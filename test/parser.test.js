@@ -50,6 +50,21 @@ describe('CodiceFiscaleUtils:Parser', () => {
                 const ninetynineYearsAgo = (new Date()).getFullYear() -99;
                 CodiceFiscaleUtilsParser.cfToBirthYear(`XXXYYY${ninetynineYearsAgo.toString().substr(-2)}`).should.be.equal(ninetynineYearsAgo);
             });
+            it('Should return null', () => {
+                expect(CodiceFiscaleUtilsParser.cfToBirthDate('XXXYYY')).to.be.null;
+                expect(CodiceFiscaleUtilsParser.cfToBirthDate()).to.be.null;
+            });
+        });
+
+        describe('cfToBirthMonth', () => {
+            it('Should return the month', () => {
+                CodiceFiscaleUtilsParser.cfToBirthMonth('XXXYYY92C').should.be.equal(2);
+            });
+            it('Should return null', () => {
+                expect(CodiceFiscaleUtilsParser.cfToBirthDate('XXXXXX90J')).to.be.null;
+                expect(CodiceFiscaleUtilsParser.cfToBirthDate('XXXXXX90')).to.be.null;
+                expect(CodiceFiscaleUtilsParser.cfToBirthDate()).to.be.null;
+            });
         });
     });
 });
