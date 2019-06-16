@@ -38,4 +38,51 @@ describe('CodiceFiscaleUtils:Enums', () => {
             }
         });
     });
+
+    describe('birthMonth', () => {
+        const BirthMonth = require('../lib/birthMonth.enum');
+        describe('birthMonth.toArray()', () => {
+            it('Should return all month codes', () => {
+                BirthMonth.toArray().should.be.an('array');
+                BirthMonth.toArray().length.should.be.equal(12);
+            });
+        });
+        it('Should return month numbers for proper codes', () => {
+            BirthMonth.A.should.be.equal(0);
+            BirthMonth.B.should.be.equal(1);
+            BirthMonth.C.should.be.equal(2);
+            BirthMonth.D.should.be.equal(3);
+            BirthMonth.E.should.be.equal(4);
+            BirthMonth.H.should.be.equal(5);
+            BirthMonth.L.should.be.equal(6);
+            BirthMonth.M.should.be.equal(7);
+            BirthMonth.P.should.be.equal(8);
+            BirthMonth.R.should.be.equal(9);
+            BirthMonth.S.should.be.equal(10);
+            BirthMonth.T.should.be.equal(11);
+        });
+        it('Should return month code for the given month number', () => {
+            BirthMonth[0].should.be.equal('A');
+            BirthMonth[1].should.be.equal('B');
+            BirthMonth[2].should.be.equal('C');
+            BirthMonth[3].should.be.equal('D');
+            BirthMonth[4].should.be.equal('E');
+            BirthMonth[5].should.be.equal('H');
+            BirthMonth[6].should.be.equal('L');
+            BirthMonth[7].should.be.equal('M');
+            BirthMonth[8].should.be.equal('P');
+            BirthMonth[9].should.be.equal('R');
+            BirthMonth[10].should.be.equal('S');
+            BirthMonth[11].should.be.equal('T');
+        });
+        it('Should return undefined', () => {
+            expect(BirthMonth[12]).to.be.undefined;
+            expect(BirthMonth.F).to.be.undefined;
+            expect(BirthMonth.G).to.be.undefined;
+            expect(BirthMonth.I).to.be.undefined;
+            expect(BirthMonth.J).to.be.undefined;
+            expect(BirthMonth.K).to.be.undefined;
+            expect(BirthMonth.Z).to.be.undefined;
+        });
+    });
 });
