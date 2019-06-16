@@ -37,5 +37,19 @@ describe('CodiceFiscaleUtils:Parser', () => {
                 expect(CodiceFiscaleUtilsParser.cfToBirthDate()).to.be.null;
             });
         });
+
+        describe('cfToBirthYear', () => {
+            it('Should return the year', () => {
+                CodiceFiscaleUtilsParser.cfToBirthYear('XXXYYY92').should.be.equal(1992);
+            });
+            it('Should return 20XX up to current year', () => {
+                const currentYear = (new Date()).getFullYear();
+                CodiceFiscaleUtilsParser.cfToBirthYear(`XXXYYY${currentYear.toString().substr(-2)}`).should.be.equal(currentYear);
+            });
+            it('Should return 19XX from next year', () => {
+                const ninetynineYearsAgo = (new Date()).getFullYear() -99;
+                CodiceFiscaleUtilsParser.cfToBirthYear(`XXXYYY${ninetynineYearsAgo.toString().substr(-2)}`).should.be.equal(ninetynineYearsAgo);
+            });
+        });
     });
 });
