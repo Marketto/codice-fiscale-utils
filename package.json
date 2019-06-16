@@ -1,0 +1,33 @@
+{
+  "name": "codice-fiscale-utils",
+  "version": "1.0.0",
+  "description": "JS utilities to handle Italian Codice Fiscale",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marketto/codice-fiscale-utils.git"
+  },
+  "keywords": [
+    "CF",
+    "CodiceFiscale"
+  ],
+  "author": "Marco Ricupero",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Marketto/codice-fiscale-utils/issues"
+  },
+  "homepage": "https://github.com/Marketto/codice-fiscale-utils#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-things": "^0.2.0",
+    "coveralls": "^3.0.4",
+    "foodoc": "0.0.9",
+    "jsdoc": "^3.6.2",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "sonarqube-scanner": "^2.4.1"
+  }
+}

@@ -1,0 +1,6 @@
+examples
+test
+sonar-project.properties
+.nyc_output
+coverage
+docs
