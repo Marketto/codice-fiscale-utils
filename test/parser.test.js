@@ -6,6 +6,29 @@ chai.should();
 describe('CodiceFiscaleUtils:Parser', () => {
     const CodiceFiscaleUtilsParser = require('../lib/parser');
     describe('methods', () => {
+        describe('cfToSurname', () => {
+            it ('Should return W*Y*Z*', () => {
+                CodiceFiscaleUtilsParser.cfToSurname('WYZ').should.be.equal('W*Y*Z*');
+            });
+            it ('Should return WA*Y*', () => {
+                CodiceFiscaleUtilsParser.cfToSurname('WYA').should.be.equal('WA*Y*');
+            });
+            it ('Should return WAE*', () => {
+                CodiceFiscaleUtilsParser.cfToSurname('WAE').should.be.equal('WAE*');
+            });
+            it ('Should return AEI*', () => {
+                CodiceFiscaleUtilsParser.cfToSurname('AEI').should.be.equal('AEI*');
+            });
+            it ('Should return AE', () => {
+                CodiceFiscaleUtilsParser.cfToSurname('AEX').should.be.equal('AE');
+            });
+            it('Should return null', () => {
+                expect(CodiceFiscaleUtilsParser.cfToGender('KAZ')).to.be.null;
+                expect(CodiceFiscaleUtilsParser.cfToGender('KA')).to.be.null;
+                expect(CodiceFiscaleUtilsParser.cfToGender()).to.be.null;
+            });
+        });
+
         describe('cfToGender', () => {
             it('Should return M', () => {
                 CodiceFiscaleUtilsParser.cfToGender('XXXYYY90B20').should.be.equal('M');
