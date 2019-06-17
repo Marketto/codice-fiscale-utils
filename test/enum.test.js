@@ -85,4 +85,47 @@ describe('CodiceFiscaleUtils:Enums', () => {
             expect(BirthMonth.Z).to.be.undefined;
         });
     });
+
+    describe('omocode', () => {
+        const Omocode = require('../lib/omocode.enum');
+        describe('omocode.toArray()', () => {
+            it('Should return all literal omocodes', () => {
+                Omocode.toArray().should.be.an('array');
+                Omocode.toArray().length.should.be.equal(10);
+            });
+        });
+        it('Should return numeric representation for proper code', () => {
+            Omocode.L.should.be.equal(0);
+            Omocode.M.should.be.equal(1);
+            Omocode.N.should.be.equal(2);
+            Omocode.P.should.be.equal(3);
+            Omocode.Q.should.be.equal(4);
+            Omocode.R.should.be.equal(5);
+            Omocode.S.should.be.equal(6);
+            Omocode.T.should.be.equal(7);
+            Omocode.U.should.be.equal(8);
+            Omocode.V.should.be.equal(9);
+        });
+        it('Should return letter representation for the given number', () => {
+            Omocode[0].should.be.equal('L');
+            Omocode[1].should.be.equal('M');
+            Omocode[2].should.be.equal('N');
+            Omocode[3].should.be.equal('P');
+            Omocode[4].should.be.equal('Q');
+            Omocode[5].should.be.equal('R');
+            Omocode[6].should.be.equal('S');
+            Omocode[7].should.be.equal('T');
+            Omocode[8].should.be.equal('U');
+            Omocode[9].should.be.equal('V');
+        });
+        it('Should return undefined', () => {
+            expect(Omocode[10]).to.be.undefined;
+            expect(Omocode.B).to.be.undefined;
+            expect(Omocode.Z).to.be.undefined;
+            expect(Omocode.D).to.be.undefined;
+            expect(Omocode.K).to.be.undefined;
+            expect(Omocode.G).to.be.undefined;
+            expect(Omocode.F).to.be.undefined;
+        });
+    });
 });
