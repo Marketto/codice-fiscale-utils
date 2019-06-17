@@ -23,9 +23,33 @@ describe('CodiceFiscaleUtils:Parser', () => {
                 CodiceFiscaleUtilsParser.cfToSurname('AEX').should.be.equal('AE');
             });
             it('Should return null', () => {
-                expect(CodiceFiscaleUtilsParser.cfToGender('KAZ')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToGender('KA')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToGender()).to.be.null;
+                expect(CodiceFiscaleUtilsParser.cfToSurname('KAZ')).to.be.null;
+                expect(CodiceFiscaleUtilsParser.cfToSurname('KA')).to.be.null;
+                expect(CodiceFiscaleUtilsParser.cfToSurname()).to.be.null;
+            });
+        });
+
+        describe('cfToName', () => {
+            it ('Should return W*Y*Z*', () => {
+                CodiceFiscaleUtilsParser.cfToName('ZZZWYZ').should.be.equal('W*Y*Z*');
+            });
+            it ('Should return WA*Y*', () => {
+                CodiceFiscaleUtilsParser.cfToName('ZZZWYA').should.be.equal('WA*Y*');
+            });
+            it ('Should return WAE*', () => {
+                CodiceFiscaleUtilsParser.cfToName('ZZZWAE').should.be.equal('WAE*');
+            });
+            it ('Should return AEI*', () => {
+                CodiceFiscaleUtilsParser.cfToName('ZZZAEI').should.be.equal('AEI*');
+            });
+            it ('Should return AE', () => {
+                CodiceFiscaleUtilsParser.cfToName('ZZZAEX').should.be.equal('AE');
+            });
+            it('Should return null', () => {
+                expect(CodiceFiscaleUtilsParser.cfToName('ZZZKAZ')).to.be.null;
+                expect(CodiceFiscaleUtilsParser.cfToName('ZZZKA')).to.be.null;
+                expect(CodiceFiscaleUtilsParser.cfToName('ZZZ')).to.be.null;
+                expect(CodiceFiscaleUtilsParser.cfToName()).to.be.null;
             });
         });
 
