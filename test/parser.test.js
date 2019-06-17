@@ -6,6 +6,12 @@ chai.should();
 describe('CodiceFiscaleUtils:Parser', () => {
     const CodiceFiscaleUtilsParser = require('../lib/parser');
     describe('methods', () => {
+        describe('cfDeomocode', () => {
+            it('Should decode KKALMNVMAPLB331Z to KKALMN91A30B331Z', () => {
+                CodiceFiscaleUtilsParser.cfDeomocode('KKALMNVMAPLB331Z').should.be.equal('KKALMN91A30B331Z');
+            });
+        });
+
         describe('cfToSurname', () => {
             it ('Should return W*Y*Z*', () => {
                 CodiceFiscaleUtilsParser.cfToSurname('WYZ').should.be.equal('W*Y*Z*');
