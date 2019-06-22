@@ -5,7 +5,7 @@ chai.should();
 
 describe('CodiceFiscaleUtils:Enums', () => {
     describe('gender', () => {
-        const Gender = require('../lib/gender.enum');
+        const Gender = require('../src/gender.enum');
         describe('gender.toArray()', () => {
             it('Should return ["M", "F"]', () => {
                 Gender.toArray().should.be.an('array');
@@ -40,7 +40,7 @@ describe('CodiceFiscaleUtils:Enums', () => {
     });
 
     describe('birthMonth', () => {
-        const BirthMonth = require('../lib/birthMonth.enum');
+        const BirthMonth = require('../src/birthMonth.enum');
         describe('birthMonth.toArray()', () => {
             it('Should return all month codes', () => {
                 BirthMonth.toArray().should.be.an('array');
@@ -87,7 +87,7 @@ describe('CodiceFiscaleUtils:Enums', () => {
     });
 
     describe('omocode', () => {
-        const Omocode = require('../lib/omocode.enum');
+        const Omocode = require('../src/omocode.enum');
         describe('omocode.toArray()', () => {
             it('Should return all literal omocodes', () => {
                 Omocode.toArray().should.be.an('array');

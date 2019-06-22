@@ -4,7 +4,7 @@ const expect = chai.expect;
 chai.should();
 
 describe('CodiceFiscaleUtils:Parser', () => {
-    const CodiceFiscaleUtilsParser = require('../lib/parser');
+    const CodiceFiscaleUtilsParser = require('../src/parser');
 
     describe('constants', () => {
         describe('OMOCODE_BITMAP', () => {

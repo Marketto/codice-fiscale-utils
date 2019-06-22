@@ -4,7 +4,7 @@ const expect = chai.expect;
 chai.should();
 
 describe('CodiceFiscaleUtils:Validator', () => {
-    const CodiceFiscaleUtilsValidator = require('../lib/validator.js');
+    const CodiceFiscaleUtilsValidator = require('../src/validator');
     describe('methods', () => {
         describe('cfSurname', () => {
             describe('Generic Validator', () => {
