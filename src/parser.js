@@ -38,8 +38,8 @@ class CodiceFiscaleUtilsParser {
         const surnameCf = codiceFiscale.substr(0,3);
 
         const VALIDATOR = require('./validator.const');
-        const [cons = ''] = surnameCf.match(new RegExp(`^[${VALIDATOR.CONSONANT_MATCHER}]{1,3}`, 'ig')) || [];
-        const [vow = ''] = surnameCf.match(new RegExp(`[${VALIDATOR.VOWEL_MATCHER}]{1,3}`, 'ig')) || [];
+        const [cons = ''] = surnameCf.match(new RegExp(`^[${VALIDATOR.CONSONANT_LIST}]{1,3}`, 'ig')) || [];
+        const [vow = ''] = surnameCf.match(new RegExp(`[${VALIDATOR.VOWEL_LIST}]{1,3}`, 'ig')) || [];
 
         const matchingLength = cons.length + vow.length;
 
