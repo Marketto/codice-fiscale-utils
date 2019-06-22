@@ -4,7 +4,7 @@ const expect = chai.expect;
 chai.should();
 
 describe('CodiceFiscaleUtils:Validator', () => {
-    const CodiceFiscaleUtilsValidator = require('../lib/validator');
+    const CodiceFiscaleUtilsValidator = require('../lib/validator.js');
     describe('methods', () => {
         describe('cfSurname', () => {
             describe('Generic Validator', () => {
@@ -30,7 +30,7 @@ describe('CodiceFiscaleUtils:Validator', () => {
                     CodiceFiscaleUtilsValidator.cfSurname().test('UIX').should.be.ok;
                 });
                 it ('Should validate UXX', () => {
-                    CodiceFiscaleUtilsValidator.cfSurname().test('UXX').should.be.ok;
+                    CodiceFiscaleUtilsValidator.cfSurname().test('UXX').should.not.be.ok;
                 });
                 it ('Should validate UIK', () => {
                     CodiceFiscaleUtilsValidator.cfSurname().test('UIK').should.not.be.ok;
@@ -62,7 +62,7 @@ describe('CodiceFiscaleUtils:Validator', () => {
                     CodiceFiscaleUtilsValidator.cfSurname('Ai').test('AIX').should.be.ok;
                 });
                 it ('Should validate UXX for U', () => {
-                    CodiceFiscaleUtilsValidator.cfSurname('U').test('UXX').should.be.ok;
+                    CodiceFiscaleUtilsValidator.cfSurname('U').test('UXX').should.not.be.ok;
                 });
             });
         });
