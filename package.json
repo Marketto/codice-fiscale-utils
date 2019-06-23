@@ -5,8 +5,8 @@
   "main": "dist/codice-fiscale-utils.js",
   "module": "src/index.js",
   "scripts": {
-    "test": "npx nyc --reporter=lcovonly mocha",
-    "coverage": "npx nyc report --reporter=lcovonly | coveralls",
+    "test": "npx mocha",
+    "coverage": "npx nyc --reporter=lcovonly npx mocha",
     "build": "npx webpack",
     "docs": "npx jsdoc . -c jsdoc.json"
   },
@@ -27,7 +27,6 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-things": "^0.2.0",
-    "coveralls": "^3.0.4",
     "foodoc": "0.0.9",
     "jsdoc": "^3.6.2",
     "mocha": "^6.1.4",
