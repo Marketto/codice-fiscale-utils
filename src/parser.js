@@ -1,15 +1,15 @@
 /**
- * @class CodiceFiscaleUtilsParser
+ * @class Parser
  * @memberof CodiceFiscaleUtils
  */
-class CodiceFiscaleUtilsParser {
+class Parser {
 
     /**
      * Default omocode bitmap
      * @static
      * @readonly
      * @returns {number}
-     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
+     * @memberof CodiceFiscaleUtils.Parser
      */
     static get OMOCODE_BITMAP(){
         return 0b0111011011000000;
@@ -19,7 +19,7 @@ class CodiceFiscaleUtilsParser {
      * Parse surname information
      * @param {string} codiceFiscale Partial or complete Omocode/Regular CF to parse
      * @returns {string|null} Regular CF w/o omocodes chars
-     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
+     * @memberof CodiceFiscaleUtils.Parser
      */
     static cfDeomocode(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 7) {
@@ -35,7 +35,7 @@ class CodiceFiscaleUtilsParser {
      * Parse surname information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {string|null} Partial/possible surname
-     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
+     * @memberof CodiceFiscaleUtils.Parser
      */
     static cfToSurname(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 3 || !(/^[A-Z]{3}/i).test(codiceFiscale)) {
@@ -70,7 +70,7 @@ class CodiceFiscaleUtilsParser {
      * Parse name information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {string|null} Partial/possible name
-     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
+     * @memberof CodiceFiscaleUtils.Parser
      */
     static cfToName(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 3 || !(/^[A-Z]{6}/i).test(codiceFiscale)) {
@@ -83,7 +83,7 @@ class CodiceFiscaleUtilsParser {
      * Parse gender information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {'M'|'F'|null} Male or female
-     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
+     * @memberof CodiceFiscaleUtils.Parser
      */
     static cfToGender(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 11) {
@@ -101,7 +101,7 @@ class CodiceFiscaleUtilsParser {
      * Parse birth year information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {number|null} Birth Year (4 digits)
-     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
+     * @memberof CodiceFiscaleUtils.Parser
      */
     static cfToBirthYear(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 8) {
@@ -124,7 +124,7 @@ class CodiceFiscaleUtilsParser {
      * Parse birth month information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {number|null} Birth Month (0...11 - Date notation)
-     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
+     * @memberof CodiceFiscaleUtils.Parser
      */
     static cfToBirthMonth(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 9) {
@@ -143,7 +143,7 @@ class CodiceFiscaleUtilsParser {
      * Parse birth day information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {number|null} Birth day (1..31)
-     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
+     * @memberof CodiceFiscaleUtils.Parser
      */
     static cfToBirthDay(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 11) {
@@ -167,7 +167,7 @@ class CodiceFiscaleUtilsParser {
      * Parse birth date information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {Date|null} Birth Date
-     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
+     * @memberof CodiceFiscaleUtils.Parser
      */
     static cfToBirthDate(codiceFiscale) {
         const birthDay = this.cfToBirthDay(codiceFiscale);
@@ -204,4 +204,4 @@ class CodiceFiscaleUtilsParser {
     }
 }
 
-module.exports = CodiceFiscaleUtilsParser;
+module.exports = Parser;

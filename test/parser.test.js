@@ -4,11 +4,11 @@ const expect = chai.expect;
 chai.should();
 
 describe('CodiceFiscaleUtils:Parser', () => {
-    const CodiceFiscaleUtilsParser = require('../src/parser');
+    const Parser = require('../src/parser');
 
     describe('constants', () => {
         describe('OMOCODE_BITMAP', () => {
-            const omocodeBitmap = CodiceFiscaleUtilsParser.OMOCODE_BITMAP;
+            const omocodeBitmap = Parser.OMOCODE_BITMAP;
             it('Should be off for Surname part', () => {
                 //Surname
                 expect(omocodeBitmap & 1).not.to.be.ok;
@@ -52,131 +52,131 @@ describe('CodiceFiscaleUtils:Parser', () => {
     describe('methods', () => {
         describe('cfDeomocode', () => {
             it('Should decode KKALMNVMAPLB331Z to KKALMN91A30B331Z', () => {
-                CodiceFiscaleUtilsParser.cfDeomocode('KKALMNVMAPLB331Z').should.be.equal('KKALMN91A30B331Z');
+                Parser.cfDeomocode('KKALMNVMAPLB331Z').should.be.equal('KKALMN91A30B331Z');
             });
         });
 
         describe('cfToSurname', () => {
             it ('Should return W*Y*Z*', () => {
-                CodiceFiscaleUtilsParser.cfToSurname('WYZ').should.be.equal('W*Y*Z*');
+                Parser.cfToSurname('WYZ').should.be.equal('W*Y*Z*');
             });
             it ('Should return WA*Y*', () => {
-                CodiceFiscaleUtilsParser.cfToSurname('WYA').should.be.equal('WA*Y*');
+                Parser.cfToSurname('WYA').should.be.equal('WA*Y*');
             });
             it ('Should return WAE*', () => {
-                CodiceFiscaleUtilsParser.cfToSurname('WAE').should.be.equal('WAE*');
+                Parser.cfToSurname('WAE').should.be.equal('WAE*');
             });
             it ('Should return AEI*', () => {
-                CodiceFiscaleUtilsParser.cfToSurname('AEI').should.be.equal('AEI*');
+                Parser.cfToSurname('AEI').should.be.equal('AEI*');
             });
             it ('Should return AE', () => {
-                CodiceFiscaleUtilsParser.cfToSurname('AEX').should.be.equal('AE');
+                Parser.cfToSurname('AEX').should.be.equal('AE');
             });
             it('Should return null', () => {
-                expect(CodiceFiscaleUtilsParser.cfToSurname('KAZ')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToSurname('KA')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToSurname()).to.be.null;
+                expect(Parser.cfToSurname('KAZ')).to.be.null;
+                expect(Parser.cfToSurname('KA')).to.be.null;
+                expect(Parser.cfToSurname()).to.be.null;
             });
         });
 
         describe('cfToName', () => {
             it ('Should return W*Y*Z*', () => {
-                CodiceFiscaleUtilsParser.cfToName('ZZZWYZ').should.be.equal('W*Y*Z*');
+                Parser.cfToName('ZZZWYZ').should.be.equal('W*Y*Z*');
             });
             it ('Should return WA*Y*', () => {
-                CodiceFiscaleUtilsParser.cfToName('ZZZWYA').should.be.equal('WA*Y*');
+                Parser.cfToName('ZZZWYA').should.be.equal('WA*Y*');
             });
             it ('Should return WAE*', () => {
-                CodiceFiscaleUtilsParser.cfToName('ZZZWAE').should.be.equal('WAE*');
+                Parser.cfToName('ZZZWAE').should.be.equal('WAE*');
             });
             it ('Should return AEI*', () => {
-                CodiceFiscaleUtilsParser.cfToName('ZZZAEI').should.be.equal('AEI*');
+                Parser.cfToName('ZZZAEI').should.be.equal('AEI*');
             });
             it ('Should return AE', () => {
-                CodiceFiscaleUtilsParser.cfToName('ZZZAEX').should.be.equal('AE');
+                Parser.cfToName('ZZZAEX').should.be.equal('AE');
             });
             it('Should return null', () => {
-                expect(CodiceFiscaleUtilsParser.cfToName('ZZZKAZ')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToName('ZZZKA')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToName('ZZZ')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToName()).to.be.null;
+                expect(Parser.cfToName('ZZZKAZ')).to.be.null;
+                expect(Parser.cfToName('ZZZKA')).to.be.null;
+                expect(Parser.cfToName('ZZZ')).to.be.null;
+                expect(Parser.cfToName()).to.be.null;
             });
         });
 
         describe('cfToGender', () => {
             it('Should return M', () => {
-                CodiceFiscaleUtilsParser.cfToGender('XXXYYY90B20').should.be.equal('M');
+                Parser.cfToGender('XXXYYY90B20').should.be.equal('M');
             });
             it('Should return F', () => {
-                CodiceFiscaleUtilsParser.cfToGender('XXXYYY90B63').should.be.equal('F');
+                Parser.cfToGender('XXXYYY90B63').should.be.equal('F');
             });
             it('Should return null', () => {
-                expect(CodiceFiscaleUtilsParser.cfToGender('XXXYYY90')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToGender()).to.be.null;
+                expect(Parser.cfToGender('XXXYYY90')).to.be.null;
+                expect(Parser.cfToGender()).to.be.null;
             });
         });
 
         describe('cfToBirthDay', () => {
             it('Should return 12 (M)', () => {
-                CodiceFiscaleUtilsParser.cfToBirthDay('XXXYYY90B12').should.be.equal(12);
+                Parser.cfToBirthDay('XXXYYY90B12').should.be.equal(12);
             });
             it('Should return 31 (F)', () => {
-                CodiceFiscaleUtilsParser.cfToBirthDay('XXXYYY90B71').should.be.equal(31);
+                Parser.cfToBirthDay('XXXYYY90B71').should.be.equal(31);
             });
             it('Should return null', () => {
-                expect(CodiceFiscaleUtilsParser.cfToBirthDay('XXXYYY90B00')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToBirthDay('XXXYYY90B35')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToBirthDay('XXXYYY90B74')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToBirthDay('XXXYYY90')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToBirthDay()).to.be.null;
+                expect(Parser.cfToBirthDay('XXXYYY90B00')).to.be.null;
+                expect(Parser.cfToBirthDay('XXXYYY90B35')).to.be.null;
+                expect(Parser.cfToBirthDay('XXXYYY90B74')).to.be.null;
+                expect(Parser.cfToBirthDay('XXXYYY90')).to.be.null;
+                expect(Parser.cfToBirthDay()).to.be.null;
             });
         });
 
         describe('cfToBirthMonth', () => {
             it('Should return the month', () => {
-                CodiceFiscaleUtilsParser.cfToBirthMonth('XXXYYY92C').should.be.equal(2);
+                Parser.cfToBirthMonth('XXXYYY92C').should.be.equal(2);
             });
             it('Should return null', () => {
-                expect(CodiceFiscaleUtilsParser.cfToBirthDate('XXXYYY90J')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToBirthDate('XXXYYY90')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToBirthDate()).to.be.null;
+                expect(Parser.cfToBirthDate('XXXYYY90J')).to.be.null;
+                expect(Parser.cfToBirthDate('XXXYYY90')).to.be.null;
+                expect(Parser.cfToBirthDate()).to.be.null;
             });
         });
 
         describe('cfToBirthYear', () => {
             it('Should return the year', () => {
-                CodiceFiscaleUtilsParser.cfToBirthYear('XXXYYY92').should.be.equal(1992);
+                Parser.cfToBirthYear('XXXYYY92').should.be.equal(1992);
             });
             it('Should return 20XX up to current year', () => {
                 const currentYear = (new Date()).getFullYear();
-                CodiceFiscaleUtilsParser.cfToBirthYear(`XXXYYY${currentYear.toString().substr(-2)}`).should.be.equal(currentYear);
+                Parser.cfToBirthYear(`XXXYYY${currentYear.toString().substr(-2)}`).should.be.equal(currentYear);
             });
             it('Should return 19XX from next year', () => {
                 const ninetynineYearsAgo = (new Date()).getFullYear() -99;
-                CodiceFiscaleUtilsParser.cfToBirthYear(`XXXYYY${ninetynineYearsAgo.toString().substr(-2)}`).should.be.equal(ninetynineYearsAgo);
+                Parser.cfToBirthYear(`XXXYYY${ninetynineYearsAgo.toString().substr(-2)}`).should.be.equal(ninetynineYearsAgo);
             });
             it('Should return null', () => {
-                expect(CodiceFiscaleUtilsParser.cfToBirthDate('XXXYYY')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToBirthDate()).to.be.null;
+                expect(Parser.cfToBirthDate('XXXYYY')).to.be.null;
+                expect(Parser.cfToBirthDate()).to.be.null;
             });
         });
 
         describe('cfToBirthDate', () => {
             it('Should return a Date (Male)', () => {
-                const bdt = CodiceFiscaleUtilsParser.cfToBirthDate('XXXYYY92B20');
+                const bdt = Parser.cfToBirthDate('XXXYYY92B20');
                 bdt.toJSON().should.be.equal('1992-02-20');
                 bdt.getDate().should.be.equal(20);
                 bdt.getMonth().should.be.equal(1);
             });
             it('Should return a Date (Female)', () => {
-                const bdt = CodiceFiscaleUtilsParser.cfToBirthDate('XXXYYY81A63');
+                const bdt = Parser.cfToBirthDate('XXXYYY81A63');
                 bdt.toISOString().should.be.equal('1981-01-23');
                 bdt.getDate().should.be.equal(23);
                 bdt.getMonth().should.be.equal(0);
             });
             it('Should return null', () => {
-                expect(CodiceFiscaleUtilsParser.cfToBirthDate('XXXYYY90')).to.be.null;
-                expect(CodiceFiscaleUtilsParser.cfToBirthDate()).to.be.null;
+                expect(Parser.cfToBirthDate('XXXYYY90')).to.be.null;
+                expect(Parser.cfToBirthDate()).to.be.null;
             });
         });
     });

@@ -1,14 +1,14 @@
 /**
- * @class CodiceFiscaleUtilsValidator
+ * @class Validator
  * @memberof CodiceFiscaleUtils
  */
-class CodiceFiscaleUtilsValidator {
+class Validator {
 
     /**
      * Validation regexp for the given surname or generic
      * @param {string} surname Optional surname to generate validation regexp
      * @returns {RegExp} CF Surname matcher
-     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsValidator
+     * @memberof CodiceFiscaleUtils.Validator
      */
     static cfSurname(surname) {
         const VALIDATOR = require('./validator.const');
@@ -22,4 +22,4 @@ class CodiceFiscaleUtilsValidator {
     }
 }
 
-module.exports = CodiceFiscaleUtilsValidator;
+module.exports = Validator;

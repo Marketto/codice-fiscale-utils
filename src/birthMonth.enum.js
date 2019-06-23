@@ -13,7 +13,7 @@ const MONTHS = [
     'T'
 ];
 /**
- * @enum BirthMonth
+ * @export {Object} BirthMonth
  * @memberof CodiceFiscaleUtils
  */
 module.exports = Object.freeze(new Proxy(new Set(MONTHS), {

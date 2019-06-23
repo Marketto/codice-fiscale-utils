@@ -9,7 +9,7 @@
         ]
     },
     "opts": {
-        "template": "./node_modules/foodoc/template",
+        "template": "node_modules/foodoc/template",
         "readme": "README.md",
         "encoding": "utf8",
         "destination": "./docs/",
