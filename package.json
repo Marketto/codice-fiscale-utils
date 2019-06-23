@@ -2,9 +2,13 @@
   "name": "codice-fiscale-utils",
   "version": "1.0.0",
   "description": "JS utilities to handle Italian Codice Fiscale",
-  "main": "index.js",
+  "main": "dist/codice-fiscale-utils.js",
+  "module": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx nyc --reporter=lcovonly mocha",
+    "coverage": "npx nyc report --reporter=lcovonly | coveralls",
+    "build": "npx webpack",
+    "docs": "npx jsdoc . -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -28,6 +32,8 @@
     "jsdoc": "^3.6.2",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
-    "sonarqube-scanner": "^2.4.1"
+    "sonarqube-scanner": "^2.4.1",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.5"
   }
 }

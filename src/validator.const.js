@@ -42,6 +42,47 @@ const PARTIAL_PLACE_CODE_MATCHER = `[${CITY_CODE_LIST}${COUNTRY_CODE_LIST}](?:[$
 
 const PARTIAL_CF = `${PARTIAL_FULL_NAME}|(?:${FULL_NAME_MATCHER}(?:(?:${PARTIAL_FULL_DATE})|(?:${FULL_DATE_MATCHER})(?:(?:${PARTIAL_PLACE_CODE_MATCHER})|(?:${PLACE_CODE_MATCHER})[A-Z]?)?)?)?`;
 
+/**
+ * Validator constants
+ * @readonly
+ * @constant {Object} VALIDATOR
+ * 
+ * @constant {string} VALIDATOR.CONSONANT_LIST List of consonant to be used in a RegExp
+ * @constant {string} VALIDATOR.VOWEL_LIST List of vowels to be used in a RegExp
+ * @constant {string} VALIDATOR.OMOCODE_NUMBER_LIST List of numbers and their omocode counterparts to be used in a RegExp
+ * @constant {string} VALIDATOR.OMOCODE_NON_ZERO_NUMBER_LIST List of numbers but 0 and their omocode counterparts to be used in a RegExp
+ * @constant {string} VALIDATOR.OMOCODE_ZERO_LIST List of 0 and its omocode counterpart to be used in a RegExp
+ * @constant {string} VALIDATOR.MONTH_LIST
+ * @constant {string} VALIDATOR.MONTH_30DAYS_LIST
+ * @constant {string} VALIDATOR.MONTH_31DAYS_LIST
+ * @constant {string} VALIDATOR.CITY_CODE_LIST
+ * @constant {string} VALIDATOR.COUNTRY_CODE_LIST
+ * @constant {string} VALIDATOR.NAME_MATCHER
+ * @constant {string} VALIDATOR.SURNAME_MATCHER
+ * @constant {string} VALIDATOR.FULL_NAME_MATCHER
+ * @constant {string} VALIDATOR.YEAR_MATCHER
+ * @constant {string} VALIDATOR.LEAP_YEAR_MATCHER
+ * @constant {string} VALIDATOR.MONTH_MATCHER
+ * @constant {string} VALIDATOR.DAY_29_MATCHER
+ * @constant {string} VALIDATOR.DAY_30_MATCHER
+ * @constant {string} VALIDATOR.DAY_31_MATCHER
+ * @constant {string} VALIDATOR.DAY_MATCHER
+ * @constant {string} VALIDATOR.MONTH_DAY_MATCHER
+ * @constant {string} VALIDATOR.FULL_DATE_MATCHER
+ * @constant {string} VALIDATOR.CITY_CODE_MATCHER
+ * @constant {string} VALIDATOR.COUNTRY_CODE_MATCHER
+ * @constant {string} VALIDATOR.PLACE_CODE_MATCHER
+ * @constant {string} VALIDATOR.CODICE_FISCALE
+ * @constant {string} VALIDATOR.PARTIAL_NAME_MATCHER
+ * @constant {string} VALIDATOR.PARTIAL_FULL_NAME
+ * @constant {string} VALIDATOR.PARTIAL_YEAR
+ * @constant {string} VALIDATOR.PARTIAL_MONTH_DAY
+ * @constant {string} VALIDATOR.PARTIAL_FULL_DATE
+ * @constant {string} VALIDATOR.PARTIAL_PLACE_CODE_MATCHER
+ * @constant {string} VALIDATOR.PARTIAL_CF
+ * 
+ * @memberof CodiceFiscaleUtils
+ */
 module.exports = Object.freeze({
     CONSONANT_LIST,
     VOWEL_LIST,
@@ -59,8 +100,6 @@ module.exports = Object.freeze({
     YEAR_MATCHER,
     LEAP_YEAR_MATCHER,
     MONTH_MATCHER,
-    // DAY_2X_MATCHER,
-    // DAY_3X_MATCHER,
     DAY_29_MATCHER,
     DAY_30_MATCHER,
     DAY_31_MATCHER,

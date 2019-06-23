@@ -1,5 +1,9 @@
 const GENDERS = ['M', 'F'];
 
+/**
+ * @enum Gender
+ * @memberof CodiceFiscaleUtils
+ */
 module.exports = Object.freeze(new Proxy(new Set(GENDERS), {
     get(receiver, name) {
         const index = parseInt(name);

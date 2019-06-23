@@ -11,6 +11,10 @@ const OMOCODE = [
     'V'
 ];
 
+/**
+ * @enum Omocode
+ * @memberof CodiceFiscaleUtils
+ */
 module.exports = Object.freeze(new Proxy(new Set(OMOCODE), {
     get(receiver, name) {
         const index = parseInt(name);

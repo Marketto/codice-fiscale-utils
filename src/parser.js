@@ -1,3 +1,7 @@
+/**
+ * @class CodiceFiscaleUtilsParser
+ * @memberof CodiceFiscaleUtils
+ */
 class CodiceFiscaleUtilsParser {
 
     /**
@@ -5,6 +9,7 @@ class CodiceFiscaleUtilsParser {
      * @static
      * @readonly
      * @returns {number}
+     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
      */
     static get OMOCODE_BITMAP(){
         return 0b0111011011000000;
@@ -14,6 +19,7 @@ class CodiceFiscaleUtilsParser {
      * Parse surname information
      * @param {string} codiceFiscale Partial or complete Omocode/Regular CF to parse
      * @returns {string|null} Regular CF w/o omocodes chars
+     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
      */
     static cfDeomocode(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 7) {
@@ -29,6 +35,7 @@ class CodiceFiscaleUtilsParser {
      * Parse surname information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {string|null} Partial/possible surname
+     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
      */
     static cfToSurname(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 3 || !(/^[A-Z]{3}/i).test(codiceFiscale)) {
@@ -63,6 +70,7 @@ class CodiceFiscaleUtilsParser {
      * Parse name information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {string|null} Partial/possible name
+     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
      */
     static cfToName(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 3 || !(/^[A-Z]{6}/i).test(codiceFiscale)) {
@@ -75,6 +83,7 @@ class CodiceFiscaleUtilsParser {
      * Parse gender information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {'M'|'F'|null} Male or female
+     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
      */
     static cfToGender(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 11) {
@@ -92,6 +101,7 @@ class CodiceFiscaleUtilsParser {
      * Parse birth year information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {number|null} Birth Year (4 digits)
+     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
      */
     static cfToBirthYear(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 8) {
@@ -114,6 +124,7 @@ class CodiceFiscaleUtilsParser {
      * Parse birth month information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {number|null} Birth Month (0...11 - Date notation)
+     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
      */
     static cfToBirthMonth(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 9) {
@@ -132,6 +143,7 @@ class CodiceFiscaleUtilsParser {
      * Parse birth day information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {number|null} Birth day (1..31)
+     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
      */
     static cfToBirthDay(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 11) {
@@ -155,6 +167,7 @@ class CodiceFiscaleUtilsParser {
      * Parse birth date information
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {Date|null} Birth Date
+     * @memberof CodiceFiscaleUtils.CodiceFiscaleUtilsParser
      */
     static cfToBirthDate(codiceFiscale) {
         const birthDay = this.cfToBirthDay(codiceFiscale);

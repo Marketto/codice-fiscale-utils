@@ -12,7 +12,10 @@ const MONTHS = [
     'S',
     'T'
 ];
-
+/**
+ * @enum BirthMonth
+ * @memberof CodiceFiscaleUtils
+ */
 module.exports = Object.freeze(new Proxy(new Set(MONTHS), {
     get(receiver, name) {
         const index = parseInt(name);

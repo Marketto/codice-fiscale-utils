@@ -1,0 +1,22 @@
+{
+    "source": {
+        "includePattern": ".+\\.js(doc|x)?$",
+        "exclude": [
+            "node_modules",
+            "dist",
+            "docs",
+            "test"
+        ]
+    },
+    "opts": {
+        "template": "./node_modules/foodoc/template",
+        "readme": "README.md",
+        "encoding": "utf8",
+        "destination": "./docs/",
+        "recurse": true
+    },
+    "templates": {
+        "systemName"            : "Codice Fiscale Utils",
+        "systemSummary"         : "JS utilities to handle Italian Codice Fiscale"
+    }
+}
