@@ -444,5 +444,16 @@ describe('CodiceFiscaleUtils:Const', () => {
                 partialCFMatcher.test('RSSMRA80A01H501U').should.be.ok;
             });
         });
+
+
+        describe('diacritics', () => {
+            const DIACRITICS = require('../src/diacritics.const');
+            it('Should convert diacritics', () => {
+                DIACRITICS['à'].should.be.equal('a');
+                DIACRITICS['è'].should.be.equal('e');
+                DIACRITICS['ç'].should.be.equal('c');
+                DIACRITICS['ù'].should.be.equal('u');
+            });
+        });
     });
 });

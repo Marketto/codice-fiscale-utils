@@ -164,7 +164,60 @@ class Parser {
     }
 
     /**
-     * Parse name to cf part
+     * Parse birth date information
+     * @param {string} codiceFiscale Partial or complete CF to parse
+     * @returns {Date|null} Birth Date
+     * @memberof CodiceFiscaleUtils.Parser
+     */
+    static cfToBirthDate(codiceFiscale) {
+        const birthDay = this.cfToBirthDay(codiceFiscale);
+        if (!birthDay) {
+            return null;
+        }
+
+        const birthMonth = this.cfToBirthMonth(codiceFiscale);
+        if (!birthMonth && birthMonth !== 0) {
+            return null;
+        }
+
+        const birthYear = this.cfToBirthYear(codiceFiscale);
+        if (!birthYear) {
+            return null;
+        }
+
+        const dt = new Date(birthYear, birthMonth, birthDay, 0, 0, 0);
+        dt.setUTCDate(birthDay);
+        return new Proxy(dt, {
+            get(receiver, name) {
+                if (['toJSON', 'toISOString'].includes(name)){
+                    return (...args) => receiver[name](...args).substr(0, 10);
+                }
+                if (name === 'getDate') {
+                    return (...args) => receiver.getUTCDate(...args);
+                }
+                if (typeof receiver[name] === 'function') {
+                    return (...args) => receiver[name](...args);
+                }
+                return receiver[name];
+            }
+        });
+    }
+
+    /**
+     * Normalize diacritics
+     * @param {string} text Input text to normalize
+     * @returns {string} Output text w/o diacritics
+     */
+    static removeDiacritics(text) {
+        if (!text || typeof text !== 'string') {
+            return null;
+        }
+        const DIACRITICS = require('./diacritics.const');
+        return text.replace(/./g, c => DIACRITICS[c]);
+    }
+
+    /**
+     * Parse surname to cf part
      * @param {string} surname Partial or complete CF to parse
      * @returns {string} partial cf
      * @memberof CodiceFiscaleUtils.Parser
@@ -188,16 +241,27 @@ class Parser {
     }
 
     /**
-     * Normalize diacritics
-     * @param {string} text Input text to normalize
-     * @returns {string} Output text w/o diacritics
+     * Parse name to cf part
+     * @param {string} name Partial or complete CF to parse
+     * @returns {string} partial cf
+     * @memberof CodiceFiscaleUtils.Parser
      */
-    static removeDiacritics(text) {
-        if (!text || typeof text !== 'string') {
+    static nameToCf(name) {
+        if ((name || '').trim().length < 2) {
             return null;
         }
-        const DIACRITICS = require('./diacritics.const');
-        return text.replace(/./g, c => DIACRITICS[c]);
+        const VALIDATOR = require('./validator.const');
+        
+        const nameNoSpaces = this.removeDiacritics(name.replace(/\s*/ig, '')).toUpperCase();
+        const consonants = (nameNoSpaces.match(new RegExp(`[${VALIDATOR.CONSONANT_LIST}]+`, 'ig')) || []).join('');
+        const vowels = (nameNoSpaces.match(new RegExp(`[${VALIDATOR.VOWEL_LIST}]+`, 'ig')) || []).join('');
+
+        const partialCf = ((consonants.substr(0,2) + (consonants.substr(3,1) || consonants.substr(2,1))) + vowels + 'X').substr(0, 3);
+
+        if (partialCf.length < 3) {
+            return null;
+        }
+        return partialCf;
     }
 }
 

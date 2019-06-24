@@ -128,14 +128,4 @@ describe('CodiceFiscaleUtils:Enums', () => {
             expect(Omocode.F).to.be.undefined;
         });
     });
-
-    describe('diacritics', () => {
-        const DIACRITICS = require('../src/diacritics.enum');
-        it('Should convert diacritics', () => {
-            DIACRITICS['à'].should.be.equal('a');
-            DIACRITICS['è'].should.be.equal('e');
-            DIACRITICS['ç'].should.be.equal('c');
-            DIACRITICS['ù'].should.be.equal('u');
-        });
-    });
 });
