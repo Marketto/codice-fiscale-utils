@@ -206,7 +206,7 @@ class Parser {
     /**
      * Normalize diacritics
      * @param {string} text Input text to normalize
-     * @returns {string} Output text w/o diacritics
+     * @returns {string|null} Output text w/o diacritics
      */
     static removeDiacritics(text) {
         if (!text || typeof text !== 'string') {
@@ -219,7 +219,7 @@ class Parser {
     /**
      * Parse surname to cf part
      * @param {string} surname Partial or complete CF to parse
-     * @returns {string} partial cf
+     * @returns {string|null} partial cf
      * @memberof CodiceFiscaleUtils.Parser
      */
     static surnameToCf(surname) {
@@ -243,7 +243,7 @@ class Parser {
     /**
      * Parse name to cf part
      * @param {string} name Partial or complete CF to parse
-     * @returns {string} partial cf
+     * @returns {string|null} partial cf
      * @memberof CodiceFiscaleUtils.Parser
      */
     static nameToCf(name) {
@@ -267,17 +267,32 @@ class Parser {
     /**
      * Parse year to cf part
      * @param {string|number} year Birth year 2 or 4 digit string, number above 19XX or below 100
-     * @returns {string} partial cf
+     * @returns {string|null} partial cf
      * @memberof CodiceFiscaleUtils.Parser
      */
     static yearToCf(year) {
         if (typeof year === 'string' && (/^\s*\d{2}(?:\d{2})?\s*$/).test(year)) {
             year = parseInt(year);
         }
-        if (!(typeof year === 'number' && (year >= 1900 || year < 100))) {
+        if (!(typeof year === 'number' && !isNaN(year) &&(year >= 1900 || year < 100))) {
             return null;
         }
         return ((/\d{2}$/).exec(`000${year}`) || [])[0];
+    }
+
+    /**
+     * Parse month information
+     * @param {number} month Month number 0..11
+     * @returns {string|null} Birth Month CF code
+     * @memberof CodiceFiscaleUtils.Parser
+     */
+    static monthToCf(month) {
+        if (!(typeof month === 'number' && !isNaN(month))) {
+            return null;
+        }
+        const BirthMonth = require('./birthMonth.enum');
+
+        return BirthMonth[month] || null;
     }
 }
 
