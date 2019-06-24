@@ -263,6 +263,22 @@ class Parser {
         }
         return partialCf;
     }
+
+    /**
+     * Parse year to cf part
+     * @param {string|number} year Birth year 2 or 4 digit string, number above 19XX or below 100
+     * @returns {string} partial cf
+     * @memberof CodiceFiscaleUtils.Parser
+     */
+    static yearToCf(year) {
+        if (typeof year === 'string' && (/^\s*\d{2}(?:\d{2})?\s*$/).test(year)) {
+            year = parseInt(year);
+        }
+        if (!(typeof year === 'number' && (year >= 1900 || year < 100))) {
+            return null;
+        }
+        return ((/\d{2}$/).exec(`000${year}`) || [])[0];
+    }
 }
 
 module.exports = Parser;
