@@ -49,7 +49,7 @@ describe('CodiceFiscaleUtils:Parser', () => {
         });
     });
 
-    describe('methods', () => {
+    describe('methods from CF', () => {
         describe('cfDeomocode', () => {
             it('Should decode KKALMNVMAPLB331Z to KKALMN91A30B331Z', () => {
                 Parser.cfDeomocode('KKALMNVMAPLB331Z').should.be.equal('KKALMN91A30B331Z');
@@ -177,6 +177,28 @@ describe('CodiceFiscaleUtils:Parser', () => {
             it('Should return null', () => {
                 expect(Parser.cfToBirthDate('XXXYYY90')).to.be.null;
                 expect(Parser.cfToBirthDate()).to.be.null;
+            });
+        });
+    });
+
+    describe('methods to CF', () => {
+        describe('surnameToCf', () => {
+            it('Should return CF surname part', () => {
+                Parser.surnameToCf('Rossi').should.be.equal('RSS');
+                Parser.surnameToCf('Reno').should.be.equal('RNE');
+                Parser.surnameToCf('Goia').should.be.equal('GOI');
+                Parser.surnameToCf('Aieie').should.be.equal('AIE');
+                Parser.surnameToCf('No').should.be.equal('NOX');
+                Parser.surnameToCf('Ai').should.be.equal('AIX');
+            });
+            it('Should work with diacritics', () => {
+                Parser.surnameToCf('Olè').should.be.equal('LOE');
+                Parser.surnameToCf('Içi').should.be.equal('CII');
+            });
+            it('Should return null', () => {
+                expect(Parser.surnameToCf('')).to.be.null;
+                expect(Parser.surnameToCf('K')).to.be.null;
+                expect(Parser.surnameToCf('@à')).to.be.null;
             });
         });
     });

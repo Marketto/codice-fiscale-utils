@@ -164,43 +164,40 @@ class Parser {
     }
 
     /**
-     * Parse birth date information
-     * @param {string} codiceFiscale Partial or complete CF to parse
-     * @returns {Date|null} Birth Date
+     * Parse name to cf part
+     * @param {string} surname Partial or complete CF to parse
+     * @returns {string} partial cf
      * @memberof CodiceFiscaleUtils.Parser
      */
-    static cfToBirthDate(codiceFiscale) {
-        const birthDay = this.cfToBirthDay(codiceFiscale);
-        if (!birthDay) {
+    static surnameToCf(surname) {
+        if ((surname || '').trim().length < 2) {
             return null;
         }
+        const VALIDATOR = require('./validator.const');
+        
+        const surnameNoSpaces = this.removeDiacritics(surname.replace(/\s*/ig, '')).toUpperCase();
+        const consonants = (surnameNoSpaces.match(new RegExp(`[${VALIDATOR.CONSONANT_LIST}]+`, 'ig')) || []).join('');
+        const vowels = (surnameNoSpaces.match(new RegExp(`[${VALIDATOR.VOWEL_LIST}]+`, 'ig')) || []).join('');
 
-        const birthMonth = this.cfToBirthMonth(codiceFiscale);
-        if (!birthMonth && birthMonth !== 0) {
+        const partialCf = (consonants + vowels + 'X').substr(0, 3);
+
+        if (partialCf.length < 3) {
             return null;
         }
+        return partialCf;
+    }
 
-        const birthYear = this.cfToBirthYear(codiceFiscale);
-        if (!birthYear) {
+    /**
+     * Normalize diacritics
+     * @param {string} text Input text to normalize
+     * @returns {string} Output text w/o diacritics
+     */
+    static removeDiacritics(text) {
+        if (!text || typeof text !== 'string') {
             return null;
         }
-
-        const dt = new Date(birthYear, birthMonth, birthDay, 0, 0, 0);
-        dt.setUTCDate(birthDay);
-        return new Proxy(dt, {
-            get(receiver, name) {
-                if (['toJSON', 'toISOString'].includes(name)){
-                    return (...args) => receiver[name](...args).substr(0, 10);
-                }
-                if (name === 'getDate') {
-                    return (...args) => receiver.getUTCDate(...args);
-                }
-                if (typeof receiver[name] === 'function') {
-                    return (...args) => receiver[name](...args);
-                }
-                return receiver[name];
-            }
-        });
+        const DIACRITICS = require('./diacritics.const');
+        return text.replace(/./g, c => DIACRITICS[c]);
     }
 }
 
