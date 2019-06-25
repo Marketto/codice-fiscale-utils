@@ -6,7 +6,6 @@ class Parser {
 
     /**
      * Default omocode bitmap
-     * @static
      * @readonly
      * @returns {number}
      * @memberof CodiceFiscaleUtils.Parser
@@ -17,6 +16,7 @@ class Parser {
 
     /**
      * Parse surname information
+     * 
      * @param {string} codiceFiscale Partial or complete Omocode/Regular CF to parse
      * @returns {string|null} Regular CF w/o omocodes chars
      * @memberof CodiceFiscaleUtils.Parser
@@ -34,6 +34,7 @@ class Parser {
 
     /**
      * Parse surname information
+     * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {string|null} Partial/possible surname
      * @memberof CodiceFiscaleUtils.Parser
@@ -69,6 +70,7 @@ class Parser {
 
     /**
      * Parse name information
+     * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {string|null} Partial/possible name
      * @memberof CodiceFiscaleUtils.Parser
@@ -82,6 +84,7 @@ class Parser {
 
     /**
      * Parse gender information
+     * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {'M'|'F'|null} Male or female
      * @memberof CodiceFiscaleUtils.Parser
@@ -100,6 +103,7 @@ class Parser {
 
     /**
      * Parse birth year information
+     * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {number|null} Birth Year (4 digits)
      * @memberof CodiceFiscaleUtils.Parser
@@ -123,6 +127,7 @@ class Parser {
 
     /**
      * Parse birth month information
+     * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {number|null} Birth Month (0...11 - Date notation)
      * @memberof CodiceFiscaleUtils.Parser
@@ -142,6 +147,7 @@ class Parser {
 
     /**
      * Parse birth day information
+     * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {number|null} Birth day (1..31)
      * @memberof CodiceFiscaleUtils.Parser
@@ -166,6 +172,7 @@ class Parser {
 
     /**
      * Parse birth date information
+     * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {Date|null} Birth Date
      * @memberof CodiceFiscaleUtils.Parser
@@ -206,6 +213,7 @@ class Parser {
 
     /**
      * Normalize diacritics
+     * 
      * @param {string} text Input text to normalize
      * @returns {string|null} Output text w/o diacritics
      */
@@ -219,6 +227,7 @@ class Parser {
 
     /**
      * Parse surname to cf part
+     * 
      * @param {string} surname Partial or complete CF to parse
      * @returns {string|null} partial cf
      * @memberof CodiceFiscaleUtils.Parser
@@ -243,6 +252,7 @@ class Parser {
 
     /**
      * Parse name to cf part
+     * 
      * @param {string} name Partial or complete CF to parse
      * @returns {string|null} partial cf
      * @memberof CodiceFiscaleUtils.Parser
@@ -267,6 +277,7 @@ class Parser {
 
     /**
      * Parse year to cf part
+     * 
      * @param {string|number} year Birth year 2 or 4 digit string, number above 19XX or below 100
      * @returns {string|null} partial cf
      * @memberof CodiceFiscaleUtils.Parser
@@ -283,6 +294,7 @@ class Parser {
 
     /**
      * Parse month information
+     * 
      * @param {number} month Month number 0..11
      * @returns {string|null} Birth Month CF code
      * @memberof CodiceFiscaleUtils.Parser
@@ -295,8 +307,10 @@ class Parser {
 
         return BirthMonth[month] || null;
     }
+
     /**
      * Parse day information
+     * 
      * @param {number} day Day number 1..31
      * @param {Gender|string} gender Gender enum value
      * @returns {string|null} Birth Day CF code
@@ -312,6 +326,64 @@ class Parser {
             return null;
         }
         return (`0${day + genderValue}`).substr(-2);
+    }
+
+    /**
+     * Parse Year, Month, Day to Date (UTC)
+     * 
+     * @param {number} year 4 digits Year
+     * @param {number} month 1 or 2 digits Month 0..11
+     * @param {number} day 1,2 digits Day 1..31
+     * @returns {Date|null} UTC Date or null if provided year/month/day are not valid
+     */
+    static yearMonthDayToDate(year, month, day) {
+        if ([year, month, day].some(param => typeof param !== 'number')) {
+            return null;
+        }
+        const date = new Date();
+        date.setUTCFullYear(year);
+        date.setUTCMonth(month);
+        date.setUTCDate(day);
+        if (day !== date.getUTCDate() || month !== date.getUTCMonth() || year !== date.getUTCFullYear()) {
+            return null;
+        }
+        return date;
+    }
+
+    /**
+     * Parse Year, Month, Day and Gender information to create Date/Gender CF part
+     * 
+     * @param {number} year 4 digits Year
+     * @param {number} month 1 or 2 digits Month 0..11
+     * @param {number} day 1,2 digits Day 1..31
+     * @param {Gender|string} gender Gender enum value
+     * @returns {string|null} Birth date and Gender CF code
+     * @memberof CodiceFiscaleUtils.Parser
+     *//**
+     * Parse a Date (UTC) and Gender information to create Date/Gender CF part
+     * 
+     * @param {Date} date Date instance (UTC format)
+     * @param {Gender|string} gender Gender enum value
+     * @returns {string|null} Birth date and Gender CF code
+     * @memberof CodiceFiscaleUtils.Parser
+     */
+    static dateGenderToCf(...args) {
+        const Gender = require('./gender.enum');
+        const gender = args.slice(-1);
+        if (!Gender.hasOwnProperty(gender)) {
+            return null;
+        }
+
+        let date = this.yearMonthDayToDate(...args) || args[0];
+        if (!(date instanceof Date)) {
+            return null;
+        }
+        
+        const cfYear = this.yearToCf(date.getUTCFullYear());
+        const cfMonth = this.monthToCf(date.getUTCMonth());
+        const cfDayGender = this.dayGenderToCf(date.getUTCDate(), gender);
+
+        return `${cfYear}${cfMonth}${cfDayGender}`;
     }
 }
 

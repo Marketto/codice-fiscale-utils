@@ -13,7 +13,8 @@ const MONTHS = [
     'T'
 ];
 /**
- * @export {Object} BirthMonth
+ * @name BirthMonth
+ * @constant {Object} BirthMonth
  * @memberof CodiceFiscaleUtils
  */
 module.exports = Object.freeze(new Proxy(new Set(MONTHS), {
@@ -30,6 +31,10 @@ module.exports = Object.freeze(new Proxy(new Set(MONTHS), {
         }
         return this[name] || receiver[name];
     },
+    /**
+     * @method toArray
+     * @returns {Array<string>} List of month codes
+     */
     toArray(){
         const a = [];
         this.forEach(v => a.push(v));

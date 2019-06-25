@@ -288,5 +288,24 @@ describe('CodiceFiscaleUtils:Parser', () => {
                 expect(Parser.dayGenderToCf(5, 'X')).to.be.null;
             });
         });
+
+        describe('dateGenderToCf', () => {
+            it('Should return CF date part from year, month, day and gender', () => {
+                Parser.dateGenderToCf(2016, 3, 23, 'M').should.be.equal('16D23');
+                Parser.dateGenderToCf(1988, 7, 3, 'F').should.be.equal('88M43');
+            });
+            it('Should return CF date part from a Date and gender', () => {
+                Parser.dateGenderToCf(new Date(2016, 2, 23, 12), 'M').should.be.equal('16C23');
+                Parser.dateGenderToCf(new Date(1988, 7, 3, 12), 'F').should.be.equal('88M43');
+            });
+            it('Should return null', () => {
+                expect(Parser.dateGenderToCf('', 'M')).to.be.null;
+                expect(Parser.dateGenderToCf(0, 'F')).to.be.null;
+                expect(Parser.dateGenderToCf(1950, 3, 'M')).to.be.null;
+                expect(Parser.dateGenderToCf(1990, 21, 12, 'F')).to.be.null;
+                expect(Parser.dateGenderToCf(1996, 11, 33, 'M')).to.be.null;
+                expect(Parser.dateGenderToCf(2016, 3, 23, 'X')).to.be.null;
+            });
+        });
     });
 });
