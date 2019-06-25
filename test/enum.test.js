@@ -13,14 +13,18 @@ describe('CodiceFiscaleUtils:Enums', () => {
                 Gender.toArray().should.include('F');
             });
         });
+        it('Should return 0', () => {
+            Gender.M.should.be.equal(0);
+        });
         it('Should return M', () => {
-            Gender.M.should.be.equal('M');
             for (let i = 0; i<32; i++){
                 Gender[i].should.be.equal('M');
             }
         });
+        it('Should return 40', () => {
+            Gender.F.should.be.equal(40);
+        });
         it('Should return F', () => {
-            Gender.F.should.be.equal('F');
             for (let i = 40; i<72; i++){
                 Gender[i].should.be.equal('F');
             }

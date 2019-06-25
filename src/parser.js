@@ -277,7 +277,7 @@ class Parser {
         if (!(typeof year === 'number' && !isNaN(year) &&(year >= 1900 || year < 100))) {
             return null;
         }
-        return ((/\d{2}$/).exec(`000${year}`) || [])[0];
+        return ((/\d{2}$/).exec(`0${year}`) || [])[0];
     }
 
     /**
@@ -293,6 +293,24 @@ class Parser {
         const BirthMonth = require('./birthMonth.enum');
 
         return BirthMonth[month] || null;
+    }
+    /**
+     * Parse day information
+     * @param {number} day Day number 1..31
+     * @param {Gender|string} gender Gender enum value
+     * @returns {string|null} Birth Day CF code
+     * @memberof CodiceFiscaleUtils.Parser
+     */
+    static dayGenderToCf(day, gender) {
+        if (!(typeof day === 'number' && !isNaN(day) && (day > 0 && day < 32))) {
+            return null;
+        }
+        const Gender = require('./gender.enum');
+        const genderValue = Gender[gender];
+        if (typeof genderValue !== 'number') {
+            return null;
+        }
+        return ((/\d{2}$/).exec(`0${day + genderValue}`) || [])[0];
     }
 }
 

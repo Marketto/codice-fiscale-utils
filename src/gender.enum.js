@@ -1,17 +1,18 @@
-const GENDERS = ['M', 'F'];
+const GENDERS = {
+    M: 0,
+    F: 40
+};
 
 /**
  * @enum Gender
  * @memberof CodiceFiscaleUtils
  */
-module.exports = Object.freeze(new Proxy(new Set(GENDERS), {
+module.exports = Object.freeze(new Proxy(GENDERS, {
     get(receiver, name) {
         const index = parseInt(name);
         const values = this.toArray.apply(receiver);
         if ((index >= 0 && index <= 31) || (index >= 40 && index <= 71)) {
             return values[Math.floor(index/40)];
-        } else if(values.includes(name)) {
-            return name;
         }
         if (typeof this[name] === 'function') {
             return (...args) => this[name].apply(receiver, args);
@@ -19,8 +20,6 @@ module.exports = Object.freeze(new Proxy(new Set(GENDERS), {
         return this[name] || receiver[name];
     },
     toArray(){
-        const a = [];
-        this.forEach(v => a.push(v));
-        return a;
+        return Object.keys(this);
     }
 }));
