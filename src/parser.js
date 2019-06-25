@@ -27,8 +27,9 @@ class Parser {
         }
 
         const Omocode = require('./omocode.enum');
+        const checkBitmap = offset => !!(2**offset & this.OMOCODE_BITMAP);
 
-        return codiceFiscale.replace(/[\dA-Z]/gi, (match, offset) => ((/^[A-Z]$/ig).test(match) && (2**offset & this.OMOCODE_BITMAP)) ? Omocode[match] : match);
+        return codiceFiscale.replace(/[\dA-Z]/gi, (match, offset) => ((/^[A-Z]$/ig).test(match) && checkBitmap(offset)) ? Omocode[match] : match);
     }
 
     /**
@@ -271,13 +272,13 @@ class Parser {
      * @memberof CodiceFiscaleUtils.Parser
      */
     static yearToCf(year) {
-        if (typeof year === 'string' && (/^\s*\d{2}(?:\d{2})?\s*$/).test(year)) {
+        if (typeof year === 'string') {
             year = parseInt(year);
         }
         if (!(typeof year === 'number' && !isNaN(year) &&(year >= 1900 || year < 100))) {
             return null;
         }
-        return ((/\d{2}$/).exec(`0${year}`) || [])[0];
+        return (`0${year}`).substr(-2);
     }
 
     /**
@@ -310,7 +311,7 @@ class Parser {
         if (typeof genderValue !== 'number') {
             return null;
         }
-        return ((/\d{2}$/).exec(`0${day + genderValue}`) || [])[0];
+        return (`0${day + genderValue}`).substr(-2);
     }
 }
 
