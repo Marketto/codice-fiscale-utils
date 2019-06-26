@@ -1,0 +1,1807 @@
+{
+    "data": [
+        {
+            "name": "Italia",
+            "iso3166alpha2": "IT",
+            "iso3166alpha3": "ITA",
+            "istatCode": 100
+        },
+        {
+            "belfioreCode": "Z100",
+            "name": "Albania",
+            "iso3166alpha2": "AL",
+            "iso3166alpha3": "ALB",
+            "istatCode": 201
+        },
+        {
+            "belfioreCode": "Z101",
+            "name": "Andorra",
+            "iso3166alpha2": "AD",
+            "iso3166alpha3": "AND",
+            "istatCode": 202
+        },
+        {
+            "belfioreCode": "Z102",
+            "name": "Austria",
+            "iso3166alpha2": "AT",
+            "iso3166alpha3": "AUT",
+            "istatCode": 203
+        },
+        {
+            "belfioreCode": "Z103",
+            "name": "Belgio",
+            "iso3166alpha2": "BE",
+            "iso3166alpha3": "BEL",
+            "istatCode": 206
+        },
+        {
+            "belfioreCode": "Z104",
+            "name": "Bulgaria",
+            "iso3166alpha2": "BG",
+            "iso3166alpha3": "BGR",
+            "istatCode": 209
+        },
+        {
+            "belfioreCode": "Z107",
+            "name": "Danimarca",
+            "iso3166alpha2": "DK",
+            "iso3166alpha3": "DNK",
+            "istatCode": 212
+        },
+        {
+            "belfioreCode": "Z109",
+            "name": "Finlandia",
+            "iso3166alpha2": "FI",
+            "iso3166alpha3": "FIN",
+            "istatCode": 214
+        },
+        {
+            "belfioreCode": "Z110",
+            "name": "Francia",
+            "iso3166alpha2": "FR",
+            "iso3166alpha3": "FRA",
+            "istatCode": 215
+        },
+        {
+            "belfioreCode": "Z112",
+            "name": "Germania",
+            "iso3166alpha2": "DE",
+            "iso3166alpha3": "DEU",
+            "istatCode": 216
+        },
+        {
+            "belfioreCode": "Z114",
+            "name": "Regno Unito",
+            "iso3166alpha2": "UK",
+            "iso3166alpha3": "GBR",
+            "istatCode": 219
+        },
+        {
+            "belfioreCode": "Z115",
+            "name": "Grecia",
+            "iso3166alpha2": "GR",
+            "iso3166alpha3": "GRC",
+            "istatCode": 220
+        },
+        {
+            "belfioreCode": "Z116",
+            "name": "Irlanda",
+            "iso3166alpha2": "IE",
+            "iso3166alpha3": "IRL",
+            "istatCode": 221
+        },
+        {
+            "belfioreCode": "Z117",
+            "name": "Islanda",
+            "iso3166alpha2": "IS",
+            "iso3166alpha3": "ISL",
+            "istatCode": 223
+        },
+        {
+            "belfioreCode": "Z119",
+            "name": "Liechtenstein",
+            "iso3166alpha2": "LI",
+            "iso3166alpha3": "LIE",
+            "istatCode": 225
+        },
+        {
+            "belfioreCode": "Z120",
+            "name": "Lussemburgo",
+            "iso3166alpha2": "LU",
+            "iso3166alpha3": "LUX",
+            "istatCode": 226
+        },
+        {
+            "belfioreCode": "Z121",
+            "name": "Malta",
+            "iso3166alpha2": "MT",
+            "iso3166alpha3": "MLT",
+            "istatCode": 227
+        },
+        {
+            "belfioreCode": "Z123",
+            "name": "Monaco",
+            "iso3166alpha2": "MC",
+            "iso3166alpha3": "MCO",
+            "istatCode": 229
+        },
+        {
+            "belfioreCode": "Z125",
+            "name": "Norvegia",
+            "iso3166alpha2": "NO",
+            "iso3166alpha3": "NOR",
+            "istatCode": 231
+        },
+        {
+            "belfioreCode": "Z126",
+            "name": "Paesi Bassi",
+            "iso3166alpha2": "NL",
+            "iso3166alpha3": "NLD",
+            "istatCode": 232
+        },
+        {
+            "belfioreCode": "Z127",
+            "name": "Polonia",
+            "iso3166alpha2": "PL",
+            "iso3166alpha3": "POL",
+            "istatCode": 233
+        },
+        {
+            "belfioreCode": "Z128",
+            "name": "Portogallo",
+            "iso3166alpha2": "PT",
+            "iso3166alpha3": "PRT",
+            "istatCode": 234
+        },
+        {
+            "belfioreCode": "Z129",
+            "name": "Romania",
+            "iso3166alpha2": "RO",
+            "iso3166alpha3": "ROU",
+            "istatCode": 235
+        },
+        {
+            "belfioreCode": "Z130",
+            "name": "San Marino",
+            "iso3166alpha2": "SM",
+            "iso3166alpha3": "SMR",
+            "istatCode": 236
+        },
+        {
+            "belfioreCode": "Z131",
+            "name": "Spagna",
+            "iso3166alpha2": "ES",
+            "iso3166alpha3": "ESP",
+            "istatCode": 239
+        },
+        {
+            "belfioreCode": "Z132",
+            "name": "Svezia",
+            "iso3166alpha2": "SE",
+            "iso3166alpha3": "SWE",
+            "istatCode": 240
+        },
+        {
+            "belfioreCode": "Z133",
+            "name": "Svizzera",
+            "iso3166alpha2": "CH",
+            "iso3166alpha3": "CHE",
+            "istatCode": 241
+        },
+        {
+            "belfioreCode": "Z138",
+            "name": "Ucraina",
+            "iso3166alpha2": "UA",
+            "iso3166alpha3": "UKR",
+            "istatCode": 243
+        },
+        {
+            "belfioreCode": "Z134",
+            "name": "Ungheria",
+            "iso3166alpha2": "HU",
+            "iso3166alpha3": "HUN",
+            "istatCode": 244
+        },
+        {
+            "belfioreCode": "Z154",
+            "name": "Federazione russa",
+            "iso3166alpha2": "RU",
+            "iso3166alpha3": "RUS",
+            "istatCode": 245
+        },
+        {
+            "belfioreCode": "Z106",
+            "name": "Stato della Citt� del Vaticano",
+            "iso3166alpha2": "VA",
+            "iso3166alpha3": "VAT",
+            "istatCode": 246
+        },
+        {
+            "belfioreCode": "Z144",
+            "name": "Estonia",
+            "iso3166alpha2": "EE",
+            "iso3166alpha3": "EST",
+            "istatCode": 247
+        },
+        {
+            "belfioreCode": "Z145",
+            "name": "Lettonia",
+            "iso3166alpha2": "LV",
+            "iso3166alpha3": "LVA",
+            "istatCode": 248
+        },
+        {
+            "belfioreCode": "Z146",
+            "name": "Lituania",
+            "iso3166alpha2": "LT",
+            "iso3166alpha3": "LTU",
+            "istatCode": 249
+        },
+        {
+            "belfioreCode": "Z149",
+            "name": "Croazia",
+            "iso3166alpha2": "HR",
+            "iso3166alpha3": "HRV",
+            "istatCode": 250
+        },
+        {
+            "belfioreCode": "Z150",
+            "name": "Slovenia",
+            "iso3166alpha2": "SI",
+            "iso3166alpha3": "SVN",
+            "istatCode": 251
+        },
+        {
+            "belfioreCode": "Z153",
+            "name": "Bosnia-Erzegovina",
+            "iso3166alpha2": "BA",
+            "iso3166alpha3": "BIH",
+            "istatCode": 252
+        },
+        {
+            "belfioreCode": "Z148",
+            "name": "Ex Repubblica Jugoslava di Macedonia",
+            "iso3166alpha2": "MK",
+            "iso3166alpha3": "MKD",
+            "istatCode": 253
+        },
+        {
+            "belfioreCode": "Z140",
+            "name": "Moldova",
+            "iso3166alpha2": "MD",
+            "iso3166alpha3": "MDA",
+            "istatCode": 254
+        },
+        {
+            "belfioreCode": "Z155",
+            "name": "Slovacchia",
+            "iso3166alpha2": "SK",
+            "iso3166alpha3": "SVK",
+            "istatCode": 255
+        },
+        {
+            "belfioreCode": "Z139",
+            "name": "Bielorussia",
+            "iso3166alpha2": "BY",
+            "iso3166alpha3": "BLR",
+            "istatCode": 256
+        },
+        {
+            "belfioreCode": "Z156",
+            "name": "Repubblica ceca",
+            "iso3166alpha2": "CZ",
+            "iso3166alpha3": "CZE",
+            "istatCode": 257
+        },
+        {
+            "belfioreCode": "Z159",
+            "name": "Montenegro",
+            "iso3166alpha2": "ME",
+            "iso3166alpha3": "MNE",
+            "istatCode": 270
+        },
+        {
+            "belfioreCode": "Z158",
+            "name": "Serbia",
+            "iso3166alpha2": "RS",
+            "iso3166alpha3": "SRB",
+            "istatCode": 271
+        },
+        {
+            "belfioreCode": "Z160",
+            "name": "Kosovo",
+            "iso3166alpha3": "KOS",
+            "istatCode": 272
+        },
+        {
+            "belfioreCode": "Z200",
+            "name": "Afghanistan",
+            "iso3166alpha2": "AF",
+            "iso3166alpha3": "AFG",
+            "istatCode": 301
+        },
+        {
+            "belfioreCode": "Z203",
+            "name": "Arabia Saudita",
+            "iso3166alpha2": "SA",
+            "iso3166alpha3": "SAU",
+            "istatCode": 302
+        },
+        {
+            "belfioreCode": "Z204",
+            "name": "Bahrein",
+            "iso3166alpha2": "BH",
+            "iso3166alpha3": "BHR",
+            "istatCode": 304
+        },
+        {
+            "belfioreCode": "Z249",
+            "name": "Bangladesh",
+            "iso3166alpha2": "BD",
+            "iso3166alpha3": "BGD",
+            "istatCode": 305
+        },
+        {
+            "belfioreCode": "Z205",
+            "name": "Bhutan",
+            "iso3166alpha2": "BT",
+            "iso3166alpha3": "BTN",
+            "istatCode": 306
+        },
+        {
+            "belfioreCode": "Z206",
+            "name": "Myanmar/Birmania",
+            "iso3166alpha2": "MM",
+            "iso3166alpha3": "MMR",
+            "istatCode": 307
+        },
+        {
+            "belfioreCode": "Z207",
+            "name": "Brunei Darussalam",
+            "iso3166alpha2": "BN",
+            "iso3166alpha3": "BRN",
+            "istatCode": 309
+        },
+        {
+            "belfioreCode": "Z208",
+            "name": "Cambogia",
+            "iso3166alpha2": "KH",
+            "iso3166alpha3": "KHM",
+            "istatCode": 310
+        },
+        {
+            "belfioreCode": "Z209",
+            "name": "Sri Lanka",
+            "iso3166alpha2": "LK",
+            "iso3166alpha3": "LKA",
+            "istatCode": 311
+        },
+        {
+            "belfioreCode": "Z210",
+            "name": "Cina",
+            "iso3166alpha2": "CN",
+            "iso3166alpha3": "CHN",
+            "istatCode": 314
+        },
+        {
+            "belfioreCode": "Z211",
+            "name": "Cipro",
+            "iso3166alpha2": "CY",
+            "iso3166alpha3": "CYP",
+            "istatCode": 315
+        },
+        {
+            "belfioreCode": "Z214",
+            "name": "Corea del Nord",
+            "iso3166alpha2": "KP",
+            "iso3166alpha3": "PRK",
+            "istatCode": 319
+        },
+        {
+            "belfioreCode": "Z213",
+            "name": "Corea del Sud",
+            "iso3166alpha2": "KR",
+            "iso3166alpha3": "KOR",
+            "istatCode": 320
+        },
+        {
+            "belfioreCode": "Z215",
+            "name": "Emirati Arabi Uniti",
+            "iso3166alpha2": "AE",
+            "iso3166alpha3": "ARE",
+            "istatCode": 322
+        },
+        {
+            "belfioreCode": "Z216",
+            "name": "Filippine",
+            "iso3166alpha2": "PH",
+            "iso3166alpha3": "PHL",
+            "istatCode": 323
+        },
+        {
+            "belfioreCode": "Z161",
+            "name": "Palestina",
+            "iso3166alpha2": "PS",
+            "iso3166alpha3": "PSE",
+            "istatCode": 324
+        },
+        {
+            "belfioreCode": "Z219",
+            "name": "Giappone",
+            "iso3166alpha2": "JP",
+            "iso3166alpha3": "JPN",
+            "istatCode": 326
+        },
+        {
+            "belfioreCode": "Z220",
+            "name": "Giordania",
+            "iso3166alpha2": "JO",
+            "iso3166alpha3": "JOR",
+            "istatCode": 327
+        },
+        {
+            "belfioreCode": "Z222",
+            "name": "India",
+            "iso3166alpha2": "IN",
+            "iso3166alpha3": "IND",
+            "istatCode": 330
+        },
+        {
+            "belfioreCode": "Z223",
+            "name": "Indonesia",
+            "iso3166alpha2": "ID",
+            "iso3166alpha3": "IDN",
+            "istatCode": 331
+        },
+        {
+            "belfioreCode": "Z224",
+            "name": "Iran",
+            "iso3166alpha2": "IR",
+            "iso3166alpha3": "IRN",
+            "istatCode": 332
+        },
+        {
+            "belfioreCode": "Z225",
+            "name": "Iraq",
+            "iso3166alpha2": "IQ",
+            "iso3166alpha3": "IRQ",
+            "istatCode": 333
+        },
+        {
+            "belfioreCode": "Z226",
+            "name": "Israele",
+            "iso3166alpha2": "IL",
+            "iso3166alpha3": "ISR",
+            "istatCode": 334
+        },
+        {
+            "belfioreCode": "Z227",
+            "name": "Kuwait",
+            "iso3166alpha2": "KW",
+            "iso3166alpha3": "KWT",
+            "istatCode": 335
+        },
+        {
+            "belfioreCode": "Z228",
+            "name": "Laos",
+            "iso3166alpha2": "LA",
+            "iso3166alpha3": "LAO",
+            "istatCode": 336
+        },
+        {
+            "belfioreCode": "Z229",
+            "name": "Libano",
+            "iso3166alpha2": "LB",
+            "iso3166alpha3": "LBN",
+            "istatCode": 337
+        },
+        {
+            "belfioreCode": "Z242",
+            "name": "Timor Leste",
+            "iso3166alpha2": "TL",
+            "iso3166alpha3": "TLS",
+            "istatCode": 338
+        },
+        {
+            "belfioreCode": "Z232",
+            "name": "Maldive",
+            "iso3166alpha2": "MV",
+            "iso3166alpha3": "MDV",
+            "istatCode": 339
+        },
+        {
+            "belfioreCode": "Z247",
+            "name": "Malaysia",
+            "iso3166alpha2": "MY",
+            "iso3166alpha3": "MYS",
+            "istatCode": 340
+        },
+        {
+            "belfioreCode": "Z233",
+            "name": "Mongolia",
+            "iso3166alpha2": "MN",
+            "iso3166alpha3": "MNG",
+            "istatCode": 341
+        },
+        {
+            "belfioreCode": "Z234",
+            "name": "Nepal",
+            "iso3166alpha2": "NP",
+            "iso3166alpha3": "NPL",
+            "istatCode": 342
+        },
+        {
+            "belfioreCode": "Z235",
+            "name": "Oman",
+            "iso3166alpha2": "OM",
+            "iso3166alpha3": "OMN",
+            "istatCode": 343
+        },
+        {
+            "belfioreCode": "Z236",
+            "name": "Pakistan",
+            "iso3166alpha2": "PK",
+            "iso3166alpha3": "PAK",
+            "istatCode": 344
+        },
+        {
+            "belfioreCode": "Z237",
+            "name": "Qatar",
+            "iso3166alpha2": "QA",
+            "iso3166alpha3": "QAT",
+            "istatCode": 345
+        },
+        {
+            "belfioreCode": "Z248",
+            "name": "Singapore",
+            "iso3166alpha2": "SG",
+            "iso3166alpha3": "SGP",
+            "istatCode": 346
+        },
+        {
+            "belfioreCode": "Z240",
+            "name": "Siria",
+            "iso3166alpha2": "SY",
+            "iso3166alpha3": "SYR",
+            "istatCode": 348
+        },
+        {
+            "belfioreCode": "Z241",
+            "name": "Thailandia",
+            "iso3166alpha2": "TH",
+            "iso3166alpha3": "THA",
+            "istatCode": 349
+        },
+        {
+            "belfioreCode": "Z243",
+            "name": "Turchia",
+            "iso3166alpha2": "TR",
+            "iso3166alpha3": "TUR",
+            "istatCode": 351
+        },
+        {
+            "belfioreCode": "Z251",
+            "name": "Vietnam",
+            "iso3166alpha2": "VN",
+            "iso3166alpha3": "VNM",
+            "istatCode": 353
+        },
+        {
+            "belfioreCode": "Z246",
+            "name": "Yemen",
+            "iso3166alpha2": "YE",
+            "iso3166alpha3": "YEM",
+            "istatCode": 354
+        },
+        {
+            "belfioreCode": "Z255",
+            "name": "Kazakhstan",
+            "iso3166alpha2": "KZ",
+            "iso3166alpha3": "KAZ",
+            "istatCode": 356
+        },
+        {
+            "belfioreCode": "Z259",
+            "name": "Uzbekistan",
+            "iso3166alpha2": "UZ",
+            "iso3166alpha3": "UZB",
+            "istatCode": 357
+        },
+        {
+            "belfioreCode": "Z252",
+            "name": "Armenia",
+            "iso3166alpha2": "AM",
+            "iso3166alpha3": "ARM",
+            "istatCode": 358
+        },
+        {
+            "belfioreCode": "Z253",
+            "name": "Azerbaigian",
+            "iso3166alpha2": "AZ",
+            "iso3166alpha3": "AZE",
+            "istatCode": 359
+        },
+        {
+            "belfioreCode": "Z254",
+            "name": "Georgia",
+            "iso3166alpha2": "GE",
+            "iso3166alpha3": "GEO",
+            "istatCode": 360
+        },
+        {
+            "belfioreCode": "Z256",
+            "name": "Kirghizistan",
+            "iso3166alpha2": "KG",
+            "iso3166alpha3": "KGZ",
+            "istatCode": 361
+        },
+        {
+            "belfioreCode": "Z257",
+            "name": "Tagikistan",
+            "iso3166alpha2": "TJ",
+            "iso3166alpha3": "TJK",
+            "istatCode": 362
+        },
+        {
+            "belfioreCode": "Z217",
+            "name": "Taiwan",
+            "iso3166alpha2": "TW",
+            "iso3166alpha3": "TWN",
+            "istatCode": 363
+        },
+        {
+            "belfioreCode": "Z258",
+            "name": "Turkmenistan",
+            "iso3166alpha2": "TM",
+            "iso3166alpha3": "TKM",
+            "istatCode": 364
+        },
+        {
+            "belfioreCode": "Z301",
+            "name": "Algeria",
+            "iso3166alpha2": "DZ",
+            "iso3166alpha3": "DZA",
+            "istatCode": 401
+        },
+        {
+            "belfioreCode": "Z302",
+            "name": "Angola",
+            "iso3166alpha2": "AO",
+            "iso3166alpha3": "AGO",
+            "istatCode": 402
+        },
+        {
+            "belfioreCode": "Z313",
+            "name": "Costa d'Avorio",
+            "iso3166alpha2": "CI",
+            "iso3166alpha3": "CIV",
+            "istatCode": 404
+        },
+        {
+            "belfioreCode": "Z314",
+            "name": "Benin",
+            "iso3166alpha2": "BJ",
+            "iso3166alpha3": "BEN",
+            "istatCode": 406
+        },
+        {
+            "belfioreCode": "Z358",
+            "name": "Botswana",
+            "iso3166alpha2": "BW",
+            "iso3166alpha3": "BWA",
+            "istatCode": 408
+        },
+        {
+            "belfioreCode": "Z354",
+            "name": "Burkina Faso",
+            "iso3166alpha2": "BF",
+            "iso3166alpha3": "BFA",
+            "istatCode": 409
+        },
+        {
+            "belfioreCode": "Z305",
+            "name": "Burundi",
+            "iso3166alpha2": "BI",
+            "iso3166alpha3": "BDI",
+            "istatCode": 410
+        },
+        {
+            "belfioreCode": "Z306",
+            "name": "Camerun",
+            "iso3166alpha2": "CM",
+            "iso3166alpha3": "CMR",
+            "istatCode": 411
+        },
+        {
+            "belfioreCode": "Z307",
+            "name": "Capo Verde",
+            "iso3166alpha2": "CV",
+            "iso3166alpha3": "CPV",
+            "istatCode": 413
+        },
+        {
+            "belfioreCode": "Z308",
+            "name": "Repubblica Centrafricana",
+            "iso3166alpha2": "CF",
+            "iso3166alpha3": "CAF",
+            "istatCode": 414
+        },
+        {
+            "belfioreCode": "Z309",
+            "name": "Ciad",
+            "iso3166alpha2": "TD",
+            "iso3166alpha3": "TCD",
+            "istatCode": 415
+        },
+        {
+            "belfioreCode": "Z310",
+            "name": "Comore",
+            "iso3166alpha2": "KM",
+            "iso3166alpha3": "COM",
+            "istatCode": 417
+        },
+        {
+            "belfioreCode": "Z311",
+            "name": "Congo",
+            "iso3166alpha2": "CG",
+            "iso3166alpha3": "COG",
+            "istatCode": 418
+        },
+        {
+            "belfioreCode": "Z336",
+            "name": "Egitto",
+            "iso3166alpha2": "EG",
+            "iso3166alpha3": "EGY",
+            "istatCode": 419
+        },
+        {
+            "belfioreCode": "Z315",
+            "name": "Etiopia",
+            "iso3166alpha2": "ET",
+            "iso3166alpha3": "ETH",
+            "istatCode": 420
+        },
+        {
+            "belfioreCode": "Z316",
+            "name": "Gabon",
+            "iso3166alpha2": "GA",
+            "iso3166alpha3": "GAB",
+            "istatCode": 421
+        },
+        {
+            "belfioreCode": "Z317",
+            "name": "Gambia",
+            "iso3166alpha2": "GM",
+            "iso3166alpha3": "GMB",
+            "istatCode": 422
+        },
+        {
+            "belfioreCode": "Z318",
+            "name": "Ghana",
+            "iso3166alpha2": "GH",
+            "iso3166alpha3": "GHA",
+            "istatCode": 423
+        },
+        {
+            "belfioreCode": "Z361",
+            "name": "Gibuti",
+            "iso3166alpha2": "DJ",
+            "iso3166alpha3": "DJI",
+            "istatCode": 424
+        },
+        {
+            "belfioreCode": "Z319",
+            "name": "Guinea",
+            "iso3166alpha2": "GN",
+            "iso3166alpha3": "GIN",
+            "istatCode": 425
+        },
+        {
+            "belfioreCode": "Z320",
+            "name": "Guinea-Bissau",
+            "iso3166alpha2": "GW",
+            "iso3166alpha3": "GNB",
+            "istatCode": 426
+        },
+        {
+            "belfioreCode": "Z321",
+            "name": "Guinea equatoriale",
+            "iso3166alpha2": "GQ",
+            "iso3166alpha3": "GNQ",
+            "istatCode": 427
+        },
+        {
+            "belfioreCode": "Z322",
+            "name": "Kenya",
+            "iso3166alpha2": "KE",
+            "iso3166alpha3": "KEN",
+            "istatCode": 428
+        },
+        {
+            "belfioreCode": "Z359",
+            "name": "Lesotho",
+            "iso3166alpha2": "LS",
+            "iso3166alpha3": "LSO",
+            "istatCode": 429
+        },
+        {
+            "belfioreCode": "Z325",
+            "name": "Liberia",
+            "iso3166alpha2": "LR",
+            "iso3166alpha3": "LBR",
+            "istatCode": 430
+        },
+        {
+            "belfioreCode": "Z326",
+            "name": "Libia",
+            "iso3166alpha2": "LY",
+            "iso3166alpha3": "LBY",
+            "istatCode": 431
+        },
+        {
+            "belfioreCode": "Z327",
+            "name": "Madagascar",
+            "iso3166alpha2": "MG",
+            "iso3166alpha3": "MDG",
+            "istatCode": 432
+        },
+        {
+            "belfioreCode": "Z328",
+            "name": "Malawi",
+            "iso3166alpha2": "MW",
+            "iso3166alpha3": "MWI",
+            "istatCode": 434
+        },
+        {
+            "belfioreCode": "Z329",
+            "name": "Mali",
+            "iso3166alpha2": "ML",
+            "iso3166alpha3": "MLI",
+            "istatCode": 435
+        },
+        {
+            "belfioreCode": "Z330",
+            "name": "Marocco",
+            "iso3166alpha2": "MA",
+            "iso3166alpha3": "MAR",
+            "istatCode": 436
+        },
+        {
+            "belfioreCode": "Z331",
+            "name": "Mauritania",
+            "iso3166alpha2": "MR",
+            "iso3166alpha3": "MRT",
+            "istatCode": 437
+        },
+        {
+            "belfioreCode": "Z332",
+            "name": "Maurizio",
+            "iso3166alpha2": "MU",
+            "iso3166alpha3": "MUS",
+            "istatCode": 438
+        },
+        {
+            "belfioreCode": "Z333",
+            "name": "Mozambico",
+            "iso3166alpha2": "MZ",
+            "iso3166alpha3": "MOZ",
+            "istatCode": 440
+        },
+        {
+            "belfioreCode": "Z300",
+            "name": "Namibia",
+            "iso3166alpha2": "NA",
+            "iso3166alpha3": "NAM",
+            "istatCode": 441
+        },
+        {
+            "belfioreCode": "Z334",
+            "name": "Niger",
+            "iso3166alpha2": "NE",
+            "iso3166alpha3": "NER",
+            "istatCode": 442
+        },
+        {
+            "belfioreCode": "Z335",
+            "name": "Nigeria",
+            "iso3166alpha2": "NG",
+            "iso3166alpha3": "NGA",
+            "istatCode": 443
+        },
+        {
+            "belfioreCode": "Z338",
+            "name": "Ruanda",
+            "iso3166alpha2": "RW",
+            "iso3166alpha3": "RWA",
+            "istatCode": 446
+        },
+        {
+            "belfioreCode": "Z341",
+            "name": "Sao Tom� e Principe",
+            "iso3166alpha2": "ST",
+            "iso3166alpha3": "STP",
+            "istatCode": 448
+        },
+        {
+            "belfioreCode": "Z342",
+            "name": "Seychelles",
+            "iso3166alpha2": "SC",
+            "iso3166alpha3": "SYC",
+            "istatCode": 449
+        },
+        {
+            "belfioreCode": "Z343",
+            "name": "Senegal",
+            "iso3166alpha2": "SN",
+            "iso3166alpha3": "SEN",
+            "istatCode": 450
+        },
+        {
+            "belfioreCode": "Z344",
+            "name": "Sierra Leone",
+            "iso3166alpha2": "SL",
+            "iso3166alpha3": "SLE",
+            "istatCode": 451
+        },
+        {
+            "belfioreCode": "Z345",
+            "name": "Somalia",
+            "iso3166alpha2": "SO",
+            "iso3166alpha3": "SOM",
+            "istatCode": 453
+        },
+        {
+            "belfioreCode": "Z347",
+            "name": "Sudafrica",
+            "iso3166alpha2": "ZA",
+            "iso3166alpha3": "ZAF",
+            "istatCode": 454
+        },
+        {
+            "belfioreCode": "Z348",
+            "name": "Sudan",
+            "iso3166alpha2": "SD",
+            "iso3166alpha3": "SDN",
+            "istatCode": 455
+        },
+        {
+            "belfioreCode": "Z349",
+            "name": "Eswatini",
+            "iso3166alpha2": "SZ",
+            "iso3166alpha3": "SWZ",
+            "istatCode": 456
+        },
+        {
+            "belfioreCode": "Z357",
+            "name": "Tanzania",
+            "iso3166alpha2": "TZ",
+            "iso3166alpha3": "TZA",
+            "istatCode": 457
+        },
+        {
+            "belfioreCode": "Z351",
+            "name": "Togo",
+            "iso3166alpha2": "TG",
+            "iso3166alpha3": "TGO",
+            "istatCode": 458
+        },
+        {
+            "belfioreCode": "Z352",
+            "name": "Tunisia",
+            "iso3166alpha2": "TN",
+            "iso3166alpha3": "TUN",
+            "istatCode": 460
+        },
+        {
+            "belfioreCode": "Z353",
+            "name": "Uganda",
+            "iso3166alpha2": "UG",
+            "iso3166alpha3": "UGA",
+            "istatCode": 461
+        },
+        {
+            "belfioreCode": "Z312",
+            "name": "Repubblica Democratica del Congo",
+            "iso3166alpha2": "CD",
+            "iso3166alpha3": "COD",
+            "istatCode": 463
+        },
+        {
+            "belfioreCode": "Z355",
+            "name": "Zambia",
+            "iso3166alpha2": "ZM",
+            "iso3166alpha3": "ZMB",
+            "istatCode": 464
+        },
+        {
+            "belfioreCode": "Z337",
+            "name": "Zimbabwe",
+            "iso3166alpha2": "ZW",
+            "iso3166alpha3": "ZWE",
+            "istatCode": 465
+        },
+        {
+            "belfioreCode": "Z368",
+            "name": "Eritrea",
+            "iso3166alpha2": "ER",
+            "iso3166alpha3": "ERI",
+            "istatCode": 466
+        },
+        {
+            "belfioreCode": "Z907",
+            "name": "Sud Sudan",
+            "iso3166alpha2": "SS",
+            "iso3166alpha3": "SSD",
+            "istatCode": 467
+        },
+        {
+            "belfioreCode": "Z532",
+            "name": "Antigua e Barbuda",
+            "iso3166alpha2": "AG",
+            "iso3166alpha3": "ATG",
+            "istatCode": 503
+        },
+        {
+            "belfioreCode": "Z502",
+            "name": "Bahamas",
+            "iso3166alpha2": "BS",
+            "iso3166alpha3": "BHS",
+            "istatCode": 505
+        },
+        {
+            "belfioreCode": "Z522",
+            "name": "Barbados",
+            "iso3166alpha2": "BB",
+            "iso3166alpha3": "BRB",
+            "istatCode": 506
+        },
+        {
+            "belfioreCode": "Z512",
+            "name": "Belize",
+            "iso3166alpha2": "BZ",
+            "iso3166alpha3": "BLZ",
+            "istatCode": 507
+        },
+        {
+            "belfioreCode": "Z401",
+            "name": "Canada",
+            "iso3166alpha2": "CA",
+            "iso3166alpha3": "CAN",
+            "istatCode": 509
+        },
+        {
+            "belfioreCode": "Z503",
+            "name": "Costa Rica",
+            "iso3166alpha2": "CR",
+            "iso3166alpha3": "CRI",
+            "istatCode": 513
+        },
+        {
+            "belfioreCode": "Z504",
+            "name": "Cuba",
+            "iso3166alpha2": "CU",
+            "iso3166alpha3": "CUB",
+            "istatCode": 514
+        },
+        {
+            "belfioreCode": "Z526",
+            "name": "Dominica",
+            "iso3166alpha2": "DM",
+            "iso3166alpha3": "DMA",
+            "istatCode": 515
+        },
+        {
+            "belfioreCode": "Z505",
+            "name": "Repubblica Dominicana",
+            "iso3166alpha2": "DO",
+            "iso3166alpha3": "DOM",
+            "istatCode": 516
+        },
+        {
+            "belfioreCode": "Z506",
+            "name": "El Salvador",
+            "iso3166alpha2": "SV",
+            "iso3166alpha3": "SLV",
+            "istatCode": 517
+        },
+        {
+            "belfioreCode": "Z507",
+            "name": "Giamaica",
+            "iso3166alpha2": "JM",
+            "iso3166alpha3": "JAM",
+            "istatCode": 518
+        },
+        {
+            "belfioreCode": "Z524",
+            "name": "Grenada",
+            "iso3166alpha2": "GD",
+            "iso3166alpha3": "GRD",
+            "istatCode": 519
+        },
+        {
+            "belfioreCode": "Z509",
+            "name": "Guatemala",
+            "iso3166alpha2": "GT",
+            "iso3166alpha3": "GTM",
+            "istatCode": 523
+        },
+        {
+            "belfioreCode": "Z510",
+            "name": "Haiti",
+            "iso3166alpha2": "HT",
+            "iso3166alpha3": "HTI",
+            "istatCode": 524
+        },
+        {
+            "belfioreCode": "Z511",
+            "name": "Honduras",
+            "iso3166alpha2": "HN",
+            "iso3166alpha3": "HND",
+            "istatCode": 525
+        },
+        {
+            "belfioreCode": "Z514",
+            "name": "Messico",
+            "iso3166alpha2": "MX",
+            "iso3166alpha3": "MEX",
+            "istatCode": 527
+        },
+        {
+            "belfioreCode": "Z515",
+            "name": "Nicaragua",
+            "iso3166alpha2": "NI",
+            "iso3166alpha3": "NIC",
+            "istatCode": 529
+        },
+        {
+            "belfioreCode": "Z516",
+            "name": "Panama",
+            "iso3166alpha2": "PA",
+            "iso3166alpha3": "PAN",
+            "istatCode": 530
+        },
+        {
+            "belfioreCode": "Z527",
+            "name": "Santa Lucia",
+            "iso3166alpha2": "LC",
+            "iso3166alpha3": "LCA",
+            "istatCode": 532
+        },
+        {
+            "belfioreCode": "Z528",
+            "name": "Saint Vincent e Grenadine",
+            "iso3166alpha2": "VC",
+            "iso3166alpha3": "VCT",
+            "istatCode": 533
+        },
+        {
+            "belfioreCode": "Z533",
+            "name": "Saint Kitts e Nevis",
+            "iso3166alpha2": "KN",
+            "iso3166alpha3": "KNA",
+            "istatCode": 534
+        },
+        {
+            "belfioreCode": "Z404",
+            "name": "Stati Uniti d'America",
+            "iso3166alpha2": "US",
+            "iso3166alpha3": "USA",
+            "istatCode": 536
+        },
+        {
+            "belfioreCode": "Z600",
+            "name": "Argentina",
+            "iso3166alpha2": "AR",
+            "iso3166alpha3": "ARG",
+            "istatCode": 602
+        },
+        {
+            "belfioreCode": "Z601",
+            "name": "Bolivia",
+            "iso3166alpha2": "BO",
+            "iso3166alpha3": "BOL",
+            "istatCode": 604
+        },
+        {
+            "belfioreCode": "Z602",
+            "name": "Brasile",
+            "iso3166alpha2": "BR",
+            "iso3166alpha3": "BRA",
+            "istatCode": 605
+        },
+        {
+            "belfioreCode": "Z603",
+            "name": "Cile",
+            "iso3166alpha2": "CL",
+            "iso3166alpha3": "CHL",
+            "istatCode": 606
+        },
+        {
+            "belfioreCode": "Z604",
+            "name": "Colombia",
+            "iso3166alpha2": "CO",
+            "iso3166alpha3": "COL",
+            "istatCode": 608
+        },
+        {
+            "belfioreCode": "Z605",
+            "name": "Ecuador",
+            "iso3166alpha2": "EC",
+            "iso3166alpha3": "ECU",
+            "istatCode": 609
+        },
+        {
+            "belfioreCode": "Z606",
+            "name": "Guyana",
+            "iso3166alpha2": "GY",
+            "iso3166alpha3": "GUY",
+            "istatCode": 612
+        },
+        {
+            "belfioreCode": "Z610",
+            "name": "Paraguay",
+            "iso3166alpha2": "PY",
+            "iso3166alpha3": "PRY",
+            "istatCode": 614
+        },
+        {
+            "belfioreCode": "Z611",
+            "name": "Per�",
+            "iso3166alpha2": "PE",
+            "iso3166alpha3": "PER",
+            "istatCode": 615
+        },
+        {
+            "belfioreCode": "Z608",
+            "name": "Suriname",
+            "iso3166alpha2": "SR",
+            "iso3166alpha3": "SUR",
+            "istatCode": 616
+        },
+        {
+            "belfioreCode": "Z612",
+            "name": "Trinidad e Tobago",
+            "iso3166alpha2": "TT",
+            "iso3166alpha3": "TTO",
+            "istatCode": 617
+        },
+        {
+            "belfioreCode": "Z613",
+            "name": "Uruguay",
+            "iso3166alpha2": "UY",
+            "iso3166alpha3": "URY",
+            "istatCode": 618
+        },
+        {
+            "belfioreCode": "Z614",
+            "name": "Venezuela",
+            "iso3166alpha2": "VE",
+            "iso3166alpha3": "VEN",
+            "istatCode": 619
+        },
+        {
+            "belfioreCode": "Z700",
+            "name": "Australia",
+            "iso3166alpha2": "AU",
+            "iso3166alpha3": "AUS",
+            "istatCode": 701
+        },
+        {
+            "belfioreCode": "Z704",
+            "name": "Figi",
+            "iso3166alpha2": "FJ",
+            "iso3166alpha3": "FJI",
+            "istatCode": 703
+        },
+        {
+            "belfioreCode": "Z731",
+            "name": "Kiribati",
+            "iso3166alpha2": "KI",
+            "iso3166alpha3": "KIR",
+            "istatCode": 708
+        },
+        {
+            "belfioreCode": "Z711",
+            "name": "Isole Marshall",
+            "iso3166alpha2": "MH",
+            "iso3166alpha3": "MHL",
+            "istatCode": 712
+        },
+        {
+            "belfioreCode": "Z735",
+            "name": "Stati Federati di Micronesia",
+            "iso3166alpha2": "FM",
+            "iso3166alpha3": "FSM",
+            "istatCode": 713
+        },
+        {
+            "belfioreCode": "Z713",
+            "name": "Nauru",
+            "iso3166alpha2": "NR",
+            "iso3166alpha3": "NRU",
+            "istatCode": 715
+        },
+        {
+            "belfioreCode": "Z719",
+            "name": "Nuova Zelanda",
+            "iso3166alpha2": "NZ",
+            "iso3166alpha3": "NZL",
+            "istatCode": 719
+        },
+        {
+            "belfioreCode": "Z734",
+            "name": "Palau",
+            "iso3166alpha2": "PW",
+            "iso3166alpha3": "PLW",
+            "istatCode": 720
+        },
+        {
+            "belfioreCode": "Z730",
+            "name": "Papua Nuova Guinea",
+            "iso3166alpha2": "PG",
+            "iso3166alpha3": "PNG",
+            "istatCode": 721
+        },
+        {
+            "belfioreCode": "Z724",
+            "name": "Isole Salomone",
+            "iso3166alpha2": "SB",
+            "iso3166alpha3": "SLB",
+            "istatCode": 725
+        },
+        {
+            "belfioreCode": "Z726",
+            "name": "Samoa",
+            "iso3166alpha2": "WS",
+            "iso3166alpha3": "WSM",
+            "istatCode": 727
+        },
+        {
+            "belfioreCode": "Z728",
+            "name": "Tonga",
+            "iso3166alpha2": "TO",
+            "iso3166alpha3": "TON",
+            "istatCode": 730
+        },
+        {
+            "belfioreCode": "Z732",
+            "name": "Tuvalu",
+            "iso3166alpha2": "TV",
+            "iso3166alpha3": "TUV",
+            "istatCode": 731
+        },
+        {
+            "belfioreCode": "Z733",
+            "name": "Vanuatu",
+            "iso3166alpha2": "VU",
+            "iso3166alpha3": "VUT",
+            "istatCode": 732
+        },
+        {
+            "belfioreCode": "Z716",
+            "name": "Nuova Caledonia",
+            "iso3166alpha2": "NC",
+            "iso3166alpha3": "NCL",
+            "istatCode": 902
+        },
+        {
+            "name": "Saint-Martin (FR)",
+            "iso3166alpha2": "MF",
+            "iso3166alpha3": "MAF",
+            "istatCode": 904
+        },
+        {
+            "belfioreCode": "Z339",
+            "name": "Sahara occidentale",
+            "iso3166alpha2": "EH",
+            "iso3166alpha3": "ESH",
+            "istatCode": 905
+        },
+        {
+            "name": "Saint-Barth�lemy",
+            "iso3166alpha2": "BL",
+            "iso3166alpha3": "BLM",
+            "istatCode": 906
+        },
+        {
+            "belfioreCode": "Z400",
+            "name": "Bermuda",
+            "iso3166alpha2": "BM",
+            "iso3166alpha3": "BMU",
+            "istatCode": 908
+        },
+        {
+            "belfioreCode": "Z703",
+            "name": "Isole Cook (NZ)",
+            "iso3166alpha2": "CK",
+            "iso3166alpha3": "COK",
+            "istatCode": 909
+        },
+        {
+            "belfioreCode": "Z113",
+            "name": "Gibilterra",
+            "iso3166alpha2": "GI",
+            "iso3166alpha3": "GIB",
+            "istatCode": 910
+        },
+        {
+            "belfioreCode": "Z530",
+            "name": "Isole Cayman",
+            "iso3166alpha2": "KY",
+            "iso3166alpha3": "CYM",
+            "istatCode": 911
+        },
+        {
+            "belfioreCode": "Z529",
+            "name": "Anguilla",
+            "iso3166alpha2": "AI",
+            "iso3166alpha3": "AIA",
+            "istatCode": 917
+        },
+        {
+            "belfioreCode": "Z723",
+            "name": "Polinesia francese",
+            "iso3166alpha2": "PF",
+            "iso3166alpha3": "PYF",
+            "istatCode": 920
+        },
+        {
+            "belfioreCode": "Z108",
+            "name": "Isole F�r �er",
+            "iso3166alpha2": "FO",
+            "iso3166alpha3": "FRO",
+            "istatCode": 924
+        },
+        {
+            "name": "Jersey",
+            "iso3166alpha2": "JE",
+            "iso3166alpha3": "JEY",
+            "istatCode": 925
+        },
+        {
+            "belfioreCode": "Z501",
+            "name": "Aruba",
+            "iso3166alpha2": "AW",
+            "iso3166alpha3": "ABW",
+            "istatCode": 926
+        },
+        {
+            "name": "Sint Maarten (NL)",
+            "iso3166alpha2": "SX",
+            "iso3166alpha3": "SXM",
+            "istatCode": 928
+        },
+        {
+            "belfioreCode": "Z402",
+            "name": "Groenlandia",
+            "iso3166alpha2": "GL",
+            "iso3166alpha3": "GRL",
+            "istatCode": 934
+        },
+        {
+            "name": "Sark",
+            "istatCode": 939
+        },
+        {
+            "name": "Guernsey",
+            "iso3166alpha2": "GG",
+            "iso3166alpha3": "GGY",
+            "istatCode": 940
+        },
+        {
+            "belfioreCode": "Z609",
+            "name": "Isole Falkland (Malvine)",
+            "iso3166alpha2": "FK",
+            "iso3166alpha3": "FLK",
+            "istatCode": 958
+        },
+        {
+            "belfioreCode": "Z122",
+            "name": "Isola di Man",
+            "iso3166alpha2": "IM",
+            "iso3166alpha3": "IMN",
+            "istatCode": 959
+        },
+        {
+            "belfioreCode": "Z531",
+            "name": "Montserrat",
+            "iso3166alpha2": "MS",
+            "iso3166alpha3": "MSR",
+            "istatCode": 964
+        },
+        {
+            "name": "Cura�ao",
+            "iso3166alpha2": "CW",
+            "iso3166alpha3": "CUW",
+            "istatCode": 966
+        },
+        {
+            "belfioreCode": "Z722",
+            "name": "Isole Pitcairn",
+            "iso3166alpha2": "PN",
+            "iso3166alpha3": "PCN",
+            "istatCode": 972
+        },
+        {
+            "belfioreCode": "Z403",
+            "name": "Saint Pierre e Miquelon",
+            "iso3166alpha2": "PM",
+            "iso3166alpha3": "SPM",
+            "istatCode": 980
+        },
+        {
+            "belfioreCode": "Z340",
+            "name": "Sant'Elena",
+            "iso3166alpha2": "SH",
+            "iso3166alpha3": "SHN",
+            "istatCode": 983
+        },
+        {
+            "name": "Terre australi e antartiche francesi",
+            "iso3166alpha2": "TF",
+            "iso3166alpha3": "ATF",
+            "istatCode": 988
+        },
+        {
+            "belfioreCode": "Z519",
+            "name": "Isole Turks e Caicos",
+            "iso3166alpha2": "TC",
+            "iso3166alpha3": "TCA",
+            "istatCode": 992
+        },
+        {
+            "belfioreCode": "Z525",
+            "name": "Isole Vergini britanniche",
+            "iso3166alpha2": "VG",
+            "iso3166alpha3": "VGB",
+            "istatCode": 994
+        },
+        {
+            "belfioreCode": "Z729",
+            "name": "Wallis e Futuna",
+            "iso3166alpha2": "WF",
+            "iso3166alpha3": "WLF",
+            "istatCode": 997
+        },
+        {
+            "name": "Yemen del Nord",
+            "expirationDate": "1990",
+            "istatCode": 824
+        },
+        {
+            "belfioreCode": "Z250",
+            "name": "Yemen del Sud",
+            "iso3166alpha2": "YD",
+            "iso3166alpha3": "YMD",
+            "expirationDate": "1990",
+            "istatCode": 825
+        },
+        {
+            "name": "Repubblica Federale Tedesca",
+            "expirationDate": "1990",
+            "istatCode": 804
+        },
+        {
+            "belfioreCode": "Z111",
+            "name": "Repubblica Democratica Tedesca",
+            "iso3166alpha2": "DD",
+            "iso3166alpha3": "DDR",
+            "expirationDate": "1990",
+            "istatCode": 805
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z135",
+            "name": "Unione Sovietica",
+            "iso3166alpha2": "SU",
+            "iso3166alpha3": "SUN",
+            "expirationDate": "1991",
+            "istatCode": 802
+        },
+        {
+            "belfioreCode": "Z105",
+            "name": "Cecoslovacchia",
+            "iso3166alpha3": "CSK",
+            "expirationDate": "1992",
+            "istatCode": 801
+        },
+        {
+            "belfioreCode": "Z105",
+            "name": "Cecoslovacchia",
+            "iso3166alpha3": "CSK",
+            "expirationDate": "1992",
+            "istatCode": 801
+        },
+        {
+            "belfioreCode": "Z118",
+            "name": "Repubblica Socialista Federale di Jugoslavia",
+            "iso3166alpha2": "YU",
+            "iso3166alpha3": "YUG",
+            "expirationDate": "2003",
+            "istatCode": 820
+        },
+        {
+            "belfioreCode": "Z118",
+            "name": "Repubblica Socialista Federale di Jugoslavia",
+            "iso3166alpha2": "YU",
+            "iso3166alpha3": "YUG",
+            "expirationDate": "2003",
+            "istatCode": 820
+        },
+        {
+            "belfioreCode": "Z118",
+            "name": "Repubblica Socialista Federale di Jugoslavia",
+            "iso3166alpha2": "YU",
+            "iso3166alpha3": "YUG",
+            "expirationDate": "2003",
+            "istatCode": 820
+        },
+        {
+            "belfioreCode": "Z118",
+            "name": "Repubblica Socialista Federale di Jugoslavia",
+            "iso3166alpha2": "YU",
+            "iso3166alpha3": "YUG",
+            "expirationDate": "2003",
+            "istatCode": 820
+        },
+        {
+            "belfioreCode": "Z118",
+            "name": "Repubblica Socialista Federale di Jugoslavia",
+            "iso3166alpha2": "YU",
+            "iso3166alpha3": "YUG",
+            "expirationDate": "2003",
+            "istatCode": 820
+        },
+        {
+            "belfioreCode": "Z157",
+            "name": "Serbia e Montenegro",
+            "iso3166alpha3": "SCG",
+            "expirationDate": "2006",
+            "istatCode": 224
+        },
+        {
+            "belfioreCode": "Z157",
+            "name": "Serbia e Montenegro",
+            "iso3166alpha3": "SCG",
+            "expirationDate": "2006",
+            "istatCode": 224
+        },
+        {
+            "name": "Antille olandesi, isole",
+            "iso3166alpha2": "AN",
+            "iso3166alpha3": "ANT",
+            "expirationDate": "2015",
+            "istatCode": 907
+        },
+        {
+            "name": "Antille olandesi, isole",
+            "iso3166alpha2": "AN",
+            "iso3166alpha3": "ANT",
+            "expirationDate": "2015",
+            "istatCode": 907
+        }
+    ],
+    "source": {
+        "uri": [
+            "https://www.istat.it/it/files//2011/01/Elenco-codici-e-denominazioni-unita-territoriali-estere.zip",
+            "https://www.istat.it/it/files//2011/01/Elenco-Paesi-esteri-cessati.zip"
+        ],
+        "name": "Istituto nazionale di statistica",
+        "url": "https://www.istat.it",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/it/",
+        "termsAndConditions": "https://www.istat.it/it/note-legali"
+    },
+    "name": "countries"
+}

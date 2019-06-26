@@ -1,0 +1,30 @@
+[
+    {
+        "name": "countries",
+        "uri": [
+            "https://www.istat.it/it/files//2011/01/Elenco-codici-e-denominazioni-unita-territoriali-estere.zip",
+            "https://www.istat.it/it/files//2011/01/Elenco-Paesi-esteri-cessati.zip"
+        ],
+        "source": {
+            "name": "Istituto nazionale di statistica",
+            "url": "https://www.istat.it",
+            "license": "CC BY 3.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/3.0/it/",
+            "termsAndConditions": "https://www.istat.it/it/note-legali"
+        },
+        "delimiter": ";"
+    },
+    {
+        "name": "cities",
+        "uri": "https://raw.githubusercontent.com/italia/anpr/master/src/archivi/ANPR_archivio_comuni.csv",
+        "source": {
+            "name": "Ministero dell'Interno",
+            "url": "https://developers.italia.it/en/anpr",
+            "license": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/legalcode.it",
+            "termsAndConditions": "https://github.com/italia/anpr/blob/master/src/archivi/ANPR_archivio_comuni_legenda.md",
+            "authors": "https://github.com/italia/anpr/blob/master/AUTHORS"
+        },
+        "delimiter": ","
+    }
+]
