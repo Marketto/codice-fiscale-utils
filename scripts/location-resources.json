@@ -1,30 +1,46 @@
-[
-    {
-        "name": "countries",
-        "uri": [
-            "https://www.istat.it/it/files//2011/01/Elenco-codici-e-denominazioni-unita-territoriali-estere.zip",
-            "https://www.istat.it/it/files//2011/01/Elenco-Paesi-esteri-cessati.zip"
-        ],
-        "source": {
-            "name": "Istituto nazionale di statistica",
-            "url": "https://www.istat.it",
-            "license": "CC BY 3.0",
-            "licenseUrl": "https://creativecommons.org/licenses/by/3.0/it/",
-            "termsAndConditions": "https://www.istat.it/it/note-legali"
+{
+    "resources": [
+        {
+            "uri": [
+                "https://www.istat.it/it/files//2011/01/Elenco-codici-e-denominazioni-unita-territoriali-estere.zip",
+                "https://www.istat.it/it/files//2011/01/Elenco-Paesi-esteri-cessati.zip"
+            ],
+            "defaultSourceCode": "I",
+            "delimiter": ";"
         },
-        "delimiter": ";"
-    },
-    {
-        "name": "cities",
-        "uri": "https://raw.githubusercontent.com/italia/anpr/master/src/archivi/ANPR_archivio_comuni.csv",
-        "source": {
+        {
+            "name": "cities",
+            "uri": "https://raw.githubusercontent.com/italia/anpr/master/src/archivi/ANPR_archivio_comuni.csv",
+            "defaultSourceCode": "MI",
+            "delimiter": ","
+        }
+    ],
+    "licenses": {
+        "MI": {
             "name": "Ministero dell'Interno",
             "url": "https://developers.italia.it/en/anpr",
-            "license": "CC BY 4.0",
+            "license": "cc-by-4.0",
             "licenseUrl": "https://creativecommons.org/licenses/by/4.0/legalcode.it",
             "termsAndConditions": "https://github.com/italia/anpr/blob/master/src/archivi/ANPR_archivio_comuni_legenda.md",
             "authors": "https://github.com/italia/anpr/blob/master/AUTHORS"
         },
-        "delimiter": ","
+        "I": {
+            "name": "Istituto nazionale di statistica",
+            "url": "https://www.istat.it",
+            "license": "cc-by-3.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/3.0/it/",
+            "termsAndConditions": "https://www.istat.it/it/note-legali"
+        },
+        "AE": {
+            "name": "Agenzia delle Entrate",
+            "url": "https://www.agenziaentrate.gov.it",
+            "license": "cc-by-4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/legalcode.it",
+            "termsAndConditions": "https://github.com/italia/anpr/blob/master/src/archivi/ANPR_archivio_comuni_legenda.md"
+        }
+    },
+    "licenseFiles": {
+        "cc-by-3.0": "https://creativecommons.org/licenses/by/3.0/legalcode.txt",
+        "cc-by-4.0": "https://creativecommons.org/licenses/by/4.0/legalcode.txt"
     }
-]
+}
