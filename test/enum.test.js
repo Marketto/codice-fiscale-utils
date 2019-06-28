@@ -4,7 +4,7 @@ const expect = chai.expect;
 chai.should();
 
 describe('CodiceFiscaleUtils:Enums', () => {
-    describe('gender', () => {
+    describe('Gender', () => {
         const Gender = require('../src/gender.enum');
         describe('gender.toArray()', () => {
             it('Should return ["M", "F"]', () => {
@@ -43,7 +43,7 @@ describe('CodiceFiscaleUtils:Enums', () => {
         });
     });
 
-    describe('birthMonth', () => {
+    describe('BirthMonth', () => {
         const BirthMonth = require('../src/birthMonth.enum');
         describe('birthMonth.toArray()', () => {
             it('Should return all month codes', () => {
@@ -90,7 +90,7 @@ describe('CodiceFiscaleUtils:Enums', () => {
         });
     });
 
-    describe('omocode', () => {
+    describe('Omocode', () => {
         const Omocode = require('../src/omocode.enum');
         describe('omocode.toArray()', () => {
             it('Should return all literal omocodes', () => {
@@ -130,6 +130,15 @@ describe('CodiceFiscaleUtils:Enums', () => {
             expect(Omocode.K).to.be.undefined;
             expect(Omocode.G).to.be.undefined;
             expect(Omocode.F).to.be.undefined;
+        });
+    });
+
+    describe('Belfiore', () => {
+        const Belfiore = require('../src/belfiore.enum');
+        describe('Belfiore[belfioreCode]', () => {
+            it('Should return Rome for H501', () => {
+                Belfiore.H501.name.should.be.equal('ROMA');
+            });
         });
     });
 });
