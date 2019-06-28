@@ -179,6 +179,20 @@ describe('CodiceFiscaleUtils:Parser', () => {
                 expect(Parser.cfToBirthDate()).to.be.null;
             });
         });
+
+        describe('cfToBirthPlace', () => {
+            it('Should return Rome for H501', () => {
+                Parser.cfToBirthPlace('XXXYYY92B20H501').should.be.equal('ROMA');
+            });
+            it('Should check expiration', () => {
+                expect(Parser.cfToBirthPlace('XXXYYY91Z111')).to.be.null;
+                Parser.cfToBirthPlace('XXXYYY81Z111').should.be.equal('Repubblica Democratica Tedesca');
+            });
+            it('Should return null', () => {
+                expect(Parser.cfToBirthPlace('XXXYYY90')).to.be.null;
+                expect(Parser.cfToBirthPlace()).to.be.null;
+            });
+        });
     });
 
     describe('methods to CF', () => {

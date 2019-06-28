@@ -212,6 +212,28 @@ class Parser {
     }
 
     /**
+     * Parse birth place information
+     * 
+     * @param {string} codiceFiscale Partial or complete CF to parse
+     * @returns {string} Birth place name
+     * @memberof CodiceFiscaleUtils.Parser
+     */
+    static cfToBirthPlace(codiceFiscale) {
+        if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 15) {
+            return null;
+        }
+
+        const Belfiore = require('./belfiore.enum');
+
+        const birthPlace = Belfiore[codiceFiscale.substr(11,4).toUpperCase()];
+        if (!birthPlace) {
+            return null;
+        }
+
+        return birthPlace.name;
+    }
+
+    /**
      * Normalize diacritics
      * 
      * @param {string} text Input text to normalize

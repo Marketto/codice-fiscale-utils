@@ -140,5 +140,12 @@ describe('CodiceFiscaleUtils:Enums', () => {
                 Belfiore.H501.name.should.be.equal('ROMA');
             });
         });
+        describe('Belfiore.cities', () => {
+            it('Should return cities by RM province', () => {
+                const rmCities = Belfiore.cities('RM');
+                rmCities.length.should.be.ok;
+                rmCities.some(({province}) => province !== 'RM').should.be.false;
+            });
+        });
     });
 });
