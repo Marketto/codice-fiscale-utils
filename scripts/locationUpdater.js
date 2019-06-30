@@ -3,6 +3,8 @@ const JSZip = require('jszip');
 const csvtojson = require('csvtojson');
 const fs = require('fs');
 const path = require('path');
+const moment = require('moment');
+const _ = require('lodash');
 
 const locationResources = require('./location-resources.json');
 
@@ -54,7 +56,7 @@ const cleanObject = (obj) => {
     const out = {};
     Object.entries(obj).forEach(([key, value]) => {
         const cleanValue = cleanField(value);
-        if (cleanValue !== undefined) {
+        if (cleanValue !== undefined && cleanValue !== null) {
             out[key] = cleanValue;
         }
     });
@@ -68,8 +70,8 @@ const dataMapper = defaultSourceCode => data => data
         newIstatCode: obj['Codice Stato/Territorio_Figlio'],
         iso3166alpha2: obj['Codice ISO 3166 alpha2'],
         iso3166alpha3: obj['Codice ISO 3166 alpha3'],
-        expirationDate: (obj['STATO'] === 'C' && obj['DATACESSAZIONE']) || obj['Anno evento'],
-        creationDate: obj['DATAISTITUZIONE'],
+        creationDate: obj['DATAISTITUZIONE'] && moment(obj['DATAISTITUZIONE'], 'YYYY-MM-DD').startOf('day').toJSON(),
+        expirationDate: (obj['STATO'] === 'C' && obj['DATACESSAZIONE'] && moment(obj['DATACESSAZIONE'], 'YYYY-MM-DD').endOf('day').toJSON()) || (obj['Anno evento'] && moment(obj['Anno evento'], 'YYYY').endOf('year').toJSON()),
         province: obj['SIGLAPROVINCIA'],
         region: parseInt(obj['IDREGIONE']),
         istatCode: parseInt(obj['CODISTAT'] || obj['Codice ISTAT']),
@@ -78,12 +80,32 @@ const dataMapper = defaultSourceCode => data => data
     }))
     .filter(({belfioreCode}) => belfioreCode);
 
+const isEqual = (a, b, ...args) => b ? _.isEqual(a,b) && (!args.length || isEqual(a, ...args)) : !!a;
 
-Promise.all(locationResources.resources.map(async ({uri, delimiter, defaultSourceCode}) => await Promise
+const merge = (...entries) => {
+    return cleanObject(_.mergeWith(..._.cloneDeep(entries).reverse(), (valD, valS, key) => {
+        switch (key) {
+        case 'creationDate':
+            return valS && valD ? moment.min(moment(valD), moment(valS)).toJSON() : null;
+        case 'expirationDate':
+            return valD && valS ? moment.max(moment(valD), moment(valS)).toJSON() : null;
+        case 'active':
+            return valS || valD;
+        default:
+            return valD;
+        }
+    }));
+};
+
+const deDupes = data => Object.values(_.groupBy(data, 'belfioreCode')).map(entry => isEqual(...entry) ? entry[0] : merge(...entry));
+
+
+Promise.all(locationResources.resources.map(async ({uri, delimiter, defaultSourceCode}) => Promise
     .all(([].concat(uri))
         .filter(uri => !!uri)
         .map(singleUri => downloadResource(singleUri, delimiter)
             .then(dataMapper(defaultSourceCode))
+            .then(deDupes)
         )
     )
     .then((data) => [[], []].concat(data).reduce((a, b) => [].concat(a).concat(b)))
