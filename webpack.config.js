@@ -7,5 +7,13 @@ module.exports = {
         filename: 'codice-fiscale-utils.js',
         library: 'codiceFiscaleUtils',
         libraryTarget: 'umd'
+    },
+    externals: {
+        moment: {
+            commonjs: 'moment',
+            commonjs2: 'moment',
+            amd: 'moment',
+            var: 'moment'
+        }
     }
 };

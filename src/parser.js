@@ -118,11 +118,11 @@ class Parser {
             return null;
         }
 
-        const current2DigitsYear = parseInt((new Date()).getFullYear().toString().substr(-2));
+        const moment = require('moment');
+        const current2DigitsYear = parseInt(moment().format('YY'));
 
-        const century = birthYear <= current2DigitsYear;
-
-        return birthYear + 1900 + (century * 100);
+        const century = (birthYear > current2DigitsYear) * 100;
+        return moment().subtract(current2DigitsYear - birthYear + century, 'years').year();
     }
 
     /**
@@ -193,22 +193,12 @@ class Parser {
             return null;
         }
 
-        const dt = new Date(birthYear, birthMonth, birthDay, 0, 0, 0);
-        dt.setUTCDate(birthDay);
-        return new Proxy(dt, {
-            get(receiver, name) {
-                if (['toJSON', 'toISOString'].includes(name)){
-                    return (...args) => receiver[name](...args).substr(0, 10);
-                }
-                if (name === 'getDate') {
-                    return (...args) => receiver.getUTCDate(...args);
-                }
-                if (typeof receiver[name] === 'function') {
-                    return (...args) => receiver[name](...args);
-                }
-                return receiver[name];
-            }
-        });
+        const moment = require('moment');
+        const dt = moment([birthYear, birthMonth, birthDay, 12]);
+        if (!dt.isValid()) {
+            return null;
+        }
+        return dt.toDate();
     }
 
     /**
@@ -230,6 +220,24 @@ class Parser {
             return null;
         }
 
+        const {creationDate, expirationDate, active} = birthPlace;
+        if (creationDate || expirationDate) {
+            const birthDate = this.cfToBirthDate(codiceFiscale);
+            if (!birthDate) {
+                return null;
+            }
+            const moment = require('moment');
+            let validityCheck = active;
+            if (creationDate) {
+                validityCheck = moment(birthDate).isSameOrAfter(moment(creationDate));
+            }
+            if(expirationDate) {
+                validityCheck = moment(birthDate).isSameOrBefore(moment(expirationDate));
+            }
+            if (!validityCheck) {
+                return null;
+            }
+        }
         return birthPlace.name;
     }
 
