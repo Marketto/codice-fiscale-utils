@@ -321,5 +321,14 @@ describe('CodiceFiscaleUtils:Parser', () => {
                 expect(Parser.dateGenderToCf(2016, 3, 23, 'X')).to.be.null;
             });
         });
+
+        describe('placeToCf', () => {
+            it('Should return CF place part from city name', () => {
+                Parser.placeToCf('Bologna').belfioreCode.should.be.equal('A944');
+            });
+            it('Should return CF place part from country name', () => {
+                Parser.placeToCf('Polonia').belfioreCode.should.be.equal('Z127');
+            });
+        });
     });
 });

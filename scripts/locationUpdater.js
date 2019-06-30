@@ -9,6 +9,7 @@ const _ = require('lodash');
 const locationResources = require('./location-resources.json');
 
 const detinationPath = path.join(__dirname, '../src/asset');
+const DEFAULT_CREATION_DATE = "1861-01-01";
 
 const downloadUnzip = (uri) => request({
     method: 'GET',
@@ -83,7 +84,8 @@ const dataMapper = defaultSourceCode => data => data
 const isEqual = (a, b, ...args) => b ? _.isEqual(a,b) && (!args.length || isEqual(a, ...args)) : !!a;
 
 const merge = (...entries) => {
-    return cleanObject(_.mergeWith(..._.cloneDeep(entries).reverse(), (valD, valS, key) => {
+    const sortedEntries = _.cloneDeep(entries).sort((a,b) => moment(b.creationDate || DEFAULT_CREATION_DATE).diff(moment(a.creationDate || DEFAULT_CREATION_DATE),'day'));
+    return cleanObject(_.mergeWith(...sortedEntries, (valD, valS, key) => {
         switch (key) {
         case 'creationDate':
             return valS && valD ? moment.min(moment(valD), moment(valS)).toJSON() : null;

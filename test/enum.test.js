@@ -132,20 +132,4 @@ describe('CodiceFiscaleUtils:Enums', () => {
             expect(Omocode.F).to.be.undefined;
         });
     });
-
-    describe('Belfiore', () => {
-        const Belfiore = require('../src/belfiore.enum');
-        describe('Belfiore[belfioreCode]', () => {
-            it('Should return Rome for H501', () => {
-                Belfiore.H501.name.should.be.equal('ROMA');
-            });
-        });
-        describe('Belfiore.cities', () => {
-            it('Should return cities by RM province', () => {
-                const rmCities = Belfiore.cities('RM');
-                rmCities.length.should.be.ok;
-                rmCities.some(({province}) => province !== 'RM').should.be.false;
-            });
-        });
-    });
 });

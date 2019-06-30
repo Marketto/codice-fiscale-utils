@@ -213,7 +213,7 @@ class Parser {
             return null;
         }
 
-        const Belfiore = require('./belfiore.enum');
+        const Belfiore = require('./belfiore');
 
         const birthPlace = Belfiore[codiceFiscale.substr(11,4).toUpperCase()];
         if (!birthPlace) {
@@ -414,6 +414,24 @@ class Parser {
         const cfDayGender = this.dayGenderToCf(date.getUTCDate(), gender);
 
         return `${cfYear}${cfMonth}${cfDayGender}`;
+    }
+
+    /**
+     * Parse place name and province to Belfiore code
+     * @param {string} name City or Country name
+     * @param {string} [province] Province code for cities
+     * @return {Object|null} Matching place, if only once is matching criteria
+     */
+    static placeToCf(name, province) {
+        const Belfiore = require('./belfiore');
+        if (!province) {
+            return Belfiore.findByName(name);
+        }
+        const results = Belfiore.searchByName(name).toArray().filter(place => province.trim().toUpperCase() === place.province);
+        if (results.length === 1) {
+            return results[0];
+        }
+        return null;
     }
 }
 
