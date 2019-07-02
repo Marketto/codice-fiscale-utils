@@ -72,7 +72,7 @@ describe('CodiceFiscaleUtils:Parser', () => {
             it ('Should return AE', () => {
                 Parser.cfToSurname('AEX').should.be.equal('AE');
             });
-            it('Should return null', () => {
+            it('Should return null for strings different from 3 chars, vowel between consonants or undefined', () => {
                 expect(Parser.cfToSurname('KAZ')).to.be.null;
                 expect(Parser.cfToSurname('KA')).to.be.null;
                 expect(Parser.cfToSurname()).to.be.null;

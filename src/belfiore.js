@@ -10,7 +10,7 @@ class BelfioreGenericList {
     constructor(data){
         Object.defineProperties(this, {
             _data: {
-                value: Object.freeze(data.map(place => Object.freeze(place))),
+                value: data,
                 enumerable: false,
                 configurable: false,
                 writable: false
@@ -34,18 +34,23 @@ class BelfioreGenericList {
 
     /**
      * Filter Places by ones active in the given date
-     * @param {string|Date|moment} [date=moment()] ISO9601 String date, Date Object or moment instance
+     * @param {string|Date|moment|Array<numbers>} [date=moment()] ISO9601 String date, Date Object or moment instance or Array of numbers [YYYY, MM, DD]
      * @return {BelfioreGenericList|null}
      */
     active(date = moment()) {
-        if (!moment(date).isValid()) {
+        const dateArray = ![].concat(date).some(param => typeof param !== 'number') && [].concat(date) ;
+        if (!(typeof date === 'string' || dateArray || date instanceof Date || date instanceof moment || !date)) {
             return null;
         }
-        const filteredData = this._date
+        const targetDate = date ? moment(dateArray || date) : moment();
+        if (!targetDate.isValid()) {
+            return null;
+        }
+        const filteredData = this._data
             .filter(({
                 creationDate = moment('1861-01-01'), 
                 expirationDate = moment('9999-12-31')
-            }) => moment(date).isBetween(creationDate, expirationDate));
+            }) => targetDate.isBetween(creationDate, expirationDate));
         return new this.constructor(filteredData);
     }
 
@@ -93,12 +98,11 @@ class BelfioreList extends BelfioreGenericList {
         this.cities = new BelfioreCities(this._data.filter(({belfioreCode}) => !(/^Z/).test(belfioreCode)));
 
         this.countries = new BelfioreGenericList(this._data.filter(({belfioreCode}) => (/^Z/).test(belfioreCode)));
-        if (licenses) {
-            this.licenses = Object.freeze(licenses);
-        }
-        if (sources) {
-            this.sources = Object.freeze(sources);
-        }
+
+        Object.assign(this, {
+            licenses,
+            sources
+        });
     }
 }
 
@@ -129,4 +133,8 @@ class BelfioreCities extends BelfioreGenericList {
  * @constant {Object} Belfiore
  * @memberof CodiceFiscaleUtils
  */
-module.exports = new BelfioreList(CITIES_COUNTRIES.data, CITIES_COUNTRIES.licenses, CITIES_COUNTRIES.sources);
+module.exports = new BelfioreList(
+    CITIES_COUNTRIES.data.map(entry => Object.freeze(entry)),
+    Object.freeze(CITIES_COUNTRIES.licenses),
+    Object.freeze(CITIES_COUNTRIES.sources)
+);

@@ -1,3 +1,6 @@
+
+const VALIDATOR = require('./validator.const');
+
 /**
  * @class Validator
  * @memberof CodiceFiscaleUtils
@@ -11,7 +14,6 @@ class Validator {
      * @memberof CodiceFiscaleUtils.Validator
      */
     static cfSurname(surname) {
-        const VALIDATOR = require('./validator.const');
         if ((surname || '').length > 1) {
             const cons = surname.match(new RegExp(`[${VALIDATOR.CONSONANT_LIST}]`, 'ig')) || [];
             const vow = surname.match(new RegExp(`[${VALIDATOR.VOWEL_LIST}]`, 'ig')) || [];

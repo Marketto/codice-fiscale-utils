@@ -1,3 +1,11 @@
+const moment = require('moment');
+const Omocode = require('./omocode.enum');
+const Gender = require('./gender.enum');
+const BirthMonth = require('./birthMonth.enum');
+const VALIDATOR = require('./validator.const');
+const DIACRITICS = require('./diacritics.const');
+const Belfiore = require('./belfiore');
+
 /**
  * @class Parser
  * @memberof CodiceFiscaleUtils
@@ -26,7 +34,6 @@ class Parser {
             return codiceFiscale;
         }
 
-        const Omocode = require('./omocode.enum');
         const checkBitmap = offset => !!(2**offset & this.OMOCODE_BITMAP);
 
         return codiceFiscale.replace(/[\dA-Z]/gi, (match, offset) => ((/^[A-Z]$/ig).test(match) && checkBitmap(offset)) ? Omocode[match] : match);
@@ -46,7 +53,6 @@ class Parser {
 
         const surnameCf = codiceFiscale.substr(0,3);
 
-        const VALIDATOR = require('./validator.const');
         const [cons = ''] = surnameCf.match(new RegExp(`^[${VALIDATOR.CONSONANT_LIST}]{1,3}`, 'ig')) || [];
         const [vow = ''] = surnameCf.match(new RegExp(`[${VALIDATOR.VOWEL_LIST}]{1,3}`, 'ig')) || [];
 
@@ -97,7 +103,6 @@ class Parser {
         if (birthDay === 0 || birthDay === 40) {
             return null;
         }
-        const Gender = require('./gender.enum');
         return Gender[birthDay];
     }
 
@@ -118,7 +123,6 @@ class Parser {
             return null;
         }
 
-        const moment = require('moment');
         const current2DigitsYear = parseInt(moment().format('YY'));
 
         const century = (birthYear > current2DigitsYear) * 100;
@@ -136,7 +140,6 @@ class Parser {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 9) {
             return null;
         }
-        const BirthMonth = require('./birthMonth.enum');
 
         const birthMonth = BirthMonth[codiceFiscale.substr(8,1)];
         if (!birthMonth && birthMonth !== 0) {
@@ -193,7 +196,6 @@ class Parser {
             return null;
         }
 
-        const moment = require('moment');
         const dt = moment([birthYear, birthMonth, birthDay, 12]);
         if (!dt.isValid()) {
             return null;
@@ -213,7 +215,6 @@ class Parser {
             return null;
         }
 
-        const Belfiore = require('./belfiore');
 
         const birthPlace = Belfiore[codiceFiscale.substr(11,4).toUpperCase()];
         if (!birthPlace) {
@@ -226,7 +227,6 @@ class Parser {
             if (!birthDate) {
                 return null;
             }
-            const moment = require('moment');
             let validityCheck = active;
             if (creationDate) {
                 validityCheck = moment(birthDate).isSameOrAfter(moment(creationDate));
@@ -251,7 +251,6 @@ class Parser {
         if (!text || typeof text !== 'string') {
             return null;
         }
-        const DIACRITICS = require('./diacritics.const');
         return text.replace(/./g, c => DIACRITICS[c]);
     }
 
@@ -266,7 +265,6 @@ class Parser {
         if ((surname || '').trim().length < 2) {
             return null;
         }
-        const VALIDATOR = require('./validator.const');
         
         const surnameNoSpaces = this.removeDiacritics(surname.replace(/\s*/ig, '')).toUpperCase();
         const consonants = (surnameNoSpaces.match(new RegExp(`[${VALIDATOR.CONSONANT_LIST}]+`, 'ig')) || []).join('');
@@ -291,7 +289,6 @@ class Parser {
         if ((name || '').trim().length < 2) {
             return null;
         }
-        const VALIDATOR = require('./validator.const');
         
         const nameNoSpaces = this.removeDiacritics(name.replace(/\s*/ig, '')).toUpperCase();
         const consonants = (nameNoSpaces.match(new RegExp(`[${VALIDATOR.CONSONANT_LIST}]+`, 'ig')) || []).join('');
@@ -333,7 +330,6 @@ class Parser {
         if (!(typeof month === 'number' && !isNaN(month))) {
             return null;
         }
-        const BirthMonth = require('./birthMonth.enum');
 
         return BirthMonth[month] || null;
     }
@@ -350,7 +346,6 @@ class Parser {
         if (!(typeof day === 'number' && !isNaN(day) && (day > 0 && day < 32))) {
             return null;
         }
-        const Gender = require('./gender.enum');
         const genderValue = Gender[gender];
         if (typeof genderValue !== 'number') {
             return null;
@@ -359,25 +354,49 @@ class Parser {
     }
 
     /**
-     * Parse Year, Month, Day to Date (UTC)
+     * Parse Year, Month, Day to Dated
      * 
      * @param {number} year 4 digits Year
      * @param {number} month 1 or 2 digits Month 0..11
      * @param {number} day 1,2 digits Day 1..31
-     * @returns {Date|null} UTC Date or null if provided year/month/day are not valid
+     * @returns {Date|null} Date or null if provided year/month/day are not valid
      */
     static yearMonthDayToDate(year, month, day) {
         if ([year, month, day].some(param => typeof param !== 'number')) {
             return null;
         }
-        const date = new Date();
-        date.setUTCFullYear(year);
-        date.setUTCMonth(month);
-        date.setUTCDate(day);
-        if (day !== date.getUTCDate() || month !== date.getUTCMonth() || year !== date.getUTCFullYear()) {
+        const date = moment([year, month, day, 12]);
+        if (!date.isValid() || date.year() !== year || date.month() !== month || date.date() !== day) {
             return null;
         }
-        return date;
+        return date.toDate();
+    }
+
+    /**
+     * Parse Year, Month, Day information to create Date
+     * 
+     * @param {number} year 4 digits Year
+     * @param {number} month 1 or 2 digits Month 0..11
+     * @param {number} day 1,2 digits Day 1..31
+     * @returns {Date|null} Parsed Date or null if not valid
+     * @memberof CodiceFiscaleUtils.Parser
+     *//**
+     * Parse a Dated and Gender information to create Date/Gender CF part
+     * 
+     * @param {Date|Moment} date Date or Moment instance (UTC format)
+     * @returns {Date|null} Parsed Date or null if not valid
+     * @memberof CodiceFiscaleUtils.Parser
+     */
+    static parseDate(...args) {
+        const date = this.yearMonthDayToDate(...args) || args[0];
+        if (!(date instanceof Date || date instanceof moment)){
+            return null;
+        }
+        const parsedDate = moment(date);
+        if (!parsedDate.isValid()){
+            return null;
+        }
+        return parsedDate.toDate();
     }
 
     /**
@@ -390,42 +409,61 @@ class Parser {
      * @returns {string|null} Birth date and Gender CF code
      * @memberof CodiceFiscaleUtils.Parser
      *//**
-     * Parse a Date (UTC) and Gender information to create Date/Gender CF part
+     * Parse a Dated and Gender information to create Date/Gender CF part
      * 
-     * @param {Date} date Date instance (UTC format)
+     * @param {Date|Moment} date Date or Moment instance (UTC format)
      * @param {Gender|string} gender Gender enum value
      * @returns {string|null} Birth date and Gender CF code
      * @memberof CodiceFiscaleUtils.Parser
      */
     static dateGenderToCf(...args) {
-        const Gender = require('./gender.enum');
-        const gender = args.slice(-1);
-        if (!Gender.hasOwnProperty(gender)) {
+        const gender = args.splice(-1);
+        if (!Gender.hasOwnProperty(gender) || !(args.length === 1 || args.length === 3)) {
             return null;
         }
-
-        let date = this.yearMonthDayToDate(...args) || args[0];
-        if (!(date instanceof Date)) {
+        const date = this.parseDate(...args);
+        if (!date) {
             return null;
         }
         
-        const cfYear = this.yearToCf(date.getUTCFullYear());
-        const cfMonth = this.monthToCf(date.getUTCMonth());
-        const cfDayGender = this.dayGenderToCf(date.getUTCDate(), gender);
+        const cfYear = this.yearToCf(date.getFullYear());
+        const cfMonth = this.monthToCf(date.getMonth());
+        const cfDayGender = this.dayGenderToCf(date.getDate(), gender);
 
         return `${cfYear}${cfMonth}${cfDayGender}`;
     }
 
     /**
+     * Parse Year, Month, Day and Gender information to create Date/Gender CF part
+     * 
+     * @param {number} year 4 digits Year
+     * @param {number} month 1 or 2 digits Month 0..11
+     * @param {number} day 1,2 digits Day 1..31
+     * @param {string} name City or Country name
+     * @param {string} [province] Province code for cities
+     * @return {Object|null} Matching place, if only once is matching criteria
+     * @memberof CodiceFiscaleUtils.Parser
+     *//**
+     * Parse a Dated and Gender information to create Date/Gender CF part
+     * 
+     * @param {Date|Moment} date Date or Moment instance (UTC format)
+     * @param {string} name City or Country name
+     * @param {string} [province] Province code for cities
+     * @return {Object|null} Matching place, if only once is matching criteria
+     * @memberof CodiceFiscaleUtils.Parser
+     *//**
      * Parse place name and province to Belfiore code
      * @param {string} name City or Country name
      * @param {string} [province] Province code for cities
      * @return {Object|null} Matching place, if only once is matching criteria
+     * @memberof CodiceFiscaleUtils.Parser
      */
-    static placeToCf(name, province) {
-        const Belfiore = require('./belfiore');
+    static placeToCf(...args) {
+        let targetDate = this.parseDate(...args.slice(0, args.length - 1));
+
+        let [name, province] = args.filter(input => typeof input === 'string');
         if (!province) {
-            return Belfiore.findByName(name);
+            return Belfiore.active(targetDate).findByName(name);
         }
         const results = Belfiore.searchByName(name).toArray().filter(place => province.trim().toUpperCase() === place.province);
         if (results.length === 1) {
