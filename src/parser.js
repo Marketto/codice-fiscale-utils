@@ -439,7 +439,7 @@ class Parser {
      * @param {number} day 1,2 digits Day 1..31
      * @param {string} name City or Country name
      * @param {string} [province] Province code for cities
-     * @return {Object|null} Matching place, if only once is matching criteria
+     * @return {string|null} Matching place belfiore code, if only once is matching criteria
      * @memberof CodiceFiscaleUtils.Parser
      *//**
      * Parse a Dated and Gender information to create Date/Gender CF part
@@ -447,13 +447,13 @@ class Parser {
      * @param {Date|Moment} date Date or Moment instance (UTC format)
      * @param {string} name City or Country name
      * @param {string} [province] Province code for cities
-     * @return {Object|null} Matching place, if only once is matching criteria
+     * @return {string|null} Matching place belfiore code, if only once is matching criteria
      * @memberof CodiceFiscaleUtils.Parser
      *//**
      * Parse place name and province to Belfiore code
      * @param {string} name City or Country name
      * @param {string} [province] Province code for cities
-     * @return {Object|null} Matching place, if only once is matching criteria
+     * @return {string|null} Matching place belfiore code, if only once is matching criteria
      * @memberof CodiceFiscaleUtils.Parser
      */
     static placeToCf(...args) {
@@ -461,11 +461,11 @@ class Parser {
 
         let [name, province] = args.filter(input => typeof input === 'string');
         if (!province) {
-            return Belfiore.active(targetDate).findByName(name);
+            return (Belfiore.active(targetDate).findByName(name) || {}).belfioreCode;
         }
         const results = Belfiore.searchByName(name).toArray().filter(place => province.trim().toUpperCase() === place.province);
         if (results.length === 1) {
-            return results[0];
+            return results[0].belfioreCode;
         }
         return null;
     }
@@ -482,7 +482,7 @@ class Parser {
      * @param {Date|Moment} [input.date] Birth Date
      * @param {Gender|string} input.gender Gender M|F
      * @param {string} input.place Place name
-     * @return {string} Complete CF
+     * @return {string|null} Complete CF
      */
     static encodeCf({
         surname,
@@ -496,16 +496,24 @@ class Parser {
         gender,
         place
     }) {
-        const surnameCf = this.surnameToCf(surname);
-        const nameCf = this.nameToCf(name);
-        const dtParams = date || [year, month, day];
-        const dateGenderCf = this.dateGenderToCf(dtParams, gender);
-        const placeCf = this.placeToCf(place);
+        const dtParams = date ? [date] : [year, month, day];
+        const generator = [
+            () => this.surnameToCf(surname),
+            () => this.nameToCf(name),
+            () => this.dateGenderToCf(...dtParams, gender),
+            () => this.placeToCf(...dtParams, place),
+            () => CheckDigitizer.checkDigit(cf)
+        ];
+        let cf = '';
+        for (let i=0; i<generator.length; i++) {
+            const cfValue = generator[i]();
+            if (!cfValue) {
+                return null;
+            }
+            cf += cfValue;
+        }
 
-        const partialCf = `${surnameCf}${nameCf}${dateGenderCf}${placeCf}`;
-        const cin = CheckDigitizer.checkDigit(partialCf);
-
-        return `${partialCf}${cin}`;
+        return cf;
     }
 }
 

@@ -324,10 +324,24 @@ describe('CodiceFiscaleUtils:Parser', () => {
 
         describe('placeToCf', () => {
             it('Should return CF place part from city name', () => {
-                Parser.placeToCf('Bologna').belfioreCode.should.be.equal('A944');
+                Parser.placeToCf('Bologna').should.be.equal('A944');
             });
             it('Should return CF place part from country name', () => {
-                Parser.placeToCf('Polonia').belfioreCode.should.be.equal('Z127');
+                Parser.placeToCf('Polonia').should.be.equal('Z127');
+            });
+        });
+
+        describe('encodeCf', () => {
+            it('Should return VRNGNY07D68C351V', () => {
+                Parser.encodeCf({
+                    surname: 'Veronesi',
+                    name: 'Genny',
+                    year: 1907,
+                    month: 3,
+                    day: 28,
+                    gender: 'M',
+                    place: 'Catania'
+                }).should.be.equal('VRNGNY07D68C351V');
             });
         });
     });
