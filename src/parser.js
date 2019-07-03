@@ -208,7 +208,7 @@ class Parser {
      * Parse birth place information
      * 
      * @param {string} codiceFiscale Partial or complete CF to parse
-     * @returns {string} Birth place name
+     * @returns {Object} {name, belfioreCode} Birth place
      * @memberof CodiceFiscaleUtils.Parser
      */
     static cfToBirthPlace(codiceFiscale) {
@@ -239,7 +239,25 @@ class Parser {
                 return null;
             }
         }
-        return birthPlace.name;
+        return birthPlace;
+    }
+
+    /**
+     * @param {string} fiscalCode
+     * @returns {Object} {surname, name, year, month, day, gender, place} Decoded CF Info
+     */
+    static cfDecode(fiscalCode) {
+        return {
+            surname: this.cfToSurname(fiscalCode),
+            name: this.cfToName(fiscalCode),
+
+            year: this.cfToBirthYear(fiscalCode),
+            month: this.cfToBirthMonth(fiscalCode),
+            day: this.cfToBirthDay(fiscalCode),
+
+            gender: this.cfToGender(fiscalCode),
+            place: (this.cfToBirthPlace(fiscalCode) || {}).name
+        };
     }
 
     /**

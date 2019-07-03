@@ -182,15 +182,46 @@ describe('CodiceFiscaleUtils:Parser', () => {
 
         describe('cfToBirthPlace', () => {
             it('Should return Rome for H501', () => {
-                Parser.cfToBirthPlace('XXXYYY92B20H501').should.be.equal('ROMA');
+                const parsedBirthPlace = Parser.cfToBirthPlace('XXXYYY92B20H501');
+                parsedBirthPlace.should.be.an('object');
+                parsedBirthPlace.belfioreCode.should.be.equal('H501');
+                parsedBirthPlace.name.should.be.equal('ROMA');
             });
             it('Should check expiration', () => {
                 expect(Parser.cfToBirthPlace('XXXYYY91B22Z111')).to.be.null;
-                Parser.cfToBirthPlace('XXXYYY81A43Z111').should.be.equal('Repubblica Democratica Tedesca');
+                const parsedBirthPlace = Parser.cfToBirthPlace('XXXYYY81A43Z111');
+                parsedBirthPlace.should.be.an('object');
+                parsedBirthPlace.belfioreCode.should.be.equal('Z111');
+                parsedBirthPlace.name.should.be.equal('Repubblica Democratica Tedesca');
             });
             it('Should return null', () => {
                 expect(Parser.cfToBirthPlace('XXXYYY90')).to.be.null;
                 expect(Parser.cfToBirthPlace()).to.be.null;
+            });
+        });
+
+        describe('cfDecode', () => {
+            it('Should return matching infos from VRNGNY07D68C351V', () => {
+                const decoded = Parser.cfDecode('VRNGNY07D68C351V');
+                decoded.should.be.a('object');
+                decoded.surname.should.be.equal('V*R*N*');
+                decoded.name.should.be.equal('G*N*Y*');
+                decoded.year.should.be.equal(2007);
+                decoded.month.should.be.equal(3);
+                decoded.day.should.be.equal(28);
+                decoded.gender.should.be.equal('F');
+                decoded.place.should.be.equal('CATANIA');
+            });
+            it('Should return matching infos from MRNMIA02E45L219X', () => {
+                const decoded = Parser.cfDecode('MRNMIA02E45L219X');
+                decoded.should.be.a('object');
+                decoded.surname.should.be.equal('M*R*N*');
+                decoded.name.should.be.equal('MIA*');
+                decoded.year.should.be.equal(2002);
+                decoded.month.should.be.equal(4);
+                decoded.day.should.be.equal(5);
+                decoded.gender.should.be.equal('F');
+                decoded.place.should.be.equal('TORINO');
             });
         });
     });
