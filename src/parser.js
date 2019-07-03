@@ -5,6 +5,7 @@ const BirthMonth = require('./birthMonth.enum');
 const VALIDATOR = require('./validator.const');
 const DIACRITICS = require('./diacritics.const');
 const Belfiore = require('./belfiore');
+const CheckDigitizer = require('./checkDigitizer');
 
 /**
  * @class Parser
@@ -266,16 +267,16 @@ class Parser {
             return null;
         }
         
-        const surnameNoSpaces = this.removeDiacritics(surname.replace(/\s*/ig, '')).toUpperCase();
-        const consonants = (surnameNoSpaces.match(new RegExp(`[${VALIDATOR.CONSONANT_LIST}]+`, 'ig')) || []).join('');
-        const vowels = (surnameNoSpaces.match(new RegExp(`[${VALIDATOR.VOWEL_LIST}]+`, 'ig')) || []).join('');
+        const noDiacriticsSurname = this.removeDiacritics(surname);
+        const consonants = (noDiacriticsSurname.match(new RegExp(`[${VALIDATOR.CONSONANT_LIST}]+`, 'ig')) || []).join('');
+        const vowels = (noDiacriticsSurname.match(new RegExp(`[${VALIDATOR.VOWEL_LIST}]+`, 'ig')) || []).join('');
 
         const partialCf = (consonants + vowels + 'X').substr(0, 3);
 
         if (partialCf.length < 3) {
             return null;
         }
-        return partialCf;
+        return partialCf.toUpperCase();
     }
 
     /**
@@ -290,16 +291,13 @@ class Parser {
             return null;
         }
         
-        const nameNoSpaces = this.removeDiacritics(name.replace(/\s*/ig, '')).toUpperCase();
-        const consonants = (nameNoSpaces.match(new RegExp(`[${VALIDATOR.CONSONANT_LIST}]+`, 'ig')) || []).join('');
-        const vowels = (nameNoSpaces.match(new RegExp(`[${VALIDATOR.VOWEL_LIST}]+`, 'ig')) || []).join('');
+        const noDiacriticsName = this.removeDiacritics(name);
+        const consonants = (noDiacriticsName.match(new RegExp(`[${VALIDATOR.CONSONANT_LIST}]+`, 'ig')) || []).join('');
 
-        const partialCf = ((consonants.substr(0,2) + (consonants.substr(3,1) || consonants.substr(2,1))) + vowels + 'X').substr(0, 3);
-
-        if (partialCf.length < 3) {
-            return null;
+        if (consonants.length >= 4) {
+            return (consonants[0] + consonants.substr(2, 2)).toUpperCase();
         }
-        return partialCf;
+        return this.surnameToCf(name);
     }
 
     /**
@@ -470,6 +468,44 @@ class Parser {
             return results[0];
         }
         return null;
+    }
+
+    /**
+     * Generates full CF
+     * 
+     * @param {Object} input Input Object
+     * @param {string} input.surname Surname
+     * @param {string} input.name Name
+     * @param {number} [input.year] Birth Year
+     * @param {number} [input.month] Birth Month
+     * @param {number} [input.day] Birth Day
+     * @param {Date|Moment} [input.date] Birth Date
+     * @param {Gender|string} input.gender Gender M|F
+     * @param {string} input.place Place name
+     * @return {string} Complete CF
+     */
+    static encodeCf({
+        surname,
+        name,
+
+        year,
+        month,
+        day,
+        date,
+
+        gender,
+        place
+    }) {
+        const surnameCf = this.surnameToCf(surname);
+        const nameCf = this.nameToCf(name);
+        const dtParams = date || [year, month, day];
+        const dateGenderCf = this.dateGenderToCf(dtParams, gender);
+        const placeCf = this.placeToCf(place);
+
+        const partialCf = `${surnameCf}${nameCf}${dateGenderCf}${placeCf}`;
+        const cin = CheckDigitizer.checkDigit(partialCf);
+
+        return `${partialCf}${cin}`;
     }
 }
 

@@ -218,8 +218,8 @@ describe('CodiceFiscaleUtils:Parser', () => {
 
         describe('nameToCf', () => {
             it('Should return CF name part', () => {
-                Parser.nameToCf('Dominique').should.be.equal('DMQ');
-                Parser.nameToCf('Alexander').should.be.equal('LXD');
+                Parser.nameToCf('Dominique').should.be.equal('DNQ');
+                Parser.nameToCf('Alexander').should.be.equal('LND');
                 Parser.nameToCf('Mark').should.be.equal('MRK');
                 Parser.nameToCf('Tom').should.be.equal('TMO');
                 Parser.nameToCf('Ania').should.be.equal('NAI');
