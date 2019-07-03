@@ -76,8 +76,7 @@ const dataMapper = defaultSourceCode => data => data
         province: obj['SIGLAPROVINCIA'],
         region: parseInt(obj['IDREGIONE']),
         istatCode: parseInt(obj['CODISTAT'] || obj['Codice ISTAT']),
-        dataSource: obj['FONTE'] || defaultSourceCode,
-        active: obj['STATO'] === 'A' || !(['C', 'D'].includes(obj['STATO']) || obj['Anno evento'] || obj['DATACESSAZIONE'])
+        dataSource: obj['FONTE'] || defaultSourceCode
     }))
     .filter(({belfioreCode}) => belfioreCode);
 
@@ -101,7 +100,7 @@ const merge = (...entries) => {
 
 const deDupes = data => Object.values(_.groupBy(data, 'belfioreCode')).map(entry => isEqual(...entry) ? entry[0] : merge(...entry));
 
-
+const mergeLists = data => [[], []].concat(data).reduce((a, b) => [].concat(a).concat(b));
 Promise.all(locationResources.resources.map(async ({uri, delimiter, defaultSourceCode}) => Promise
     .all(([].concat(uri))
         .filter(uri => !!uri)
@@ -110,9 +109,9 @@ Promise.all(locationResources.resources.map(async ({uri, delimiter, defaultSourc
             .then(deDupes)
         )
     )
-    .then((data) => [[], []].concat(data).reduce((a, b) => [].concat(a).concat(b)))
+    .then(mergeLists)
 ))
-    .then((data) => [[], []].concat(data).reduce((a, b) => [].concat(a).concat(b)))
+    .then(mergeLists)
     .then(sourceDataApplier({
         licenses: locationResources.licenses,
         sources: [].concat(locationResources.resources.map(({uri}) => uri)).reduce((a, b) => a.concat(b)).filter(uri => !!uri)
