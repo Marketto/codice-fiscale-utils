@@ -4,8 +4,8 @@ const moment = require('moment');
 class BelfioreGenericList {
     /**
      * @constructor
-     * @param {Array<Object>} placeList 
-     * @memberof BelfioreEnum
+     * @param {Array<Object>} placeList List of places
+     * @memberof BelfioreGenericList
      */
     constructor(data){
         Object.defineProperties(this, {
@@ -26,7 +26,8 @@ class BelfioreGenericList {
     /**
      * List of places as Array instance
      * @method
-     * @returns {Array<Object>} List of places
+     * @return {Array<Object>} List of places
+     * @memberof BelfioreGenericList
      */
     toArray() {
         return this._data;
@@ -36,6 +37,7 @@ class BelfioreGenericList {
      * Filter Places by ones active in the given date
      * @param {string|Date|moment|Array<numbers>} [date=moment()] ISO9601 String date, Date Object or moment instance or Array of numbers [YYYY, MM, DD]
      * @return {BelfioreGenericList|null}
+     * @memberof BelfioreGenericList
      */
     active(date = moment()) {
         const dateArray = ![].concat(date).some(param => typeof param !== 'number') && [].concat(date) ;
@@ -58,6 +60,7 @@ class BelfioreGenericList {
      * Search places matching given name
      * @param {string} place Place name
      * @return {BelfioreGenericList|null}
+     * @memberof BelfioreGenericList
      */
     searchByName(place) {
         if (!place || typeof place !== 'string') {
@@ -70,6 +73,7 @@ class BelfioreGenericList {
      * Find place matching given name, retuns place object if provided name match only 1 result
      * @param {string} name Place name
      * @return {Object|null}
+     * @memberof BelfioreGenericList
      */
     findByName(place) {
         let results = this.searchByName(place).toArray();
@@ -107,19 +111,12 @@ class BelfioreList extends BelfioreGenericList {
 }
 
 class BelfioreCities extends BelfioreGenericList {
-    /**
-     * @constructor
-     * @param {Array<Object>} placeList 
-     * @memberof BelfioreEnum
-     */
-    constructor(data){
-        super(data);
-    }
 
     /**
      * List all cities or ones by the given province code
      * @param {string} [provinceCode] 2 char province code
-     * @returns {BelfioreGenericList|null} List of cities filtered by given province
+     * @return {BelfioreGenericList|null} List of cities filtered by given province
+     * @memberof BelfioreCities
      */
     byProvince(provinceCode) {
         return (typeof provinceCode === 'string' && provinceCode.trim().length === 2) ?
