@@ -19,9 +19,9 @@ const MONTHS = [
  */
 module.exports = Object.freeze(new Proxy(new Set(MONTHS), {
     get(receiver, name) {
-        const index = parseInt(name);
+        const index = typeof name === 'string' ? parseInt(name) : name;
         const values = this.toArray.apply(receiver);
-        if ((index >= 0 && index <= 11)) {
+        if (typeof index === 'number' && (index >= 0 && index <= 11)) {
             return values[index];
         } else if(values.includes(name)) {
             return values.indexOf(name);
