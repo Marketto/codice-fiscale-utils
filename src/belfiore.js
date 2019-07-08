@@ -120,6 +120,7 @@ class Belfiore{
             data: _data,
             licenses: _licenses,
             activeDate: moment(date),
+            province: _province,
             codeMatcher: _codeMatcher
         });
     }
