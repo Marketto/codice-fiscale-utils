@@ -16,7 +16,11 @@ class Validator {
      * @memberof CodiceFiscaleUtils.Validator
      */
     static cfSurname(surname) {
-        return new RegExp(`^${Parser.surnameToCf(surname) || VALIDATOR.NAME_MATCHER}$`, 'i');
+        let matcher = VALIDATOR.NAME_MATCHER;
+        if (surname) {
+            matcher = Parser.surnameToCf(surname) || matcher;
+        }
+        return new RegExp(`^${matcher}$`, 'i');
     }
 
     /**
@@ -26,7 +30,11 @@ class Validator {
      * @memberof CodiceFiscaleUtils.Validator
      */
     static cfName(name) {
-        return new RegExp(`^${Parser.nameToCf(name) || VALIDATOR.NAME_MATCHER}$`, 'i');
+        let matcher = VALIDATOR.NAME_MATCHER;
+        if (name) {
+            matcher = Parser.nameToCf(name) || matcher;
+        }
+        return new RegExp(`^${matcher}$`, 'i');
     }
 
     /**
@@ -36,10 +44,12 @@ class Validator {
      * @memberof CodiceFiscaleUtils.Validator
      */
     static cfYear(year) {
-        const parsedYear = Parser.yearToCf(year);
         let matcher = VALIDATOR.YEAR_MATCHER;
-        if (parsedYear) {
-            matcher = parsedYear.replace(/\d/g, n => `[${n}${Omocode[n]}]`);
+        if (year) {
+            const parsedYear = Parser.yearToCf(year);
+            if (parsedYear) {
+                matcher = parsedYear.replace(/\d/g, n => `[${n}${Omocode[n]}]`);
+            }
         }
         return new RegExp(`^${matcher}$`, 'i');
     }
@@ -51,7 +61,30 @@ class Validator {
      * @memberof CodiceFiscaleUtils.Validator
      */
     static cfMonth(month) {
-        return new RegExp(`^${Parser.monthToCf(month) || VALIDATOR.MONTH_MATCHER}$`, 'i');
+        let matcher = VALIDATOR.MONTH_MATCHER;
+        if (month) {
+            matcher = Parser.monthToCf(month) || matcher;
+        }
+        return new RegExp(`^${matcher}$`, 'i');
+    }
+
+    /**
+     * Validation regexp for the given year or generic
+     * @param {number} day Optional day to generate validation regexp
+     * @returns {RegExp} CF day matcher
+     * @memberof CodiceFiscaleUtils.Validator
+     */
+    static cfDay(day) {
+        let matcher = VALIDATOR.DAY_MATCHER;
+        if (day) {
+            const parsedDayM = Parser.dayGenderToCf(day, 'M');
+            if (parsedDayM) {
+                const matcherM = parsedDayM.replace(/\d/g, n => `[${n}${Omocode[n]}]`);
+                const matcherF = Parser.dayGenderToCf(day, 'F').replace(/\d/g, n => `[${n}${Omocode[n]}]`);
+                matcher = `(?:${matcherM})|(?:${matcherF})`;
+            }
+        }
+        return new RegExp(`^${matcher}$`, 'i');
     }
 }
 
