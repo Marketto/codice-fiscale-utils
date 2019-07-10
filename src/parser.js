@@ -37,7 +37,7 @@ class Parser {
 
         const checkBitmap = offset => !!(2**offset & this.OMOCODE_BITMAP);
 
-        return codiceFiscale.replace(/[\dA-Z]/gi, (match, offset) => ((/^[A-Z]$/ig).test(match) && checkBitmap(offset)) ? Omocode[match] : match);
+        return codiceFiscale.replace(/[\dA-Z]/giu, (match, offset) => (/^[A-Z]$/giu).test(match) && checkBitmap(offset) ? Omocode[match] : match);
     }
 
     /**
@@ -48,7 +48,7 @@ class Parser {
      * @memberof CodiceFiscaleUtils.Parser
      */
     static cfToSurname(codiceFiscale) {
-        if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 3 || !(/^[A-Z]{3}/i).test(codiceFiscale)) {
+        if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 3 || !(/^[A-Z]{3}/iu).test(codiceFiscale)) {
             return null;
         }
 
@@ -59,7 +59,7 @@ class Parser {
 
         const matchingLength = cons.length + vow.length;
 
-        if (matchingLength < 2 || (matchingLength < 3 && surnameCf[2].toUpperCase() !== 'X')) {
+        if (matchingLength < 2 || matchingLength < 3 && surnameCf[2].toUpperCase() !== 'X') {
             return null;
         }
 
@@ -83,7 +83,7 @@ class Parser {
      * @memberof CodiceFiscaleUtils.Parser
      */
     static cfToName(codiceFiscale) {
-        if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 3 || !(/^[A-Z]{6}/i).test(codiceFiscale)) {
+        if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 3 || !(/^[A-Z]{6}/iu).test(codiceFiscale)) {
             return null;
         }
         return this.cfToSurname(codiceFiscale.substr(3, 3));
@@ -270,7 +270,7 @@ class Parser {
         if (!text || typeof text !== 'string') {
             return null;
         }
-        return text.replace(/./g, c => DIACRITICS[c]);
+        return text.replace(/./gu, c => DIACRITICS[c]);
     }
 
     /**
@@ -332,7 +332,7 @@ class Parser {
         if (!(typeof year === 'number' && !isNaN(year) &&(year >= 1900 || year < 100))) {
             return null;
         }
-        return (`0${year}`).substr(-2);
+        return `0${year}`.substr(-2);
     }
 
     /**
@@ -366,7 +366,7 @@ class Parser {
         if (typeof genderValue !== 'number') {
             return null;
         }
-        return (`0${day + genderValue}`).substr(-2);
+        return `0${day + genderValue}`.substr(-2);
     }
 
     /**
@@ -457,7 +457,7 @@ class Parser {
      * @param {number} day 1,2 digits Day 1..31
      * @param {string} name City or Country name
      * @param {string} [province] Province code for cities
-     * @return {string|null} Matching place belfiore code, if only once is matching criteria
+     * @returns {string|null} Matching place belfiore code, if only once is matching criteria
      * @memberof CodiceFiscaleUtils.Parser
      *//**
      * Parse a Dated and Gender information to create Date/Gender CF part
@@ -465,13 +465,13 @@ class Parser {
      * @param {Date|Moment} date Date or Moment instance (UTC format)
      * @param {string} name City or Country name
      * @param {string} [province] Province code for cities
-     * @return {string|null} Matching place belfiore code, if only once is matching criteria
+     * @returns {string|null} Matching place belfiore code, if only once is matching criteria
      * @memberof CodiceFiscaleUtils.Parser
      *//**
      * Parse place name and province to Belfiore code
      * @param {string} name City or Country name
      * @param {string} [province] Province code for cities
-     * @return {string|null} Matching place belfiore code, if only once is matching criteria
+     * @returns {string|null} Matching place belfiore code, if only once is matching criteria
      * @memberof CodiceFiscaleUtils.Parser
      */
     static placeToCf(...args) {
@@ -500,7 +500,7 @@ class Parser {
      * @param {Date|Moment} [input.date] Birth Date
      * @param {Gender|string} input.gender Gender M|F
      * @param {string} input.place Place name
-     * @return {string|null} Complete CF
+     * @returns {string|null} Complete CF
      */
     static encodeCf({
         surname,

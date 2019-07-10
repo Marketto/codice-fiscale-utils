@@ -48,7 +48,7 @@ class Validator {
         if (year) {
             const parsedYear = Parser.yearToCf(year);
             if (parsedYear) {
-                matcher = parsedYear.replace(/\d/g, n => `[${n}${Omocode[n]}]`);
+                matcher = parsedYear.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
             }
         }
         return new RegExp(`^${matcher}$`, 'i');
@@ -79,8 +79,8 @@ class Validator {
         if (day) {
             const parsedDayM = Parser.dayGenderToCf(day, 'M');
             if (parsedDayM) {
-                const matcherM = parsedDayM.replace(/\d/g, n => `[${n}${Omocode[n]}]`);
-                const matcherF = Parser.dayGenderToCf(day, 'F').replace(/\d/g, n => `[${n}${Omocode[n]}]`);
+                const matcherM = parsedDayM.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
+                const matcherF = Parser.dayGenderToCf(day, 'F').replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
                 matcher = `(?:${matcherM})|(?:${matcherF})`;
             }
         }

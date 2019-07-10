@@ -35,11 +35,12 @@ class CheckDigitizer {
      * @param {string} partialCF Partial Fiscal Code to evaluate
      * @generator
      * @yields {number} character value odd/even
+     * @returns {0}
      */
     static* evaluateChar(partialCF) {
         for(let index in partialCF){
             const char = partialCF[index].toUpperCase();
-            const isNumber = (/^\d/).test(char);
+            const isNumber = (/^\d/u).test(char);
             //Odd/Even are shifted/swapped (array starts from 0, 'Agenzia delle Entrate' documentation counts the string from 1)
             if (index%2) {
                 //Odd positions
@@ -60,7 +61,7 @@ class CheckDigitizer {
     static checkDigit(partialCF) {
         let partialCfValue = 0;
         for (let charValue of this.evaluateChar(partialCF)) partialCfValue += charValue;
-        return String.fromCharCode((partialCfValue%26) + 65);
+        return String.fromCharCode(partialCfValue%26 + 65);
     }
 }
 

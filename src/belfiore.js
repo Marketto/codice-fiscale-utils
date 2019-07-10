@@ -5,8 +5,8 @@ class Belfiore{
     /**
      * 
      * @param {Object} param Static json
-     * @param {Array<Array<Object>>} param.data
-     * @param {Array<Array<Object>>} param.licenses
+     * @param {Array<Array<Object>>} param.data Resource data
+     * @param {Array<Array<Object>>} param.licenses License array
      * @memberof Belfiore
      */
     constructor({ data, licenses, activeDate, codeMatcher, province }) {
@@ -36,20 +36,20 @@ class Belfiore{
      */
     toArray() {
         return this._data
-            .map(resource => (Array.from(new Array(resource.belfioreCode.length / 3), (e, i) => this.constructor.locationByIndex(resource, i, {
+            .map(resource => Array.from(new Array(resource.belfioreCode.length / 3), (e, i) => this.constructor.locationByIndex(resource, i, {
                 activeDate: this._activeDate,
                 codeMatcher: this._codeMatcher,
                 province: this._province,
                 licenses: this._licenses
-            }))))
+            })))
             .reduce((a, b) => a.concat(b))
             .filter(e => !!e);
     }
 
     /**
      * Search places matching given name
-     * @param {string} place Place name
-     * @return {Array<Object>}
+     * @param {string} name Place name
+     * @returns {Array<Object>}
      * @memberof Belfiore
      */
     searchByName(name) {
@@ -80,7 +80,7 @@ class Belfiore{
     /**
      * Find place matching given name, retuns place object if provided name match only 1 result
      * @param {string} name Place name
-     * @return {Object|null
+     * @returns {Object|null}
      * @memberof BelfioreGenericList
      * @memberof Belfiore
      */
@@ -127,10 +127,11 @@ class Belfiore{
 
     /**
      * Returns a Belfiore instance filtered by the given province
-     * @param {string} code 
+     * @param {string} code Province Code  (2 A-Z char)
+     * @returns {Belfiore}
      */
     byProvince(code) {
-        if (!(typeof code === 'string' && (/^[A-Z]{2}$/).test(code))) {
+        if (!(typeof code === 'string' && (/^[A-Z]{2}$/u).test(code))) {
             return;
         }
         const { _data, _licenses, _activeDate } = this;
@@ -153,7 +154,7 @@ class Belfiore{
             data: _data,
             licenses: _licenses,
             activeDate: _activeDate,
-            codeMatcher: /^[A-Y]/
+            codeMatcher: /^[A-Y]/u
         });
     }
 
@@ -168,19 +169,19 @@ class Belfiore{
             data: _data,
             licenses: _licenses,
             activeDate: _activeDate,
-            codeMatcher: /^Z/
+            codeMatcher: /^Z/u
         });
     }
 
     /**
      * Get Proxy
      * @param {Object} resource target resource
-     * @param {string|number|Symbol} name property name to proxy
-     * @return {*} 
+     * @param {string|number|Symbol} paramName property name to proxy
+     * @returns {*} 
      * @memberof Belfiore
      */
     static get (resource, paramName) {
-        if (typeof paramName  === 'string' && (/^[A-Z]\d{3}$/).test(paramName)){
+        if (typeof paramName  === 'string' && (/^[A-Z]\d{3}$/u).test(paramName)){
             const base32name = this.belfioreToInt(paramName).toString(32).padStart(3, '0');
             for (let g = 0; g < resource._data.length; g++) {
                 const resourceData = resource._data[g];
@@ -197,14 +198,14 @@ class Belfiore{
         }
 
         if (
-            (
-                (resource._codeMatcher || resource._province) &&
+            
+            (resource._codeMatcher || resource._province) &&
                 ['cities', 'countries'].includes(paramName)
-            ) ||
-            (
+             ||
+            
                 paramName === 'byProvince' &&
                 (resource._codeMatcher.test('Z000') || resource._province)
-            )
+            
         ) {
             return;
         }
@@ -224,32 +225,32 @@ class Belfiore{
      */
     static binaryfindIndex(text, value, start = 0, end = (text || '').length -1) {
         const currentLength = end - start + 1;
-        if (start > end || (currentLength % value.length)) {
+        if (start > end || currentLength % value.length) {
             return -1;
         }
         const targetIndex = start + Math.floor(currentLength/(2*value.length))*value.length;
         const targetValure = text.substr(targetIndex, value.length);
         if (targetValure === value) {
-            return Math.ceil(((targetIndex + 1) / value.length)) -1;
+            return Math.ceil((targetIndex + 1) / value.length) -1;
         }
         const goAhead = value > targetValure;
-        return this.binaryfindIndex(text, value, goAhead ? (targetIndex + value.length) : start, goAhead ? end : (targetIndex - 1));
+        return this.binaryfindIndex(text, value, goAhead ? targetIndex + value.length : start, goAhead ? end : targetIndex - 1);
     }
 
     /**
      * Converts belfiore code into an int
      * @param {string} code Belfiore Code
-     * @return {number} Int version of belfiore code
+     * @returns {number} Int version of belfiore code
      * @memberof Belfiore
      */
     static belfioreToInt(code) {
-        return ((code.charCodeAt()-65)*10**3) + parseInt(code.substr(1));
+        return (code.charCodeAt()-65)*10**3 + parseInt(code.substr(1));
     }
 
     /**
      * Converts int to belfiore code
      * @param {number} code Belfiore int code
-     * @return {string} Standard belfiore code
+     * @returns {string} Standard belfiore code
      * @memberof Belfiore
      */
     static belfioreFromInt(code) {
@@ -270,6 +271,7 @@ class Belfiore{
      * Retrieve string at index posizion
      * @param {string} list concatenation of names
      * @param {number} index target name index
+     * @param {number} [startIndex=0] Initial index
      * @returns {string} index-th string 
      * @memberof Belfiore
      */
@@ -286,14 +288,15 @@ class Belfiore{
      * @generator
      * @param {string} list concatenation of names
      * @param {string|RegExp} matcher target name index
-     * @yields {number} index 
+     * @yields {number} index
+     * @returns {-1} -1 when Done
      * @memberof Belfiore
      */
     static* indexByName(list, matcher) {
         if (typeof matcher === 'string') {
             matcher = new RegExp(matcher, 'i');
         }
-        const seekEntryEndIndex = index => (list.indexOf('|', index +1) + 1) || list.length;
+        const seekEntryEndIndex = index => list.indexOf('|', index +1) + 1 || list.length;
         
         for(let startIndex = 0, entryIndex = 0; startIndex < list.length; entryIndex++) {
             const endIndex = seekEntryEndIndex(startIndex);
