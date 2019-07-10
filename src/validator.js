@@ -86,6 +86,35 @@ class Validator {
         }
         return new RegExp(`^${matcher}$`, 'i');
     }
+
+    /**
+     * Validation regexp for the given year or generic
+     * @param {number} day Optional day to generate validation regexp
+     * @param {'M'|'F'} [gender] 
+     * @returns {RegExp} CF day matcher
+     * @memberof CodiceFiscaleUtils.Validator
+     */
+    static cfDayGender(day, gender) {
+        if (!gender) {
+            return this.cfDay(day);
+        }
+        let matcher;
+        if (day) {
+            matcher = Parser.dayGenderToCf(day, gender).replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
+        } else {
+            switch (gender) {
+            case 'M':
+                matcher = VALIDATOR.MALE_DAY_MATCHER;
+                break;
+            case 'F':
+                matcher = VALIDATOR.FEMALE_DAY_MATCHER;
+                break;
+            default:
+                throw new Error('[Validator.cfDayGender] Provided gender is not valid');
+            }
+        }
+        return new RegExp(`^${matcher}$`, 'i');
+    }
 }
 
 module.exports = Validator;

@@ -255,5 +255,33 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 });
             });
         });
+
+        describe('cfDayGender', () => {
+            describe('Generic Validator', () => {
+                const cfDayValidator = Validator.cfDayGender();
+                it ('Should validate 0M Male', () => {
+                    cfDayValidator.test('0M', 'M').should.be.ok;
+                });
+                it ('Should validate MN for 12', () => {
+                    Validator.cfDay(12).test('MN').should.be.ok;
+                });
+            });
+            describe('Specific validator', () => {
+                it ('Should validate 01 for 1 Male', () => {
+                    Validator.cfDayGender(1, 'M').test('01').should.be.ok;
+                });
+                it ('Should not validate RM for 9 Female', () => {
+                    Validator.cfDayGender(9, 'F').test('RM').should.not.be.ok;
+                });
+
+                it ('Should not validate 41 for 1 Male', () => {
+                    Validator.cfDayGender(1, 'M').test('41').should.be.not.ok;
+                });
+
+                it ('Should not validate QM for 9 Female', () => {
+                    Validator.cfDayGender(9, 'F').test('QM').should.not.be.ok;
+                });
+            });
+        });
     });
 });
