@@ -91,7 +91,7 @@ class Validator {
      * Validation regexp for the given year or generic
      * @param {number} day Optional day to generate validation regexp
      * @param {'M'|'F'} [gender] 
-     * @returns {RegExp} CF day matcher
+     * @returns {RegExp} CF day and gender matcher
      * @memberof CodiceFiscaleUtils.Validator
      */
     static cfDayGender(day, gender) {
@@ -100,7 +100,12 @@ class Validator {
         }
         let matcher;
         if (day) {
-            matcher = Parser.dayGenderToCf(day, gender).replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
+            const parsedDayGender = Parser.dayGenderToCf(day, gender);
+            if (parsedDayGender) {
+                matcher = parsedDayGender.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
+            } else {
+                throw new Error('[Validator.cfDayGender] Provided day is not valid');
+            }
         } else {
             switch (gender) {
             case 'M':
@@ -111,6 +116,37 @@ class Validator {
                 break;
             default:
                 throw new Error('[Validator.cfDayGender] Provided gender is not valid');
+            }
+        }
+        return new RegExp(`^${matcher}$`, 'i');
+    }
+
+    /**
+     * Validation regexp for the given year or generic
+     * @param {Date|Moment|Array<number>} date Optional date to generate validation regexp
+     * @param {'M'|'F'} [gender] 
+     * @returns {RegExp} CF date and gender matcher
+     * @memberof CodiceFiscaleUtils.Validator
+     */
+    static cfDateGender(date, gender) {
+        let matcher = VALIDATOR.FULL_DATE_MATCHER;
+        if (date && gender) {
+            const parsedDateGender = Parser.dateGenderToCf(date, gender);
+            if (parsedDateGender) {
+                matcher = parsedDateGender.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
+            } else {
+                throw new Error('[Validator.cfDateGender] Provided date is not valid');
+            }
+        } else if (gender) {
+            switch (gender) {
+            case 'M':
+                matcher = VALIDATOR.MALE_FULL_DATE_MATCHER;
+                break;
+            case 'F':
+                matcher = VALIDATOR.FEMALE_FULL_DATE_MATCHER;
+                break;
+            default:
+                throw new Error('[Validator.cfDateGender] Provided gender is not valid');
             }
         }
         return new RegExp(`^${matcher}$`, 'i');

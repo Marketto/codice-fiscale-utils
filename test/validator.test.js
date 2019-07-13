@@ -259,11 +259,11 @@ describe('CodiceFiscaleUtils:Validator', () => {
         describe('cfDayGender', () => {
             describe('Generic Validator', () => {
                 const cfDayValidator = Validator.cfDayGender();
-                it ('Should validate 0M Male', () => {
-                    cfDayValidator.test('0M', 'M').should.be.ok;
+                it ('Should validate 0M', () => {
+                    cfDayValidator.test('0M').should.be.ok;
                 });
                 it ('Should validate MN for 12', () => {
-                    Validator.cfDay(12).test('MN').should.be.ok;
+                    cfDayValidator.test('MN').should.be.ok;
                 });
             });
             describe('Specific validator', () => {
@@ -280,6 +280,44 @@ describe('CodiceFiscaleUtils:Validator', () => {
 
                 it ('Should not validate QM for 9 Female', () => {
                     Validator.cfDayGender(9, 'F').test('QM').should.not.be.ok;
+                });
+            });
+        });
+
+        describe('cfDateGender', () => {
+            describe('Generic Validator', () => {
+                const cfDateValidator = Validator.cfDateGender();
+                it ('Should validate 1983-04-22 Male', () => {
+                    cfDateValidator.test('83D22').should.be.ok;
+                });
+                it ('Should validate U3D2N for 1983-04-22 Male', () => {
+                    cfDateValidator.test('U3D2N').should.be.ok;
+                });
+            });
+            describe('Specific validator', () => {
+                it ('Should validate U3D2N for 1983-04-22 Male', () => {
+                    Validator.cfDateGender([1983, 3, 22], 'M').test('U3D2N').should.be.ok;
+                });
+                it ('Should validate 83D22 for 1983-04-22 Male', () => {
+                    Validator.cfDateGender([1983, 3, 22], 'M').test('83D22').should.be.ok;
+                });
+                it ('Should not validate U3D2N for 1983-04-22 Male', () => {
+                    Validator.cfDateGender([1983, 3, 22], 'M').test('U3DSN').should.not.be.ok;
+                });
+                it ('Should not validate 83D62 for 1983-04-22 Male', () => {
+                    Validator.cfDateGender([1983, 3, 22], 'M').test('83D62').should.not.be.ok;
+                });
+                it ('Should not validate V5EQ1 for 1995-04-22 Female', () => {
+                    Validator.cfDateGender([1995, 4, 1], 'F').test('V5EQ1').should.be.ok;
+                });
+                it ('Should not validate 95EQM for 1995-04-22 Female', () => {
+                    Validator.cfDateGender([1995, 4, 1], 'F').test('95EQM').should.be.ok;
+                });
+                it ('Should validate V5ELM for 1995-04-22 Female', () => {
+                    Validator.cfDateGender([1995, 4, 1], 'F').test('V5ELM').should.not.be.ok;
+                });
+                it ('Should validate 95EL1 for 1995-04-22 Female', () => {
+                    Validator.cfDateGender([1995, 4, 1], 'F').test('95EL1').should.not.be.ok;
                 });
             });
         });
