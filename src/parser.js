@@ -399,12 +399,13 @@ class Parser {
      *//**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * 
-     * @param {Date|Moment} date Date or Moment instance (UTC format)
+     * @param {Date|Moment|Array<number>} date Date, Moment instance or Array of numbers [year, month, day]
      * @returns {Date|null} Parsed Date or null if not valid
      * @memberof CodiceFiscaleUtils.Parser
      */
     static parseDate(...args) {
-        const date = this.yearMonthDayToDate(...args) || args[0];
+        let dateInput = Array.isArray(args[0]) ? args[0] : args;
+        const date = this.yearMonthDayToDate(...dateInput) || dateInput[0];
         if (!(date instanceof Date || date instanceof moment)){
             return null;
         }
@@ -427,7 +428,7 @@ class Parser {
      *//**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * 
-     * @param {Date|Moment} date Date or Moment instance (UTC format)
+     * @param {Date|Moment|Array<number>} date Date, Moment instance or number array (Year, month, day)
      * @param {Gender|string} gender Gender enum value
      * @returns {string|null} Birth date and Gender CF code
      * @memberof CodiceFiscaleUtils.Parser
