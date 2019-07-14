@@ -151,6 +151,24 @@ class Validator {
         }
         return new RegExp(`^${matcher}$`, 'i');
     }
+
+    /**
+     * @param {string} placeName Optional place name to generate validation regexp
+     * @returns {RegExp} CF place matcher
+     * @memberof CodiceFiscaleUtils.Validator
+     */
+    static cfPlace(placeName) {
+        let matcher = VALIDATOR.BELFIORE_CODE_MATCHER;
+        if (placeName) {
+            const parsedPlace = Parser.placeToCf(placeName);
+            if (parsedPlace) {
+                matcher = parsedPlace.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
+            } else {
+                throw new Error('[Validator.cfPlace] Provided place is not valid');
+            }
+        }
+        return new RegExp(`^${matcher}$`, 'i');
+    }
 }
 
 module.exports = Validator;

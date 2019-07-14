@@ -287,10 +287,10 @@ describe('CodiceFiscaleUtils:Validator', () => {
         describe('cfDateGender', () => {
             describe('Generic Validator', () => {
                 const cfDateValidator = Validator.cfDateGender();
-                it ('Should validate 1983-04-22 Male', () => {
+                it ('Should validate 83D22', () => {
                     cfDateValidator.test('83D22').should.be.ok;
                 });
-                it ('Should validate U3D2N for 1983-04-22 Male', () => {
+                it ('Should validate U3D2N', () => {
                     cfDateValidator.test('U3D2N').should.be.ok;
                 });
             });
@@ -318,6 +318,32 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 });
                 it ('Should validate 95EL1 for 1995-04-22 Female', () => {
                     Validator.cfDateGender([1995, 4, 1], 'F').test('95EL1').should.not.be.ok;
+                });
+            });
+        });
+
+        describe('cfPlace', () => {
+            describe('Generic Validator', () => {
+                const cfDateValidator = Validator.cfPlace();
+                it ('Should validate A662', () => {
+                    cfDateValidator.test('A662').should.be.ok;
+                });
+                it ('Should validate H501', () => {
+                    cfDateValidator.test('H501').should.be.ok;
+                });
+            });
+            describe('Specific validator', () => {
+                it ('Should validate A662 for Bari', () => {
+                    Validator.cfPlace('Bari').test('A662').should.be.ok;
+                });
+                it ('Should validate H501 for Roma', () => {
+                    Validator.cfPlace('Roma').test('H501').should.be.ok;
+                });
+                it ('Should not validate H501 for Bari', () => {
+                    Validator.cfPlace('Bari').test('H501').should.not.be.ok;
+                });
+                it ('Should not validate A662 for Roma', () => {
+                    Validator.cfPlace('Roma').test('A662').should.not.be.ok;
                 });
             });
         });
