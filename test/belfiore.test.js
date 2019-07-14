@@ -87,4 +87,25 @@ describe('CodiceFiscaleUtils:Belfiore', () => {
             });
         });
     });
+
+    describe('Belfiore.nameByIndex', () => {
+        const nameByIndex = (...args) => Belfiore.constructor.nameByIndex(...args);
+        const targetData = Belfiore._data[0];
+        it('Should return Bologna @ 0', () => {
+            nameByIndex(targetData.name, 0).should.be.equal('Cecoslovacchia');
+        });
+        it('Should return Bologna @ 3', () => {
+            nameByIndex(targetData.name, 3).should.be.equal('Unione Sovietica');
+        });
+        it('Should return Bologna @ last position', () => {
+            nameByIndex(targetData.name, targetData.belfioreCode.length/3 -1).should.be.equal('Yemen del Sud');
+        });
+        it('Should return null @ last position +1', () => {
+            try {
+                nameByIndex(targetData.name, targetData.belfioreCode.length/3);
+            } catch (err) {
+                expect(err).to.be.ok;
+            }
+        });
+    });
 });

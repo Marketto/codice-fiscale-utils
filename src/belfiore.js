@@ -271,15 +271,28 @@ class Belfiore{
      * Retrieve string at index posizion
      * @param {string} list concatenation of names
      * @param {number} index target name index
-     * @param {number} [startIndex=0] Initial index
      * @returns {string} index-th string 
      * @memberof Belfiore
      */
-    static nameByIndex(list, index, startIndex = 0) {
-        const endIndex = list.indexOf('|', startIndex);
-        if (index > 0) {
-            return this.nameByIndex(list, index -1, endIndex + 1);
+    static nameByIndex(list, index) {
+        let startIndex = 0,
+            endIndex = list.indexOf('|', startIndex + 1),
+            counter = index;
+
+        while (counter > 0 && endIndex > startIndex) {
+            counter--;
+            startIndex = endIndex + 1;
+            endIndex = list.indexOf('|', startIndex + 1);
         }
+        
+        if (index < 0 || counter > 0) {
+            throw new Error(`[Belfiore.nameByIndex] Provided index ${index} is out range`);
+        }
+
+        if (!counter && endIndex < 0) {
+            return list.substring(startIndex);
+        }
+
         return list.substring(startIndex, endIndex);
     }
 
