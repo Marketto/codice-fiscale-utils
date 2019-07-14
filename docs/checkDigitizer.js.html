@@ -1,9 +1,10 @@
+<!-- start:source.tmpl.hbs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-		<title>Classes</title>
+		<title>checkDigitizer.js</title>
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -13,7 +14,7 @@
 		<link type="text/css" rel="stylesheet" href="css/template.min.css">
 		<script type="text/javascript">
 			window.TEMPLATE_OPTIONS = {"includeDate":true,"dateFormat":"Do MMM YYYY","systemName":"Codice Fiscale Utils","systemSummary":"JS utilities to handle Italian Codice Fiscale","systemLogo":"","systemColor":"","navMembers":[{"kind":"class","title":"Classes","summary":"All documented classes."},{"kind":"external","title":"Externals","summary":"All documented external members."},{"kind":"global","title":"Globals","summary":"All documented globals."},{"kind":"mixin","title":"Mixins","summary":"All documented mixins."},{"kind":"interface","title":"Interfaces","summary":"All documented interfaces."},{"kind":"module","title":"Modules","summary":"All documented modules."},{"kind":"namespace","title":"Namespaces","summary":"All documented namespaces."},{"kind":"tutorial","title":"Tutorials","summary":"All available tutorials."}],"footer":"","copyright":"FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.","linenums":true,"collapseSymbols":true,"inverseNav":true,"inlineNav":false,"outputSourceFiles":true,"sourceRootPath":null,"disablePackagePath":true,"outputSourcePath":false,"showTableOfContents":true,"showAccessFilter":true,"analytics":null,"methodHeadingReturns":true,"sort":"linenum, longname, version, since","search":true,"favicon":null,"stylesheets":[],"scripts":[],"monospaceLinks":false,"cleverLinks":false};
-			window.DOCLET_TOC_ENABLED = true;
+			window.DOCLET_TOC_ENABLED = false;
 			window.DOCLET_AFILTER_ENABLED = false;
 		</script>
 </head>
@@ -71,52 +72,85 @@
 	</header>
 	<!-- end:navbar.hbs -->		<div class="page-header">
 			<div class="container">
-				<span class="kind">list</span>
-				<h1><span class="name">Classes</span></h1>
-				<div class="summary"><p>All documented classes.</p></div>			</div>
+				<span class="kind">source</span>
+				<h1><span class="name">checkDigitizer.js</span></h1>
+			</div>
 		</div>
 	<div class="container content">
 		<div class="row">
-			<div class="col-md-9 main-content">
-						<ol class="breadcrumb">
-							<li><a href="index.html">Home</a></li>
-							<li class="active">Classes</li>
-						</ol>
-					<section>
-		<h2><span class="name">Classes</span></h2>
-		<article class="secondary">
-				<dl class="symbol">
-						
-						<dt class="symbol-title class public">
-			<h4 id="Belfiore" class="class public"><a href="Belfiore.Belfiore.html"><span class="signature-new">new&nbsp;</span><span class="name">Belfiore</span><span class="signature-params">( <span class="signature-param">param</span>&nbsp;)</span><span class="signature-type"></span></a></h4>
-</dt>
-<dd class="symbol-details class public">
-	<div class="symbol-details-inner">
-	</div>
-</dd>
-						<hr/>
-						<dt class="symbol-title class public">
-			<h4 id="Parser" class="class public"><a href="CodiceFiscaleUtils.Parser.html"><span class="signature-new">new&nbsp;</span><span class="name">Parser</span><span class="signature-params">()</span><span class="signature-type"></span></a></h4>
-</dt>
-<dd class="symbol-details class public">
-	<div class="symbol-details-inner">
-	</div>
-</dd>
-						<hr/>
-						<dt class="symbol-title class public">
-			<h4 id="Validator" class="class public"><a href="CodiceFiscaleUtils.Validator_.html"><span class="signature-new">new&nbsp;</span><span class="name">Validator</span><span class="signature-params">()</span><span class="signature-type"></span></a></h4>
-</dt>
-<dd class="symbol-details class public">
-	<div class="symbol-details-inner">
-	</div>
-</dd>
-				</dl>
-		</article>
-					</section>
+			<div class="col-md-12 main-content">
+		<section class="source-section">
+			<article></article>
+			<pre class="prettyprint source language-javascript line-numbers"><code class="language-javascript">const CONTROL_CODE_IN = {
+    'A': 1,
+    'B': 0,
+    'C': 5,
+    'D': 7,
+    'E': 9,
+    'F': 13,
+    'G': 15,
+    'H': 17,
+    'I': 19,
+    'J': 21,
+    'K': 2,
+    'L': 4,
+    'M': 18,
+    'N': 20,
+    'O': 11,
+    'P': 3,
+    'Q': 6,
+    'R': 8,
+    'S': 12,
+    'T': 14,
+    'U': 16,
+    'V': 10,
+    'W': 22,
+    'X': 25,
+    'Y': 24,
+    'Z': 23
+};
+
+
+class CheckDigitizer {
+
+    /**
+     * Partial FiscalCode Evaluator
+     * @param {string} partialCF Partial Fiscal Code to evaluate
+     * @generator
+     * @yields {number} character value odd/even
+     * @returns {0}
+     */
+    static* evaluateChar(partialCF) {
+        for(let index in partialCF){
+            const char = partialCF[index].toUpperCase();
+            const isNumber = (/^\d/u).test(char);
+            //Odd/Even are shifted/swapped (array starts from 0, 'Agenzia delle Entrate' documentation counts the string from 1)
+            if (index%2) {
+                //Odd positions
+                yield char.charCodeAt(0) - (isNumber ? 48 : 65);
+            } else {
+                //Even positions
+                yield CONTROL_CODE_IN[isNumber ? String.fromCharCode(parseInt(char) + 65) : char];
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Evaluate given partial CF to produce last check digit character
+     * @param {string} partialCF Partial Fiscal Code to evaluate to produce last character
+     * @returns {char} 16th CF char
+     */
+    static checkDigit(partialCF) {
+        let partialCfValue = 0;
+        for (let charValue of this.evaluateChar(partialCF)) partialCfValue += charValue;
+        return String.fromCharCode(partialCfValue%26 + 65);
+    }
+}
+
+module.exports = CheckDigitizer;</code></pre>
+		</section>
 			</div>
-				<div class="col-md-3 side-content">
-					<nav class="toc hidden-print hidden-sm hidden-xs"></nav>
-				</div>
 		</div>
 	</div>
 	<footer>
@@ -148,3 +182,4 @@
 	
 </body>
 </html>
+<!-- end:source.tmpl.hbs -->

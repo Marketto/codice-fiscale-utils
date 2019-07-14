@@ -65,10 +65,27 @@
           "list:modul",
           "modul"
         ],
+        "Belfiore.Belfiore.html": [
+          "belfior",
+          "belfiore.belfior",
+          "class"
+        ],
         "CodiceFiscaleUtils.Parser.html": [
           "class",
           "codicefiscaleutils.pars",
           "parser"
+        ],
+        "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP": [
+          "bitmap",
+          "codicefiscaleutils.parser.parser.omocode_bitmap",
+          "default",
+          "lt;static",
+          "member",
+          "omocod",
+          "omocode_bitmap",
+          "parser.omocode_bitmap",
+          "parser.parser.omocode_bitmap",
+          "readonly&gt"
         ],
         "CodiceFiscaleUtils.Parser.html#.Parser.cfDeomocode": [
           "cfdeomocod",
@@ -178,6 +195,133 @@
           "parser.cftobirthd",
           "parser.parser.cftobirthd"
         ],
+        "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": [
+          "birth",
+          "cftobirthplac",
+          "codicefiscal",
+          "codicefiscaleutils.parser.parser.cftobirthplac",
+          "function",
+          "inform",
+          "lt;static&gt",
+          "object",
+          "pars",
+          "parser.cftobirthplac",
+          "parser.parser.cftobirthplac",
+          "place"
+        ],
+        "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": [
+          "cf",
+          "codicefiscaleutils.parser.parser.surnametocf",
+          "function",
+          "lt;static&gt",
+          "pars",
+          "parser.parser.surnametocf",
+          "parser.surnametocf",
+          "part",
+          "string|nul",
+          "surnam",
+          "surnametocf"
+        ],
+        "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": [
+          "cf",
+          "codicefiscaleutils.parser.parser.nametocf",
+          "function",
+          "lt;static&gt",
+          "name",
+          "nametocf",
+          "pars",
+          "parser.nametocf",
+          "parser.parser.nametocf",
+          "part",
+          "string|nul"
+        ],
+        "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": [
+          "cf",
+          "codicefiscaleutils.parser.parser.yeartocf",
+          "function",
+          "lt;static&gt",
+          "pars",
+          "parser.parser.yeartocf",
+          "parser.yeartocf",
+          "part",
+          "string|nul",
+          "year",
+          "yeartocf"
+        ],
+        "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf": [
+          "codicefiscaleutils.parser.parser.monthtocf",
+          "function",
+          "inform",
+          "lt;static&gt",
+          "month",
+          "monthtocf",
+          "pars",
+          "parser.monthtocf",
+          "parser.parser.monthtocf",
+          "string|nul"
+        ],
+        "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": [
+          "codicefiscaleutils.parser.parser.daygendertocf",
+          "day",
+          "daygendertocf",
+          "function",
+          "gender",
+          "inform",
+          "lt;static&gt",
+          "pars",
+          "parser.daygendertocf",
+          "parser.parser.daygendertocf",
+          "string|nul"
+        ],
+        "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": [
+          "cf",
+          "codicefiscaleutils.parser.parser.parsed",
+          "creat",
+          "date",
+          "date/gend",
+          "date|nul",
+          "function",
+          "gender",
+          "inform",
+          "lt;static&gt",
+          "pars",
+          "parsed",
+          "parser.parsed",
+          "parser.parser.parsed",
+          "part"
+        ],
+        "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": [
+          "cf",
+          "codicefiscaleutils.parser.parser.dategendertocf",
+          "creat",
+          "date",
+          "date/gend",
+          "dategendertocf",
+          "function",
+          "gender",
+          "inform",
+          "lt;static&gt",
+          "pars",
+          "parser.dategendertocf",
+          "parser.parser.dategendertocf",
+          "part",
+          "string|nul"
+        ],
+        "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": [
+          "belfior",
+          "code",
+          "codicefiscaleutils.parser.parser.placetocf",
+          "function",
+          "lt;static&gt",
+          "name",
+          "pars",
+          "parser.parser.placetocf",
+          "parser.placetocf",
+          "place",
+          "placetocf",
+          "provinc",
+          "string|nul"
+        ],
         "CodiceFiscaleUtils.Validator_.html": [
           "class",
           "codicefiscaleutils.valid",
@@ -196,13 +340,107 @@
           "validator.cfsurnam",
           "validator.validator.cfsurnam"
         ],
+        "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": [
+          "cfname",
+          "codicefiscaleutils.validator.validator.cfnam",
+          "function",
+          "gener",
+          "given",
+          "lt;static&gt",
+          "name",
+          "regexp",
+          "valid",
+          "validator.cfnam",
+          "validator.validator.cfnam"
+        ],
+        "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": [
+          "cfyear",
+          "codicefiscaleutils.validator.validator.cfyear",
+          "function",
+          "gener",
+          "given",
+          "lt;static&gt",
+          "regexp",
+          "valid",
+          "validator.cfyear",
+          "validator.validator.cfyear",
+          "year"
+        ],
+        "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": [
+          "cfmonth",
+          "codicefiscaleutils.validator.validator.cfmonth",
+          "function",
+          "gener",
+          "given",
+          "lt;static&gt",
+          "month",
+          "regexp",
+          "valid",
+          "validator.cfmonth",
+          "validator.validator.cfmonth"
+        ],
+        "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": [
+          "cfday",
+          "codicefiscaleutils.validator.validator.cfday",
+          "day",
+          "function",
+          "gener",
+          "given",
+          "lt;static&gt",
+          "regexp",
+          "valid",
+          "validator.cfday",
+          "validator.validator.cfday",
+          "year"
+        ],
+        "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": [
+          "cfdaygend",
+          "codicefiscaleutils.validator.validator.cfdaygend",
+          "day",
+          "function",
+          "gender",
+          "gener",
+          "given",
+          "lt;static&gt",
+          "regexp",
+          "valid",
+          "validator.cfdaygend",
+          "validator.validator.cfdaygend",
+          "year"
+        ],
+        "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": [
+          "cfdategend",
+          "codicefiscaleutils.validator.validator.cfdategend",
+          "date",
+          "function",
+          "gender",
+          "gener",
+          "given",
+          "lt;static&gt",
+          "regexp",
+          "valid",
+          "validator.cfdategend",
+          "validator.validator.cfdategend",
+          "year"
+        ],
+        "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace": [
+          "cfplace",
+          "codicefiscaleutils.validator.validator.cfplac",
+          "date",
+          "function",
+          "lt;static&gt",
+          "placenam",
+          "regexp",
+          "validator.cfplac",
+          "validator.validator.cfplac"
+        ],
         "module-CodiceFiscaleUtils.html": [
           "codicefiscaleutil",
           "modul",
           "module:codicefiscaleutil"
         ]
       },
-      "length": 16
+      "length": 34
     },
     "tokenStore": {
       "root": {
@@ -267,6 +505,10 @@
                                   "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate": {
                                     "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate",
                                     "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+                                    "tf": 25
                                   }
                                 },
                                 "e": {
@@ -321,6 +563,53 @@
                                                                         "docs": {},
                                                                         ".": {
                                                                           "docs": {},
+                                                                          "o": {
+                                                                            "docs": {},
+                                                                            "m": {
+                                                                              "docs": {},
+                                                                              "o": {
+                                                                                "docs": {},
+                                                                                "c": {
+                                                                                  "docs": {},
+                                                                                  "o": {
+                                                                                    "docs": {},
+                                                                                    "d": {
+                                                                                      "docs": {},
+                                                                                      "e": {
+                                                                                        "docs": {},
+                                                                                        "_": {
+                                                                                          "docs": {},
+                                                                                          "b": {
+                                                                                            "docs": {},
+                                                                                            "i": {
+                                                                                              "docs": {},
+                                                                                              "t": {
+                                                                                                "docs": {},
+                                                                                                "m": {
+                                                                                                  "docs": {},
+                                                                                                  "a": {
+                                                                                                    "docs": {},
+                                                                                                    "p": {
+                                                                                                      "docs": {
+                                                                                                        "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP": {
+                                                                                                          "ref": "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP",
+                                                                                                          "tf": 1075
+                                                                                                        }
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          },
                                                                           "c": {
                                                                             "docs": {},
                                                                             "f": {
@@ -477,6 +766,288 @@
                                                                                                   }
                                                                                                 }
                                                                                               }
+                                                                                            },
+                                                                                            "p": {
+                                                                                              "docs": {},
+                                                                                              "l": {
+                                                                                                "docs": {},
+                                                                                                "a": {
+                                                                                                  "docs": {},
+                                                                                                  "c": {
+                                                                                                    "docs": {
+                                                                                                      "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+                                                                                                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+                                                                                                        "tf": 1075
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          },
+                                                                          "s": {
+                                                                            "docs": {},
+                                                                            "u": {
+                                                                              "docs": {},
+                                                                              "r": {
+                                                                                "docs": {},
+                                                                                "n": {
+                                                                                  "docs": {},
+                                                                                  "a": {
+                                                                                    "docs": {},
+                                                                                    "m": {
+                                                                                      "docs": {},
+                                                                                      "e": {
+                                                                                        "docs": {},
+                                                                                        "t": {
+                                                                                          "docs": {},
+                                                                                          "o": {
+                                                                                            "docs": {},
+                                                                                            "c": {
+                                                                                              "docs": {},
+                                                                                              "f": {
+                                                                                                "docs": {
+                                                                                                  "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": {
+                                                                                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf",
+                                                                                                    "tf": 1075
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          },
+                                                                          "n": {
+                                                                            "docs": {},
+                                                                            "a": {
+                                                                              "docs": {},
+                                                                              "m": {
+                                                                                "docs": {},
+                                                                                "e": {
+                                                                                  "docs": {},
+                                                                                  "t": {
+                                                                                    "docs": {},
+                                                                                    "o": {
+                                                                                      "docs": {},
+                                                                                      "c": {
+                                                                                        "docs": {},
+                                                                                        "f": {
+                                                                                          "docs": {
+                                                                                            "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": {
+                                                                                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf",
+                                                                                              "tf": 1075
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          },
+                                                                          "y": {
+                                                                            "docs": {},
+                                                                            "e": {
+                                                                              "docs": {},
+                                                                              "a": {
+                                                                                "docs": {},
+                                                                                "r": {
+                                                                                  "docs": {},
+                                                                                  "t": {
+                                                                                    "docs": {},
+                                                                                    "o": {
+                                                                                      "docs": {},
+                                                                                      "c": {
+                                                                                        "docs": {},
+                                                                                        "f": {
+                                                                                          "docs": {
+                                                                                            "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": {
+                                                                                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf",
+                                                                                              "tf": 1075
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          },
+                                                                          "m": {
+                                                                            "docs": {},
+                                                                            "o": {
+                                                                              "docs": {},
+                                                                              "n": {
+                                                                                "docs": {},
+                                                                                "t": {
+                                                                                  "docs": {},
+                                                                                  "h": {
+                                                                                    "docs": {},
+                                                                                    "t": {
+                                                                                      "docs": {},
+                                                                                      "o": {
+                                                                                        "docs": {},
+                                                                                        "c": {
+                                                                                          "docs": {},
+                                                                                          "f": {
+                                                                                            "docs": {
+                                                                                              "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf": {
+                                                                                                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf",
+                                                                                                "tf": 1075
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          },
+                                                                          "d": {
+                                                                            "docs": {},
+                                                                            "a": {
+                                                                              "docs": {},
+                                                                              "y": {
+                                                                                "docs": {},
+                                                                                "g": {
+                                                                                  "docs": {},
+                                                                                  "e": {
+                                                                                    "docs": {},
+                                                                                    "n": {
+                                                                                      "docs": {},
+                                                                                      "d": {
+                                                                                        "docs": {},
+                                                                                        "e": {
+                                                                                          "docs": {},
+                                                                                          "r": {
+                                                                                            "docs": {},
+                                                                                            "t": {
+                                                                                              "docs": {},
+                                                                                              "o": {
+                                                                                                "docs": {},
+                                                                                                "c": {
+                                                                                                  "docs": {},
+                                                                                                  "f": {
+                                                                                                    "docs": {
+                                                                                                      "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": {
+                                                                                                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf",
+                                                                                                        "tf": 1075
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              },
+                                                                              "t": {
+                                                                                "docs": {},
+                                                                                "e": {
+                                                                                  "docs": {},
+                                                                                  "g": {
+                                                                                    "docs": {},
+                                                                                    "e": {
+                                                                                      "docs": {},
+                                                                                      "n": {
+                                                                                        "docs": {},
+                                                                                        "d": {
+                                                                                          "docs": {},
+                                                                                          "e": {
+                                                                                            "docs": {},
+                                                                                            "r": {
+                                                                                              "docs": {},
+                                                                                              "t": {
+                                                                                                "docs": {},
+                                                                                                "o": {
+                                                                                                  "docs": {},
+                                                                                                  "c": {
+                                                                                                    "docs": {},
+                                                                                                    "f": {
+                                                                                                      "docs": {
+                                                                                                        "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                                                                                                          "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                                                                                                          "tf": 1075
+                                                                                                        }
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          },
+                                                                          "p": {
+                                                                            "docs": {},
+                                                                            "a": {
+                                                                              "docs": {},
+                                                                              "r": {
+                                                                                "docs": {},
+                                                                                "s": {
+                                                                                  "docs": {},
+                                                                                  "e": {
+                                                                                    "docs": {},
+                                                                                    "d": {
+                                                                                      "docs": {
+                                                                                        "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                                                                                          "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                                                                                          "tf": 1075
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            },
+                                                                            "l": {
+                                                                              "docs": {},
+                                                                              "a": {
+                                                                                "docs": {},
+                                                                                "c": {
+                                                                                  "docs": {},
+                                                                                  "e": {
+                                                                                    "docs": {},
+                                                                                    "t": {
+                                                                                      "docs": {},
+                                                                                      "o": {
+                                                                                        "docs": {},
+                                                                                        "c": {
+                                                                                          "docs": {},
+                                                                                          "f": {
+                                                                                            "docs": {
+                                                                                              "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                                                                                                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                                                                                                "tf": 1075
+                                                                                              }
                                                                                             }
                                                                                           }
                                                                                         }
@@ -572,6 +1143,128 @@
                                                                                                 }
                                                                                               }
                                                                                             }
+                                                                                          },
+                                                                                          "n": {
+                                                                                            "docs": {},
+                                                                                            "a": {
+                                                                                              "docs": {},
+                                                                                              "m": {
+                                                                                                "docs": {
+                                                                                                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": {
+                                                                                                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfName",
+                                                                                                    "tf": 1075
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          },
+                                                                                          "y": {
+                                                                                            "docs": {},
+                                                                                            "e": {
+                                                                                              "docs": {},
+                                                                                              "a": {
+                                                                                                "docs": {},
+                                                                                                "r": {
+                                                                                                  "docs": {
+                                                                                                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": {
+                                                                                                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear",
+                                                                                                      "tf": 1075
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          },
+                                                                                          "m": {
+                                                                                            "docs": {},
+                                                                                            "o": {
+                                                                                              "docs": {},
+                                                                                              "n": {
+                                                                                                "docs": {},
+                                                                                                "t": {
+                                                                                                  "docs": {},
+                                                                                                  "h": {
+                                                                                                    "docs": {
+                                                                                                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": {
+                                                                                                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth",
+                                                                                                        "tf": 1075
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          },
+                                                                                          "d": {
+                                                                                            "docs": {},
+                                                                                            "a": {
+                                                                                              "docs": {},
+                                                                                              "y": {
+                                                                                                "docs": {
+                                                                                                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+                                                                                                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+                                                                                                    "tf": 1075
+                                                                                                  }
+                                                                                                },
+                                                                                                "g": {
+                                                                                                  "docs": {},
+                                                                                                  "e": {
+                                                                                                    "docs": {},
+                                                                                                    "n": {
+                                                                                                      "docs": {},
+                                                                                                      "d": {
+                                                                                                        "docs": {
+                                                                                                          "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                                                                                                            "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                                                                                                            "tf": 1075
+                                                                                                          }
+                                                                                                        }
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              },
+                                                                                              "t": {
+                                                                                                "docs": {},
+                                                                                                "e": {
+                                                                                                  "docs": {},
+                                                                                                  "g": {
+                                                                                                    "docs": {},
+                                                                                                    "e": {
+                                                                                                      "docs": {},
+                                                                                                      "n": {
+                                                                                                        "docs": {},
+                                                                                                        "d": {
+                                                                                                          "docs": {
+                                                                                                            "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                                                                                                              "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
+                                                                                                              "tf": 1075
+                                                                                                            }
+                                                                                                          }
+                                                                                                        }
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          },
+                                                                                          "p": {
+                                                                                            "docs": {},
+                                                                                            "l": {
+                                                                                              "docs": {},
+                                                                                              "a": {
+                                                                                                "docs": {},
+                                                                                                "c": {
+                                                                                                  "docs": {
+                                                                                                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace": {
+                                                                                                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace",
+                                                                                                      "tf": 1075
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
                                                                                           }
                                                                                         }
                                                                                       }
@@ -610,6 +1303,14 @@
                     }
                   }
                 }
+              },
+              "e": {
+                "docs": {
+                  "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                    "tf": 8.333333333333332
+                  }
+                }
               }
             }
           },
@@ -625,6 +1326,10 @@
                       "ref": "list_class.html",
                       "tf": 635
                     },
+                    "Belfiore.Belfiore.html": {
+                      "ref": "Belfiore.Belfiore.html",
+                      "tf": 110
+                    },
                     "CodiceFiscaleUtils.Parser.html": {
                       "ref": "CodiceFiscaleUtils.Parser.html",
                       "tf": 110
@@ -639,7 +1344,32 @@
             }
           },
           "f": {
-            "docs": {},
+            "docs": {
+              "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": {
+                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf",
+                "tf": 12.5
+              },
+              "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": {
+                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf",
+                "tf": 12.5
+              },
+              "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": {
+                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf",
+                "tf": 12.5
+              },
+              "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                "tf": 6.25
+              },
+              "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                "tf": 6.25
+              },
+              "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                "tf": 6.25
+              }
+            },
             "d": {
               "docs": {},
               "e": {
@@ -658,6 +1388,57 @@
                             "docs": {
                               "CodiceFiscaleUtils.Parser.html#.Parser.cfDeomocode": {
                                 "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfDeomocode",
+                                "tf": 75
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "a": {
+                "docs": {},
+                "y": {
+                  "docs": {
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+                      "tf": 75
+                    }
+                  },
+                  "g": {
+                    "docs": {},
+                    "e": {
+                      "docs": {},
+                      "n": {
+                        "docs": {},
+                        "d": {
+                          "docs": {
+                            "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                              "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                              "tf": 75
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "t": {
+                  "docs": {},
+                  "e": {
+                    "docs": {},
+                    "g": {
+                      "docs": {},
+                      "e": {
+                        "docs": {},
+                        "n": {
+                          "docs": {},
+                          "d": {
+                            "docs": {
+                              "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                                "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
                                 "tf": 75
                               }
                             }
@@ -792,6 +1573,23 @@
                                 }
                               }
                             }
+                          },
+                          "p": {
+                            "docs": {},
+                            "l": {
+                              "docs": {},
+                              "a": {
+                                "docs": {},
+                                "c": {
+                                  "docs": {
+                                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+                                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+                                      "tf": 75
+                                    }
+                                  }
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -818,6 +1616,105 @@
                           }
                         }
                       }
+                    }
+                  }
+                }
+              }
+            },
+            "n": {
+              "docs": {},
+              "a": {
+                "docs": {},
+                "m": {
+                  "docs": {},
+                  "e": {
+                    "docs": {
+                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": {
+                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfName",
+                        "tf": 75
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "y": {
+              "docs": {},
+              "e": {
+                "docs": {},
+                "a": {
+                  "docs": {},
+                  "r": {
+                    "docs": {
+                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": {
+                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear",
+                        "tf": 75
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "m": {
+              "docs": {},
+              "o": {
+                "docs": {},
+                "n": {
+                  "docs": {},
+                  "t": {
+                    "docs": {},
+                    "h": {
+                      "docs": {
+                        "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": {
+                          "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth",
+                          "tf": 75
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "p": {
+              "docs": {},
+              "l": {
+                "docs": {},
+                "a": {
+                  "docs": {},
+                  "c": {
+                    "docs": {},
+                    "e": {
+                      "docs": {
+                        "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace": {
+                          "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace",
+                          "tf": 75
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "r": {
+            "docs": {},
+            "e": {
+              "docs": {},
+              "a": {
+                "docs": {},
+                "t": {
+                  "docs": {
+                    "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                      "tf": 6.25
+                    },
+                    "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                      "tf": 6.25
+                    },
+                    "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                      "tf": 6.25
                     }
                   }
                 }
@@ -893,8 +1790,72 @@
                             "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate",
                             "tf": 110
                           },
+                          "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": {
+                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": {
+                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": {
+                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf": {
+                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": {
+                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                            "tf": 110
+                          },
                           "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname": {
                             "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": {
+                            "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfName",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": {
+                            "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": {
+                            "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+                            "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                            "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                            "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace": {
+                            "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace",
                             "tf": 110
                           }
                         }
@@ -983,6 +1944,30 @@
                       "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate": {
                         "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate",
                         "tf": 12.5
+                      },
+                      "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+                        "tf": 12.5
+                      },
+                      "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf",
+                        "tf": 16.666666666666664
+                      },
+                      "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf",
+                        "tf": 16.666666666666664
+                      },
+                      "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                        "tf": 6.25
+                      },
+                      "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                        "tf": 6.25
+                      },
+                      "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                        "tf": 6.25
                       }
                     }
                   }
@@ -1040,6 +2025,32 @@
                       "tf": 110
                     }
                   }
+                },
+                "o": {
+                  "docs": {},
+                  "n": {
+                    "docs": {},
+                    "l": {
+                      "docs": {},
+                      "y": {
+                        "docs": {},
+                        "&": {
+                          "docs": {},
+                          "g": {
+                            "docs": {},
+                            "t": {
+                              "docs": {
+                                "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP": {
+                                  "ref": "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP",
+                                  "tf": 33.33333333333333
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -1054,6 +2065,34 @@
                       "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname": {
                         "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname",
                         "tf": 35
+                      },
+                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": {
+                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfName",
+                        "tf": 35
+                      },
+                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": {
+                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear",
+                        "tf": 35
+                      },
+                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": {
+                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth",
+                        "tf": 35
+                      },
+                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+                        "tf": 35
+                      },
+                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                        "tf": 30
+                      },
+                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
+                        "tf": 30
+                      },
+                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace": {
+                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace",
+                        "tf": 20
                       }
                     }
                   }
@@ -1115,6 +2154,29 @@
               }
             }
           },
+          "e": {
+            "docs": {},
+            "f": {
+              "docs": {},
+              "a": {
+                "docs": {},
+                "u": {
+                  "docs": {},
+                  "l": {
+                    "docs": {},
+                    "t": {
+                      "docs": {
+                        "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP": {
+                          "ref": "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP",
+                          "tf": 16.666666666666664
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "a": {
             "docs": {},
             "y": {
@@ -1122,6 +2184,53 @@
                 "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDay": {
                   "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDay",
                   "tf": 12.5
+                },
+                "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": {
+                  "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf",
+                  "tf": 36.666666666666664
+                },
+                "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+                  "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+                  "tf": 25
+                },
+                "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                  "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                  "tf": 20
+                }
+              },
+              "g": {
+                "docs": {},
+                "e": {
+                  "docs": {},
+                  "n": {
+                    "docs": {},
+                    "d": {
+                      "docs": {},
+                      "e": {
+                        "docs": {},
+                        "r": {
+                          "docs": {},
+                          "t": {
+                            "docs": {},
+                            "o": {
+                              "docs": {},
+                              "c": {
+                                "docs": {},
+                                "f": {
+                                  "docs": {
+                                    "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": {
+                                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf",
+                                      "tf": 75
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -1132,6 +2241,26 @@
                   "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate": {
                     "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate",
                     "tf": 12.5
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                    "tf": 31.25
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                    "tf": 26.25
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                    "tf": 22.916666666666664
+                  },
+                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
+                    "tf": 20
+                  },
+                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace": {
+                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace",
+                    "tf": 20
                   }
                 },
                 "|": {
@@ -1145,6 +2274,73 @@
                           "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate": {
                             "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate",
                             "tf": 25
+                          },
+                          "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                            "tf": 25
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "/": {
+                  "docs": {},
+                  "g": {
+                    "docs": {},
+                    "e": {
+                      "docs": {},
+                      "n": {
+                        "docs": {},
+                        "d": {
+                          "docs": {
+                            "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                              "tf": 6.25
+                            },
+                            "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                              "tf": 6.25
+                            },
+                            "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                              "tf": 6.25
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "g": {
+                  "docs": {},
+                  "e": {
+                    "docs": {},
+                    "n": {
+                      "docs": {},
+                      "d": {
+                        "docs": {},
+                        "e": {
+                          "docs": {},
+                          "r": {
+                            "docs": {},
+                            "t": {
+                              "docs": {},
+                              "o": {
+                                "docs": {},
+                                "c": {
+                                  "docs": {},
+                                  "f": {
+                                    "docs": {
+                                      "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                                        "tf": 75
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -1190,6 +2386,30 @@
                       "CodiceFiscaleUtils.Parser.html#.Parser.cfToGender": {
                         "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToGender",
                         "tf": 16.666666666666664
+                      },
+                      "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf",
+                        "tf": 20
+                      },
+                      "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                        "tf": 6.25
+                      },
+                      "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                        "tf": 26.25
+                      },
+                      "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                        "tf": 6.25
+                      },
+                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                        "tf": 20
+                      },
+                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
+                        "tf": 20
                       }
                     }
                   }
@@ -1201,6 +2421,30 @@
                   "docs": {
                     "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname": {
                       "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfName",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
                       "tf": 10
                     }
                   }
@@ -1218,6 +2462,30 @@
                   "docs": {
                     "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname": {
                       "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfName",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
                       "tf": 10
                     }
                   }
@@ -1304,7 +2572,12 @@
                       "i": {
                         "docs": {},
                         "c": {
-                          "docs": {},
+                          "docs": {
+                            "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP": {
+                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP",
+                              "tf": 33.33333333333333
+                            }
+                          },
                           "&": {
                             "docs": {},
                             "g": {
@@ -1343,9 +2616,73 @@
                                     "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate",
                                     "tf": 25
                                   },
+                                  "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+                                    "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": {
+                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf",
+                                    "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": {
+                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf",
+                                    "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": {
+                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf",
+                                    "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf": {
+                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf",
+                                    "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": {
+                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf",
+                                    "tf": 20
+                                  },
+                                  "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                                    "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                                    "tf": 20
+                                  },
+                                  "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                                    "tf": 20
+                                  },
                                   "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname": {
                                     "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname",
                                     "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": {
+                                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfName",
+                                    "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": {
+                                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear",
+                                    "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": {
+                                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth",
+                                    "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+                                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+                                    "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                                    "tf": 20
+                                  },
+                                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
+                                    "tf": 20
+                                  },
+                                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace": {
+                                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace",
+                                    "tf": 20
                                   }
                                 }
                               }
@@ -1453,6 +2790,51 @@
                     "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthMonth": {
                       "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthMonth",
                       "tf": 12.5
+                    },
+                    "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf": {
+                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf",
+                      "tf": 41.666666666666664
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth",
+                      "tf": 35
+                    }
+                  },
+                  "t": {
+                    "docs": {},
+                    "o": {
+                      "docs": {},
+                      "c": {
+                        "docs": {},
+                        "f": {
+                          "docs": {
+                            "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf": {
+                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf",
+                              "tf": 75
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "e": {
+            "docs": {},
+            "m": {
+              "docs": {},
+              "b": {
+                "docs": {},
+                "e": {
+                  "docs": {},
+                  "r": {
+                    "docs": {
+                      "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP",
+                        "tf": 110
+                      }
                     }
                   }
                 }
@@ -1488,6 +2870,118 @@
                           }
                         }
                       }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "b": {
+          "docs": {},
+          "e": {
+            "docs": {},
+            "l": {
+              "docs": {},
+              "f": {
+                "docs": {},
+                "i": {
+                  "docs": {},
+                  "o": {
+                    "docs": {},
+                    "r": {
+                      "docs": {
+                        "Belfiore.Belfiore.html": {
+                          "ref": "Belfiore.Belfiore.html",
+                          "tf": 750
+                        },
+                        "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                          "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                          "tf": 8.333333333333332
+                        }
+                      },
+                      "e": {
+                        "docs": {},
+                        ".": {
+                          "docs": {},
+                          "b": {
+                            "docs": {},
+                            "e": {
+                              "docs": {},
+                              "l": {
+                                "docs": {},
+                                "f": {
+                                  "docs": {},
+                                  "i": {
+                                    "docs": {},
+                                    "o": {
+                                      "docs": {},
+                                      "r": {
+                                        "docs": {
+                                          "Belfiore.Belfiore.html": {
+                                            "ref": "Belfiore.Belfiore.html",
+                                            "tf": 1150
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "i": {
+            "docs": {},
+            "t": {
+              "docs": {},
+              "m": {
+                "docs": {},
+                "a": {
+                  "docs": {},
+                  "p": {
+                    "docs": {
+                      "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP",
+                        "tf": 16.666666666666664
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "r": {
+              "docs": {},
+              "t": {
+                "docs": {},
+                "h": {
+                  "docs": {
+                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthYear": {
+                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthYear",
+                      "tf": 12.5
+                    },
+                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthMonth": {
+                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthMonth",
+                      "tf": 12.5
+                    },
+                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDay": {
+                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDay",
+                      "tf": 12.5
+                    },
+                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate": {
+                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate",
+                      "tf": 12.5
+                    },
+                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+                      "tf": 12.5
                     }
                   }
                 }
@@ -1534,6 +3028,42 @@
                   "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate": {
                     "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate",
                     "tf": 12.5
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+                    "tf": 12.5
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf",
+                    "tf": 12.5
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf",
+                    "tf": 12.5
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf",
+                    "tf": 12.5
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf",
+                    "tf": 16.666666666666664
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf",
+                    "tf": 16.666666666666664
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                    "tf": 6.25
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                    "tf": 6.25
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                    "tf": 8.333333333333332
                   }
                 },
                 "e": {
@@ -1547,158 +3077,39 @@
                     },
                     ".": {
                       "docs": {},
-                      "c": {
+                      "o": {
                         "docs": {},
-                        "f": {
+                        "m": {
                           "docs": {},
-                          "d": {
+                          "o": {
                             "docs": {},
-                            "e": {
+                            "c": {
                               "docs": {},
                               "o": {
                                 "docs": {},
-                                "m": {
+                                "d": {
                                   "docs": {},
-                                  "o": {
+                                  "e": {
                                     "docs": {},
-                                    "c": {
+                                    "_": {
                                       "docs": {},
-                                      "o": {
+                                      "b": {
                                         "docs": {},
-                                        "d": {
-                                          "docs": {
-                                            "CodiceFiscaleUtils.Parser.html#.Parser.cfDeomocode": {
-                                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfDeomocode",
-                                              "tf": 600
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "t": {
-                            "docs": {},
-                            "o": {
-                              "docs": {},
-                              "s": {
-                                "docs": {},
-                                "u": {
-                                  "docs": {},
-                                  "r": {
-                                    "docs": {},
-                                    "n": {
-                                      "docs": {},
-                                      "a": {
-                                        "docs": {},
-                                        "m": {
-                                          "docs": {
-                                            "CodiceFiscaleUtils.Parser.html#.Parser.cfToSurname": {
-                                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToSurname",
-                                              "tf": 600
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "n": {
-                                "docs": {},
-                                "a": {
-                                  "docs": {},
-                                  "m": {
-                                    "docs": {
-                                      "CodiceFiscaleUtils.Parser.html#.Parser.cfToName": {
-                                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToName",
-                                        "tf": 600
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "g": {
-                                "docs": {},
-                                "e": {
-                                  "docs": {},
-                                  "n": {
-                                    "docs": {},
-                                    "d": {
-                                      "docs": {
-                                        "CodiceFiscaleUtils.Parser.html#.Parser.cfToGender": {
-                                          "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToGender",
-                                          "tf": 600
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "b": {
-                                "docs": {},
-                                "i": {
-                                  "docs": {},
-                                  "r": {
-                                    "docs": {},
-                                    "t": {
-                                      "docs": {},
-                                      "h": {
-                                        "docs": {},
-                                        "y": {
+                                        "i": {
                                           "docs": {},
-                                          "e": {
+                                          "t": {
                                             "docs": {},
-                                            "a": {
+                                            "m": {
                                               "docs": {},
-                                              "r": {
-                                                "docs": {
-                                                  "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthYear": {
-                                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthYear",
-                                                    "tf": 600
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        },
-                                        "m": {
-                                          "docs": {},
-                                          "o": {
-                                            "docs": {},
-                                            "n": {
-                                              "docs": {},
-                                              "t": {
+                                              "a": {
                                                 "docs": {},
-                                                "h": {
+                                                "p": {
                                                   "docs": {
-                                                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthMonth": {
-                                                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthMonth",
-                                                      "tf": 600
+                                                    "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP": {
+                                                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP",
+                                                      "tf": 608.3333333333334
                                                     }
                                                   }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        },
-                                        "d": {
-                                          "docs": {
-                                            "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate": {
-                                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate",
-                                              "tf": 600
-                                            }
-                                          },
-                                          "a": {
-                                            "docs": {},
-                                            "y": {
-                                              "docs": {
-                                                "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDay": {
-                                                  "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDay",
-                                                  "tf": 600
                                                 }
                                               }
                                             }
@@ -1727,6 +3138,53 @@
                                   "docs": {},
                                   ".": {
                                     "docs": {},
+                                    "o": {
+                                      "docs": {},
+                                      "m": {
+                                        "docs": {},
+                                        "o": {
+                                          "docs": {},
+                                          "c": {
+                                            "docs": {},
+                                            "o": {
+                                              "docs": {},
+                                              "d": {
+                                                "docs": {},
+                                                "e": {
+                                                  "docs": {},
+                                                  "_": {
+                                                    "docs": {},
+                                                    "b": {
+                                                      "docs": {},
+                                                      "i": {
+                                                        "docs": {},
+                                                        "t": {
+                                                          "docs": {},
+                                                          "m": {
+                                                            "docs": {},
+                                                            "a": {
+                                                              "docs": {},
+                                                              "p": {
+                                                                "docs": {
+                                                                  "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP": {
+                                                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP",
+                                                                    "tf": 75
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
                                     "c": {
                                       "docs": {},
                                       "f": {
@@ -1883,7 +3341,722 @@
                                                             }
                                                           }
                                                         }
+                                                      },
+                                                      "p": {
+                                                        "docs": {},
+                                                        "l": {
+                                                          "docs": {},
+                                                          "a": {
+                                                            "docs": {},
+                                                            "c": {
+                                                              "docs": {
+                                                                "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+                                                                  "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+                                                                  "tf": 75
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
                                                       }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "s": {
+                                      "docs": {},
+                                      "u": {
+                                        "docs": {},
+                                        "r": {
+                                          "docs": {},
+                                          "n": {
+                                            "docs": {},
+                                            "a": {
+                                              "docs": {},
+                                              "m": {
+                                                "docs": {},
+                                                "e": {
+                                                  "docs": {},
+                                                  "t": {
+                                                    "docs": {},
+                                                    "o": {
+                                                      "docs": {},
+                                                      "c": {
+                                                        "docs": {},
+                                                        "f": {
+                                                          "docs": {
+                                                            "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": {
+                                                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf",
+                                                              "tf": 75
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "n": {
+                                      "docs": {},
+                                      "a": {
+                                        "docs": {},
+                                        "m": {
+                                          "docs": {},
+                                          "e": {
+                                            "docs": {},
+                                            "t": {
+                                              "docs": {},
+                                              "o": {
+                                                "docs": {},
+                                                "c": {
+                                                  "docs": {},
+                                                  "f": {
+                                                    "docs": {
+                                                      "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": {
+                                                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf",
+                                                        "tf": 75
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "y": {
+                                      "docs": {},
+                                      "e": {
+                                        "docs": {},
+                                        "a": {
+                                          "docs": {},
+                                          "r": {
+                                            "docs": {},
+                                            "t": {
+                                              "docs": {},
+                                              "o": {
+                                                "docs": {},
+                                                "c": {
+                                                  "docs": {},
+                                                  "f": {
+                                                    "docs": {
+                                                      "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": {
+                                                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf",
+                                                        "tf": 75
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "m": {
+                                      "docs": {},
+                                      "o": {
+                                        "docs": {},
+                                        "n": {
+                                          "docs": {},
+                                          "t": {
+                                            "docs": {},
+                                            "h": {
+                                              "docs": {},
+                                              "t": {
+                                                "docs": {},
+                                                "o": {
+                                                  "docs": {},
+                                                  "c": {
+                                                    "docs": {},
+                                                    "f": {
+                                                      "docs": {
+                                                        "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf": {
+                                                          "ref": "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf",
+                                                          "tf": 75
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "d": {
+                                      "docs": {},
+                                      "a": {
+                                        "docs": {},
+                                        "y": {
+                                          "docs": {},
+                                          "g": {
+                                            "docs": {},
+                                            "e": {
+                                              "docs": {},
+                                              "n": {
+                                                "docs": {},
+                                                "d": {
+                                                  "docs": {},
+                                                  "e": {
+                                                    "docs": {},
+                                                    "r": {
+                                                      "docs": {},
+                                                      "t": {
+                                                        "docs": {},
+                                                        "o": {
+                                                          "docs": {},
+                                                          "c": {
+                                                            "docs": {},
+                                                            "f": {
+                                                              "docs": {
+                                                                "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": {
+                                                                  "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf",
+                                                                  "tf": 75
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "t": {
+                                          "docs": {},
+                                          "e": {
+                                            "docs": {},
+                                            "g": {
+                                              "docs": {},
+                                              "e": {
+                                                "docs": {},
+                                                "n": {
+                                                  "docs": {},
+                                                  "d": {
+                                                    "docs": {},
+                                                    "e": {
+                                                      "docs": {},
+                                                      "r": {
+                                                        "docs": {},
+                                                        "t": {
+                                                          "docs": {},
+                                                          "o": {
+                                                            "docs": {},
+                                                            "c": {
+                                                              "docs": {},
+                                                              "f": {
+                                                                "docs": {
+                                                                  "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                                                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                                                                    "tf": 75
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "p": {
+                                      "docs": {},
+                                      "a": {
+                                        "docs": {},
+                                        "r": {
+                                          "docs": {},
+                                          "s": {
+                                            "docs": {},
+                                            "e": {
+                                              "docs": {},
+                                              "d": {
+                                                "docs": {
+                                                  "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                                                    "tf": 75
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "l": {
+                                        "docs": {},
+                                        "a": {
+                                          "docs": {},
+                                          "c": {
+                                            "docs": {},
+                                            "e": {
+                                              "docs": {},
+                                              "t": {
+                                                "docs": {},
+                                                "o": {
+                                                  "docs": {},
+                                                  "c": {
+                                                    "docs": {},
+                                                    "f": {
+                                                      "docs": {
+                                                        "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                                                          "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                                                          "tf": 75
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "d": {
+                                  "docs": {
+                                    "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                                      "tf": 600
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "l": {
+                          "docs": {},
+                          "a": {
+                            "docs": {},
+                            "c": {
+                              "docs": {},
+                              "e": {
+                                "docs": {},
+                                "t": {
+                                  "docs": {},
+                                  "o": {
+                                    "docs": {},
+                                    "c": {
+                                      "docs": {},
+                                      "f": {
+                                        "docs": {
+                                          "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                                            "tf": 595
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "c": {
+                        "docs": {},
+                        "f": {
+                          "docs": {},
+                          "d": {
+                            "docs": {},
+                            "e": {
+                              "docs": {},
+                              "o": {
+                                "docs": {},
+                                "m": {
+                                  "docs": {},
+                                  "o": {
+                                    "docs": {},
+                                    "c": {
+                                      "docs": {},
+                                      "o": {
+                                        "docs": {},
+                                        "d": {
+                                          "docs": {
+                                            "CodiceFiscaleUtils.Parser.html#.Parser.cfDeomocode": {
+                                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfDeomocode",
+                                              "tf": 600
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "t": {
+                            "docs": {},
+                            "o": {
+                              "docs": {},
+                              "s": {
+                                "docs": {},
+                                "u": {
+                                  "docs": {},
+                                  "r": {
+                                    "docs": {},
+                                    "n": {
+                                      "docs": {},
+                                      "a": {
+                                        "docs": {},
+                                        "m": {
+                                          "docs": {
+                                            "CodiceFiscaleUtils.Parser.html#.Parser.cfToSurname": {
+                                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToSurname",
+                                              "tf": 600
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "n": {
+                                "docs": {},
+                                "a": {
+                                  "docs": {},
+                                  "m": {
+                                    "docs": {
+                                      "CodiceFiscaleUtils.Parser.html#.Parser.cfToName": {
+                                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToName",
+                                        "tf": 600
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "g": {
+                                "docs": {},
+                                "e": {
+                                  "docs": {},
+                                  "n": {
+                                    "docs": {},
+                                    "d": {
+                                      "docs": {
+                                        "CodiceFiscaleUtils.Parser.html#.Parser.cfToGender": {
+                                          "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToGender",
+                                          "tf": 600
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "b": {
+                                "docs": {},
+                                "i": {
+                                  "docs": {},
+                                  "r": {
+                                    "docs": {},
+                                    "t": {
+                                      "docs": {},
+                                      "h": {
+                                        "docs": {},
+                                        "y": {
+                                          "docs": {},
+                                          "e": {
+                                            "docs": {},
+                                            "a": {
+                                              "docs": {},
+                                              "r": {
+                                                "docs": {
+                                                  "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthYear": {
+                                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthYear",
+                                                    "tf": 600
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "m": {
+                                          "docs": {},
+                                          "o": {
+                                            "docs": {},
+                                            "n": {
+                                              "docs": {},
+                                              "t": {
+                                                "docs": {},
+                                                "h": {
+                                                  "docs": {
+                                                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthMonth": {
+                                                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthMonth",
+                                                      "tf": 600
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "d": {
+                                          "docs": {
+                                            "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate": {
+                                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate",
+                                              "tf": 600
+                                            }
+                                          },
+                                          "a": {
+                                            "docs": {},
+                                            "y": {
+                                              "docs": {
+                                                "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDay": {
+                                                  "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDay",
+                                                  "tf": 600
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "p": {
+                                          "docs": {},
+                                          "l": {
+                                            "docs": {},
+                                            "a": {
+                                              "docs": {},
+                                              "c": {
+                                                "docs": {
+                                                  "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+                                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+                                                    "tf": 600
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "s": {
+                        "docs": {},
+                        "u": {
+                          "docs": {},
+                          "r": {
+                            "docs": {},
+                            "n": {
+                              "docs": {},
+                              "a": {
+                                "docs": {},
+                                "m": {
+                                  "docs": {},
+                                  "e": {
+                                    "docs": {},
+                                    "t": {
+                                      "docs": {},
+                                      "o": {
+                                        "docs": {},
+                                        "c": {
+                                          "docs": {},
+                                          "f": {
+                                            "docs": {
+                                              "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": {
+                                                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf",
+                                                "tf": 600
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "n": {
+                        "docs": {},
+                        "a": {
+                          "docs": {},
+                          "m": {
+                            "docs": {},
+                            "e": {
+                              "docs": {},
+                              "t": {
+                                "docs": {},
+                                "o": {
+                                  "docs": {},
+                                  "c": {
+                                    "docs": {},
+                                    "f": {
+                                      "docs": {
+                                        "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": {
+                                          "ref": "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf",
+                                          "tf": 600
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "y": {
+                        "docs": {},
+                        "e": {
+                          "docs": {},
+                          "a": {
+                            "docs": {},
+                            "r": {
+                              "docs": {},
+                              "t": {
+                                "docs": {},
+                                "o": {
+                                  "docs": {},
+                                  "c": {
+                                    "docs": {},
+                                    "f": {
+                                      "docs": {
+                                        "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": {
+                                          "ref": "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf",
+                                          "tf": 600
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "m": {
+                        "docs": {},
+                        "o": {
+                          "docs": {},
+                          "n": {
+                            "docs": {},
+                            "t": {
+                              "docs": {},
+                              "h": {
+                                "docs": {},
+                                "t": {
+                                  "docs": {},
+                                  "o": {
+                                    "docs": {},
+                                    "c": {
+                                      "docs": {},
+                                      "f": {
+                                        "docs": {
+                                          "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf": {
+                                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf",
+                                            "tf": 600
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "d": {
+                        "docs": {},
+                        "a": {
+                          "docs": {},
+                          "y": {
+                            "docs": {},
+                            "g": {
+                              "docs": {},
+                              "e": {
+                                "docs": {},
+                                "n": {
+                                  "docs": {},
+                                  "d": {
+                                    "docs": {},
+                                    "e": {
+                                      "docs": {},
+                                      "r": {
+                                        "docs": {},
+                                        "t": {
+                                          "docs": {},
+                                          "o": {
+                                            "docs": {},
+                                            "c": {
+                                              "docs": {},
+                                              "f": {
+                                                "docs": {
+                                                  "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": {
+                                                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf",
+                                                    "tf": 595
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "t": {
+                            "docs": {},
+                            "e": {
+                              "docs": {},
+                              "g": {
+                                "docs": {},
+                                "e": {
+                                  "docs": {},
+                                  "n": {
+                                    "docs": {},
+                                    "d": {
+                                      "docs": {},
+                                      "e": {
+                                        "docs": {},
+                                        "r": {
+                                          "docs": {},
+                                          "t": {
+                                            "docs": {},
+                                            "o": {
+                                              "docs": {},
+                                              "c": {
+                                                "docs": {},
+                                                "f": {
+                                                  "docs": {
+                                                    "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                                                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                                                      "tf": 595
                                                     }
                                                   }
                                                 }
@@ -1899,6 +4072,189 @@
                             }
                           }
                         }
+                      }
+                    }
+                  },
+                  "d": {
+                    "docs": {
+                      "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                        "tf": 75
+                      }
+                    }
+                  }
+                }
+              },
+              "t": {
+                "docs": {
+                  "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf",
+                    "tf": 12.5
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf",
+                    "tf": 12.5
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf",
+                    "tf": 12.5
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+                    "tf": 6.25
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                    "tf": 6.25
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                    "tf": 6.25
+                  }
+                }
+              }
+            }
+          },
+          "l": {
+            "docs": {},
+            "a": {
+              "docs": {},
+              "c": {
+                "docs": {},
+                "e": {
+                  "docs": {
+                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+                      "tf": 12.5
+                    },
+                    "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                      "tf": 8.333333333333332
+                    }
+                  },
+                  "t": {
+                    "docs": {},
+                    "o": {
+                      "docs": {},
+                      "c": {
+                        "docs": {},
+                        "f": {
+                          "docs": {
+                            "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                              "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                              "tf": 75
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "n": {
+                    "docs": {},
+                    "a": {
+                      "docs": {},
+                      "m": {
+                        "docs": {
+                          "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace": {
+                            "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace",
+                            "tf": 20
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "r": {
+            "docs": {},
+            "o": {
+              "docs": {},
+              "v": {
+                "docs": {},
+                "i": {
+                  "docs": {},
+                  "n": {
+                    "docs": {},
+                    "c": {
+                      "docs": {
+                        "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                          "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                          "tf": 28.333333333333332
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "o": {
+          "docs": {},
+          "m": {
+            "docs": {},
+            "o": {
+              "docs": {},
+              "c": {
+                "docs": {},
+                "o": {
+                  "docs": {},
+                  "d": {
+                    "docs": {
+                      "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP",
+                        "tf": 16.666666666666664
+                      }
+                    },
+                    "e": {
+                      "docs": {},
+                      "_": {
+                        "docs": {},
+                        "b": {
+                          "docs": {},
+                          "i": {
+                            "docs": {},
+                            "t": {
+                              "docs": {},
+                              "m": {
+                                "docs": {},
+                                "a": {
+                                  "docs": {},
+                                  "p": {
+                                    "docs": {
+                                      "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP": {
+                                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP",
+                                        "tf": 75
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "b": {
+            "docs": {},
+            "j": {
+              "docs": {},
+              "e": {
+                "docs": {},
+                "c": {
+                  "docs": {},
+                  "t": {
+                    "docs": {
+                      "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+                        "tf": 25
                       }
                     }
                   }
@@ -1938,6 +4294,34 @@
                               "CodiceFiscaleUtils.Parser.html#.Parser.cfToName": {
                                 "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToName",
                                 "tf": 25
+                              },
+                              "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": {
+                                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf",
+                                "tf": 25
+                              },
+                              "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": {
+                                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf",
+                                "tf": 25
+                              },
+                              "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": {
+                                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf",
+                                "tf": 25
+                              },
+                              "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf": {
+                                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf",
+                                "tf": 25
+                              },
+                              "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": {
+                                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf",
+                                "tf": 20
+                              },
+                              "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+                                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+                                "tf": 20
+                              },
+                              "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                                "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                                "tf": 20
                               }
                             }
                           }
@@ -1967,9 +4351,33 @@
                         "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToSurname",
                         "tf": 16.666666666666664
                       },
+                      "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": {
+                        "ref": "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf",
+                        "tf": 37.5
+                      },
                       "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname": {
                         "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname",
                         "tf": 35
+                      }
+                    },
+                    "e": {
+                      "docs": {},
+                      "t": {
+                        "docs": {},
+                        "o": {
+                          "docs": {},
+                          "c": {
+                            "docs": {},
+                            "f": {
+                              "docs": {
+                                "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": {
+                                  "ref": "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf",
+                                  "tf": 75
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -1989,6 +4397,35 @@
                   "CodiceFiscaleUtils.Parser.html#.Parser.cfToName": {
                     "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToName",
                     "tf": 16.666666666666664
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf",
+                    "tf": 37.5
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+                    "tf": 28.333333333333332
+                  },
+                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": {
+                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfName",
+                    "tf": 35
+                  }
+                },
+                "t": {
+                  "docs": {},
+                  "o": {
+                    "docs": {},
+                    "c": {
+                      "docs": {},
+                      "f": {
+                        "docs": {
+                          "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": {
+                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf",
+                            "tf": 75
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -2035,38 +4472,6 @@
             }
           }
         },
-        "b": {
-          "docs": {},
-          "i": {
-            "docs": {},
-            "r": {
-              "docs": {},
-              "t": {
-                "docs": {},
-                "h": {
-                  "docs": {
-                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthYear": {
-                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthYear",
-                      "tf": 12.5
-                    },
-                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthMonth": {
-                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthMonth",
-                      "tf": 12.5
-                    },
-                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDay": {
-                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDay",
-                      "tf": 12.5
-                    },
-                    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate": {
-                      "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthDate",
-                      "tf": 12.5
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
         "y": {
           "docs": {},
           "e": {
@@ -2078,6 +4483,43 @@
                   "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthYear": {
                     "ref": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthYear",
                     "tf": 12.5
+                  },
+                  "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": {
+                    "ref": "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf",
+                    "tf": 37.5
+                  },
+                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": {
+                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear",
+                    "tf": 35
+                  },
+                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+                    "tf": 10
+                  },
+                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                    "tf": 10
+                  },
+                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
+                    "tf": 10
+                  }
+                },
+                "t": {
+                  "docs": {},
+                  "o": {
+                    "docs": {},
+                    "c": {
+                      "docs": {},
+                      "f": {
+                        "docs": {
+                          "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": {
+                            "ref": "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf",
+                            "tf": 75
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -2100,6 +4542,30 @@
                     },
                     "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname": {
                       "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfSurname",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfName",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                      "tf": 10
+                    },
+                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
                       "tf": 10
                     }
                   },
@@ -2134,6 +4600,128 @@
                                                 "tf": 600
                                               }
                                             }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "n": {
+                                  "docs": {},
+                                  "a": {
+                                    "docs": {},
+                                    "m": {
+                                      "docs": {
+                                        "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": {
+                                          "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfName",
+                                          "tf": 600
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "y": {
+                                  "docs": {},
+                                  "e": {
+                                    "docs": {},
+                                    "a": {
+                                      "docs": {},
+                                      "r": {
+                                        "docs": {
+                                          "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": {
+                                            "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear",
+                                            "tf": 600
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "m": {
+                                  "docs": {},
+                                  "o": {
+                                    "docs": {},
+                                    "n": {
+                                      "docs": {},
+                                      "t": {
+                                        "docs": {},
+                                        "h": {
+                                          "docs": {
+                                            "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": {
+                                              "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth",
+                                              "tf": 600
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "d": {
+                                  "docs": {},
+                                  "a": {
+                                    "docs": {},
+                                    "y": {
+                                      "docs": {
+                                        "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+                                          "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+                                          "tf": 600
+                                        }
+                                      },
+                                      "g": {
+                                        "docs": {},
+                                        "e": {
+                                          "docs": {},
+                                          "n": {
+                                            "docs": {},
+                                            "d": {
+                                              "docs": {
+                                                "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                                                  "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                                                  "tf": 595
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "t": {
+                                      "docs": {},
+                                      "e": {
+                                        "docs": {},
+                                        "g": {
+                                          "docs": {},
+                                          "e": {
+                                            "docs": {},
+                                            "n": {
+                                              "docs": {},
+                                              "d": {
+                                                "docs": {
+                                                  "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                                                    "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
+                                                    "tf": 595
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "p": {
+                                  "docs": {},
+                                  "l": {
+                                    "docs": {},
+                                    "a": {
+                                      "docs": {},
+                                      "c": {
+                                        "docs": {
+                                          "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace": {
+                                            "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace",
+                                            "tf": 595
                                           }
                                         }
                                       }
@@ -2188,6 +4776,128 @@
                                                           }
                                                         }
                                                       }
+                                                    },
+                                                    "n": {
+                                                      "docs": {},
+                                                      "a": {
+                                                        "docs": {},
+                                                        "m": {
+                                                          "docs": {
+                                                            "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": {
+                                                              "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfName",
+                                                              "tf": 75
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    "y": {
+                                                      "docs": {},
+                                                      "e": {
+                                                        "docs": {},
+                                                        "a": {
+                                                          "docs": {},
+                                                          "r": {
+                                                            "docs": {
+                                                              "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": {
+                                                                "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear",
+                                                                "tf": 75
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    "m": {
+                                                      "docs": {},
+                                                      "o": {
+                                                        "docs": {},
+                                                        "n": {
+                                                          "docs": {},
+                                                          "t": {
+                                                            "docs": {},
+                                                            "h": {
+                                                              "docs": {
+                                                                "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": {
+                                                                  "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth",
+                                                                  "tf": 75
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    "d": {
+                                                      "docs": {},
+                                                      "a": {
+                                                        "docs": {},
+                                                        "y": {
+                                                          "docs": {
+                                                            "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+                                                              "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+                                                              "tf": 75
+                                                            }
+                                                          },
+                                                          "g": {
+                                                            "docs": {},
+                                                            "e": {
+                                                              "docs": {},
+                                                              "n": {
+                                                                "docs": {},
+                                                                "d": {
+                                                                  "docs": {
+                                                                    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+                                                                      "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+                                                                      "tf": 75
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        },
+                                                        "t": {
+                                                          "docs": {},
+                                                          "e": {
+                                                            "docs": {},
+                                                            "g": {
+                                                              "docs": {},
+                                                              "e": {
+                                                                "docs": {},
+                                                                "n": {
+                                                                  "docs": {},
+                                                                  "d": {
+                                                                    "docs": {
+                                                                      "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+                                                                        "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
+                                                                        "tf": 75
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    "p": {
+                                                      "docs": {},
+                                                      "l": {
+                                                        "docs": {},
+                                                        "a": {
+                                                          "docs": {},
+                                                          "c": {
+                                                            "docs": {
+                                                              "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace": {
+                                                                "ref": "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace",
+                                                                "tf": 75
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
                                                     }
                                                   }
                                                 }
@@ -2212,20 +4922,33 @@
           }
         }
       },
-      "length": 130
+      "length": 357
     },
     "corpusTokens": [
+      "belfior",
+      "belfiore.belfior",
       "birth",
+      "bitmap",
+      "cf",
+      "cfdategend",
+      "cfday",
+      "cfdaygend",
       "cfdeomocod",
+      "cfmonth",
+      "cfname",
+      "cfplace",
       "cfsurnam",
       "cftobirthd",
       "cftobirthday",
       "cftobirthmonth",
+      "cftobirthplac",
       "cftobirthyear",
       "cftogend",
       "cftonam",
       "cftosurnam",
+      "cfyear",
       "class",
+      "code",
       "codic",
       "codicefiscal",
       "codicefiscaleutil",
@@ -2234,15 +4957,37 @@
       "codicefiscaleutils.parser.parser.cftobirthd",
       "codicefiscaleutils.parser.parser.cftobirthday",
       "codicefiscaleutils.parser.parser.cftobirthmonth",
+      "codicefiscaleutils.parser.parser.cftobirthplac",
       "codicefiscaleutils.parser.parser.cftobirthyear",
       "codicefiscaleutils.parser.parser.cftogend",
       "codicefiscaleutils.parser.parser.cftonam",
       "codicefiscaleutils.parser.parser.cftosurnam",
+      "codicefiscaleutils.parser.parser.dategendertocf",
+      "codicefiscaleutils.parser.parser.daygendertocf",
+      "codicefiscaleutils.parser.parser.monthtocf",
+      "codicefiscaleutils.parser.parser.nametocf",
+      "codicefiscaleutils.parser.parser.omocode_bitmap",
+      "codicefiscaleutils.parser.parser.parsed",
+      "codicefiscaleutils.parser.parser.placetocf",
+      "codicefiscaleutils.parser.parser.surnametocf",
+      "codicefiscaleutils.parser.parser.yeartocf",
       "codicefiscaleutils.valid",
+      "codicefiscaleutils.validator.validator.cfdategend",
+      "codicefiscaleutils.validator.validator.cfday",
+      "codicefiscaleutils.validator.validator.cfdaygend",
+      "codicefiscaleutils.validator.validator.cfmonth",
+      "codicefiscaleutils.validator.validator.cfnam",
+      "codicefiscaleutils.validator.validator.cfplac",
       "codicefiscaleutils.validator.validator.cfsurnam",
+      "codicefiscaleutils.validator.validator.cfyear",
+      "creat",
       "date",
+      "date/gend",
+      "dategendertocf",
       "date|nul",
       "day",
+      "daygendertocf",
+      "default",
       "document",
       "fiscal",
       "function",
@@ -2258,40 +5003,90 @@
       "list",
       "list:class",
       "list:modul",
+      "lt;static",
       "lt;static&gt",
       "m'|'f'|null",
+      "member",
       "modul",
       "module:codicefiscaleutil",
       "month",
+      "monthtocf",
       "name",
+      "nametocf",
       "number|nul",
+      "object",
+      "omocod",
+      "omocode_bitmap",
       "pars",
+      "parsed",
       "parser",
       "parser.cfdeomocod",
       "parser.cftobirthd",
       "parser.cftobirthday",
       "parser.cftobirthmonth",
+      "parser.cftobirthplac",
       "parser.cftobirthyear",
       "parser.cftogend",
       "parser.cftonam",
       "parser.cftosurnam",
+      "parser.dategendertocf",
+      "parser.daygendertocf",
+      "parser.monthtocf",
+      "parser.nametocf",
+      "parser.omocode_bitmap",
+      "parser.parsed",
       "parser.parser.cfdeomocod",
       "parser.parser.cftobirthd",
       "parser.parser.cftobirthday",
       "parser.parser.cftobirthmonth",
+      "parser.parser.cftobirthplac",
       "parser.parser.cftobirthyear",
       "parser.parser.cftogend",
       "parser.parser.cftonam",
       "parser.parser.cftosurnam",
+      "parser.parser.dategendertocf",
+      "parser.parser.daygendertocf",
+      "parser.parser.monthtocf",
+      "parser.parser.nametocf",
+      "parser.parser.omocode_bitmap",
+      "parser.parser.parsed",
+      "parser.parser.placetocf",
+      "parser.parser.surnametocf",
+      "parser.parser.yeartocf",
+      "parser.placetocf",
+      "parser.surnametocf",
+      "parser.yeartocf",
+      "part",
+      "place",
+      "placenam",
+      "placetocf",
+      "provinc",
       "readm",
+      "readonly&gt",
       "regexp",
       "string|nul",
       "surnam",
+      "surnametocf",
       "util",
       "valid",
+      "validator.cfdategend",
+      "validator.cfday",
+      "validator.cfdaygend",
+      "validator.cfmonth",
+      "validator.cfnam",
+      "validator.cfplac",
       "validator.cfsurnam",
+      "validator.cfyear",
+      "validator.validator.cfdategend",
+      "validator.validator.cfday",
+      "validator.validator.cfdaygend",
+      "validator.validator.cfmonth",
+      "validator.validator.cfnam",
+      "validator.validator.cfplac",
       "validator.validator.cfsurnam",
-      "year"
+      "validator.validator.cfyear",
+      "year",
+      "yeartocf"
     ],
     "pipeline": [
       "trimmer",
@@ -2344,6 +5139,17 @@
       "description": "",
       "body": ""
     },
+    "Belfiore.Belfiore.html": {
+      "id": "Belfiore.Belfiore.html",
+      "kind": "class",
+      "title": "Belfiore",
+      "longname": "Belfiore.Belfiore",
+      "name": "Belfiore",
+      "tags": "Belfiore.Belfiore Belfiore",
+      "summary": "",
+      "description": "",
+      "body": ""
+    },
     "CodiceFiscaleUtils.Parser.html": {
       "id": "CodiceFiscaleUtils.Parser.html",
       "kind": "class",
@@ -2354,6 +5160,16 @@
       "summary": "",
       "description": "",
       "body": ""
+    },
+    "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP": {
+      "id": "CodiceFiscaleUtils.Parser.html#.Parser.OMOCODE_BITMAP",
+      "kind": "member",
+      "title": "&lt;static, readonly&gt; Parser.OMOCODE_BITMAP",
+      "longname": "CodiceFiscaleUtils.Parser.Parser.OMOCODE_BITMAP",
+      "name": "Parser.OMOCODE_BITMAP",
+      "tags": "CodiceFiscaleUtils.Parser.Parser.OMOCODE_BITMAP Parser.Parser.OMOCODE_BITMAP Parser.OMOCODE_BITMAP OMOCODE_BITMAP",
+      "summary": "",
+      "description": "Default omocode bitmap"
     },
     "CodiceFiscaleUtils.Parser.html#.Parser.cfDeomocode": {
       "id": "CodiceFiscaleUtils.Parser.html#.Parser.cfDeomocode",
@@ -2435,6 +5251,96 @@
       "summary": "",
       "description": "Parse birth date information"
     },
+    "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace": {
+      "id": "CodiceFiscaleUtils.Parser.html#.Parser.cfToBirthPlace",
+      "kind": "function",
+      "title": "&lt;static&gt; Parser.cfToBirthPlace( codiceFiscale ) → {Object}",
+      "longname": "CodiceFiscaleUtils.Parser.Parser.cfToBirthPlace",
+      "name": "Parser.cfToBirthPlace",
+      "tags": "CodiceFiscaleUtils.Parser.Parser.cfToBirthPlace Parser.Parser.cfToBirthPlace Parser.cfToBirthPlace cfToBirthPlace",
+      "summary": "",
+      "description": "Parse birth place information"
+    },
+    "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf": {
+      "id": "CodiceFiscaleUtils.Parser.html#.Parser.surnameToCf",
+      "kind": "function",
+      "title": "&lt;static&gt; Parser.surnameToCf( surname ) → {string|null}",
+      "longname": "CodiceFiscaleUtils.Parser.Parser.surnameToCf",
+      "name": "Parser.surnameToCf",
+      "tags": "CodiceFiscaleUtils.Parser.Parser.surnameToCf Parser.Parser.surnameToCf Parser.surnameToCf surnameToCf",
+      "summary": "",
+      "description": "Parse surname to cf part"
+    },
+    "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf": {
+      "id": "CodiceFiscaleUtils.Parser.html#.Parser.nameToCf",
+      "kind": "function",
+      "title": "&lt;static&gt; Parser.nameToCf( name ) → {string|null}",
+      "longname": "CodiceFiscaleUtils.Parser.Parser.nameToCf",
+      "name": "Parser.nameToCf",
+      "tags": "CodiceFiscaleUtils.Parser.Parser.nameToCf Parser.Parser.nameToCf Parser.nameToCf nameToCf",
+      "summary": "",
+      "description": "Parse name to cf part"
+    },
+    "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf": {
+      "id": "CodiceFiscaleUtils.Parser.html#.Parser.yearToCf",
+      "kind": "function",
+      "title": "&lt;static&gt; Parser.yearToCf( year ) → {string|null}",
+      "longname": "CodiceFiscaleUtils.Parser.Parser.yearToCf",
+      "name": "Parser.yearToCf",
+      "tags": "CodiceFiscaleUtils.Parser.Parser.yearToCf Parser.Parser.yearToCf Parser.yearToCf yearToCf",
+      "summary": "",
+      "description": "Parse year to cf part"
+    },
+    "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf": {
+      "id": "CodiceFiscaleUtils.Parser.html#.Parser.monthToCf",
+      "kind": "function",
+      "title": "&lt;static&gt; Parser.monthToCf( month ) → {string|null}",
+      "longname": "CodiceFiscaleUtils.Parser.Parser.monthToCf",
+      "name": "Parser.monthToCf",
+      "tags": "CodiceFiscaleUtils.Parser.Parser.monthToCf Parser.Parser.monthToCf Parser.monthToCf monthToCf",
+      "summary": "",
+      "description": "Parse month information"
+    },
+    "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf": {
+      "id": "CodiceFiscaleUtils.Parser.html#.Parser.dayGenderToCf",
+      "kind": "function",
+      "title": "&lt;static&gt; Parser.dayGenderToCf( day, gender ) → {string|null}",
+      "longname": "CodiceFiscaleUtils.Parser.Parser.dayGenderToCf",
+      "name": "Parser.dayGenderToCf",
+      "tags": "CodiceFiscaleUtils.Parser.Parser.dayGenderToCf Parser.Parser.dayGenderToCf Parser.dayGenderToCf dayGenderToCf",
+      "summary": "",
+      "description": "Parse day information"
+    },
+    "CodiceFiscaleUtils.Parser.html#.Parser.parseDate": {
+      "id": "CodiceFiscaleUtils.Parser.html#.Parser.parseDate",
+      "kind": "function",
+      "title": "&lt;static&gt; Parser.parseDate( date ) → {Date|null}",
+      "longname": "CodiceFiscaleUtils.Parser.Parser.parseDate",
+      "name": "Parser.parseDate",
+      "tags": "CodiceFiscaleUtils.Parser.Parser.parseDate Parser.Parser.parseDate Parser.parseDate parseDate",
+      "summary": "",
+      "description": "Parse a Dated and Gender information to create Date/Gender CF part"
+    },
+    "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf": {
+      "id": "CodiceFiscaleUtils.Parser.html#.Parser.dateGenderToCf",
+      "kind": "function",
+      "title": "&lt;static&gt; Parser.dateGenderToCf( date, gender ) → {string|null}",
+      "longname": "CodiceFiscaleUtils.Parser.Parser.dateGenderToCf",
+      "name": "Parser.dateGenderToCf",
+      "tags": "CodiceFiscaleUtils.Parser.Parser.dateGenderToCf Parser.Parser.dateGenderToCf Parser.dateGenderToCf dateGenderToCf",
+      "summary": "",
+      "description": "Parse a Dated and Gender information to create Date/Gender CF part"
+    },
+    "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf": {
+      "id": "CodiceFiscaleUtils.Parser.html#.Parser.placeToCf",
+      "kind": "function",
+      "title": "&lt;static&gt; Parser.placeToCf( name [, province ] ) → {string|null}",
+      "longname": "CodiceFiscaleUtils.Parser.Parser.placeToCf",
+      "name": "Parser.placeToCf",
+      "tags": "CodiceFiscaleUtils.Parser.Parser.placeToCf Parser.Parser.placeToCf Parser.placeToCf placeToCf",
+      "summary": "",
+      "description": "Parse place name and province to Belfiore code"
+    },
     "CodiceFiscaleUtils.Validator_.html": {
       "id": "CodiceFiscaleUtils.Validator_.html",
       "kind": "class",
@@ -2455,6 +5361,76 @@
       "tags": "CodiceFiscaleUtils.Validator.Validator.cfSurname Validator.Validator.cfSurname Validator.cfSurname cfSurname",
       "summary": "",
       "description": "Validation regexp for the given surname or generic"
+    },
+    "CodiceFiscaleUtils.Validator_.html#.Validator.cfName": {
+      "id": "CodiceFiscaleUtils.Validator_.html#.Validator.cfName",
+      "kind": "function",
+      "title": "&lt;static&gt; Validator.cfName( name ) → {RegExp}",
+      "longname": "CodiceFiscaleUtils.Validator.Validator.cfName",
+      "name": "Validator.cfName",
+      "tags": "CodiceFiscaleUtils.Validator.Validator.cfName Validator.Validator.cfName Validator.cfName cfName",
+      "summary": "",
+      "description": "Validation regexp for the given name or generic"
+    },
+    "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear": {
+      "id": "CodiceFiscaleUtils.Validator_.html#.Validator.cfYear",
+      "kind": "function",
+      "title": "&lt;static&gt; Validator.cfYear( year ) → {RegExp}",
+      "longname": "CodiceFiscaleUtils.Validator.Validator.cfYear",
+      "name": "Validator.cfYear",
+      "tags": "CodiceFiscaleUtils.Validator.Validator.cfYear Validator.Validator.cfYear Validator.cfYear cfYear",
+      "summary": "",
+      "description": "Validation regexp for the given year or generic"
+    },
+    "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth": {
+      "id": "CodiceFiscaleUtils.Validator_.html#.Validator.cfMonth",
+      "kind": "function",
+      "title": "&lt;static&gt; Validator.cfMonth( month ) → {RegExp}",
+      "longname": "CodiceFiscaleUtils.Validator.Validator.cfMonth",
+      "name": "Validator.cfMonth",
+      "tags": "CodiceFiscaleUtils.Validator.Validator.cfMonth Validator.Validator.cfMonth Validator.cfMonth cfMonth",
+      "summary": "",
+      "description": "Validation regexp for the given month or generic"
+    },
+    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay": {
+      "id": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDay",
+      "kind": "function",
+      "title": "&lt;static&gt; Validator.cfDay( day ) → {RegExp}",
+      "longname": "CodiceFiscaleUtils.Validator.Validator.cfDay",
+      "name": "Validator.cfDay",
+      "tags": "CodiceFiscaleUtils.Validator.Validator.cfDay Validator.Validator.cfDay Validator.cfDay cfDay",
+      "summary": "",
+      "description": "Validation regexp for the given year or generic"
+    },
+    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender": {
+      "id": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDayGender",
+      "kind": "function",
+      "title": "&lt;static&gt; Validator.cfDayGender( day [, gender ] ) → {RegExp}",
+      "longname": "CodiceFiscaleUtils.Validator.Validator.cfDayGender",
+      "name": "Validator.cfDayGender",
+      "tags": "CodiceFiscaleUtils.Validator.Validator.cfDayGender Validator.Validator.cfDayGender Validator.cfDayGender cfDayGender",
+      "summary": "",
+      "description": "Validation regexp for the given year or generic"
+    },
+    "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender": {
+      "id": "CodiceFiscaleUtils.Validator_.html#.Validator.cfDateGender",
+      "kind": "function",
+      "title": "&lt;static&gt; Validator.cfDateGender( date [, gender ] ) → {RegExp}",
+      "longname": "CodiceFiscaleUtils.Validator.Validator.cfDateGender",
+      "name": "Validator.cfDateGender",
+      "tags": "CodiceFiscaleUtils.Validator.Validator.cfDateGender Validator.Validator.cfDateGender Validator.cfDateGender cfDateGender",
+      "summary": "",
+      "description": "Validation regexp for the given year or generic"
+    },
+    "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace": {
+      "id": "CodiceFiscaleUtils.Validator_.html#.Validator.cfPlace",
+      "kind": "function",
+      "title": "&lt;static&gt; Validator.cfPlace( [ date ], placeName ) → {RegExp}",
+      "longname": "CodiceFiscaleUtils.Validator.Validator.cfPlace",
+      "name": "Validator.cfPlace",
+      "tags": "CodiceFiscaleUtils.Validator.Validator.cfPlace Validator.Validator.cfPlace Validator.cfPlace cfPlace",
+      "summary": "",
+      "description": ""
     },
     "module-CodiceFiscaleUtils.html": {
       "id": "module-CodiceFiscaleUtils.html",

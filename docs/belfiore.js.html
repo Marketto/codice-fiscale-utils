@@ -1,0 +1,501 @@
+<!-- start:source.tmpl.hbs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+		<title>belfiore.js</title>
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet">
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+		<link type="text/css" rel="stylesheet" href="css/prism.min.css">
+		<link type="text/css" rel="stylesheet" href="css/template.min.css">
+		<script type="text/javascript">
+			window.TEMPLATE_OPTIONS = {"includeDate":true,"dateFormat":"Do MMM YYYY","systemName":"Codice Fiscale Utils","systemSummary":"JS utilities to handle Italian Codice Fiscale","systemLogo":"","systemColor":"","navMembers":[{"kind":"class","title":"Classes","summary":"All documented classes."},{"kind":"external","title":"Externals","summary":"All documented external members."},{"kind":"global","title":"Globals","summary":"All documented globals."},{"kind":"mixin","title":"Mixins","summary":"All documented mixins."},{"kind":"interface","title":"Interfaces","summary":"All documented interfaces."},{"kind":"module","title":"Modules","summary":"All documented modules."},{"kind":"namespace","title":"Namespaces","summary":"All documented namespaces."},{"kind":"tutorial","title":"Tutorials","summary":"All available tutorials."}],"footer":"","copyright":"FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.","linenums":true,"collapseSymbols":true,"inverseNav":true,"inlineNav":false,"outputSourceFiles":true,"sourceRootPath":null,"disablePackagePath":true,"outputSourcePath":false,"showTableOfContents":true,"showAccessFilter":true,"analytics":null,"methodHeadingReturns":true,"sort":"linenum, longname, version, since","search":true,"favicon":null,"stylesheets":[],"scripts":[],"monospaceLinks":false,"cleverLinks":false};
+			window.DOCLET_TOC_ENABLED = false;
+			window.DOCLET_AFILTER_ENABLED = false;
+		</script>
+</head>
+<body>
+	<!-- start:navbar.hbs -->
+	<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html">
+					Codice Fiscale Utils
+				</a>
+				<!-- displayed on small devices -->
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse" id="topNavigation">
+				<ul class="nav navbar-nav">
+								<li class="dropdown">
+									<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Globals<b class="caret"></b></a>
+									<ul class="dropdown-menu">
+											<li><a href="global.html#toArray">toArray</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="list_class.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+									<ul class="dropdown-menu">
+											<li><a href="Belfiore.Belfiore.html">Belfiore.Belfiore</a></li>
+											<li><a href="CodiceFiscaleUtils.Parser.html">CodiceFiscaleUtils.Parser</a></li>
+											<li><a href="CodiceFiscaleUtils.Validator_.html">CodiceFiscaleUtils.Validator</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="list_module.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+									<ul class="dropdown-menu">
+											<li><a href="module-CodiceFiscaleUtils.html">CodiceFiscaleUtils</a></li>
+									</ul>
+								</li>
+				</ul>
+					<!-- start:lunr-search-navbar.hbs -->
+					<form class="navbar-form navbar-right" role="search">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" id="lunr-search-input">
+							<div class="input-group-btn">
+								<button class="btn btn-default" id="lunr-search-submit">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+					<!-- start:lunr-search-navbar.hbs -->		</div>
+		</div>
+	</header>
+	<!-- end:navbar.hbs -->		<div class="page-header">
+			<div class="container">
+				<span class="kind">source</span>
+				<h1><span class="name">belfiore.js</span></h1>
+			</div>
+		</div>
+	<div class="container content">
+		<div class="row">
+			<div class="col-md-12 main-content">
+		<section class="source-section">
+			<article></article>
+			<pre class="prettyprint source language-javascript line-numbers"><code class="language-javascript">const CITIES_COUNTRIES = require('./asset/cities-countries.json');
+const moment = require('moment');
+
+class Belfiore{
+    /**
+     * 
+     * @param {Object} param Static json
+     * @param {Array&lt;Array&lt;Object>>} param.data Resource data
+     * @param {Array&lt;Array&lt;Object>>} param.licenses License array
+     * @memberof Belfiore
+     */
+    constructor({ data, licenses, activeDate, codeMatcher, province }) {
+        if (codeMatcher &amp;&amp; province) {
+            throw new Error('Both codeMatcher and province were provided to Bolfiore, only one is allowed');
+        }
+        const hiddenValueConf = value => ({
+            value,
+            enumerable: false,
+            configurable: false,
+            writable: false
+        });
+
+        Object.defineProperties(this, {
+            _data: hiddenValueConf(data),
+            _licenses: hiddenValueConf(licenses),
+            _activeDate: hiddenValueConf(activeDate),
+            _codeMatcher: hiddenValueConf(codeMatcher),
+            _province: hiddenValueConf(province)
+        });
+        return new Proxy(this, this.constructor);
+    }
+
+    /**
+     * @returns {Array&lt;Object>} List of places
+     * @memberof Belfiore
+     */
+    toArray() {
+        return this._data
+            .map(resource => Array.from(new Array(resource.belfioreCode.length / 3), (e, i) => this.constructor.locationByIndex(resource, i, {
+                activeDate: this._activeDate,
+                codeMatcher: this._codeMatcher,
+                province: this._province,
+                licenses: this._licenses
+            })))
+            .reduce((a, b) => a.concat(b))
+            .filter(e => !!e);
+    }
+
+    /**
+     * Search places matching given name
+     * @param {string} name Place name
+     * @returns {Array&lt;Object>}
+     * @memberof Belfiore
+     */
+    searchByName(name) {
+        if (!name || typeof name !== 'string') {
+            return null;
+        }
+        let output = [];
+        for (let g = 0; g &lt; this._data.length; g++) {
+            const resourceData = this._data[g];
+            const indexer = this.constructor.indexByName(resourceData.name, name);
+            for (let index of indexer) {
+                if (index >= 0) {
+                    const roundItem = this.constructor.locationByIndex(resourceData, index, {
+                        activeDate: this._activeDate,
+                        codeMatcher: this._codeMatcher,
+                        province: this._province,
+                        licenses: this._licenses
+                    });
+                    if (roundItem) {
+                        output.push(roundItem);
+                    }
+                }
+            }
+        }
+        return output;
+    }
+
+    /**
+     * Find place matching given name, retuns place object if provided name match only 1 result
+     * @param {string} name Place name
+     * @returns {Object|null}
+     * @memberof BelfioreGenericList
+     * @memberof Belfiore
+     */
+    findByName(name) {
+        if (!name || typeof name !== 'string') {
+            return null;
+        }
+        const matcher = new RegExp(`^${name}$`, 'i');
+        for (let g = 0; g &lt; this._data.length; g++) {
+            const resourceData = this._data[g];
+            const indexer = this.constructor.indexByName(resourceData.name, matcher);
+            for (let index of indexer) {
+                if (index >= 0) {
+                    const roundItem = this.constructor.locationByIndex(resourceData, index, {
+                        activeDate: this._activeDate,
+                        codeMatcher: this._codeMatcher,
+                        province: this._province,
+                        licenses: this._licenses
+                    });
+                    if (roundItem) {
+                        return roundItem;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns a Proxied version of Belfiore which filters results by given date
+     * @param {string|Date|Moment|Array&lt;number>} [date = moment()] Target date to filter places active only for the given date
+     * @returns {Belfiore}
+     */
+    active(date = moment()) {
+        const { _data, _licenses, _codeMatcher, _province } = this;
+        return new Belfiore({
+            data: _data,
+            licenses: _licenses,
+            activeDate: moment(date),
+            province: _province,
+            codeMatcher: _codeMatcher
+        });
+    }
+
+    /**
+     * Returns a Belfiore instance filtered by the given province
+     * @param {string} code Province Code  (2 A-Z char)
+     * @returns {Belfiore}
+     */
+    byProvince(code) {
+        if (!(typeof code === 'string' &amp;&amp; (/^[A-Z]{2}$/u).test(code))) {
+            return;
+        }
+        const { _data, _licenses, _activeDate } = this;
+        return new Belfiore({
+            data: _data,
+            licenses: _licenses,
+            activeDate: _activeDate,
+            province: code
+        });
+    }
+
+    /**
+     * Returns a Proxied version of Belfiore which filters results by place type
+     * @readonly
+     * @returns {Belfiore}
+     */
+    get cities() {
+        const { _data, _licenses, _activeDate } = this;
+        return new Belfiore({
+            data: _data,
+            licenses: _licenses,
+            activeDate: _activeDate,
+            codeMatcher: /^[A-Y]/u
+        });
+    }
+
+    /**
+     * Returns a Proxied version of Belfiore which filters results by place type
+     * @readonly
+     * @returns {Belfiore}
+     */
+    get countries() {
+        const { _data, _licenses, _activeDate } = this;
+        return new Belfiore({
+            data: _data,
+            licenses: _licenses,
+            activeDate: _activeDate,
+            codeMatcher: /^Z/u
+        });
+    }
+
+    /**
+     * Get Proxy
+     * @param {Object} resource target resource
+     * @param {string|number|Symbol} paramName property name to proxy
+     * @returns {*} 
+     * @memberof Belfiore
+     */
+    static get (resource, paramName) {
+        if (typeof paramName  === 'string' &amp;&amp; (/^[A-Z]\d{3}$/u).test(paramName)){
+            const base32name = this.belfioreToInt(paramName).toString(32).padStart(3, '0');
+            for (let g = 0; g &lt; resource._data.length; g++) {
+                const resourceData = resource._data[g];
+                const index = this.binaryfindIndex(resourceData.belfioreCode, base32name);
+                if (index >= 0) {
+                    return this.locationByIndex(resourceData, index, {
+                        activeDate: resource._activeDate,
+                        codeMatcher: resource._codeMatcher,
+                        province: resource._province,
+                        licenses: resource._licenses
+                    });
+                }
+            }
+        }
+
+        if (
+            
+            (resource._codeMatcher || resource._province) &amp;&amp;
+                ['cities', 'countries'].includes(paramName)
+             ||
+            
+                paramName === 'byProvince' &amp;&amp;
+                (resource._codeMatcher.test('Z000') || resource._province)
+            
+        ) {
+            return;
+        }
+
+        return resource[paramName];
+    }
+
+    /**
+     * Binary find Index (works ONLY in sorted arrays)
+     * @param {string} text 
+     * @param {string} value
+     * @param {number} start
+     * @param {number} end
+     * @param {number} step
+     * @returns {number} Found value Index, -1 if not found 
+     * @memberof Belfiore
+     */
+    static binaryfindIndex(text, value, start = 0, end = (text || '').length -1) {
+        const currentLength = end - start + 1;
+        if (start > end || currentLength % value.length) {
+            return -1;
+        }
+        const targetIndex = start + Math.floor(currentLength/(2*value.length))*value.length;
+        const targetValure = text.substr(targetIndex, value.length);
+        if (targetValure === value) {
+            return Math.ceil((targetIndex + 1) / value.length) -1;
+        }
+        const goAhead = value > targetValure;
+        return this.binaryfindIndex(text, value, goAhead ? targetIndex + value.length : start, goAhead ? end : targetIndex - 1);
+    }
+
+    /**
+     * Converts belfiore code into an int
+     * @param {string} code Belfiore Code
+     * @returns {number} Int version of belfiore code
+     * @memberof Belfiore
+     */
+    static belfioreToInt(code) {
+        return (code.charCodeAt()-65)*10**3 + parseInt(code.substr(1));
+    }
+
+    /**
+     * Converts int to belfiore code
+     * @param {number} code Belfiore int code
+     * @returns {string} Standard belfiore code
+     * @memberof Belfiore
+     */
+    static belfioreFromInt(code) {
+        return `${String.fromCharCode(Math.floor(code / 10**3) + 65)}${code.toString().substr(-3).padStart(3, '0')}`;
+    }
+
+    /**
+     * Converst Base 32 number of days since 01/01/1861 to Moment instance
+     * @param {string} base32daysFrom1861 Base 32 number of days from 1861-01-01
+     * @returns {Moment} Moment instance date
+     * @memberof Belfiore
+     */
+    static decodeDate(base32daysFrom1861) {
+        return moment('1861-01-01').add(parseInt(base32daysFrom1861, 32) ,'days');
+    }
+
+    /**
+     * Retrieve string at index posizion
+     * @param {string} list concatenation of names
+     * @param {number} index target name index
+     * @returns {string} index-th string 
+     * @memberof Belfiore
+     */
+    static nameByIndex(list, index) {
+        let startIndex = 0,
+            endIndex = list.indexOf('|', startIndex + 1),
+            counter = index;
+
+        while (counter > 0 &amp;&amp; endIndex > startIndex) {
+            counter--;
+            startIndex = endIndex + 1;
+            endIndex = list.indexOf('|', startIndex + 1);
+        }
+        
+        if (index &lt; 0 || counter > 0) {
+            throw new Error(`[Belfiore.nameByIndex] Provided index ${index} is out range`);
+        }
+
+        if (!counter &amp;&amp; endIndex &lt; 0) {
+            return list.substring(startIndex);
+        }
+
+        return list.substring(startIndex, endIndex);
+    }
+
+    /**
+     * Retrieve string at index posizion
+     * @generator
+     * @param {string} list concatenation of names
+     * @param {string|RegExp} matcher target name index
+     * @yields {number} index
+     * @returns {number} -1 when Done
+     * @memberof Belfiore
+     */
+    static* indexByName(list, matcher) {
+        if (typeof matcher === 'string') {
+            matcher = new RegExp(matcher, 'i');
+        }
+        const seekEntryEndIndex = index => list.indexOf('|', index +1) + 1 || list.length;
+        
+        for(let startIndex = 0, entryIndex = 0; startIndex &lt; list.length; entryIndex++) {
+            const endIndex = seekEntryEndIndex(startIndex);
+            const targetName = list.substring(startIndex, endIndex -1);
+            if (matcher.test(targetName)) {
+                yield entryIndex;
+            }
+            // Moving to next entry to chgeck
+            startIndex = endIndex;
+        }
+        return -1;
+    }
+
+    /**
+     * Retrieve location for the given index in the given subset
+     * @param {string} resourceData concatenation of names
+     * @param {number} index target name index
+     * @returns {Object} location 
+     * @memberof Belfiore
+     */
+    static locationByIndex(resourceData, index, { activeDate, codeMatcher, province, licenses } = {}) {
+        const belfioreIndex = index * 3;
+        if (resourceData.belfioreCode.length - belfioreIndex &lt; 3) {
+            return null;
+        }
+        const belFioreInt = parseInt(resourceData.belfioreCode.substr(belfioreIndex, 3), '32');
+        const belfioreCode = this.belfioreFromInt(belFioreInt);
+        if (codeMatcher &amp;&amp; !codeMatcher.test(belfioreCode)) {
+            return null;
+        }
+        const code = resourceData.provinceOrCountry.substr(index * 2, 2);
+        if (province &amp;&amp; province !== code) {
+            return null;
+        }
+
+        const dateIndex = index * 4;
+        const creationDate = this.decodeDate((resourceData.creationDate || '').substr(dateIndex, 4) || '0').startOf('day');
+        const expirationDate = this.decodeDate((resourceData.expirationDate || '').substr(dateIndex, 4) || '2qn13').endOf('day');
+        if (
+            activeDate &amp;&amp; 
+            (
+                resourceData.creationDate &amp;&amp; activeDate.isBefore(creationDate, 'day') ||
+                resourceData.expirationDate &amp;&amp;  activeDate.isAfter(expirationDate, 'day')
+            )
+        ) {
+            return null;
+        }
+        const name = this.nameByIndex(resourceData.name, index);
+        const isCountry = belfioreCode[0] === 'Z';
+
+        const dataSource = licenses[parseInt(parseInt(resourceData.dataSource, 32).toString(2).padStart(resourceData.belfioreCode.length * 2/3, 0).substr(index * 2, 2), 2)];
+
+        return Object.assign({
+            belfioreCode,
+            name,
+            creationDate: creationDate.toDate(),
+            expirationDate: expirationDate.toDate(),
+            dataSource
+        }, isCountry ? {
+            iso3166: code
+        } : {
+            province: code
+        });
+    }
+}
+
+/**
+ * @name Belfiore
+ * @returns {Object} Belfiore
+ * @memberof CodiceFiscaleUtils
+ */
+module.exports = new Belfiore(CITIES_COUNTRIES);</code></pre>
+		</section>
+			</div>
+		</div>
+	</div>
+	<footer>
+				<div class="copyright">FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.</div>
+			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on 15th Jul 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
+	</footer>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/clipboard.min.js"></script>
+	<script src="js/prism.min.js"></script>
+	<script src="js/template.min.js"></script>
+		<!-- start:lunr-search-modal.hbs -->
+		<div class="modal fade" id="lunr-search-modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Search results</h4>
+					</div>
+					<div class="modal-body" id="lunr-search-body">
+					</div>
+					<div class="modal-footer" id="lunr-search-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+		<!-- end:lunr-search-modal.hbs -->		<script src="js/lunr.min.js"></script>
+	
+</body>
+</html>
+<!-- end:source.tmpl.hbs -->
