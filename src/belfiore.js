@@ -302,7 +302,7 @@ class Belfiore{
      * @param {string} list concatenation of names
      * @param {string|RegExp} matcher target name index
      * @yields {number} index
-     * @returns {-1} -1 when Done
+     * @returns {number} -1 when Done
      * @memberof Belfiore
      */
     static* indexByName(list, matcher) {
