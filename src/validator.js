@@ -156,15 +156,20 @@ class Validator {
      * @param {string} placeName Optional place name to generate validation regexp
      * @returns {RegExp} CF place matcher
      * @memberof CodiceFiscaleUtils.Validator
+     *//**
+     * @param {Date|Moment|Array<number>} [date] Optional date to generate validation regexp
+     * @param {string} placeName Optional place name to generate validation regexp
+     * @returns {RegExp} CF place matcher
+     * @memberof CodiceFiscaleUtils.Validator
      */
-    static cfPlace(placeName) {
+    static cfPlace(...args) {
         let matcher = VALIDATOR.BELFIORE_CODE_MATCHER;
-        if (placeName) {
-            const parsedPlace = Parser.placeToCf(placeName);
+        if (args.length) {
+            const parsedPlace = Parser.placeToCf(...args);
             if (parsedPlace) {
                 matcher = parsedPlace.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
-            } else {
-                throw new Error('[Validator.cfPlace] Provided place is not valid');
+            }else {
+                matcher = '';
             }
         }
         return new RegExp(`^${matcher}$`, 'i');

@@ -339,11 +339,17 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 it ('Should validate H501 for Roma', () => {
                     Validator.cfPlace('Roma').test('H501').should.be.ok;
                 });
+                it ('Should validate D620 for Fiume in 1933', () => {
+                    Validator.cfPlace([1933], 'Fiume').test('D620').should.be.ok;
+                });
                 it ('Should not validate H501 for Bari', () => {
-                    Validator.cfPlace('Bari').test('H501').should.not.be.ok;
+                    Validator.cfPlace('Bari').test('H501').should.be.false;
                 });
                 it ('Should not validate A662 for Roma', () => {
-                    Validator.cfPlace('Roma').test('A662').should.not.be.ok;
+                    Validator.cfPlace('Roma').test('A662').should.be.false;
+                });
+                it ('Should not validate D620 for Fiume in 2000', () => {
+                    Validator.cfPlace([2000], 'Fiume').test('D620').should.be.false;
                 });
             });
         });

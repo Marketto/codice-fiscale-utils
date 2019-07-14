@@ -373,12 +373,12 @@ class Parser {
      * Parse Year, Month, Day to Dated
      * 
      * @param {number} year 4 digits Year
-     * @param {number} month 1 or 2 digits Month 0..11
-     * @param {number} day 1,2 digits Day 1..31
+     * @param {number} [month = 0] 1 or 2 digits Month 0..11
+     * @param {number} [day = 1] 1,2 digits Day 1..31
      * @returns {Date|null} Date or null if provided year/month/day are not valid
      */
-    static yearMonthDayToDate(year, month, day) {
-        if ([year, month, day].some(param => typeof param !== 'number')) {
+    static yearMonthDayToDate(year, month = 0, day = 1) {
+        if ([year, month, day].some(param => typeof param !== 'number') || year < 1861) {
             return null;
         }
         const date = moment([year, month, day, 12]);
@@ -417,15 +417,6 @@ class Parser {
     }
 
     /**
-     * Parse Year, Month, Day and Gender information to create Date/Gender CF part
-     * 
-     * @param {number} year 4 digits Year
-     * @param {number} month 1 or 2 digits Month 0..11
-     * @param {number} day 1,2 digits Day 1..31
-     * @param {Gender|string} gender Gender enum value
-     * @returns {string|null} Birth date and Gender CF code
-     * @memberof CodiceFiscaleUtils.Parser
-     *//**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * 
      * @param {Date|Moment|Array<number>} date Date, Moment instance or number array (Year, month, day)
@@ -433,37 +424,26 @@ class Parser {
      * @returns {string|null} Birth date and Gender CF code
      * @memberof CodiceFiscaleUtils.Parser
      */
-    static dateGenderToCf(...args) {
-        const gender = args.splice(-1);
-        if (!Gender.hasOwnProperty(gender) || !(args.length === 1 || args.length === 3)) {
+    static dateGenderToCf(date, gender) {
+        if (!Gender.hasOwnProperty(gender)) {
             return null;
         }
-        const date = this.parseDate(...args);
-        if (!date) {
+        const parsedDate = this.parseDate(date);
+        if (!parsedDate) {
             return null;
         }
         
-        const cfYear = this.yearToCf(date.getFullYear());
-        const cfMonth = this.monthToCf(date.getMonth());
-        const cfDayGender = this.dayGenderToCf(date.getDate(), gender);
+        const cfYear = this.yearToCf(parsedDate.getFullYear());
+        const cfMonth = this.monthToCf(parsedDate.getMonth());
+        const cfDayGender = this.dayGenderToCf(parsedDate.getDate(), gender);
 
         return `${cfYear}${cfMonth}${cfDayGender}`;
     }
 
     /**
-     * Parse Year, Month, Day and Gender information to create Date/Gender CF part
-     * 
-     * @param {number} year 4 digits Year
-     * @param {number} month 1 or 2 digits Month 0..11
-     * @param {number} day 1,2 digits Day 1..31
-     * @param {string} name City or Country name
-     * @param {string} [province] Province code for cities
-     * @returns {string|null} Matching place belfiore code, if only once is matching criteria
-     * @memberof CodiceFiscaleUtils.Parser
-     *//**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * 
-     * @param {Date|Moment} date Date or Moment instance (UTC format)
+     * @param {Date|Moment|Array<number>} date Date, Moment instance or number array (Year, month, day)
      * @param {string} name City or Country name
      * @param {string} [province] Province code for cities
      * @returns {string|null} Matching place belfiore code, if only once is matching criteria
@@ -476,7 +456,7 @@ class Parser {
      * @memberof CodiceFiscaleUtils.Parser
      */
     static placeToCf(...args) {
-        let targetDate = this.parseDate(...args.slice(0, args.length - 1));
+        let targetDate = this.parseDate(args[0]);
 
         let [name, province] = args.filter(input => typeof input === 'string');
         if (!province) {
@@ -515,12 +495,12 @@ class Parser {
         gender,
         place
     }) {
-        const dtParams = date ? [date] : [year, month, day];
+        const dtParams = date ? date : [year, month, day];
         const generator = [
             () => this.surnameToCf(surname),
             () => this.nameToCf(name),
-            () => this.dateGenderToCf(...dtParams, gender),
-            () => this.placeToCf(...dtParams, place),
+            () => this.dateGenderToCf(dtParams, gender),
+            () => this.placeToCf(dtParams, place),
             () => CheckDigitizer.checkDigit(cf)
         ];
         let cf = '';

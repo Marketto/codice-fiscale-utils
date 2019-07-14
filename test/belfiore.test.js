@@ -72,6 +72,9 @@ describe('CodiceFiscaleUtils:Belfiore', () => {
             it('Should return FIUME for D620 in 1933', () => {
                 Belfiore.active([1933]).D620.name.should.be.equal('FIUME');
             });
+            it('Should throws Error for D620 in 2000', () => {
+                expect(Belfiore.active([2000]).D620).to.be.not.ok;
+            });
         });
         describe('Belfiore.cities.active()', () => {
             it('Should not contains D620 (Fiume)', () => {
