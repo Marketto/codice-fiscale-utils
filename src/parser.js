@@ -389,26 +389,21 @@ class Parser {
     }
 
     /**
-     * Parse Year, Month, Day information to create Date
-     * 
-     * @param {number} year 4 digits Year
-     * @param {number} month 1 or 2 digits Month 0..11
-     * @param {number} day 1,2 digits Day 1..31
-     * @returns {Date|null} Parsed Date or null if not valid
-     * @memberof CodiceFiscaleUtils.Parser
-     *//**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * 
      * @param {Date|Moment|Array<number>} date Date, Moment instance or Array of numbers [year, month, day]
      * @returns {Date|null} Parsed Date or null if not valid
      * @memberof CodiceFiscaleUtils.Parser
      */
-    static parseDate(...args) {
-        let dateInput = Array.isArray(args[0]) ? args[0] : args;
-        const date = this.yearMonthDayToDate(...dateInput) || dateInput[0];
-        if (!(date instanceof Date || date instanceof moment)){
+    static parseDate(date) {
+        if (!(
+            date instanceof Date ||
+            date instanceof moment ||
+            Array.isArray(date) && !date.some(value => typeof value !== 'number')
+        )) {
             return null;
         }
+
         const parsedDate = moment(date);
         if (!parsedDate.isValid()){
             return null;
@@ -495,7 +490,7 @@ class Parser {
         gender,
         place
     }) {
-        const dtParams = date ? date : [year, month, day];
+        const dtParams = this.parseDate(date) || this.yearMonthDayToDate(year, month, day);
         const generator = [
             () => this.surnameToCf(surname),
             () => this.nameToCf(name),
