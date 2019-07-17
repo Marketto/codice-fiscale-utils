@@ -326,13 +326,14 @@ class Parser {
      * @memberof CodiceFiscaleUtils.Parser
      */
     static yearToCf(year) {
+        let parsedYear = year;
         if (typeof year === 'string') {
-            year = parseInt(year);
+            parsedYear = parseInt(year);
         }
-        if (!(typeof year === 'number' && !isNaN(year) &&(year >= 1900 || year < 100))) {
+        if (!(typeof parsedYear === 'number' && !isNaN(parsedYear) &&(parsedYear >= 1900 || parsedYear < 100))) {
             return null;
         }
-        return `0${year}`.substr(-2);
+        return `0${parsedYear}`.substr(-2);
     }
 
     /**

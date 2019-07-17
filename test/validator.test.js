@@ -5,7 +5,7 @@ chai.should();
 
 describe('CodiceFiscaleUtils:Validator', () => {
     const Validator = require('../src/validator');
-    describe('methods', () => {
+    describe('codiceFiscale', () => {
         describe('cfSurname', () => {
             describe('Generic Validator', () => {
                 const cfSurnameValidator = Validator.cfSurname();
@@ -419,6 +419,45 @@ describe('CodiceFiscaleUtils:Validator', () => {
                         gender: 'F',
                         place: 'Torino'
                     }).test('MRNMIA02E45L219X').should.be.true;
+                });
+            });
+        });
+    });
+    describe('personal infos', () => {
+        describe('surname', () => {
+            describe('Generic Validator', () => {
+                const surnameValidator = Validator.surname();
+                it ('Should validate Kristersen', () => {
+                    surnameValidator.test('Kristersen').should.be.ok;
+                });
+                it ('Should validate Rossi', () => {
+                    surnameValidator.test('Rossi').should.be.ok;
+                });
+                it ('Should validate Ao', () => {
+                    surnameValidator.test('Ao').should.be.ok;
+                });
+            });
+            describe('Specific validator', () => {
+                it ('Should validate Marco for MRC', () => {
+                    Validator.surname('MRC').test('Marco').should.be.ok;
+                });
+                it ('Should validate Alex for LXA', () => {
+                    Validator.surname('LXA').test('Alex').should.be.ok;
+                });
+                it ('Should validate Aieie for AIE', () => {
+                    Validator.surname('AIE').test('Aieie').should.be.ok;
+                });
+                it ('Should validate Ai for AIX', () => {
+                    Validator.surname('AIX').test('Ai').should.be.ok;
+                });
+                it ('Should validate U for UXX', () => {
+                    Validator.surname('UXX').test('U').should.be.ok;
+                });
+                it ('Should validate Vàlidàtòr for VLD', () => {
+                    Validator.surname('VLD').test('Vàlidàtòr').should.be.ok;
+                });
+                it ('Should not validate Air for AIX', () => {
+                    Validator.surname('AIX').test('Air').should.be.false;
                 });
             });
         });
