@@ -226,6 +226,49 @@ class Validator {
         }
         return new RegExp(`^${matcher}$`, 'iu');
     }
+
+
+    static surname(codiceFiscale) {
+        let matcher = '[A-Z]+';
+        if (typeof codiceFiscale === 'string' && (/^[A-Z]{1,3}/iu).test(codiceFiscale)) {
+            const surnameCf = codiceFiscale.substr(0,3);
+
+            const [cons = ''] = surnameCf.match(new RegExp(`^[${VALIDATOR.CONSONANT_LIST}]{1,3}`, 'ig')) || [];
+            const [vow = ''] = surnameCf.match(new RegExp(`[${VALIDATOR.VOWEL_LIST}]{1,3}`, 'ig')) || [];
+
+            switch(cons.length) {
+            case 3:
+                matcher = cons.split('').join(`[${VALIDATOR.VOWEL_LIST}]*`) + '[A-Z]*';
+                break;
+            case 2: {
+                const possibilities = [
+                    `${vow[0]}${cons[0]}[${VALIDATOR.VOWEL_LIST}]*${cons[1]}`,
+                    `${cons[0]}${vow}[${VALIDATOR.VOWEL_LIST}]*${cons[1]}`,
+                    `${cons}${vow[0]}`
+                ];
+                matcher = `(?:${possibilities.join('|')})[${VALIDATOR.VOWEL_LIST}]*`;
+                break;
+            }
+            case 1: {
+                const possibilities = [
+                    `${vow.substr(0,2)}[${VALIDATOR.VOWEL_LIST}]*${cons}`,
+                    `${vow[0]}${cons}${vow[1]}`,
+                    `${cons+vow.substr(0,2)}`
+                ];
+                matcher = `(?:${possibilities.join('|')})[${VALIDATOR.VOWEL_LIST}]*`;
+                break;
+            }
+            default:
+                matcher = `${vow}[${VALIDATOR.VOWEL_LIST}]*`;
+            }
+        }
+
+        return new RegExp(`^${matcher}$`, 'iu');
+    }
+
+    static name(codiceFiscale) {
+
+    }
 }
 
 module.exports = Validator;
