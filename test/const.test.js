@@ -447,12 +447,49 @@ describe('CodiceFiscaleUtils:Const', () => {
 
 
         describe('diacritics', () => {
-            const DIACRITICS = require('../src/diacritics.const');
-            it('Should convert diacritics', () => {
-                DIACRITICS['à'].should.be.equal('a');
-                DIACRITICS['è'].should.be.equal('e');
-                DIACRITICS['ç'].should.be.equal('c');
-                DIACRITICS['ù'].should.be.equal('u');
+            const DIACRITICS = require('../src/diacritics');
+            describe('Converter', () => {
+                it('Should convert diacritics', () => {
+                    DIACRITICS['à'].should.be.equal('a');
+                    DIACRITICS['è'].should.be.equal('e');
+                    DIACRITICS['ç'].should.be.equal('c');
+                    DIACRITICS['ù'].should.be.equal('u');
+                });
+                it('Should return normal letters', () => {
+                    DIACRITICS['a'].should.be.equal('a');
+                    DIACRITICS['e'].should.be.equal('e');
+                    DIACRITICS['z'].should.be.equal('z');
+                    DIACRITICS['l'].should.be.equal('l');
+                });
+            });
+            describe('Validator', () => {
+                it('Should validate sensitive diacritics', () => {
+                    DIACRITICS.validator['a'].test('à').should.be.ok;
+                    DIACRITICS.validator['e'].test('è').should.be.ok;
+                    DIACRITICS.validator['e'].test('é').should.be.ok;
+                    DIACRITICS.validator['i'].test('ì').should.be.ok;
+                    DIACRITICS.validator['o'].test('ò').should.be.ok;
+                    DIACRITICS.validator['u'].test('ù').should.be.ok;
+                });
+                it('Should not validate insensitive diacritics', () => {
+                    DIACRITICS.validator['A'].test('à').should.be.false;
+                    DIACRITICS.validator['E'].test('è').should.be.false;
+                    DIACRITICS.validator['E'].test('é').should.be.false;
+                    DIACRITICS.validator['I'].test('ì').should.be.false;
+                    DIACRITICS.validator['O'].test('ò').should.be.false;
+                    DIACRITICS.validator['U'].test('ù').should.be.false;
+                });
+            });
+
+            describe('InsensitiveValidator', () => {
+                it('Should validate insensitive diacritics', () => {
+                    DIACRITICS.insensitiveValidator['a'].test('à').should.be.ok;
+                    DIACRITICS.insensitiveValidator['E'].test('è').should.be.ok;
+                    DIACRITICS.insensitiveValidator['e'].test('é').should.be.ok;
+                    DIACRITICS.insensitiveValidator['I'].test('ì').should.be.ok;
+                    DIACRITICS.insensitiveValidator['o'].test('ò').should.be.ok;
+                    DIACRITICS.insensitiveValidator['U'].test('ù').should.be.ok;
+                });
             });
         });
     });

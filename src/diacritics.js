@@ -84,13 +84,12 @@ const DIACRITICS_MAP = {
     y: '\u0079\u24E8\uFF59\u1EF3\u00FD\u0177\u1EF9\u0233\u1E8F\u00FF\u1EF7\u1E99\u1EF5\u01B4\u024F\u1EFF',
     z: '\u007A\u24E9\uFF5A\u017A\u1E91\u017C\u017E\u1E93\u1E95\u01B6\u0225\u0240\u2C6C\uA763'
 };
-
-module.exports = new Proxy({
+const matcher = {
     matcher: Object.freeze(DIACRITICS_MAP),
     insensitiveMatcher: new Proxy({}, {
         get(receiver, name) {
             if (typeof name === 'string') {
-                const keys = Object.keys(DIACRITICS_MAP).filter(key => (new RegExp(`^${key}$`, 'ui').test(name)));
+                const keys = Object.keys(DIACRITICS_MAP).filter(key => (new RegExp(`^[${key}]$`, 'ui')).test(name));
                 if (keys.length) {
                     return keys.map(key => DIACRITICS_MAP[key]).join('');
                 }
@@ -98,11 +97,32 @@ module.exports = new Proxy({
             return receiver[name];
         }
     })
+};
+module.exports = new Proxy({
+    ...matcher,
+    validator: new Proxy({}, {
+        get(receiver, name) {
+            if (typeof name === 'string' && matcher.matcher[name]) {
+                return new RegExp(`[${matcher.matcher[name]}]`, 'u');
+            }
+            return receiver[name];
+        }
+    }),
+    insensitiveValidator: new Proxy({}, {
+        get(receiver, name) {
+            if (typeof name === 'string' && matcher.matcher[name]) {
+                return new RegExp(`[${matcher.insensitiveMatcher[name]}]`, 'ui');
+            }
+            return receiver[name];
+        }
+    })
 }, {
     get(receiver, name) {
-        if (typeof name === 'string'  && name.length === 1) {
-            const [normalizedLetter] = Object.values(DIACRITICS_MAP).find(value => (new RegExp(`[${value}]`, 'u')).test(name)) || [];
-            return normalizedLetter || name;
+        if (typeof name === 'string'){
+            if (name.length === 1) {
+                const [normalizedLetter] = Object.values(DIACRITICS_MAP).find(value => (new RegExp(`[${value}]`, 'u')).test(name)) || [];
+                return normalizedLetter || name;
+            }
         }
         return receiver[name];
     }
