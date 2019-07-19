@@ -275,7 +275,7 @@ class Validator {
     }
 
     static name(codiceFiscale) {
-
+        return this.surname((codiceFiscale || '').substr(3,3));
     }
 }
 

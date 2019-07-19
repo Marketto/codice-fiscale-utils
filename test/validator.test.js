@@ -9,60 +9,60 @@ describe('CodiceFiscaleUtils:Validator', () => {
         describe('cfSurname', () => {
             describe('Generic Validator', () => {
                 const cfSurnameValidator = Validator.cfSurname();
-                it ('Should validate KST', () => {
+                it ('Should validate cf surname KST', () => {
                     cfSurnameValidator.test('KST').should.be.ok;
                 });
-                it ('Should validate KSE', () => {
+                it ('Should validate cf surname KSE', () => {
                     cfSurnameValidator.test('KSE').should.be.ok;
                 });
-                it ('Should validate KAO', () => {
+                it ('Should validate cf surname KAO', () => {
                     cfSurnameValidator.test('KAO').should.be.ok;
                 });
-                it ('Should validate NIX', () => {
+                it ('Should validate cf surname NIX', () => {
                     cfSurnameValidator.test('NIX').should.be.ok;
                 });
-                it ('Should validate NIK', () => {
+                it ('Should validate cf surname NIK', () => {
                     cfSurnameValidator.test('NIK').should.not.be.ok;
                 });
-                it ('Should validate UAO', () => {
+                it ('Should validate cf surname UAO', () => {
                     cfSurnameValidator.test('UAO').should.be.ok;
                 });
-                it ('Should validate UIX', () => {
+                it ('Should validate cf surname UIX', () => {
                     cfSurnameValidator.test('UIX').should.be.ok;
                 });
-                it ('Should validate UXX', () => {
+                it ('Should validate cf surname UXX', () => {
                     cfSurnameValidator.test('UXX').should.not.be.ok;
                 });
-                it ('Should validate UIK', () => {
+                it ('Should validate cf surname UIK', () => {
                     cfSurnameValidator.test('UIK').should.not.be.ok;
                 });
-                it ('Should validate ASQ', () => {
+                it ('Should validate cf surname ASQ', () => {
                     cfSurnameValidator.test('ASQ').should.not.be.ok;
                 });
-                it ('Should validate ASX', () => {
+                it ('Should validate cf surname ASX', () => {
                     cfSurnameValidator.test('ASX').should.not.be.ok;
                 });
-                it ('Should validate UXI', () => {
+                it ('Should validate cf surname UXI', () => {
                     cfSurnameValidator.test('UXI').should.not.be.ok;
                 });
-                it ('Should validate UXK', () => {
+                it ('Should validate cf surname UXK', () => {
                     cfSurnameValidator.test('UXK').should.not.be.ok;
                 });
             });
             describe('Specific validator', () => {
-                it ('Should validate MRC for Marco', () => {
+                it ('Should validate cf surname MRC for Marco', () => {
                     Validator.cfSurname('Marco').test('MRC').should.be.ok;
                 });
-                it ('Should validate LXA for Alex', () => {
+                it ('Should validate cf surname LXA for Alex', () => {
                     Validator.cfSurname('Alex').test('LXA').should.be.ok;
                 });
-                it ('Should validate AIE for Aieie', () => {
+                it ('Should validate cf surname AIE for Aieie', () => {
                     Validator.cfSurname('Aieie').test('AIE').should.be.ok;
                 });
-                it ('Should validate AIX for Ai', () => {
+                it ('Should validate cf surname AIX for Ai', () => {
                     Validator.cfSurname('Ai').test('AIX').should.be.ok;
                 });
-                it ('Should validate UXX for U', () => {
+                it ('Should validate cf surname UXX for U', () => {
                     Validator.cfSurname('U').test('UXX').should.not.be.ok;
                 });
             });
@@ -71,66 +71,66 @@ describe('CodiceFiscaleUtils:Validator', () => {
         describe('cfName', () => {
             describe('Generic Validator', () => {
                 const cfNameValidator = Validator.cfName();
-                it ('Should validate KST', () => {
+                it ('Should validate cf name KST', () => {
                     cfNameValidator.test('KST').should.be.ok;
                 });
-                it ('Should validate KSE', () => {
+                it ('Should validate cf name KSE', () => {
                     cfNameValidator.test('KSE').should.be.ok;
                 });
-                it ('Should validate KAO', () => {
+                it ('Should validate cf name KAO', () => {
                     cfNameValidator.test('KAO').should.be.ok;
                 });
-                it ('Should validate NIX', () => {
+                it ('Should validate cf name NIX', () => {
                     cfNameValidator.test('NIX').should.be.ok;
                 });
-                it ('Should validate NIK', () => {
+                it ('Should validate cf name NIK', () => {
                     cfNameValidator.test('NIK').should.not.be.ok;
                 });
-                it ('Should validate UAO', () => {
+                it ('Should validate cf name UAO', () => {
                     cfNameValidator.test('UAO').should.be.ok;
                 });
-                it ('Should validate UIX', () => {
+                it ('Should validate cf name UIX', () => {
                     cfNameValidator.test('UIX').should.be.ok;
                 });
-                it ('Should validate UXX', () => {
+                it ('Should validate cf name UXX', () => {
                     cfNameValidator.test('UXX').should.not.be.ok;
                 });
-                it ('Should validate UIK', () => {
+                it ('Should validate cf name UIK', () => {
                     cfNameValidator.test('UIK').should.not.be.ok;
                 });
-                it ('Should validate ASQ', () => {
+                it ('Should validate cf name ASQ', () => {
                     cfNameValidator.test('ASQ').should.not.be.ok;
                 });
-                it ('Should validate ASX', () => {
+                it ('Should validate cf name ASX', () => {
                     cfNameValidator.test('ASX').should.not.be.ok;
                 });
-                it ('Should validate UXI', () => {
+                it ('Should validate cf name UXI', () => {
                     cfNameValidator.test('UXI').should.not.be.ok;
                 });
-                it ('Should validate UXK', () => {
+                it ('Should validate cf name UXK', () => {
                     cfNameValidator.test('UXK').should.not.be.ok;
                 });
             });
             describe('Specific validator', () => {
-                it ('Should validate DNC for Domenico', () => {
+                it ('Should validate cf name DNC for Domenico', () => {
                     Validator.cfName('Domenico').test('DNC').should.be.ok;
                 });
-                it ('Should validate GNN for Giovanni', () => {
+                it ('Should validate cf name GNN for Giovanni', () => {
                     Validator.cfName('Giovanni').test('GNN').should.be.ok;
                 });
-                it ('Should validate MRK for Mark', () => {
+                it ('Should validate cf name MRK for Mark', () => {
                     Validator.cfName('Mark').test('MRK').should.be.ok;
                 });
-                it ('Should validate LXA for Alex', () => {
+                it ('Should validate cf name LXA for Alex', () => {
                     Validator.cfName('Alex').test('LXA').should.be.ok;
                 });
-                it ('Should validate AIE for Aieie', () => {
+                it ('Should validate cf name AIE for Aieie', () => {
                     Validator.cfName('Aieie').test('AIE').should.be.ok;
                 });
-                it ('Should validate AIX for Ai', () => {
+                it ('Should validate cf name AIX for Ai', () => {
                     Validator.cfName('Ai').test('AIX').should.be.ok;
                 });
-                it ('Should validate UXX for U', () => {
+                it ('Should validate cf name UXX for U', () => {
                     Validator.cfName('U').test('UXX').should.not.be.ok;
                 });
             });
@@ -139,33 +139,33 @@ describe('CodiceFiscaleUtils:Validator', () => {
         describe('cfYear', () => {
             describe('Generic Validator', () => {
                 const cfYearValidator = Validator.cfYear();
-                it ('Should validate 07', () => {
+                it ('Should validate cf year 07', () => {
                     cfYearValidator.test('07').should.be.ok;
                 });
             });
             describe('Specific validator', () => {
-                it ('Should validate 86 for 1986', () => {
+                it ('Should validate cf year 86 for 1986', () => {
                     Validator.cfYear(1986).test('86').should.be.ok;
                 });
-                it ('Should validate 8S for 1986', () => {
+                it ('Should validate cf year 8S for 1986', () => {
                     Validator.cfYear(1986).test('8S').should.be.ok;
                 });
-                it ('Should validate U6 for 1986', () => {
+                it ('Should validate cf year U6 for 1986', () => {
                     Validator.cfYear(1986).test('U6').should.be.ok;
                 });
-                it ('Should validate US for 1986', () => {
+                it ('Should validate cf year US for 1986', () => {
                     Validator.cfYear(1986).test('US').should.be.ok;
                 });
-                it ('Should not validate 87 for 1986', () => {
+                it ('Should not validate cf year 87 for 1986', () => {
                     Validator.cfYear(1986).test('87').should.not.be.ok;
                 });
-                it ('Should not validate UT for 1986', () => {
+                it ('Should not validate cf year UT for 1986', () => {
                     Validator.cfYear(1986).test('UT').should.not.be.ok;
                 });
-                it ('Should validate 07 for 1907', () => {
+                it ('Should validate cf year 07 for 1907', () => {
                     Validator.cfYear(1907).test('07').should.be.ok;
                 });
-                it ('Should validate 07 for 2007', () => {
+                it ('Should validate cf year 07 for 2007', () => {
                     Validator.cfYear(2007).test('07').should.be.ok;
                 });
             });
@@ -174,55 +174,55 @@ describe('CodiceFiscaleUtils:Validator', () => {
         describe('cfMonth', () => {
             describe('Generic Validator', () => {
                 const cfMonthValidator = Validator.cfMonth();
-                it ('Should validate C', () => {
+                it ('Should validate cf month C', () => {
                     cfMonthValidator.test('C').should.be.ok;
                 });
             });
             describe('Specific validator', () => {
-                it ('Should validate A for 0', () => {
+                it ('Should validate cf month A for 0', () => {
                     Validator.cfMonth(0).test('A').should.be.ok;
                 });
-                it ('Should validate B for 1', () => {
+                it ('Should validate cf month B for 1', () => {
                     Validator.cfMonth(1).test('B').should.be.ok;
                 });
-                it ('Should validate C for 2', () => {
+                it ('Should validate cf month C for 2', () => {
                     Validator.cfMonth(2).test('C').should.be.ok;
                 });
-                it ('Should validate D for 3', () => {
+                it ('Should validate cf month D for 3', () => {
                     Validator.cfMonth(3).test('D').should.be.ok;
                 });
-                it ('Should validate E for 4', () => {
+                it ('Should validate cf month E for 4', () => {
                     Validator.cfMonth(4).test('E').should.be.ok;
                 });
-                it ('Should validate H for 5', () => {
+                it ('Should validate cf month H for 5', () => {
                     Validator.cfMonth(5).test('H').should.be.ok;
                 });
-                it ('Should validate L for 6', () => {
+                it ('Should validate cf month L for 6', () => {
                     Validator.cfMonth(6).test('L').should.be.ok;
                 });
-                it ('Should validate M for 7', () => {
+                it ('Should validate cf month M for 7', () => {
                     Validator.cfMonth(7).test('M').should.be.ok;
                 });
-                it ('Should validate P for 8', () => {
+                it ('Should validate cf month P for 8', () => {
                     Validator.cfMonth(8).test('P').should.be.ok;
                 });
-                it ('Should validate R for 9', () => {
+                it ('Should validate cf month R for 9', () => {
                     Validator.cfMonth(9).test('R').should.be.ok;
                 });
-                it ('Should validate S for 10', () => {
+                it ('Should validate cf month S for 10', () => {
                     Validator.cfMonth(10).test('S').should.be.ok;
                 });
-                it ('Should validate T for 11', () => {
+                it ('Should validate cf month T for 11', () => {
                     Validator.cfMonth(11).test('T').should.be.ok;
                 });
 
-                it ('Should not validate B for 9', () => {
+                it ('Should not validate cf month B for 9', () => {
                     Validator.cfMonth(9).test('B').should.not.be.ok;
                 });
-                it ('Should not validate R for 10', () => {
+                it ('Should not validate cf month R for 10', () => {
                     Validator.cfMonth(10).test('R').should.not.be.ok;
                 });
-                it ('Should not validate A for 11', () => {
+                it ('Should not validate cf month A for 11', () => {
                     Validator.cfMonth(11).test('A').should.not.be.ok;
                 });
             });
@@ -231,26 +231,26 @@ describe('CodiceFiscaleUtils:Validator', () => {
         describe('cfDay', () => {
             describe('Generic Validator', () => {
                 const cfDayValidator = Validator.cfDay();
-                it ('Should validate 0M', () => {
+                it ('Should validate cf day 0M', () => {
                     cfDayValidator.test('0M').should.be.ok;
                 });
-                it ('Should validate MN for 12', () => {
+                it ('Should validate cf day MN for 12', () => {
                     Validator.cfDay(12).test('MN').should.be.ok;
                 });
             });
             describe('Specific validator', () => {
-                it ('Should validate 01 for 1', () => {
+                it ('Should validate cf day 01 for 1', () => {
                     Validator.cfDay(1).test('01').should.be.ok;
                 });
-                it ('Should not validate LM for 9', () => {
+                it ('Should not validate cf day LM for 9', () => {
                     Validator.cfDay(9).test('LM').should.not.be.ok;
                 });
 
-                it ('Should validate 41 for 1', () => {
+                it ('Should validate cf day 41 for 1', () => {
                     Validator.cfDay(1).test('41').should.be.ok;
                 });
 
-                it ('Should not validate QM for 9', () => {
+                it ('Should not validate cf day QM for 9', () => {
                     Validator.cfDay(9).test('QM').should.not.be.ok;
                 });
             });
@@ -259,26 +259,26 @@ describe('CodiceFiscaleUtils:Validator', () => {
         describe('cfDayGender', () => {
             describe('Generic Validator', () => {
                 const cfDayValidator = Validator.cfDayGender();
-                it ('Should validate 0M', () => {
+                it ('Should validate cf day/gender 0M', () => {
                     cfDayValidator.test('0M').should.be.ok;
                 });
-                it ('Should validate MN for 12', () => {
+                it ('Should validate cf day/gender MN for 12', () => {
                     cfDayValidator.test('MN').should.be.ok;
                 });
             });
             describe('Specific validator', () => {
-                it ('Should validate 01 for 1 Male', () => {
+                it ('Should validate cf day/gender 01 for 1 Male', () => {
                     Validator.cfDayGender(1, 'M').test('01').should.be.ok;
                 });
-                it ('Should not validate RM for 9 Female', () => {
+                it ('Should not validate cf day/gender RM for 9 Female', () => {
                     Validator.cfDayGender(9, 'F').test('RM').should.not.be.ok;
                 });
 
-                it ('Should not validate 41 for 1 Male', () => {
+                it ('Should not validate cf day/gender 41 for 1 Male', () => {
                     Validator.cfDayGender(1, 'M').test('41').should.be.not.ok;
                 });
 
-                it ('Should not validate QM for 9 Female', () => {
+                it ('Should not validate cf day/gender QM for 9 Female', () => {
                     Validator.cfDayGender(9, 'F').test('QM').should.not.be.ok;
                 });
             });
@@ -427,40 +427,80 @@ describe('CodiceFiscaleUtils:Validator', () => {
         describe('surname', () => {
             describe('Generic Validator', () => {
                 const surnameValidator = Validator.surname();
-                it ('Should validate Kristersen', () => {
+                it ('Should validate surname Kristersen', () => {
                     surnameValidator.test('Kristersen').should.be.ok;
                 });
-                it ('Should validate Rossi', () => {
+                it ('Should validate surname Rossi', () => {
                     surnameValidator.test('Rossi').should.be.ok;
                 });
-                it ('Should validate Ao', () => {
+                it ('Should validate surname Ao', () => {
                     surnameValidator.test('Ao').should.be.ok;
                 });
-                it ('Should validate Tést', () => {
+                it ('Should validate surname Tést', () => {
                     surnameValidator.test('Tést').should.be.ok;
                 });
             });
             describe('Specific validator', () => {
-                it ('Should validate Marco for MRC', () => {
+                it ('Should validate surname Marco for MRC', () => {
                     Validator.surname('MRC').test('Marco').should.be.ok;
                 });
-                it ('Should validate Alex for LXA', () => {
+                it ('Should validate surname Alex for LXA', () => {
                     Validator.surname('LXA').test('Alex').should.be.ok;
                 });
-                it ('Should validate Aieie for AIE', () => {
+                it ('Should validate surname Aieie for AIE', () => {
                     Validator.surname('AIE').test('Aieie').should.be.ok;
                 });
-                it ('Should validate Ai for AIX', () => {
+                it ('Should validate surname Ai for AIX', () => {
                     Validator.surname('AIX').test('Ai').should.be.ok;
                 });
-                it ('Should validate U for UXX', () => {
+                it ('Should validate surname U for UXX', () => {
                     Validator.surname('UXX').test('U').should.be.ok;
                 });
-                it ('Should validate Vàlidàtòr for VLD', () => {
+                it ('Should validate surname Vàlidàtòr for VLD', () => {
                     Validator.surname('VLD').test('Vàlidàtòr').should.be.ok;
                 });
-                it ('Should not validate Air for AIX', () => {
+                it ('Should not validate surname Air for AIX', () => {
                     Validator.surname('AIX').test('Air').should.be.false;
+                });
+            });
+        });
+        describe('name', () => {
+            describe('Generic Validator', () => {
+                const nameValidator = Validator.name();
+                it ('Should validate name Kristersen', () => {
+                    nameValidator.test('Kristersen').should.be.ok;
+                });
+                it ('Should validate name Rossi', () => {
+                    nameValidator.test('Rossi').should.be.ok;
+                });
+                it ('Should validate name Ao', () => {
+                    nameValidator.test('Ao').should.be.ok;
+                });
+                it ('Should validate name Tést', () => {
+                    nameValidator.test('Tést').should.be.ok;
+                });
+            });
+            describe('Specific validator', () => {
+                it ('Should validate name Marco for XYZMRC', () => {
+                    Validator.name('XYZMRC').test('Marco').should.be.ok;
+                });
+                it ('Should validate name Alex for XYZLXA', () => {
+                    Validator.name('XYZLXA').test('Alex').should.be.ok;
+                });
+                it ('Should validate name Aieie for XYZAIE', () => {
+                    Validator.name('XYZAIE').test('Aieie').should.be.ok;
+                });
+                it ('Should validate name Ai for XYZAIX', () => {
+                    Validator.name('XYZAIX').test('Ai').should.be.ok;
+                });
+                it ('Should validate name U for XYZUXX', () => {
+                    Validator.name('XYZUXX').test('U').should.be.ok;
+                });
+                it ('Should validate name Vàlidàtòr for XYZVLD', () => {
+                    Validator.name('XYZVDT').test('Vàlidàtòr').should.be.ok;
+                });
+                it ('Should not validate name Air for XYZAIX', () => {
+                    Validator.name('XYZAIX').test('Air').should.be.false;
                 });
             });
         });
