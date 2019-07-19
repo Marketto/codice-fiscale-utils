@@ -235,7 +235,7 @@ class Validator {
         if (typeof codiceFiscale === 'string' && (/^[A-Z]{1,3}/iu).test(codiceFiscale)) {
             const surnameCf = codiceFiscale.substr(0,3);
             
-            const diacriticizer = (matchingChars) => (matchingChars || '').split('').map(char => `[${Diacritics.insensitiveMatcher[char]}]`);
+            const diacriticizer = matchingChars => (matchingChars || '').split('').map(char => `[${Diacritics.insensitiveMatcher[char]}]`);
 
             const matchFromCf = (cf, matcher) => diacriticizer((cf.match(new RegExp(matcher, 'ig')) || [])[0]);
 
@@ -275,6 +275,22 @@ class Validator {
     }
 
     static name(codiceFiscale) {
+        if (typeof codiceFiscale === 'string' && (new RegExp(`^[A-Z]{3}[${VALIDATOR.CONSONANT_LIST}]{3}`, 'iu')).test(codiceFiscale)) {
+            const ANY_LETTER = `[${Diacritics.matcherBy(/^[A-Z]$/ui)}]`;
+
+            const nameCf = codiceFiscale.substr(3,3);
+
+            const cons = ((nameCf.match(new RegExp(`^[${VALIDATOR.CONSONANT_LIST}]{1,3}`, 'ig')) || [])[0] || '')
+                .split('').map(char => `[${Diacritics.insensitiveMatcher[char]}]`);
+
+            const diacriticsVowelList = Diacritics.matcherBy(new RegExp(`^[${VALIDATOR.VOWEL_LIST}]$`, 'ui'));
+            const diacriticsConsonantList = Diacritics.matcherBy(new RegExp(`^[${VALIDATOR.CONSONANT_LIST}]$`, 'ui'));
+
+            const matcher = `[${diacriticsVowelList}]*${cons[0]}[${diacriticsVowelList}]*(?:[${diacriticsConsonantList}][${diacriticsVowelList}]*)?`
+                + cons.slice(1,3).join(`[${diacriticsVowelList}]*`) + `${ANY_LETTER}*`;
+            
+            return new RegExp(`^${matcher}$`, 'iu');
+        }
         return this.surname((codiceFiscale || '').substr(3,3));
     }
 }
