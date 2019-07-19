@@ -2,6 +2,7 @@
 const VALIDATOR = require('./validator.const');
 const Parser = require('./parser');
 const Omocode = require('./omocode.enum');
+const Diacritics = require('./diacritics');
 
 /**
  * @class Validator
@@ -229,37 +230,44 @@ class Validator {
 
 
     static surname(codiceFiscale) {
-        let matcher = '[A-Z]+';
+        const ANY_LETTER = `[${Diacritics.matcherBy(/^[A-Z]$/ui)}]`;
+        let matcher = `${ANY_LETTER}+`;
         if (typeof codiceFiscale === 'string' && (/^[A-Z]{1,3}/iu).test(codiceFiscale)) {
             const surnameCf = codiceFiscale.substr(0,3);
+            
+            const diacriticizer = (matchingChars) => (matchingChars || '').split('').map(char => `[${Diacritics.insensitiveMatcher[char]}]`);
 
-            const [cons = ''] = surnameCf.match(new RegExp(`^[${VALIDATOR.CONSONANT_LIST}]{1,3}`, 'ig')) || [];
-            const [vow = ''] = surnameCf.match(new RegExp(`[${VALIDATOR.VOWEL_LIST}]{1,3}`, 'ig')) || [];
+            const matchFromCf = (cf, matcher) => diacriticizer((cf.match(new RegExp(matcher, 'ig')) || [])[0]);
+
+            const cons = matchFromCf(surnameCf, `^[${VALIDATOR.CONSONANT_LIST}]{1,3}`);
+            const vow = matchFromCf(surnameCf, `[${VALIDATOR.VOWEL_LIST}]{1,3}`);
+            
+            const diacriticsVowelList = Diacritics.matcherBy(new RegExp(`^[${VALIDATOR.VOWEL_LIST}]$`, 'ui'));
 
             switch(cons.length) {
             case 3:
-                matcher = cons.split('').join(`[${VALIDATOR.VOWEL_LIST}]*`) + '[A-Z]*';
+                matcher = cons.join(`[${diacriticsVowelList}]*`) + `${ANY_LETTER}*`;
                 break;
             case 2: {
                 const possibilities = [
-                    `${vow[0]}${cons[0]}[${VALIDATOR.VOWEL_LIST}]*${cons[1]}`,
-                    `${cons[0]}${vow}[${VALIDATOR.VOWEL_LIST}]*${cons[1]}`,
-                    `${cons}${vow[0]}`
+                    `${vow[0]}${cons[0]}[${diacriticsVowelList}]*${cons[1]}`,
+                    `${cons[0]}${vow.join('')}[${diacriticsVowelList}]*${cons[1]}`,
+                    `${cons.join('')}${vow[0]}`
                 ];
-                matcher = `(?:${possibilities.join('|')})[${VALIDATOR.VOWEL_LIST}]*`;
+                matcher = `(?:${possibilities.join('|')})[${diacriticsVowelList}]*`;
                 break;
             }
             case 1: {
                 const possibilities = [
-                    `${vow.substr(0,2)}[${VALIDATOR.VOWEL_LIST}]*${cons}`,
+                    `${vow.slice(0,2).join('')}[${diacriticsVowelList}]*${cons}`,
                     `${vow[0]}${cons}${vow[1]}`,
-                    `${cons+vow.substr(0,2)}`
+                    `${cons[0]+vow.slice(0,2).join('')}`
                 ];
-                matcher = `(?:${possibilities.join('|')})[${VALIDATOR.VOWEL_LIST}]*`;
+                matcher = `(?:${possibilities.join('|')})[${diacriticsVowelList}]*`;
                 break;
             }
             default:
-                matcher = `${vow}[${VALIDATOR.VOWEL_LIST}]*`;
+                matcher = `${vow.join('')}[${diacriticsVowelList}]*`;
             }
         }
 

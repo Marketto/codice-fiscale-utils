@@ -84,8 +84,17 @@ const DIACRITICS_MAP = {
     y: '\u0079\u24E8\uFF59\u1EF3\u00FD\u0177\u1EF9\u0233\u1E8F\u00FF\u1EF7\u1E99\u1EF5\u01B4\u024F\u1EFF',
     z: '\u007A\u24E9\uFF5A\u017A\u1E91\u017C\u017E\u1E93\u1E95\u01B6\u0225\u0240\u2C6C\uA763'
 };
-const matcher = {
+const core = {
+    /**
+     * Case sensitive matcher map {@link Diacritics.#matcher}
+     * @property {Object}
+     */
     matcher: Object.freeze(DIACRITICS_MAP),
+
+    /**
+     * Case insensitive matcher map {@link Diacritics.#insensitiveMatcher}
+     * @property {Object}
+     */
     insensitiveMatcher: new Proxy({}, {
         get(receiver, name) {
             if (typeof name === 'string') {
@@ -96,22 +105,50 @@ const matcher = {
             }
             return receiver[name];
         }
-    })
+    }),
+
+    /**
+     * Build a matcher made by keys which match for the passed regexp {@link Diacritics.#matcherBy}
+     * @param {RegExp} regexp matching criteria
+     * @returns {string}
+     */
+    matcherBy(regexp) {
+        if (regexp instanceof RegExp) {
+            const keys = Object.keys(DIACRITICS_MAP).filter(key => regexp.test(key));
+            if (keys.length) {
+                return keys.map(key => DIACRITICS_MAP[key].trim()).join('');
+            }
+        }
+        return;
+    }
 };
+
+/**
+ * @namespace Diacritics
+ */
 module.exports = new Proxy({
-    ...matcher,
+    ...core,
+    /**
+     * Case sensitive validator map {@link Diacritics.#validator}
+     * @property {Object}
+     */
     validator: new Proxy({}, {
         get(receiver, name) {
-            if (typeof name === 'string' && matcher.matcher[name]) {
-                return new RegExp(`[${matcher.matcher[name]}]`, 'u');
+            if (typeof name === 'string' && core.matcher[name]) {
+                return new RegExp(`[${core.matcher[name]}]`, 'u');
             }
             return receiver[name];
         }
     }),
+
+    /**
+     * Case insensitive validator map {@link Diacritics.#insensitiveValidator}
+     * @property {Object}
+     */
     insensitiveValidator: new Proxy({}, {
         get(receiver, name) {
-            if (typeof name === 'string' && matcher.matcher[name]) {
-                return new RegExp(`[${matcher.insensitiveMatcher[name]}]`, 'ui');
+            if (typeof name === 'string' && core.matcher[name]) {
+                return new RegExp(`[${core.insensitiveMatcher[name]}]`, 'ui');
             }
             return receiver[name];
         }
@@ -127,3 +164,29 @@ module.exports = new Proxy({
         return receiver[name];
     }
 });
+
+/**
+ * Converter value
+ * {@link Diacritics.{char}}
+ * @returns {char} diacritic converted char
+ */
+/**
+ * Matcher value
+ * {@link Diacritics.#matcher.{char}}
+ * @returns {string} Diacritic char list
+ */
+/**
+ * Insensitive matcher value, A = a
+ * {@link Diacritics.#insensitiveMatcher.{char}}
+ * @returns {string} Diacritic char list
+ */
+/**
+ * Validator
+ * {@link Diacritics.#validator.{char}}
+ * @returns {RegExp} Diacritic char list @see Diacritics.#matcher.{char}
+ */
+/**
+ * Insensitive matcher value, A = a
+ * {@link Diacritics.#insensitiveValidator.{char}}
+ * @returns {RegExp} Diacritic char list @see Diacritics.#insensitiveValidator.{char}
+ */

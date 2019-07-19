@@ -436,6 +436,9 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 it ('Should validate Ao', () => {
                     surnameValidator.test('Ao').should.be.ok;
                 });
+                it ('Should validate Tést', () => {
+                    surnameValidator.test('Tést').should.be.ok;
+                });
             });
             describe('Specific validator', () => {
                 it ('Should validate Marco for MRC', () => {
