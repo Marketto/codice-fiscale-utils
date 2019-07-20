@@ -231,7 +231,9 @@ describe('CodiceFiscaleUtils:Parser', () => {
             it('Should return CF surname part', () => {
                 Parser.surnameToCf('Rossi').should.be.equal('RSS');
                 Parser.surnameToCf('Reno').should.be.equal('RNE');
+                Parser.surnameToCf('Di Reno').should.be.equal('DRN');
                 Parser.surnameToCf('Goia').should.be.equal('GOI');
+                Parser.surnameToCf('D\'Aieie').should.be.equal('DAI');
                 Parser.surnameToCf('Aieie').should.be.equal('AIE');
                 Parser.surnameToCf('No').should.be.equal('NOX');
                 Parser.surnameToCf('Ai').should.be.equal('AIX');
@@ -251,6 +253,7 @@ describe('CodiceFiscaleUtils:Parser', () => {
             it('Should return CF name part', () => {
                 Parser.nameToCf('Dominique').should.be.equal('DNQ');
                 Parser.nameToCf('Alexander').should.be.equal('LND');
+                Parser.nameToCf('Pier Ale').should.be.equal('PRL');
                 Parser.nameToCf('Mark').should.be.equal('MRK');
                 Parser.nameToCf('Tom').should.be.equal('TMO');
                 Parser.nameToCf('Ania').should.be.equal('NAI');

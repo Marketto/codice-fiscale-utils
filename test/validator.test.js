@@ -56,6 +56,12 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 it ('Should validate cf surname LXA for Alex', () => {
                     Validator.cfSurname('Alex').test('LXA').should.be.ok;
                 });
+                it ('Should validate cf surname DLS for D\'Annunzio', () => {
+                    Validator.cfSurname('D\'Annunzio').test('DNN').should.be.ok;
+                });
+                it ('Should validate cf surname DVN for Da Vinci', () => {
+                    Validator.cfSurname('Da Vinci').test('DVN').should.be.ok;
+                });
                 it ('Should validate cf surname AIE for Aieie', () => {
                     Validator.cfSurname('Aieie').test('AIE').should.be.ok;
                 });
@@ -112,11 +118,20 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 });
             });
             describe('Specific validator', () => {
-                it ('Should validate cf name DNC for Domenico', () => {
-                    Validator.cfName('Domenico').test('DNC').should.be.ok;
+                it ('Should validate cf name DNQ for Dominique', () => {
+                    Validator.cfName('Dominique').test('DNQ').should.be.ok;
                 });
                 it ('Should validate cf name GNN for Giovanni', () => {
                     Validator.cfName('Giovanni').test('GNN').should.be.ok;
+                });
+                it ('Should validate cf name GNN for Gianni', () => {
+                    Validator.cfName('Gianni').test('GNN').should.be.ok;
+                });
+                it ('Should validate cf name GPL for Gian Paolo', () => {
+                    Validator.cfName('Gian Paolo').test('GPL').should.be.ok;
+                });
+                it ('Should not validate cf name GNP for Gian Paolo', () => {
+                    Validator.cfName('Gian Paolo').test('GNP').should.be.false;
                 });
                 it ('Should validate cf name MRK for Mark', () => {
                     Validator.cfName('Mark').test('MRK').should.be.ok;
