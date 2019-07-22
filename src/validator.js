@@ -1,5 +1,5 @@
-
 const VALIDATOR = require('./validator.const');
+const DATE_VALIDATOR = require('./dateValidator.const');
 const Parser = require('./parser');
 const Omocode = require('./omocode.enum');
 const Diacritics = require('./diacritics');
@@ -292,6 +292,17 @@ class Validator {
             return new RegExp(`^${matcher}$`, 'iu');
         }
         return this.surname((codiceFiscale || '').substr(3,3));
+    }
+
+    static date(codiceFiscale){
+        let matcher = DATE_VALIDATOR.ISO8601_FULL_DATE;
+        if (codiceFiscale) {
+            const parsedDate = Parser.cfToBirthDate(codiceFiscale);
+            if (parsedDate) {
+                matcher = parsedDate.toJSON().substr(0,10);
+            }
+        }
+        return new RegExp(`^${matcher}(?:T${DATE_VALIDATOR.TIME}(?:${DATE_VALIDATOR.TIMEZONE})?)?$`, 'iu');
     }
 }
 
