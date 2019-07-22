@@ -237,7 +237,7 @@ class Validator {
             
             const diacriticizer = matchingChars => (matchingChars || '').split('').map(char => `[${Diacritics.insensitiveMatcher[char]}]`);
 
-            const matchFromCf = (cf, matcher) => diacriticizer((cf.match(new RegExp(matcher, 'ig')) || [])[0]);
+            const matchFromCf = (cf, charMatcher) => diacriticizer((cf.match(new RegExp(charMatcher, 'ig')) || [])[0]);
 
             const cons = matchFromCf(surnameCf, `^[${VALIDATOR.CONSONANT_LIST}]{1,3}`);
             const vow = matchFromCf(surnameCf, `[${VALIDATOR.VOWEL_LIST}]{1,3}`);

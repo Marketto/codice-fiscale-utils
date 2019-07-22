@@ -81,7 +81,6 @@ class Belfiore{
      * Find place matching given name, retuns place object if provided name match only 1 result
      * @param {string} name Place name
      * @returns {Object|null}
-     * @memberof BelfioreGenericList
      * @memberof Belfiore
      */
     findByName(name) {
@@ -127,7 +126,7 @@ class Belfiore{
 
     /**
      * Returns a Belfiore instance filtered by the given province
-     * @param {string} code Province Code  (2 A-Z char)
+     * @param {string} code Province Code (2 A-Z char)
      * @returns {Belfiore}
      */
     byProvince(code) {
@@ -215,15 +214,24 @@ class Belfiore{
 
     /**
      * Binary find Index (works ONLY in sorted arrays)
-     * @param {string} text 
-     * @param {string} value
-     * @param {number} start
-     * @param {number} end
-     * @param {number} step
-     * @returns {number} Found value Index, -1 if not found 
+     * @param {string} text Unique string of values of the same length (step)
+     * @param {string} value Exact text to find
+     * @param {number} start text start index for seeking the value
+     * @param {number} end text end index for seeking the value
+     * @param {number} step length of a single value to seek properly the text string
+     * @returns {number} Found value Index or -1 if not found 
      * @memberof Belfiore
      */
-    static binaryfindIndex(text, value, start = 0, end = (text || '').length -1) {
+    static binaryfindIndex(text, value, start, end) {
+        if (typeof text !== 'string' || !text.length) {
+            return -1;
+        }
+        if (!start || start < 0) {
+            start = 0;
+        }
+        if (!end || end >= text.length) {
+            end = text.length -1;
+        }
         const currentLength = end - start + 1;
         if (start > end || currentLength % value.length) {
             return -1;
