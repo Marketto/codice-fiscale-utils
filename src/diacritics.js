@@ -97,11 +97,9 @@ const core = {
      */
     insensitiveMatcher: new Proxy({}, {
         get(receiver, name) {
-            if (typeof name === 'string') {
-                const keys = Object.keys(DIACRITICS_MAP).filter(key => (new RegExp(`^[${key}]$`, 'ui')).test(name));
-                if (keys.length) {
-                    return keys.map(key => DIACRITICS_MAP[key]).join('');
-                }
+            const keys = Object.keys(DIACRITICS_MAP).filter(key => (new RegExp(`^[${key}]$`, 'ui')).test(name));
+            if (keys.length) {
+                return keys.map(key => DIACRITICS_MAP[key]).join('');
             }
             return receiver[name];
         }
@@ -134,7 +132,7 @@ module.exports = new Proxy({
      */
     validator: new Proxy({}, {
         get(receiver, name) {
-            if (typeof name === 'string' && core.matcher[name]) {
+            if (core.matcher[name]) {
                 return new RegExp(`[${core.matcher[name]}]`, 'u');
             }
             return receiver[name];
@@ -147,7 +145,7 @@ module.exports = new Proxy({
      */
     insensitiveValidator: new Proxy({}, {
         get(receiver, name) {
-            if (typeof name === 'string' && core.matcher[name]) {
+            if (core.matcher[name]) {
                 return new RegExp(`[${core.insensitiveMatcher[name]}]`, 'ui');
             }
             return receiver[name];
@@ -155,11 +153,9 @@ module.exports = new Proxy({
     })
 }, {
     get(receiver, name) {
-        if (typeof name === 'string'){
-            if (name.length === 1) {
-                const [normalizedLetter] = Object.values(DIACRITICS_MAP).find(value => (new RegExp(`[${value}]`, 'u')).test(name)) || [];
-                return normalizedLetter || name;
-            }
+        if (name.length === 1) {
+            const [normalizedLetter] = Object.values(DIACRITICS_MAP).find(value => (new RegExp(`[${value}]`, 'u')).test(name)) || [];
+            return normalizedLetter || name;
         }
         return receiver[name];
     }

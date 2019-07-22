@@ -9,9 +9,9 @@ const GENDERS = {
  */
 module.exports = Object.freeze(new Proxy(GENDERS, {
     get(receiver, name) {
-        const index = typeof name === 'string' ? parseInt(name) : name;
+        const index = parseInt(name);
         const values = this.toArray.apply(receiver);
-        if (typeof index === 'number' && (index >= 0 && index <= 31 || index >= 40 && index <= 71)) {
+        if (!isNaN(index) && (index >= 0 && index <= 31 || index >= 40 && index <= 71)) {
             return values[Math.floor(index/40)];
         }
         if (typeof this[name] === 'function') {
