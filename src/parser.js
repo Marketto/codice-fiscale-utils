@@ -243,7 +243,7 @@ class Parser {
     }
 
     /**
-     * @param {string} fiscalCode
+     * @param {string} fiscalCode 16 character Codice Fiscale to decode
      * @returns {Object} {surname, name, year, month, day, gender, place} Decoded CF Info
      */
     static cfDecode(fiscalCode) {
@@ -392,7 +392,7 @@ class Parser {
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * 
-     * @param {Date|Moment|Array<number>} date Date, Moment instance or Array of numbers [year, month, day]
+     * @param {Date|Moment|Array<number>} date Date, Moment instance or array of numbers [year, month, day]
      * @returns {Date|null} Parsed Date or null if not valid
      * @memberof CodiceFiscaleUtils.Parser
      */
@@ -415,7 +415,7 @@ class Parser {
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * 
-     * @param {Date|Moment|Array<number>} date Date, Moment instance or number array (Year, month, day)
+     * @param {Date|Moment|Array<number>} date Date, Moment instance or array of numbers [year, month, day]
      * @param {Gender|string} gender Gender enum value
      * @returns {string|null} Birth date and Gender CF code
      * @memberof CodiceFiscaleUtils.Parser
@@ -439,7 +439,7 @@ class Parser {
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * 
-     * @param {Date|Moment|Array<number>} date Date, Moment instance or number array (Year, month, day)
+     * @param {Date|Moment|Array<number>} date Date, Moment instance or array of numbers [year, month, day]
      * @param {string} name City or Country name
      * @param {string} [province] Province code for cities
      * @returns {string|null} Matching place belfiore code, if only once is matching criteria
