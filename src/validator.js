@@ -1,3 +1,4 @@
+const moment = require('moment');
 const VALIDATOR = require('./validator.const');
 const DATE_VALIDATOR = require('./dateValidator.const');
 const Parser = require('./parser');
@@ -91,7 +92,7 @@ class Validator {
     /**
      * Validation regexp for the given year or generic
      * @param {number} day Optional day to generate validation regexp
-     * @param {'M'|'F'} [gender] 
+     * @param {'M'|'F'} [gender] Gender @see Gender
      * @returns {RegExp} CF day and gender matcher
      * @memberof CodiceFiscaleUtils.Validator
      */
@@ -125,7 +126,7 @@ class Validator {
     /**
      * Validation regexp for the given year or generic
      * @param {Date|Moment|Array<number>} date Optional date to generate validation regexp
-     * @param {'M'|'F'} [gender] 
+     * @param {'M'|'F'} [gender] @see Gender
      * @returns {RegExp} CF date and gender matcher
      * @memberof CodiceFiscaleUtils.Validator
      */
@@ -299,7 +300,17 @@ class Validator {
         if (codiceFiscale) {
             const parsedDate = Parser.cfToBirthDate(codiceFiscale);
             if (parsedDate) {
-                matcher = parsedDate.toJSON().substr(0,10);
+                const dateIso8601 = parsedDate.toJSON();
+                if (moment().diff(moment(parsedDate), 'y') < 50) {
+                    const century = parseInt(dateIso8601.substr(0,2));
+                    const centuries = [
+                        century -1,
+                        century
+                    ].map(year => year.toString().padStart(2, 0));
+                    matcher = `(?:${centuries.join('|')})` + dateIso8601.substr(2,8);
+                } else {
+                    matcher = dateIso8601.substr(0,10);
+                }
             }
         }
         return new RegExp(`^${matcher}(?:T${DATE_VALIDATOR.TIME}(?:${DATE_VALIDATOR.TIMEZONE})?)?$`, 'iu');
