@@ -19,6 +19,12 @@ module.exports = Object.freeze(new Proxy(GENDERS, {
         }
         return this[name] || receiver[name];
     },
+
+    /**
+     * Return an array of Gender constants
+     *
+     * @returns {Array<string>} List of Gender keys
+     */
     toArray(){
         return Object.keys(this);
     }

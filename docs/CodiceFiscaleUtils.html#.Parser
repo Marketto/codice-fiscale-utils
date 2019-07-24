@@ -1,10 +1,9 @@
-<!-- start:readme.hbs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-		<title>Codice Fiscale Utils</title>
+		<title>Parser</title>
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -72,35 +71,59 @@
 	</header>
 	<!-- end:navbar.hbs -->		<div class="page-header">
 			<div class="container">
-				<span class="kind">readme</span>
-				<h1><span class="name">Codice Fiscale Utils</span></h1>
-				<div class="summary"><p>JS utilities to handle Italian Codice Fiscale</p></div>			</div>
+				<span class="kind">class</span>
+				<h1><span class="name">Parser</span></h1>
+			</div>
 		</div>
 	<div class="container content">
 		<div class="row">
 			<div class="col-md-9 main-content">
-		<section class="readme-section">
-			<article><h1>codice-fiscale-utils</h1>
-<p><a href="https://app.fossa.io/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils?ref=badge_shield"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils.svg?type=shield" alt="FOSSA Status"></a>
-<a href="https://sonarcloud.io/dashboard/index/Marketto_codice-fiscale-utils"><img src="https://sonarcloud.io/api/project_badges/measure?project=Marketto_codice-fiscale-utils&amp;metric=alert_status" alt="Quality Gate"></a>
-<a href="https://sonarcloud.io/dashboard/index/Marketto_codice-fiscale-utils"><img src="https://sonarcloud.io/api/project_badges/measure?project=Marketto_codice-fiscale-utils&amp;metric=coverage" alt="Coverage"></a>
-<a href="https://sonarcloud.io/dashboard/index/Marketto_codice-fiscale-utils"><img src="https://sonarcloud.io/api/project_badges/measure?project=Marketto_codice-fiscale-utils&amp;metric=sqale_rating" alt="Maintainability"></a>
-<a href="https://sonarcloud.io/dashboard/index/Marketto_codice-fiscale-utils"><img src="https://sonarcloud.io/api/project_badges/measure?project=Marketto_codice-fiscale-utils&amp;metric=reliability_rating" alt="Reliability"></a></p>
-<p>JS utilities to handle Italian Codice Fiscale</p>
-<h2>INSTALLATION</h2>
-<pre class="prettyprint source lang-{r,"><code>npm i -s @marketto/codice-fiscale-utils moment
-</code></pre>
-<h2>LICENSE</h2>
-<p>MIT License</p>
-<p><a href="https://app.fossa.io/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils?ref=badge_large"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils.svg?type=large" alt="FOSSA Status"></a></p>
-<h3>ASSETS LICENSES</h3>
-<ul>
-<li>Cities List of Values: CC BY 4.0 Ministero dell'interno</li>
-<li>Countries List of Values: CC BY 3.0 Istituto nazionale di statistica</li>
-</ul>
-<h2>AUTHORS</h2>
-<p>Marco Ricupero</p></article>
-		</section>
+						<ol class="breadcrumb">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="list_class.html">Classes</a></li>
+							<li class="active">Parser</li>
+						</ol>
+					<section>
+							<dl class="symbol primary">
+								<dt class="symbol-title class collapsible-symbol expanded">
+			<h2 class="class"><span class="signature-new">new&nbsp;</span><span class="name">Parser</span><span class="signature-params">()</span><span class="signature-type"></span></h2>
+</dt>
+<dd class="symbol-details class  collapsible-symbol expanded" style="max-height: 9999px;">
+	<div class="symbol-details-inner">
+			<div class="callout callout-default"><h5>Details</h5>		<form class="form-horizontal details">
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+							<!-- source -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label">Source</label>
+								<div class="col-sm-9">
+									<p class="form-control-static"><a href="parser.js.html">parser.js</a>, <a href="parser.js.html#line-10">line 10</a></p>
+								</div>
+							</div>
+			
+			
+			
+			
+					</form>
+			</div>	</div>
+</dd>
+							</dl>
+							<article class="secondary">
+							</article>
+					</section>
 			</div>
 				<div class="col-md-3 side-content">
 					<nav class="toc hidden-print hidden-sm hidden-xs"></nav>
@@ -136,4 +159,3 @@
 	
 </body>
 </html>
-<!-- end:readme.hbs -->

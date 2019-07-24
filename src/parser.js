@@ -16,8 +16,8 @@ class Parser {
     /**
      * Default omocode bitmap
      * @readonly
-     * @returns {number}
-     * @memberof CodiceFiscaleUtils.Parser
+     * @returns {number} Omocode bitmap number
+     * @memberof Parser
      */
     static get OMOCODE_BITMAP(){
         return 0b0111011011000000;
@@ -28,7 +28,7 @@ class Parser {
      * 
      * @param {string} codiceFiscale Partial or complete Omocode/Regular CF to parse
      * @returns {string|null} Regular CF w/o omocodes chars
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static cfDeomocode(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 7) {
@@ -45,7 +45,7 @@ class Parser {
      * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {string|null} Partial/possible surname
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static cfToSurname(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 3 || !(/^[A-Z]{3}/iu).test(codiceFiscale)) {
@@ -80,7 +80,7 @@ class Parser {
      * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {string|null} Partial/possible name
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static cfToName(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 3 || !(/^[A-Z]{6}/iu).test(codiceFiscale)) {
@@ -94,7 +94,7 @@ class Parser {
      * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {'M'|'F'|null} Male or female
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static cfToGender(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 11) {
@@ -112,7 +112,7 @@ class Parser {
      * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {number|null} Birth Year (4 digits)
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static cfToBirthYear(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 8) {
@@ -135,7 +135,7 @@ class Parser {
      * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {number|null} Birth Month (0...11 - Date notation)
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static cfToBirthMonth(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 9) {
@@ -154,7 +154,7 @@ class Parser {
      * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {number|null} Birth day (1..31)
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static cfToBirthDay(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 11) {
@@ -179,7 +179,7 @@ class Parser {
      * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {Date|null} Birth Date
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static cfToBirthDate(codiceFiscale) {
         const birthDay = this.cfToBirthDay(codiceFiscale);
@@ -209,7 +209,7 @@ class Parser {
      * 
      * @param {string} codiceFiscale Partial or complete CF to parse
      * @returns {Object} {name, belfioreCode} Birth place
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static cfToBirthPlace(codiceFiscale) {
         if (typeof codiceFiscale !== 'string' || codiceFiscale.length < 15) {
@@ -278,7 +278,7 @@ class Parser {
      * 
      * @param {string} surname Partial or complete CF to parse
      * @returns {string|null} partial cf
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static surnameToCf(surname) {
         if ((surname || '').trim().length < 2) {
@@ -302,7 +302,7 @@ class Parser {
      * 
      * @param {string} name Partial or complete CF to parse
      * @returns {string|null} partial cf
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static nameToCf(name) {
         if ((name || '').trim().length < 2) {
@@ -323,7 +323,7 @@ class Parser {
      * 
      * @param {string|number} year Birth year 2 or 4 digit string, number above 19XX or below 100
      * @returns {string|null} partial cf
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static yearToCf(year) {
         let parsedYear = year;
@@ -341,7 +341,7 @@ class Parser {
      * 
      * @param {number} month Month number 0..11
      * @returns {string|null} Birth Month CF code
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static monthToCf(month) {
         if (!(typeof month === 'number' && !isNaN(month))) {
@@ -357,7 +357,7 @@ class Parser {
      * @param {number} day Day number 1..31
      * @param {Gender|string} gender Gender enum value
      * @returns {string|null} Birth Day CF code
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static dayGenderToCf(day, gender) {
         if (!(typeof day === 'number' && !isNaN(day) && (day > 0 && day < 32))) {
@@ -394,7 +394,7 @@ class Parser {
      * 
      * @param {Date|Moment|Array<number>} date Date, Moment instance or array of numbers [year, month, day]
      * @returns {Date|null} Parsed Date or null if not valid
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static parseDate(date) {
         if (!(
@@ -418,7 +418,7 @@ class Parser {
      * @param {Date|Moment|Array<number>} date Date, Moment instance or array of numbers [year, month, day]
      * @param {Gender|string} gender Gender enum value
      * @returns {string|null} Birth date and Gender CF code
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static dateGenderToCf(date, gender) {
         if (!Gender.hasOwnProperty(gender)) {
@@ -443,13 +443,13 @@ class Parser {
      * @param {string} name City or Country name
      * @param {string} [province] Province code for cities
      * @returns {string|null} Matching place belfiore code, if only once is matching criteria
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      *//**
      * Parse place name and province to Belfiore code
      * @param {string} name City or Country name
      * @param {string} [province] Province code for cities
      * @returns {string|null} Matching place belfiore code, if only once is matching criteria
-     * @memberof CodiceFiscaleUtils.Parser
+     * @memberof Parser
      */
     static placeToCf(...args) {
         let targetDate = this.parseDate(args[0]);
