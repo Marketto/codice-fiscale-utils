@@ -17,20 +17,21 @@ const ISO8601_FULL_DATE = `${YEAR}(?:-(?:(?:${MONTH})|(?:${MONTH_DAY})(?:T${TIME
  * Date Validator constants
  * @readonly
  * @constant {Object} DATE_VALIDATOR
- * @constant {string} DATE_VALIDATOR.YEAR               String matcher for ISO8601 4 digits year (limited to 1000-2999)
- * @constant {string} DATE_VALIDATOR.MONTH              String matcher for ISO8601 2 digits month (01-12)
- * @constant {string} DATE_VALIDATOR.DAY                String matcher for ISO8601 2 digits day (01-31)
- * @constant {string} DATE_VALIDATOR.LEAP_MONTH         String matcher for ISO8601 2 digits leap month
- * @constant {string} DATE_VALIDATOR.DAYS_30_MONTHS     String matcher for ISO8601 2 digits 30 days month
- * @constant {string} DATE_VALIDATOR.DAYS_31_MONTHS     String matcher for ISO8601 2 digits 31 days month
- * @constant {string} DATE_VALIDATOR.MONTH_DAY          String matcher for ISO8601 2 digits month + 2 digit day tailored for 28/29, 30 and 31 days months (##-##)
- * @constant {string} DATE_VALIDATOR.HOURS              String matcher for ISO8601 2 digits hours (00-23)
- * @constant {string} DATE_VALIDATOR.MINUTES            String matcher for ISO8601 2 digits minutes (00-59)
- * @constant {string} DATE_VALIDATOR.SECONDS            String matcher for ISO8601 2 digits seconds (00-59)
- * @constant {string} DATE_VALIDATOR.MILLISECONDS       String matcher for ISO8601 3 digits milliseconds (000-999)
- * @constant {string} DATE_VALIDATOR.TIMEZONE           String matcher for ISO8601 timezone (Z or ±## or ±##:## or ±####)
- * @constant {string} DATE_VALIDATOR.TIME               String matcher for ISO8601 for time (T## , T##:## , T##:##:## , T##:##:##.###)
- * @constant {string} DATE_VALIDATOR.ISO8601_FULL_DATE  String matcher for ISO8601 date/time format
+ * @constant {string} DATE_VALIDATOR.YEAR String matcher for ISO8601 4 digits year (limited to 1000-2999)
+ * @constant {string} DATE_VALIDATOR.MONTH String matcher for ISO8601 2 digits month (01-12)
+ * @constant {string} DATE_VALIDATOR.DAY String matcher for ISO8601 2 digits day (01-31)
+ * @constant {string} DATE_VALIDATOR.LEAP_MONTH String matcher for ISO8601 2 digits leap month
+ * @constant {string} DATE_VALIDATOR.DAYS_30_MONTHS String matcher for ISO8601 2 digits 30 days month
+ * @constant {string} DATE_VALIDATOR.DAYS_31_MONTHS String matcher for ISO8601 2 digits 31 days month
+ * @constant {string} DATE_VALIDATOR.MONTH_DAY String matcher for ISO8601 2 digits month + 2 digit day tailored for 28/29, 30 and 31 days months (##-##)
+ * @constant {string} DATE_VALIDATOR.HOURS String matcher for ISO8601 2 digits hours (00-23)
+ * @constant {string} DATE_VALIDATOR.MINUTES String matcher for ISO8601 2 digits minutes (00-59)
+ * @constant {string} DATE_VALIDATOR.SECONDS String matcher for ISO8601 2 digits seconds (00-59)
+ * @constant {string} DATE_VALIDATOR.MILLISECONDS String matcher for ISO8601 3 digits milliseconds (000-999)
+ * @constant {string} DATE_VALIDATOR.TIMEZONE String matcher for ISO8601 timezone (Z or ±## or ±##:## or ±####)
+ * @constant {string} DATE_VALIDATOR.TIME String matcher for ISO8601 for time (T## , T##:## , T##:##:## , T##:##:##.###)
+ * @constant {string} DATE_VALIDATOR.ISO8601_FULL_DATE String matcher for ISO8601 date/time format
+ * @memberof DATE_VALIDATOR
 */
 module.exports = Object.freeze({
     YEAR,

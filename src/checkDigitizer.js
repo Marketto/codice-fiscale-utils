@@ -35,7 +35,8 @@ class CheckDigitizer {
      * @param {string} partialCF Partial Fiscal Code to evaluate
      * @generator
      * @yields {number} character value odd/even
-     * @returns {0}
+     * @returns {number} 0
+     * @memberof CheckDigitizer
      */
     static* evaluateChar(partialCF) {
         for(let index in partialCF){
@@ -57,6 +58,7 @@ class CheckDigitizer {
      * Evaluate given partial CF to produce last check digit character
      * @param {string} partialCF Partial Fiscal Code to evaluate to produce last character
      * @returns {char} 16th CF char
+     * @memberof CheckDigitizer
      */
     static checkDigit(partialCF) {
         let partialCfValue = 0;

@@ -16,7 +16,7 @@ class Validator {
      * Validation regexp for the given surname or generic
      * @param {string} surname Optional surname to generate validation regexp
      * @returns {RegExp} CF Surname matcher
-     * @memberof CodiceFiscaleUtils.Validator
+     * @memberof Validator
      */
     static cfSurname(surname) {
         let matcher = VALIDATOR.NAME_MATCHER;
@@ -30,7 +30,7 @@ class Validator {
      * Validation regexp for the given name or generic
      * @param {string} name Optional name to generate validation regexp
      * @returns {RegExp} CF name matcher
-     * @memberof CodiceFiscaleUtils.Validator
+     * @memberof Validator
      */
     static cfName(name) {
         let matcher = VALIDATOR.NAME_MATCHER;
@@ -44,7 +44,7 @@ class Validator {
      * Validation regexp for the given year or generic
      * @param {number} year Optional year to generate validation regexp
      * @returns {RegExp} CF year matcher
-     * @memberof CodiceFiscaleUtils.Validator
+     * @memberof Validator
      */
     static cfYear(year) {
         let matcher = VALIDATOR.YEAR_MATCHER;
@@ -61,7 +61,7 @@ class Validator {
      * Validation regexp for the given month or generic
      * @param {number} month Optional month to generate validation regexp
      * @returns {RegExp} CF month matcher
-     * @memberof CodiceFiscaleUtils.Validator
+     * @memberof Validator
      */
     static cfMonth(month) {
         let matcher = VALIDATOR.MONTH_MATCHER;
@@ -75,7 +75,7 @@ class Validator {
      * Validation regexp for the given year or generic
      * @param {number} day Optional day to generate validation regexp
      * @returns {RegExp} CF day matcher
-     * @memberof CodiceFiscaleUtils.Validator
+     * @memberof Validator
      */
     static cfDay(day) {
         let matcher = VALIDATOR.DAY_MATCHER;
@@ -95,7 +95,7 @@ class Validator {
      * @param {number} day Optional day to generate validation regexp
      * @param {'M'|'F'} [gender] Gender @see Gender
      * @returns {RegExp} CF day and gender matcher
-     * @memberof CodiceFiscaleUtils.Validator
+     * @memberof Validator
      */
     static cfDayGender(day, gender) {
         if (!gender) {
@@ -129,7 +129,7 @@ class Validator {
      * @param {Date|Moment|Array<number>} date Optional date to generate validation regexp
      * @param {'M'|'F'} [gender] @see Gender
      * @returns {RegExp} CF date and gender matcher
-     * @memberof CodiceFiscaleUtils.Validator
+     * @memberof Validator
      */
     static cfDateGender(date, gender) {
         let matcher = VALIDATOR.FULL_DATE_MATCHER;
@@ -158,12 +158,12 @@ class Validator {
     /**
      * @param {string} placeName Optional place name to generate validation regexp
      * @returns {RegExp} CF place matcher
-     * @memberof CodiceFiscaleUtils.Validator
+     * @memberof Validator
      *//**
      * @param {Date|Moment|Array<number>} [date] Optional date to generate validation regexp
      * @param {string} placeName Optional place name to generate validation regexp
      * @returns {RegExp} CF place matcher
-     * @memberof CodiceFiscaleUtils.Validator
+     * @memberof Validator
      */
     static cfPlace(...args) {
         let matcher = VALIDATOR.BELFIORE_CODE_MATCHER;
@@ -231,6 +231,13 @@ class Validator {
     }
 
 
+    /**
+     * Returns surname validator based on given cf or generic
+     * 
+     * @param {string} codiceFiscale Partial or complete CF to parse
+     * @returns {RegExp} Generic or specific regular expression
+     * @memberof CodiceFiscaleUtils.Validator
+     */
     static surname(codiceFiscale) {
         const ANY_LETTER = `[${Diacritics.matcherBy(/^[A-Z]$/ui)}]`;
         let matcher = `${ANY_LETTER}+`;
@@ -276,6 +283,13 @@ class Validator {
         return new RegExp(`^${matcher}$`, 'iu');
     }
 
+    /**
+     * Returns name validator based on given cf or generic
+     * 
+     * @param {string} codiceFiscale Partial or complete CF to parse
+     * @returns {RegExp} Generic or specific regular expression
+     * @memberof CodiceFiscaleUtils.Validator
+     */
     static name(codiceFiscale) {
         if (typeof codiceFiscale === 'string' && (new RegExp(`^[A-Z]{3}[${VALIDATOR.CONSONANT_LIST}]{3}`, 'iu')).test(codiceFiscale)) {
             const ANY_LETTER = `[${Diacritics.matcherBy(/^[A-Z]$/ui)}]`;
@@ -296,6 +310,13 @@ class Validator {
         return this.surname((codiceFiscale || '').substr(3,3));
     }
 
+    /**
+     * Returns iso8601 date validator based on given cf or generic
+     * 
+     * @param {string} codiceFiscale Partial or complete CF to parse
+     * @returns {RegExp} Generic or specific regular expression
+     * @memberof CodiceFiscaleUtils.Validator
+     */
     static date(codiceFiscale){
         let matcher = DATE_VALIDATOR.ISO8601_FULL_DATE;
         if (codiceFiscale) {

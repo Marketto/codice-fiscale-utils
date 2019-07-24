@@ -49,7 +49,7 @@ class Belfiore{
     /**
      * Search places matching given name
      * @param {string} name Place name
-     * @returns {Array<Object>}
+     * @returns {Array<Object>} List of places
      * @memberof Belfiore
      */
     searchByName(name) {
@@ -111,7 +111,8 @@ class Belfiore{
     /**
      * Returns a Proxied version of Belfiore which filters results by given date
      * @param {string|Date|Moment|Array<number>} [date = moment()] Target date to filter places active only for the given date
-     * @returns {Belfiore}
+     * @returns {Belfiore} Belfiore instance filtered by active date
+     * @memberof Belfiore
      */
     active(date = moment()) {
         const { _data, _licenses, _codeMatcher, _province } = this;
@@ -127,7 +128,8 @@ class Belfiore{
     /**
      * Returns a Belfiore instance filtered by the given province
      * @param {string} code Province Code (2 A-Z char)
-     * @returns {Belfiore}
+     * @returns {Belfiore} Belfiore instance filtered by province code
+     * @memberof Belfiore
      */
     byProvince(code) {
         if (!(typeof code === 'string' && (/^[A-Z]{2}$/u).test(code))) {
@@ -145,7 +147,8 @@ class Belfiore{
     /**
      * Returns a Proxied version of Belfiore which filters results by place type
      * @readonly
-     * @returns {Belfiore}
+     * @returns {Belfiore} Belfiore instance filtered by cities
+     * @memberof Belfiore
      */
     get cities() {
         const { _data, _licenses, _activeDate } = this;
@@ -160,7 +163,8 @@ class Belfiore{
     /**
      * Returns a Proxied version of Belfiore which filters results by place type
      * @readonly
-     * @returns {Belfiore}
+     * @returns {Belfiore} Belfiore instance filtered by countries
+     * @memberof Belfiore
      */
     get countries() {
         const { _data, _licenses, _activeDate } = this;
@@ -176,7 +180,7 @@ class Belfiore{
      * Get Proxy
      * @param {Object} resource target resource
      * @param {string|number|Symbol} paramName property name to proxy
-     * @returns {*} 
+     * @returns {*} Proxied property
      * @memberof Belfiore
      */
     static get (resource, paramName) {
