@@ -21,7 +21,7 @@ const downloadUnzip = (uri) => request({
 })
     .then(({body}) => body)
     .then(JSZip.loadAsync)
-    .then(zip => zip.file(/\.csv$/i)[0].async('string'));
+    .then(zip => zip.file(/\.csv$/i)[0].async('binarystring'));
 
 
 const downloadText = (uri) => request({
@@ -66,7 +66,7 @@ const cleanObject = (obj) => {
     return out;
 };
 
-const belfioreToInt = code => ((code.charCodeAt()-65)*10**3) + parseInt(code.substr(1));
+const belfioreToInt = code => (code.charCodeAt()-65)*10**3 + parseInt(code.substr(1));
 const dataMapper1 = defaultSourceCode => data => data
     .map(obj => cleanObject({
         belfioreCode: obj['Codice AT'] || obj['CODCATASTALE'],
@@ -75,7 +75,8 @@ const dataMapper1 = defaultSourceCode => data => data
         iso3166alpha2: obj['Codice ISO 3166 alpha2'],
         // iso3166alpha3: obj['Codice ISO 3166 alpha3'],
         creationDate: obj['DATAISTITUZIONE'] && moment(obj['DATAISTITUZIONE'], 'YYYY-MM-DD').startOf('day').toISOString(),
-        expirationDate: (obj['STATO'] === 'C' && obj['DATACESSAZIONE'] && moment(obj['DATACESSAZIONE'], 'YYYY-MM-DD').endOf('day').toISOString()) || (obj['Anno evento'] && moment(obj['Anno evento'], 'YYYY').endOf('year').toISOString()),
+        expirationDate: obj['STATO'] === 'C' && obj['DATACESSAZIONE'] && moment(obj['DATACESSAZIONE'], 'YYYY-MM-DD').endOf('day').toISOString() ||
+            obj['Anno evento'] && moment(obj['Anno evento'], 'YYYY').endOf('year').toISOString(),
         province: obj['SIGLAPROVINCIA'],
         // region: parseInt(obj['IDREGIONE']),
         // istatCode: parseInt(obj['CODISTAT'] || obj['Codice ISTAT']),
@@ -97,7 +98,7 @@ const compressDataMapper = data => data.map(({
     creationDate: creationDate ? moment(creationDate).diff(DEFAULT_CREATION_DATE, 'days').toString(32) : undefined,
     expirationDate: expirationDate ? moment(expirationDate).diff(DEFAULT_CREATION_DATE, 'days').toString(32) : undefined,
     provinceOrCountry: province || iso3166alpha2,
-    dataSource: ({ MI: 0, I: 1, AE: 2 })[dataSource]
+    dataSource: { MI: 0, I: 1, AE: 2 }[dataSource]
 }));
 
 const dataSquasher = data => {
@@ -114,7 +115,7 @@ const dataSquasher = data => {
 };
 
 const dataGrouping = data => [
-    data.filter(({ creationDate, expirationDate }) => (creationDate && expirationDate)),
+    data.filter(({ creationDate, expirationDate }) => creationDate && expirationDate),
     data.filter(({ creationDate, expirationDate }) => !creationDate && expirationDate),
     data.filter(({ creationDate, expirationDate }) => creationDate && !expirationDate),
     data.filter(({ creationDate, expirationDate }) => !creationDate && !expirationDate)
@@ -143,7 +144,7 @@ const deDupes = data => Object.values(_.groupBy(data, 'belfioreCode')).map(entry
 
 const mergeLists = data => [[], []].concat(data).reduce((a, b) => [].concat(a).concat(b));
 Promise.all(locationResources.resources.map(async ({uri, delimiter, defaultSourceCode}) => Promise
-    .all(([].concat(uri))
+    .all([].concat(uri)
         .filter(uri => !!uri)
         .map(singleUri => downloadResource(singleUri, delimiter)
             .then(dataMapper1(defaultSourceCode))
@@ -160,10 +161,10 @@ Promise.all(locationResources.resources.map(async ({uri, delimiter, defaultSourc
         licenses: LICENSE_KEYS.map(k => locationResources.licenses[k]),
         sources: [].concat(locationResources.resources.map(({uri}) => uri)).reduce((a, b) => a.concat(b)).filter(uri => !!uri)
     }))
-    .then(data => new Promise((resolve, reject) => fs.writeFile(path.join(detinationPath, 'cities-countries.json'), JSON.stringify(data), (err) => (err ? reject(err) : resolve()))));
+    .then(data => new Promise((resolve, reject) => fs.writeFile(path.join(detinationPath, 'cities-countries.json'), JSON.stringify(data), (err) => err ? reject(err) : resolve())));
 
 Promise.all(Object.entries(locationResources.licenseFiles).map(([licenseId, uri]) => downloadText(uri).then(data => ({ [licenseId]: data }))))
     .then(licenses => Object.assign({}, ...licenses))
     .then((licenses) => Promise.all(Object.values(locationResources.licenses)
-        .map(({license, name}) => new Promise((resolve, reject) => fs.writeFile(path.join(detinationPath, `${name.toUpperCase().replace(/[^A-Z\d]/g, '_')}.LICENSE`), licenses[license], (err) => (err ? reject(err) : resolve()))))
+        .map(({license, name}) => new Promise((resolve, reject) => fs.writeFile(path.join(detinationPath, `${name.toUpperCase().replace(/[^A-Z\d]/g, '_')}.LICENSE`), licenses[license], (err) => err ? reject(err) : resolve())))
     ));
