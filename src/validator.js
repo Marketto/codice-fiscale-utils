@@ -1,9 +1,10 @@
-const moment = require('moment');
-const VALIDATOR = require('./validator.const');
 const DATE_VALIDATOR = require('./dateValidator.const');
-const Parser = require('./parser');
-const Omocode = require('./omocode.enum');
 const Diacritics = require('./diacritics');
+const Gender = require('./gender.enum');
+const moment = require('moment');
+const Omocode = require('./omocode.enum');
+const Parser = require('./parser');
+const VALIDATOR = require('./validator.const');
 
 /**
  * @class Validator
@@ -314,6 +315,19 @@ class Validator {
             }
         }
         return new RegExp(`^${matcher}(?:T${DATE_VALIDATOR.TIME}(?:${DATE_VALIDATOR.TIMEZONE})?)?$`, 'iu');
+    }
+
+    /**
+     * Returns gender validator based on given cf or generic
+     * 
+     * @param {string} codiceFiscale Partial or complete CF to parse
+     * @returns {RegExp} Generic or specific regular expression
+     * @memberof CodiceFiscaleUtils.Validator
+     */
+    static gender(codiceFiscale) {
+        const parsedGender = Parser.cfToGender(codiceFiscale);
+        const matcher = parsedGender || `[${Gender.toArray().join('')}]`;
+        return new RegExp(`^${matcher}$`, 'u');
     }
 }
 
