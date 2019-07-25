@@ -329,6 +329,27 @@ class Validator {
         const matcher = parsedGender || `[${Gender.toArray().join('')}]`;
         return new RegExp(`^${matcher}$`, 'u');
     }
+
+    
+
+    /**
+     * Returns place validator based on given cf or generic
+     * 
+     * @param {string} codiceFiscale Partial or complete CF to parse
+     * @returns {RegExp} Generic or specific regular expression
+     * @memberof CodiceFiscaleUtils.Validator
+     */
+    static place(codiceFiscale) {
+        let matcher = '.+';
+        const parsedPlace = Parser.cfToBirthPlace(codiceFiscale);
+
+        if (parsedPlace) {
+            const nameMatcher = parsedPlace.name.replace(/./gu, c => (Diacritics[c]===c ? c : `[${c}${Diacritics[c]}]`));
+            matcher = `(?:${nameMatcher}|${parsedPlace.belfioreCode})`;
+        }
+
+        return new RegExp(`^${matcher}$`, 'ui');
+    }
 }
 
 module.exports = Validator;

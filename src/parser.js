@@ -1,11 +1,11 @@
+const Belfiore = require('./belfiore');
+const BirthMonth = require('./birthMonth.enum');
+const CheckDigitizer = require('./checkDigitizer');
+const Diacritics = require('./diacritics');
+const Gender = require('./gender.enum');
 const moment = require('moment');
 const Omocode = require('./omocode.enum');
-const Gender = require('./gender.enum');
-const BirthMonth = require('./birthMonth.enum');
 const VALIDATOR = require('./validator.const');
-const DIACRITICS = require('./diacritics');
-const Belfiore = require('./belfiore');
-const CheckDigitizer = require('./checkDigitizer');
 
 /**
  * @class Parser
@@ -270,7 +270,7 @@ class Parser {
         if (!text || typeof text !== 'string') {
             return null;
         }
-        return text.replace(/./gu, c => DIACRITICS[c]);
+        return text.replace(/./gu, c => Diacritics[c]);
     }
 
     /**
