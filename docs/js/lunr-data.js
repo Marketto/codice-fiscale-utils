@@ -145,13 +145,29 @@ window.lunrData = {
           "validator.gend",
           "validator.validator.gend"
         ],
+        "CodiceFiscaleUtils.html#.Validator#.Validator.place": [
+          "base",
+          "cf",
+          "codicefiscal",
+          "codicefiscaleutils.validator.validator.plac",
+          "function",
+          "gener",
+          "given",
+          "lt;static&gt",
+          "place",
+          "regexp",
+          "return",
+          "valid",
+          "validator.plac",
+          "validator.validator.plac"
+        ],
         "module-CodiceFiscaleUtils.html": [
           "codicefiscaleutil",
           "modul",
           "module:codicefiscaleutil"
         ]
       },
-      "length": 12
+      "length": 13
     },
     "tokenStore": {
       "root": {
@@ -199,6 +215,10 @@ window.lunrData = {
                                   },
                                   "CodiceFiscaleUtils.html#.Validator#.Validator.gender": {
                                     "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.gender",
+                                    "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                                    "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
                                     "tf": 25
                                   }
                                 },
@@ -344,6 +364,23 @@ window.lunrData = {
                                                                                             }
                                                                                           }
                                                                                         }
+                                                                                      },
+                                                                                      "p": {
+                                                                                        "docs": {},
+                                                                                        "l": {
+                                                                                          "docs": {},
+                                                                                          "a": {
+                                                                                            "docs": {},
+                                                                                            "c": {
+                                                                                              "docs": {
+                                                                                                "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                                                                                                  "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
+                                                                                                  "tf": 1075
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
                                                                                       }
                                                                                     }
                                                                                   }
@@ -429,6 +466,10 @@ window.lunrData = {
               "CodiceFiscaleUtils.html#.Validator#.Validator.gender": {
                 "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.gender",
                 "tf": 7.142857142857142
+              },
+              "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
+                "tf": 7.142857142857142
               }
             }
           }
@@ -483,6 +524,10 @@ window.lunrData = {
                           },
                           "CodiceFiscaleUtils.html#.Validator#.Validator.gender": {
                             "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.gender",
+                            "tf": 110
+                          },
+                          "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                            "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
                             "tf": 110
                           }
                         }
@@ -632,6 +677,10 @@ window.lunrData = {
                       "CodiceFiscaleUtils.html#.Validator#.Validator.gender": {
                         "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.gender",
                         "tf": 25
+                      },
+                      "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                        "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
+                        "tf": 25
                       }
                     }
                   }
@@ -660,6 +709,10 @@ window.lunrData = {
                       },
                       "CodiceFiscaleUtils.html#.Validator#.Validator.gender": {
                         "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.gender",
+                        "tf": 7.142857142857142
+                      },
+                      "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                        "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
                         "tf": 7.142857142857142
                       }
                     }
@@ -782,6 +835,10 @@ window.lunrData = {
                     "CodiceFiscaleUtils.html#.Validator#.Validator.gender": {
                       "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.gender",
                       "tf": 7.142857142857142
+                    },
+                    "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                      "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
+                      "tf": 7.142857142857142
                     }
                   }
                 }
@@ -824,6 +881,10 @@ window.lunrData = {
                     },
                     "CodiceFiscaleUtils.html#.Validator#.Validator.gender": {
                       "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.gender",
+                      "tf": 7.142857142857142
+                    },
+                    "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                      "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
                       "tf": 7.142857142857142
                     }
                   }
@@ -931,6 +992,10 @@ window.lunrData = {
                                   },
                                   "CodiceFiscaleUtils.html#.Validator#.Validator.gender": {
                                     "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.gender",
+                                    "tf": 25
+                                  },
+                                  "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                                    "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
                                     "tf": 25
                                   }
                                 }
@@ -1110,6 +1175,10 @@ window.lunrData = {
                   "CodiceFiscaleUtils.html#.Validator#.Validator.gender": {
                     "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.gender",
                     "tf": 7.142857142857142
+                  },
+                  "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                    "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
+                    "tf": 7.142857142857142
                   }
                 }
               }
@@ -1132,6 +1201,23 @@ window.lunrData = {
                         "ref": "CodiceFiscaleUtils.html#.Parser",
                         "tf": 750
                       }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "l": {
+            "docs": {},
+            "a": {
+              "docs": {},
+              "c": {
+                "docs": {},
+                "e": {
+                  "docs": {
+                    "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                      "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
+                      "tf": 82.14285714285714
                     }
                   }
                 }
@@ -1167,6 +1253,10 @@ window.lunrData = {
                     },
                     "CodiceFiscaleUtils.html#.Validator#.Validator.gender": {
                       "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.gender",
+                      "tf": 7.142857142857142
+                    },
+                    "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                      "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
                       "tf": 7.142857142857142
                     }
                   },
@@ -1284,6 +1374,23 @@ window.lunrData = {
                                                       }
                                                     }
                                                   }
+                                                },
+                                                "p": {
+                                                  "docs": {},
+                                                  "l": {
+                                                    "docs": {},
+                                                    "a": {
+                                                      "docs": {},
+                                                      "c": {
+                                                        "docs": {
+                                                          "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                                                            "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
+                                                            "tf": 75
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
                                                 }
                                               }
                                             }
@@ -1327,6 +1434,23 @@ window.lunrData = {
                                     "docs": {
                                       "CodiceFiscaleUtils.html#.Validator#.Validator.gender": {
                                         "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.gender",
+                                        "tf": 600
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "p": {
+                              "docs": {},
+                              "l": {
+                                "docs": {},
+                                "a": {
+                                  "docs": {},
+                                  "c": {
+                                    "docs": {
+                                      "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+                                        "ref": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
                                         "tf": 600
                                       }
                                     }
@@ -1385,7 +1509,7 @@ window.lunrData = {
           }
         }
       },
-      "length": 87
+      "length": 101
     },
     "corpusTokens": [
       "base",
@@ -1401,6 +1525,7 @@ window.lunrData = {
       "codicefiscaleutils.validator.validator.d",
       "codicefiscaleutils.validator.validator.gend",
       "codicefiscaleutils.validator.validator.nam",
+      "codicefiscaleutils.validator.validator.plac",
       "codicefiscaleutils.validator.validator.surnam",
       "date",
       "document",
@@ -1423,6 +1548,7 @@ window.lunrData = {
       "module:codicefiscaleutil",
       "name",
       "parser",
+      "place",
       "readm",
       "regexp",
       "return",
@@ -1432,10 +1558,12 @@ window.lunrData = {
       "validator.d",
       "validator.gend",
       "validator.nam",
+      "validator.plac",
       "validator.surnam",
       "validator.validator.d",
       "validator.validator.gend",
       "validator.validator.nam",
+      "validator.validator.plac",
       "validator.validator.surnam"
     ],
     "pipeline": [
@@ -1561,6 +1689,16 @@ window.lunrData = {
       "tags": "CodiceFiscaleUtils.Validator.Validator.gender Validator.Validator.gender Validator.gender gender",
       "summary": "",
       "description": "Returns gender validator based on given cf or generic"
+    },
+    "CodiceFiscaleUtils.html#.Validator#.Validator.place": {
+      "id": "CodiceFiscaleUtils.html#.Validator#.Validator.place",
+      "kind": "function",
+      "title": "&lt;static&gt; Validator.place( codiceFiscale ) → {RegExp}",
+      "longname": "CodiceFiscaleUtils.Validator.Validator.place",
+      "name": "Validator.place",
+      "tags": "CodiceFiscaleUtils.Validator.Validator.place Validator.Validator.place Validator.place place",
+      "summary": "",
+      "description": "Returns place validator based on given cf or generic"
     },
     "module-CodiceFiscaleUtils.html": {
       "id": "module-CodiceFiscaleUtils.html",

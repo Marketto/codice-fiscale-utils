@@ -2,6 +2,7 @@ examples
 test
 sonar-project.properties
 .nyc_output
+.vscode
 coverage
 docs
 scripts

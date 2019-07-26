@@ -1,5 +1,5 @@
 {
-  "name": "codice-fiscale-utils",
+  "name": "@marketto/codice-fiscale-utils",
   "version": "1.0.0",
   "description": "JS utilities to handle Italian Codice Fiscale",
   "main": "dist/codice-fiscale-utils.js",
@@ -17,7 +17,12 @@
   },
   "keywords": [
     "CF",
-    "CodiceFiscale"
+    "CodiceFiscale",
+    "Codice Fiscale",
+    "Validator",
+    "Omocodia",
+    "Omocode",
+    "Belfiore"
   ],
   "author": "Marco Ricupero",
   "license": "MIT",
