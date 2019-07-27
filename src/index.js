@@ -1,46 +1,46 @@
 const BirthMonth = require('./birthMonth.enum');
+const CheckDigitizer = require('./checkDigitizer');
 const Gender = require('./gender.enum');
 const Omocode = require('./omocode.enum');
-const VALIDATOR = require('./validator.const');
 const Parser = require('./parser');
 const Validator = require('./validator');
+const VALIDATOR = require('./validator.const');
 
 /**
  * @module CodiceFiscaleUtils
  */
 module.exports = {
     /**
-     * @see CodiceFiscaleUtils.BirthMonth
      * @name BirthMonth
      * @memberof CodiceFiscaleUtils
      */
     BirthMonth,
     /**
-     * @see CodiceFiscaleUtils.Gender
+     * @name CheckDigitizer
+     * @memberof CodiceFiscaleUtils
+     */
+    CheckDigitizer,
+    /**
      * @name Gender
      * @memberof CodiceFiscaleUtils
      */
     Gender,
     /**
-     * @see CodiceFiscaleUtils.Omocode
      * @name Omocode
      * @memberof CodiceFiscaleUtils
      */
     Omocode,
     /**
-     * @see CodiceFiscaleUtils.VALIDATOR
-     * @name VALIDATOR
-     * @memberof CodiceFiscaleUtils
-     */
-    VALIDATOR,
-    /**
-     * @see CodiceFiscaleUtils.Parser
      * @name Parser
      * @memberof CodiceFiscaleUtils
      */
     Parser,
     /**
-     * @see CodiceFiscaleUtils.Validator
+     * @name VALIDATOR
+     * @memberof CodiceFiscaleUtils
+     */
+    VALIDATOR,
+    /**
      * @name Validator
      * @memberof CodiceFiscaleUtils
      */

@@ -1,3 +1,5 @@
+const VALIDATOR = require('./validator.const');
+
 const CONTROL_CODE_IN = {
     'A': 1,
     'B': 0,
@@ -56,14 +58,18 @@ class CheckDigitizer {
 
     /**
      * Evaluate given partial CF to produce last check digit character
-     * @param {string} partialCF Partial Fiscal Code to evaluate to produce last character
-     * @returns {char} 16th CF char
+     * @param {string} codiceFiscale Partial or complete Fiscal Code to evaluate to produce last character
+     * @returns {char|null} 16th CF char
      * @memberof CheckDigitizer
      */
-    static checkDigit(partialCF) {
-        let partialCfValue = 0;
-        for (let charValue of this.evaluateChar(partialCF)) partialCfValue += charValue;
-        return String.fromCharCode(partialCfValue%26 + 65);
+    static checkDigit(codiceFiscale) {
+        if (typeof codiceFiscale === 'string' && (new RegExp(VALIDATOR.PARTIAL_CF)).test(codiceFiscale)) {
+            const partialCF = codiceFiscale.substr(0, 15);
+            let partialCfValue = 0;
+            for (let charValue of this.evaluateChar(partialCF)) partialCfValue += charValue;
+            return String.fromCharCode(partialCfValue%26 + 65);
+        }
+        return null;
     }
 }
 
