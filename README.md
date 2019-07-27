@@ -9,7 +9,7 @@ JS utilities to handle Italian Codice Fiscale
 
 ## INSTALLATION
 ```{r, engine='bash', global_install}
-npm i -s @marketto/codice-fiscale-utils moment
+npm i -s @marketto/codice-fiscale-utils
 ```
 
 ## LICENSE

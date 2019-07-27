@@ -30,16 +30,18 @@
     "url": "https://github.com/Marketto/codice-fiscale-utils/issues"
   },
   "homepage": "https://github.com/Marketto/codice-fiscale-utils#readme",
+  "dependencies": {
+    "moment": "^2.24.0"
+  },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-things": "^0.2.0",
     "csvtojson": "^2.0.10",
     "foodoc": "0.0.9",
-    "jsdoc": "^3.6.2",
+    "jsdoc": "^3.6.3",
     "jszip": "^3.2.2",
     "lodash": "^4.17.14",
     "mocha": "^6.1.4",
-    "moment": "^2.24.0",
     "nyc": "^14.1.1",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
