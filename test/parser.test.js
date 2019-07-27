@@ -348,6 +348,9 @@ describe('CodiceFiscaleUtils:Parser', () => {
             it('Should return CF date part from year and gender', () => {
                 Parser.dateGenderToCf([1950], 'F').should.be.equal('50A41');
             });
+            it('Should return CF date part from iso8601 date string and gender', () => {
+                Parser.dateGenderToCf('1987-09-22', 'F').should.be.equal('87P62');
+            });
             it('Should return CF date part from a Date and gender', () => {
                 Parser.dateGenderToCf(new Date(2016, 2, 23, 12), 'M').should.be.equal('16C23');
                 Parser.dateGenderToCf(new Date(1988, 7, 3, 12), 'F').should.be.equal('88M43');

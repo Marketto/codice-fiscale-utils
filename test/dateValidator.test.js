@@ -1045,8 +1045,80 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
         });
     });
 
-    describe('ISO8601_FULL_DATE', () => {
-        const dateMatcher = new RegExp(`^(?:${DateValidator.ISO8601_FULL_DATE})$`, 'u');
+    describe('ISO8601_SHORT_DATE', () => {
+        const dateMatcher = new RegExp(`^(?:${DateValidator.ISO8601_SHORT_DATE})$`, 'u');
+
+        it('Should match 2002-04-22', () => {
+            dateMatcher.test('2002-04-22').should.be.ok;
+        });
+        it('Should match 2002-04-22T23', () => {
+            dateMatcher.test('2002-04-22T23').should.be.ok;
+        });
+        it('Should match 2010-10-01T04:53', () => {
+            dateMatcher.test('2010-10-01T04:53').should.be.ok;
+        });
+        it('Should match 1891-09-30T09:05:45', () => {
+            dateMatcher.test('1891-09-30T09:05:45').should.be.ok;
+        });
+        it('Should match 1987-07-21T07:33:05.371', () => {
+            dateMatcher.test('1987-07-21T07:33:05.371').should.be.ok;
+        });
+        it('Should match 1987-07-21T07:33Z', () => {
+            dateMatcher.test('1987-07-21T07:33Z').should.be.ok;
+        });
+        it('Should match 1891-09-30T09:05:45-0344', () => {
+            dateMatcher.test('1891-09-30T09:05:45-0344').should.be.ok;
+        });
+        it('Should match 2010-10-01T04:53+06:30', () => {
+            dateMatcher.test('2010-10-01T04:53+06:30').should.be.ok;
+        });
+
+        it('Should not match 2017', () => {
+            dateMatcher.test('2017').should.be.false;
+        });
+        it('Should not match 1998-12', () => {
+            dateMatcher.test('1998-12').should.be.false;
+        });
+        it('Should not match 2017-', () => {
+            dateMatcher.test('2017-').should.be.false;
+        });
+        it('Should not match 1998-1', () => {
+            dateMatcher.test('1998-1').should.be.false;
+        });
+        it('Should not match 2007-02-30', () => {
+            dateMatcher.test('2007-02-30').should.be.false;
+        });
+        it('Should not match 2002-04-99', () => {
+            dateMatcher.test('2002-04-99').should.be.false;
+        });
+        it('Should not match 2011-04-22T', () => {
+            dateMatcher.test('2011-04-22T').should.be.false;
+        });
+        it('Should not match 1984-04-22T9', () => {
+            dateMatcher.test('1984-04-22T9').should.be.false;
+        });
+        it('Should not match 2010-10-01T04:', () => {
+            dateMatcher.test('2010-10-01T04:').should.be.false;
+        });
+        it('Should not match 1980-01-11T03:5', () => {
+            dateMatcher.test('1980-01-11T03:5').should.be.false;
+        });
+        it('Should not match 1980-01-11T03:71', () => {
+            dateMatcher.test('1980-01-11T03:71').should.be.false;
+        });
+        it('Should not match 1891-09-30T09:05:7', () => {
+            dateMatcher.test('1891-09-30T09:05:7').should.be.false;
+        });
+        it('Should not match 1987-07-21T07:33:05.4', () => {
+            dateMatcher.test('1987-07-21T07:33:05.4').should.be.false;
+        });
+        it('Should not match 1999-02-28T05:13:35.45', () => {
+            dateMatcher.test('1999-02-28T05:13:35.45').should.be.false;
+        });
+    });
+
+    describe('ISO8601_DATE_TIME', () => {
+        const dateMatcher = new RegExp(`^(?:${DateValidator.ISO8601_DATE_TIME})$`, 'u');
         it('Should match 2017', () => {
             dateMatcher.test('2017').should.be.ok;
         });

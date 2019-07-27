@@ -11,7 +11,8 @@ const SECONDS = MINUTES;
 const MILLISECONDS = '\\d{3}';
 const TIMEZONE = `Z|[-+](?:${HOURS})(?::?${MINUTES})?`;
 const TIME = `(?:${HOURS})(?::${MINUTES}(?::${SECONDS}(\\.${MILLISECONDS})?)?)?`;
-const ISO8601_FULL_DATE = `${YEAR}(?:-(?:(?:${MONTH})|(?:${MONTH_DAY})(?:T${TIME}(?:${TIMEZONE})?)?))?`;
+const ISO8601_SHORT_DATE = `${YEAR}-(?:${MONTH_DAY})(?:T${TIME}(?:${TIMEZONE})?)?`;
+const ISO8601_DATE_TIME = `${YEAR}(?:-(?:(?:${MONTH})|(?:${MONTH_DAY})(?:T${TIME}(?:${TIMEZONE})?)?))?`;
 
 /**
  * Date Validator constants
@@ -24,13 +25,14 @@ const ISO8601_FULL_DATE = `${YEAR}(?:-(?:(?:${MONTH})|(?:${MONTH_DAY})(?:T${TIME
  * @constant {string} DATE_VALIDATOR.DAYS_30_MONTHS String matcher for ISO8601 2 digits 30 days month
  * @constant {string} DATE_VALIDATOR.DAYS_31_MONTHS String matcher for ISO8601 2 digits 31 days month
  * @constant {string} DATE_VALIDATOR.MONTH_DAY String matcher for ISO8601 2 digits month + 2 digit day tailored for 28/29, 30 and 31 days months (##-##)
+ * @constant {string} DATE_VALIDATOR.ISO8601_SHORT_DATE String matcher for ISO8601 date: 4 digits year, 2 digits month and 2 digit day tailored for 28/29, 30 and 31 days months (####-##-##)
  * @constant {string} DATE_VALIDATOR.HOURS String matcher for ISO8601 2 digits hours (00-23)
  * @constant {string} DATE_VALIDATOR.MINUTES String matcher for ISO8601 2 digits minutes (00-59)
  * @constant {string} DATE_VALIDATOR.SECONDS String matcher for ISO8601 2 digits seconds (00-59)
  * @constant {string} DATE_VALIDATOR.MILLISECONDS String matcher for ISO8601 3 digits milliseconds (000-999)
  * @constant {string} DATE_VALIDATOR.TIMEZONE String matcher for ISO8601 timezone (Z or ±## or ±##:## or ±####)
  * @constant {string} DATE_VALIDATOR.TIME String matcher for ISO8601 for time (T## , T##:## , T##:##:## , T##:##:##.###)
- * @constant {string} DATE_VALIDATOR.ISO8601_FULL_DATE String matcher for ISO8601 date/time format
+ * @constant {string} DATE_VALIDATOR.ISO8601_DATE_TIME String matcher for ISO8601 date/time format
  * @memberof DATE_VALIDATOR
 */
 module.exports = Object.freeze({
@@ -41,11 +43,12 @@ module.exports = Object.freeze({
     DAYS_30_MONTHS,
     DAYS_31_MONTHS,
     MONTH_DAY,
+    ISO8601_SHORT_DATE,
     HOURS,
     MINUTES,
     SECONDS,
     MILLISECONDS,
     TIMEZONE,
     TIME,
-    ISO8601_FULL_DATE
+    ISO8601_DATE_TIME
 });

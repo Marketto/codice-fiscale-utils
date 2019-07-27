@@ -318,7 +318,7 @@ class Validator {
      * @memberof CodiceFiscaleUtils.Validator
      */
     static date(codiceFiscale){
-        let matcher = DATE_VALIDATOR.ISO8601_FULL_DATE;
+        let matcher = DATE_VALIDATOR.ISO8601_DATE_TIME;
         if (codiceFiscale) {
             const parsedDate = Parser.cfToBirthDate(codiceFiscale);
             if (parsedDate) {
@@ -365,7 +365,7 @@ class Validator {
         const parsedPlace = Parser.cfToBirthPlace(codiceFiscale);
 
         if (parsedPlace) {
-            const nameMatcher = parsedPlace.name.replace(/./gu, c => (Diacritics[c]===c ? c : `[${c}${Diacritics[c]}]`));
+            const nameMatcher = parsedPlace.name.replace(/./gu, c => Diacritics[c]===c ? c : `[${c}${Diacritics[c]}]`);
             matcher = `(?:${nameMatcher}|${parsedPlace.belfioreCode})`;
         }
 

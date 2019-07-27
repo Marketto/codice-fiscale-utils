@@ -1,6 +1,7 @@
 const Belfiore = require('./belfiore');
 const BirthMonth = require('./birthMonth.enum');
 const CheckDigitizer = require('./checkDigitizer');
+const DATE_VALIDATOR = require('./dateValidator.const');
 const Diacritics = require('./diacritics');
 const Gender = require('./gender.enum');
 const moment = require('moment');
@@ -392,7 +393,7 @@ class Parser {
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * 
-     * @param {Date|Moment|Array<number>} date Date, Moment instance or array of numbers [year, month, day]
+     * @param {Date|Moment|string|Array<number>} date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
      * @returns {Date|null} Parsed Date or null if not valid
      * @memberof Parser
      */
@@ -400,6 +401,7 @@ class Parser {
         if (!(
             date instanceof Date ||
             date instanceof moment ||
+            typeof date === 'string' && (new RegExp(DATE_VALIDATOR.ISO8601_SHORT_DATE)).test(date) ||
             Array.isArray(date) && !date.some(value => typeof value !== 'number')
         )) {
             return null;
@@ -415,7 +417,7 @@ class Parser {
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * 
-     * @param {Date|Moment|Array<number>} date Date, Moment instance or array of numbers [year, month, day]
+     * @param {Date|Moment|string|Array<number>} date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
      * @param {Gender|string} gender Gender enum value
      * @returns {string|null} Birth date and Gender CF code
      * @memberof Parser
@@ -439,7 +441,7 @@ class Parser {
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * 
-     * @param {Date|Moment|Array<number>} date Date, Moment instance or array of numbers [year, month, day]
+     * @param {Date|Moment|string|Array<number>} date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
      * @param {string} name City or Country name
      * @param {string} [province] Province code for cities
      * @returns {string|null} Matching place belfiore code, if only once is matching criteria
