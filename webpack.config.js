@@ -6,7 +6,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'codice-fiscale-utils.js',
         library: 'codiceFiscaleUtils',
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
+        globalObject: 'typeof self !== \'undefined\' ? self : this'
     },
     externals: {
         moment: {
