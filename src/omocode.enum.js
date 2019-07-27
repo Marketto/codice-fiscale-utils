@@ -17,7 +17,7 @@ const OMOCODE = [
  */
 module.exports = Object.freeze(new Proxy(OMOCODE, {
     get(receiver, name) {
-        if(receiver.includes(name)) {
+        if(typeof name  === 'string' && receiver.includes(name)) {
             return receiver.indexOf(name);
         }
         return this[name] || receiver[name];

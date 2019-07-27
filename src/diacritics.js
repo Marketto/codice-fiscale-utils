@@ -118,7 +118,7 @@ module.exports = new Proxy({
     ...core,
     validator: new Proxy({}, {
         get(receiver, name) {
-            if (core.matcher[name]) {
+            if (typeof name  === 'string' && core.matcher[name]) {
                 return new RegExp(`[${core.matcher[name]}]`, 'u');
             }
             return receiver[name];

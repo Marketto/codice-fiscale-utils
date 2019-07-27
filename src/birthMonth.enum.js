@@ -19,7 +19,7 @@ const MONTHS = [
  */
 module.exports = Object.freeze(new Proxy(MONTHS, {
     get(receiver, name) {
-        if(receiver.includes(name)) {
+        if (typeof name  === 'string' && receiver.includes(name)) {
             return receiver.indexOf(name);
         }
         return this[name] || receiver[name];
