@@ -1,3 +1,4 @@
+const CheckDigitizer = require('./checkDigitizer');
 const DATE_VALIDATOR = require('./dateValidator.const');
 const Diacritics = require('./diacritics');
 const Gender = require('./gender.enum');
@@ -370,6 +371,28 @@ class Validator {
         }
 
         return new RegExp(`^${matcher}$`, 'ui');
+    }
+
+    /**
+     * Check the given cf validity by form, birth date/place and digit code
+     * 
+     * @param {string} codiceFiscale Complete CF to parse
+     * @returns {boolean} Generic or specific regular expression
+     * @memberof CodiceFiscaleUtils.Validator
+     */
+    static isValid(codiceFiscale) {
+        const matcher = new RegExp(`^(?:${VALIDATOR.CODICE_FISCALE})$`, 'ui');
+        if (
+            // Checking form validity
+            !matcher.test(codiceFiscale) ||
+            //Checking 16th char check digit validity
+            codiceFiscale.substr(15, 1).toUpperCase() !== CheckDigitizer.checkDigit(codiceFiscale) ||
+            //Checking Birth date/place validity
+            !Parser.cfToBirthPlace(codiceFiscale)
+        ) {
+            return false;
+        }
+        return true;
     }
 }
 
