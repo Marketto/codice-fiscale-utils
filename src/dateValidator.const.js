@@ -10,9 +10,9 @@ const MINUTES = '[0-5]\\d';
 const SECONDS = MINUTES;
 const MILLISECONDS = '\\d{3}';
 const TIMEZONE = `Z|[-+](?:${HOURS})(?::?${MINUTES})?`;
-const TIME = `(?:${HOURS})(?::${MINUTES}(?::${SECONDS}(\\.${MILLISECONDS})?)?)?`;
-const ISO8601_SHORT_DATE = `${YEAR}-(?:${MONTH_DAY})(?:T${TIME}(?:${TIMEZONE})?)?`;
-const ISO8601_DATE_TIME = `${YEAR}(?:-(?:(?:${MONTH})|(?:${MONTH_DAY})(?:T${TIME}(?:${TIMEZONE})?)?))?`;
+const TIME = `(?:${HOURS})(?::${MINUTES}(?::${SECONDS}(\\.${MILLISECONDS})?)?(?:${TIMEZONE})?)?`;
+const ISO8601_SHORT_DATE = `${YEAR}-(?:${MONTH_DAY})(?:T${TIME})?`;
+const ISO8601_DATE_TIME = `${YEAR}(?:-(?:(?:${MONTH})|(?:${MONTH_DAY})(?:T${TIME})?))?`;
 
 /**
  * Date Validator constants

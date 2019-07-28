@@ -1009,11 +1009,20 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
         it('Should match 04:53', () => {
             timeMatcher.test('04:53').should.be.ok;
         });
+        it('Should match 04:53+0300', () => {
+            timeMatcher.test('04:53+0300').should.be.ok;
+        });
         it('Should match 09:05:45', () => {
             timeMatcher.test('09:05:45').should.be.ok;
         });
+        it('Should match 09:05:45-06:30', () => {
+            timeMatcher.test('09:05:45-06:30').should.be.ok;
+        });
         it('Should match 07:33:05.371', () => {
             timeMatcher.test('07:33:05.371').should.be.ok;
+        });
+        it('Should match 07:33:05.371Z', () => {
+            timeMatcher.test('07:33:05.371Z').should.be.ok;
         });
 
         it('Should not match 9', () => {
@@ -1021,6 +1030,9 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
         });
         it('Should not match 04:', () => {
             timeMatcher.test('04:').should.be.false;
+        });
+        it('Should not match 04+0200', () => {
+            timeMatcher.test('04+0200').should.be.false;
         });
         it('Should not match 03:5', () => {
             timeMatcher.test('03:5').should.be.false;
@@ -1091,14 +1103,23 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
         it('Should not match 2002-04-99', () => {
             dateMatcher.test('2002-04-99').should.be.false;
         });
+        it('Should not match 2002-04-99+0400', () => {
+            dateMatcher.test('2002-04-99+0400').should.be.false;
+        });
         it('Should not match 2011-04-22T', () => {
             dateMatcher.test('2011-04-22T').should.be.false;
+        });
+        it('Should not match 2011-04-22T-07:00', () => {
+            dateMatcher.test('2011-04-22T-07:00').should.be.false;
         });
         it('Should not match 1984-04-22T9', () => {
             dateMatcher.test('1984-04-22T9').should.be.false;
         });
         it('Should not match 2010-10-01T04:', () => {
             dateMatcher.test('2010-10-01T04:').should.be.false;
+        });
+        it('Should not match 2010-10-01T04+0800', () => {
+            dateMatcher.test('2010-10-01T04+0800').should.be.false;
         });
         it('Should not match 1980-01-11T03:5', () => {
             dateMatcher.test('1980-01-11T03:5').should.be.false;
@@ -1162,14 +1183,23 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
         it('Should not match 2002-04-99', () => {
             dateMatcher.test('2002-04-99').should.be.false;
         });
+        it('Should not match 2002-04-99+0400', () => {
+            dateMatcher.test('2002-04-99+0400').should.be.false;
+        });
         it('Should not match 2011-04-22T', () => {
             dateMatcher.test('2011-04-22T').should.be.false;
+        });
+        it('Should not match 2011-04-22T-07:00', () => {
+            dateMatcher.test('2011-04-22T-07:00').should.be.false;
         });
         it('Should not match 1984-04-22T9', () => {
             dateMatcher.test('1984-04-22T9').should.be.false;
         });
         it('Should not match 2010-10-01T04:', () => {
             dateMatcher.test('2010-10-01T04:').should.be.false;
+        });
+        it('Should not match 2010-10-01T04+0800', () => {
+            dateMatcher.test('2010-10-01T04+0800').should.be.false;
         });
         it('Should not match 1980-01-11T03:5', () => {
             dateMatcher.test('1980-01-11T03:5').should.be.false;
