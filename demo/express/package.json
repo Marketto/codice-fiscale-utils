@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@marketto/codice-fiscale-utils": "^1.0.0",
+    "@marketto/codice-fiscale-utils": "^1.0.1",
     "express": "^4.17.1"
   }
 }
