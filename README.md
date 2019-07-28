@@ -17,15 +17,16 @@ JS utilities to handle Italian Codice Fiscale
 
 ## FAQs?
 1. **Why should I need a library? Can't I use just a RegExp?**
-    *A RegExp whould just check the form of a CodiceFiscale, not coherence between birth date and place, not validity of 16th check digit char*
-
-2. **Why it's ~250KB? Seems a lot**
+    *A RegExp would just check the form of a CodiceFiscale, not coherence between birth date and place, not validity of 16th check digit char*
+2. **What about the omocodes (Omocodia/Omocodice) problem, does it work?**
+   *Absolutely! There's a dedicated class to encode or decode such kind of CodiceFiscale and it's properly integrated in* [***Parser***](#parser) *and* [***Validator***](#validator) *methods*
+3. **Why it's ~250KB? Seems a lot**
    *It contains all you need in a FE or BE environment to properly check and validate a CodiceFiscale by its own or against spare personal informations, the full list of all Italian cities and foregin countries since [1861](https://en.wikipedia.org/wiki/Kingdom_of_Italy) including belfiore codes, province for cities,  begin and end date*
 
-3. **Should I trust such city/country informations and do I need them?**
+4. **Should I trust such city/country informations and do I need them?**
    *Sure, every single information is provided with original source referrals like website, license and name. The script used to create the embedded dataset uses only official informations provided by Italian istitutional sources under* ***CC-BY*** *like 'Agenzia delle entrate', 'Ministero dell'interno' or 'ISTAT'; Give a look at the * [Assets Licenses and Authors](#assets-licenses-and-authors) *chapters*
 
-4. **The examples seems for nodeJs, can I use this library in a FE project with other frameworks?**
+5. **The examples seems for nodeJs, can I use this library in a FE project with other frameworks?**
     *Sure, it's built to work both in node and browser environments*
 
 
