@@ -12,6 +12,39 @@ JS utilities to handle Italian Codice Fiscale
 npm i -s @marketto/codice-fiscale-utils
 ```
 
+## DOCUMENTATION
+[JsDocs @ GitHub Pages](https://marketto.github.io/codice-fiscale-utils/)
+
+## EXAMPLES
+### Parser
+#### deomocode
+`Parser.cfDeomocode('KKALMNVMAPLB331Z'); //KKALMN91A30B331Z`
+#### cfToSurname
+`Parser.cfToSurname('WYZ'); //W*Y*Z*`
+#### cfToName
+`Parser.cfToName('ZZZWAE'); //WAE*`
+#### cfToGender
+`Parser.cfToGender('XXXYYY90B20'); //M`
+`Parser.cfToGender('XXXYYY90B63'); //F`
+#### cfToBirthDay
+`Parser.cfToBirthDay('XXXYYY90B71'); //31`
+#### cfToBirthMonth
+`Parser.cfToBirthMonth('XXXYYY92C'); //2`
+#### cfToBirthYear
+Parser will consider both 19xx and 20xx, dates which can be in the last 100 years range are parsed as 20xx
+`Parser.cfToBirthYear('XXXYYY92'); //1992`
+`Parser.cfToBirthYear('XXXYYY12'); //2012`
+#### cfToBirthDate
+`const dt = Parser.cfToBirthDate('XXXYYY81A63'); //Date`
+`dt.toJSON(); //1981-01-23T...`
+#### cfToBirthPlace
+`const birthPlace = Parser.cfToBirthPlace('XXXYYY92B20H501'); //Object`
+`birthPlace.name; //ROMA`
+`birthPlace.belfioreCode; //H501`
+#### cfDecode
+`Parser.cfDecode('VRNGNY07D68C351V'); //{surname: 'V*R*N*', name: 'G*N*Y*', day: 28,month: 3, year: 2017, gender: 'F', place: 'CATANIA'}`
+
+
 ## LICENSE
 MIT License
 
