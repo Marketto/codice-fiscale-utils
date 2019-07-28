@@ -198,7 +198,7 @@ class Parser {
             return null;
         }
 
-        const dt = moment([birthYear, birthMonth, birthDay, 12]);
+        const dt = moment(Date.UTC(birthYear, birthMonth, birthDay));
         if (!dt.isValid()) {
             return null;
         }
@@ -248,13 +248,17 @@ class Parser {
      * @returns {Object} {surname, name, year, month, day, gender, place} Decoded CF Info
      */
     static cfDecode(fiscalCode) {
+        const year = this.cfToBirthYear(fiscalCode),
+            month = this.cfToBirthMonth(fiscalCode),
+            day = this.cfToBirthDay(fiscalCode);
         return {
             surname: this.cfToSurname(fiscalCode),
             name: this.cfToName(fiscalCode),
 
-            year: this.cfToBirthYear(fiscalCode),
-            month: this.cfToBirthMonth(fiscalCode),
-            day: this.cfToBirthDay(fiscalCode),
+            year,
+            month,
+            day,
+            date: new Date(Date.UTC(year, month, day)),
 
             gender: this.cfToGender(fiscalCode),
             place: (this.cfToBirthPlace(fiscalCode) || {}).name
@@ -383,7 +387,7 @@ class Parser {
         if ([year, month, day].some(param => typeof param !== 'number') || year < 1861) {
             return null;
         }
-        const date = moment([year, month, day, 12]);
+        const date = moment(Date.UTC(year, month, day));
         if (!date.isValid() || date.year() !== year || date.month() !== month || date.date() !== day) {
             return null;
         }
