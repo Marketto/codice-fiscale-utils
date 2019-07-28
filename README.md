@@ -1,10 +1,13 @@
 # codice-fiscale-utils
+[![NPM Version](https://img.shields.io/npm/v/@marketto/codice-fiscale-utils.svg)](https://www.npmjs.com/package/@marketto/codice-fiscale-utils)
+[![NPM Downloads](https://img.shields.io/npm/dm/@marketto/codice-fiscale-utils.svg)](https://www.npmjs.com/package/@marketto/codice-fiscale-utils)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils?ref=badge_shield)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=Marketto_codice-fiscale-utils&metric=alert_status)](https://sonarcloud.io/dashboard/index/Marketto_codice-fiscale-utils)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Marketto_codice-fiscale-utils&metric=coverage)](https://sonarcloud.io/dashboard/index/Marketto_codice-fiscale-utils)
 [![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=Marketto_codice-fiscale-utils&metric=sqale_rating)](https://sonarcloud.io/dashboard/index/Marketto_codice-fiscale-utils)
 [![Reliability](https://sonarcloud.io/api/project_badges/measure?project=Marketto_codice-fiscale-utils&metric=reliability_rating)](https://sonarcloud.io/dashboard/index/Marketto_codice-fiscale-utils)
 ![Build Status](http://ci.marketto.it/buildStatus/icon?job=codice-fiscale-utils)
+[![Buy me a coffee](https://img.shields.io/badge/Ko--fi-donate-blueviolet)](https://ko-fi.com/marketto)
 
 JS utilities to handle Italian Codice Fiscale
 
