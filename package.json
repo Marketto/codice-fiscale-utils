@@ -1,8 +1,8 @@
 {
   "name": "@marketto/codice-fiscale-utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "JS utilities to handle Italian Codice Fiscale",
-  "main": "dist/codice-fiscale-utils.js",
+  "main": "dist/codice-fiscale-utils.min.js",
   "module": "src/index.js",
   "scripts": {
     "test": "npx mocha",
