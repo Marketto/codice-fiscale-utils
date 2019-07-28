@@ -24,7 +24,7 @@ JS utilities to handle Italian Codice Fiscale
    *It contains all you need in a FE or BE environment to properly check and validate a CodiceFiscale by its own or against spare personal informations, the full list of all Italian cities and foregin countries since [1861](https://en.wikipedia.org/wiki/Kingdom_of_Italy) including belfiore codes, province for cities,  begin and end date*
 
 4. **Should I trust such city/country informations and do I need them?**
-   *Sure, every single information is provided with original source referrals like website, license and name. The script used to create the embedded dataset uses only official informations provided by Italian istitutional sources under* ***CC-BY*** *like 'Agenzia delle entrate', 'Ministero dell'interno' or 'ISTAT'; Give a look at the * [Assets Licenses and Authors](#assets-licenses-and-authors) *chapters*
+   *Sure, every single information is provided with original source referrals like website, license and name. The script used to create the embedded dataset uses only official informations provided by Italian istitutional sources under* ***CC-BY*** *like 'Agenzia delle entrate', 'Ministero dell'interno' or 'ISTAT'; Give a look at the* [Assets Licenses and Authors](#assets-licenses-and-authors) *chapters*
 
 5. **The examples seems for nodeJs, can I use this library in a FE project with other frameworks?**
     *Sure, it's built to work both in node and browser environments*
