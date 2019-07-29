@@ -1,13 +1,19 @@
 const CITIES_COUNTRIES = require('./asset/cities-countries.json');
 const moment = require('moment');
 
+/**
+ * Handler for cities and countries Dataset
+ * 
+ * @namespace Belfiore
+ */
 class Belfiore{
     /**
      * 
      * @param {Object} param Static json
      * @param {Array<Array<Object>>} param.data Resource data
      * @param {Array<Array<Object>>} param.licenses License array
-     * @memberof Belfiore
+     * @constructor
+     * @private
      */
     constructor({ data, licenses, activeDate, codeMatcher, province }) {
         if (codeMatcher && province) {
@@ -32,7 +38,7 @@ class Belfiore{
 
     /**
      * @returns {Array<Object>} List of places
-     * @memberof Belfiore
+     * @public
      */
     toArray() {
         return this._data
@@ -50,7 +56,7 @@ class Belfiore{
      * Search places matching given name
      * @param {string} name Place name
      * @returns {Array<Object>} List of places
-     * @memberof Belfiore
+     * @public
      */
     searchByName(name) {
         if (!name || typeof name !== 'string') {
@@ -81,7 +87,7 @@ class Belfiore{
      * Find place matching given name, retuns place object if provided name match only 1 result
      * @param {string} name Place name
      * @returns {Object|null}
-     * @memberof Belfiore
+     * @public
      */
     findByName(name) {
         if (!name || typeof name !== 'string') {
@@ -112,7 +118,7 @@ class Belfiore{
      * Returns a Proxied version of Belfiore which filters results by given date
      * @param {string|Date|Moment|Array<number>} [date = moment()] Target date to filter places active only for the given date
      * @returns {Belfiore} Belfiore instance filtered by active date
-     * @memberof Belfiore
+     * @public
      */
     active(date = moment()) {
         const { _data, _licenses, _codeMatcher, _province } = this;
@@ -129,7 +135,7 @@ class Belfiore{
      * Returns a Belfiore instance filtered by the given province
      * @param {string} code Province Code (2 A-Z char)
      * @returns {Belfiore} Belfiore instance filtered by province code
-     * @memberof Belfiore
+     * @public
      */
     byProvince(code) {
         if (!(typeof code === 'string' && (/^[A-Z]{2}$/u).test(code))) {
@@ -148,7 +154,7 @@ class Belfiore{
      * Returns a Proxied version of Belfiore which filters results by place type
      * @readonly
      * @returns {Belfiore} Belfiore instance filtered by cities
-     * @memberof Belfiore
+     * @public
      */
     get cities() {
         const { _data, _licenses, _activeDate } = this;
@@ -164,7 +170,7 @@ class Belfiore{
      * Returns a Proxied version of Belfiore which filters results by place type
      * @readonly
      * @returns {Belfiore} Belfiore instance filtered by countries
-     * @memberof Belfiore
+     * @public
      */
     get countries() {
         const { _data, _licenses, _activeDate } = this;
@@ -181,7 +187,7 @@ class Belfiore{
      * @param {Object} resource target resource
      * @param {string|number|Symbol} paramName property name to proxy
      * @returns {*} Proxied property
-     * @memberof Belfiore
+     * @private
      */
     static get (resource, paramName) {
         if (typeof paramName  === 'string' && (/^[A-Z]\d{3}$/u).test(paramName)){
@@ -223,8 +229,8 @@ class Belfiore{
      * @param {number} start text start index for seeking the value
      * @param {number} end text end index for seeking the value
      * @param {number} step length of a single value to seek properly the text string
-     * @returns {number} Found value Index or -1 if not found 
-     * @memberof Belfiore
+     * @returns {number} Found value Index or -1 if not found
+     * @private
      */
     static binaryfindIndex(text, value, start, end) {
         if (typeof text !== 'string' || !text.length) {
@@ -253,7 +259,7 @@ class Belfiore{
      * Converts belfiore code into an int
      * @param {string} code Belfiore Code
      * @returns {number} Int version of belfiore code
-     * @memberof Belfiore
+     * @private
      */
     static belfioreToInt(code) {
         return (code.charCodeAt()-65)*10**3 + parseInt(code.substr(1));
@@ -263,7 +269,7 @@ class Belfiore{
      * Converts int to belfiore code
      * @param {number} code Belfiore int code
      * @returns {string} Standard belfiore code
-     * @memberof Belfiore
+     * @private
      */
     static belfioreFromInt(code) {
         return `${String.fromCharCode(Math.floor(code / 10**3) + 65)}${code.toString().substr(-3).padStart(3, '0')}`;
@@ -273,7 +279,7 @@ class Belfiore{
      * Converst Base 32 number of days since 01/01/1861 to Moment instance
      * @param {string} base32daysFrom1861 Base 32 number of days from 1861-01-01
      * @returns {Moment} Moment instance date
-     * @memberof Belfiore
+     * @private
      */
     static decodeDate(base32daysFrom1861) {
         return moment('1861-01-01').add(parseInt(base32daysFrom1861, 32) ,'days');
@@ -283,8 +289,8 @@ class Belfiore{
      * Retrieve string at index posizion
      * @param {string} list concatenation of names
      * @param {number} index target name index
-     * @returns {string} index-th string 
-     * @memberof Belfiore
+     * @returns {string} index-th string
+     * @private
      */
     static nameByIndex(list, index) {
         let startIndex = 0,
@@ -315,7 +321,7 @@ class Belfiore{
      * @param {string|RegExp} matcher target name index
      * @yields {number} index
      * @returns {number} -1 when Done
-     * @memberof Belfiore
+     * @private
      */
     static* indexByName(list, matcher) {
         if (typeof matcher === 'string') {
@@ -339,8 +345,8 @@ class Belfiore{
      * Retrieve location for the given index in the given subset
      * @param {string} resourceData concatenation of names
      * @param {number} index target name index
-     * @returns {Object} location 
-     * @memberof Belfiore
+     * @returns {Object} location
+     * @private
      */
     static locationByIndex(resourceData, index, { activeDate, codeMatcher, province, licenses } = {}) {
         const belfioreIndex = index * 3;
@@ -388,9 +394,4 @@ class Belfiore{
     }
 }
 
-/**
- * @name Belfiore
- * @returns {Object} Belfiore
- * @memberof CodiceFiscaleUtils
- */
 module.exports = new Belfiore(CITIES_COUNTRIES);

@@ -8,7 +8,7 @@
     "test": "npx mocha",
     "coverage": "npx nyc --reporter=lcovonly npx mocha",
     "build": "npx webpack",
-    "docs": "npx jsdoc . -c jsdoc.json",
+    "docs": "npx rimraf ./docs && npx jsdoc . -c jsdoc.json",
     "update-lovs": "node ./scripts/locationUpdater.js"
   },
   "repository": {
@@ -45,6 +45,7 @@
     "nyc": "^14.1.1",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
+    "rimraf": "^2.6.3",
     "sonarqube-scanner": "^2.5.0",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.5"

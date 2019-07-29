@@ -4,8 +4,10 @@ const GENDERS = {
 };
 
 /**
- * @enum Gender
- * @memberof CodiceFiscaleUtils
+ * @namespace Gender
+ * @property {number} M 0
+ * @property {number} F 40
+ * @property {function({number})} parseNumberToGender
  */
 module.exports = Object.freeze(new Proxy(GENDERS, {
     get(receiver, name) {
@@ -26,7 +28,7 @@ module.exports = Object.freeze(new Proxy(GENDERS, {
      * Return an array of Gender constants
      *
      * @returns {Array<string>} List of Gender keys
-     * @memberof CodiceFiscaleUtils.Gender
+     * @memberof Gender
      */
     toArray(){
         return Object.keys(this);

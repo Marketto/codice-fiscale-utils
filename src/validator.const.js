@@ -51,7 +51,7 @@ const PARTIAL_CF = `${PARTIAL_FULL_NAME}|(?:${FULL_NAME_MATCHER}(?:(?:${PARTIAL_
 /**
  * Validator constants
  * @readonly
- * @constant {Object} VALIDATOR
+ * @returns {Object} VALIDATOR
  * 
  * @constant {string} VALIDATOR.CONSONANT_LIST List of consonant to be used in a RegExp
  * @constant {string} VALIDATOR.VOWEL_LIST List of vowels to be used in a RegExp
@@ -92,7 +92,7 @@ const PARTIAL_CF = `${PARTIAL_FULL_NAME}|(?:${FULL_NAME_MATCHER}(?:(?:${PARTIAL_
  * @constant {string} VALIDATOR.PARTIAL_BELFIORE_CODE_MATCHER
  * @constant {string} VALIDATOR.PARTIAL_CF
  * 
- * @memberof CodiceFiscaleUtils
+ * @namespace VALIDATOR
  */
 module.exports = Object.freeze({
     CONSONANT_LIST,

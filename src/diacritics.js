@@ -114,6 +114,10 @@ const core = {
     }
 };
 
+/**
+ * @namespace Diacritics
+ * @returns {Proxy}
+ */
 module.exports = new Proxy({
     ...core,
     validator: new Proxy({}, {

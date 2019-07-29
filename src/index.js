@@ -11,38 +11,31 @@ const VALIDATOR = require('./validator.const');
  */
 module.exports = {
     /**
-     * @name BirthMonth
-     * @memberof CodiceFiscaleUtils
+     * {@link BirthMonth}
      */
     BirthMonth,
     /**
-     * @name CheckDigitizer
-     * @memberof CodiceFiscaleUtils
+     * {@link CheckDigitizer}
      */
     CheckDigitizer,
     /**
-     * @name Gender
-     * @memberof CodiceFiscaleUtils
+     * {@link Gender}
      */
     Gender,
     /**
-     * @name Omocode
-     * @memberof CodiceFiscaleUtils
+     * {@link Omocode}
      */
     Omocode,
     /**
-     * @name Parser
-     * @memberof CodiceFiscaleUtils
+     * {@link Parser}
      */
     Parser,
     /**
-     * @name VALIDATOR
-     * @memberof CodiceFiscaleUtils
+     * {@link VALIDATOR}
      */
     VALIDATOR,
     /**
-     * @name Validator
-     * @memberof CodiceFiscaleUtils
+     * {@link Validator}
      */
     Validator
 };

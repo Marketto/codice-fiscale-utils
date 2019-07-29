@@ -30,6 +30,14 @@ const CONTROL_CODE_IN = {
 };
 
 
+/**
+ * CodiceFiscal 16th char check digit calculator
+ * @class
+ * @public
+ *//**
+ *
+ * @namespace CheckDigitizer
+ */
 class CheckDigitizer {
 
     /**
@@ -38,7 +46,7 @@ class CheckDigitizer {
      * @generator
      * @yields {number} character value odd/even
      * @returns {number} 0
-     * @memberof CheckDigitizer
+     * @public
      */
     static* evaluateChar(partialCF) {
         for(let index in partialCF){
@@ -60,7 +68,7 @@ class CheckDigitizer {
      * Evaluate given partial CF to produce last check digit character
      * @param {string} codiceFiscale Partial or complete Fiscal Code to evaluate to produce last character
      * @returns {char|null} 16th CF char
-     * @memberof CheckDigitizer
+     * @public
      */
     static checkDigit(codiceFiscale) {
         if (typeof codiceFiscale === 'string' && (new RegExp(VALIDATOR.PARTIAL_CF)).test(codiceFiscale)) {

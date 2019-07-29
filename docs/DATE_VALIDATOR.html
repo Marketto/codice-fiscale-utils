@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-		<title>Classes</title>
+		<title>DATE_VALIDATOR</title>
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -78,31 +78,195 @@
 	</header>
 	<!-- end:navbar.hbs -->		<div class="page-header">
 			<div class="container">
-				<span class="kind">list</span>
-				<h1><span class="name">Classes</span></h1>
-				<div class="summary"><p>All documented classes.</p></div>			</div>
+				<span class="kind">namespace</span>
+				<h1><span class="name">DATE_VALIDATOR</span></h1>
+			</div>
 		</div>
 	<div class="container content">
 		<div class="row">
 			<div class="col-md-9 main-content">
 						<ol class="breadcrumb">
 							<li><a href="index.html">Home</a></li>
-							<li class="active">Classes</li>
+							<li><a href="list_namespace.html">Namespaces</a></li>
+							<li class="active">DATE_VALIDATOR</li>
 						</ol>
 					<section>
-		<h2><span class="name">Classes</span></h2>
-		<article class="secondary">
-				<dl class="symbol">
-						
-						<dt class="symbol-title class public">
-			<h4 id="CheckDigitizer" class="class public"><a href="CheckDigitizer.html"><span class="signature-new">new&nbsp;</span><span class="name">CheckDigitizer</span><span class="signature-params">()</span><span class="signature-type"></span></a></h4>
+							<dl class="symbol primary">
+								<dt class="symbol-title namespace collapsible-symbol expanded">
+			<h2 class="namespace"><span class="name">DATE_VALIDATOR</span></h2>
 </dt>
-<dd class="symbol-details class public">
+<dd class="symbol-details namespace  collapsible-symbol expanded" style="max-height: 9999px;">
 	<div class="symbol-details-inner">
-	</div>
+			<div class="callout callout-primary"><h5>Description</h5>		<div class="description">Date Validator propertys</div>
+			</div>			<div class="callout callout-info">
+				<h5>Properties</h5>
+				<table class="params table table-striped">
+					<thead>
+					<tr>
+							<th>Name</th>
+						<th>Type</th>
+						<th class="last">Description</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr>
+								<td><code>DATE_VALIDATOR</code></td>
+							<td><span class="param-type">Object</span></td>
+							<td class="last">
+										<table class="params table table-striped">
+											<thead>
+											<tr>
+													<th>Name</th>
+												<th>Type</th>
+												<th class="last">Description</th>
+											</tr>
+											</thead>
+											<tbody>
+												<tr>
+														<td><code>YEAR</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 4 digits year (limited to 1000-2999)
+													</td>
+												</tr>
+												<tr>
+														<td><code>MONTH</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 2 digits month (01-12)
+													</td>
+												</tr>
+												<tr>
+														<td><code>DAY</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 2 digits day (01-31)
+													</td>
+												</tr>
+												<tr>
+														<td><code>LEAP_MONTH</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 2 digits leap month
+													</td>
+												</tr>
+												<tr>
+														<td><code>DAYS_30_MONTHS</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 2 digits 30 days month
+													</td>
+												</tr>
+												<tr>
+														<td><code>DAYS_31_MONTHS</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 2 digits 31 days month
+													</td>
+												</tr>
+												<tr>
+														<td><code>MONTH_DAY</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 2 digits month + 2 digit day tailored for 28/29, 30 and 31 days months (##-##)
+													</td>
+												</tr>
+												<tr>
+														<td><code>ISO8601_SHORT_DATE</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 date: 4 digits year, 2 digits month and 2 digit day tailored for 28/29, 30 and 31 days months (####-##-##)
+													</td>
+												</tr>
+												<tr>
+														<td><code>HOURS</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 2 digits hours (00-23)
+													</td>
+												</tr>
+												<tr>
+														<td><code>MINUTES</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 2 digits minutes (00-59)
+													</td>
+												</tr>
+												<tr>
+														<td><code>SECONDS</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 2 digits seconds (00-59)
+													</td>
+												</tr>
+												<tr>
+														<td><code>MILLISECONDS</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 3 digits milliseconds (000-999)
+													</td>
+												</tr>
+												<tr>
+														<td><code>TIMEZONE</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 timezone (Z or ±## or ±##:## or ±####)
+													</td>
+												</tr>
+												<tr>
+														<td><code>TIME</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 for time (T## , T##:## , T##:##:## , T##:##:##.###)
+													</td>
+												</tr>
+												<tr>
+														<td><code>ISO8601_DATE_TIME</code></td>
+													<td><span class="param-type">string</span></td>
+													<td class="last">
+															String matcher for ISO8601 date/time format
+													</td>
+												</tr>
+											</tbody>
+										</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="callout callout-default"><h5>Details</h5>		<form class="form-horizontal details">
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+							<!-- source -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label">Source</label>
+								<div class="col-sm-9">
+									<p class="form-control-static"><a href="dateValidator.const.js.html">dateValidator.const.js</a>, <a href="dateValidator.const.js.html#line-17">line 17</a></p>
+								</div>
+							</div>
+			
+			
+			
+			
+					</form>
+			</div>	</div>
 </dd>
-				</dl>
-		</article>
+							</dl>
+							<article class="secondary">
+							</article>
 					</section>
 			</div>
 				<div class="col-md-3 side-content">

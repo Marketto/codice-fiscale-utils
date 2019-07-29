@@ -36,23 +36,30 @@
 			<div class="navbar-collapse collapse" id="topNavigation">
 				<ul class="nav navbar-nav">
 								<li class="dropdown">
-									<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Globals<b class="caret"></b></a>
-									<ul class="dropdown-menu">
-											<li><a href="global.html#toArray">toArray</a></li>
-									</ul>
-								</li>
-								<li class="dropdown">
 									<a href="list_class.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 									<ul class="dropdown-menu">
-											<li><a href="Belfiore.Belfiore.html">Belfiore.Belfiore</a></li>
-											<li><a href="CodiceFiscaleUtils.html#.Parser">CodiceFiscaleUtils.Parser</a></li>
-											<li><a href="CodiceFiscaleUtils.html#.Validator">CodiceFiscaleUtils.Validator</a></li>
+											<li><a href="CheckDigitizer.html">CheckDigitizer</a></li>
 									</ul>
 								</li>
 								<li class="dropdown">
 									<a href="list_module.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 									<ul class="dropdown-menu">
 											<li><a href="module-CodiceFiscaleUtils.html">CodiceFiscaleUtils</a></li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="list_namespace.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+									<ul class="dropdown-menu">
+											<li><a href="Belfiore.html">Belfiore</a></li>
+											<li><a href="BirthMonth.html">BirthMonth</a></li>
+											<li><a href="CheckDigitizer.html">CheckDigitizer</a></li>
+											<li><a href="DATE_VALIDATOR.html">DATE_VALIDATOR</a></li>
+											<li><a href="Diacritics.html">Diacritics</a></li>
+											<li><a href="Gender.html">Gender</a></li>
+											<li><a href="Omocode.html">Omocode</a></li>
+											<li><a href="Parser.html">Parser</a></li>
+											<li><a href="VALIDATOR.html">VALIDATOR</a></li>
+											<li><a href="Validator_.html">Validator</a></li>
 									</ul>
 								</li>
 				</ul>
@@ -84,13 +91,19 @@
 			<pre class="prettyprint source language-javascript line-numbers"><code class="language-javascript">const CITIES_COUNTRIES = require('./asset/cities-countries.json');
 const moment = require('moment');
 
+/**
+ * Handler for cities and countries Dataset
+ * 
+ * @namespace Belfiore
+ */
 class Belfiore{
     /**
      * 
      * @param {Object} param Static json
      * @param {Array&lt;Array&lt;Object>>} param.data Resource data
      * @param {Array&lt;Array&lt;Object>>} param.licenses License array
-     * @memberof Belfiore
+     * @constructor
+     * @private
      */
     constructor({ data, licenses, activeDate, codeMatcher, province }) {
         if (codeMatcher &amp;&amp; province) {
@@ -115,7 +128,7 @@ class Belfiore{
 
     /**
      * @returns {Array&lt;Object>} List of places
-     * @memberof Belfiore
+     * @public
      */
     toArray() {
         return this._data
@@ -133,7 +146,7 @@ class Belfiore{
      * Search places matching given name
      * @param {string} name Place name
      * @returns {Array&lt;Object>} List of places
-     * @memberof Belfiore
+     * @public
      */
     searchByName(name) {
         if (!name || typeof name !== 'string') {
@@ -164,7 +177,7 @@ class Belfiore{
      * Find place matching given name, retuns place object if provided name match only 1 result
      * @param {string} name Place name
      * @returns {Object|null}
-     * @memberof Belfiore
+     * @public
      */
     findByName(name) {
         if (!name || typeof name !== 'string') {
@@ -195,7 +208,7 @@ class Belfiore{
      * Returns a Proxied version of Belfiore which filters results by given date
      * @param {string|Date|Moment|Array&lt;number>} [date = moment()] Target date to filter places active only for the given date
      * @returns {Belfiore} Belfiore instance filtered by active date
-     * @memberof Belfiore
+     * @public
      */
     active(date = moment()) {
         const { _data, _licenses, _codeMatcher, _province } = this;
@@ -212,7 +225,7 @@ class Belfiore{
      * Returns a Belfiore instance filtered by the given province
      * @param {string} code Province Code (2 A-Z char)
      * @returns {Belfiore} Belfiore instance filtered by province code
-     * @memberof Belfiore
+     * @public
      */
     byProvince(code) {
         if (!(typeof code === 'string' &amp;&amp; (/^[A-Z]{2}$/u).test(code))) {
@@ -231,7 +244,7 @@ class Belfiore{
      * Returns a Proxied version of Belfiore which filters results by place type
      * @readonly
      * @returns {Belfiore} Belfiore instance filtered by cities
-     * @memberof Belfiore
+     * @public
      */
     get cities() {
         const { _data, _licenses, _activeDate } = this;
@@ -247,7 +260,7 @@ class Belfiore{
      * Returns a Proxied version of Belfiore which filters results by place type
      * @readonly
      * @returns {Belfiore} Belfiore instance filtered by countries
-     * @memberof Belfiore
+     * @public
      */
     get countries() {
         const { _data, _licenses, _activeDate } = this;
@@ -264,7 +277,7 @@ class Belfiore{
      * @param {Object} resource target resource
      * @param {string|number|Symbol} paramName property name to proxy
      * @returns {*} Proxied property
-     * @memberof Belfiore
+     * @private
      */
     static get (resource, paramName) {
         if (typeof paramName  === 'string' &amp;&amp; (/^[A-Z]\d{3}$/u).test(paramName)){
@@ -306,8 +319,8 @@ class Belfiore{
      * @param {number} start text start index for seeking the value
      * @param {number} end text end index for seeking the value
      * @param {number} step length of a single value to seek properly the text string
-     * @returns {number} Found value Index or -1 if not found 
-     * @memberof Belfiore
+     * @returns {number} Found value Index or -1 if not found
+     * @private
      */
     static binaryfindIndex(text, value, start, end) {
         if (typeof text !== 'string' || !text.length) {
@@ -336,7 +349,7 @@ class Belfiore{
      * Converts belfiore code into an int
      * @param {string} code Belfiore Code
      * @returns {number} Int version of belfiore code
-     * @memberof Belfiore
+     * @private
      */
     static belfioreToInt(code) {
         return (code.charCodeAt()-65)*10**3 + parseInt(code.substr(1));
@@ -346,7 +359,7 @@ class Belfiore{
      * Converts int to belfiore code
      * @param {number} code Belfiore int code
      * @returns {string} Standard belfiore code
-     * @memberof Belfiore
+     * @private
      */
     static belfioreFromInt(code) {
         return `${String.fromCharCode(Math.floor(code / 10**3) + 65)}${code.toString().substr(-3).padStart(3, '0')}`;
@@ -356,7 +369,7 @@ class Belfiore{
      * Converst Base 32 number of days since 01/01/1861 to Moment instance
      * @param {string} base32daysFrom1861 Base 32 number of days from 1861-01-01
      * @returns {Moment} Moment instance date
-     * @memberof Belfiore
+     * @private
      */
     static decodeDate(base32daysFrom1861) {
         return moment('1861-01-01').add(parseInt(base32daysFrom1861, 32) ,'days');
@@ -366,8 +379,8 @@ class Belfiore{
      * Retrieve string at index posizion
      * @param {string} list concatenation of names
      * @param {number} index target name index
-     * @returns {string} index-th string 
-     * @memberof Belfiore
+     * @returns {string} index-th string
+     * @private
      */
     static nameByIndex(list, index) {
         let startIndex = 0,
@@ -398,7 +411,7 @@ class Belfiore{
      * @param {string|RegExp} matcher target name index
      * @yields {number} index
      * @returns {number} -1 when Done
-     * @memberof Belfiore
+     * @private
      */
     static* indexByName(list, matcher) {
         if (typeof matcher === 'string') {
@@ -422,8 +435,8 @@ class Belfiore{
      * Retrieve location for the given index in the given subset
      * @param {string} resourceData concatenation of names
      * @param {number} index target name index
-     * @returns {Object} location 
-     * @memberof Belfiore
+     * @returns {Object} location
+     * @private
      */
     static locationByIndex(resourceData, index, { activeDate, codeMatcher, province, licenses } = {}) {
         const belfioreIndex = index * 3;
@@ -471,11 +484,6 @@ class Belfiore{
     }
 }
 
-/**
- * @name Belfiore
- * @returns {Object} Belfiore
- * @memberof CodiceFiscaleUtils
- */
 module.exports = new Belfiore(CITIES_COUNTRIES);</code></pre>
 		</section>
 			</div>
@@ -483,7 +491,7 @@ module.exports = new Belfiore(CITIES_COUNTRIES);</code></pre>
 	</div>
 	<footer>
 				<div class="copyright">FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.</div>
-			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on 26th Jul 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
+			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 29th Jul 2019 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
 	</footer>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
