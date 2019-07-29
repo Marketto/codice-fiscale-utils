@@ -167,11 +167,11 @@ class Validator {
      */
     static cfPlace(...args) {
         let matcher = VALIDATOR.BELFIORE_CODE_MATCHER;
-        if (args.length) {
+        if (args.filter(param => !!param).length > moment(args[0]).isValid()) {
             const parsedPlace = Parser.placeToCf(...args);
             if (parsedPlace) {
                 matcher = parsedPlace.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
-            }else {
+            } else {
                 matcher = '';
             }
         }

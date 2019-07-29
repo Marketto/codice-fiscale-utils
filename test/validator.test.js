@@ -346,6 +346,9 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 it ('Should validate H501', () => {
                     cfDateValidator.test('H501').should.be.ok;
                 });
+                it ('Should validate any providing date', () => {
+                    Validator.cfPlace('1941-01-16').test('H501').should.be.ok;
+                });
             });
             describe('Specific validator', () => {
                 it ('Should validate A662 for Bari', () => {
