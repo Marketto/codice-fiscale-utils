@@ -413,6 +413,10 @@ describe('CodiceFiscaleUtils:Validator', () => {
                     Validator.codiceFiscale({ year: 1902, month: 4, day: 5, gender: 'F', place: 'Torino' })
                         .test('MRNMIA03E45L219X').should.be.false;
                 });
+                it('Should match VRNGNY97A65C351V providing partial surname', () => {
+                    Validator.codiceFiscale({ surname: 'V' })
+                        .test('VRNGNY97A65C351V').should.be.true;
+                });
             });
 
             describe('Specific validator', () => {

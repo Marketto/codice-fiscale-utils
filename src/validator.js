@@ -214,11 +214,11 @@ class Validator {
                     for (let i=0; i<generator.length; i++) {
                         const cfPartValidator = generator[i]();
                         if (!cfPartValidator) {
-                            return null;
+                            break;
                         }
                         const cfValue = (cfPartValidator.toString().match(/\^(.+)\$/) || [])[1];
                         if (!cfValue) {
-                            return null;
+                            break;
                         }
                         matcher += `(?:${cfValue})`;
                     }
