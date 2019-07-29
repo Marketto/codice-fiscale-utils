@@ -373,17 +373,15 @@ Validator.isValid('VRNGNY07D68C351K'); //false - invalid check digit
 Validator.isValid('GSTPPP99C06D620V'); //false - invalid birth date/place
 ```
 
+### ASSETS LICENSES AND AUTHORS
+* Cities List of Values: [CC BY 4.0](asset/MINISTERO_DELL_INTERNO.LICENSE) Ministero dell'interno
+* Cities List of Values: [CC BY 4.0](asset/AGENZIA_DELLE_ENTRATE.LICENSE) Agenzia delle Entrate
+* Countries List of Values: [CC BY 3.0](asset/ISTITUTO_NAZIONALE_DI_STATISTICA.LICENSE) Istituto nazionale di statistica
 
 ## LICENSE
 [MIT License](LICENSE)
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils?ref=badge_large)
 
-
-### ASSETS LICENSES AND AUTHORS
-* Cities List of Values: CC BY 4.0 Ministero dell'interno
-* Countries List of Values: CC BY 3.0 Istituto nazionale di statistica
-
-
-## AUTHORS
+## AUTHOR
 [Marco Ricupero](mailto:marco.ricupero@gmail.com)
