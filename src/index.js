@@ -1,4 +1,5 @@
 const BirthMonth = require('./birthMonth.enum');
+const Belfiore = require('./belfiore');
 const CheckDigitizer = require('./checkDigitizer');
 const Gender = require('./gender.enum');
 const Omocode = require('./omocode.enum');
@@ -10,6 +11,10 @@ const VALIDATOR = require('./validator.const');
  * @module CodiceFiscaleUtils
  */
 module.exports = {
+    /**
+     * {@link Belfiore}
+     */
+    Belfiore,
     /**
      * {@link BirthMonth}
      */
