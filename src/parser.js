@@ -229,7 +229,7 @@ class Parser {
                 return null;
             }
             let validityCheck = true;
-            if (validityCheck && creationDate) {
+            if (creationDate) {
                 validityCheck = moment(birthDate).isSameOrAfter(moment(creationDate));
             }
             if(validityCheck && expirationDate) {
