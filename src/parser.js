@@ -222,17 +222,17 @@ class Parser {
             return null;
         }
 
-        const {creationDate, expirationDate, active} = birthPlace;
+        const {creationDate, expirationDate} = birthPlace;
         if (creationDate || expirationDate) {
             const birthDate = this.cfToBirthDate(codiceFiscale);
             if (!birthDate) {
                 return null;
             }
-            let validityCheck = active;
-            if (creationDate) {
+            let validityCheck = true;
+            if (validityCheck && creationDate) {
                 validityCheck = moment(birthDate).isSameOrAfter(moment(creationDate));
             }
-            if(expirationDate) {
+            if(validityCheck && expirationDate) {
                 validityCheck = moment(birthDate).isSameOrBefore(moment(expirationDate));
             }
             if (!validityCheck) {
