@@ -366,7 +366,7 @@ class Validator {
 
         if (parsedPlace) {
             const nameMatcher = parsedPlace.name.replace(/./gu, c => Diacritics[c]===c ? c : `[${c}${Diacritics[c]}]`);
-            matcher = `(?:${nameMatcher}|${parsedPlace.belfioreCode})`;
+            matcher = `(?:(?:${nameMatcher})|${parsedPlace.belfioreCode})`;
         }
 
         return new RegExp(`^${matcher}$`, 'ui');
