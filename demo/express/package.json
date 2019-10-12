@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Marco Ricupero <marco.ricupero@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@marketto/codice-fiscale-utils": "file:./../..",
     "express": "^4.17.1"

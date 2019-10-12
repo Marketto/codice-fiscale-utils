@@ -24,13 +24,12 @@ const OMOCODE = [
  * @property {number} T
  * @property {number} U
  * @property {number} V
- * @property {function({string})} parseCodeToNumber 
  */
-module.exports = Object.freeze(new Proxy(OMOCODE, {
+export default Object.freeze(new Proxy({ OMOCODE }, {
     get(receiver, name) {
-        if(typeof name  === 'string' && receiver.includes(name)) {
-            return receiver.indexOf(name);
+        if(typeof name  === 'string' && receiver.OMOCODE.includes(name)) {
+            return receiver.OMOCODE.indexOf(name);
         }
-        return this[name] || receiver[name];
+        return this[name] || receiver.OMOCODE[name] || receiver[name];
     }
 }));

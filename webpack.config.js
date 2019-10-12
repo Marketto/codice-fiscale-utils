@@ -6,9 +6,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'codice-fiscale-utils.min.js',
-        library: 'codiceFiscaleUtils',
-        libraryTarget: 'umd',
-        globalObject: 'typeof self !== \'undefined\' ? self : this'
+        libraryTarget: 'commonjs'
     },
     externals: {
         moment: {
@@ -17,5 +15,6 @@ module.exports = {
             amd: 'moment',
             var: 'moment'
         }
-    }
+    },
+    devtool: 'source-map'
 };

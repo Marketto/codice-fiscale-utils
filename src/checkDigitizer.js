@@ -1,4 +1,4 @@
-const VALIDATOR = require('./validator.const');
+import VALIDATOR from './validator.const';
 
 const CONTROL_CODE_IN = {
     'A': 1,
@@ -42,14 +42,14 @@ class CheckDigitizer {
 
     /**
      * Partial FiscalCode Evaluator
-     * @param {string} partialCF Partial Fiscal Code to evaluate
+     * @param {string} [partialCF=''] Partial Fiscal Code to evaluate
      * @generator
      * @yields {number} character value odd/even
      * @returns {number} 0
      * @public
      */
-    static* evaluateChar(partialCF) {
-        for(let index in partialCF){
+    static* evaluateChar(partialCF = '') {
+        for(let index in partialCF.split('')){
             const char = partialCF[index].toUpperCase();
             const isNumber = (/^\d/u).test(char);
             //Odd/Even are shifted/swapped (array starts from 0, 'Agenzia delle Entrate' documentation counts the string from 1)
@@ -81,4 +81,4 @@ class CheckDigitizer {
     }
 }
 
-module.exports = CheckDigitizer;
+export default CheckDigitizer;

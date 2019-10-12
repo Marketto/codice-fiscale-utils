@@ -1,12 +1,12 @@
-const Belfiore = require('./belfiore');
-const BirthMonth = require('./birthMonth.enum');
-const CheckDigitizer = require('./checkDigitizer');
-const DATE_VALIDATOR = require('./dateValidator.const');
-const Diacritics = require('./diacritics');
-const Gender = require('./gender.enum');
-const moment = require('moment');
-const Omocode = require('./omocode.enum');
-const VALIDATOR = require('./validator.const');
+import Belfiore from './belfiore';
+import BirthMonth from './birthMonth.enum';
+import CheckDigitizer from './checkDigitizer';
+import DATE_VALIDATOR from './dateValidator.const';
+import Diacritics from './diacritics';
+import Gender from './gender.enum';
+import moment from 'moment';
+import Omocode from './omocode.enum';
+import VALIDATOR from './validator.const';
 
 /**
  * @namespace Parser
@@ -517,4 +517,4 @@ class Parser {
     }
 }
 
-module.exports = Parser;
+export default Parser;

@@ -1,13 +1,11 @@
 const chai = require('chai');
 chai.use(require('chai-things'));
-const expect = chai.expect;
 chai.should();
+const {DATE_VALIDATOR} = require('../dist/codice-fiscale-utils.min');
 
-describe('CodiceFiscaleUtils:DateValidator', () => {
-    const DateValidator = require('../src/dateValidator.const');
-
+describe('CodiceFiscaleUtils:DATE_VALIDATOR', () => {
     describe('YEAR', () => {
-        const yearMatcher = new RegExp(`^(?:${DateValidator.YEAR})$`, 'u');
+        const yearMatcher = new RegExp(`^(?:${DATE_VALIDATOR.YEAR})$`, 'u');
         it('Should match year 2016', () => {
             yearMatcher.test('2016').should.be.ok;
         });
@@ -78,7 +76,7 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
     });
 
     describe('MONTH', () => {
-        const monthMatcher = new RegExp(`^(?:${DateValidator.MONTH})$`, 'u');
+        const monthMatcher = new RegExp(`^(?:${DATE_VALIDATOR.MONTH})$`, 'u');
         it('Should match month 01', () => {
             monthMatcher.test('01').should.be.ok;
         });
@@ -135,7 +133,7 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
     });
 
     describe('DAY', () => {
-        const dayMatcher = new RegExp(`^(?:${DateValidator.DAY})$`, 'u');
+        const dayMatcher = new RegExp(`^(?:${DATE_VALIDATOR.DAY})$`, 'u');
         
         it('Should match day 01', () => {
             dayMatcher.test('01').should.be.ok;
@@ -238,7 +236,7 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
     });
 
     describe('MONTH_DAY', () => {
-        const monthDayMatcher = new RegExp(`^(?:${DateValidator.MONTH_DAY})$`, 'u');
+        const monthDayMatcher = new RegExp(`^(?:${DATE_VALIDATOR.MONTH_DAY})$`, 'u');
         
         it('Should match day 01-01', () => {
             monthDayMatcher.test('01-01').should.be.ok;
@@ -393,7 +391,7 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
     });
 
     describe('HOURS', () => {
-        const hoursMatcher = new RegExp(`^(?:${DateValidator.HOURS})$`, 'u');
+        const hoursMatcher = new RegExp(`^(?:${DATE_VALIDATOR.HOURS})$`, 'u');
         it('Should match 00', () => {
             hoursMatcher.test('00').should.be.ok;
         });
@@ -497,7 +495,7 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
     });
 
     describe('MINUTES', () => {
-        const minutesMatcher = new RegExp(`^(?:${DateValidator.MINUTES})$`, 'u');
+        const minutesMatcher = new RegExp(`^(?:${DATE_VALIDATOR.MINUTES})$`, 'u');
         it('Should match 00', () => {
             minutesMatcher.test('00').should.be.ok;
         });
@@ -694,7 +692,7 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
     });
 
     describe('SECONDS', () => {
-        const secondsMatcher = new RegExp(`^(?:${DateValidator.SECONDS})$`, 'u');
+        const secondsMatcher = new RegExp(`^(?:${DATE_VALIDATOR.SECONDS})$`, 'u');
         it('Should match 00', () => {
             secondsMatcher.test('00').should.be.ok;
         });
@@ -891,7 +889,7 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
     });
 
     describe('MILLISECONDS', () => {
-        const msMatcher = new RegExp(`^(?:${DateValidator.MILLISECONDS})$`, 'u');
+        const msMatcher = new RegExp(`^(?:${DATE_VALIDATOR.MILLISECONDS})$`, 'u');
         it('Should match 000', () => {
             msMatcher.test('000').should.be.ok;
         });
@@ -944,7 +942,7 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
     });
 
     describe('TIMEZONE', () => {
-        const tmzMatcher = new RegExp(`^(?:${DateValidator.TIMEZONE})$`, 'u');
+        const tmzMatcher = new RegExp(`^(?:${DATE_VALIDATOR.TIMEZONE})$`, 'u');
         it ('Should match Z', () => {
             tmzMatcher.test('Z').should.be.ok;
         });
@@ -1001,7 +999,7 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
     });
 
     describe('TIME', () => {
-        const timeMatcher = new RegExp(`^(?:${DateValidator.TIME})$`, 'u');
+        const timeMatcher = new RegExp(`^(?:${DATE_VALIDATOR.TIME})$`, 'u');
         
         it('Should match 23', () => {
             timeMatcher.test('23').should.be.ok;
@@ -1058,7 +1056,7 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
     });
 
     describe('ISO8601_SHORT_DATE', () => {
-        const dateMatcher = new RegExp(`^(?:${DateValidator.ISO8601_SHORT_DATE})$`, 'u');
+        const dateMatcher = new RegExp(`^(?:${DATE_VALIDATOR.ISO8601_SHORT_DATE})$`, 'u');
 
         it('Should match 2002-04-22', () => {
             dateMatcher.test('2002-04-22').should.be.ok;
@@ -1139,7 +1137,7 @@ describe('CodiceFiscaleUtils:DateValidator', () => {
     });
 
     describe('ISO8601_DATE_TIME', () => {
-        const dateMatcher = new RegExp(`^(?:${DateValidator.ISO8601_DATE_TIME})$`, 'u');
+        const dateMatcher = new RegExp(`^(?:${DATE_VALIDATOR.ISO8601_DATE_TIME})$`, 'u');
         it('Should match 2017', () => {
             dateMatcher.test('2017').should.be.ok;
         });

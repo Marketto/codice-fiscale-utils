@@ -34,7 +34,7 @@ const ISO8601_DATE_TIME = `${YEAR}(?:-(?:(?:${MONTH})|(?:${MONTH_DAY})(?:T${TIME
  * @property {string} DATE_VALIDATOR.TIME String matcher for ISO8601 for time (T## , T##:## , T##:##:## , T##:##:##.###)
  * @property {string} DATE_VALIDATOR.ISO8601_DATE_TIME String matcher for ISO8601 date/time format
 */
-module.exports = Object.freeze({
+export default Object.freeze({
     YEAR,
     MONTH,
     DAY,

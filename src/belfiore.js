@@ -1,5 +1,5 @@
-const CITIES_COUNTRIES = require('./asset/cities-countries.json');
-const moment = require('moment');
+import CITIES_COUNTRIES from './asset/cities-countries.json';
+import moment from 'moment';
 
 /**
  * Handler for cities and countries Dataset
@@ -287,12 +287,12 @@ class Belfiore{
 
     /**
      * Retrieve string at index posizion
-     * @param {string} list concatenation of names
+     * @param {string} [list=''] concatenation of names
      * @param {number} index target name index
      * @returns {string} index-th string
      * @private
      */
-    static nameByIndex(list, index) {
+    static nameByIndex(list = '', index) {
         let startIndex = 0,
             endIndex = list.indexOf('|', startIndex + 1),
             counter = index;
@@ -317,13 +317,13 @@ class Belfiore{
     /**
      * Retrieve string at index posizion
      * @generator
-     * @param {string} list concatenation of names
+     * @param {string} [list=''] concatenation of names
      * @param {string|RegExp} matcher target name index
      * @yields {number} index
      * @returns {number} -1 when Done
      * @private
      */
-    static* indexByName(list, matcher) {
+    static* indexByName(list = '', matcher) {
         if (typeof matcher === 'string') {
             matcher = new RegExp(matcher, 'i');
         }
@@ -394,4 +394,4 @@ class Belfiore{
     }
 }
 
-module.exports = new Belfiore(CITIES_COUNTRIES);
+export default new Belfiore(CITIES_COUNTRIES);
