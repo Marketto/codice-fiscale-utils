@@ -2,10 +2,10 @@ const chai = require('chai');
 chai.use(require('chai-things'));
 const expect = chai.expect;
 chai.should();
+const {Gender, BirthMonth, Omocode} = require('../dist/codice-fiscale-utils.min');
 
 describe('CodiceFiscaleUtils:Enums', () => {
     describe('Gender', () => {
-        const Gender = require('../src/gender.enum');
         describe('gender.toArray()', () => {
             it('Should return ["M", "F"]', () => {
                 Gender.toArray().should.be.an('array');
@@ -44,7 +44,6 @@ describe('CodiceFiscaleUtils:Enums', () => {
     });
 
     describe('BirthMonth', () => {
-        const BirthMonth = require('../src/birthMonth.enum');
         it('Should return month numbers for proper codes', () => {
             BirthMonth.A.should.be.equal(0);
             BirthMonth.B.should.be.equal(1);
@@ -85,7 +84,6 @@ describe('CodiceFiscaleUtils:Enums', () => {
     });
 
     describe('Omocode', () => {
-        const Omocode = require('../src/omocode.enum');
         it('Should return numeric representation for proper code', () => {
             Omocode.L.should.be.equal(0);
             Omocode.M.should.be.equal(1);

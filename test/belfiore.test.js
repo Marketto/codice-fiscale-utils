@@ -2,9 +2,9 @@ const chai = require('chai');
 chai.use(require('chai-things'));
 const expect = chai.expect;
 chai.should();
+const {Belfiore} = require('../dist/codice-fiscale-utils.min');
 
 describe('CodiceFiscaleUtils:Belfiore', () => {
-    const Belfiore = require('../src/belfiore');
     describe('Belfiore.constructor', () => {
         describe('Belfiore.constructor.binaryfindIndex', () => {
             it('Should return proper index', () => {

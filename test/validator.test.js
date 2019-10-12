@@ -1,10 +1,9 @@
 const chai = require('chai');
 chai.use(require('chai-things'));
-const expect = chai.expect;
 chai.should();
+const {Validator} = require('../dist/codice-fiscale-utils.min');
 
 describe('CodiceFiscaleUtils:Validator', () => {
-    const Validator = require('../src/validator');
     describe('codiceFiscale', () => {
         describe('cfSurname', () => {
             describe('Generic Validator', () => {

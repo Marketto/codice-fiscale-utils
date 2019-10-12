@@ -94,7 +94,7 @@ const PARTIAL_CF = `${PARTIAL_FULL_NAME}|(?:${FULL_NAME_MATCHER}(?:(?:${PARTIAL_
  * 
  * @namespace VALIDATOR
  */
-module.exports = Object.freeze({
+export default Object.freeze({
     CONSONANT_LIST,
     VOWEL_LIST,
     OMOCODE_NUMBER_LIST,

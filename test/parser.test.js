@@ -2,10 +2,9 @@ const chai = require('chai');
 chai.use(require('chai-things'));
 const expect = chai.expect;
 chai.should();
+const {Parser} = require('../dist/codice-fiscale-utils.min');
 
 describe('CodiceFiscaleUtils:Parser', () => {
-    const Parser = require('../src/parser');
-
     describe('constants', () => {
         describe('OMOCODE_BITMAP', () => {
             const omocodeBitmap = Parser.OMOCODE_BITMAP;

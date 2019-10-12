@@ -9,7 +9,7 @@ const GENDERS = {
  * @property {number} F 40
  * @property {function({number})} parseNumberToGender
  */
-module.exports = Object.freeze(new Proxy(GENDERS, {
+export default Object.freeze(new Proxy(Object.assign({}, GENDERS), {
     get(receiver, name) {
         if (typeof name  === 'string') {
             const index = parseInt(name);

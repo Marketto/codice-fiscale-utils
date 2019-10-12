@@ -118,8 +118,7 @@ const core = {
  * @namespace Diacritics
  * @returns {Proxy}
  */
-module.exports = new Proxy({
-    ...core,
+export default new Proxy(Object.assign({}, core, {
     validator: new Proxy({}, {
         get(receiver, name) {
             if (typeof name  === 'string' && core.matcher[name]) {
@@ -137,7 +136,7 @@ module.exports = new Proxy({
             return receiver[name];
         }
     })
-}, {
+}), {
     get(receiver, name) {
         if (name.length === 1) {
             const [normalizedLetter] = Object.values(DIACRITICS_MAP).find(value => (new RegExp(`[${value}]`, 'u')).test(name)) || [];

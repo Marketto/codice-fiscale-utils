@@ -1,16 +1,18 @@
-const BirthMonth = require('./birthMonth.enum');
-const Belfiore = require('./belfiore');
-const CheckDigitizer = require('./checkDigitizer');
-const Gender = require('./gender.enum');
-const Omocode = require('./omocode.enum');
-const Parser = require('./parser');
-const Validator = require('./validator');
-const VALIDATOR = require('./validator.const');
+import BirthMonth from './birthMonth.enum';
+import Belfiore from './belfiore';
+import CheckDigitizer from './checkDigitizer';
+import DATE_VALIDATOR from './dateValidator.const';
+import Diacritics from './diacritics';
+import Gender from './gender.enum';
+import Omocode from './omocode.enum';
+import Parser from './parser';
+import Validator from './validator';
+import VALIDATOR from './validator.const';
 
 /**
  * @module CodiceFiscaleUtils
  */
-module.exports = {
+export {
     /**
      * {@link Belfiore}
      */
@@ -23,6 +25,14 @@ module.exports = {
      * {@link CheckDigitizer}
      */
     CheckDigitizer,
+    /**
+     * {@link DATE_VALIDATOR}
+     */
+    DATE_VALIDATOR,
+    /**
+     * {@link Diacritics}
+     */
+    Diacritics,
     /**
      * {@link Gender}
      */

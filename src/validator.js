@@ -1,11 +1,11 @@
-const CheckDigitizer = require('./checkDigitizer');
-const DATE_VALIDATOR = require('./dateValidator.const');
-const Diacritics = require('./diacritics');
-const Gender = require('./gender.enum');
-const moment = require('moment');
-const Omocode = require('./omocode.enum');
-const Parser = require('./parser');
-const VALIDATOR = require('./validator.const');
+import CheckDigitizer from './checkDigitizer';
+import DATE_VALIDATOR from './dateValidator.const';
+import Diacritics from './diacritics';
+import Gender from './gender.enum';
+import moment from 'moment';
+import Omocode from './omocode.enum';
+import Parser from './parser';
+import VALIDATOR from './validator.const';
 
 /**
  * @namespace Validator
@@ -395,4 +395,4 @@ class Validator {
     }
 }
 
-module.exports = Validator;
+export default Validator;
