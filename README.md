@@ -28,8 +28,8 @@ JS utilities to handle Italian Codice Fiscale
 4. **Should I trust such city/country informations and do I need them?**
    *Sure, every single information is provided with original source referrals like website, license and name. The script used to create the embedded dataset uses only official informations provided by Italian istitutional sources under* ***CC-BY*** *like 'Agenzia delle entrate', 'Ministero dell'interno' or 'ISTAT'; Give a look at the* [Assets Licenses and Authors](#assets-licenses-and-authors) *chapters*
 
-5. **The examples seems for nodeJs, can I use this library in a FE project with other frameworks?**
-    *Sure, it's built to work both in node and browser environments*
+5. **Can I use this library in a FE project with other frameworks?**
+    *Sure, it's built to work both in node and browser environments! Give a look at the [Demo section](#demo)*
 
 
 ## INSTALLATION
@@ -41,11 +41,20 @@ npm i -s @marketto/codice-fiscale-utils
 [JsDocs @ GitHub Pages](https://marketto.github.io/codice-fiscale-utils/)
 
 ## DEMO
-Check out [CodiceFiscaleUtils](https://github.com/Marketto/codice-fiscale-utils) repo on Github to give a look to an expressjs and a vue demo
+Check out [CodiceFiscaleUtils](https://github.com/Marketto/codice-fiscale-utils) repo on Github
+### NodeJS Express
+[Node/Express Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/express)
+### Browser VueJs
+[Node/Express Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/vue)
 
 ## EXAMPLES
+### NodeJs
 ```javascript
 const codiceFiscaleUtils = require('@marketto/codice-fiscale-utils');
+```
+### Browser
+```javascript
+import codiceFiscaleUtils from '@marketto/codice-fiscale-utils';
 ```
 
 ### Parser
@@ -377,15 +386,21 @@ Validator.isValid('VRNGNY07D68C351K'); //false - invalid check digit
 Validator.isValid('GSTPPP99C06D620V'); //false - invalid birth date/place
 ```
 
-### ASSETS LICENSES AND AUTHORS
-* Cities List of Values: [CC BY 4.0](asset/MINISTERO_DELL_INTERNO.LICENSE) Ministero dell'interno
-* Cities List of Values: [CC BY 4.0](asset/AGENZIA_DELLE_ENTRATE.LICENSE) Agenzia delle Entrate
-* Countries List of Values: [CC BY 3.0](asset/ISTITUTO_NAZIONALE_DI_STATISTICA.LICENSE) Istituto nazionale di statistica
+## Compatibility (tested)
+* [X] NodeJs
+* [X] Chrome
+* [X] Firefox
+* [X] Edge
 
 ## LICENSE
 [MIT License](LICENSE)
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils?ref=badge_large)
+
+## ASSETS LICENSES AND AUTHORS
+* Cities List of Values: [CC BY 4.0](asset/MINISTERO_DELL_INTERNO.LICENSE) Ministero dell'interno
+* Cities List of Values: [CC BY 4.0](asset/AGENZIA_DELLE_ENTRATE.LICENSE) Agenzia delle Entrate
+* Countries List of Values: [CC BY 3.0](asset/ISTITUTO_NAZIONALE_DI_STATISTICA.LICENSE) Istituto nazionale di statistica
 
 ## AUTHOR
 [Marco Ricupero](mailto:marco.ricupero@gmail.com)

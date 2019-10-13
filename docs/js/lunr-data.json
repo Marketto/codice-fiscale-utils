@@ -416,6 +416,17 @@
           "parser.monthtocf",
           "string|nul"
         ],
+        "Parser.html#.dayGenderToCf": [
+          "day",
+          "daygendertocf",
+          "function",
+          "gender",
+          "inform",
+          "lt;static&gt",
+          "pars",
+          "parser.daygendertocf",
+          "string|nul"
+        ],
         "Parser.html#.yearMonthDayToDate": [
           "date",
           "date|nul",
@@ -459,14 +470,18 @@
           "string|nul"
         ],
         "Parser.html#.placeToCf": [
-          "belfior",
-          "code",
+          "cf",
+          "creat",
+          "date",
+          "date/gend",
           "function",
+          "gender",
+          "inform",
           "lt;static&gt",
           "name",
           "pars",
           "parser.placetocf",
-          "place",
+          "part",
           "placetocf",
           "provinc",
           "string|nul"
@@ -480,17 +495,6 @@
           "input",
           "lt;static&gt",
           "parser.encodecf",
-          "string|nul"
-        ],
-        "Parser.html#.dayGenderToCf": [
-          "day",
-          "daygendertocf",
-          "function",
-          "gender",
-          "inform",
-          "lt;static&gt",
-          "pars",
-          "parser.daygendertocf",
           "string|nul"
         ],
         "VALIDATOR.html": [
@@ -1174,13 +1178,13 @@
                 "ref": "Parser.html#.dateGenderToCf",
                 "tf": 6.25
               },
-              "Parser.html#.placeToCf": {
-                "ref": "Parser.html#.placeToCf",
-                "tf": 6.25
-              },
               "Parser.html#.encodeCf": {
                 "ref": "Parser.html#.encodeCf",
                 "tf": 16.666666666666664
+              },
+              "Parser.html#.placeToCf": {
+                "ref": "Parser.html#.placeToCf",
+                "tf": 6.25
               },
               "Validator_.html#.codiceFiscale": {
                 "ref": "Validator_.html#.codiceFiscale",
@@ -1801,6 +1805,10 @@
                             "ref": "Parser.html#.monthToCf",
                             "tf": 110
                           },
+                          "Parser.html#.dayGenderToCf": {
+                            "ref": "Parser.html#.dayGenderToCf",
+                            "tf": 110
+                          },
                           "Parser.html#.yearMonthDayToDate": {
                             "ref": "Parser.html#.yearMonthDayToDate",
                             "tf": 110
@@ -1819,10 +1827,6 @@
                           },
                           "Parser.html#.encodeCf": {
                             "ref": "Parser.html#.encodeCf",
-                            "tf": 110
-                          },
-                          "Parser.html#.dayGenderToCf": {
-                            "ref": "Parser.html#.dayGenderToCf",
                             "tf": 110
                           },
                           "Validator_.html#.cfSurname": {
@@ -2040,6 +2044,10 @@
                         "ref": "Parser.html#.monthToCf",
                         "tf": 16.666666666666664
                       },
+                      "Parser.html#.dayGenderToCf": {
+                        "ref": "Parser.html#.dayGenderToCf",
+                        "tf": 16.666666666666664
+                      },
                       "Parser.html#.parseDate": {
                         "ref": "Parser.html#.parseDate",
                         "tf": 6.25
@@ -2051,10 +2059,6 @@
                       "Parser.html#.placeToCf": {
                         "ref": "Parser.html#.placeToCf",
                         "tf": 6.25
-                      },
-                      "Parser.html#.dayGenderToCf": {
-                        "ref": "Parser.html#.dayGenderToCf",
-                        "tf": 16.666666666666664
                       }
                     }
                   }
@@ -2707,13 +2711,13 @@
                   "ref": "Parser.html#.cfToBirthDay",
                   "tf": 12.5
                 },
-                "Parser.html#.yearMonthDayToDate": {
-                  "ref": "Parser.html#.yearMonthDayToDate",
-                  "tf": 26.666666666666664
-                },
                 "Parser.html#.dayGenderToCf": {
                   "ref": "Parser.html#.dayGenderToCf",
                   "tf": 36.666666666666664
+                },
+                "Parser.html#.yearMonthDayToDate": {
+                  "ref": "Parser.html#.yearMonthDayToDate",
+                  "tf": 26.666666666666664
                 },
                 "Validator_.html#.cfDay": {
                   "ref": "Validator_.html#.cfDay",
@@ -2918,6 +2922,10 @@
                         "ref": "Parser.html#.cfToGender",
                         "tf": 16.666666666666664
                       },
+                      "Parser.html#.dayGenderToCf": {
+                        "ref": "Parser.html#.dayGenderToCf",
+                        "tf": 20
+                      },
                       "Parser.html#.parseDate": {
                         "ref": "Parser.html#.parseDate",
                         "tf": 6.25
@@ -2929,10 +2937,6 @@
                       "Parser.html#.placeToCf": {
                         "ref": "Parser.html#.placeToCf",
                         "tf": 6.25
-                      },
-                      "Parser.html#.dayGenderToCf": {
-                        "ref": "Parser.html#.dayGenderToCf",
-                        "tf": 20
                       },
                       "Validator_.html#.cfDayGender": {
                         "ref": "Validator_.html#.cfDayGender",
@@ -3256,6 +3260,10 @@
                                     "ref": "Parser.html#.monthToCf",
                                     "tf": 25
                                   },
+                                  "Parser.html#.dayGenderToCf": {
+                                    "ref": "Parser.html#.dayGenderToCf",
+                                    "tf": 20
+                                  },
                                   "Parser.html#.yearMonthDayToDate": {
                                     "ref": "Parser.html#.yearMonthDayToDate",
                                     "tf": 16.666666666666664
@@ -3270,15 +3278,11 @@
                                   },
                                   "Parser.html#.placeToCf": {
                                     "ref": "Parser.html#.placeToCf",
-                                    "tf": 20
+                                    "tf": 16.666666666666664
                                   },
                                   "Parser.html#.encodeCf": {
                                     "ref": "Parser.html#.encodeCf",
                                     "tf": 25
-                                  },
-                                  "Parser.html#.dayGenderToCf": {
-                                    "ref": "Parser.html#.dayGenderToCf",
-                                    "tf": 20
                                   },
                                   "Validator_.html#.cfSurname": {
                                     "ref": "Validator_.html#.cfSurname",
@@ -3648,7 +3652,7 @@
                   },
                   "Parser.html#.placeToCf": {
                     "ref": "Parser.html#.placeToCf",
-                    "tf": 28.333333333333332
+                    "tf": 16.666666666666664
                   },
                   "Validator_.html#.cfName": {
                     "ref": "Validator_.html#.cfName",
@@ -3995,6 +3999,10 @@
                     "ref": "Parser.html#.monthToCf",
                     "tf": 16.666666666666664
                   },
+                  "Parser.html#.dayGenderToCf": {
+                    "ref": "Parser.html#.dayGenderToCf",
+                    "tf": 16.666666666666664
+                  },
                   "Parser.html#.yearMonthDayToDate": {
                     "ref": "Parser.html#.yearMonthDayToDate",
                     "tf": 10
@@ -4009,11 +4017,7 @@
                   },
                   "Parser.html#.placeToCf": {
                     "ref": "Parser.html#.placeToCf",
-                    "tf": 8.333333333333332
-                  },
-                  "Parser.html#.dayGenderToCf": {
-                    "ref": "Parser.html#.dayGenderToCf",
-                    "tf": 16.666666666666664
+                    "tf": 6.25
                   }
                 },
                 "e": {
@@ -4481,6 +4485,91 @@
                           }
                         }
                       },
+                      "d": {
+                        "docs": {},
+                        "a": {
+                          "docs": {},
+                          "y": {
+                            "docs": {},
+                            "g": {
+                              "docs": {},
+                              "e": {
+                                "docs": {},
+                                "n": {
+                                  "docs": {},
+                                  "d": {
+                                    "docs": {},
+                                    "e": {
+                                      "docs": {},
+                                      "r": {
+                                        "docs": {},
+                                        "t": {
+                                          "docs": {},
+                                          "o": {
+                                            "docs": {},
+                                            "c": {
+                                              "docs": {},
+                                              "f": {
+                                                "docs": {
+                                                  "Parser.html#.dayGenderToCf": {
+                                                    "ref": "Parser.html#.dayGenderToCf",
+                                                    "tf": 1150
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "t": {
+                            "docs": {},
+                            "e": {
+                              "docs": {},
+                              "g": {
+                                "docs": {},
+                                "e": {
+                                  "docs": {},
+                                  "n": {
+                                    "docs": {},
+                                    "d": {
+                                      "docs": {},
+                                      "e": {
+                                        "docs": {},
+                                        "r": {
+                                          "docs": {},
+                                          "t": {
+                                            "docs": {},
+                                            "o": {
+                                              "docs": {},
+                                              "c": {
+                                                "docs": {},
+                                                "f": {
+                                                  "docs": {
+                                                    "Parser.html#.dateGenderToCf": {
+                                                      "ref": "Parser.html#.dateGenderToCf",
+                                                      "tf": 1150
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
                       "p": {
                         "docs": {},
                         "a": {
@@ -4522,91 +4611,6 @@
                                           "Parser.html#.placeToCf": {
                                             "ref": "Parser.html#.placeToCf",
                                             "tf": 1150
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "d": {
-                        "docs": {},
-                        "a": {
-                          "docs": {},
-                          "t": {
-                            "docs": {},
-                            "e": {
-                              "docs": {},
-                              "g": {
-                                "docs": {},
-                                "e": {
-                                  "docs": {},
-                                  "n": {
-                                    "docs": {},
-                                    "d": {
-                                      "docs": {},
-                                      "e": {
-                                        "docs": {},
-                                        "r": {
-                                          "docs": {},
-                                          "t": {
-                                            "docs": {},
-                                            "o": {
-                                              "docs": {},
-                                              "c": {
-                                                "docs": {},
-                                                "f": {
-                                                  "docs": {
-                                                    "Parser.html#.dateGenderToCf": {
-                                                      "ref": "Parser.html#.dateGenderToCf",
-                                                      "tf": 1150
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "y": {
-                            "docs": {},
-                            "g": {
-                              "docs": {},
-                              "e": {
-                                "docs": {},
-                                "n": {
-                                  "docs": {},
-                                  "d": {
-                                    "docs": {},
-                                    "e": {
-                                      "docs": {},
-                                      "r": {
-                                        "docs": {},
-                                        "t": {
-                                          "docs": {},
-                                          "o": {
-                                            "docs": {},
-                                            "c": {
-                                              "docs": {},
-                                              "f": {
-                                                "docs": {
-                                                  "Parser.html#.dayGenderToCf": {
-                                                    "ref": "Parser.html#.dayGenderToCf",
-                                                    "tf": 1150
-                                                  }
-                                                }
-                                              }
-                                            }
                                           }
                                         }
                                       }
@@ -4720,7 +4724,7 @@
                         },
                         "Parser.html#.placeToCf": {
                           "ref": "Parser.html#.placeToCf",
-                          "tf": 28.333333333333332
+                          "tf": 16.666666666666664
                         }
                       }
                     }
@@ -4796,7 +4800,7 @@
                           "docs": {
                             "Parser.html#.placeToCf": {
                               "ref": "Parser.html#.placeToCf",
-                              "tf": 670
+                              "tf": 666.6666666666666
                             }
                           }
                         }
@@ -4900,21 +4904,21 @@
                                 "ref": "Parser.html#.monthToCf",
                                 "tf": 25
                               },
+                              "Parser.html#.dayGenderToCf": {
+                                "ref": "Parser.html#.dayGenderToCf",
+                                "tf": 20
+                              },
                               "Parser.html#.dateGenderToCf": {
                                 "ref": "Parser.html#.dateGenderToCf",
                                 "tf": 20
                               },
                               "Parser.html#.placeToCf": {
                                 "ref": "Parser.html#.placeToCf",
-                                "tf": 20
+                                "tf": 16.666666666666664
                               },
                               "Parser.html#.encodeCf": {
                                 "ref": "Parser.html#.encodeCf",
                                 "tf": 25
-                              },
-                              "Parser.html#.dayGenderToCf": {
-                                "ref": "Parser.html#.dayGenderToCf",
-                                "tf": 20
                               }
                             }
                           }
@@ -6508,7 +6512,7 @@
     "CheckDigitizer.html#.evaluateChar": {
       "id": "CheckDigitizer.html#.evaluateChar",
       "kind": "function",
-      "title": "&lt;generator, static&gt; evaluateChar( partialCF ) → {number}",
+      "title": "&lt;generator, static&gt; evaluateChar( [ partialCF ] ) → {number}",
       "longname": "CheckDigitizer.evaluateChar",
       "name": "evaluateChar",
       "tags": "CheckDigitizer.evaluateChar evaluateChar",
@@ -6853,6 +6857,16 @@
       "summary": "",
       "description": "Parse month information"
     },
+    "Parser.html#.dayGenderToCf": {
+      "id": "Parser.html#.dayGenderToCf",
+      "kind": "function",
+      "title": "&lt;static&gt; dayGenderToCf( day, gender ) → {string|null}",
+      "longname": "Parser.dayGenderToCf",
+      "name": "dayGenderToCf",
+      "tags": "Parser.dayGenderToCf dayGenderToCf",
+      "summary": "",
+      "description": "Parse day information"
+    },
     "Parser.html#.yearMonthDayToDate": {
       "id": "Parser.html#.yearMonthDayToDate",
       "kind": "function",
@@ -6886,12 +6900,12 @@
     "Parser.html#.placeToCf": {
       "id": "Parser.html#.placeToCf",
       "kind": "function",
-      "title": "&lt;static&gt; placeToCf( name [, province ] ) → {string|null}",
+      "title": "&lt;static&gt; placeToCf( date, name [, province ] ) → {string|null}",
       "longname": "Parser.placeToCf",
       "name": "placeToCf",
       "tags": "Parser.placeToCf placeToCf",
       "summary": "",
-      "description": "Parse place name and province to Belfiore code"
+      "description": "Parse a Dated and Gender information to create Date/Gender CF part"
     },
     "Parser.html#.encodeCf": {
       "id": "Parser.html#.encodeCf",
@@ -6902,16 +6916,6 @@
       "tags": "Parser.encodeCf encodeCf",
       "summary": "",
       "description": "Generates full CF"
-    },
-    "Parser.html#.dayGenderToCf": {
-      "id": "Parser.html#.dayGenderToCf",
-      "kind": "function",
-      "title": "&lt;static&gt; dayGenderToCf( day, gender ) → {string|null}",
-      "longname": "Parser.dayGenderToCf",
-      "name": "dayGenderToCf",
-      "tags": "Parser.dayGenderToCf dayGenderToCf",
-      "summary": "",
-      "description": "Parse day information"
     },
     "VALIDATOR.html": {
       "id": "VALIDATOR.html",

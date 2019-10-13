@@ -1,11 +1,11 @@
 {
   "name": "@marketto/codice-fiscale-utils",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "JS utilities to handle Italian Codice Fiscale",
   "main": "dist/codice-fiscale-utils.min.js",
   "module": "src/index.js",
   "scripts": {
-    "test": "npx mocha",
+    "test": "npm run-script build && npx mocha",
     "coverage": "npx nyc --reporter=lcovonly npx mocha",
     "build": "npx rimraf ./dist && npx webpack",
     "docs": "npx rimraf ./docs && npx jsdoc . -c jsdoc.json",
