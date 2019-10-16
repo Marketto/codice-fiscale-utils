@@ -1,8 +1,11 @@
-const chai = require('chai');
-chai.use(require('chai-things'));
+import chai from 'chai';
+import chaiThings from 'chai-things';
+chai.use(chaiThings);
 const expect = chai.expect;
 chai.should();
-const {Gender, BirthMonth, Omocode} = require('../dist/codice-fiscale-utils.min');
+import Gender from '../src/gender.enum';
+import BirthMonth from '../src/birthMonth.enum';
+import Omocode from '../src/omocode.enum';
 
 describe('CodiceFiscaleUtils:Enums', () => {
     describe('Gender', () => {

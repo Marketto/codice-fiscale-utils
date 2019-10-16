@@ -5,8 +5,8 @@
   "main": "dist/codice-fiscale-utils.min.js",
   "module": "src/index.js",
   "scripts": {
-    "test": "npm run-script build && npx mocha",
-    "coverage": "npx nyc --reporter=lcovonly npx mocha",
+    "test": "npx mocha -r @babel/register",
+    "coverage": "npx nyc --reporter=lcovonly npx run-script test",
     "build": "npx rimraf ./dist && npx webpack",
     "docs": "npx rimraf ./docs && npx jsdoc . -c jsdoc.json",
     "update-lovs": "node ./scripts/locationUpdater.js"
@@ -34,6 +34,13 @@
     "moment": "^2.24.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
+    "@babel/runtime": "^7.6.3",
     "chai": "^4.2.0",
     "chai-things": "^0.2.0",
     "csvtojson": "^2.0.10",

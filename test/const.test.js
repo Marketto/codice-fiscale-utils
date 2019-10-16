@@ -1,7 +1,9 @@
-const chai = require('chai');
-chai.use(require('chai-things'));
+import chai from 'chai';
+import chaiThings from 'chai-things';
+chai.use(chaiThings);
 chai.should();
-const {VALIDATOR, Diacritics} = require('../dist/codice-fiscale-utils.min');
+import VALIDATOR from '../src/validator.const';
+import Diacritics from '../src/diacritics';
 
 describe('CodiceFiscaleUtils:Const', () => {
     describe('validator', () => {

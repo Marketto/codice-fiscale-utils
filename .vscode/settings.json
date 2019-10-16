@@ -1,5 +1,6 @@
 {
     "jslint.enable": false,
     "eslint.enable": true,
-    "jshint.enable": false
+    "jshint.enable": false,
+    "mochaExplorer.require": "@babel/register"
 }

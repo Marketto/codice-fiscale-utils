@@ -1,7 +1,8 @@
-const chai = require('chai');
-chai.use(require('chai-things'));
+import chai from 'chai';
+import chaiThings from 'chai-things';
+chai.use(chaiThings);
 chai.should();
-const {DATE_VALIDATOR} = require('../dist/codice-fiscale-utils.min');
+import DATE_VALIDATOR from '../src/dateValidator.const';
 
 describe('CodiceFiscaleUtils:DATE_VALIDATOR', () => {
     describe('YEAR', () => {
