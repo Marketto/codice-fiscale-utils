@@ -1,8 +1,9 @@
-const chai = require('chai');
-chai.use(require('chai-things'));
+import chai from 'chai';
+import chaiThings from 'chai-things';
+chai.use(chaiThings);
 const expect = chai.expect;
 chai.should();
-const {Parser} = require('../dist/codice-fiscale-utils.min');
+import Parser from '../src/parser';
 
 describe('CodiceFiscaleUtils:Parser', () => {
     describe('constants', () => {

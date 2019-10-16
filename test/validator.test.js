@@ -1,7 +1,8 @@
-const chai = require('chai');
-chai.use(require('chai-things'));
+import chai from 'chai';
+import chaiThings from 'chai-things';
+chai.use(chaiThings);
 chai.should();
-const {Validator} = require('../dist/codice-fiscale-utils.min');
+import Validator from '../src/validator';
 
 describe('CodiceFiscaleUtils:Validator', () => {
     describe('codiceFiscale', () => {
