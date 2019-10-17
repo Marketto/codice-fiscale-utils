@@ -37,6 +37,21 @@ JS utilities to handle Italian Codice Fiscale
 npm i -s @marketto/codice-fiscale-utils
 ```
 
+## USAGE
+### NodeJs
+```javascript
+const codiceFiscaleUtils = require('@marketto/codice-fiscale-utils');
+```
+### ES6
+```javascript
+import codiceFiscaleUtils from '@marketto/codice-fiscale-utils';
+```
+### Script
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://unpkg.com/browse/@marketto/codice-fiscale-utils/dist/codice-fiscale-utils.amd.min.js"></script>
+```
+
 ## DOCUMENTATION
 [JsDocs @ GitHub Pages](https://marketto.github.io/codice-fiscale-utils/)
 
@@ -46,16 +61,6 @@ Check out [CodiceFiscaleUtils](https://github.com/Marketto/codice-fiscale-utils)
 [Node/Express Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/express)
 ### Browser VueJs
 [Node/Express Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/vue)
-
-## EXAMPLES
-### NodeJs
-```javascript
-const codiceFiscaleUtils = require('@marketto/codice-fiscale-utils');
-```
-### Browser
-```javascript
-import codiceFiscaleUtils from '@marketto/codice-fiscale-utils';
-```
 
 ### Parser
 *Class* with *static* methods

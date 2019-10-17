@@ -41,6 +41,7 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/register": "^7.6.2",
     "@babel/runtime": "^7.6.3",
+    "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
     "chai-things": "^0.2.0",
     "csvtojson": "^2.0.10",
