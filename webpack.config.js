@@ -1,12 +1,30 @@
 const path = require('path');
 
-module.exports = {
+module.exports = [
+    {
+        libraryTarget: 'commonjs'
+    },
+    {
+        filenamePrefix: 'amd',
+        libraryTarget: 'amd',
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules|docs|test|scripts|dist/,
+                use: ['babel-loader']
+            }
+        ]
+    }
+].map(({filenamePrefix, libraryTarget, rules}) => ({
     entry: './src/index.js',
     mode: 'production',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'codice-fiscale-utils.min.js',
-        libraryTarget: 'commonjs'
+        filename: `codice-fiscale-utils${filenamePrefix ? ('.' + filenamePrefix) : ''}.min.js`,
+        libraryTarget
+    },
+    module: {
+        rules
     },
     externals: {
         moment: {
@@ -17,4 +35,4 @@ module.exports = {
         }
     },
     devtool: 'source-map'
-};
+}));
