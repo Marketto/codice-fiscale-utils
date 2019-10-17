@@ -236,23 +236,19 @@ class Belfiore{
         if (typeof text !== 'string' || !text.length) {
             return -1;
         }
-        if (!start || start < 0) {
-            start = 0;
-        }
-        if (!end || end >= text.length) {
-            end = text.length -1;
-        }
-        const currentLength = end - start + 1;
-        if (start > end || currentLength % value.length) {
+        const rangedStart = (!start || start < 0) ? 0 : start;
+        const rangedEnd = (!end || end >= text.length) ? (text.length - 1) : end;
+        const currentLength = rangedEnd - rangedStart + 1;
+        if (rangedStart > rangedEnd || currentLength % value.length) {
             return -1;
         }
-        const targetIndex = start + Math.floor(currentLength/(2*value.length))*value.length;
+        const targetIndex = rangedStart + Math.floor(currentLength/(2*value.length))*value.length;
         const targetValure = text.substr(targetIndex, value.length);
         if (targetValure === value) {
             return Math.ceil((targetIndex + 1) / value.length) -1;
         }
         const goAhead = value > targetValure;
-        return this.binaryfindIndex(text, value, goAhead ? targetIndex + value.length : start, goAhead ? end : targetIndex - 1);
+        return this.binaryfindIndex(text, value, goAhead ? targetIndex + value.length : rangedStart, goAhead ? rangedEnd : targetIndex - 1);
     }
 
     /**
@@ -324,15 +320,18 @@ class Belfiore{
      * @private
      */
     static* indexByName(list = '', matcher) {
-        if (typeof matcher === 'string') {
-            matcher = new RegExp(matcher, 'i');
+        const regExpMatcher = typeof matcher === 'string' ? new RegExp(matcher, 'i') : matcher;
+        
+        if (!(regExpMatcher instanceof RegExp)) {
+            throw new Error("Provided matcher must be of type string or RegExp");
         }
+
         const seekEntryEndIndex = index => list.indexOf('|', index +1) + 1 || list.length;
         
         for(let startIndex = 0, entryIndex = 0; startIndex < list.length; entryIndex++) {
             const endIndex = seekEntryEndIndex(startIndex);
             const targetName = list.substring(startIndex, endIndex -1);
-            if (matcher.test(targetName)) {
+            if (regExpMatcher.test(targetName)) {
                 yield entryIndex;
             }
             // Moving to next entry to chgeck
