@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = [
     {
+        filenamePrefix: 'cjs',
         libraryTarget: 'commonjs'
     },
     {
