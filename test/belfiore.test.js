@@ -3,13 +3,23 @@ import chaiThings from 'chai-things';
 chai.use(chaiThings);
 const expect = chai.expect;
 chai.should();
-import Belfiore from '../src/belfiore';
+import {Belfiore, BelfioreConnector} from '../src/belfiore';
 
 describe('CodiceFiscaleUtils:Belfiore', () => {
-    describe('Belfiore.constructor', () => {
-        describe('Belfiore.constructor.binaryfindIndex', () => {
+    describe('BelfioreConnector', () => {
+        describe('binaryfindIndex', () => {
             it('Should return proper index', () => {
-                Belfiore.constructor.binaryfindIndex('00100200300400500600700800900a00b00c00d00e00f00g00h00i','00e').should.be.equal(13);
+                BelfioreConnector.binaryfindIndex('00100200300400500600700800900a00b00c00d00e00f00g00h00i','00e').should.be.equal(13);
+            });
+        });
+
+        describe('constructor', () => {
+            it('Should throw error providing both codeMatcher and province', () => {
+                try {
+                    const belfioreInstance = new BelfioreConnector({ codeMatcher: new RegExp('test'), province: 'XX' });
+                } catch (e) {
+                    e.should.be.an('Error');
+                }
             });
         });
     });
@@ -58,6 +68,36 @@ describe('CodiceFiscaleUtils:Belfiore', () => {
             it('Should return cities by RM province', () => {
                 const rmCities = Belfiore.cities.byProvince('RM');
                 rmCities.toArray().some(({province}) => province !== 'RM').should.be.false;
+            });
+        
+            it('Should throw an error for province not matching 2 letters code', () => {
+                try {
+                    Belfiore.cities.byProvince('@3');
+                } catch(e) {
+                    e.should.be.an('Error');
+                }
+            });
+        });
+    });
+
+    describe('Belfiore.countries', () => {
+        describe('Belfiore[belfioreCode]', () => {
+            it('Should return Federazione russa for Z154', () => {
+                Belfiore.countries.Z154.name.should.be.equal('Federazione russa');
+            });
+        });
+    });
+
+    describe('Belfiore Proxy pitfalls', () => {
+        describe('Should return undefined', () => {
+            it('countries.cities', () => {
+                expect(Belfiore.countries.cities).to.be.undefined;
+            });
+            it('cities.countries', () => {
+                expect(Belfiore.cities.countries).to.be.undefined;
+            });
+            it('byProvince().countries', () => {
+                expect(Belfiore.byProvince('VV').countries).to.be.undefined;
             });
         });
     });

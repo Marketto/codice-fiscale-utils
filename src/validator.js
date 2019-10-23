@@ -92,7 +92,7 @@ class Validator {
 
     /**
      * Validation regexp for the given year or generic
-     * @param {number} day Optional day to generate validation regexp
+     * @param {number|null} [day] Optional day to generate validation regexp
      * @param {'M'|'F'} [gender] Gender @see Gender
      * @returns {RegExp} CF day and gender matcher
      * @public
@@ -111,14 +111,14 @@ class Validator {
             }
         } else {
             switch (gender) {
-            case 'M':
-                matcher = VALIDATOR.MALE_DAY_MATCHER;
-                break;
-            case 'F':
-                matcher = VALIDATOR.FEMALE_DAY_MATCHER;
-                break;
-            default:
-                throw new Error('[Validator.cfDayGender] Provided gender is not valid');
+                case 'M':
+                    matcher = VALIDATOR.MALE_DAY_MATCHER;
+                    break;
+                case 'F':
+                    matcher = VALIDATOR.FEMALE_DAY_MATCHER;
+                    break;
+                default:
+                    throw new Error('[Validator.cfDayGender] Provided gender is not valid');
             }
         }
         return new RegExp(`^${matcher}$`, 'iu');
@@ -142,14 +142,14 @@ class Validator {
             }
         } else if (gender) {
             switch (gender) {
-            case 'M':
-                matcher = VALIDATOR.MALE_FULL_DATE_MATCHER;
-                break;
-            case 'F':
-                matcher = VALIDATOR.FEMALE_FULL_DATE_MATCHER;
-                break;
-            default:
-                throw new Error('[Validator.cfDateGender] Provided gender is not valid');
+                case 'M':
+                    matcher = VALIDATOR.MALE_FULL_DATE_MATCHER;
+                    break;
+                case 'F':
+                    matcher = VALIDATOR.FEMALE_FULL_DATE_MATCHER;
+                    break;
+                default:
+                    throw new Error('[Validator.cfDateGender] Provided gender is not valid');
             }
         }
         return new RegExp(`^${matcher}$`, 'iu');

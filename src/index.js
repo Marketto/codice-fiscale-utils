@@ -1,5 +1,5 @@
 import BirthMonth from './birthMonth.enum';
-import Belfiore from './belfiore';
+import { Belfiore, BelfioreConnector } from './belfiore';
 import CheckDigitizer from './checkDigitizer';
 import DATE_VALIDATOR from './dateValidator.const';
 import Diacritics from './diacritics';
@@ -14,9 +14,13 @@ import VALIDATOR from './validator.const';
  */
 export {
     /**
-     * {@link Belfiore}
+     * {@link BelfioreConnector}
      */
     Belfiore,
+    /**
+     * {@link BelfioreConnector}
+     */
+    BelfioreConnector,
     /**
      * {@link BirthMonth}
      */

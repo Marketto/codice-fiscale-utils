@@ -6,7 +6,7 @@ import moment from 'moment';
  * 
  * @namespace Belfiore
  */
-class Belfiore{
+class BelfioreConnector {
     /**
      * 
      * @param {Object} param Static json
@@ -117,12 +117,12 @@ class Belfiore{
     /**
      * Returns a Proxied version of Belfiore which filters results by given date
      * @param {string|Date|Moment|Array<number>} [date = moment()] Target date to filter places active only for the given date
-     * @returns {Belfiore} Belfiore instance filtered by active date
+     * @returns {BelfioreConnector} Belfiore instance filtered by active date
      * @public
      */
     active(date = moment()) {
         const { _data, _licenses, _codeMatcher, _province } = this;
-        return new Belfiore({
+        return new BelfioreConnector({
             data: _data,
             licenses: _licenses,
             activeDate: moment(date),
@@ -134,7 +134,7 @@ class Belfiore{
     /**
      * Returns a Belfiore instance filtered by the given province
      * @param {string} code Province Code (2 A-Z char)
-     * @returns {Belfiore} Belfiore instance filtered by province code
+     * @returns {BelfioreConnector} Belfiore instance filtered by province code
      * @public
      */
     byProvince(code) {
@@ -142,7 +142,7 @@ class Belfiore{
             return;
         }
         const { _data, _licenses, _activeDate } = this;
-        return new Belfiore({
+        return new BelfioreConnector({
             data: _data,
             licenses: _licenses,
             activeDate: _activeDate,
@@ -158,7 +158,7 @@ class Belfiore{
      */
     get cities() {
         const { _data, _licenses, _activeDate } = this;
-        return new Belfiore({
+        return new BelfioreConnector({
             data: _data,
             licenses: _licenses,
             activeDate: _activeDate,
@@ -169,12 +169,12 @@ class Belfiore{
     /**
      * Returns a Proxied version of Belfiore which filters results by place type
      * @readonly
-     * @returns {Belfiore} Belfiore instance filtered by countries
+     * @returns {BelfioreConnector} Belfiore instance filtered by countries
      * @public
      */
     get countries() {
         const { _data, _licenses, _activeDate } = this;
-        return new Belfiore({
+        return new BelfioreConnector({
             data: _data,
             licenses: _licenses,
             activeDate: _activeDate,
@@ -213,7 +213,10 @@ class Belfiore{
              ||
             
                 paramName === 'byProvince' &&
-                (resource._codeMatcher.test('Z000') || resource._province)
+                (
+                    (resource._codeMatcher instanceof RegExp && resource._codeMatcher.test('Z000')) 
+                    || resource._province
+                )
             
         ) {
             return;
@@ -283,12 +286,18 @@ class Belfiore{
 
     /**
      * Retrieve string at index posizion
-     * @param {string} [list=''] concatenation of names
+     * @param {string} list concatenation of names
      * @param {number} index target name index
      * @returns {string} index-th string
      * @private
      */
-    static nameByIndex(list = '', index) {
+    static nameByIndex(list, index) {
+        if (typeof list !== 'string') {
+            throw new Error(`[BelfioreConnector.nameByIndex] Provided list is not a string`);
+        }
+        if (!list.length) {
+            throw new Error(`[BelfioreConnector.nameByIndex] Provided list empty`);
+        }
         let startIndex = 0,
             endIndex = list.indexOf('|', startIndex + 1),
             counter = index;
@@ -300,7 +309,7 @@ class Belfiore{
         }
         
         if (index < 0 || counter > 0) {
-            throw new Error(`[Belfiore.nameByIndex] Provided index ${index} is out range`);
+            throw new Error(`[BelfioreConnector.nameByIndex] Provided index ${index} is out range`);
         }
 
         if (!counter && endIndex < 0) {
@@ -313,13 +322,19 @@ class Belfiore{
     /**
      * Retrieve string at index posizion
      * @generator
-     * @param {string} [list=''] concatenation of names
+     * @param {string} list concatenation of names
      * @param {string|RegExp} matcher target name index
      * @yields {number} index
      * @returns {number} -1 when Done
      * @private
      */
-    static* indexByName(list = '', matcher) {
+    static* indexByName(list, matcher) {
+        if (typeof list !== 'string') {
+            throw new Error(`[BelfioreConnector.indexByName] Provided list is not a string`);
+        }
+        if (!list.length) {
+            throw new Error(`[BelfioreConnector.indexByName] Provided list empty`);
+        }
         const regExpMatcher = typeof matcher === 'string' ? new RegExp(matcher, 'i') : matcher;
         
         if (!(regExpMatcher instanceof RegExp)) {
@@ -393,4 +408,5 @@ class Belfiore{
     }
 }
 
-export default new Belfiore(CITIES_COUNTRIES);
+export const Belfiore = new BelfioreConnector(CITIES_COUNTRIES);
+export {BelfioreConnector};
