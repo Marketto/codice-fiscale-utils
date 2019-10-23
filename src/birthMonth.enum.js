@@ -29,8 +29,11 @@ const MONTHS = [
  */
 export default Object.freeze(new Proxy({ MONTHS }, {
     get(receiver, name) {
-        if (typeof name  === 'string' && receiver.MONTHS.includes(name)) {
-            return receiver.MONTHS.indexOf(name);
+        if (typeof name  === 'string'){
+            const monthCode = name.toUpperCase();
+            if(receiver.MONTHS.includes(monthCode)) {
+                return receiver.MONTHS.indexOf(monthCode);
+            }
         }
         return this[name] || receiver.MONTHS[name] || receiver[name];
     }

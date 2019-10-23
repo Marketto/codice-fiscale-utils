@@ -27,8 +27,11 @@ const OMOCODE = [
  */
 export default Object.freeze(new Proxy({ OMOCODE }, {
     get(receiver, name) {
-        if(typeof name  === 'string' && receiver.OMOCODE.includes(name)) {
-            return receiver.OMOCODE.indexOf(name);
+        if(typeof name  === 'string'){
+            const omocodeChar = name.toUpperCase();
+            if (receiver.OMOCODE.includes(omocodeChar)) {
+                return receiver.OMOCODE.indexOf(omocodeChar);
+            }
         }
         return this[name] || receiver.OMOCODE[name] || receiver[name];
     }

@@ -47,19 +47,37 @@ describe('CodiceFiscaleUtils:Enums', () => {
     });
 
     describe('BirthMonth', () => {
-        it('Should return month numbers for proper codes', () => {
-            BirthMonth.A.should.be.equal(0);
-            BirthMonth.B.should.be.equal(1);
-            BirthMonth.C.should.be.equal(2);
-            BirthMonth.D.should.be.equal(3);
-            BirthMonth.E.should.be.equal(4);
-            BirthMonth.H.should.be.equal(5);
-            BirthMonth.L.should.be.equal(6);
-            BirthMonth.M.should.be.equal(7);
-            BirthMonth.P.should.be.equal(8);
-            BirthMonth.R.should.be.equal(9);
-            BirthMonth.S.should.be.equal(10);
-            BirthMonth.T.should.be.equal(11);
+        describe('Uppercase', () => {
+            it('Should return month numbers for proper codes', () => {
+                BirthMonth.A.should.be.equal(0);
+                BirthMonth.B.should.be.equal(1);
+                BirthMonth.C.should.be.equal(2);
+                BirthMonth.D.should.be.equal(3);
+                BirthMonth.E.should.be.equal(4);
+                BirthMonth.H.should.be.equal(5);
+                BirthMonth.L.should.be.equal(6);
+                BirthMonth.M.should.be.equal(7);
+                BirthMonth.P.should.be.equal(8);
+                BirthMonth.R.should.be.equal(9);
+                BirthMonth.S.should.be.equal(10);
+                BirthMonth.T.should.be.equal(11);
+            });
+        });
+        describe('Lowercase', () => {
+            it('Should return month numbers for proper codes', () => {
+                BirthMonth.a.should.be.equal(0);
+                BirthMonth.b.should.be.equal(1);
+                BirthMonth.c.should.be.equal(2);
+                BirthMonth.d.should.be.equal(3);
+                BirthMonth.e.should.be.equal(4);
+                BirthMonth.h.should.be.equal(5);
+                BirthMonth.l.should.be.equal(6);
+                BirthMonth.m.should.be.equal(7);
+                BirthMonth.p.should.be.equal(8);
+                BirthMonth.r.should.be.equal(9);
+                BirthMonth.s.should.be.equal(10);
+                BirthMonth.t.should.be.equal(11);
+            });
         });
         it('Should return month code for the given month number', () => {
             BirthMonth[0].should.be.equal('A');
@@ -87,17 +105,33 @@ describe('CodiceFiscaleUtils:Enums', () => {
     });
 
     describe('Omocode', () => {
-        it('Should return numeric representation for proper code', () => {
-            Omocode.L.should.be.equal(0);
-            Omocode.M.should.be.equal(1);
-            Omocode.N.should.be.equal(2);
-            Omocode.P.should.be.equal(3);
-            Omocode.Q.should.be.equal(4);
-            Omocode.R.should.be.equal(5);
-            Omocode.S.should.be.equal(6);
-            Omocode.T.should.be.equal(7);
-            Omocode.U.should.be.equal(8);
-            Omocode.V.should.be.equal(9);
+        describe('Uppercase', () => {
+            it('Should return numeric representation for proper code', () => {
+                Omocode.L.should.be.equal(0);
+                Omocode.M.should.be.equal(1);
+                Omocode.N.should.be.equal(2);
+                Omocode.P.should.be.equal(3);
+                Omocode.Q.should.be.equal(4);
+                Omocode.R.should.be.equal(5);
+                Omocode.S.should.be.equal(6);
+                Omocode.T.should.be.equal(7);
+                Omocode.U.should.be.equal(8);
+                Omocode.V.should.be.equal(9);
+            });
+        });
+        describe('Lowercase', () => {
+            it('Should return numeric representation for proper code', () => {
+                Omocode.l.should.be.equal(0);
+                Omocode.m.should.be.equal(1);
+                Omocode.n.should.be.equal(2);
+                Omocode.p.should.be.equal(3);
+                Omocode.q.should.be.equal(4);
+                Omocode.r.should.be.equal(5);
+                Omocode.s.should.be.equal(6);
+                Omocode.t.should.be.equal(7);
+                Omocode.u.should.be.equal(8);
+                Omocode.v.should.be.equal(9);
+            });
         });
         it('Should return letter representation for the given number', () => {
             Omocode[0].should.be.equal('L');
