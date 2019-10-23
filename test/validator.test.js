@@ -254,19 +254,22 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 });
             });
             describe('Specific validator', () => {
-                it ('Should validate cf day 01 for 1', () => {
-                    Validator.cfDay(1).test('01').should.be.ok;
-                });
-                it ('Should not validate cf day LM for 9', () => {
-                    Validator.cfDay(9).test('LM').should.not.be.ok;
-                });
+                describe('Days', () => {
+                    it ('Should validate cf day 01 for 1', () => {
+                        Validator.cfDay(1).test('01').should.be.ok;
+                    });
+                    it ('Should not validate cf day LM for 9', () => {
+                        Validator.cfDay(9).test('LM').should.not.be.ok;
+                    });
 
-                it ('Should validate cf day 41 for 1', () => {
-                    Validator.cfDay(1).test('41').should.be.ok;
-                });
+                    it ('Should validate cf day 41 for 1', () => {
+                        Validator.cfDay(1).test('41').should.be.ok;
+                    });
 
-                it ('Should not validate cf day QM for 9', () => {
-                    Validator.cfDay(9).test('QM').should.not.be.ok;
+                    it ('Should not validate cf day QM for 9', () => {
+                        Validator.cfDay(9).test('QM').should.not.be.ok;
+                    });
+
                 });
             });
         });
@@ -281,6 +284,32 @@ describe('CodiceFiscaleUtils:Validator', () => {
                     cfDayValidator.test('MN').should.be.ok;
                 });
             });
+
+            describe('Gender validator', () => {
+                it ('Should validate cf gender 41 for M', () => {
+                    Validator.cfDayGender(null, 'M').test('41').should.be.false;
+                });
+
+                it ('Should validate cf gender MR for F', () => {
+                    Validator.cfDayGender(null, 'F').test('MR').should.be.false;
+                });
+                it ('Should not validate cf gender QM for F', () => {
+                    Validator.cfDayGender(null, 'F').test('QM').should.true;
+                });
+
+                it ('Should not validate cf gender MR for M', () => {
+                    Validator.cfDayGender(null, 'M').test('MR').should.true;
+                });
+
+                it ('Should throw an error for K as gender', () => {
+                    try {
+                        Validator.cfDayGender(null, 'K');
+                    }catch(e){
+                        e.should.be.an('Error');
+                    }
+                });
+            });
+
             describe('Specific validator', () => {
                 it ('Should validate cf day/gender 01 for 1 Male', () => {
                     Validator.cfDayGender(1, 'M').test('01').should.be.ok;
@@ -295,6 +324,13 @@ describe('CodiceFiscaleUtils:Validator', () => {
 
                 it ('Should not validate cf day/gender QM for 9 Female', () => {
                     Validator.cfDayGender(9, 'F').test('QM').should.not.be.ok;
+                })
+                it ('Should throw an error providing invalid day', () => {
+                    try {
+                        Validator.cfDayGender(-3);
+                    }catch(e){
+                        e.should.be.an('Error');
+                    }
                 });
             });
         });
@@ -309,6 +345,32 @@ describe('CodiceFiscaleUtils:Validator', () => {
                     cfDateValidator.test('U3D2N').should.be.ok;
                 });
             });
+
+            describe('Gender validator', () => {
+                it ('Should validate cf gender U3D41 for M', () => {
+                    Validator.cfDateGender(null, 'M').test('U3D41').should.be.false;
+                });
+
+                it ('Should validate cf gender 83DMR for F', () => {
+                    Validator.cfDateGender(null, 'F').test('83DMR').should.be.false;
+                });
+                it ('Should not validate cf gender V5EQM for F', () => {
+                    Validator.cfDateGender(null, 'F').test('V5EQM').should.true;
+                });
+
+                it ('Should not validate cf gender 83DMR for M', () => {
+                    Validator.cfDateGender(null, 'M').test('83DMR').should.true;
+                });
+
+                it ('Should throw an error for K as gender', () => {
+                    try {
+                        Validator.cfDateGender(null, 'K');
+                    }catch(e){
+                        e.should.be.an('Error');
+                    }
+                });
+            });
+
             describe('Specific validator', () => {
                 it ('Should validate U3D2N for 1983-04-22 Male', () => {
                     Validator.cfDateGender([1983, 3, 22], 'M').test('U3D2N').should.be.ok;
@@ -333,6 +395,14 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 });
                 it ('Should validate 95EL1 for 1995-04-22 Female', () => {
                     Validator.cfDateGender([1995, 4, 1], 'F').test('95EL1').should.not.be.ok;
+                });
+
+                it ('Should throw an error providing invalid date', () => {
+                    try {
+                        Validator.cfDateGender("-3");
+                    }catch(e){
+                        e.should.be.an('Error');
+                    }
                 });
             });
         });

@@ -1,4 +1,4 @@
-import Belfiore from './belfiore';
+import {Belfiore} from './belfiore';
 import BirthMonth from './birthMonth.enum';
 import CheckDigitizer from './checkDigitizer';
 import DATE_VALIDATOR from './dateValidator.const';

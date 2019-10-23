@@ -89,9 +89,11 @@ const core = {
 
     insensitiveMatcher: new Proxy({}, {
         get(receiver, name) {
-            const keys = Object.keys(DIACRITICS_MAP).filter(key => (new RegExp(`^[${key}]$`, 'ui')).test(name));
-            if (keys.length) {
-                return keys.map(key => DIACRITICS_MAP[key]).join('');
+            if (typeof name === 'string' && name.length === 1) {
+                const keys = Object.keys(DIACRITICS_MAP).filter(key => (new RegExp(`^[${key}]$`, 'ui')).test(name));
+                if (keys.length) {
+                    return keys.map(key => DIACRITICS_MAP[key]).join('');
+                }
             }
             return receiver[name];
         }
@@ -118,10 +120,10 @@ const core = {
  * @namespace Diacritics
  * @returns {Proxy}
  */
-export default new Proxy(Object.assign({}, core, {
+export default new Proxy(Object.assign({
     validator: new Proxy({}, {
         get(receiver, name) {
-            if (typeof name  === 'string' && core.matcher[name]) {
+            if (typeof name  === 'string' && name.length === 1 && core.matcher[name]) {
                 return new RegExp(`[${core.matcher[name]}]`, 'u');
             }
             return receiver[name];
@@ -130,15 +132,15 @@ export default new Proxy(Object.assign({}, core, {
 
     insensitiveValidator: new Proxy({}, {
         get(receiver, name) {
-            if (core.matcher[name]) {
+            if (typeof name === 'string' && name.length === 1 && core.matcher[name]) {
                 return new RegExp(`[${core.insensitiveMatcher[name]}]`, 'ui');
             }
             return receiver[name];
         }
     })
-}), {
+}, core), {
     get(receiver, name) {
-        if (name.length === 1) {
+        if (typeof name === 'string' && name.length === 1) {
             const [normalizedLetter] = Object.values(DIACRITICS_MAP).find(value => (new RegExp(`[${value}]`, 'u')).test(name)) || [];
             return normalizedLetter || name;
         }
