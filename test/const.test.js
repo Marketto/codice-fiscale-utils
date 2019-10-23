@@ -443,6 +443,7 @@ describe('CodiceFiscaleUtils:Const', () => {
                 partialCFMatcher.test('RSSMRA80A01H50').should.be.ok;
                 partialCFMatcher.test('RSSMRA80A01H501').should.be.ok;
                 partialCFMatcher.test('RSSMRA80A01H501U').should.be.ok;
+                partialCFMatcher.test('rssmra80a01h501u').should.be.ok;
             });
         });
 

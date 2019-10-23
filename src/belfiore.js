@@ -190,7 +190,7 @@ class Belfiore{
      * @private
      */
     static get (resource, paramName) {
-        if (typeof paramName  === 'string' && (/^[A-Z]\d{3}$/u).test(paramName)){
+        if (typeof paramName  === 'string' && (/^[A-Z]\d{3}$/iu).test(paramName)){
             const base32name = this.belfioreToInt(paramName).toString(32).padStart(3, '0');
             for (let g = 0; g < resource._data.length; g++) {
                 const resourceData = resource._data[g];
@@ -258,7 +258,8 @@ class Belfiore{
      * @private
      */
     static belfioreToInt(code) {
-        return (code.charCodeAt()-65)*10**3 + parseInt(code.substr(1));
+        const upperCaseCode = code.toUpperCase();
+        return (upperCaseCode.charCodeAt()-65)*10**3 + parseInt(upperCaseCode.substr(1));
     }
 
     /**

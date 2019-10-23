@@ -19,6 +19,9 @@ describe('CodiceFiscaleUtils:Belfiore', () => {
             it('Should return Rome for H501', () => {
                 Belfiore.H501.name.should.be.equal('ROMA');
             });
+            it('Should return Bari for a662', () => {
+                Belfiore.a662.name.should.be.equal('BARI');
+            });
         });
         describe('Belfiore place', () => {
             it('Should return code H501 for H501', () => {

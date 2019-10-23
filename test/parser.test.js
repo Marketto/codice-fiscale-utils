@@ -51,177 +51,340 @@ describe('CodiceFiscaleUtils:Parser', () => {
 
     describe('methods from CF', () => {
         describe('cfDeomocode', () => {
-            it('Should decode KKALMNVMAPLB331Z to KKALMN91A30B331Z', () => {
-                Parser.cfDeomocode('KKALMNVMAPLB331Z').should.be.equal('KKALMN91A30B331Z');
+            describe('Uppercase', () => {
+                it('Should decode KKALMNVMAPLB331Z to KKALMN91A30B331Z', () => {
+                    Parser.cfDeomocode('KKALMNVMAPLB331Z').should.be.equal('KKALMN91A30B331Z');
+                });
+            });
+            describe('Lowercase', () => {
+                it('Should decode kkalmnvmaplb331z to kkalmn91a30b331z', () => {
+                    Parser.cfDeomocode('kkalmnvmaplb331z').should.be.equal('kkalmn91a30b331z');
+                });
             });
         });
 
         describe('cfToSurname', () => {
-            it ('Should return W*Y*Z*', () => {
-                Parser.cfToSurname('WYZ').should.be.equal('W*Y*Z*');
+            describe('Uppercase', () => {
+                it ('Should return W*Y*Z*', () => {
+                    Parser.cfToSurname('WYZ').should.be.equal('W*Y*Z*');
+                });
+                it ('Should return WA*Y*', () => {
+                    Parser.cfToSurname('WYA').should.be.equal('WA*Y*');
+                });
+                it ('Should return WAE*', () => {
+                    Parser.cfToSurname('WAE').should.be.equal('WAE*');
+                });
+                it ('Should return AEI*', () => {
+                    Parser.cfToSurname('AEI').should.be.equal('AEI*');
+                });
+                it ('Should return AE', () => {
+                    Parser.cfToSurname('AEX').should.be.equal('AE');
+                });
             });
-            it ('Should return WA*Y*', () => {
-                Parser.cfToSurname('WYA').should.be.equal('WA*Y*');
+            describe('Lowercase', () => {
+                it ('Should return K*N*T*', () => {
+                    Parser.cfToSurname('knt').should.be.equal('k*n*t*');
+                });
+                it ('Should return KO*T*', () => {
+                    Parser.cfToSurname('kto').should.be.equal('ko*t*');
+                });
+                it ('Should return RIO*', () => {
+                    Parser.cfToSurname('rio').should.be.equal('rio*');
+                });
+                it ('Should return UAU*', () => {
+                    Parser.cfToSurname('uau').should.be.equal('uau*');
+                });
+                it ('Should return OO', () => {
+                    Parser.cfToSurname('oox').should.be.equal('oo');
+                });
             });
-            it ('Should return WAE*', () => {
-                Parser.cfToSurname('WAE').should.be.equal('WAE*');
-            });
-            it ('Should return AEI*', () => {
-                Parser.cfToSurname('AEI').should.be.equal('AEI*');
-            });
-            it ('Should return AE', () => {
-                Parser.cfToSurname('AEX').should.be.equal('AE');
-            });
-            it('Should return null for strings different from 3 chars, vowel between consonants or undefined', () => {
-                expect(Parser.cfToSurname('KAZ')).to.be.null;
-                expect(Parser.cfToSurname('KA')).to.be.null;
-                expect(Parser.cfToSurname()).to.be.null;
+            describe('Invalid', () => {
+                //Invalid
+                it('Should return null for strings different from 3 chars, vowel between consonants or undefined', () => {
+                    expect(Parser.cfToSurname('KAZ')).to.be.null;
+                    expect(Parser.cfToSurname('KA')).to.be.null;
+                    expect(Parser.cfToSurname()).to.be.null;
+                });
             });
         });
 
         describe('cfToName', () => {
-            it ('Should return W*Y*Z*', () => {
-                Parser.cfToName('ZZZWYZ').should.be.equal('W*Y*Z*');
+            describe('Uppercase', () => {
+                it ('Should return W*Y*Z*', () => {
+                    Parser.cfToName('ZZZWYZ').should.be.equal('W*Y*Z*');
+                });
+                it ('Should return WA*Y*', () => {
+                    Parser.cfToName('ZZZWYA').should.be.equal('WA*Y*');
+                });
+                it ('Should return WAE*', () => {
+                    Parser.cfToName('ZZZWAE').should.be.equal('WAE*');
+                });
+                it ('Should return AEI*', () => {
+                    Parser.cfToName('ZZZAEI').should.be.equal('AEI*');
+                });
+                it ('Should return AE', () => {
+                    Parser.cfToName('ZZZAEX').should.be.equal('AE');
+                });
             });
-            it ('Should return WA*Y*', () => {
-                Parser.cfToName('ZZZWYA').should.be.equal('WA*Y*');
+            describe('Lowercase', () => {
+                it ('Should return K*N*T*', () => {
+                    Parser.cfToName('qqqknt').should.be.equal('k*n*t*');
+                });
+                it ('Should return KO*T*', () => {
+                    Parser.cfToName('qqqkto').should.be.equal('ko*t*');
+                });
+                it ('Should return RIO*', () => {
+                    Parser.cfToName('qqqrio').should.be.equal('rio*');
+                });
+                it ('Should return UAU*', () => {
+                    Parser.cfToName('qqquau').should.be.equal('uau*');
+                });
+                it ('Should return OO', () => {
+                    Parser.cfToName('qqqoox').should.be.equal('oo');
+                });
             });
-            it ('Should return WAE*', () => {
-                Parser.cfToName('ZZZWAE').should.be.equal('WAE*');
-            });
-            it ('Should return AEI*', () => {
-                Parser.cfToName('ZZZAEI').should.be.equal('AEI*');
-            });
-            it ('Should return AE', () => {
-                Parser.cfToName('ZZZAEX').should.be.equal('AE');
-            });
-            it('Should return null', () => {
-                expect(Parser.cfToName('ZZZKAZ')).to.be.null;
-                expect(Parser.cfToName('ZZZKA')).to.be.null;
-                expect(Parser.cfToName('ZZZ')).to.be.null;
-                expect(Parser.cfToName()).to.be.null;
+            describe('Invalid', () => {
+                it('Should return null', () => {
+                    expect(Parser.cfToName('ZZZKAZ')).to.be.null;
+                    expect(Parser.cfToName('ZZZKA')).to.be.null;
+                    expect(Parser.cfToName('ZZZ')).to.be.null;
+                    expect(Parser.cfToName()).to.be.null;
+                });
             });
         });
 
         describe('cfToGender', () => {
-            it('Should return M', () => {
-                Parser.cfToGender('XXXYYY90B20').should.be.equal('M');
+            describe('Uppercase', () => {
+                it('Should return M (Uppercase)', () => {
+                    Parser.cfToGender('XXXYYY90B20').should.be.equal('M');
+                });
+                it('Should return F (Uppercase)', () => {
+                    Parser.cfToGender('XXXYYY90B63').should.be.equal('F');
+                });
             });
-            it('Should return F', () => {
-                Parser.cfToGender('XXXYYY90B63').should.be.equal('F');
+            describe('Lowercase', () => {
+                it('Should return M (Lowercase)', () => {
+                    Parser.cfToGender('xxxyyy90b20').should.be.equal('M');
+                });
+                it('Should return F (Lowercase)', () => {
+                    Parser.cfToGender('xxxyyy90b63').should.be.equal('F');
+                });
             });
-            it('Should return null', () => {
-                expect(Parser.cfToGender('XXXYYY90')).to.be.null;
-                expect(Parser.cfToGender()).to.be.null;
+            describe('Invalid', () => {
+                it('Should return null', () => {
+                    expect(Parser.cfToGender('XXXYYY90')).to.be.null;
+                    expect(Parser.cfToGender()).to.be.null;
+                });
             });
         });
 
         describe('cfToBirthDay', () => {
-            it('Should return 12 (M)', () => {
-                Parser.cfToBirthDay('XXXYYY90B12').should.be.equal(12);
+            describe('Uppercase', () => {
+                it('Should return 12 (M)', () => {
+                    Parser.cfToBirthDay('XXXYYY90B12').should.be.equal(12);
+                });
+                it('Should return 31 (F)', () => {
+                    Parser.cfToBirthDay('XXXYYY90B71').should.be.equal(31);
+                });
             });
-            it('Should return 31 (F)', () => {
-                Parser.cfToBirthDay('XXXYYY90B71').should.be.equal(31);
+            describe('Lowercase', () => {
+                it('Should return 12 (M)', () => {
+                    Parser.cfToBirthDay('XXXYYY90B12').should.be.equal(12);
+                });
+                it('Should return 31 (F)', () => {
+                    Parser.cfToBirthDay('XXXYYY90B71').should.be.equal(31);
+                });
             });
-            it('Should return null', () => {
-                expect(Parser.cfToBirthDay('XXXYYY90B00')).to.be.null;
-                expect(Parser.cfToBirthDay('XXXYYY90B35')).to.be.null;
-                expect(Parser.cfToBirthDay('XXXYYY90B74')).to.be.null;
-                expect(Parser.cfToBirthDay('XXXYYY90')).to.be.null;
-                expect(Parser.cfToBirthDay()).to.be.null;
+            describe('Invalid', () => {
+                it('Should return null', () => {
+                    expect(Parser.cfToBirthDay('XXXYYY90B00')).to.be.null;
+                    expect(Parser.cfToBirthDay('XXXYYY90B35')).to.be.null;
+                    expect(Parser.cfToBirthDay('XXXYYY90B74')).to.be.null;
+                    expect(Parser.cfToBirthDay('XXXYYY90')).to.be.null;
+                    expect(Parser.cfToBirthDay()).to.be.null;
+                });
             });
         });
 
         describe('cfToBirthMonth', () => {
-            it('Should return the month', () => {
-                Parser.cfToBirthMonth('XXXYYY92C').should.be.equal(2);
+            describe('Uppercase', () => {
+                it('Should return the month', () => {
+                    Parser.cfToBirthMonth('XXXYYY92C').should.be.equal(2);
+                });
             });
-            it('Should return null', () => {
-                expect(Parser.cfToBirthDate('XXXYYY90J')).to.be.null;
-                expect(Parser.cfToBirthDate('XXXYYY90')).to.be.null;
-                expect(Parser.cfToBirthDate()).to.be.null;
+            describe('Lowercase', () => {
+                it('Should return the month', () => {
+                    Parser.cfToBirthMonth('xxxyyy92c').should.be.equal(2);
+                });
+            });
+            describe('Invalid', () => {
+                it('Should return null', () => {
+                    expect(Parser.cfToBirthDate('XXXYYY90J')).to.be.null;
+                    expect(Parser.cfToBirthDate('XXXYYY90')).to.be.null;
+                    expect(Parser.cfToBirthDate()).to.be.null;
+                });
             });
         });
 
         describe('cfToBirthYear', () => {
-            it('Should return the year', () => {
-                Parser.cfToBirthYear('XXXYYY92').should.be.equal(1992);
+            describe('Uppercase', () => {
+                it('Should return the year', () => {
+                    Parser.cfToBirthYear('XXXYYY92').should.be.equal(1992);
+                });
+                it('Should return 20XX up to current year', () => {
+                    const currentYear = (new Date()).getFullYear();
+                    Parser.cfToBirthYear(`XXXYYY${currentYear.toString().substr(-2)}`).should.be.equal(currentYear);
+                });
+                it('Should return 19XX from next year', () => {
+                    const ninetynineYearsAgo = (new Date()).getFullYear() -99;
+                    Parser.cfToBirthYear(`XXXYYY${ninetynineYearsAgo.toString().substr(-2)}`).should.be.equal(ninetynineYearsAgo);
+                });
             });
-            it('Should return 20XX up to current year', () => {
-                const currentYear = (new Date()).getFullYear();
-                Parser.cfToBirthYear(`XXXYYY${currentYear.toString().substr(-2)}`).should.be.equal(currentYear);
+            describe('Lowercase', () => {
+                it('Should return the year', () => {
+                    Parser.cfToBirthYear('xxxyyy92').should.be.equal(1992);
+                });
+                it('Should return 20XX up to current year', () => {
+                    const currentYear = (new Date()).getFullYear();
+                    Parser.cfToBirthYear(`xxxyyy${currentYear.toString().substr(-2)}`).should.be.equal(currentYear);
+                });
+                it('Should return 19XX from next year', () => {
+                    const ninetynineYearsAgo = (new Date()).getFullYear() -99;
+                    Parser.cfToBirthYear(`xxxyyy${ninetynineYearsAgo.toString().substr(-2)}`).should.be.equal(ninetynineYearsAgo);
+                });
             });
-            it('Should return 19XX from next year', () => {
-                const ninetynineYearsAgo = (new Date()).getFullYear() -99;
-                Parser.cfToBirthYear(`XXXYYY${ninetynineYearsAgo.toString().substr(-2)}`).should.be.equal(ninetynineYearsAgo);
-            });
-            it('Should return null', () => {
-                expect(Parser.cfToBirthDate('XXXYYY')).to.be.null;
-                expect(Parser.cfToBirthDate()).to.be.null;
+            describe('Invalid', () => {
+                it('Should return null', () => {
+                    expect(Parser.cfToBirthDate('XXXYYY')).to.be.null;
+                    expect(Parser.cfToBirthDate()).to.be.null;
+                });
             });
         });
 
         describe('cfToBirthDate', () => {
-            it('Should return a Date (Male)', () => {
-                const bdt = Parser.cfToBirthDate('XXXYYY92B20');
-                //bdt.toJSON().should.be.equal('1992-02-20');
-                bdt.getDate().should.be.equal(20);
-                bdt.getMonth().should.be.equal(1);
+            describe('Uppercase', () => {
+                it('Should return a Date (Male)', () => {
+                    const bdt = Parser.cfToBirthDate('XXXYYY92B20');
+                    bdt.toJSON().substr(0,10).should.be.equal('1992-02-20');
+                    bdt.getDate().should.be.equal(20);
+                    bdt.getMonth().should.be.equal(1);
+                });
+                it('Should return a Date (Female)', () => {
+                    const bdt = Parser.cfToBirthDate('XXXYYY81A63');
+                    bdt.toISOString().substr(0,10).should.be.equal('1981-01-23');
+                    bdt.getDate().should.be.equal(23);
+                    bdt.getMonth().should.be.equal(0);
+                });
             });
-            it('Should return a Date (Female)', () => {
-                const bdt = Parser.cfToBirthDate('XXXYYY81A63');
-                //bdt.toISOString().should.be.equal('1981-01-23');
-                bdt.getDate().should.be.equal(23);
-                bdt.getMonth().should.be.equal(0);
+            describe('Lowercase', () => {
+                it('Should return a Date (Male)', () => {
+                    const bdt = Parser.cfToBirthDate('xxxyyy92b20');
+                    bdt.toJSON().substr(0,10).should.be.equal('1992-02-20');
+                    bdt.getDate().should.be.equal(20);
+                    bdt.getMonth().should.be.equal(1);
+                });
+                it('Should return a Date (Female)', () => {
+                    const bdt = Parser.cfToBirthDate('xxxyyy81a63');
+                    bdt.toISOString().substr(0,10).should.be.equal('1981-01-23');
+                    bdt.getDate().should.be.equal(23);
+                    bdt.getMonth().should.be.equal(0);
+                });
             });
-            it('Should return null', () => {
-                expect(Parser.cfToBirthDate('XXXYYY90')).to.be.null;
-                expect(Parser.cfToBirthDate()).to.be.null;
+            describe('Invalid', () => {
+                it('Should return null', () => {
+                    expect(Parser.cfToBirthDate('XXXYYY90')).to.be.null;
+                    expect(Parser.cfToBirthDate()).to.be.null;
+                });
             });
         });
 
         describe('cfToBirthPlace', () => {
-            it('Should return Rome for H501', () => {
-                const parsedBirthPlace = Parser.cfToBirthPlace('XXXYYY92B20H501');
-                parsedBirthPlace.should.be.an('object');
-                parsedBirthPlace.belfioreCode.should.be.equal('H501');
-                parsedBirthPlace.name.should.be.equal('ROMA');
+            describe('Uppercase', () => {
+                it('Should return Rome for H501', () => {
+                    const parsedBirthPlace = Parser.cfToBirthPlace('XXXYYY92B20H501');
+                    parsedBirthPlace.should.be.an('object');
+                    parsedBirthPlace.belfioreCode.should.be.equal('H501');
+                    parsedBirthPlace.name.should.be.equal('ROMA');
+                });
+                it('Should check expiration', () => {
+                    expect(Parser.cfToBirthPlace('XXXYYY91B22Z111')).to.be.null;
+                    const parsedBirthPlace = Parser.cfToBirthPlace('XXXYYY81A43Z111');
+                    parsedBirthPlace.should.be.an('object');
+                    parsedBirthPlace.belfioreCode.should.be.equal('Z111');
+                    parsedBirthPlace.name.should.be.equal('Repubblica Democratica Tedesca');
+                });
             });
-            it('Should check expiration', () => {
-                expect(Parser.cfToBirthPlace('XXXYYY91B22Z111')).to.be.null;
-                const parsedBirthPlace = Parser.cfToBirthPlace('XXXYYY81A43Z111');
-                parsedBirthPlace.should.be.an('object');
-                parsedBirthPlace.belfioreCode.should.be.equal('Z111');
-                parsedBirthPlace.name.should.be.equal('Repubblica Democratica Tedesca');
+            describe('Lowercase', () => {
+                it('Should return Rome for H501', () => {
+                    const parsedBirthPlace = Parser.cfToBirthPlace('xxxyyy92b20h501');
+                    parsedBirthPlace.should.be.an('object');
+                    parsedBirthPlace.belfioreCode.should.be.equal('H501');
+                    parsedBirthPlace.name.should.be.equal('ROMA');
+                });
+                it('Should check expiration', () => {
+                    expect(Parser.cfToBirthPlace('XXXYYY91B22Z111')).to.be.null;
+                    const parsedBirthPlace = Parser.cfToBirthPlace('xxxyyy81a43z111');
+                    parsedBirthPlace.should.be.an('object');
+                    parsedBirthPlace.belfioreCode.should.be.equal('Z111');
+                    parsedBirthPlace.name.should.be.equal('Repubblica Democratica Tedesca');
+                });
             });
-            it('Should return null', () => {
-                expect(Parser.cfToBirthPlace('XXXYYY90')).to.be.null;
-                expect(Parser.cfToBirthPlace()).to.be.null;
+            describe('Invalid', () => {
+                it('Should return null', () => {
+                    expect(Parser.cfToBirthPlace('XXXYYY90')).to.be.null;
+                    expect(Parser.cfToBirthPlace()).to.be.null;
+                });
             });
         });
 
         describe('cfDecode', () => {
-            it('Should return matching infos from VRNGNY07D68C351V', () => {
-                const decoded = Parser.cfDecode('VRNGNY07D68C351V');
-                decoded.should.be.a('object');
-                decoded.surname.should.be.equal('V*R*N*');
-                decoded.name.should.be.equal('G*N*Y*');
-                decoded.year.should.be.equal(2007);
-                decoded.month.should.be.equal(3);
-                decoded.day.should.be.equal(28);
-                decoded.gender.should.be.equal('F');
-                decoded.place.should.be.equal('CATANIA');
+            describe('Lowercase', () => {
+                it('Should return matching infos from VRNGNY07D68C351V', () => {
+                    const decoded = Parser.cfDecode('VRNGNY07D68C351V');
+                    decoded.should.be.a('object');
+                    decoded.surname.should.be.equal('V*R*N*');
+                    decoded.name.should.be.equal('G*N*Y*');
+                    decoded.year.should.be.equal(2007);
+                    decoded.month.should.be.equal(3);
+                    decoded.day.should.be.equal(28);
+                    decoded.gender.should.be.equal('F');
+                    decoded.place.should.be.equal('CATANIA');
+                });
+                it('Should return matching infos from MRNMIA02E45L219X', () => {
+                    const decoded = Parser.cfDecode('MRNMIA02E45L219X');
+                    decoded.should.be.a('object');
+                    decoded.surname.should.be.equal('M*R*N*');
+                    decoded.name.should.be.equal('MIA*');
+                    decoded.year.should.be.equal(2002);
+                    decoded.month.should.be.equal(4);
+                    decoded.day.should.be.equal(5);
+                    decoded.gender.should.be.equal('F');
+                    decoded.place.should.be.equal('TORINO');
+                });
             });
-            it('Should return matching infos from MRNMIA02E45L219X', () => {
-                const decoded = Parser.cfDecode('MRNMIA02E45L219X');
-                decoded.should.be.a('object');
-                decoded.surname.should.be.equal('M*R*N*');
-                decoded.name.should.be.equal('MIA*');
-                decoded.year.should.be.equal(2002);
-                decoded.month.should.be.equal(4);
-                decoded.day.should.be.equal(5);
-                decoded.gender.should.be.equal('F');
-                decoded.place.should.be.equal('TORINO');
+            describe('Lowercase', () => {
+                it('Should return matching infos from vrngny07d68c351v', () => {
+                    const decoded = Parser.cfDecode('vrngny07d68c351v');
+                    decoded.should.be.a('object');
+                    decoded.surname.should.be.equal('v*r*n*');
+                    decoded.name.should.be.equal('g*n*y*');
+                    decoded.year.should.be.equal(2007);
+                    decoded.month.should.be.equal(3);
+                    decoded.day.should.be.equal(28);
+                    decoded.gender.should.be.equal('F');
+                    decoded.place.should.be.equal('CATANIA');
+                });
+                it('Should return matching infos from mrnmia02e45l219x', () => {
+                    const decoded = Parser.cfDecode('mrnmia02e45l219x');
+                    decoded.should.be.a('object');
+                    decoded.surname.should.be.equal('m*r*n*');
+                    decoded.name.should.be.equal('mia*');
+                    decoded.year.should.be.equal(2002);
+                    decoded.month.should.be.equal(4);
+                    decoded.day.should.be.equal(5);
+                    decoded.gender.should.be.equal('F');
+                    decoded.place.should.be.equal('TORINO');
+                });
             });
         });
     });
