@@ -46,6 +46,10 @@ const codiceFiscaleUtils = require('@marketto/codice-fiscale-utils');
 ```javascript
 import codiceFiscaleUtils from '@marketto/codice-fiscale-utils';
 ```
+### TypeScript
+```typescript
+import * as codiceFiscaleUtils from '@marketto/codice-fiscale-utils';
+```
 ### Script
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

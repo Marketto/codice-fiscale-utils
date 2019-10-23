@@ -117,92 +117,6 @@ window.lunrData = {
           "handler",
           "namespac"
         ],
-        "Belfiore.html#cities": [
-          "belfior",
-          "belfiore#c",
-          "citi",
-          "filter",
-          "lt;readonly&gt",
-          "member",
-          "place",
-          "proxi",
-          "result",
-          "return",
-          "type",
-          "version"
-        ],
-        "Belfiore.html#countries": [
-          "belfior",
-          "belfiore#countri",
-          "countri",
-          "filter",
-          "lt;readonly&gt",
-          "member",
-          "place",
-          "proxi",
-          "result",
-          "return",
-          "type",
-          "version"
-        ],
-        "Belfiore.html#searchByName": [
-          "array.&lt;object&gt",
-          "belfiore#searchbynam",
-          "function",
-          "given",
-          "match",
-          "name",
-          "place",
-          "search",
-          "searchbynam"
-        ],
-        "Belfiore.html#findByName": [
-          "1",
-          "belfiore#findbynam",
-          "find",
-          "findbynam",
-          "function",
-          "given",
-          "match",
-          "name",
-          "object",
-          "object|nul",
-          "place",
-          "provid",
-          "result",
-          "retun"
-        ],
-        "Belfiore.html#active": [
-          "activ",
-          "belfior",
-          "belfiore#act",
-          "date",
-          "filter",
-          "function",
-          "given",
-          "proxi",
-          "result",
-          "return",
-          "version"
-        ],
-        "Belfiore.html#byProvince": [
-          "belfior",
-          "belfiore#byprovinc",
-          "byprovinc",
-          "code",
-          "filter",
-          "function",
-          "given",
-          "instanc",
-          "provinc",
-          "return"
-        ],
-        "Belfiore.html#toArray": [
-          "array.&lt;object&gt",
-          "belfiore#toarray",
-          "function",
-          "toarray"
-        ],
         "BirthMonth.html": [
           "birthmonth",
           "namespac"
@@ -701,7 +615,7 @@ window.lunrData = {
           "validator.isvalid"
         ]
       },
-      "length": 63
+      "length": 56
     },
     "tokenStore": {
       "root": {
@@ -720,12 +634,7 @@ window.lunrData = {
               }
             }
           },
-          "docs": {
-            "Belfiore.html#findByName": {
-              "ref": "Belfiore.html#findByName",
-              "tf": 3.8461538461538463
-            }
-          }
+          "docs": {}
         },
         "docs": {},
         "c": {
@@ -862,10 +771,6 @@ window.lunrData = {
               },
               "e": {
                 "docs": {
-                  "Belfiore.html#byProvince": {
-                    "ref": "Belfiore.html#byProvince",
-                    "tf": 33.33333333333333
-                  },
                   "Parser.html#.placeToCf": {
                     "ref": "Parser.html#.placeToCf",
                     "tf": 8.333333333333332
@@ -890,10 +795,6 @@ window.lunrData = {
                         "Belfiore.html": {
                           "ref": "Belfiore.html",
                           "tf": 12.5
-                        },
-                        "Belfiore.html#countries": {
-                          "ref": "Belfiore.html#countries",
-                          "tf": 700
                         }
                       }
                     }
@@ -1564,10 +1465,6 @@ window.lunrData = {
                   "Belfiore.html": {
                     "ref": "Belfiore.html",
                     "tf": 12.5
-                  },
-                  "Belfiore.html#cities": {
-                    "ref": "Belfiore.html#cities",
-                    "tf": 700
                   }
                 }
               }
@@ -1637,66 +1534,6 @@ window.lunrData = {
                   }
                 }
               }
-            },
-            "l": {
-              "docs": {},
-              "t": {
-                "docs": {},
-                "e": {
-                  "docs": {},
-                  "r": {
-                    "docs": {
-                      "Belfiore.html#cities": {
-                        "ref": "Belfiore.html#cities",
-                        "tf": 6.25
-                      },
-                      "Belfiore.html#countries": {
-                        "ref": "Belfiore.html#countries",
-                        "tf": 6.25
-                      },
-                      "Belfiore.html#active": {
-                        "ref": "Belfiore.html#active",
-                        "tf": 6.25
-                      },
-                      "Belfiore.html#byProvince": {
-                        "ref": "Belfiore.html#byProvince",
-                        "tf": 8.333333333333332
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "n": {
-              "docs": {},
-              "d": {
-                "docs": {
-                  "Belfiore.html#findByName": {
-                    "ref": "Belfiore.html#findByName",
-                    "tf": 3.8461538461538463
-                  }
-                },
-                "b": {
-                  "docs": {},
-                  "y": {
-                    "docs": {},
-                    "n": {
-                      "docs": {},
-                      "a": {
-                        "docs": {},
-                        "m": {
-                          "docs": {
-                            "Belfiore.html#findByName": {
-                              "ref": "Belfiore.html#findByName",
-                              "tf": 683.3333333333334
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
             }
           },
           "u": {
@@ -1719,26 +1556,6 @@ window.lunrData = {
                           },
                           "CheckDigitizer.html#.checkDigit": {
                             "ref": "CheckDigitizer.html#.checkDigit",
-                            "tf": 110
-                          },
-                          "Belfiore.html#searchByName": {
-                            "ref": "Belfiore.html#searchByName",
-                            "tf": 110
-                          },
-                          "Belfiore.html#findByName": {
-                            "ref": "Belfiore.html#findByName",
-                            "tf": 110
-                          },
-                          "Belfiore.html#active": {
-                            "ref": "Belfiore.html#active",
-                            "tf": 110
-                          },
-                          "Belfiore.html#byProvince": {
-                            "ref": "Belfiore.html#byProvince",
-                            "tf": 110
-                          },
-                          "Belfiore.html#toArray": {
-                            "ref": "Belfiore.html#toArray",
                             "tf": 110
                           },
                           "Gender.html#.toArray": {
@@ -1976,26 +1793,6 @@ window.lunrData = {
                 }
               }
             },
-            "s": {
-              "docs": {},
-              "t": {
-                "docs": {},
-                "a": {
-                  "docs": {},
-                  "n": {
-                    "docs": {},
-                    "c": {
-                      "docs": {
-                        "Belfiore.html#byProvince": {
-                          "ref": "Belfiore.html#byProvince",
-                          "tf": 8.333333333333332
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
             "f": {
               "docs": {},
               "o": {
@@ -2206,35 +2003,6 @@ window.lunrData = {
                 }
               }
             },
-            "s": {
-              "docs": {},
-              "u": {
-                "docs": {},
-                "l": {
-                  "docs": {},
-                  "t": {
-                    "docs": {
-                      "Belfiore.html#cities": {
-                        "ref": "Belfiore.html#cities",
-                        "tf": 6.25
-                      },
-                      "Belfiore.html#countries": {
-                        "ref": "Belfiore.html#countries",
-                        "tf": 6.25
-                      },
-                      "Belfiore.html#findByName": {
-                        "ref": "Belfiore.html#findByName",
-                        "tf": 3.8461538461538463
-                      },
-                      "Belfiore.html#active": {
-                        "ref": "Belfiore.html#active",
-                        "tf": 6.25
-                      }
-                    }
-                  }
-                }
-              }
-            },
             "t": {
               "docs": {},
               "u": {
@@ -2243,22 +2011,6 @@ window.lunrData = {
                   "docs": {},
                   "n": {
                     "docs": {
-                      "Belfiore.html#cities": {
-                        "ref": "Belfiore.html#cities",
-                        "tf": 6.25
-                      },
-                      "Belfiore.html#countries": {
-                        "ref": "Belfiore.html#countries",
-                        "tf": 6.25
-                      },
-                      "Belfiore.html#active": {
-                        "ref": "Belfiore.html#active",
-                        "tf": 6.25
-                      },
-                      "Belfiore.html#byProvince": {
-                        "ref": "Belfiore.html#byProvince",
-                        "tf": 8.333333333333332
-                      },
                       "Gender.html#.toArray": {
                         "ref": "Gender.html#.toArray",
                         "tf": 12.5
@@ -2283,14 +2035,6 @@ window.lunrData = {
                         "ref": "Validator_.html#.place",
                         "tf": 7.142857142857142
                       }
-                    }
-                  }
-                },
-                "n": {
-                  "docs": {
-                    "Belfiore.html#findByName": {
-                      "ref": "Belfiore.html#findByName",
-                      "tf": 3.8461538461538463
                     }
                   }
                 }
@@ -2534,10 +2278,6 @@ window.lunrData = {
               },
               "e": {
                 "docs": {
-                  "Belfiore.html#active": {
-                    "ref": "Belfiore.html#active",
-                    "tf": 39.58333333333333
-                  },
                   "DATE_VALIDATOR.html": {
                     "ref": "DATE_VALIDATOR.html",
                     "tf": 16.666666666666664
@@ -2822,22 +2562,6 @@ window.lunrData = {
                     "CheckDigitizer.html#.checkDigit": {
                       "ref": "CheckDigitizer.html#.checkDigit",
                       "tf": 5.555555555555555
-                    },
-                    "Belfiore.html#searchByName": {
-                      "ref": "Belfiore.html#searchByName",
-                      "tf": 10
-                    },
-                    "Belfiore.html#findByName": {
-                      "ref": "Belfiore.html#findByName",
-                      "tf": 3.8461538461538463
-                    },
-                    "Belfiore.html#active": {
-                      "ref": "Belfiore.html#active",
-                      "tf": 6.25
-                    },
-                    "Belfiore.html#byProvince": {
-                      "ref": "Belfiore.html#byProvince",
-                      "tf": 8.333333333333332
                     },
                     "Validator_.html#.cfSurname": {
                       "ref": "Validator_.html#.cfSurname",
@@ -3353,48 +3077,6 @@ window.lunrData = {
                     }
                   }
                 }
-              },
-              "r": {
-                "docs": {},
-                "e": {
-                  "docs": {},
-                  "a": {
-                    "docs": {},
-                    "d": {
-                      "docs": {},
-                      "o": {
-                        "docs": {},
-                        "n": {
-                          "docs": {},
-                          "l": {
-                            "docs": {},
-                            "y": {
-                              "docs": {},
-                              "&": {
-                                "docs": {},
-                                "g": {
-                                  "docs": {},
-                                  "t": {
-                                    "docs": {
-                                      "Belfiore.html#cities": {
-                                        "ref": "Belfiore.html#cities",
-                                        "tf": 50
-                                      },
-                                      "Belfiore.html#countries": {
-                                        "ref": "Belfiore.html#countries",
-                                        "tf": 50
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
               }
             }
           },
@@ -3551,39 +3233,10 @@ window.lunrData = {
                   "docs": {},
                   "r": {
                     "docs": {
-                      "Belfiore.html#cities": {
-                        "ref": "Belfiore.html#cities",
-                        "tf": 110
-                      },
-                      "Belfiore.html#countries": {
-                        "ref": "Belfiore.html#countries",
-                        "tf": 110
-                      },
                       "Parser.html#.OMOCODE_BITMAP": {
                         "ref": "Parser.html#.OMOCODE_BITMAP",
                         "tf": 110
                       }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "a": {
-            "docs": {},
-            "t": {
-              "docs": {},
-              "c": {
-                "docs": {},
-                "h": {
-                  "docs": {
-                    "Belfiore.html#searchByName": {
-                      "ref": "Belfiore.html#searchByName",
-                      "tf": 10
-                    },
-                    "Belfiore.html#findByName": {
-                      "ref": "Belfiore.html#findByName",
-                      "tf": 7.6923076923076925
                     }
                   }
                 }
@@ -3634,14 +3287,6 @@ window.lunrData = {
               "docs": {},
               "e": {
                 "docs": {
-                  "Belfiore.html#searchByName": {
-                    "ref": "Belfiore.html#searchByName",
-                    "tf": 43.33333333333333
-                  },
-                  "Belfiore.html#findByName": {
-                    "ref": "Belfiore.html#findByName",
-                    "tf": 41.02564102564102
-                  },
                   "Parser.html#.cfToName": {
                     "ref": "Parser.html#.cfToName",
                     "tf": 16.666666666666664
@@ -4683,54 +4328,6 @@ window.lunrData = {
                   }
                 }
               },
-              "x": {
-                "docs": {},
-                "i": {
-                  "docs": {
-                    "Belfiore.html#cities": {
-                      "ref": "Belfiore.html#cities",
-                      "tf": 6.25
-                    },
-                    "Belfiore.html#countries": {
-                      "ref": "Belfiore.html#countries",
-                      "tf": 6.25
-                    },
-                    "Belfiore.html#active": {
-                      "ref": "Belfiore.html#active",
-                      "tf": 6.25
-                    }
-                  }
-                }
-              },
-              "v": {
-                "docs": {},
-                "i": {
-                  "docs": {},
-                  "d": {
-                    "docs": {
-                      "Belfiore.html#findByName": {
-                        "ref": "Belfiore.html#findByName",
-                        "tf": 3.8461538461538463
-                      }
-                    }
-                  },
-                  "n": {
-                    "docs": {},
-                    "c": {
-                      "docs": {
-                        "Belfiore.html#byProvince": {
-                          "ref": "Belfiore.html#byProvince",
-                          "tf": 8.333333333333332
-                        },
-                        "Parser.html#.placeToCf": {
-                          "ref": "Parser.html#.placeToCf",
-                          "tf": 16.666666666666664
-                        }
-                      }
-                    }
-                  }
-                }
-              },
               "p": {
                 "docs": {},
                 "e": {
@@ -4750,6 +4347,23 @@ window.lunrData = {
                     }
                   }
                 }
+              },
+              "v": {
+                "docs": {},
+                "i": {
+                  "docs": {},
+                  "n": {
+                    "docs": {},
+                    "c": {
+                      "docs": {
+                        "Parser.html#.placeToCf": {
+                          "ref": "Parser.html#.placeToCf",
+                          "tf": 16.666666666666664
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           },
@@ -4761,22 +4375,6 @@ window.lunrData = {
                 "docs": {},
                 "e": {
                   "docs": {
-                    "Belfiore.html#cities": {
-                      "ref": "Belfiore.html#cities",
-                      "tf": 6.25
-                    },
-                    "Belfiore.html#countries": {
-                      "ref": "Belfiore.html#countries",
-                      "tf": 6.25
-                    },
-                    "Belfiore.html#searchByName": {
-                      "ref": "Belfiore.html#searchByName",
-                      "tf": 10
-                    },
-                    "Belfiore.html#findByName": {
-                      "ref": "Belfiore.html#findByName",
-                      "tf": 7.6923076923076925
-                    },
                     "Parser.html#.cfToBirthPlace": {
                       "ref": "Parser.html#.cfToBirthPlace",
                       "tf": 12.5
@@ -4930,46 +4528,6 @@ window.lunrData = {
               }
             }
           },
-          "e": {
-            "docs": {},
-            "a": {
-              "docs": {},
-              "r": {
-                "docs": {},
-                "c": {
-                  "docs": {},
-                  "h": {
-                    "docs": {
-                      "Belfiore.html#searchByName": {
-                        "ref": "Belfiore.html#searchByName",
-                        "tf": 10
-                      }
-                    },
-                    "b": {
-                      "docs": {},
-                      "y": {
-                        "docs": {},
-                        "n": {
-                          "docs": {},
-                          "a": {
-                            "docs": {},
-                            "m": {
-                              "docs": {
-                                "Belfiore.html#searchByName": {
-                                  "ref": "Belfiore.html#searchByName",
-                                  "tf": 683.3333333333334
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
           "u": {
             "docs": {},
             "r": {
@@ -5045,233 +4603,9 @@ window.lunrData = {
                           "ref": "Belfiore.html",
                           "tf": 1900
                         },
-                        "Belfiore.html#cities": {
-                          "ref": "Belfiore.html#cities",
-                          "tf": 6.25
-                        },
-                        "Belfiore.html#countries": {
-                          "ref": "Belfiore.html#countries",
-                          "tf": 6.25
-                        },
-                        "Belfiore.html#active": {
-                          "ref": "Belfiore.html#active",
-                          "tf": 39.58333333333333
-                        },
-                        "Belfiore.html#byProvince": {
-                          "ref": "Belfiore.html#byProvince",
-                          "tf": 41.66666666666666
-                        },
                         "Parser.html#.placeToCf": {
                           "ref": "Parser.html#.placeToCf",
                           "tf": 8.333333333333332
-                        }
-                      },
-                      "e": {
-                        "docs": {},
-                        "#": {
-                          "docs": {},
-                          "c": {
-                            "docs": {
-                              "Belfiore.html#cities": {
-                                "ref": "Belfiore.html#cities",
-                                "tf": 1150
-                              }
-                            },
-                            "o": {
-                              "docs": {},
-                              "u": {
-                                "docs": {},
-                                "n": {
-                                  "docs": {},
-                                  "t": {
-                                    "docs": {},
-                                    "r": {
-                                      "docs": {},
-                                      "i": {
-                                        "docs": {
-                                          "Belfiore.html#countries": {
-                                            "ref": "Belfiore.html#countries",
-                                            "tf": 1150
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "s": {
-                            "docs": {},
-                            "e": {
-                              "docs": {},
-                              "a": {
-                                "docs": {},
-                                "r": {
-                                  "docs": {},
-                                  "c": {
-                                    "docs": {},
-                                    "h": {
-                                      "docs": {},
-                                      "b": {
-                                        "docs": {},
-                                        "y": {
-                                          "docs": {},
-                                          "n": {
-                                            "docs": {},
-                                            "a": {
-                                              "docs": {},
-                                              "m": {
-                                                "docs": {
-                                                  "Belfiore.html#searchByName": {
-                                                    "ref": "Belfiore.html#searchByName",
-                                                    "tf": 1150
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "f": {
-                            "docs": {},
-                            "i": {
-                              "docs": {},
-                              "n": {
-                                "docs": {},
-                                "d": {
-                                  "docs": {},
-                                  "b": {
-                                    "docs": {},
-                                    "y": {
-                                      "docs": {},
-                                      "n": {
-                                        "docs": {},
-                                        "a": {
-                                          "docs": {},
-                                          "m": {
-                                            "docs": {
-                                              "Belfiore.html#findByName": {
-                                                "ref": "Belfiore.html#findByName",
-                                                "tf": 1150
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "a": {
-                            "docs": {},
-                            "c": {
-                              "docs": {},
-                              "t": {
-                                "docs": {
-                                  "Belfiore.html#active": {
-                                    "ref": "Belfiore.html#active",
-                                    "tf": 1150
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "b": {
-                            "docs": {},
-                            "y": {
-                              "docs": {},
-                              "p": {
-                                "docs": {},
-                                "r": {
-                                  "docs": {},
-                                  "o": {
-                                    "docs": {},
-                                    "v": {
-                                      "docs": {},
-                                      "i": {
-                                        "docs": {},
-                                        "n": {
-                                          "docs": {},
-                                          "c": {
-                                            "docs": {
-                                              "Belfiore.html#byProvince": {
-                                                "ref": "Belfiore.html#byProvince",
-                                                "tf": 1150
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "t": {
-                            "docs": {},
-                            "o": {
-                              "docs": {},
-                              "a": {
-                                "docs": {},
-                                "r": {
-                                  "docs": {},
-                                  "r": {
-                                    "docs": {},
-                                    "a": {
-                                      "docs": {},
-                                      "y": {
-                                        "docs": {
-                                          "Belfiore.html#toArray": {
-                                            "ref": "Belfiore.html#toArray",
-                                            "tf": 1150
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "y": {
-            "docs": {},
-            "p": {
-              "docs": {},
-              "r": {
-                "docs": {},
-                "o": {
-                  "docs": {},
-                  "v": {
-                    "docs": {},
-                    "i": {
-                      "docs": {},
-                      "n": {
-                        "docs": {},
-                        "c": {
-                          "docs": {
-                            "Belfiore.html#byProvince": {
-                              "ref": "Belfiore.html#byProvince",
-                              "tf": 683.3333333333334
-                            }
-                          }
                         }
                       }
                     }
@@ -5412,101 +4746,8 @@ window.lunrData = {
             }
           }
         },
-        "t": {
-          "docs": {},
-          "y": {
-            "docs": {},
-            "p": {
-              "docs": {},
-              "e": {
-                "docs": {
-                  "Belfiore.html#cities": {
-                    "ref": "Belfiore.html#cities",
-                    "tf": 6.25
-                  },
-                  "Belfiore.html#countries": {
-                    "ref": "Belfiore.html#countries",
-                    "tf": 6.25
-                  }
-                }
-              }
-            }
-          },
-          "o": {
-            "docs": {},
-            "a": {
-              "docs": {},
-              "r": {
-                "docs": {},
-                "r": {
-                  "docs": {},
-                  "a": {
-                    "docs": {},
-                    "y": {
-                      "docs": {
-                        "Belfiore.html#toArray": {
-                          "ref": "Belfiore.html#toArray",
-                          "tf": 700
-                        },
-                        "Gender.html#.toArray": {
-                          "ref": "Gender.html#.toArray",
-                          "tf": 683.3333333333334
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "e": {
-            "docs": {},
-            "x": {
-              "docs": {},
-              "t": {
-                "docs": {
-                  "Parser.html#.removeDiacritics": {
-                    "ref": "Parser.html#.removeDiacritics",
-                    "tf": 25
-                  }
-                }
-              }
-            }
-          }
-        },
         "v": {
           "docs": {},
-          "e": {
-            "docs": {},
-            "r": {
-              "docs": {},
-              "s": {
-                "docs": {},
-                "i": {
-                  "docs": {},
-                  "o": {
-                    "docs": {},
-                    "n": {
-                      "docs": {
-                        "Belfiore.html#cities": {
-                          "ref": "Belfiore.html#cities",
-                          "tf": 6.25
-                        },
-                        "Belfiore.html#countries": {
-                          "ref": "Belfiore.html#countries",
-                          "tf": 6.25
-                        },
-                        "Belfiore.html#active": {
-                          "ref": "Belfiore.html#active",
-                          "tf": 6.25
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
           "a": {
             "docs": {},
             "l": {
@@ -5923,42 +5164,6 @@ window.lunrData = {
                           "docs": {},
                           ";": {
                             "docs": {},
-                            "o": {
-                              "docs": {},
-                              "b": {
-                                "docs": {},
-                                "j": {
-                                  "docs": {},
-                                  "e": {
-                                    "docs": {},
-                                    "c": {
-                                      "docs": {},
-                                      "t": {
-                                        "docs": {},
-                                        "&": {
-                                          "docs": {},
-                                          "g": {
-                                            "docs": {},
-                                            "t": {
-                                              "docs": {
-                                                "Belfiore.html#searchByName": {
-                                                  "ref": "Belfiore.html#searchByName",
-                                                  "tf": 33.33333333333333
-                                                },
-                                                "Belfiore.html#toArray": {
-                                                  "ref": "Belfiore.html#toArray",
-                                                  "tf": 50
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            },
                             "s": {
                               "docs": {},
                               "t": {
@@ -5999,64 +5204,25 @@ window.lunrData = {
                 }
               }
             }
-          },
-          "c": {
-            "docs": {},
-            "t": {
-              "docs": {},
-              "i": {
-                "docs": {},
-                "v": {
-                  "docs": {
-                    "Belfiore.html#active": {
-                      "ref": "Belfiore.html#active",
-                      "tf": 683.3333333333334
-                    }
-                  }
-                }
-              }
-            }
           }
         },
-        "o": {
+        "t": {
           "docs": {},
-          "b": {
+          "o": {
             "docs": {},
-            "j": {
+            "a": {
               "docs": {},
-              "e": {
+              "r": {
                 "docs": {},
-                "c": {
+                "r": {
                   "docs": {},
-                  "t": {
-                    "docs": {
-                      "Belfiore.html#findByName": {
-                        "ref": "Belfiore.html#findByName",
-                        "tf": 3.8461538461538463
-                      },
-                      "Parser.html#.cfToBirthPlace": {
-                        "ref": "Parser.html#.cfToBirthPlace",
-                        "tf": 25
-                      },
-                      "Parser.html#.cfDecode": {
-                        "ref": "Parser.html#.cfDecode",
-                        "tf": 25
-                      }
-                    },
-                    "|": {
-                      "docs": {},
-                      "n": {
-                        "docs": {},
-                        "u": {
-                          "docs": {},
-                          "l": {
-                            "docs": {
-                              "Belfiore.html#findByName": {
-                                "ref": "Belfiore.html#findByName",
-                                "tf": 33.33333333333333
-                              }
-                            }
-                          }
+                  "a": {
+                    "docs": {},
+                    "y": {
+                      "docs": {
+                        "Gender.html#.toArray": {
+                          "ref": "Gender.html#.toArray",
+                          "tf": 683.3333333333334
                         }
                       }
                     }
@@ -6065,6 +5231,23 @@ window.lunrData = {
               }
             }
           },
+          "e": {
+            "docs": {},
+            "x": {
+              "docs": {},
+              "t": {
+                "docs": {
+                  "Parser.html#.removeDiacritics": {
+                    "ref": "Parser.html#.removeDiacritics",
+                    "tf": 25
+                  }
+                }
+              }
+            }
+          }
+        },
+        "o": {
+          "docs": {},
           "m": {
             "docs": {},
             "o": {
@@ -6111,6 +5294,30 @@ window.lunrData = {
                             }
                           }
                         }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "b": {
+            "docs": {},
+            "j": {
+              "docs": {},
+              "e": {
+                "docs": {},
+                "c": {
+                  "docs": {},
+                  "t": {
+                    "docs": {
+                      "Parser.html#.cfToBirthPlace": {
+                        "ref": "Parser.html#.cfToBirthPlace",
+                        "tf": 25
+                      },
+                      "Parser.html#.cfDecode": {
+                        "ref": "Parser.html#.cfDecode",
+                        "tf": 25
                       }
                     }
                   }
@@ -6236,29 +5443,18 @@ window.lunrData = {
           }
         }
       },
-      "length": 585
+      "length": 513
     },
     "corpusTokens": [
-      "1",
       "16th",
-      "activ",
       "array",
-      "array.&lt;object&gt",
       "array.&lt;string&gt",
       "base",
       "belfior",
-      "belfiore#act",
-      "belfiore#byprovinc",
-      "belfiore#c",
-      "belfiore#countri",
-      "belfiore#findbynam",
-      "belfiore#searchbynam",
-      "belfiore#toarray",
       "birth",
       "birthmonth",
       "bitmap",
       "boolean",
-      "byprovinc",
       "calcul",
       "cf",
       "cfdategend",
@@ -6312,9 +5508,6 @@ window.lunrData = {
       "encodecf",
       "evalu",
       "evaluatechar",
-      "filter",
-      "find",
-      "findbynam",
       "fiscal",
       "fiscalcod",
       "form",
@@ -6330,7 +5523,6 @@ window.lunrData = {
       "index",
       "inform",
       "input",
-      "instanc",
       "iso8601",
       "isvalid",
       "italian",
@@ -6341,11 +5533,9 @@ window.lunrData = {
       "list:modul",
       "list:namespac",
       "lt;gener",
-      "lt;readonly&gt",
       "lt;static",
       "lt;static&gt",
       "m'|'f'|null",
-      "match",
       "member",
       "modul",
       "module:codicefiscaleutil",
@@ -6358,7 +5548,6 @@ window.lunrData = {
       "number",
       "number|nul",
       "object",
-      "object|nul",
       "omocod",
       "omocode_bitmap",
       "option",
@@ -6395,25 +5584,18 @@ window.lunrData = {
       "placetocf",
       "produc",
       "properti",
-      "provid",
       "provinc",
-      "proxi",
       "readm",
       "readonly&gt",
       "regexp",
       "removediacrit",
-      "result",
-      "retun",
       "return",
-      "search",
-      "searchbynam",
       "static&gt",
       "string|nul",
       "surnam",
       "surnametocf",
       "text",
       "toarray",
-      "type",
       "util",
       "valid",
       "validator.cfdategend",
@@ -6431,7 +5613,6 @@ window.lunrData = {
       "validator.nam",
       "validator.plac",
       "validator.surnam",
-      "version",
       "year",
       "yearmonthdaytod",
       "yeartocf"
@@ -6550,76 +5731,6 @@ window.lunrData = {
       "summary": "",
       "description": "Handler for cities and countries Dataset",
       "body": ""
-    },
-    "Belfiore.html#cities": {
-      "id": "Belfiore.html#cities",
-      "kind": "member",
-      "title": "&lt;readonly&gt; cities",
-      "longname": "Belfiore#cities",
-      "name": "cities",
-      "tags": "Belfiore#cities cities",
-      "summary": "",
-      "description": "Returns a Proxied version of Belfiore which filters results by place type"
-    },
-    "Belfiore.html#countries": {
-      "id": "Belfiore.html#countries",
-      "kind": "member",
-      "title": "&lt;readonly&gt; countries",
-      "longname": "Belfiore#countries",
-      "name": "countries",
-      "tags": "Belfiore#countries countries",
-      "summary": "",
-      "description": "Returns a Proxied version of Belfiore which filters results by place type"
-    },
-    "Belfiore.html#searchByName": {
-      "id": "Belfiore.html#searchByName",
-      "kind": "function",
-      "title": "searchByName( name ) → {Array.&lt;Object&gt;}",
-      "longname": "Belfiore#searchByName",
-      "name": "searchByName",
-      "tags": "Belfiore#searchByName searchByName",
-      "summary": "",
-      "description": "Search places matching given name"
-    },
-    "Belfiore.html#findByName": {
-      "id": "Belfiore.html#findByName",
-      "kind": "function",
-      "title": "findByName( name ) → {Object|null}",
-      "longname": "Belfiore#findByName",
-      "name": "findByName",
-      "tags": "Belfiore#findByName findByName",
-      "summary": "",
-      "description": "Find place matching given name, retuns place object if provided name match only 1 result"
-    },
-    "Belfiore.html#active": {
-      "id": "Belfiore.html#active",
-      "kind": "function",
-      "title": "active( [ date ] ) → {Belfiore}",
-      "longname": "Belfiore#active",
-      "name": "active",
-      "tags": "Belfiore#active active",
-      "summary": "",
-      "description": "Returns a Proxied version of Belfiore which filters results by given date"
-    },
-    "Belfiore.html#byProvince": {
-      "id": "Belfiore.html#byProvince",
-      "kind": "function",
-      "title": "byProvince( code ) → {Belfiore}",
-      "longname": "Belfiore#byProvince",
-      "name": "byProvince",
-      "tags": "Belfiore#byProvince byProvince",
-      "summary": "",
-      "description": "Returns a Belfiore instance filtered by the given province"
-    },
-    "Belfiore.html#toArray": {
-      "id": "Belfiore.html#toArray",
-      "kind": "function",
-      "title": "toArray() → {Array.&lt;Object&gt;}",
-      "longname": "Belfiore#toArray",
-      "name": "toArray",
-      "tags": "Belfiore#toArray toArray",
-      "summary": "",
-      "description": ""
     },
     "BirthMonth.html": {
       "id": "BirthMonth.html",
@@ -6992,7 +6103,7 @@ window.lunrData = {
     "Validator_.html#.cfDayGender": {
       "id": "Validator_.html#.cfDayGender",
       "kind": "function",
-      "title": "&lt;static&gt; cfDayGender( day [, gender ] ) → {RegExp}",
+      "title": "&lt;static&gt; cfDayGender( [ day [, gender ] ] ) → {RegExp}",
       "longname": "Validator.cfDayGender",
       "name": "cfDayGender",
       "tags": "Validator.cfDayGender cfDayGender",

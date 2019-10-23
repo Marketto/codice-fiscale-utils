@@ -1,7 +1,8 @@
 {
   "name": "@marketto/codice-fiscale-utils",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "JS utilities to handle Italian Codice Fiscale",
+  "browser": "dist/codice-fiscale-utils.amd.min.js",
   "main": "dist/codice-fiscale-utils.cjs.min.js",
   "module": "src/index.js",
   "scripts": {
@@ -24,7 +25,7 @@
     "Omocode",
     "Belfiore"
   ],
-  "author": "Marco Ricupero",
+  "author": "Marco Ricupero <marco.ricupero@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Marketto/codice-fiscale-utils/issues"
