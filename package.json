@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/Marketto/codice-fiscale-utils#readme",
   "dependencies": {
+    "@marketto/diacritic-remover": "^1.0.2",
     "moment": "^2.24.0"
   },
   "devDependencies": {

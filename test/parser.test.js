@@ -1,8 +1,4 @@
-import chai from 'chai';
-import chaiThings from 'chai-things';
-chai.use(chaiThings);
-const expect = chai.expect;
-chai.should();
+import { expect } from './utils';
 import Parser from '../src/parser';
 
 describe('CodiceFiscaleUtils:Parser', () => {

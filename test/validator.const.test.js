@@ -1,8 +1,5 @@
-import chai from 'chai';
-import chaiThings from 'chai-things';
-chai.use(chaiThings);
-chai.should();
-import {Belfiore} from '../src/belfiore';
+import './utils';
+import { Belfiore } from '../src/belfiore';
 import VALIDATOR from '../src/validator.const';
 const belfioreCodes = Belfiore.toArray().map(({belfioreCode}) => belfioreCode);
 const belfioreCodeMatcher = new RegExp(`^(?:${VALIDATOR.BELFIORE_CODE_MATCHER})$`, 'giu');

@@ -33,6 +33,12 @@ module.exports = [
             commonjs2: 'moment',
             amd: 'moment',
             var: 'moment'
+        },
+        '@marketto/diacritic-remover': {
+            commonjs: 'DiacriticRemover',
+            commonjs2: 'DiacriticRemover',
+            amd: 'DiacriticRemover',
+            var: 'DiacriticRemover'
         }
     },
     devtool: 'source-map'

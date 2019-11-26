@@ -695,6 +695,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@marketto/diacritic-remover@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@marketto/diacritic-remover/-/diacritic-remover-1.0.2.tgz#9001f1a4d4b1d0bfbf5cbd0a2a654023eb3939c6"
+  integrity sha512-Z12b6Kq8pG7MWc5Dc3KRpTJ0G+Y6iZdBpnlbfouuD9icto8Z2/01d+FtDcxGSX0ikchStqOV1hfug6b3WuQ5vQ==
+
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
@@ -5190,6 +5195,13 @@ regjsparser@^0.6.0:
   dependencies:
     jsesc "~0.5.0"
 
+relcov@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/relcov/-/relcov-1.0.6.tgz#5ae0ef66f22669390807577e31ae388866fdae47"
+  integrity sha1-WuDvZvImaTkIB1d+Ma44iGb9rkc=
+  dependencies:
+    split "^1.0.0"
+
 release-zalgo@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/release-zalgo/-/release-zalgo-1.0.0.tgz#09700b7e5074329739330e535c5a90fb67851730"
@@ -5645,6 +5657,13 @@ split-string@^3.0.1, split-string@^3.0.2:
   dependencies:
     extend-shallow "^3.0.0"
 
+split@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/split/-/split-1.0.1.tgz#605bd9be303aa59fb35f9229fbea0ddec9ea07d9"
+  integrity sha512-mTyOoPbrivtXnwnIxZRFYRrPNtEFKlpB2fvjSnCQUiAA6qAZzqwna5envK4uk6OIeP17CsdF3rSBGYVBsU0Tkg==
+  dependencies:
+    through "2"
+
 sprintf-js@^1.0.3:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.2.tgz#da1765262bf8c0f571749f2ad6c26300207ae673"
@@ -5964,7 +5983,7 @@ through2@^2.0.0:
     readable-stream "~2.3.6"
     xtend "~4.0.1"
 
-through@^2.3.8:
+through@2, through@^2.3.8:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=

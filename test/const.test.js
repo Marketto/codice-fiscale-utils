@@ -1,7 +1,4 @@
-import chai from 'chai';
-import chaiThings from 'chai-things';
-chai.use(chaiThings);
-chai.should();
+import './utils';
 import VALIDATOR from '../src/validator.const';
 
 describe('CodiceFiscaleUtils:Const', () => {

@@ -1,7 +1,4 @@
-import chai from 'chai';
-import chaiThings from 'chai-things';
-chai.use(chaiThings);
-chai.should();
+import './utils';
 import Validator from '../src/validator';
 
 describe('CodiceFiscaleUtils:Validator', () => {
@@ -324,7 +321,8 @@ describe('CodiceFiscaleUtils:Validator', () => {
 
                 it ('Should not validate cf day/gender QM for 9 Female', () => {
                     Validator.cfDayGender(9, 'F').test('QM').should.not.be.ok;
-                })
+                });
+
                 it ('Should throw an error providing invalid day', () => {
                     try {
                         Validator.cfDayGender(-3);
@@ -399,7 +397,7 @@ describe('CodiceFiscaleUtils:Validator', () => {
 
                 it ('Should throw an error providing invalid date', () => {
                     try {
-                        Validator.cfDateGender("-3");
+                        Validator.cfDateGender('-3');
                     }catch(e){
                         e.should.be.an('Error');
                     }

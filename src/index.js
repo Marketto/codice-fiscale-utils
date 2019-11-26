@@ -2,7 +2,6 @@ import BirthMonth from './birthMonth.enum';
 import { Belfiore, BelfioreConnector } from './belfiore';
 import CheckDigitizer from './checkDigitizer';
 import DATE_VALIDATOR from './dateValidator.const';
-import Diacritics from './diacritics';
 import Gender from './gender.enum';
 import Omocode from './omocode.enum';
 import Parser from './parser';
@@ -33,10 +32,6 @@ export {
      * {@link DATE_VALIDATOR}
      */
     DATE_VALIDATOR,
-    /**
-     * {@link Diacritics}
-     */
-    Diacritics,
     /**
      * {@link Gender}
      */

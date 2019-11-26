@@ -1,8 +1,4 @@
-import chai from 'chai';
-import chaiThings from 'chai-things';
-chai.use(chaiThings);
-const expect = chai.expect;
-chai.should();
+import { expect } from './utils';
 import {Belfiore, BelfioreConnector} from '../src/belfiore';
 
 describe('CodiceFiscaleUtils:Belfiore', () => {
