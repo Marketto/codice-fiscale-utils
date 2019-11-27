@@ -1,17 +1,18 @@
 {
-    "nyc": {
-        "all": true,
-        "include": [
-            "src/**/*.js"
-        ],
-        "exclude": [
-            "node_modules",
-            "dist",
-            "docs",
-            "coverage"
-        ],
-        "reporter": [
-            "lcovonly"
-        ]
-    }
+    "include": [
+        "src/**/*.js"
+    ],
+    "exclude": [
+        "dist",
+        "docs",
+        "coverage",
+        "scripts",
+        "test",
+        "demo"
+    ],
+    "reporter": [
+        "lcovonly",
+        "text",
+        "text-summary"
+    ]
 }

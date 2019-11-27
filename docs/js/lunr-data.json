@@ -128,10 +128,6 @@
           "properti",
           "valid"
         ],
-        "Diacritics.html": [
-          "diacrit",
-          "namespac"
-        ],
         "Gender.html": [
           "gender",
           "namespac"
@@ -277,16 +273,6 @@
           "object",
           "parser.cfdecod"
         ],
-        "Parser.html#.removeDiacritics": [
-          "diacrit",
-          "function",
-          "lt;static&gt",
-          "normal",
-          "parser.removediacrit",
-          "removediacrit",
-          "string|nul",
-          "text"
-        ],
         "Parser.html#.surnameToCf": [
           "cf",
           "function",
@@ -384,18 +370,14 @@
           "string|nul"
         ],
         "Parser.html#.placeToCf": [
-          "cf",
-          "creat",
-          "date",
-          "date/gend",
+          "belfior",
+          "code",
           "function",
-          "gender",
-          "inform",
           "lt;static&gt",
           "name",
           "pars",
           "parser.placetocf",
-          "part",
+          "place",
           "placetocf",
           "provinc",
           "string|nul"
@@ -615,7 +597,7 @@
           "validator.isvalid"
         ]
       },
-      "length": 56
+      "length": 54
     },
     "tokenStore": {
       "root": {
@@ -1079,13 +1061,13 @@
                 "ref": "Parser.html#.dateGenderToCf",
                 "tf": 6.25
               },
-              "Parser.html#.encodeCf": {
-                "ref": "Parser.html#.encodeCf",
-                "tf": 16.666666666666664
-              },
               "Parser.html#.placeToCf": {
                 "ref": "Parser.html#.placeToCf",
                 "tf": 6.25
+              },
+              "Parser.html#.encodeCf": {
+                "ref": "Parser.html#.encodeCf",
+                "tf": 16.666666666666664
               },
               "Validator_.html#.codiceFiscale": {
                 "ref": "Validator_.html#.codiceFiscale",
@@ -1602,10 +1584,6 @@
                             "ref": "Parser.html#.cfDecode",
                             "tf": 110
                           },
-                          "Parser.html#.removeDiacritics": {
-                            "ref": "Parser.html#.removeDiacritics",
-                            "tf": 110
-                          },
                           "Parser.html#.surnameToCf": {
                             "ref": "Parser.html#.surnameToCf",
                             "tf": 110
@@ -2040,44 +2018,6 @@
                 }
               }
             },
-            "m": {
-              "docs": {},
-              "o": {
-                "docs": {},
-                "v": {
-                  "docs": {},
-                  "e": {
-                    "docs": {},
-                    "d": {
-                      "docs": {},
-                      "i": {
-                        "docs": {},
-                        "a": {
-                          "docs": {},
-                          "c": {
-                            "docs": {},
-                            "r": {
-                              "docs": {},
-                              "i": {
-                                "docs": {},
-                                "t": {
-                                  "docs": {
-                                    "Parser.html#.removeDiacritics": {
-                                      "ref": "Parser.html#.removeDiacritics",
-                                      "tf": 675
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
             "g": {
               "docs": {},
               "e": {
@@ -2225,30 +2165,6 @@
                     "Validator_.html#.isValid": {
                       "ref": "Validator_.html#.isValid",
                       "tf": 5.555555555555555
-                    }
-                  }
-                }
-              }
-            },
-            "a": {
-              "docs": {},
-              "c": {
-                "docs": {},
-                "r": {
-                  "docs": {},
-                  "i": {
-                    "docs": {},
-                    "t": {
-                      "docs": {
-                        "Diacritics.html": {
-                          "ref": "Diacritics.html",
-                          "tf": 1900
-                        },
-                        "Parser.html#.removeDiacritics": {
-                          "ref": "Parser.html#.removeDiacritics",
-                          "tf": 25
-                        }
-                      }
                     }
                   }
                 }
@@ -2964,10 +2880,6 @@
                                     "ref": "Parser.html#.cfDecode",
                                     "tf": 25
                                   },
-                                  "Parser.html#.removeDiacritics": {
-                                    "ref": "Parser.html#.removeDiacritics",
-                                    "tf": 25
-                                  },
                                   "Parser.html#.surnameToCf": {
                                     "ref": "Parser.html#.surnameToCf",
                                     "tf": 25
@@ -3002,7 +2914,7 @@
                                   },
                                   "Parser.html#.placeToCf": {
                                     "ref": "Parser.html#.placeToCf",
-                                    "tf": 16.666666666666664
+                                    "tf": 20
                                   },
                                   "Parser.html#.encodeCf": {
                                     "ref": "Parser.html#.encodeCf",
@@ -3297,7 +3209,7 @@
                   },
                   "Parser.html#.placeToCf": {
                     "ref": "Parser.html#.placeToCf",
-                    "tf": 16.666666666666664
+                    "tf": 28.333333333333332
                   },
                   "Validator_.html#.cfName": {
                     "ref": "Validator_.html#.cfName",
@@ -3334,10 +3246,6 @@
                           },
                           "DATE_VALIDATOR.html": {
                             "ref": "DATE_VALIDATOR.html",
-                            "tf": 110
-                          },
-                          "Diacritics.html": {
-                            "ref": "Diacritics.html",
                             "tf": 110
                           },
                           "Gender.html": {
@@ -3423,26 +3331,6 @@
                             }
                           }
                         }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "o": {
-            "docs": {},
-            "r": {
-              "docs": {},
-              "m": {
-                "docs": {},
-                "a": {
-                  "docs": {},
-                  "l": {
-                    "docs": {
-                      "Parser.html#.removeDiacritics": {
-                        "ref": "Parser.html#.removeDiacritics",
-                        "tf": 25
                       }
                     }
                   }
@@ -3662,7 +3550,7 @@
                   },
                   "Parser.html#.placeToCf": {
                     "ref": "Parser.html#.placeToCf",
-                    "tf": 6.25
+                    "tf": 8.333333333333332
                   }
                 },
                 "e": {
@@ -3904,50 +3792,6 @@
                                                 "docs": {
                                                   "Parser.html#.cfToBirthPlace": {
                                                     "ref": "Parser.html#.cfToBirthPlace",
-                                                    "tf": 1150
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "r": {
-                        "docs": {},
-                        "e": {
-                          "docs": {},
-                          "m": {
-                            "docs": {},
-                            "o": {
-                              "docs": {},
-                              "v": {
-                                "docs": {},
-                                "e": {
-                                  "docs": {},
-                                  "d": {
-                                    "docs": {},
-                                    "i": {
-                                      "docs": {},
-                                      "a": {
-                                        "docs": {},
-                                        "c": {
-                                          "docs": {},
-                                          "r": {
-                                            "docs": {},
-                                            "i": {
-                                              "docs": {},
-                                              "t": {
-                                                "docs": {
-                                                  "Parser.html#.removeDiacritics": {
-                                                    "ref": "Parser.html#.removeDiacritics",
                                                     "tf": 1150
                                                   }
                                                 }
@@ -4358,7 +4202,7 @@
                       "docs": {
                         "Parser.html#.placeToCf": {
                           "ref": "Parser.html#.placeToCf",
-                          "tf": 16.666666666666664
+                          "tf": 28.333333333333332
                         }
                       }
                     }
@@ -4398,7 +4242,7 @@
                           "docs": {
                             "Parser.html#.placeToCf": {
                               "ref": "Parser.html#.placeToCf",
-                              "tf": 666.6666666666666
+                              "tf": 670
                             }
                           }
                         }
@@ -4482,10 +4326,6 @@
                                 "ref": "Parser.html#.cfToName",
                                 "tf": 25
                               },
-                              "Parser.html#.removeDiacritics": {
-                                "ref": "Parser.html#.removeDiacritics",
-                                "tf": 25
-                              },
                               "Parser.html#.surnameToCf": {
                                 "ref": "Parser.html#.surnameToCf",
                                 "tf": 25
@@ -4512,7 +4352,7 @@
                               },
                               "Parser.html#.placeToCf": {
                                 "ref": "Parser.html#.placeToCf",
-                                "tf": 16.666666666666664
+                                "tf": 20
                               },
                               "Parser.html#.encodeCf": {
                                 "ref": "Parser.html#.encodeCf",
@@ -5230,20 +5070,6 @@
                 }
               }
             }
-          },
-          "e": {
-            "docs": {},
-            "x": {
-              "docs": {},
-              "t": {
-                "docs": {
-                  "Parser.html#.removeDiacritics": {
-                    "ref": "Parser.html#.removeDiacritics",
-                    "tf": 25
-                  }
-                }
-              }
-            }
           }
         },
         "o": {
@@ -5443,7 +5269,7 @@
           }
         }
       },
-      "length": 513
+      "length": 503
     },
     "corpusTokens": [
       "16th",
@@ -5502,7 +5328,6 @@
       "day",
       "daygendertocf",
       "default",
-      "diacrit",
       "digit",
       "document",
       "encodecf",
@@ -5544,7 +5369,6 @@
       "name",
       "namespac",
       "nametocf",
-      "normal",
       "number",
       "number|nul",
       "object",
@@ -5572,7 +5396,6 @@
       "parser.omocode_bitmap",
       "parser.parsed",
       "parser.placetocf",
-      "parser.removediacrit",
       "parser.surnametocf",
       "parser.yearmonthdaytod",
       "parser.yeartocf",
@@ -5588,13 +5411,11 @@
       "readm",
       "readonly&gt",
       "regexp",
-      "removediacrit",
       "return",
       "static&gt",
       "string|nul",
       "surnam",
       "surnametocf",
-      "text",
       "toarray",
       "util",
       "valid",
@@ -5754,17 +5575,6 @@
       "description": "Date Validator propertys",
       "body": ""
     },
-    "Diacritics.html": {
-      "id": "Diacritics.html",
-      "kind": "namespace",
-      "title": "Diacritics",
-      "longname": "Diacritics",
-      "name": "Diacritics",
-      "tags": "Diacritics",
-      "summary": "",
-      "description": "",
-      "body": ""
-    },
     "Gender.html": {
       "id": "Gender.html",
       "kind": "namespace",
@@ -5918,16 +5728,6 @@
       "summary": "",
       "description": ""
     },
-    "Parser.html#.removeDiacritics": {
-      "id": "Parser.html#.removeDiacritics",
-      "kind": "function",
-      "title": "&lt;static&gt; removeDiacritics( text ) → {string|null}",
-      "longname": "Parser.removeDiacritics",
-      "name": "removeDiacritics",
-      "tags": "Parser.removeDiacritics removeDiacritics",
-      "summary": "",
-      "description": "Normalize diacritics"
-    },
     "Parser.html#.surnameToCf": {
       "id": "Parser.html#.surnameToCf",
       "kind": "function",
@@ -6011,12 +5811,12 @@
     "Parser.html#.placeToCf": {
       "id": "Parser.html#.placeToCf",
       "kind": "function",
-      "title": "&lt;static&gt; placeToCf( date, name [, province ] ) → {string|null}",
+      "title": "&lt;static&gt; placeToCf( name [, province ] ) → {string|null}",
       "longname": "Parser.placeToCf",
       "name": "placeToCf",
       "tags": "Parser.placeToCf placeToCf",
       "summary": "",
-      "description": "Parse a Dated and Gender information to create Date/Gender CF part"
+      "description": "Parse place name and province to Belfiore code"
     },
     "Parser.html#.encodeCf": {
       "id": "Parser.html#.encodeCf",
