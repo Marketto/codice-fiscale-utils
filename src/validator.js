@@ -6,7 +6,7 @@ import moment from 'moment';
 import Omocode from './omocode.enum';
 import Parser from './parser';
 import VALIDATOR from './validator.const';
-
+import Error from './error';
 /**
  * @namespace Validator
  */
@@ -19,9 +19,13 @@ class Validator {
      * @public
      */
     static cfSurname(surname) {
+        const error =  new Error('Validator', 'cfSurname');
         let matcher = VALIDATOR.NAME_MATCHER;
         if (surname) {
-            matcher = Parser.surnameToCf(surname) || matcher;
+            matcher = Parser.surnameToCf(surname);
+            if (!matcher) {
+                throw error.INVALID_SURNAME;
+            }
         }
         return new RegExp(`^${matcher}$`, 'iu');
     }
@@ -33,9 +37,13 @@ class Validator {
      * @public
      */
     static cfName(name) {
+        const error =  new Error('Validator', 'cfName');
         let matcher = VALIDATOR.NAME_MATCHER;
         if (name) {
-            matcher = Parser.nameToCf(name) || matcher;
+            matcher = Parser.nameToCf(name);
+            if (!matcher) {
+                throw error.INVALID_NAME;
+            }
         }
         return new RegExp(`^${matcher}$`, 'iu');
     }
@@ -47,11 +55,14 @@ class Validator {
      * @public
      */
     static cfYear(year) {
+        const error =  new Error(this.constructor.name, 'cfYear');
         let matcher = VALIDATOR.YEAR_MATCHER;
         if (year) {
             const parsedYear = Parser.yearToCf(year);
             if (parsedYear) {
                 matcher = parsedYear.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
+            } else {
+                throw error.INVALID_YEAR;
             }
         }
         return new RegExp(`^${matcher}$`, 'iu');
@@ -78,6 +89,7 @@ class Validator {
      * @public
      */
     static cfDay(day) {
+        const error =  new Error('Validator', 'cfDayGender');
         let matcher = VALIDATOR.DAY_MATCHER;
         if (day) {
             const parsedDayM = Parser.dayGenderToCf(day, 'M');
@@ -85,6 +97,8 @@ class Validator {
                 const matcherM = parsedDayM.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
                 const matcherF = Parser.dayGenderToCf(day, 'F').replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
                 matcher = `(?:${matcherM})|(?:${matcherF})`;
+            } else {
+                throw error.INVALID_DAY;
             }
         }
         return new RegExp(`^${matcher}$`, 'iu');
@@ -98,6 +112,7 @@ class Validator {
      * @public
      */
     static cfDayGender(day, gender) {
+        const error =  new Error('Validator', 'cfDayGender');
         if (!gender) {
             return this.cfDay(day);
         }
@@ -107,7 +122,7 @@ class Validator {
             if (parsedDayGender) {
                 matcher = parsedDayGender.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
             } else {
-                throw new Error('[Validator.cfDayGender] Provided day is not valid');
+                throw error.INVALID_DAY_OR_GENDER;
             }
         } else {
             switch (gender) {
@@ -118,7 +133,7 @@ class Validator {
                 matcher = VALIDATOR.FEMALE_DAY_MATCHER;
                 break;
             default:
-                throw new Error('[Validator.cfDayGender] Provided gender is not valid');
+                throw error.INVALID_GENDER;
             }
         }
         return new RegExp(`^${matcher}$`, 'iu');
@@ -132,15 +147,20 @@ class Validator {
      * @public
      */
     static cfDateGender(date, gender) {
+        const error =  new Error('Validator', 'cfDateGender');
+        if (date && !Parser.parseDate(date)) {
+            throw error.INVALID_DATE;
+        }
+        if (gender && !Gender.toArray().includes(gender)) {
+            throw error.INVALID_GENDER;
+        }
         let matcher = VALIDATOR.FULL_DATE_MATCHER;
-        if (date && gender) {
-            const parsedDateGender = Parser.dateGenderToCf(date, gender);
-            if (parsedDateGender) {
-                matcher = parsedDateGender.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
-            } else {
-                throw new Error('[Validator.cfDateGender] Provided date is not valid');
-            }
-        } else if (gender) {
+        if (date) {
+            const omocodeReplacer = parsedDateGender => parsedDateGender.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
+            matcher = gender ?
+                omocodeReplacer(Parser.dateGenderToCf(date, gender)) :
+                `(?:${omocodeReplacer(Parser.dateGenderToCf(date, 'M'))}|${omocodeReplacer(Parser.dateGenderToCf(date, 'm'))})`;
+        } else {
             switch (gender) {
             case 'M':
                 matcher = VALIDATOR.MALE_FULL_DATE_MATCHER;
@@ -148,8 +168,6 @@ class Validator {
             case 'F':
                 matcher = VALIDATOR.FEMALE_FULL_DATE_MATCHER;
                 break;
-            default:
-                throw new Error('[Validator.cfDateGender] Provided gender is not valid');
             }
         }
         return new RegExp(`^${matcher}$`, 'iu');
@@ -213,13 +231,7 @@ class Validator {
                     matcher = '';
                     for (let i=0; i<generator.length; i++) {
                         const cfPartValidator = generator[i]();
-                        if (!cfPartValidator) {
-                            break;
-                        }
-                        const cfValue = (cfPartValidator.toString().match(/\^(.+)\$/) || [])[1];
-                        if (!cfValue) {
-                            break;
-                        }
+                        const cfValue = cfPartValidator.toString().match(/\^(.+)\$/)[1];
                         matcher += `(?:${cfValue})`;
                     }
                     // Final addition of CheckDigit

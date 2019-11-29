@@ -42,7 +42,7 @@ module.exports = [
     },
     externals: {
         moment: 'moment',
-        '@marketto/diacritic-remover': 'DiacriticRemover'
+        '@marketto/diacritic-remover': '@marketto/diacritic-remover'
     },
     plugins: [
         new BannerPlugin({

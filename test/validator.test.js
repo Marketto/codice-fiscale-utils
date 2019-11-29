@@ -1,4 +1,4 @@
-import './utils';
+import { expect } from './utils';
 import Validator from '../src/validator';
 
 describe('CodiceFiscaleUtils:Validator', () => {
@@ -67,6 +67,9 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 });
                 it ('Should validate cf surname UXX for U', () => {
                     Validator.cfSurname('U').test('UXX').should.not.be.ok;
+                });
+                it ('Should throw error for cd surname with special chars', () => {
+                    expect(() => Validator.cfSurname('@ieie')).to.throw('[Validator.cfSurname] Provided surname is not valid, only letters and apostrophe allowed');
                 });
             });
         });
@@ -144,6 +147,9 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 });
                 it ('Should validate cf name UXX for U', () => {
                     Validator.cfName('U').test('UXX').should.not.be.ok;
+                });
+                it ('Should throw error for cd surname with special chars', () => {
+                    expect(() => Validator.cfName('@ieie')).to.throw('[Validator.cfName] Provided name is not valid, only letters and apostrophe allowed');
                 });
             });
         });
@@ -299,11 +305,7 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 });
 
                 it ('Should throw an error for K as gender', () => {
-                    try {
-                        Validator.cfDayGender(null, 'K');
-                    }catch(e){
-                        e.should.be.an('Error');
-                    }
+                    expect(() => Validator.cfDayGender(null, 'K')).to.throw();
                 });
             });
 
@@ -324,11 +326,7 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 });
 
                 it ('Should throw an error providing invalid day', () => {
-                    try {
-                        Validator.cfDayGender(-3);
-                    }catch(e){
-                        e.should.be.an('Error');
-                    }
+                    expect(() => Validator.cfDayGender(-3)).to.throw('[Validator.cfDayGender] Provided day is not valid');
                 });
             });
         });
@@ -361,11 +359,7 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 });
 
                 it ('Should throw an error for K as gender', () => {
-                    try {
-                        Validator.cfDateGender(null, 'K');
-                    }catch(e){
-                        e.should.be.an('Error');
-                    }
+                    expect(() => Validator.cfDateGender(null, 'K')).to.throw();
                 });
             });
 
@@ -396,11 +390,7 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 });
 
                 it ('Should throw an error providing invalid date', () => {
-                    try {
-                        Validator.cfDateGender('-3');
-                    }catch(e){
-                        e.should.be.an('Error');
-                    }
+                    expect(() => Validator.cfDateGender('-3')).to.throw('[Validator.cfDateGender] Provided date is not valid');
                 });
             });
         });
@@ -452,7 +442,12 @@ describe('CodiceFiscaleUtils:Validator', () => {
             });
 
             describe('Partial validator', () => {
-                it('Should match VRNGNY97A65C351V', () => {
+                it('Should match VRNGNY97A65C351V providing name', () => {
+                    Validator.codiceFiscale({
+                        name: 'Genny',
+                    }).test('VRNGNY97A65C351V').should.be.true;
+                });
+                it('Should match VRNGNY97A65C351V providing surname, name, gender and place', () => {
                     Validator.codiceFiscale({
                         surname: 'Veronesi',
                         name: 'Genny',
@@ -484,6 +479,9 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 it('Should match VRNGNY97A65C351V providing partial surname', () => {
                     Validator.codiceFiscale({ surname: 'V' })
                         .test('VRNGNY97A65C351V').should.be.true;
+                });
+                it('Should match VRNGNY97A65C351V providing invalid surname', () => {
+                    expect(() => Validator.codiceFiscale({ surname: 'V@3' })).to.throw('[Validator.cfSurname] Provided surname is not valid, only letters and apostrophe allowed');
                 });
             });
 
@@ -536,6 +534,9 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 });
                 it ('Should validate surname Alex for LXA', () => {
                     Validator.surname('LXA').test('Alex').should.be.ok;
+                });
+                it ('Should validate surname Alex for LEA', () => {
+                    Validator.surname('LEA').test('Lea').should.be.ok;
                 });
                 it ('Should validate surname Aieie for AIE', () => {
                     Validator.surname('AIE').test('Aieie').should.be.ok;
@@ -628,7 +629,7 @@ describe('CodiceFiscaleUtils:Validator', () => {
                 it('Should not validate 1992-03-26 for XYZXYZ92C16', () => {
                     Validator.date('XYZXYZ92C16').test('1992-03-26').should.be.false;
                 });
-                it('Should not validate 1992-04-16 for XYZXYZ92C16', () => {
+                it('Should not validate 1988-04-21 for XYZXYZ88H61', () => {
                     Validator.date('XYZXYZ88H61').test('1988-04-21').should.be.false;
                 });
             });
