@@ -10,7 +10,8 @@
     "coverage": "mkdir coverage \n npm run test && npx nyc report --reporter=text-lcov | npx relcov > coverage/lcov.info",
     "build": "npx rimraf ./dist && npx webpack",
     "docs": "npx rimraf ./docs && npx jsdoc . -c jsdoc.json",
-    "update-lovs": "node ./scripts/locationUpdater.js"
+    "update-lovs": "node ./scripts/locationUpdater.js",
+    "release": "npm audit fix && npm run update-lovs && npm run test && npm run docs && npm run build"
   },
   "repository": {
     "type": "git",
