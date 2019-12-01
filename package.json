@@ -1,16 +1,17 @@
 {
   "name": "@marketto/codice-fiscale-utils",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "JS utilities to handle Italian Codice Fiscale",
-  "browser": "dist/codice-fiscale-utils.amd.min.js",
   "main": "dist/codice-fiscale-utils.cjs.min.js",
   "module": "src/index.js",
+  "browser": "dist/codice-fiscale-utils.amd.min.js",
   "scripts": {
-    "test": "npx mocha -r @babel/register",
-    "coverage": "npx nyc --reporter=lcovonly npm run-script test",
+    "test": "npx nyc npx mocha",
+    "coverage": "mkdir coverage \n npm run test && npx nyc report --reporter=text-lcov | npx relcov > coverage/lcov.info",
     "build": "npx rimraf ./dist && npx webpack",
     "docs": "npx rimraf ./docs && npx jsdoc . -c jsdoc.json",
-    "update-lovs": "node ./scripts/locationUpdater.js"
+    "update-lovs": "node ./scripts/locationUpdater.js",
+    "release": "npm audit fix && npm run update-lovs && npm run test && npm run docs && npm run build"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,9 @@
     "CF",
     "CodiceFiscale",
     "Codice Fiscale",
+    "Fiscal Code",
+    "Generator",
+    "Parser",
     "Validator",
     "Omocodia",
     "Omocode",
@@ -32,6 +36,7 @@
   },
   "homepage": "https://github.com/Marketto/codice-fiscale-utils#readme",
   "dependencies": {
+    "@marketto/diacritic-remover": "^1.0.3",
     "moment": "^2.24.0"
   },
   "devDependencies": {
@@ -52,6 +57,7 @@
     "lodash": "^4.17.14",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
+    "relcov": "^1.0.6",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
     "rimraf": "^2.6.3",

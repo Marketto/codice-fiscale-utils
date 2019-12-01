@@ -2,7 +2,7 @@ import {Belfiore} from './belfiore';
 import BirthMonth from './birthMonth.enum';
 import CheckDigitizer from './checkDigitizer';
 import DATE_VALIDATOR from './dateValidator.const';
-import Diacritics from './diacritics';
+import DiacriticRemover from '@marketto/diacritic-remover';
 import Gender from './gender.enum';
 import moment from 'moment';
 import Omocode from './omocode.enum';
@@ -265,19 +265,6 @@ class Parser {
     }
 
     /**
-     * Normalize diacritics
-     * 
-     * @param {string} text Input text to normalize
-     * @returns {string|null} Output text w/o diacritics
-     */
-    static removeDiacritics(text) {
-        if (!text || typeof text !== 'string') {
-            return null;
-        }
-        return text.replace(/./gu, c => Diacritics[c]);
-    }
-
-    /**
      * Parse surname to cf part
      * 
      * @param {string} surname Partial or complete CF to parse
@@ -288,12 +275,15 @@ class Parser {
         if ((surname || '').trim().length < 2) {
             return null;
         }
-        
-        const noDiacriticsSurname = this.removeDiacritics(surname);
+        const diacriticRemover = new DiacriticRemover();
+        const noDiacriticsSurname = diacriticRemover.replace(surname).trim();
+        if (!(/^[A-Z ']+$/iu).test(noDiacriticsSurname)) {
+            return null;
+        }
         const consonants = (noDiacriticsSurname.match(new RegExp(`[${VALIDATOR.CONSONANT_LIST}]+`, 'ig')) || []).join('');
         const vowels = (noDiacriticsSurname.match(new RegExp(`[${VALIDATOR.VOWEL_LIST}]+`, 'ig')) || []).join('');
 
-        const partialCf = (consonants + vowels + 'X').substr(0, 3);
+        const partialCf = (consonants + vowels).padEnd(3, 'X').substr(0, 3);
 
         if (partialCf.length < 3) {
             return null;
@@ -313,7 +303,8 @@ class Parser {
             return null;
         }
         
-        const noDiacriticsName = this.removeDiacritics(name);
+        const diacriticRemover = new DiacriticRemover();
+        const noDiacriticsName = diacriticRemover.replace(name);
         const consonants = (noDiacriticsName.match(new RegExp(`[${VALIDATOR.CONSONANT_LIST}]+`, 'ig')) || []).join('');
 
         if (consonants.length >= 4) {

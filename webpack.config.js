@@ -1,4 +1,17 @@
 const path = require('path');
+const { BannerPlugin } = require('webpack');
+const pkg = require('./package.json');
+
+const licenseBanner = `
+${pkg.name} ${pkg.version}
+Copyright (c) 2019, ${pkg.author}
+License: ${pkg.license}
+============================================================
+CITIES_COUNTRIES uses material from the following authors:
+- Agenzia delle Entrate             -   License: CC-BY 4.0
+- Istituto nazionale di Statistica  -   License: CC-BY 3.0
+- Ministero dell'Interno            -   License: CC-BY 4.0
+`;
 
 module.exports = [
     {
@@ -21,19 +34,20 @@ module.exports = [
     mode: 'production',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: `codice-fiscale-utils${filenamePrefix ? ('.' + filenamePrefix) : ''}.min.js`,
+        filename: `codice-fiscale-utils${filenamePrefix ? `.${filenamePrefix}` : ''}.min.js`,
         libraryTarget
     },
     module: {
         rules
     },
     externals: {
-        moment: {
-            commonjs: 'moment',
-            commonjs2: 'moment',
-            amd: 'moment',
-            var: 'moment'
-        }
+        moment: 'moment',
+        '@marketto/diacritic-remover': '@marketto/diacritic-remover'
     },
+    plugins: [
+        new BannerPlugin({
+            banner: licenseBanner
+        })
+    ],
     devtool: 'source-map'
 }));

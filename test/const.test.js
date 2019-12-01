@@ -1,7 +1,4 @@
-import chai from 'chai';
-import chaiThings from 'chai-things';
-chai.use(chaiThings);
-chai.should();
+import './utils';
 import VALIDATOR from '../src/validator.const';
 
 describe('CodiceFiscaleUtils:Const', () => {
@@ -412,8 +409,8 @@ describe('CodiceFiscaleUtils:Const', () => {
             });
         });
 
-        describe('PARTIAL_FULL_NAME', () => {
-            const partialFullNameMatcher = new RegExp(`^${VALIDATOR.PARTIAL_FULL_NAME}$`, 'i');
+        describe('PARTIAL_CF_FULL_NAME', () => {
+            const partialFullNameMatcher = new RegExp(`^${VALIDATOR.PARTIAL_CF_FULL_NAME}$`, 'i');
             it('Should match partial valid CF', () => {
                 partialFullNameMatcher.test('R').should.be.ok;
                 partialFullNameMatcher.test('RS').should.be.ok;

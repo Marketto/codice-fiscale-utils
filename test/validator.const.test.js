@@ -1,8 +1,5 @@
-import chai from 'chai';
-import chaiThings from 'chai-things';
-chai.use(chaiThings);
-chai.should();
-import {Belfiore} from '../src/belfiore';
+import './utils';
+import { Belfiore } from '../src/belfiore';
 import VALIDATOR from '../src/validator.const';
 const belfioreCodes = Belfiore.toArray().map(({belfioreCode}) => belfioreCode);
 const belfioreCodeMatcher = new RegExp(`^(?:${VALIDATOR.BELFIORE_CODE_MATCHER})$`, 'giu');
@@ -428,8 +425,8 @@ describe('CodiceFiscaleUtils:VALIDATOR', () => {
 
 
     describe('Partial CF', () => {
-        describe('PARTIAL_FULL_NAME', () => {
-            const partialFullNameMatcher = new RegExp(`^${VALIDATOR.PARTIAL_FULL_NAME}$`, 'i');
+        describe('PARTIAL_CF_FULL_NAME', () => {
+            const partialFullNameMatcher = new RegExp(`^${VALIDATOR.PARTIAL_CF_FULL_NAME}$`, 'i');
             it('Should match partial valid CF', () => {
                 partialFullNameMatcher.test('R').should.be.ok;
                 partialFullNameMatcher.test('RS').should.be.ok;

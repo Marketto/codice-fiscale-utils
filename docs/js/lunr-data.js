@@ -104,6 +104,10 @@ window.lunrData = {
           "partial",
           "produc"
         ],
+        "Errors.html": [
+          "class",
+          "error"
+        ],
         "module-CodiceFiscaleUtils.html": [
           "codicefiscaleutil",
           "modul",
@@ -127,10 +131,6 @@ window.lunrData = {
           "namespac",
           "properti",
           "valid"
-        ],
-        "Diacritics.html": [
-          "diacrit",
-          "namespac"
         ],
         "Gender.html": [
           "gender",
@@ -277,16 +277,6 @@ window.lunrData = {
           "object",
           "parser.cfdecod"
         ],
-        "Parser.html#.removeDiacritics": [
-          "diacrit",
-          "function",
-          "lt;static&gt",
-          "normal",
-          "parser.removediacrit",
-          "removediacrit",
-          "string|nul",
-          "text"
-        ],
         "Parser.html#.surnameToCf": [
           "cf",
           "function",
@@ -328,17 +318,6 @@ window.lunrData = {
           "monthtocf",
           "pars",
           "parser.monthtocf",
-          "string|nul"
-        ],
-        "Parser.html#.dayGenderToCf": [
-          "day",
-          "daygendertocf",
-          "function",
-          "gender",
-          "inform",
-          "lt;static&gt",
-          "pars",
-          "parser.daygendertocf",
           "string|nul"
         ],
         "Parser.html#.yearMonthDayToDate": [
@@ -384,18 +363,14 @@ window.lunrData = {
           "string|nul"
         ],
         "Parser.html#.placeToCf": [
-          "cf",
-          "creat",
-          "date",
-          "date/gend",
+          "belfior",
+          "code",
           "function",
-          "gender",
-          "inform",
           "lt;static&gt",
           "name",
           "pars",
           "parser.placetocf",
-          "part",
+          "place",
           "placetocf",
           "provinc",
           "string|nul"
@@ -409,6 +384,17 @@ window.lunrData = {
           "input",
           "lt;static&gt",
           "parser.encodecf",
+          "string|nul"
+        ],
+        "Parser.html#.dayGenderToCf": [
+          "day",
+          "daygendertocf",
+          "function",
+          "gender",
+          "inform",
+          "lt;static&gt",
+          "pars",
+          "parser.daygendertocf",
           "string|nul"
         ],
         "VALIDATOR.html": [
@@ -615,7 +601,7 @@ window.lunrData = {
           "validator.isvalid"
         ]
       },
-      "length": 56
+      "length": 55
     },
     "tokenStore": {
       "root": {
@@ -844,6 +830,10 @@ window.lunrData = {
                     },
                     "CheckDigitizer.html": {
                       "ref": "CheckDigitizer.html",
+                      "tf": 110
+                    },
+                    "Errors.html": {
+                      "ref": "Errors.html",
                       "tf": 110
                     }
                   }
@@ -1079,13 +1069,13 @@ window.lunrData = {
                 "ref": "Parser.html#.dateGenderToCf",
                 "tf": 6.25
               },
-              "Parser.html#.encodeCf": {
-                "ref": "Parser.html#.encodeCf",
-                "tf": 16.666666666666664
-              },
               "Parser.html#.placeToCf": {
                 "ref": "Parser.html#.placeToCf",
                 "tf": 6.25
+              },
+              "Parser.html#.encodeCf": {
+                "ref": "Parser.html#.encodeCf",
+                "tf": 16.666666666666664
               },
               "Validator_.html#.codiceFiscale": {
                 "ref": "Validator_.html#.codiceFiscale",
@@ -1602,10 +1592,6 @@ window.lunrData = {
                             "ref": "Parser.html#.cfDecode",
                             "tf": 110
                           },
-                          "Parser.html#.removeDiacritics": {
-                            "ref": "Parser.html#.removeDiacritics",
-                            "tf": 110
-                          },
                           "Parser.html#.surnameToCf": {
                             "ref": "Parser.html#.surnameToCf",
                             "tf": 110
@@ -1620,10 +1606,6 @@ window.lunrData = {
                           },
                           "Parser.html#.monthToCf": {
                             "ref": "Parser.html#.monthToCf",
-                            "tf": 110
-                          },
-                          "Parser.html#.dayGenderToCf": {
-                            "ref": "Parser.html#.dayGenderToCf",
                             "tf": 110
                           },
                           "Parser.html#.yearMonthDayToDate": {
@@ -1644,6 +1626,10 @@ window.lunrData = {
                           },
                           "Parser.html#.encodeCf": {
                             "ref": "Parser.html#.encodeCf",
+                            "tf": 110
+                          },
+                          "Parser.html#.dayGenderToCf": {
+                            "ref": "Parser.html#.dayGenderToCf",
                             "tf": 110
                           },
                           "Validator_.html#.cfSurname": {
@@ -1841,10 +1827,6 @@ window.lunrData = {
                         "ref": "Parser.html#.monthToCf",
                         "tf": 16.666666666666664
                       },
-                      "Parser.html#.dayGenderToCf": {
-                        "ref": "Parser.html#.dayGenderToCf",
-                        "tf": 16.666666666666664
-                      },
                       "Parser.html#.parseDate": {
                         "ref": "Parser.html#.parseDate",
                         "tf": 6.25
@@ -1856,6 +1838,10 @@ window.lunrData = {
                       "Parser.html#.placeToCf": {
                         "ref": "Parser.html#.placeToCf",
                         "tf": 6.25
+                      },
+                      "Parser.html#.dayGenderToCf": {
+                        "ref": "Parser.html#.dayGenderToCf",
+                        "tf": 16.666666666666664
                       }
                     }
                   }
@@ -2040,44 +2026,6 @@ window.lunrData = {
                 }
               }
             },
-            "m": {
-              "docs": {},
-              "o": {
-                "docs": {},
-                "v": {
-                  "docs": {},
-                  "e": {
-                    "docs": {},
-                    "d": {
-                      "docs": {},
-                      "i": {
-                        "docs": {},
-                        "a": {
-                          "docs": {},
-                          "c": {
-                            "docs": {},
-                            "r": {
-                              "docs": {},
-                              "i": {
-                                "docs": {},
-                                "t": {
-                                  "docs": {
-                                    "Parser.html#.removeDiacritics": {
-                                      "ref": "Parser.html#.removeDiacritics",
-                                      "tf": 675
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
             "g": {
               "docs": {},
               "e": {
@@ -2225,30 +2173,6 @@ window.lunrData = {
                     "Validator_.html#.isValid": {
                       "ref": "Validator_.html#.isValid",
                       "tf": 5.555555555555555
-                    }
-                  }
-                }
-              }
-            },
-            "a": {
-              "docs": {},
-              "c": {
-                "docs": {},
-                "r": {
-                  "docs": {},
-                  "i": {
-                    "docs": {},
-                    "t": {
-                      "docs": {
-                        "Diacritics.html": {
-                          "ref": "Diacritics.html",
-                          "tf": 1900
-                        },
-                        "Parser.html#.removeDiacritics": {
-                          "ref": "Parser.html#.removeDiacritics",
-                          "tf": 25
-                        }
-                      }
                     }
                   }
                 }
@@ -2451,13 +2375,13 @@ window.lunrData = {
                   "ref": "Parser.html#.cfToBirthDay",
                   "tf": 12.5
                 },
-                "Parser.html#.dayGenderToCf": {
-                  "ref": "Parser.html#.dayGenderToCf",
-                  "tf": 36.666666666666664
-                },
                 "Parser.html#.yearMonthDayToDate": {
                   "ref": "Parser.html#.yearMonthDayToDate",
                   "tf": 26.666666666666664
+                },
+                "Parser.html#.dayGenderToCf": {
+                  "ref": "Parser.html#.dayGenderToCf",
+                  "tf": 36.666666666666664
                 },
                 "Validator_.html#.cfDay": {
                   "ref": "Validator_.html#.cfDay",
@@ -2646,10 +2570,6 @@ window.lunrData = {
                         "ref": "Parser.html#.cfToGender",
                         "tf": 16.666666666666664
                       },
-                      "Parser.html#.dayGenderToCf": {
-                        "ref": "Parser.html#.dayGenderToCf",
-                        "tf": 20
-                      },
                       "Parser.html#.parseDate": {
                         "ref": "Parser.html#.parseDate",
                         "tf": 6.25
@@ -2661,6 +2581,10 @@ window.lunrData = {
                       "Parser.html#.placeToCf": {
                         "ref": "Parser.html#.placeToCf",
                         "tf": 6.25
+                      },
+                      "Parser.html#.dayGenderToCf": {
+                        "ref": "Parser.html#.dayGenderToCf",
+                        "tf": 20
                       },
                       "Validator_.html#.cfDayGender": {
                         "ref": "Validator_.html#.cfDayGender",
@@ -2964,10 +2888,6 @@ window.lunrData = {
                                     "ref": "Parser.html#.cfDecode",
                                     "tf": 25
                                   },
-                                  "Parser.html#.removeDiacritics": {
-                                    "ref": "Parser.html#.removeDiacritics",
-                                    "tf": 25
-                                  },
                                   "Parser.html#.surnameToCf": {
                                     "ref": "Parser.html#.surnameToCf",
                                     "tf": 25
@@ -2984,10 +2904,6 @@ window.lunrData = {
                                     "ref": "Parser.html#.monthToCf",
                                     "tf": 25
                                   },
-                                  "Parser.html#.dayGenderToCf": {
-                                    "ref": "Parser.html#.dayGenderToCf",
-                                    "tf": 20
-                                  },
                                   "Parser.html#.yearMonthDayToDate": {
                                     "ref": "Parser.html#.yearMonthDayToDate",
                                     "tf": 16.666666666666664
@@ -3002,11 +2918,15 @@ window.lunrData = {
                                   },
                                   "Parser.html#.placeToCf": {
                                     "ref": "Parser.html#.placeToCf",
-                                    "tf": 16.666666666666664
+                                    "tf": 20
                                   },
                                   "Parser.html#.encodeCf": {
                                     "ref": "Parser.html#.encodeCf",
                                     "tf": 25
+                                  },
+                                  "Parser.html#.dayGenderToCf": {
+                                    "ref": "Parser.html#.dayGenderToCf",
+                                    "tf": 20
                                   },
                                   "Validator_.html#.cfSurname": {
                                     "ref": "Validator_.html#.cfSurname",
@@ -3297,7 +3217,7 @@ window.lunrData = {
                   },
                   "Parser.html#.placeToCf": {
                     "ref": "Parser.html#.placeToCf",
-                    "tf": 16.666666666666664
+                    "tf": 28.333333333333332
                   },
                   "Validator_.html#.cfName": {
                     "ref": "Validator_.html#.cfName",
@@ -3334,10 +3254,6 @@ window.lunrData = {
                           },
                           "DATE_VALIDATOR.html": {
                             "ref": "DATE_VALIDATOR.html",
-                            "tf": 110
-                          },
-                          "Diacritics.html": {
-                            "ref": "Diacritics.html",
                             "tf": 110
                           },
                           "Gender.html": {
@@ -3429,26 +3345,6 @@ window.lunrData = {
                 }
               }
             }
-          },
-          "o": {
-            "docs": {},
-            "r": {
-              "docs": {},
-              "m": {
-                "docs": {},
-                "a": {
-                  "docs": {},
-                  "l": {
-                    "docs": {
-                      "Parser.html#.removeDiacritics": {
-                        "ref": "Parser.html#.removeDiacritics",
-                        "tf": 25
-                      }
-                    }
-                  }
-                }
-              }
-            }
           }
         },
         "e": {
@@ -3494,6 +3390,23 @@ window.lunrData = {
                           }
                         }
                       }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "r": {
+            "docs": {},
+            "r": {
+              "docs": {},
+              "o": {
+                "docs": {},
+                "r": {
+                  "docs": {
+                    "Errors.html": {
+                      "ref": "Errors.html",
+                      "tf": 1900
                     }
                   }
                 }
@@ -3644,10 +3557,6 @@ window.lunrData = {
                     "ref": "Parser.html#.monthToCf",
                     "tf": 16.666666666666664
                   },
-                  "Parser.html#.dayGenderToCf": {
-                    "ref": "Parser.html#.dayGenderToCf",
-                    "tf": 16.666666666666664
-                  },
                   "Parser.html#.yearMonthDayToDate": {
                     "ref": "Parser.html#.yearMonthDayToDate",
                     "tf": 10
@@ -3662,7 +3571,11 @@ window.lunrData = {
                   },
                   "Parser.html#.placeToCf": {
                     "ref": "Parser.html#.placeToCf",
-                    "tf": 6.25
+                    "tf": 8.333333333333332
+                  },
+                  "Parser.html#.dayGenderToCf": {
+                    "ref": "Parser.html#.dayGenderToCf",
+                    "tf": 16.666666666666664
                   }
                 },
                 "e": {
@@ -3920,50 +3833,6 @@ window.lunrData = {
                           }
                         }
                       },
-                      "r": {
-                        "docs": {},
-                        "e": {
-                          "docs": {},
-                          "m": {
-                            "docs": {},
-                            "o": {
-                              "docs": {},
-                              "v": {
-                                "docs": {},
-                                "e": {
-                                  "docs": {},
-                                  "d": {
-                                    "docs": {},
-                                    "i": {
-                                      "docs": {},
-                                      "a": {
-                                        "docs": {},
-                                        "c": {
-                                          "docs": {},
-                                          "r": {
-                                            "docs": {},
-                                            "i": {
-                                              "docs": {},
-                                              "t": {
-                                                "docs": {
-                                                  "Parser.html#.removeDiacritics": {
-                                                    "ref": "Parser.html#.removeDiacritics",
-                                                    "tf": 1150
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
                       "s": {
                         "docs": {},
                         "u": {
@@ -4130,91 +3999,6 @@ window.lunrData = {
                           }
                         }
                       },
-                      "d": {
-                        "docs": {},
-                        "a": {
-                          "docs": {},
-                          "y": {
-                            "docs": {},
-                            "g": {
-                              "docs": {},
-                              "e": {
-                                "docs": {},
-                                "n": {
-                                  "docs": {},
-                                  "d": {
-                                    "docs": {},
-                                    "e": {
-                                      "docs": {},
-                                      "r": {
-                                        "docs": {},
-                                        "t": {
-                                          "docs": {},
-                                          "o": {
-                                            "docs": {},
-                                            "c": {
-                                              "docs": {},
-                                              "f": {
-                                                "docs": {
-                                                  "Parser.html#.dayGenderToCf": {
-                                                    "ref": "Parser.html#.dayGenderToCf",
-                                                    "tf": 1150
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "t": {
-                            "docs": {},
-                            "e": {
-                              "docs": {},
-                              "g": {
-                                "docs": {},
-                                "e": {
-                                  "docs": {},
-                                  "n": {
-                                    "docs": {},
-                                    "d": {
-                                      "docs": {},
-                                      "e": {
-                                        "docs": {},
-                                        "r": {
-                                          "docs": {},
-                                          "t": {
-                                            "docs": {},
-                                            "o": {
-                                              "docs": {},
-                                              "c": {
-                                                "docs": {},
-                                                "f": {
-                                                  "docs": {
-                                                    "Parser.html#.dateGenderToCf": {
-                                                      "ref": "Parser.html#.dateGenderToCf",
-                                                      "tf": 1150
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
                       "p": {
                         "docs": {},
                         "a": {
@@ -4256,6 +4040,91 @@ window.lunrData = {
                                           "Parser.html#.placeToCf": {
                                             "ref": "Parser.html#.placeToCf",
                                             "tf": 1150
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "d": {
+                        "docs": {},
+                        "a": {
+                          "docs": {},
+                          "t": {
+                            "docs": {},
+                            "e": {
+                              "docs": {},
+                              "g": {
+                                "docs": {},
+                                "e": {
+                                  "docs": {},
+                                  "n": {
+                                    "docs": {},
+                                    "d": {
+                                      "docs": {},
+                                      "e": {
+                                        "docs": {},
+                                        "r": {
+                                          "docs": {},
+                                          "t": {
+                                            "docs": {},
+                                            "o": {
+                                              "docs": {},
+                                              "c": {
+                                                "docs": {},
+                                                "f": {
+                                                  "docs": {
+                                                    "Parser.html#.dateGenderToCf": {
+                                                      "ref": "Parser.html#.dateGenderToCf",
+                                                      "tf": 1150
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "y": {
+                            "docs": {},
+                            "g": {
+                              "docs": {},
+                              "e": {
+                                "docs": {},
+                                "n": {
+                                  "docs": {},
+                                  "d": {
+                                    "docs": {},
+                                    "e": {
+                                      "docs": {},
+                                      "r": {
+                                        "docs": {},
+                                        "t": {
+                                          "docs": {},
+                                          "o": {
+                                            "docs": {},
+                                            "c": {
+                                              "docs": {},
+                                              "f": {
+                                                "docs": {
+                                                  "Parser.html#.dayGenderToCf": {
+                                                    "ref": "Parser.html#.dayGenderToCf",
+                                                    "tf": 1150
+                                                  }
+                                                }
+                                              }
+                                            }
                                           }
                                         }
                                       }
@@ -4358,7 +4227,7 @@ window.lunrData = {
                       "docs": {
                         "Parser.html#.placeToCf": {
                           "ref": "Parser.html#.placeToCf",
-                          "tf": 16.666666666666664
+                          "tf": 28.333333333333332
                         }
                       }
                     }
@@ -4398,7 +4267,7 @@ window.lunrData = {
                           "docs": {
                             "Parser.html#.placeToCf": {
                               "ref": "Parser.html#.placeToCf",
-                              "tf": 666.6666666666666
+                              "tf": 670
                             }
                           }
                         }
@@ -4482,10 +4351,6 @@ window.lunrData = {
                                 "ref": "Parser.html#.cfToName",
                                 "tf": 25
                               },
-                              "Parser.html#.removeDiacritics": {
-                                "ref": "Parser.html#.removeDiacritics",
-                                "tf": 25
-                              },
                               "Parser.html#.surnameToCf": {
                                 "ref": "Parser.html#.surnameToCf",
                                 "tf": 25
@@ -4502,21 +4367,21 @@ window.lunrData = {
                                 "ref": "Parser.html#.monthToCf",
                                 "tf": 25
                               },
-                              "Parser.html#.dayGenderToCf": {
-                                "ref": "Parser.html#.dayGenderToCf",
-                                "tf": 20
-                              },
                               "Parser.html#.dateGenderToCf": {
                                 "ref": "Parser.html#.dateGenderToCf",
                                 "tf": 20
                               },
                               "Parser.html#.placeToCf": {
                                 "ref": "Parser.html#.placeToCf",
-                                "tf": 16.666666666666664
+                                "tf": 20
                               },
                               "Parser.html#.encodeCf": {
                                 "ref": "Parser.html#.encodeCf",
                                 "tf": 25
+                              },
+                              "Parser.html#.dayGenderToCf": {
+                                "ref": "Parser.html#.dayGenderToCf",
+                                "tf": 20
                               }
                             }
                           }
@@ -5230,20 +5095,6 @@ window.lunrData = {
                 }
               }
             }
-          },
-          "e": {
-            "docs": {},
-            "x": {
-              "docs": {},
-              "t": {
-                "docs": {
-                  "Parser.html#.removeDiacritics": {
-                    "ref": "Parser.html#.removeDiacritics",
-                    "tf": 25
-                  }
-                }
-              }
-            }
           }
         },
         "o": {
@@ -5443,7 +5294,7 @@ window.lunrData = {
           }
         }
       },
-      "length": 513
+      "length": 505
     },
     "corpusTokens": [
       "16th",
@@ -5502,10 +5353,10 @@ window.lunrData = {
       "day",
       "daygendertocf",
       "default",
-      "diacrit",
       "digit",
       "document",
       "encodecf",
+      "error",
       "evalu",
       "evaluatechar",
       "fiscal",
@@ -5544,7 +5395,6 @@ window.lunrData = {
       "name",
       "namespac",
       "nametocf",
-      "normal",
       "number",
       "number|nul",
       "object",
@@ -5572,7 +5422,6 @@ window.lunrData = {
       "parser.omocode_bitmap",
       "parser.parsed",
       "parser.placetocf",
-      "parser.removediacrit",
       "parser.surnametocf",
       "parser.yearmonthdaytod",
       "parser.yeartocf",
@@ -5588,13 +5437,11 @@ window.lunrData = {
       "readm",
       "readonly&gt",
       "regexp",
-      "removediacrit",
       "return",
       "static&gt",
       "string|nul",
       "surnam",
       "surnametocf",
-      "text",
       "toarray",
       "util",
       "valid",
@@ -5710,6 +5557,17 @@ window.lunrData = {
       "summary": "",
       "description": "Evaluate given partial CF to produce last check digit character"
     },
+    "Errors.html": {
+      "id": "Errors.html",
+      "kind": "class",
+      "title": "Errors",
+      "longname": "Errors",
+      "name": "Errors",
+      "tags": "Errors",
+      "summary": "",
+      "description": "",
+      "body": ""
+    },
     "module-CodiceFiscaleUtils.html": {
       "id": "module-CodiceFiscaleUtils.html",
       "kind": "module",
@@ -5752,17 +5610,6 @@ window.lunrData = {
       "tags": "DATE_VALIDATOR",
       "summary": "",
       "description": "Date Validator propertys",
-      "body": ""
-    },
-    "Diacritics.html": {
-      "id": "Diacritics.html",
-      "kind": "namespace",
-      "title": "Diacritics",
-      "longname": "Diacritics",
-      "name": "Diacritics",
-      "tags": "Diacritics",
-      "summary": "",
-      "description": "",
       "body": ""
     },
     "Gender.html": {
@@ -5918,16 +5765,6 @@ window.lunrData = {
       "summary": "",
       "description": ""
     },
-    "Parser.html#.removeDiacritics": {
-      "id": "Parser.html#.removeDiacritics",
-      "kind": "function",
-      "title": "&lt;static&gt; removeDiacritics( text ) → {string|null}",
-      "longname": "Parser.removeDiacritics",
-      "name": "removeDiacritics",
-      "tags": "Parser.removeDiacritics removeDiacritics",
-      "summary": "",
-      "description": "Normalize diacritics"
-    },
     "Parser.html#.surnameToCf": {
       "id": "Parser.html#.surnameToCf",
       "kind": "function",
@@ -5968,16 +5805,6 @@ window.lunrData = {
       "summary": "",
       "description": "Parse month information"
     },
-    "Parser.html#.dayGenderToCf": {
-      "id": "Parser.html#.dayGenderToCf",
-      "kind": "function",
-      "title": "&lt;static&gt; dayGenderToCf( day, gender ) → {string|null}",
-      "longname": "Parser.dayGenderToCf",
-      "name": "dayGenderToCf",
-      "tags": "Parser.dayGenderToCf dayGenderToCf",
-      "summary": "",
-      "description": "Parse day information"
-    },
     "Parser.html#.yearMonthDayToDate": {
       "id": "Parser.html#.yearMonthDayToDate",
       "kind": "function",
@@ -6011,12 +5838,12 @@ window.lunrData = {
     "Parser.html#.placeToCf": {
       "id": "Parser.html#.placeToCf",
       "kind": "function",
-      "title": "&lt;static&gt; placeToCf( date, name [, province ] ) → {string|null}",
+      "title": "&lt;static&gt; placeToCf( name [, province ] ) → {string|null}",
       "longname": "Parser.placeToCf",
       "name": "placeToCf",
       "tags": "Parser.placeToCf placeToCf",
       "summary": "",
-      "description": "Parse a Dated and Gender information to create Date/Gender CF part"
+      "description": "Parse place name and province to Belfiore code"
     },
     "Parser.html#.encodeCf": {
       "id": "Parser.html#.encodeCf",
@@ -6027,6 +5854,16 @@ window.lunrData = {
       "tags": "Parser.encodeCf encodeCf",
       "summary": "",
       "description": "Generates full CF"
+    },
+    "Parser.html#.dayGenderToCf": {
+      "id": "Parser.html#.dayGenderToCf",
+      "kind": "function",
+      "title": "&lt;static&gt; dayGenderToCf( day, gender ) → {string|null}",
+      "longname": "Parser.dayGenderToCf",
+      "name": "dayGenderToCf",
+      "tags": "Parser.dayGenderToCf dayGenderToCf",
+      "summary": "",
+      "description": "Parse day information"
     },
     "VALIDATOR.html": {
       "id": "VALIDATOR.html",
