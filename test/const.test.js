@@ -409,8 +409,8 @@ describe('CodiceFiscaleUtils:Const', () => {
             });
         });
 
-        describe('PARTIAL_FULL_NAME', () => {
-            const partialFullNameMatcher = new RegExp(`^${VALIDATOR.PARTIAL_FULL_NAME}$`, 'i');
+        describe('PARTIAL_CF_FULL_NAME', () => {
+            const partialFullNameMatcher = new RegExp(`^${VALIDATOR.PARTIAL_CF_FULL_NAME}$`, 'i');
             it('Should match partial valid CF', () => {
                 partialFullNameMatcher.test('R').should.be.ok;
                 partialFullNameMatcher.test('RS').should.be.ok;

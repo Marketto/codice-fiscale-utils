@@ -11,11 +11,7 @@ describe('CodiceFiscaleUtils:Belfiore', () => {
 
         describe('constructor', () => {
             it('Should throw error providing both codeMatcher and province', () => {
-                try {
-                    const belfioreInstance = new BelfioreConnector({ codeMatcher: new RegExp('test'), province: 'XX' });
-                } catch (e) {
-                    e.should.be.an('Error');
-                }
+                expect(() => new BelfioreConnector({ codeMatcher: new RegExp('test'), province: 'XX' })).to.throw();
             });
         });
     });

@@ -695,10 +695,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@marketto/diacritic-remover@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@marketto/diacritic-remover/-/diacritic-remover-1.0.2.tgz#9001f1a4d4b1d0bfbf5cbd0a2a654023eb3939c6"
-  integrity sha512-Z12b6Kq8pG7MWc5Dc3KRpTJ0G+Y6iZdBpnlbfouuD9icto8Z2/01d+FtDcxGSX0ikchStqOV1hfug6b3WuQ5vQ==
+"@marketto/diacritic-remover@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@marketto/diacritic-remover/-/diacritic-remover-1.0.3.tgz#ead22d72cdddae270607c3c38079f44ec51725cd"
+  integrity sha512-H+52ZcgAcsk2Eh+8dwWgogboaPpcyJYvoGSVT+rR6hTv3w2cYIUKjKTiJw5WSVNxNJNckXXmMMcUfbdUtoYGnw==
 
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"

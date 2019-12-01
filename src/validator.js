@@ -6,7 +6,7 @@ import moment from 'moment';
 import Omocode from './omocode.enum';
 import Parser from './parser';
 import VALIDATOR from './validator.const';
-
+import Error from './error';
 /**
  * @namespace Validator
  */
@@ -19,11 +19,15 @@ class Validator {
      * @public
      */
     static cfSurname(surname) {
-        let matcher = VALIDATOR.NAME_MATCHER;
+        const error =  new Error('Validator', 'cfSurname');
+        let matcher = VALIDATOR.CF_NAME_MATCHER;
         if (surname) {
+            if (!this.surname().test(surname)) {
+                throw error.INVALID_SURNAME;
+            }
             matcher = Parser.surnameToCf(surname) || matcher;
         }
-        return new RegExp(`^${matcher}$`, 'iu');
+        return new RegExp(`^(?:${matcher})$`, 'iu');
     }
 
     /**
@@ -33,8 +37,12 @@ class Validator {
      * @public
      */
     static cfName(name) {
-        let matcher = VALIDATOR.NAME_MATCHER;
+        const error =  new Error('Validator', 'cfName');
+        let matcher = VALIDATOR.CF_NAME_MATCHER;
         if (name) {
+            if (!this.surname().test(name)) {
+                throw error.INVALID_NAME;
+            }
             matcher = Parser.nameToCf(name) || matcher;
         }
         return new RegExp(`^${matcher}$`, 'iu');
@@ -47,11 +55,14 @@ class Validator {
      * @public
      */
     static cfYear(year) {
+        const error =  new Error(this.constructor.name, 'cfYear');
         let matcher = VALIDATOR.YEAR_MATCHER;
         if (year) {
             const parsedYear = Parser.yearToCf(year);
             if (parsedYear) {
                 matcher = parsedYear.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
+            } else {
+                throw error.INVALID_YEAR;
             }
         }
         return new RegExp(`^${matcher}$`, 'iu');
@@ -78,6 +89,7 @@ class Validator {
      * @public
      */
     static cfDay(day) {
+        const error =  new Error('Validator', 'cfDayGender');
         let matcher = VALIDATOR.DAY_MATCHER;
         if (day) {
             const parsedDayM = Parser.dayGenderToCf(day, 'M');
@@ -85,6 +97,8 @@ class Validator {
                 const matcherM = parsedDayM.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
                 const matcherF = Parser.dayGenderToCf(day, 'F').replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
                 matcher = `(?:${matcherM})|(?:${matcherF})`;
+            } else {
+                throw error.INVALID_DAY;
             }
         }
         return new RegExp(`^${matcher}$`, 'iu');
@@ -98,6 +112,7 @@ class Validator {
      * @public
      */
     static cfDayGender(day, gender) {
+        const error =  new Error('Validator', 'cfDayGender');
         if (!gender) {
             return this.cfDay(day);
         }
@@ -107,7 +122,7 @@ class Validator {
             if (parsedDayGender) {
                 matcher = parsedDayGender.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
             } else {
-                throw new Error('[Validator.cfDayGender] Provided day is not valid');
+                throw error.INVALID_DAY_OR_GENDER;
             }
         } else {
             switch (gender) {
@@ -118,7 +133,7 @@ class Validator {
                 matcher = VALIDATOR.FEMALE_DAY_MATCHER;
                 break;
             default:
-                throw new Error('[Validator.cfDayGender] Provided gender is not valid');
+                throw error.INVALID_GENDER;
             }
         }
         return new RegExp(`^${matcher}$`, 'iu');
@@ -132,15 +147,20 @@ class Validator {
      * @public
      */
     static cfDateGender(date, gender) {
+        const error =  new Error('Validator', 'cfDateGender');
+        if (date && !Parser.parseDate(date)) {
+            throw error.INVALID_DATE;
+        }
+        if (gender && !Gender.toArray().includes(gender)) {
+            throw error.INVALID_GENDER;
+        }
         let matcher = VALIDATOR.FULL_DATE_MATCHER;
-        if (date && gender) {
-            const parsedDateGender = Parser.dateGenderToCf(date, gender);
-            if (parsedDateGender) {
-                matcher = parsedDateGender.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
-            } else {
-                throw new Error('[Validator.cfDateGender] Provided date is not valid');
-            }
-        } else if (gender) {
+        if (date) {
+            const omocodeReplacer = parsedDateGender => parsedDateGender.replace(/\d/gu, n => `[${n}${Omocode[n]}]`);
+            matcher = gender ?
+                omocodeReplacer(Parser.dateGenderToCf(date, gender)) :
+                `(?:${omocodeReplacer(Parser.dateGenderToCf(date, 'M'))}|${omocodeReplacer(Parser.dateGenderToCf(date, 'm'))})`;
+        } else {
             switch (gender) {
             case 'M':
                 matcher = VALIDATOR.MALE_FULL_DATE_MATCHER;
@@ -148,8 +168,6 @@ class Validator {
             case 'F':
                 matcher = VALIDATOR.FEMALE_FULL_DATE_MATCHER;
                 break;
-            default:
-                throw new Error('[Validator.cfDateGender] Provided gender is not valid');
             }
         }
         return new RegExp(`^${matcher}$`, 'iu');
@@ -213,13 +231,7 @@ class Validator {
                     matcher = '';
                     for (let i=0; i<generator.length; i++) {
                         const cfPartValidator = generator[i]();
-                        if (!cfPartValidator) {
-                            break;
-                        }
-                        const cfValue = (cfPartValidator.toString().match(/\^(.+)\$/) || [])[1];
-                        if (!cfValue) {
-                            break;
-                        }
+                        const cfValue = cfPartValidator.toString().match(/\^(.+)\$/)[1];
                         matcher += `(?:${cfValue})`;
                     }
                     // Final addition of CheckDigit
@@ -240,12 +252,14 @@ class Validator {
      */
     static surname(codiceFiscale) {
         const diacriticRemover = new DiacriticRemover();
-        const ANY_LETTER = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/ui)}]`;
+        const LETTER_SET = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/ui)}]`;
+        const SEPARATOR_SET = '[\' ]';
+        const ANY_LETTER = `(?:${LETTER_SET}+${SEPARATOR_SET}?)`;
         let matcher = `${ANY_LETTER}+`;
         if (typeof codiceFiscale === 'string' && (/^[A-Z]{1,3}/iu).test(codiceFiscale)) {
             const surnameCf = codiceFiscale.substr(0,3);
             
-            const diacriticizer = matchingChars => (matchingChars || '').split('').map(char => `[${char}${diacriticRemover.insensitiveMatcher[char]}]`);
+            const diacriticizer = matchingChars => (matchingChars || '').split('').map(char => `[${diacriticRemover.insensitiveMatcher[char]}]`);
 
             const matchFromCf = (cf, charMatcher) => diacriticizer((cf.match(new RegExp(charMatcher, 'ig')) || [])[0]);
 
@@ -253,35 +267,39 @@ class Validator {
             const vow = matchFromCf(surnameCf, `[${VALIDATOR.VOWEL_LIST}]{1,3}`);
             
             const diacriticsVowelList = VALIDATOR.VOWEL_LIST + diacriticRemover.matcherBy(new RegExp(`^[${VALIDATOR.VOWEL_LIST}]$`, 'ui'));
-
+            const diacriticsVowelMatcher = `[${diacriticsVowelList}]`;
+            const midDiacriticVowelMatcher = `(?:${diacriticsVowelMatcher}${SEPARATOR_SET}?)*`;
+            const endingDiacritcVowelMatcher = `(?:${SEPARATOR_SET}?${midDiacriticVowelMatcher}${diacriticsVowelMatcher})?`;
             switch(cons.length) {
-            case 3:
-                matcher = cons.join(`[${diacriticsVowelList}]*`) + `${ANY_LETTER}*`;
+            case 3: {
+                const divider = midDiacriticVowelMatcher;
+                matcher = divider + cons.join(`${SEPARATOR_SET}?${divider}`) + `(?:${SEPARATOR_SET}?${LETTER_SET}*${LETTER_SET})?`;
                 break;
+            }
             case 2: {
                 const possibilities = [
-                    `${vow[0]}${cons[0]}[${diacriticsVowelList}]*${cons[1]}`,
-                    `${cons[0]}${vow.join('')}[${diacriticsVowelList}]*${cons[1]}`,
-                    `${cons.join('')}${vow[0]}`
+                    `${vow[0]}${SEPARATOR_SET}?${cons[0]}${midDiacriticVowelMatcher}${cons[1]}`,
+                    `${cons[0]}${SEPARATOR_SET}?` + vow.join(`${SEPARATOR_SET}?`) + `${SEPARATOR_SET}?${midDiacriticVowelMatcher}${cons[1]}`,
+                    cons.join(`${SEPARATOR_SET}?`) + `${SEPARATOR_SET}?${vow[0]}`
                 ];
-                matcher = `(?:${possibilities.join('|')})[${diacriticsVowelList}]*`;
+                matcher = `(?:${possibilities.join('|')})${endingDiacritcVowelMatcher}`;
                 break;
             }
             case 1: {
                 const possibilities = [
-                    `${vow.slice(0,2).join('')}[${diacriticsVowelList}]*${cons}`,
-                    `${vow[0]}${cons}${vow[1]}`,
-                    `${cons[0]+vow.slice(0,2).join('')}`
+                    vow.slice(0,2).join(`${SEPARATOR_SET}?`) + midDiacriticVowelMatcher + cons.join(`${SEPARATOR_SET}?`),
+                    `${vow[0]}${SEPARATOR_SET}?` + cons.join(`${SEPARATOR_SET}?`) + vow[1],
+                    [cons[0], ...vow.slice(0,2)].join(`${SEPARATOR_SET}?`)
                 ];
-                matcher = `(?:${possibilities.join('|')})[${diacriticsVowelList}]*`;
+                matcher = `(?:${possibilities.join('|')})${endingDiacritcVowelMatcher}`;
                 break;
             }
             default:
-                matcher = `${vow.join('')}[${diacriticsVowelList}]*`;
+                matcher = `${vow.join(`${SEPARATOR_SET}?`)}${endingDiacritcVowelMatcher}`;
             }
         }
 
-        return new RegExp(`^${matcher}$`, 'iu');
+        return new RegExp(`^ *(${matcher}) *$`, 'iu');
     }
 
     /**
@@ -299,7 +317,7 @@ class Validator {
             const nameCf = codiceFiscale.substr(3,3);
 
             const cons = ((nameCf.match(new RegExp(`^[${VALIDATOR.CONSONANT_LIST}]{1,3}`, 'ig')) || [])[0] || '')
-                .split('').map(char => `[${char}${diacriticRemover.insensitiveMatcher[char]}]`);
+                .split('').map(char => `[${diacriticRemover.insensitiveMatcher[char]}]`);
 
             const diacriticizer = chars => chars + diacriticRemover.matcherBy(new RegExp(`^[${chars}]$`, 'ui'));
 
