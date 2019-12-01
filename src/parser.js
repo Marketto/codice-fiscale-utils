@@ -276,11 +276,14 @@ class Parser {
             return null;
         }
         const diacriticRemover = new DiacriticRemover();
-        const noDiacriticsSurname = diacriticRemover.replace(surname);
+        const noDiacriticsSurname = diacriticRemover.replace(surname).trim();
+        if (!(/^[A-Z ']+$/iu).test(noDiacriticsSurname)) {
+            return null;
+        }
         const consonants = (noDiacriticsSurname.match(new RegExp(`[${VALIDATOR.CONSONANT_LIST}]+`, 'ig')) || []).join('');
         const vowels = (noDiacriticsSurname.match(new RegExp(`[${VALIDATOR.VOWEL_LIST}]+`, 'ig')) || []).join('');
 
-        const partialCf = (consonants + vowels + 'X').substr(0, 3);
+        const partialCf = (consonants + vowels).padEnd(3, 'X').substr(0, 3);
 
         if (partialCf.length < 3) {
             return null;

@@ -1,6 +1,6 @@
 const ERRORS = Object.freeze({
-    INVALID_SURNAME: 'Provided surname is not valid, only letters and apostrophe allowed',
-    INVALID_NAME: 'Provided name is not valid, only letters and apostrophe allowed',
+    INVALID_SURNAME: 'Provided surname is not valid, only letters, diacritics and apostrophe allowed',
+    INVALID_NAME: 'Provided name is not valid, only letters, diacritics and apostrophe allowed',
     INVALID_DAY: 'Provided day is not valid',
     INVALID_GENDER: 'Provided gender is not valid',
     INVALID_DAY_OR_GENDER: 'Provided day and/or gender are not valid',

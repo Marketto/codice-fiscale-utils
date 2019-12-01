@@ -20,14 +20,14 @@ class Validator {
      */
     static cfSurname(surname) {
         const error =  new Error('Validator', 'cfSurname');
-        let matcher = VALIDATOR.NAME_MATCHER;
+        let matcher = VALIDATOR.CF_NAME_MATCHER;
         if (surname) {
-            matcher = Parser.surnameToCf(surname);
-            if (!matcher) {
+            if (!this.surname().test(surname)) {
                 throw error.INVALID_SURNAME;
             }
+            matcher = Parser.surnameToCf(surname) || matcher;
         }
-        return new RegExp(`^${matcher}$`, 'iu');
+        return new RegExp(`^(?:${matcher})$`, 'iu');
     }
 
     /**
@@ -38,12 +38,12 @@ class Validator {
      */
     static cfName(name) {
         const error =  new Error('Validator', 'cfName');
-        let matcher = VALIDATOR.NAME_MATCHER;
+        let matcher = VALIDATOR.CF_NAME_MATCHER;
         if (name) {
-            matcher = Parser.nameToCf(name);
-            if (!matcher) {
+            if (!this.surname().test(name)) {
                 throw error.INVALID_NAME;
             }
+            matcher = Parser.nameToCf(name) || matcher;
         }
         return new RegExp(`^${matcher}$`, 'iu');
     }
@@ -252,12 +252,14 @@ class Validator {
      */
     static surname(codiceFiscale) {
         const diacriticRemover = new DiacriticRemover();
-        const ANY_LETTER = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/ui)}]`;
+        const LETTER_SET = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/ui)}]`;
+        const SEPARATOR_SET = '[\' ]';
+        const ANY_LETTER = `(?:${LETTER_SET}+${SEPARATOR_SET}?)`;
         let matcher = `${ANY_LETTER}+`;
         if (typeof codiceFiscale === 'string' && (/^[A-Z]{1,3}/iu).test(codiceFiscale)) {
             const surnameCf = codiceFiscale.substr(0,3);
             
-            const diacriticizer = matchingChars => (matchingChars || '').split('').map(char => `[${char}${diacriticRemover.insensitiveMatcher[char]}]`);
+            const diacriticizer = matchingChars => (matchingChars || '').split('').map(char => `[${diacriticRemover.insensitiveMatcher[char]}]`);
 
             const matchFromCf = (cf, charMatcher) => diacriticizer((cf.match(new RegExp(charMatcher, 'ig')) || [])[0]);
 
@@ -265,35 +267,39 @@ class Validator {
             const vow = matchFromCf(surnameCf, `[${VALIDATOR.VOWEL_LIST}]{1,3}`);
             
             const diacriticsVowelList = VALIDATOR.VOWEL_LIST + diacriticRemover.matcherBy(new RegExp(`^[${VALIDATOR.VOWEL_LIST}]$`, 'ui'));
-
+            const diacriticsVowelMatcher = `[${diacriticsVowelList}]`;
+            const midDiacriticVowelMatcher = `(?:${diacriticsVowelMatcher}${SEPARATOR_SET}?)*`;
+            const endingDiacritcVowelMatcher = `(?:${SEPARATOR_SET}?${midDiacriticVowelMatcher}${diacriticsVowelMatcher})?`;
             switch(cons.length) {
-            case 3:
-                matcher = cons.join(`[${diacriticsVowelList}]*`) + `${ANY_LETTER}*`;
+            case 3: {
+                const divider = midDiacriticVowelMatcher;
+                matcher = divider + cons.join(`${SEPARATOR_SET}?${divider}`) + `(?:${SEPARATOR_SET}?${LETTER_SET}*${LETTER_SET})?`;
                 break;
+            }
             case 2: {
                 const possibilities = [
-                    `${vow[0]}${cons[0]}[${diacriticsVowelList}]*${cons[1]}`,
-                    `${cons[0]}${vow.join('')}[${diacriticsVowelList}]*${cons[1]}`,
-                    `${cons.join('')}${vow[0]}`
+                    `${vow[0]}${SEPARATOR_SET}?${cons[0]}${midDiacriticVowelMatcher}${cons[1]}`,
+                    `${cons[0]}${SEPARATOR_SET}?` + vow.join(`${SEPARATOR_SET}?`) + `${SEPARATOR_SET}?${midDiacriticVowelMatcher}${cons[1]}`,
+                    cons.join(`${SEPARATOR_SET}?`) + `${SEPARATOR_SET}?${vow[0]}`
                 ];
-                matcher = `(?:${possibilities.join('|')})[${diacriticsVowelList}]*`;
+                matcher = `(?:${possibilities.join('|')})${endingDiacritcVowelMatcher}`;
                 break;
             }
             case 1: {
                 const possibilities = [
-                    `${vow.slice(0,2).join('')}[${diacriticsVowelList}]*${cons}`,
-                    `${vow[0]}${cons}${vow[1]}`,
-                    `${cons[0]+vow.slice(0,2).join('')}`
+                    vow.slice(0,2).join(`${SEPARATOR_SET}?`) + midDiacriticVowelMatcher + cons.join(`${SEPARATOR_SET}?`),
+                    `${vow[0]}${SEPARATOR_SET}?` + cons.join(`${SEPARATOR_SET}?`) + vow[1],
+                    [cons[0], ...vow.slice(0,2)].join(`${SEPARATOR_SET}?`)
                 ];
-                matcher = `(?:${possibilities.join('|')})[${diacriticsVowelList}]*`;
+                matcher = `(?:${possibilities.join('|')})${endingDiacritcVowelMatcher}`;
                 break;
             }
             default:
-                matcher = `${vow.join('')}[${diacriticsVowelList}]*`;
+                matcher = `${vow.join(`${SEPARATOR_SET}?`)}${endingDiacritcVowelMatcher}`;
             }
         }
 
-        return new RegExp(`^${matcher}$`, 'iu');
+        return new RegExp(`^ *(${matcher}) *$`, 'iu');
     }
 
     /**
@@ -311,7 +317,7 @@ class Validator {
             const nameCf = codiceFiscale.substr(3,3);
 
             const cons = ((nameCf.match(new RegExp(`^[${VALIDATOR.CONSONANT_LIST}]{1,3}`, 'ig')) || [])[0] || '')
-                .split('').map(char => `[${char}${diacriticRemover.insensitiveMatcher[char]}]`);
+                .split('').map(char => `[${diacriticRemover.insensitiveMatcher[char]}]`);
 
             const diacriticizer = chars => chars + diacriticRemover.matcherBy(new RegExp(`^[${chars}]$`, 'ui'));
 
