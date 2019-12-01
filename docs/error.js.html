@@ -1,9 +1,10 @@
+<!-- start:source.tmpl.hbs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-		<title>Modules</title>
+		<title>error.js</title>
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -13,7 +14,7 @@
 		<link type="text/css" rel="stylesheet" href="css/template.min.css">
 		<script type="text/javascript">
 			window.TEMPLATE_OPTIONS = {"includeDate":true,"dateFormat":"Do MMM YYYY","systemName":"Codice Fiscale Utils","systemSummary":"JS utilities to handle Italian Codice Fiscale","systemLogo":"","systemColor":"","navMembers":[{"kind":"class","title":"Classes","summary":"All documented classes."},{"kind":"external","title":"Externals","summary":"All documented external members."},{"kind":"global","title":"Globals","summary":"All documented globals."},{"kind":"mixin","title":"Mixins","summary":"All documented mixins."},{"kind":"interface","title":"Interfaces","summary":"All documented interfaces."},{"kind":"module","title":"Modules","summary":"All documented modules."},{"kind":"namespace","title":"Namespaces","summary":"All documented namespaces."},{"kind":"tutorial","title":"Tutorials","summary":"All available tutorials."}],"footer":"","copyright":"FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.","linenums":true,"collapseSymbols":true,"inverseNav":true,"inlineNav":false,"outputSourceFiles":true,"sourceRootPath":null,"disablePackagePath":true,"outputSourcePath":false,"showTableOfContents":true,"showAccessFilter":true,"analytics":null,"methodHeadingReturns":true,"sort":"linenum, longname, version, since","search":true,"favicon":null,"stylesheets":[],"scripts":[],"monospaceLinks":false,"cleverLinks":false};
-			window.DOCLET_TOC_ENABLED = true;
+			window.DOCLET_TOC_ENABLED = false;
 			window.DOCLET_AFILTER_ENABLED = false;
 		</script>
 </head>
@@ -78,36 +79,44 @@
 	</header>
 	<!-- end:navbar.hbs -->		<div class="page-header">
 			<div class="container">
-				<span class="kind">list</span>
-				<h1><span class="name">Modules</span></h1>
-				<div class="summary"><p>All documented modules.</p></div>			</div>
+				<span class="kind">source</span>
+				<h1><span class="name">error.js</span></h1>
+			</div>
 		</div>
 	<div class="container content">
 		<div class="row">
-			<div class="col-md-9 main-content">
-						<ol class="breadcrumb">
-							<li><a href="index.html">Home</a></li>
-							<li class="active">Modules</li>
-						</ol>
-					<section>
-		<h2><span class="name">Modules</span></h2>
-		<article class="secondary">
-				<dl class="symbol">
-						
-						<dt class="symbol-title module public">
-			<h4 id="CodiceFiscaleUtils" class="module public"><a href="module-CodiceFiscaleUtils.html"><span class="name">CodiceFiscaleUtils</span></a></h4>
-</dt>
-<dd class="symbol-details module public">
-	<div class="symbol-details-inner">
-	</div>
-</dd>
-				</dl>
-		</article>
-					</section>
+			<div class="col-md-12 main-content">
+		<section class="source-section">
+			<article></article>
+			<pre class="prettyprint source language-javascript line-numbers"><code class="language-javascript">const ERRORS = Object.freeze({
+    INVALID_SURNAME: 'Provided surname is not valid, only letters, diacritics and apostrophe allowed',
+    INVALID_NAME: 'Provided name is not valid, only letters, diacritics and apostrophe allowed',
+    INVALID_DAY: 'Provided day is not valid',
+    INVALID_GENDER: 'Provided gender is not valid',
+    INVALID_DAY_OR_GENDER: 'Provided day and/or gender are not valid',
+    INVALID_YEAR: 'Provided year is not valid, only 2 or 4 digit numbers are allowed',
+    INVALID_DATE: 'Provided date is not valid',
+});
+
+class Errors {
+    /**
+     * 
+     * @param {string} className 
+     * @param {string} methodName 
+     */
+    constructor(className, methodName) {
+        Object.assign(
+            this,
+            Object.entries(ERRORS)
+                .map(([key, name]) => [key, new Error(`[${className}.${methodName}] ${name}`)])
+                .reduce((accumulator, [key, err]) => Object.assign(accumulator, { [key]: err }), {})
+        );
+    }
+}
+
+export default Errors;</code></pre>
+		</section>
 			</div>
-				<div class="col-md-3 side-content">
-					<nav class="toc hidden-print hidden-sm hidden-xs"></nav>
-				</div>
 		</div>
 	</div>
 	<footer>
@@ -139,3 +148,4 @@
 	
 </body>
 </html>
+<!-- end:source.tmpl.hbs -->
