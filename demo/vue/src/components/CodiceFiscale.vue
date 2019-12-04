@@ -81,7 +81,7 @@
 
 <script>
 import * as moment from 'moment';
-import * as CodiceFiscaleUtils from '@marketto/codice-fiscale-utils';
+import * as CodiceFiscaleUtils from '../../../../dist/codice-fiscale-utils.system.min.js';
 export default {
   name: 'CodiceFiscale',
   computed: {

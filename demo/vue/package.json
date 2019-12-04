@@ -15,9 +15,11 @@
   "license": "MIT",
   "dependencies": {
     "@marketto/codice-fiscale-utils": "file:./../..",
+    "@marketto/diacritic-remover": "^1.0.3",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.27",
     "core-js": "^2.6.5",
+    "moment": "^2.24.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {

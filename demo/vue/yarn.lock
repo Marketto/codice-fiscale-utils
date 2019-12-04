@@ -872,10 +872,16 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
-"@marketto/codice-fiscale-utils@file:./../..":
-  version "1.0.4"
+"@marketto/codice-fiscale-utils@file:../..":
+  version "1.1.3"
   dependencies:
+    "@marketto/diacritic-remover" "^1.0.3"
     moment "^2.24.0"
+
+"@marketto/diacritic-remover@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@marketto/diacritic-remover/-/diacritic-remover-1.0.3.tgz#ead22d72cdddae270607c3c38079f44ec51725cd"
+  integrity sha512-H+52ZcgAcsk2Eh+8dwWgogboaPpcyJYvoGSVT+rR6hTv3w2cYIUKjKTiJw5WSVNxNJNckXXmMMcUfbdUtoYGnw==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"

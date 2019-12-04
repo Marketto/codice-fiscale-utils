@@ -13,3 +13,4 @@ test
 CODE_OF_CONDUCT.md
 jsdoc.json
 sonar-project.properties
+yarn-error.log
