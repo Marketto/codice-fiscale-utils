@@ -1,29 +1,34 @@
 import pkg from './package.json';
-import { terser } from 'rollup-plugin-terser';
+// import commonJs from 'rollup-plugin-commonjs';
+// import { terser } from 'rollup-plugin-terser';
 import pluginJson from 'rollup-plugin-json';
-//import builtins from 'rollup-plugin-node-builtins';
-import babel from 'rollup-plugin-babel'
+import nodeResolve from 'rollup-plugin-node-resolve';
+import babel from 'rollup-plugin-babel';
 import license from 'rollup-plugin-license';
 import path from 'path';
 
 
 const baseConf = {
-    input: pkg.module,
+    input: 'src/',
     external: [
         ...Object.keys(pkg.dependencies || {})
     ],
     output: {
+        name: 'CodiceFiscaleUtils',
+        sourcemap: true,
         globals: {
             moment: 'moment',
             '@marketto/diacritic-remover': 'DiacriticRemover'
         }
     },
     plugins: [
+        nodeResolve(),
+        //commonJs(),
         pluginJson(),
         babel({
             exclude: 'node_modules/**' // only transpile our source code
         }),
-        terser(),
+        //terser(),
         license({
             cwd: __dirname,
             banner: {        
@@ -42,14 +47,11 @@ export default [
             {
                 file: pkg.main,
                 format: 'cjs',
-                sourcemap: true,
                 ...baseConf.output
             },
             {
-                file: pkg.browser,
-                format: 'amd',
-                name: 'CodiceFiscaleUtils',
-                sourcemap: true,
+                file: 'dist/codice-fiscale-utils.bundle.min.js',
+                format: 'iife',
                 ...baseConf.output
             }
         ],
