@@ -3,17 +3,17 @@
   "version": "1.1.3",
   "description": "JS utilities to handle Italian Codice Fiscale",
   "_type": "module",
-  "main": "dist/codice-fiscale-utils.cjs.min.js",
-  "module": "src/index.js",
+  "main": "dist/codice-fiscale-utils.min.js",
+  "module": "dist/codice-fiscale-utils.min.mjs",
   "scripts": {
     "test": "npx cross-env NODE_ENV=test npx nyc npx mocha",
     "lint": "npx eslint ./src/**/*.js",
     "lint-fix": "npm run lint --fix",
     "coverage": "mkdir coverage \n npm run test && npx nyc report --reporter=text-lcov | npx relcov > coverage/lcov.info",
-    "build": "npm run lint && npx rimraf ./dist && npx rollup -c",
+    "build": "npx rimraf ./dist & npx cross-env NODE_ENV=prod npx rollup -c",
     "docs": "npx rimraf ./docs && npx jsdoc . -c jsdoc.json",
     "update-lovs": "node ./scripts/locationUpdater.js",
-    "release": "npm audit fix && npm run update-lovs && npm run test && npm run docs && npm run build"
+    "release": "npm audit fix && npm run update-lovs && npm run coverage && npm run docs && npm run build"
   },
   "repository": {
     "type": "git",
@@ -69,7 +69,6 @@
     "rimraf": "^2.6.3",
     "rollup": "^1.27.6",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-license": "^0.13.0",
     "rollup-plugin-node-resolve": "^5.2.0",

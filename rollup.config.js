@@ -1,6 +1,5 @@
 import pkg from './package.json';
-// import commonJs from 'rollup-plugin-commonjs';
-// import { terser } from 'rollup-plugin-terser';
+import { terser } from 'rollup-plugin-terser';
 import pluginJson from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
@@ -23,12 +22,11 @@ const baseConf = {
     },
     plugins: [
         nodeResolve(),
-        //commonJs(),
         pluginJson(),
         babel({
             exclude: 'node_modules/**' // only transpile our source code
         }),
-        //terser(),
+        terser(),
         license({
             cwd: __dirname,
             banner: {        
@@ -47,6 +45,11 @@ export default [
             {
                 file: pkg.main,
                 format: 'cjs',
+                ...baseConf.output
+            },
+            {
+                file: pkg.module,
+                format: 'esm',
                 ...baseConf.output
             },
             {
