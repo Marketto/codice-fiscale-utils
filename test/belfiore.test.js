@@ -1,5 +1,5 @@
 import { expect } from './utils';
-import {Belfiore, BelfioreConnector} from '../src/belfiore';
+import { Belfiore, BelfioreConnector } from '../src/belfiore';
 
 describe('CodiceFiscaleUtils:Belfiore', () => {
     describe('BelfioreConnector', () => {
