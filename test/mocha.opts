@@ -1,1 +1,2 @@
 -r @babel/register
+test/**/*.test.js
