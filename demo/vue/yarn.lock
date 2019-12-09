@@ -872,16 +872,12 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
-"@marketto/codice-fiscale-utils@file:../..":
-  version "1.1.3"
+"@marketto/codice-fiscale-utils@latest":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@marketto/codice-fiscale-utils/-/codice-fiscale-utils-1.1.2.tgz#82e5982748bda328ecbd40fc6c204792bf707b06"
+  integrity sha512-Z7rMKBddhWKdvRQsd+qPhxoQSor00/nEU58sJFgiDIqGH4LOGXZgwO4+pABwL9gLQUgOPwvPN3sBiDSlrIY65A==
   dependencies:
-    "@marketto/diacritic-remover" "^1.0.3"
     moment "^2.24.0"
-
-"@marketto/diacritic-remover@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@marketto/diacritic-remover/-/diacritic-remover-1.0.3.tgz#ead22d72cdddae270607c3c38079f44ec51725cd"
-  integrity sha512-H+52ZcgAcsk2Eh+8dwWgogboaPpcyJYvoGSVT+rR6hTv3w2cYIUKjKTiJw5WSVNxNJNckXXmMMcUfbdUtoYGnw==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -3293,6 +3289,13 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+cross-env@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-6.0.3.tgz#4256b71e49b3a40637a0ce70768a6ef5c72ae941"
+  integrity sha512-+KqxF6LCvfhWvADcDPqo64yVIB31gv/jQulX2NGzKS/g3GEVz6/pt4wjHFtFWsHMddebWD/sDthJemzM4MaAag==
+  dependencies:
+    cross-spawn "^7.0.0"
 
 cross-spawn@^5.0.1, cross-spawn@^5.1.0:
   version "5.1.0"

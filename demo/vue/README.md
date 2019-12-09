@@ -1,6 +1,11 @@
 # codice-fiscale-utils-vue-demo
 
 ## Project setup
+### NPM
+```
+yarn i install
+```
+### YARN
 ```
 yarn install
 ```

@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "private": true,
   "scripts": {
-    "serve": "npx vue-cli-service serve",
+    "serve": "npx cross-env NODE_OPTIONS=--max_old_space_size=8192 npx vue-cli-service serve --mode development",
     "build": "npx vue-cli-service build",
     "lint": "npx vue-cli-service lint"
   },
@@ -14,8 +14,7 @@
   "author": "Marco Ricupero <marco.ricupero@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@marketto/codice-fiscale-utils": "file:./../..",
-    "@marketto/diacritic-remover": "^1.0.3",
+    "@marketto/codice-fiscale-utils": "latest",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.27",
     "core-js": "^2.6.5",
@@ -28,23 +27,10 @@
     "@vue/cli-plugin-eslint": "^3.9.0",
     "@vue/cli-service": "^3.9.0",
     "babel-eslint": "^10.0.1",
+    "cross-env": "^6.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "vue-template-compiler": "^2.6.10"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
   },
   "postcss": {
     "plugins": {
