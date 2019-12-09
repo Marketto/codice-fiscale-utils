@@ -80,6 +80,7 @@
 </template>
 
 <script>
+
 import * as moment from 'moment';
 import * as CodiceFiscaleUtils from '@marketto/codice-fiscale-utils';
 export default {

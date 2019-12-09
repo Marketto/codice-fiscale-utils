@@ -214,7 +214,7 @@ class BelfioreConnector {
             
                 paramName === 'byProvince' &&
                 (
-                    (resource._codeMatcher instanceof RegExp && resource._codeMatcher.test('Z000')) 
+                    resource._codeMatcher instanceof RegExp && resource._codeMatcher.test('Z000') 
                     || resource._province
                 )
             
@@ -239,8 +239,8 @@ class BelfioreConnector {
         if (typeof text !== 'string' || !text.length) {
             return -1;
         }
-        const rangedStart = (!start || start < 0) ? 0 : start;
-        const rangedEnd = (!end || end >= text.length) ? (text.length - 1) : end;
+        const rangedStart = !start || start < 0 ? 0 : start;
+        const rangedEnd = !end || end >= text.length ? text.length - 1 : end;
         const currentLength = rangedEnd - rangedStart + 1;
         if (rangedStart > rangedEnd || currentLength % value.length) {
             return -1;
@@ -294,10 +294,10 @@ class BelfioreConnector {
      */
     static nameByIndex(list, index) {
         if (typeof list !== 'string') {
-            throw new Error(`[BelfioreConnector.nameByIndex] Provided list is not a string`);
+            throw new Error('[BelfioreConnector.nameByIndex] Provided list is not a string');
         }
         if (!list.length) {
-            throw new Error(`[BelfioreConnector.nameByIndex] Provided list empty`);
+            throw new Error('[BelfioreConnector.nameByIndex] Provided list empty');
         }
         let startIndex = 0,
             endIndex = list.indexOf('|', startIndex + 1),
@@ -331,15 +331,15 @@ class BelfioreConnector {
      */
     static* indexByName(list, matcher) {
         if (typeof list !== 'string') {
-            throw new Error(`[BelfioreConnector.indexByName] Provided list is not a string`);
+            throw new Error('[BelfioreConnector.indexByName] Provided list is not a string');
         }
         if (!list.length) {
-            throw new Error(`[BelfioreConnector.indexByName] Provided list empty`);
+            throw new Error('[BelfioreConnector.indexByName] Provided list empty');
         }
         const regExpMatcher = typeof matcher === 'string' ? new RegExp(matcher, 'i') : matcher;
         
         if (!(regExpMatcher instanceof RegExp)) {
-            throw new Error("Provided matcher must be of type string or RegExp");
+            throw new Error('Provided matcher must be of type string or RegExp');
         }
 
         const seekEntryEndIndex = index => list.indexOf('|', index +1) + 1 || list.length;

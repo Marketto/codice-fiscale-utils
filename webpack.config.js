@@ -19,8 +19,8 @@ module.exports = [
         libraryTarget: 'commonjs'
     },
     {
-        filenamePrefix: 'amd',
-        libraryTarget: 'amd',
+        filenamePrefix: 'system',
+        libraryTarget: 'system',
         rules: [
             {
                 test: /\.js$/,
@@ -42,7 +42,7 @@ module.exports = [
     },
     externals: {
         moment: 'moment',
-        '@marketto/diacritic-remover': '@marketto/diacritic-remover'
+        '@marketto/diacritic-remover': 'DiacriticRemover'
     },
     plugins: [
         new BannerPlugin({

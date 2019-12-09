@@ -1,25 +1,41 @@
+import bitmap from './parser/omocode-bitmap.test';
+
+import cfDeomocode from './parser/cfDeomocode.test';
+import cfToSurname from './parser/cfToSurname.test';
+import cfToName from './parser/cfToName.test';
+import cfToGender from './parser/cfToGender.test';
+import cfToBirthDate from './parser/cfToBirthDate.test';
+import tes from './parser/cfDecode.test';       
+ 
+import surnameToCf from './parser/surnameToCf.test';
+import nameToCf from './parser/nameToCf.test';
+import yearToCf from './parser/yearToCf.test';
+import monthToCf from './parser/monthToCf.test';
+import dayGenderToCf from './parser/dayGenderToCf.test';
+import dateGenderToCf from './parser/dateGenderToCf.test';
+import placeToCf from './parser/placeToCf.test';
+import encodeCf from './parser/encodeCf.test';
+
 describe('CodiceFiscaleUtils:Parser', () => {
-    describe('constants', () => {
-        require('./parser/omocode-bitmap.test');
-    });
+    describe('constants', () => bitmap());
 
-    describe('methods from CF', () => {
-        require('./parser/cfDeomocode.test');
-        require('./parser/cfToSurname.test');
-        require('./parser/cfToName.test');
-        require('./parser/cfToGender.test');
-        require('./parser/cfToBirthDate.test');
-        require('./parser/cfDecode.test');        
-    });
+    describe('methods from CF', () => Promise.all([
+        cfDeomocode(),
+        cfToSurname(),
+        cfToName(),
+        cfToGender(),
+        cfToBirthDate(),
+        tes(),
+    ]));
 
-    describe('methods to CF', () => {
-        require('./parser/surnameToCf.test');
-        require('./parser/nameToCf.test');
-        require('./parser/yearToCf.test');
-        require('./parser/monthToCf.test');
-        require('./parser/dayGenderToCf.test');
-        require('./parser/dateGenderToCf.test');
-        require('./parser/placeToCf.test');
-        require('./parser/encodeCf.test');
-    });
+    describe('methods to CF', () => Promise.all([
+        surnameToCf(),
+        nameToCf(),
+        yearToCf(),
+        monthToCf(),
+        dayGenderToCf(),
+        dateGenderToCf(),
+        placeToCf(),
+        encodeCf(),
+    ]));
 });

@@ -71,7 +71,7 @@ class CheckDigitizer {
      * @public
      */
     static checkDigit(codiceFiscale) {
-        if (typeof codiceFiscale === 'string' && (new RegExp(VALIDATOR.PARTIAL_CF)).test(codiceFiscale)) {
+        if (typeof codiceFiscale === 'string' && new RegExp(VALIDATOR.PARTIAL_CF).test(codiceFiscale)) {
             const partialCF = codiceFiscale.substr(0, 15);
             let partialCfValue = 0;
             for (let charValue of this.evaluateChar(partialCF)) partialCfValue += charValue;

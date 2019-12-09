@@ -395,7 +395,7 @@ class Parser {
         if (!(
             date instanceof Date ||
             date instanceof moment ||
-            typeof date === 'string' && (new RegExp(DATE_VALIDATOR.ISO8601_SHORT_DATE)).test(date) ||
+            typeof date === 'string' && new RegExp(DATE_VALIDATOR.ISO8601_SHORT_DATE).test(date) ||
             Array.isArray(date) && !date.some(value => typeof value !== 'number')
         )) {
             return null;
@@ -417,7 +417,7 @@ class Parser {
      * @public
      */
     static dateGenderToCf(date, gender) {
-        if (!Gender.hasOwnProperty(gender)) {
+        if (!(gender in Gender)) {
             return null;
         }
         const parsedDate = this.parseDate(date);

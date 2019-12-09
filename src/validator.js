@@ -310,7 +310,7 @@ class Validator {
      * @public
      */
     static name(codiceFiscale) {
-        if (typeof codiceFiscale === 'string' && (new RegExp(`^[A-Z]{3}[${VALIDATOR.CONSONANT_LIST}]{3}`, 'iu')).test(codiceFiscale)) {
+        if (typeof codiceFiscale === 'string' && new RegExp(`^[A-Z]{3}[${VALIDATOR.CONSONANT_LIST}]{3}`, 'iu').test(codiceFiscale)) {
             const diacriticRemover = new DiacriticRemover();
             const ANY_LETTER = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/ui)}]`;
 
