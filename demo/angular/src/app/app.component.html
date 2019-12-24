@@ -1,0 +1,100 @@
+<div class="container">
+  <img
+    class="logo"
+    alt="Angular Logo"
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+  />
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Codice Fiscale Utils</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field appearance="outline" class="field field-cf">
+          <mat-label>Codice Fiscale</mat-label>
+          <input
+            required
+            matInput
+            name="cf"
+            [(ngModel)]="cf"
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field field-name">
+          <mat-label>Cognome</mat-label>
+          <input
+            required
+            matInput
+            name="lastName"
+            [(ngModel)]="lastName"
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field field-name">
+          <mat-label>Nome</mat-label>
+          <input
+            required
+            matInput
+            name="firstName"
+            [(ngModel)]="firstName"
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field field-date">
+          <mat-label>Data di nascita</mat-label>
+          <input
+            required
+            matInput
+            [matDatepicker]="birthDatePicker"
+            placeholder="Seleziona una data"
+            [(ngModel)]="birthDate"
+          >
+          <mat-datepicker-toggle matSuffix [for]="birthDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #birthDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field field-gender">
+          <mat-label>Sesso</mat-label>
+          <mat-select [(value)]="gender" required name="gender">
+            <mat-option>(Seleziona)</mat-option>
+            <mat-option value="M">Maschio</mat-option>
+            <mat-option value="F">Femmina</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field field-place">
+          <mat-label>Area di nascita</mat-label>
+          <input
+            type="text"
+            name="province"
+            matInput
+            required
+            placeholder="Provincia o estero"
+            [matAutocomplete]="autoArea"
+            [formControl]="areaControl"
+          >
+          <mat-autocomplete #autoArea="matAutocomplete" autoActiveFirstOption>
+            <mat-option *ngFor="let area of filteredAreas | async" [value]="area">
+              {{area}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field field-place">
+          <mat-label>Luogo di nascita</mat-label>
+          <input
+            type="text"
+            name="birthCity"
+            matInput
+            required
+            [matAutocomplete]="autoPlace"
+            [formControl]="placeControl"
+          >
+          <mat-autocomplete #autoPlace="matAutocomplete" autoActiveFirstOption [displayWith]="displayPlace">
+            <mat-option *ngFor="let place of filteredPlaces | async" [value]="place">
+              {{place.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+</div>
