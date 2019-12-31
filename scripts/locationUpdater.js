@@ -10,7 +10,7 @@ const locationResources = require('./location-resources.json');
 
 const LICENSE_KEYS = Object.keys(locationResources.licenses);
 
-const detinationPath = path.join(__dirname, '../src/asset');
+const detinationPath = path.join(__dirname, '../asset');
 const DEFAULT_CREATION_DATE = '1861-01-01';
 
 const downloadUnzip = (uri) => request({
