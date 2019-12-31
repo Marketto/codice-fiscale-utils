@@ -2,7 +2,9 @@ import moment, { Moment } from "moment";
 import IBelfioreCity from "../interfaces/belfiore-city.interface";
 import IBelfioreCommonPlace from "../interfaces/belfiore-common-place.interface";
 import IBelfioreCountry from "../interfaces/belfiore-country.interface";
-import IBelfioreDB from "../interfaces/belfiore-db.interface";
+import IBelfioreDbData from "../interfaces/belfiore-db-data.interface";
+import IBelfioreDbLicense from "../interfaces/belfiore-db-license.interface";
+import IBelfioreDb from "../interfaces/belfiore-db.interface";
 import BelfioreConnectorConfig from "../types/belfiore-connector-config.type";
 import BelfiorePlace from "../types/belfiore-place.type";
 import MultiFormatDate from "../types/multi-format-date.type";
@@ -20,12 +22,12 @@ export default class BelfioreConnector {
      */
     public static get(resource: BelfioreConnector, paramName: string, receiver: any): BelfiorePlace | any {
         if (this.BELFIORE_CODE_MATCHER.test(paramName)) {
-            const base32name = this.belfioreToInt(paramName)
+            const base32name: string = this.belfioreToInt(paramName)
                 .toString(32)
                 .padStart(3, "0");
 
             for (const sourceData of resource.data) {
-                const index = this.binaryfindIndex(sourceData.belfioreCode, base32name);
+                const index: number = this.binaryfindIndex(sourceData.belfioreCode, base32name);
                 if (index >= 0) {
                     return this.locationByIndex(sourceData, index, resource.config);
                 }
@@ -46,12 +48,12 @@ export default class BelfioreConnector {
 
     /**
      * Binary find Index (works ONLY in sorted arrays)
-     * @param {string} text Unique string of values of the same length (step)
-     * @param {string} value Exact text to find
-     * @param {number} start text start index for seeking the value
-     * @param {number} end text end index for seeking the value
-     * @param {number} step length of a single value to seek properly the text string
-     * @returns {number} Found value Index or -1 if not found
+     * @param text Unique string of values of the same length (step)
+     * @param value Exact text to find
+     * @param start text start index for seeking the value
+     * @param end text end index for seeking the value
+     * @param step length of a single value to seek properly the text string
+     * @returns Found value Index or -1 if not found
      * @private
      */
     public static binaryfindIndex(
@@ -59,18 +61,19 @@ export default class BelfioreConnector {
         targetText: string,
         start: number = 0,
         end: number = sourceString.length - 1,
-    ) {
+    ): number {
         if (!sourceString.length) {
             return -1;
         }
-        const rangedStart = Math.max(start, 0);
-        const rangedEnd = Math.min(end, sourceString.length - 1);
-        const currentLength = rangedEnd - rangedStart + 1;
+        const rangedStart: number = Math.max(start, 0);
+        const rangedEnd: number = Math.min(end, sourceString.length - 1);
+        const currentLength: number = rangedEnd - rangedStart + 1;
         if (rangedStart > rangedEnd || currentLength % targetText.length) {
             return -1;
         }
-        const targetIndex = rangedStart + Math.floor(currentLength / (2 * targetText.length)) * targetText.length;
-        const targetValue = sourceString.substr(targetIndex, targetText.length);
+        const targetIndex: number =
+            rangedStart + Math.floor(currentLength / (2 * targetText.length)) * targetText.length;
+        const targetValue: string = sourceString.substr(targetIndex, targetText.length);
         if (targetValue === targetText) {
             return Math.ceil((targetIndex + 1) / targetText.length) - 1;
         }
@@ -84,51 +87,51 @@ export default class BelfioreConnector {
      * Converts belfiore code into an int
      */
     public static belfioreToInt(code: string): number {
-        const upperCaseCode = code.toUpperCase();
+        const upperCaseCode: string = code.toUpperCase();
         return (upperCaseCode.charCodeAt(0) - 65) * 10 ** 3 + parseInt(upperCaseCode.substr(1), 10);
     }
 
+    private static ITALY_KINGDOM_BIRTHDATE = "1861-01-01";
+    private static BELFIORE_CODE_MATCHER = /^[A-Z]\d{3}$/iu;
+
     /**
      * Converts int to belfiore code
-     * @param {number} code Belfiore int code
-     * @returns {string} Standard belfiore code
-     * @private
+     * @param code Belfiore int code
+     * @returns Standard belfiore code
      */
-    public static belfioreFromInt(code: number): string {
-        const charIndex = Math.floor(code / 10 ** 3);
-        const char = String.fromCharCode(charIndex + 65);
-        const numValue = code.toString().substr(-3);
+    private static belfioreFromInt(code: number): string {
+        const charIndex: number = Math.floor(code / 10 ** 3);
+        const char: string = String.fromCharCode(charIndex + 65);
+        const numValue: string = code.toString().substr(-3);
         return `${char}${numValue.padStart(3, "0")}`;
     }
 
     /**
      * Converst Base 32 number of days since 01/01/1861 to Moment instance
-     * @param {string} base32daysFrom1861 Base 32 number of days from 1861-01-01
-     * @returns {Moment} Moment instance date
-     * @private
+     * @param base32daysFrom1861 Base 32 number of days from 1861-01-01
+     * @returns Moment instance date
      */
-    public static decodeDate(base32daysFrom1861) {
+    private static decodeDate(base32daysFrom1861: string): Moment {
         const italyBirthDatePastDays = parseInt(base32daysFrom1861, 32);
         return moment(this.ITALY_KINGDOM_BIRTHDATE).add(italyBirthDatePastDays, "days");
     }
 
     /**
      * Retrieve string at index posizion
-     * @param {string} list concatenation of names
-     * @param {number} index target name index
-     * @returns {string} index-th string
-     * @private
+     * @param list concatenation of names
+     * @param index target name index
+     * @returns index-th string
      */
-    public static nameByIndex(list, index) {
+    private static nameByIndex(list: string, index: number): string {
         if (typeof list !== "string") {
             throw new Error("[BelfioreConnector.nameByIndex] Provided list is not a string");
         }
         if (!list.length) {
             throw new Error("[BelfioreConnector.nameByIndex] Provided list empty");
         }
-        let startIndex = 0;
-        let endIndex = list.indexOf("|", startIndex + 1);
-        let counter = index;
+        let startIndex: number = 0;
+        let endIndex: number = list.indexOf("|", startIndex + 1);
+        let counter: number = index;
 
         while (counter > 0 && endIndex > startIndex) {
             counter--;
@@ -149,12 +152,15 @@ export default class BelfioreConnector {
 
     /**
      * Retrieve location for the given index in the given subset
-     * @param {string} resourceData concatenation of names
-     * @param {number} index target name index
-     * @returns {Object} location
-     * @private
+     * @param resourceData concatenation of names
+     * @param index target name index
+     * @returns location
      */
-    public static locationByIndex(resourceData, index, config: BelfioreConnectorConfig): BelfiorePlace {
+    private static locationByIndex(
+        resourceData: IBelfioreDbData,
+        index: number,
+        config: BelfioreConnectorConfig,
+    ): BelfiorePlace | null {
         const belfioreIndex = index * 3;
         if (resourceData.belfioreCode.length - belfioreIndex < 3) {
             return null;
@@ -209,11 +215,9 @@ export default class BelfioreConnector {
         } as IBelfioreCity;
     }
 
-    private static ITALY_KINGDOM_BIRTHDATE = "1861-01-01";
-    private static BELFIORE_CODE_MATCHER = /^[A-Z]\d{3}$/iu;
-
-    private data: IBelfioreDB[];
-    private licenses: string[];
+    private data: IBelfioreDbData[];
+    private licenses: IBelfioreDbLicense[];
+    private sources: string[];
     private activeDate: Moment | undefined;
     private codeMatcher: RegExp | undefined;
     private province: string | undefined;
@@ -224,6 +228,7 @@ export default class BelfioreConnector {
         data,
         licenses,
         province,
+        sources,
     }: BelfioreConnectorConfig) {
         if (codeMatcher && province) {
             throw new Error("Both codeMatcher and province were provided to Bolfiore, only one is allowed");
@@ -234,6 +239,7 @@ export default class BelfioreConnector {
         this.data = data;
         this.licenses = licenses;
         this.province = province;
+        this.sources = sources;
 
         return new Proxy(this, this.constructor);
     }
@@ -315,22 +321,24 @@ export default class BelfioreConnector {
         });
     }
 
-    private get config() {
+    private get config(): BelfioreConnectorConfig {
         const {
             activeDate,
             codeMatcher,
             data,
             licenses,
+            sources,
         } = this;
         return {
             activeDate,
             codeMatcher,
             data,
             licenses,
-        };
+            sources,
+        } as BelfioreConnectorConfig;
     }
 
-    private* scanDataSourceIndex(dataSource: IBelfioreDB, matcher?: RegExp): Generator<number> {
+    private* scanDataSourceIndex(dataSource: IBelfioreDbData, matcher?: RegExp): Generator<number, -1, void> {
         if (matcher) {
             for (let startIndex = 0, entryIndex = 0; startIndex < dataSource.name.length; entryIndex++) {
                 const endIndex = dataSource.name.indexOf("|", startIndex + 1) + 1 || dataSource.name.length;
@@ -350,14 +358,14 @@ export default class BelfioreConnector {
         return -1;
     }
 
-    private* scanData(name?: string | RegExp): Generator<BelfiorePlace> {
+    private* scanData(name?: string | RegExp): Generator<BelfiorePlace, null, void> {
         const constructor = this.constructor as (typeof BelfioreConnector);
         const nameMatcher = typeof name === "string" ? new RegExp(name, "i") : name;
 
         for (const sourceData of this.data) {
             const dataSourceScan = this.scanDataSourceIndex(sourceData, nameMatcher);
             for (const index of dataSourceScan) {
-                const parsedPlace: BelfiorePlace = constructor.locationByIndex(sourceData, index, this.config);
+                const parsedPlace: BelfiorePlace | null = constructor.locationByIndex(sourceData, index, this.config);
                 if (parsedPlace) {
                     yield parsedPlace;
                 }
