@@ -1,27 +1,27 @@
-import rollupPluginTs from '@wessberg/rollup-plugin-ts';
-import pkg from './package.json';
-import tsconfig from './tsconfig.json';
-import { terser } from 'rollup-plugin-terser';
-import builtins from 'rollup-plugin-node-builtins';
-import jsonPlugin from '@rollup/plugin-json';
-import license from 'rollup-plugin-license';
-import path from 'path';
+import rollupPluginTs from "@wessberg/rollup-plugin-ts";
+import pkg from "./package.json";
+import tsconfig from "./tsconfig.json";
+import { terser } from "rollup-plugin-terser";
+import builtins from "rollup-plugin-node-builtins";
+import jsonPlugin from "@rollup/plugin-json";
+import license from "rollup-plugin-license";
+import path from "path";
 
 const baseConf = {
     external: [
         ...Object.keys(pkg.dependencies || {})
     ],
-    input: 'src/classes/codice-fiscale-utils.class.ts',
+    input: "src/classes/codice-fiscale-utils.class.ts",
     output: {
-        exports: 'default',
-        name: 'CodiceFiscaleUtils',
+        exports: "default",
+        name: "CodiceFiscaleUtils",
         sourceMap: true,
     },
     plugins: [
         license({
             banner: {
                 content: {
-                    file: path.join('.', 'src/banner'),
+                    file: path.join(".", "src/banner"),
                 },
             },
             cwd: __dirname,
@@ -40,16 +40,16 @@ const rollupModuleConf = rollupPluginTs({
     tsconfig: {
         ...tsconfig.compilerOptions,
         declaration: true,
-        module: 'ESNext',
-        target: 'ESNext',
+        module: "ESNext",
+        target: "ESNext",
     },
 });
 const rollupBrowserConf = rollupPluginTs({
     tsconfig: {
         ...tsconfig.compilerOptions,
         declaration: false,
-        module: 'iife',
-        target: 'ES2015',
+        module: "iife",
+        target: "ES2015",
         namedExports: {
             
         }
@@ -62,7 +62,7 @@ export default [
         output: {
             ...baseConf.output,
             file: pkg.main,
-            format: 'cjs',
+            format: "cjs",
         },
         plugins: [
             builtins(),
@@ -79,7 +79,7 @@ export default [
         output: {
             ...baseConf.output,
             file: pkg.module,
-            format: 'esm',
+            format: "esm",
         },
         plugins: [
             builtins(),
@@ -95,8 +95,8 @@ export default [
         ...baseConf,
         output: {
             ...baseConf.output,
-            file: 'dist/codice-fiscale-utils.bundle.js',
-            format: 'iife',
+            file: "dist/codice-fiscale-utils.bundle.js",
+            format: "iife",
         },
         plugins: [
             builtins(),
@@ -112,8 +112,8 @@ export default [
         ...baseConf,
         output: {
             ...baseConf.output,
-            file: 'dist/codice-fiscale-utils.bundle.min.js',
-            format: 'iife',
+            file: "dist/codice-fiscale-utils.bundle.min.js",
+            format: "iife",
         },
         plugins: [
             builtins(),
