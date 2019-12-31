@@ -1,8 +1,6 @@
 import { Moment } from "moment";
-import IBelfioreDB from "./belfiore-db.interface";
+import IBelfioreDb from "./belfiore-db.interface";
 
-export default interface IBelfioreConnectorCommonConfig {
-    data: IBelfioreDB[];
-    licenses: string[];
+export default interface IBelfioreConnectorCommonConfig extends IBelfioreDb {
     activeDate?: Moment;
 }
