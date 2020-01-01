@@ -9,11 +9,15 @@ import path from "path";
 
 const baseConf = {
     external: [
-        ...Object.keys(pkg.dependencies || {})
+        ...Object.keys(pkg.dependencies || {}),
     ],
-    input: "src/classes/codice-fiscale-utils.class.ts",
+    input: "src/index.ts",
     output: {
-        exports: "default",
+        exports: "named",
+        globals: {
+            "@marketto/diacritic-remover": "DiacriticRemover",
+            "moment": "moment",
+        },
         name: "CodiceFiscaleUtils",
         sourceMap: true,
     },
@@ -49,10 +53,8 @@ const rollupBrowserConf = rollupPluginTs({
         ...tsconfig.compilerOptions,
         declaration: false,
         module: "iife",
+        namedExports: {},
         target: "ES2015",
-        namedExports: {
-            
-        }
     },
 });
 

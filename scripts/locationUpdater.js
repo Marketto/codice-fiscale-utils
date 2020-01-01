@@ -14,10 +14,10 @@ const detinationPath = path.join(__dirname, '../asset');
 const DEFAULT_CREATION_DATE = '1861-01-01';
 
 const downloadUnzip = (uri) => request({
+    encoding: null,
     method: 'GET',
-    uri,
     resolveWithFullResponse: true,
-    encoding: null
+    uri
 })
     .then(({body}) => body)
     .then(JSZip.loadAsync)
