@@ -1,25 +1,23 @@
-import bitmap from './parser/omocode-bitmap.test';
+import tes from "./parser/cfDecode.test";
+import cfDeomocode from "./parser/cfDeomocode.test";
+import cfToBirthDate from "./parser/cfToBirthDate.test";
+import cfToGender from "./parser/cfToGender.test";
+import cfToName from "./parser/cfToName.test";
+import cfToSurname from "./parser/cfToSurname.test";
+import dateGenderToCf from "./parser/dateGenderToCf.test";
+import dayGenderToCf from "./parser/dayGenderToCf.test";
+import encodeCf from "./parser/encodeCf.test";
+import monthToCf from "./parser/monthToCf.test";
+import nameToCf from "./parser/nameToCf.test";
+import bitmap from "./parser/omocode-bitmap.test";
+import placeToCf from "./parser/placeToCf.test";
+import surnameToCf from "./parser/surnameToCf.test";
+import yearToCf from "./parser/yearToCf.test";
 
-import cfDeomocode from './parser/cfDeomocode.test';
-import cfToSurname from './parser/cfToSurname.test';
-import cfToName from './parser/cfToName.test';
-import cfToGender from './parser/cfToGender.test';
-import cfToBirthDate from './parser/cfToBirthDate.test';
-import tes from './parser/cfDecode.test';       
- 
-import surnameToCf from './parser/surnameToCf.test';
-import nameToCf from './parser/nameToCf.test';
-import yearToCf from './parser/yearToCf.test';
-import monthToCf from './parser/monthToCf.test';
-import dayGenderToCf from './parser/dayGenderToCf.test';
-import dateGenderToCf from './parser/dateGenderToCf.test';
-import placeToCf from './parser/placeToCf.test';
-import encodeCf from './parser/encodeCf.test';
+describe("CodiceFiscaleUtils:Parser", () => {
+    describe("constants", () => bitmap());
 
-describe('CodiceFiscaleUtils:Parser', () => {
-    describe('constants', () => bitmap());
-
-    describe('methods from CF', () => Promise.all([
+    describe("methods from CF", () => Promise.all([
         cfDeomocode(),
         cfToSurname(),
         cfToName(),
@@ -28,7 +26,7 @@ describe('CodiceFiscaleUtils:Parser', () => {
         tes(),
     ]));
 
-    describe('methods to CF', () => Promise.all([
+    describe("methods to CF", () => Promise.all([
         surnameToCf(),
         nameToCf(),
         yearToCf(),
