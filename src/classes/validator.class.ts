@@ -1,6 +1,5 @@
 import DiacriticRemover from "@marketto/diacritic-remover";
 import moment, { Moment } from "moment";
-import BelfiorePlace from "../belfiore-connector/types/belfiore-place.type";
 import MultiFormatDate from "../belfiore-connector/types/multi-format-date.type";
 import {
     ISO8601_DATE_TIME,
@@ -13,6 +12,7 @@ import {
     INVALID_DAY_OR_GENDER,
     INVALID_GENDER,
     INVALID_NAME,
+    INVALID_PLACE_NAME,
     INVALID_SURNAME,
     INVALID_YEAR,
 } from "../const/error-messages.const";
@@ -91,7 +91,7 @@ export default class Validator {
         if (year) {
             const parsedYear = Parser.yearToCf(year);
             if (parsedYear) {
-                matcher = parsedYear.replace(/\d/gu, (n) => `[${n}${Omocodes[n]}]`);
+                matcher = this.deomocode(parsedYear);
             } else {
                 throw new CfuError(INVALID_YEAR);
             }
@@ -120,10 +120,11 @@ export default class Validator {
     public static cfDay(day?: DateDay): RegExp {
         let matcher = DAY_MATCHER;
         if (day) {
-            const parsedDayM: string = Parser.dayGenderToCf(day, "M");
-            if (parsedDayM) {
-                const matcherM: string = parsedDayM.replace(/\d/gu, (n) => `[${n}${Omocodes[n]}]`);
-                const matcherF: string = Parser.dayGenderToCf(day, "F").replace(/\d/gu, (n) => `[${n}${Omocodes[n]}]`);
+            const parsedDayM = Parser.dayGenderToCf(day, "M");
+            const parsedDayF = Parser.dayGenderToCf(day, "F");
+            if (parsedDayM && parsedDayF) {
+                const matcherM: string = this.deomocode(parsedDayM);
+                const matcherF: string = this.deomocode(parsedDayF);
                 matcher = `(?:${matcherM})|(?:${matcherF})`;
             } else {
                 throw new CfuError(INVALID_DAY);
@@ -146,7 +147,7 @@ export default class Validator {
         if (day) {
             const parsedDayGender = Parser.dayGenderToCf(day, gender);
             if (parsedDayGender) {
-                matcher = parsedDayGender.replace(/\d/gu, (n) => `[${n}${Omocodes[n]}]`);
+                matcher = this.deomocode(parsedDayGender);
             } else {
                 throw new CfuError(INVALID_DAY_OR_GENDER);
             }
@@ -171,7 +172,7 @@ export default class Validator {
      * @param gender @see Genders
      * @return CF date and gender matcher
      */
-    public static cfDateGender(date: MultiFormatDate, gender: Genders): RegExp {
+    public static cfDateGender(date?: MultiFormatDate | null, gender?: Genders | null): RegExp {
         if (date && !Parser.parseDate(date)) {
             throw new CfuError(INVALID_DATE);
         }
@@ -180,12 +181,18 @@ export default class Validator {
         }
         let matcher = FULL_DATE_MATCHER;
         if (date) {
-            const omocodeReplacer = (parsedDateGender) => parsedDateGender
-                .replace(/\d/gu, (n) => `[${n}${Omocodes[n]}]`);
-            if (gender) {
-                matcher = omocodeReplacer(Parser.dateGenderToCf(date, gender));
+            const parsedDateGender = gender && Parser.dateGenderToCf(date, gender);
+            if (parsedDateGender) {
+                matcher = this.deomocode(parsedDateGender);
             } else {
-                matcher = `(?:${Gender.toArray().map((g) => omocodeReplacer(Parser.dateGenderToCf(date, g))).join("|")})`;
+                const parseDeomocode = (g: Genders): string => {
+                    const parsedGender = Parser.dateGenderToCf(date, g);
+                    if (!parsedGender) {
+                        throw new CfuError(INVALID_DATE);
+                    }
+                    return parsedGender && this.deomocode(parsedGender);
+                };
+                matcher = `(?:${Gender.toArray().map(parseDeomocode).join("|")})`;
             }
         } else {
             switch (gender) {
@@ -206,27 +213,29 @@ export default class Validator {
      * @param placeName Optional place name to generate validation regexp
      * @return CF place matcher
      */
-    public static cfPlace(placeName?: string): RegExp;
+    public static cfPlace(placeName?: string | null): RegExp;
     /**
      * @param date Optional date to generate validation regexp
      * @param placeName Optional place name to generate validation regexp
      * @return CF place matcher
      */
-    public static cfPlace(birthDate: MultiFormatDate, placeName?: string): RegExp;
-    public static cfPlace(birthDateOrName?: MultiFormatDate, placeName?: string): RegExp {
+    public static cfPlace(birthDate: MultiFormatDate | null, placeName?: string | null): RegExp;
+    public static cfPlace(birthDateOrName?: MultiFormatDate | null, placeName?: string | null): RegExp {
         let matcher = BELFIORE_CODE_MATCHER;
-        const birthDate: Moment = moment(birthDateOrName);
-        let place: string;
-        if (birthDate.isValid()) {
-            place = placeName;
-        } else if (typeof birthDateOrName === "string") {
-            place = birthDateOrName;
-        }
+        if (birthDateOrName) {
+            const birthDate: Moment = moment(birthDateOrName);
+            const validBD: boolean = birthDate.isValid();
+            let place: string;
+            if (validBD && placeName) {
+                place = placeName;
+            } else if (!validBD && typeof birthDateOrName === "string") {
+                place = birthDateOrName;
+            } else {
+                throw new CfuError(INVALID_PLACE_NAME);
+            }
 
-        if (place || !birthDate) {
-            const parsedPlace = Parser.placeToCf(birthDateOrName, placeName);
-            matcher = (parsedPlace || "")
-                .replace(/\d/gu, (n) => `[${n}${Omocodes[n]}]`);
+            const parsedPlace = Parser.placeToCf(place);
+            matcher = this.deomocode(parsedPlace || "");
         }
         return this.isolatedInsensitiveTailor(matcher);
     }
@@ -236,18 +245,23 @@ export default class Validator {
      * @param personalInfo Input Object
      * @return CodiceFiscale matcher
      */
-    public static codiceFiscale(personalInfo: IPersonalInfo): RegExp {
+    public static codiceFiscale(personalInfo?: IPersonalInfo): RegExp {
         let matcher = CODICE_FISCALE;
         if (personalInfo) {
             const parsedCf = Parser.encodeCf(personalInfo);
 
             if (parsedCf) {
-                matcher = parsedCf.replace(/\d/gu, (n) => `[${n}${Omocodes[n]}]`);
+                matcher = this.deomocode(parsedCf);
             } else {
                 const { surname, name, year, month, day, date, gender, place } = personalInfo;
                 if (surname || name || year || month || day || date || gender || place) {
-                    const dtParams = Parser.parseDate(date) || Parser.yearMonthDayToDate(year, month, day);
-                    const generator = [
+                    let dtParams: Date | null = null;
+                    if (date) {
+                        dtParams = Parser.parseDate(date);
+                    } else if (year) {
+                        dtParams = Parser.yearMonthDayToDate(year, month, day);
+                    }
+                    const generator: Array<() => RegExp> = [
                         () => this.cfSurname(surname),
                         () => this.cfName(name),
                         () => this.cfDateGender(dtParams, gender),
@@ -256,8 +270,11 @@ export default class Validator {
 
                     matcher = "";
                     for (const validator of generator) {
-                        const cfValue = validator()
-                            .toString().match(/\^(.+)\$/)[1];
+                        const cfMatcher = validator().toString();
+                        const [cfValue] = cfMatcher.match(/\^(.+)\$/) || [];
+                        if (!cfValue) {
+                            throw new Error(`Unable to handle [${cfMatcher}]`);
+                        }
                         matcher += `(?:${cfValue})`;
                     }
                     // Final addition of CheckDigit
@@ -278,10 +295,9 @@ export default class Validator {
         const SEPARATOR_SET: string = "[' ]";
         const ANY_LETTER: string = `(?:${LETTER_SET}+${SEPARATOR_SET}?)`;
         let matcher: string = `${ANY_LETTER}+`;
-        if ((/^[A-Z]{1,3}/iu).test(codiceFiscale)) {
+        if (codiceFiscale && (/^[A-Z]{1,3}/iu).test(codiceFiscale)) {
             const surnameCf: string = codiceFiscale.substr(0, 3);
-            const diacriticizer = (matchingChars) => (matchingChars || "")
-                .split("")
+            const diacriticizer = (matchingChars: string) => matchingChars.split("")
                 .map((char) => `[${diacriticRemover.insensitiveMatcher[char]}]`);
 
             const [cons, vow] = [
@@ -331,8 +347,8 @@ export default class Validator {
      * @param codiceFiscale Partial or complete CF to parse
      * @return Generic or specific regular expression
      */
-    public static firstname(codiceFiscale: string): RegExp {
-        if (new RegExp(`^[A-Z]{3}[${CONSONANT_LIST}]{3}`, "iu").test(codiceFiscale)) {
+    public static firstname(codiceFiscale?: string): RegExp {
+        if (codiceFiscale && new RegExp(`^[A-Z]{3}[${CONSONANT_LIST}]{3}`, "iu").test(codiceFiscale)) {
             const ANY_LETTER: string = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/ui)}]`;
 
             const nameCf: string = codiceFiscale.substr(3, 3);
@@ -356,10 +372,10 @@ export default class Validator {
      * @param codiceFiscale Partial or complete CF to parse
      * @return Generic or specific regular expression
      */
-    public static date(codiceFiscale: string): RegExp {
+    public static date(codiceFiscale?: string): RegExp {
         let matcher: string = ISO8601_DATE_TIME;
         if (codiceFiscale) {
-            const parsedDate: Date = Parser.cfToBirthDate(codiceFiscale);
+            const parsedDate = Parser.cfToBirthDate(codiceFiscale);
             if (parsedDate) {
                 const dateIso8601: string = parsedDate.toJSON();
                 if (moment().diff(moment(parsedDate), "y") < 50) {
@@ -382,8 +398,8 @@ export default class Validator {
      * @param codiceFiscale Partial or complete CF to parse
      * @return Generic or specific regular expression
      */
-    public static gender(codiceFiscale: string): RegExp {
-        const parsedGender: string = Parser.cfToGender(codiceFiscale);
+    public static gender(codiceFiscale?: string): RegExp {
+        const parsedGender = codiceFiscale && Parser.cfToGender(codiceFiscale);
         const matcher: string = parsedGender || `[${Gender.toArray().join("")}]`;
         return this.isolatedInsensitiveTailor(matcher);
     }
@@ -393,9 +409,9 @@ export default class Validator {
      * @param codiceFiscale Partial or complete CF to parse
      * @return Generic or specific regular expression
      */
-    public static place(codiceFiscale: string): RegExp {
+    public static place(codiceFiscale?: string): RegExp {
         let matcher: string = ".+";
-        const parsedPlace: BelfiorePlace = Parser.cfToBirthPlace(codiceFiscale);
+        const parsedPlace = codiceFiscale && Parser.cfToBirthPlace(codiceFiscale);
 
         if (parsedPlace) {
             const nameMatcher: string = parsedPlace.name.replace(/./gu, (c) => diacriticRemover[c] === c ? c : `[${c}${diacriticRemover[c]}]`);
@@ -423,6 +439,10 @@ export default class Validator {
             return false;
         }
         return true;
+    }
+
+    public static deomocode(omocode: string): string {
+        return omocode.replace(/\d/gu, (n: any) => `[${n}${Omocodes[n]}]`);
     }
 
     private static isolatedInsensitiveTailor(matcher: string): RegExp {
