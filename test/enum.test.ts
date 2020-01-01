@@ -17,7 +17,7 @@ describe("CodiceFiscaleUtils:Enums", () => {
             GenderWeight.M.should.be.equal(0);
         });
         it("Should return M", () => {
-            for (let i = 1; i < 32; i++) {
+            for (let i = 0; i < 32; i++) {
                 expect(Gender.getGender(i)).to.be.equal("M");
             }
         });
@@ -25,16 +25,14 @@ describe("CodiceFiscaleUtils:Enums", () => {
             GenderWeight.F.should.be.equal(40);
         });
         it("Should return F", () => {
-            for (let i = 41; i < 72; i++) {
+            for (let i = 40; i < 72; i++) {
                 expect(Gender.getGender(i)).to.be.equal("F");
             }
         });
         it("Should return null", () => {
-            expect(Gender.getGender(0)).to.be.null;
             for (let i = 32; i < 40; i++) {
                 expect(Gender.getGender(i)).to.be.null;
             }
-            expect(Gender.getGender(40)).to.be.null;
             for (let i = 72; i < 100; i++) {
                 expect(Gender.getGender(i)).to.be.null;
             }

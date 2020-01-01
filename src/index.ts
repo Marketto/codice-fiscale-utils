@@ -8,6 +8,7 @@ import * as DateMatcher from "./const/date-matcher.const";
 import * as VALIDATOR from "./const/matcher.const";
 import * as Matcher from "./const/matcher.const";
 import BirthMonth from "./enums/birth-month.enum";
+import CRC from "./enums/crc.enum";
 import Omocodes from "./enums/omocodes.enum";
 import Genders from "./types/genders.type";
 
@@ -16,6 +17,7 @@ export {
     BelfioreConnector,
     BirthMonth,
     CheckDigitizer,
+    CRC,
     DATE_VALIDATOR,
     DateMatcher,
     Gender,

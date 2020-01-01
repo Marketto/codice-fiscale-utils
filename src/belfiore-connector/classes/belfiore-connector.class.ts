@@ -30,7 +30,7 @@ export default class BelfioreConnector {
             for (const sourceData of resource.data) {
                 const index: number = this.binaryfindIndex(sourceData.belfioreCode, base32name);
                 if (index >= 0) {
-                    return this.locationByIndex(sourceData, index, resource.config);
+                    return resource.locationByIndex(sourceData, index);
                 }
             }
         }
@@ -151,71 +151,6 @@ export default class BelfioreConnector {
         return list.substring(startIndex, endIndex);
     }
 
-    /**
-     * Retrieve location for the given index in the given subset
-     * @param resourceData concatenation of names
-     * @param index target name index
-     * @returns location
-     */
-    private static locationByIndex(
-        resourceData: IBelfioreDbData,
-        index: number,
-        config: BelfioreConnectorConfig,
-    ): BelfiorePlace | null {
-        const belfioreIndex = index * 3;
-        if (resourceData.belfioreCode.length - belfioreIndex < 3) {
-            return null;
-        }
-        const belFioreInt = parseInt(resourceData.belfioreCode.substr(belfioreIndex, 3), 32);
-        const belfioreCode = this.belfioreFromInt(belFioreInt);
-        if (config.codeMatcher && !config.codeMatcher.test(belfioreCode)) {
-            return null;
-        }
-        const code = resourceData.provinceOrCountry.substr(index * 2, 2);
-        if (config.province && config.province !== code) {
-            return null;
-        }
-
-        const dateIndex = index * 4;
-        const creationDate = this.decodeDate((resourceData.creationDate || "")
-            .substr(dateIndex, 4) || "0").startOf("day");
-        const expirationDate = this.decodeDate((resourceData.expirationDate || "")
-            .substr(dateIndex, 4) || "2qn13").endOf("day");
-        if (
-            config.activeDate &&
-            (
-                resourceData.creationDate && config.activeDate.isBefore(creationDate, "day") ||
-                resourceData.expirationDate && config.activeDate.isAfter(expirationDate, "day")
-            )
-        ) {
-            return null;
-        }
-        const name = this.nameByIndex(resourceData.name, index);
-        const isCountry = belfioreCode[0] === "Z";
-        const licenseIndex = parseInt(resourceData.dataSource, 32)
-            .toString(2).padStart(resourceData.belfioreCode.length * 2 / 3, "0")
-            .substr(index * 2, 2);
-        const dataSource = config.licenses[parseInt(licenseIndex, 2)];
-
-        const location: IBelfioreCommonPlace = {
-            belfioreCode,
-            creationDate: creationDate.toDate(),
-            dataSource,
-            expirationDate: expirationDate.toDate(),
-            name,
-        };
-        if (isCountry) {
-            return {
-                ...location,
-                iso3166: code,
-            } as IBelfioreCountry;
-        }
-        return {
-            ...location,
-            province: code,
-        } as IBelfioreCity;
-    }
-
     private data: IBelfioreDbData[];
     private licenses: IBelfioreDbLicense[];
     private sources: string[];
@@ -285,13 +220,13 @@ export default class BelfioreConnector {
 
     /**
      * Returns a Belfiore instance filtered by the given province
-     * @param {string} code Province Code (2 A-Z char)
-     * @returns {BelfioreConnector} Belfiore instance filtered by province code
+     * @param code Province Code (2 A-Z char)
+     * @returns Belfiore instance filtered by province code
      * @public
      */
-    public byProvince(code: string): BelfioreConnector | undefined {
-        if (typeof code !== "string" || (/^[A-Z]{2}$/u).test(code)) {
-            return;
+    public byProvince(code: string): BelfioreConnector {
+        if (typeof code !== "string" || !(/^[A-Z]{2}$/u).test(code)) {
+            throw new Error("Province code must be a 2 char code");
         }
         return new BelfioreConnector({
             ...this.config,
@@ -360,18 +295,82 @@ export default class BelfioreConnector {
     }
 
     private* scanData(name?: string | RegExp): Generator<BelfiorePlace, null, void> {
-        const constructor = this.constructor as (typeof BelfioreConnector);
         const nameMatcher = typeof name === "string" ? new RegExp(name, "i") : name;
 
         for (const sourceData of this.data) {
             const dataSourceScan = this.scanDataSourceIndex(sourceData, nameMatcher);
             for (const index of dataSourceScan) {
-                const parsedPlace: BelfiorePlace | null = constructor.locationByIndex(sourceData, index, this.config);
+                const parsedPlace: BelfiorePlace | null = this.locationByIndex(sourceData, index);
                 if (parsedPlace) {
                     yield parsedPlace;
                 }
             }
         }
         return null;
+    }
+
+    /**
+     * Retrieve location for the given index in the given subset
+     * @param resourceData concatenation of names
+     * @param index target name index
+     * @returns location
+     */
+    private locationByIndex(
+        resourceData: IBelfioreDbData,
+        index: number,
+    ): BelfiorePlace | null {
+        const belfioreIndex = index * 3;
+        if (resourceData.belfioreCode.length - belfioreIndex < 3) {
+            return null;
+        }
+        const belFioreInt = parseInt(resourceData.belfioreCode.substr(belfioreIndex, 3), 32);
+        const belfioreCode = (this.constructor as typeof BelfioreConnector).belfioreFromInt(belFioreInt);
+        const code = resourceData.provinceOrCountry.substr(index * 2, 2);
+        if (
+            this.province && this.province !== code ||
+            this.codeMatcher && !this.codeMatcher.test(belfioreCode)
+        ) {
+            return null;
+        }
+
+        const constructor = this.constructor as typeof BelfioreConnector;
+        const dateIndex = index * 4;
+        const creationDate = constructor.decodeDate((resourceData.creationDate || "")
+            .substr(dateIndex, 4) || "0").startOf("day");
+        const expirationDate = constructor.decodeDate((resourceData.expirationDate || "")
+            .substr(dateIndex, 4) || "2qn13").endOf("day");
+        if (
+            this.activeDate &&
+            (
+                resourceData.creationDate && this.activeDate.isBefore(creationDate, "day") ||
+                resourceData.expirationDate && this.activeDate.isAfter(expirationDate, "day")
+            )
+        ) {
+            return null;
+        }
+        const name = constructor.nameByIndex(resourceData.name, index);
+        const licenseIndex = parseInt(resourceData.dataSource, 32)
+            .toString(2).padStart(resourceData.belfioreCode.length * 2 / 3, "0")
+            .substr(index * 2, 2);
+        const dataSource = this.licenses[parseInt(licenseIndex, 2)];
+
+        const location: IBelfioreCommonPlace = {
+            belfioreCode,
+            creationDate: creationDate.toDate(),
+            dataSource,
+            expirationDate: expirationDate.toDate(),
+            name,
+        };
+        const isCountry = belfioreCode[0] === "Z";
+        if (isCountry) {
+            return {
+                ...location,
+                iso3166: code,
+            } as IBelfioreCountry;
+        }
+        return {
+            ...location,
+            province: code,
+        } as IBelfioreCity;
     }
 }

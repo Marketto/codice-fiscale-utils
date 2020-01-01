@@ -52,7 +52,7 @@ export default async () => {
             });
             /*
             it ("Should throw an error providing invalid day", () => {
-                expect(() => Validator.cfDayGender(-3)).to.throw("[Validator.cfDayGender] Provided day is not valid");
+                expect(() => Validator.cfDayGender(-3)).to.throw("Provided day is not valid");
             });
             */
         });

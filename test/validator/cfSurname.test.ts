@@ -68,10 +68,10 @@ export default async () => {
                 Validator.cfSurname("U").test("LUX").should.be.ok;
             });
             it ("Should throw error for cf surname with special chars", () => {
-                expect(() => Validator.cfSurname("@ieie")).to.throw("[Validator.cfSurname] Provided surname is not valid, only letters, diacritics and apostrophe allowed");
+                expect(() => Validator.cfSurname("@ieie")).to.throw("Provided surname is not valid, only letters, diacritics and apostrophe allowed");
             });
             it ("Should throw error for cf surname with double apostrophe", () => {
-                expect(() => Validator.cfSurname("D''Aje")).to.throw("[Validator.cfSurname] Provided surname is not valid, only letters, diacritics and apostrophe allowed");
+                expect(() => Validator.cfSurname("D''Aje")).to.throw("Provided surname is not valid, only letters, diacritics and apostrophe allowed");
             });
         });
     });

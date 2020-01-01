@@ -194,17 +194,10 @@ export default class Validator {
                 };
                 matcher = `(?:${Gender.toArray().map(parseDeomocode).join("|")})`;
             }
-        } else {
-            switch (gender) {
-            case "M":
-                matcher = MALE_FULL_DATE_MATCHER;
-                break;
-            case "F":
-                matcher = FEMALE_FULL_DATE_MATCHER;
-                break;
-            default:
-                throw new CfuError(INVALID_GENDER);
-            }
+        } else if (gender === "M") {
+            matcher = MALE_FULL_DATE_MATCHER;
+        } else if (gender === "F") {
+            matcher = FEMALE_FULL_DATE_MATCHER;
         }
         return this.isolatedInsensitiveTailor(matcher);
     }
@@ -213,29 +206,27 @@ export default class Validator {
      * @param placeName Optional place name to generate validation regexp
      * @return CF place matcher
      */
-    public static cfPlace(placeName?: string | null): RegExp;
     /**
      * @param date Optional date to generate validation regexp
      * @param placeName Optional place name to generate validation regexp
      * @return CF place matcher
      */
-    public static cfPlace(birthDate: MultiFormatDate | null, placeName?: string | null): RegExp;
+    public static cfPlace(placeName?: string | null): RegExp;
+    public static cfPlace(birthDate?: MultiFormatDate | null, placeName?: string | null): RegExp;
     public static cfPlace(birthDateOrName?: MultiFormatDate | null, placeName?: string | null): RegExp {
         let matcher = BELFIORE_CODE_MATCHER;
         if (birthDateOrName) {
             const birthDate: Moment = moment(birthDateOrName);
             const validBD: boolean = birthDate.isValid();
-            let place: string;
             if (validBD && placeName) {
-                place = placeName;
+                const place: string = placeName;
+                const parsedPlace = Parser.placeToCf(birthDate, place);
+                matcher = this.deomocode(parsedPlace || "");
             } else if (!validBD && typeof birthDateOrName === "string") {
-                place = birthDateOrName;
-            } else {
-                throw new CfuError(INVALID_PLACE_NAME);
+                const place: string = birthDateOrName;
+                const parsedPlace = Parser.placeToCf(place);
+                matcher = this.deomocode(parsedPlace || "");
             }
-
-            const parsedPlace = Parser.placeToCf(place);
-            matcher = this.deomocode(parsedPlace || "");
         }
         return this.isolatedInsensitiveTailor(matcher);
     }
@@ -271,7 +262,7 @@ export default class Validator {
                     matcher = "";
                     for (const validator of generator) {
                         const cfMatcher = validator().toString();
-                        const [cfValue] = cfMatcher.match(/\^(.+)\$/) || [];
+                        const [, cfValue] = cfMatcher.match(/\^(.+)\$/) || [];
                         if (!cfValue) {
                             throw new Error(`Unable to handle [${cfMatcher}]`);
                         }
@@ -303,7 +294,7 @@ export default class Validator {
             const [cons, vow] = [
                 `^[${CONSONANT_LIST}]{1,3}`,
                 `[${VOWEL_LIST}]{1,3}`,
-            ].map((charMatcher) => diacriticizer((surnameCf.match(new RegExp(charMatcher, "ig")) || [])[0]));
+            ].map((charMatcher) => diacriticizer((surnameCf.match(new RegExp(charMatcher, "ig")) || [])[0] || ""));
 
             const diacriticsVowelList: string = VOWEL_LIST + diacriticRemover.matcherBy(new RegExp(`^[${VOWEL_LIST}]$`, "ui"));
             const diacriticsVowelMatcher: string = `[${diacriticsVowelList}]`;

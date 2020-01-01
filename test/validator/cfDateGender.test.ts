@@ -62,7 +62,7 @@ export default async () => {
             });
 
             it ("Should throw an error providing invalid date", () => {
-                expect(() => Validator.cfDateGender("-3")).to.throw("[Validator.cfDateGender] Provided date is not valid");
+                expect(() => Validator.cfDateGender("-3")).to.throw("Provided date is not valid");
             });
         });
     });

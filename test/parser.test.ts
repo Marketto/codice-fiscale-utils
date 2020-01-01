@@ -1,4 +1,4 @@
-import tes from "./parser/cfDecode.test";
+import cfDecode from "./parser/cfDecode.test";
 import cfDeomocode from "./parser/cfDeomocode.test";
 import cfToBirthDate from "./parser/cfToBirthDate.test";
 import cfToGender from "./parser/cfToGender.test";
@@ -23,7 +23,7 @@ describe("CodiceFiscaleUtils:Parser", () => {
         cfToName(),
         cfToGender(),
         cfToBirthDate(),
-        tes(),
+        cfDecode(),
     ]));
 
     describe("methods to CF", () => Promise.all([
