@@ -126,7 +126,7 @@ export default class Parser {
             return null;
         }
 
-        const birthMonthCode: string = codiceFiscale.substr(8, 1);
+        const birthMonthCode: string = codiceFiscale.substr(8, 1).toUpperCase();
         const birthMonth = BirthMonth[birthMonthCode as any];
         if (typeof birthMonth !== "number" || birthMonth < 0 || birthMonth > 11) {
             return null;
@@ -257,9 +257,9 @@ export default class Parser {
             return null;
         }
 
-        /*if (!(/^[A-Z "]+$/iu).test(noDiacriticsSurname)) {
+        if (!(/^[A-Z "]+$/iu).test(diacriticRemover.replace(surname))) {
             return null;
-        }*/
+        }
 
         const consonants = this.charExtractor(surname, CONSONANT_LIST);
         const vowels = this.charExtractor(surname, VOWEL_LIST);
@@ -416,33 +416,29 @@ export default class Parser {
     public static placeToCf(cityOrCountryName: string, provinceId?: string): string | null;
     public static placeToCf(birthDate: MultiFormatDate, cityOrCountryName: string, provinceId?: string): string | null;
     public static placeToCf(dateOrName: MultiFormatDate, nameOrProvince?: string, provinceId?: string): string | null {
-        if (nameOrProvince) {
-            const birthDate: Date | null = this.parseDate(dateOrName);
-            let name: string;
-            let province: string | undefined;
-            if (!birthDate && typeof dateOrName === "string") {
-                name = dateOrName;
-                province = nameOrProvince;
-            } else {
-                name = nameOrProvince;
-                province = provinceId;
-            }
-            if (!name) {
-                throw new Error("placeToCf accepts only (string, [string]) or (string | Date | Moment, string, [string])");
-            }
-
-            let placeFinder: BelfioreConnector | undefined = Belfiore;
-            if (province) {
-                placeFinder = placeFinder.byProvince(province);
-            }
-            if (birthDate && placeFinder) {
-                placeFinder = placeFinder.active(birthDate);
-            }
-            if (placeFinder) {
-                const foundPlace: BelfiorePlace | null = placeFinder.findByName(name);
-                if (foundPlace) {
-                    return foundPlace.belfioreCode;
-                }
+        const birthDate: Date | null = this.parseDate(dateOrName);
+        let name: string;
+        let province: string | undefined;
+        if (!birthDate && typeof dateOrName === "string") {
+            name = dateOrName;
+            province = nameOrProvince;
+        } else if (nameOrProvince) {
+            name = nameOrProvince;
+            province = provinceId;
+        } else {
+            return null;
+        }
+        let placeFinder: BelfioreConnector | undefined = Belfiore;
+        if (province) {
+            placeFinder = placeFinder.byProvince(province);
+        }
+        if (birthDate && placeFinder) {
+            placeFinder = placeFinder.active(birthDate);
+        }
+        if (placeFinder) {
+            const foundPlace: BelfiorePlace | null = placeFinder.findByName(name);
+            if (foundPlace) {
+                return foundPlace.belfioreCode;
             }
         }
         return null;
@@ -496,7 +492,7 @@ export default class Parser {
 
     private static charOmocode(char: string, offset: number): string {
         if ((/^[A-Z]$/giu).test(char) && this.checkBitmap(offset)) {
-            return Omocodes[char as any];
+            return Omocodes[char.toUpperCase() as any];
         }
 
         return char;

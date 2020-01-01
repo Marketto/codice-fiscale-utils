@@ -53,7 +53,7 @@ export default async () => {
                     .test("VRNGNY97A65C351V").should.be.true;
             });
             it("Should match VRNGNY97A65C351V providing invalid surname", () => {
-                expect(() => Validator.codiceFiscale({ surname: "V@3" })).to.throw("[Validator.cfSurname] Provided surname is not valid, only letters, diacritics and apostrophe allowed");
+                expect(() => Validator.codiceFiscale({ surname: "V@3" })).to.throw("Provided surname is not valid, only letters, diacritics and apostrophe allowed");
             });
         });
 

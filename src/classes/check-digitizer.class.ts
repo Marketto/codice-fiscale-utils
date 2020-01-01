@@ -10,24 +10,22 @@ class CheckDigitizer {
      */
     public static* evaluateChar(partialCF: string = ""): Generator<number> {
         if (typeof partialCF === "string" && partialCF.length) {
-            for (const idx in partialCF.split("")) {
-                if (idx) {
-                    const index: number = parseInt(idx, 10);
-                    if (!isNaN(index) && index) {
-                        const char: string = partialCF[index].toUpperCase();
-                        const isNumber: boolean = (/^\d$/u).test(char);
-                        const isOdd: boolean = !(index % 2);
-// Odd/Even are shifted/swapped (array starts from 0, "Agenzia delle Entrate" documentation counts the string from 1)
-                        if (index % 2) {
-                            const charCodeOffset = isNumber ? 48 : 65;
-                            // Odd positions
-                            yield char.charCodeAt(0) - charCodeOffset;
-                        } else {
-                            const enumValue: any = isNumber ?
-                                String.fromCharCode(parseInt(char, 10) + 65) : char;
-                            yield parseInt(CRC[enumValue], 10);
-                        }
-                    }
+            for (let index = 0; index < partialCF.length; index++) {
+                let char: string = partialCF[index].toUpperCase();
+                const isNumber: boolean = (/^\d$/u).test(char);
+                if (isNumber) {
+                    // Numbers have always (odd/even) the same values of corresponding letters (0-9 => A-J)
+                    char = String.fromCharCode(parseInt(char, 10) + this.CHAR_OFFSET);
+                }
+                // Odd/Even are shifted/swapped
+                // array starts from 0, "Agenzia delle Entrate" documentation counts the string from 1
+                const isOdd: boolean = !(index % 2); // Odd according to documentation
+                if (isOdd) {
+                    // Odd positions
+                    yield parseInt(CRC[char as any], 10);
+                } else {
+                    // Even positions
+                    yield char.charCodeAt(0) - this.CHAR_OFFSET;
                 }
             }
         }
@@ -48,6 +46,8 @@ class CheckDigitizer {
         }
         return null;
     }
+
+    private static CHAR_OFFSET: number = 65;
 }
 
 export default CheckDigitizer;

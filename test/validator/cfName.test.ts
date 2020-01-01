@@ -77,7 +77,7 @@ export default async () => {
                 Validator.cfName("U").test("UXX").should.not.be.ok;
             });
             it ("Should throw error for cd surname with special chars", () => {
-                expect(() => Validator.cfName("@ieie")).to.throw("[Validator.cfName] Provided name is not valid, only letters, diacritics and apostrophe allowed");
+                expect(() => Validator.cfName("@ieie")).to.throw("Provided name is not valid, only letters, diacritics and apostrophe allowed");
             });
         });
     });
