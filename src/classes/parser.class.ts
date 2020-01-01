@@ -7,6 +7,7 @@ import MultiFormatDate from "../belfiore-connector/types/multi-format-date.type"
 import { ISO8601_SHORT_DATE } from "../const/date-matcher.const";
 import { CONSONANT_LIST, VOWEL_LIST } from "../const/matcher.const";
 import BirthMonth from "../enums/birth-month.enum";
+import GenderWeight from "../enums/gender-weight.enum";
 import Omocodes from "../enums/omocodes.enum";
 import IPersonalInfo from "../interfaces/personal-info.interface";
 import DateDay from "../types/date-day.type";
@@ -18,6 +19,10 @@ import Gender from "./gender.class";
 const diacriticRemover = new DiacriticRemover();
 
 export default class Parser {
+    /**
+     * Default omocode bitmap
+     */
+    public static OMOCODE_BITMAP: number = 0b0111011011000000;
 
     /**
      * Parse surname information
@@ -28,7 +33,7 @@ export default class Parser {
         if (codiceFiscale && codiceFiscale.length < 7) {
             return codiceFiscale;
         }
-        const charReplacer = (char, position) => this.charOmocode(char, position);
+        const charReplacer = (char: string, position: number) => this.charOmocode(char, position);
         return codiceFiscale.replace(/[\dA-Z]/giu, charReplacer);
     }
 
@@ -121,7 +126,8 @@ export default class Parser {
             return null;
         }
 
-        const birthMonth = BirthMonth[codiceFiscale.substr(8, 1)];
+        const birthMonthCode: string = codiceFiscale.substr(8, 1);
+        const birthMonth = BirthMonth[birthMonthCode as any];
         if (typeof birthMonth !== "number" || birthMonth < 0 || birthMonth > 11) {
             return null;
         }
@@ -189,7 +195,7 @@ export default class Parser {
             return null;
         }
         const belfioreCode: string = codiceFiscale.substr(11, 4).toUpperCase();
-        const birthPlace: BelfiorePlace = Belfiore[belfioreCode];
+        const birthPlace: BelfiorePlace | undefined = Belfiore[belfioreCode];
         if (!birthPlace) {
             return null;
         }
@@ -219,21 +225,26 @@ export default class Parser {
      * @returns Decoded CF Info
      */
     public static cfDecode(fiscalCode: string): IPersonalInfo {
-        const year = this.cfToBirthYear(fiscalCode);
-        const month = this.cfToBirthMonth(fiscalCode);
-        const day = this.cfToBirthDay(fiscalCode);
-        return {
-            name: this.cfToName(fiscalCode),
-            surname: this.cfToSurname(fiscalCode),
+        const year = this.cfToBirthYear(fiscalCode) || undefined;
+        const month = this.cfToBirthMonth(fiscalCode) || undefined;
+        const day = this.cfToBirthDay(fiscalCode) || undefined;
+        const personalInfo: IPersonalInfo = {
+            name: this.cfToName(fiscalCode) || undefined,
+            surname: this.cfToSurname(fiscalCode) || undefined,
 
-            date: new Date(Date.UTC(year, month, day)),
             day,
             month,
             year,
 
-            gender: this.cfToGender(fiscalCode),
+            gender: this.cfToGender(fiscalCode) || undefined,
             place: (this.cfToBirthPlace(fiscalCode) || {}).name,
         };
+
+        if (year && month && day) {
+            personalInfo.date = new Date(Date.UTC(year, month, day));
+        }
+
+        return personalInfo;
     }
 
     /**
@@ -241,8 +252,8 @@ export default class Parser {
      * @param surname Partial or complete CF to parse
      * @returns partial cf
      */
-    public static surnameToCf(surname: string): string | null {
-        if ((surname || "").trim().length < 2) {
+    public static surnameToCf(surname?: string | null): string | null {
+        if (!surname || (surname || "").trim().length < 2) {
             return null;
         }
 
@@ -267,8 +278,8 @@ export default class Parser {
      * @param name Partial or complete CF to parse
      * @returns partial cf
      */
-    public static nameToCf(name: string): string | null {
-        if ((name || "").trim().length < 2) {
+    public static nameToCf(name?: string | null): string | null {
+        if (!name || (name || "").trim().length < 2) {
             return null;
         }
         const consonants = this.charExtractor(name, CONSONANT_LIST);
@@ -321,7 +332,7 @@ export default class Parser {
             return null;
         }
 
-        const genderValue = Gender[gender];
+        const genderValue = GenderWeight[gender as any];
         if (typeof genderValue !== "number") {
             return null;
         }
@@ -335,11 +346,15 @@ export default class Parser {
      * @param day 1,2 digits Day 1..31
      * @returns Date or null if provided year/month/day are not valid
      */
-    public static yearMonthDayToDate(year: number, month: DateMonth = 0, day: DateDay = 1): Date | null {
-        if ([year, month, day].some((param) => typeof param !== "number") || year < 1861) {
+    public static yearMonthDayToDate(
+        year: number | null | undefined,
+        month: DateMonth | null | undefined = 0,
+        day: DateDay | null | undefined = 1,
+    ): Date | null {
+        if (!year || year < 1861 || [month, day].some((param) => typeof param !== "number") ) {
             return null;
         }
-        const date = moment(Date.UTC(year, month, day));
+        const date = moment(Date.UTC(year, month || 0, day || 1));
         if (!date.isValid() || date.year() !== year || date.month() !== month || date.date() !== day) {
             return null;
         }
@@ -351,7 +366,7 @@ export default class Parser {
      * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
      * @returns Parsed Date or null if not valid
      */
-    public static parseDate(date: MultiFormatDate): Date | null {
+    public static parseDate(date?: MultiFormatDate | null): Date | null {
         if (!(
             date instanceof Date ||
             date instanceof moment ||
@@ -401,30 +416,34 @@ export default class Parser {
     public static placeToCf(cityOrCountryName: string, provinceId?: string): string | null;
     public static placeToCf(birthDate: MultiFormatDate, cityOrCountryName: string, provinceId?: string): string | null;
     public static placeToCf(dateOrName: MultiFormatDate, nameOrProvince?: string, provinceId?: string): string | null {
-        const birthDate: Date | null = this.parseDate(dateOrName);
-        let name: string;
-        let province: string;
-        if (!birthDate && typeof dateOrName === "string") {
-            name = dateOrName;
-            province = nameOrProvince;
-        } else {
-            name = nameOrProvince;
-            province = provinceId;
-        }
-        if (!name) {
-            throw new Error("placeToCf accepts only (string, [string]) or (string | Date | Moment, string, [string])");
-        }
+        if (nameOrProvince) {
+            const birthDate: Date | null = this.parseDate(dateOrName);
+            let name: string;
+            let province: string | undefined;
+            if (!birthDate && typeof dateOrName === "string") {
+                name = dateOrName;
+                province = nameOrProvince;
+            } else {
+                name = nameOrProvince;
+                province = provinceId;
+            }
+            if (!name) {
+                throw new Error("placeToCf accepts only (string, [string]) or (string | Date | Moment, string, [string])");
+            }
 
-        let placeFinder: BelfioreConnector = Belfiore;
-        if (province) {
-            placeFinder = placeFinder.byProvince(province);
-        }
-        if (birthDate) {
-            placeFinder = placeFinder.active(birthDate);
-        }
-        const foundPlace: BelfiorePlace = placeFinder.findByName(name);
-        if (foundPlace) {
-            return foundPlace.belfioreCode;
+            let placeFinder: BelfioreConnector | undefined = Belfiore;
+            if (province) {
+                placeFinder = placeFinder.byProvince(province);
+            }
+            if (birthDate && placeFinder) {
+                placeFinder = placeFinder.active(birthDate);
+            }
+            if (placeFinder) {
+                const foundPlace: BelfiorePlace | null = placeFinder.findByName(name);
+                if (foundPlace) {
+                    return foundPlace.belfioreCode;
+                }
+            }
         }
         return null;
     }
@@ -446,6 +465,9 @@ export default class Parser {
         place,
     }: IPersonalInfo): string | null {
         const dtParams = this.parseDate(date) || this.yearMonthDayToDate(year, month, day);
+        if (!(dtParams && surname && name && gender && place)) {
+            return null;
+        }
         const generator = [
             () => this.surnameToCf(surname),
             () => this.nameToCf(name),
@@ -467,11 +489,6 @@ export default class Parser {
 
     private static JOLLY_CHAR: string = "*";
 
-    /**
-     * Default omocode bitmap
-     */
-    private static OMOCODE_BITMAP: number = 0b0111011011000000;
-
     private static checkBitmap(offset: number): boolean {
         // tslint:disable-next-line: no-bitwise
         return !!( 2 ** offset & this.OMOCODE_BITMAP);
@@ -479,7 +496,7 @@ export default class Parser {
 
     private static charOmocode(char: string, offset: number): string {
         if ((/^[A-Z]$/giu).test(char) && this.checkBitmap(offset)) {
-            return Omocodes[char];
+            return Omocodes[char as any];
         }
 
         return char;

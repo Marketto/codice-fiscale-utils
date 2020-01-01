@@ -13,6 +13,7 @@ import MultiFormatDate from "../types/multi-format-date.type";
  * Handler for cities and countries Dataset
  */
 export default class BelfioreConnector {
+    [belfioreCode: string]: BelfiorePlace | any;
 
     /**
      * Get Proxy
@@ -241,7 +242,7 @@ export default class BelfioreConnector {
         this.province = province;
         this.sources = sources;
 
-        return new Proxy(this, this.constructor);
+        return new Proxy<BelfioreConnector>(this, this.constructor);
     }
 
     /**

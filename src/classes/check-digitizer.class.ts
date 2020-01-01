@@ -2,7 +2,7 @@ import { PARTIAL_CF } from "../const/matcher.const";
 import CRC from "../enums/crc.enum";
 import CodiceFiscaleCRC from "../types/codice-fiscale-crc.type";
 
-export class CheckDigitizer {
+class CheckDigitizer {
     /**
      * Partial FiscalCode Evaluator
      * @param Partial Fiscal Code to evaluate
@@ -19,11 +19,13 @@ export class CheckDigitizer {
                         const isOdd: boolean = !(index % 2);
 // Odd/Even are shifted/swapped (array starts from 0, "Agenzia delle Entrate" documentation counts the string from 1)
                         if (index % 2) {
+                            const charCodeOffset = isNumber ? 48 : 65;
                             // Odd positions
-                            yield char.charCodeAt(0) - (isNumber ? 48 : 65);
+                            yield char.charCodeAt(0) - charCodeOffset;
                         } else {
-                            // Even positions
-                            yield CRC[isNumber ? String.fromCharCode(parseInt(char, 10) + 65) : char];
+                            const enumValue: any = isNumber ?
+                                String.fromCharCode(parseInt(char, 10) + 65) : char;
+                            yield parseInt(CRC[enumValue], 10);
                         }
                     }
                 }
