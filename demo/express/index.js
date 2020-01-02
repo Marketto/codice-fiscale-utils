@@ -11,7 +11,7 @@ server.param('cf', (req, res, next, codiceFiscale) => {
 });
 
 server.param(['surname', 'name'], (req, res, next, name) => {
-    if (!CodiceFiscaleUtils.Validator.name(name)) {
+    if (!CodiceFiscaleUtils.Validator.firstname(name)) {
         res.status(400).send({error: `The provided ${name} is not a valid name or surname`});
     } else {
         next();
