@@ -4,7 +4,6 @@ import IBelfioreCommonPlace from "../interfaces/belfiore-common-place.interface"
 import IBelfioreCountry from "../interfaces/belfiore-country.interface";
 import IBelfioreDbData from "../interfaces/belfiore-db-data.interface";
 import IBelfioreDbLicense from "../interfaces/belfiore-db-license.interface";
-import IBelfioreDb from "../interfaces/belfiore-db.interface";
 import BelfioreConnectorConfig from "../types/belfiore-connector-config.type";
 import BelfiorePlace from "../types/belfiore-place.type";
 import MultiFormatDate from "../types/multi-format-date.type";
@@ -27,7 +26,7 @@ export default class BelfioreConnector {
                 .toString(32)
                 .padStart(3, "0");
 
-            for (const sourceData of resource.data) {
+            for (const sourceData of resource.data || []) {
                 const index: number = this.binaryfindIndex(sourceData.belfioreCode, base32name);
                 if (index >= 0) {
                     return resource.locationByIndex(sourceData, index);
