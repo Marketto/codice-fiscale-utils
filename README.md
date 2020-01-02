@@ -15,7 +15,7 @@
 [![Blog](https://img.shields.io/badge/blog-marketto-blue.svg)](http://blog.marketto.it)
 [![Buy me a coffee](https://img.shields.io/badge/Ko--fi-donate-blueviolet)](https://ko-fi.com/marketto)
 
-JS utilities to handle Italian Codice Fiscale
+TS utilities to handle Italian Codice Fiscale
 
 ## FAQs?
 1. **Why should I need a library? Can't I use just a RegExp?**
@@ -358,9 +358,9 @@ Validator.surname('AIX').test('Air'); //false
 
 #### Validator.name
 ```javascript
-Validator.name().test('Rossi'); //true
-Validator.name('XYZAIE').test('Aieie'); //true
-Validator.name('XYZAIX').test('Air'); //false
+Validator.firstname().test('Rossi'); //true
+Validator.firstname('XYZAIE').test('Aieie'); //true
+Validator.firstname('XYZAIX').test('Air'); //false
 ```
 
 #### Validator.date
