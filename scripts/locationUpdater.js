@@ -94,7 +94,7 @@ const compressDataMapper = data => data.map(({
     dataSource
 }) => ({
     belfioreCode: belfioreToInt(belfioreCode).toString(32).padStart(3, '0'),
-    name,
+    name: name === _.upperCase(name) ? _.startCase(_.lowerCase(name)) : name,
     creationDate: creationDate ? moment(creationDate).diff(DEFAULT_CREATION_DATE, 'days').toString(32) : undefined,
     expirationDate: expirationDate ? moment(expirationDate).diff(DEFAULT_CREATION_DATE, 'days').toString(32) : undefined,
     provinceOrCountry: province || iso3166alpha2,
