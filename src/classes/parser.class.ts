@@ -228,6 +228,7 @@ export default class Parser {
         const year = this.cfToBirthYear(fiscalCode) || undefined;
         const month = this.cfToBirthMonth(fiscalCode) || undefined;
         const day = this.cfToBirthDay(fiscalCode) || undefined;
+        const place = this.cfToBirthPlace(fiscalCode);
         const personalInfo: IPersonalInfo = {
             name: this.cfToName(fiscalCode) || undefined,
             surname: this.cfToSurname(fiscalCode) || undefined,
@@ -237,7 +238,7 @@ export default class Parser {
             year,
 
             gender: this.cfToGender(fiscalCode) || undefined,
-            place: (this.cfToBirthPlace(fiscalCode) || {}).name,
+            place: place ? place.name : undefined,
         };
 
         if (year && month && day) {
