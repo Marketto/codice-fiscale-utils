@@ -37,13 +37,11 @@ const baseConf = {
 const rollupCjsConf = rollupPluginTs({
     tsconfig: {
         ...tsconfig.compilerOptions,
-        declaration: false,
     },
 });
 const rollupModuleConf = rollupPluginTs({
     tsconfig: {
         ...tsconfig.compilerOptions,
-        declaration: true,
         module: "ESNext",
         target: "ESNext",
     },
@@ -51,7 +49,6 @@ const rollupModuleConf = rollupPluginTs({
 const rollupBrowserConf = rollupPluginTs({
     tsconfig: {
         ...tsconfig.compilerOptions,
-        declaration: false,
         module: "iife",
         namedExports: {},
         target: "ES2015",
