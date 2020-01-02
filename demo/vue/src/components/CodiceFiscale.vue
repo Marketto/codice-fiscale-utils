@@ -110,7 +110,7 @@ export default {
       if(!(this.name || '').length) {
         return null;
       }
-      return CodiceFiscaleUtils.Validator.name(this.cf).test(this.name);
+      return CodiceFiscaleUtils.Validator.firstname(this.cf).test(this.name);
     },
     stateDate() {
       if(!this.date) {

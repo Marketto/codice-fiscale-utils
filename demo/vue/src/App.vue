@@ -1,7 +1,7 @@
 <template>
   <div id="app">
+    <img alt="vue-logo" src="./assets/logo.png">
     <h1>Codice Fiscale Utils</h1>
-    <h2>Vue Demo</h2>
     <CodiceFiscale/>
   </div>
 </template>
