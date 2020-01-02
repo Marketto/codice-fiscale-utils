@@ -23,10 +23,10 @@ describe("CodiceFiscaleUtils:Belfiore", () => {
     describe("Belfiore", () => {
         describe("Belfiore[belfioreCode]", () => {
             it("Should return Rome for H501", () => {
-                Belfiore.H501.name.should.be.equal("ROMA");
+                Belfiore.H501.name.should.be.equalIgnoreCase("ROMA");
             });
             it("Should return Bari for a662", () => {
-                Belfiore.a662.name.should.be.equal("BARI");
+                Belfiore.a662.name.should.be.equalIgnoreCase("BARI");
             });
         });
         describe("Belfiore place", () => {
@@ -55,7 +55,7 @@ describe("CodiceFiscaleUtils:Belfiore", () => {
                 const place = Belfiore.findByName("Roma");
                 expect(place).to.be.ok;
                 if (place) {
-                    place.name.should.be.equal("ROMA");
+                    place.name.should.be.equalIgnoreCase("ROMA");
                 }
             });
         });
@@ -64,7 +64,7 @@ describe("CodiceFiscaleUtils:Belfiore", () => {
     describe("Belfiore.cities", () => {
         describe("Belfiore[belfioreCode]", () => {
             it("Should return Bari for A662", () => {
-                Belfiore.cities.A662.name.should.be.equal("BARI");
+                Belfiore.cities.A662.name.should.be.equalIgnoreCase("BARI");
             });
         });
         describe("Belfiore.cities", () => {
@@ -90,7 +90,7 @@ describe("CodiceFiscaleUtils:Belfiore", () => {
     describe("Belfiore.countries", () => {
         describe("Belfiore[belfioreCode]", () => {
             it("Should return Federazione russa for Z154", () => {
-                Belfiore.countries.Z154.name.should.be.equal("Federazione russa");
+                Belfiore.countries.Z154.name.should.be.equalIgnoreCase("Federazione russa");
             });
         });
     });
@@ -116,13 +116,13 @@ describe("CodiceFiscaleUtils:Belfiore", () => {
     describe("Belfiore.active", () => {
         describe("Belfiore.active()[belfioreCode]", () => {
             it("Should return Bologna for A944", () => {
-                Belfiore.active().A944.name.should.be.equal("BOLOGNA");
+                Belfiore.active().A944.name.should.be.equalIgnoreCase("BOLOGNA");
             });
             it("Should return null for D620 today", () => {
                 expect(Belfiore.active().D620).to.be.not.ok;
             });
             it("Should return FIUME for D620 in 1933", () => {
-                Belfiore.active([1933]).D620.name.should.be.equal("FIUME");
+                Belfiore.active([1933]).D620.name.should.be.equalIgnoreCase("FIUME");
             });
             it("Should throws Error for D620 in 2000", () => {
                 expect(Belfiore.active([2000]).D620).to.be.not.ok;
@@ -135,7 +135,7 @@ describe("CodiceFiscaleUtils:Belfiore", () => {
             });
             it("Should contains D620 (Fiume) passing 1933 as active date", () => {
                 const activeCities = Belfiore.cities.active([1933]);
-                activeCities.D620.name.should.be.equal("FIUME");
+                activeCities.D620.name.should.be.equalIgnoreCase("FIUME");
             });
         });
     });
