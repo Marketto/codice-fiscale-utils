@@ -13,7 +13,7 @@ export default async () => {
                 expect(decoded.month).to.be.equal(3);
                 expect(decoded.day).to.be.equal(28);
                 expect(decoded.gender).to.be.equal("F");
-                expect(decoded.place).to.be.equal("CATANIA");
+                expect(decoded.place).to.be.equalIgnoreCase("CATANIA");
             });
             it("Should return matching infos from MRNMIA02E45L219X", () => {
                 const decoded = Parser.cfDecode("MRNMIA02E45L219X");
@@ -24,7 +24,7 @@ export default async () => {
                 expect(decoded.month).to.be.equal(4);
                 expect(decoded.day).to.be.equal(5);
                 expect(decoded.gender).to.be.equal("F");
-                expect(decoded.place).to.be.equal("TORINO");
+                expect(decoded.place).to.be.equalIgnoreCase("TORINO");
             });
         });
         describe("Lowercase", () => {
@@ -37,7 +37,7 @@ export default async () => {
                 expect(decoded.month).to.be.equal(3);
                 expect(decoded.day).to.be.equal(28);
                 expect(decoded.gender).to.be.equal("F");
-                expect(decoded.place).to.be.equal("CATANIA");
+                expect(decoded.place).to.be.equalIgnoreCase("CATANIA");
             });
             it("Should return matching infos from mrnmia02e45l219x", () => {
                 const decoded = Parser.cfDecode("mrnmia02e45l219x");
@@ -48,7 +48,7 @@ export default async () => {
                 expect(decoded.month).to.be.equal(4);
                 expect(decoded.day).to.be.equal(5);
                 expect(decoded.gender).to.be.equal("F");
-                expect(decoded.place).to.be.equal("TORINO");
+                expect(decoded.place).to.be.equalIgnoreCase("TORINO");
             });
         });
     });
