@@ -1,4 +1,6 @@
 import moment, { Moment } from "moment";
+import generatorWrapper from "../../functions/generator-wrapper.function";
+import IGeneratorWrapper from "../../interfaces/generator-wrapper.interface";
 import IBelfioreCity from "../interfaces/belfiore-city.interface";
 import IBelfioreCommonPlace from "../interfaces/belfiore-common-place.interface";
 import IBelfioreCountry from "../interfaces/belfiore-country.interface";
@@ -183,14 +185,14 @@ export default class BelfioreConnector {
      * Return belfiore places list
      */
     public toArray(): BelfiorePlace[] {
-        return Array.from(this.scanData());
+        return [...this.scanData()] as BelfiorePlace[];
     }
 
     /**
      * Search places matching given name
      */
     public searchByName(name: string): BelfiorePlace[] | null {
-        return name ? Array.from(this.scanData(name)) : null;
+        return name ? [...this.scanData(name)] as BelfiorePlace[] : null;
     }
 
     /**
@@ -273,7 +275,7 @@ export default class BelfioreConnector {
         } as BelfioreConnectorConfig;
     }
 
-    private* scanDataSourceIndex(dataSource: IBelfioreDbData, matcher?: RegExp): Generator<number, -1, void> {
+    private* scanDataSourceIndex(dataSource: IBelfioreDbData, matcher?: RegExp): Generator {
         if (matcher) {
             for (let startIndex = 0, entryIndex = 0; startIndex < dataSource.name.length; entryIndex++) {
                 const endIndex = dataSource.name.indexOf("|", startIndex + 1) + 1 || dataSource.name.length;
@@ -293,12 +295,16 @@ export default class BelfioreConnector {
         return -1;
     }
 
-    private* scanData(name?: string | RegExp): Generator<BelfiorePlace, null, void> {
+    private scanData(name?: string | RegExp): IGeneratorWrapper<BelfiorePlace, null, void> {
+      return generatorWrapper(this.scanDataGenerator(name));
+    }
+    private* scanDataGenerator(name?: string | RegExp): Generator {
         const nameMatcher = typeof name === "string" ? new RegExp(name, "i") : name;
 
         for (const sourceData of this.data) {
             const dataSourceScan = this.scanDataSourceIndex(sourceData, nameMatcher);
-            for (const index of dataSourceScan) {
+            for (let dss = dataSourceScan.next(); !dss.done; dss = dataSourceScan.next()) {
+                const index = dss.value as number;
                 const parsedPlace: BelfiorePlace | null = this.locationByIndex(sourceData, index);
                 if (parsedPlace) {
                     yield parsedPlace;

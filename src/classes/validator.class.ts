@@ -262,7 +262,9 @@ export default class Validator {
                     matcher = "";
                     for (const validator of generator) {
                         const cfMatcher = validator().toString();
-                        const [, cfValue] = cfMatcher.match(/\^(.+)\$/) || [];
+                        const match = cfMatcher.match(/\^(.+)\$/);
+                        const cfValue: string | null | undefined = match && match[1];
+
                         if (!cfValue) {
                             throw new Error(`Unable to handle [${cfMatcher}]`);
                         }
