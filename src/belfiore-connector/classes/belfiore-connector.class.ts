@@ -94,7 +94,10 @@ export default class BelfioreConnector {
     }
 
     private static ITALY_KINGDOM_BIRTHDATE = "1861-01-01";
-    private static BELFIORE_CODE_MATCHER = /^[A-Z]\d{3}$/iu;
+    private static BELFIORE_CODE_MATCHER: RegExp = /^[A-Z]\d{3}$/iu;
+
+    private static CITY_CODE_MATCHER: RegExp = /^[A-Y]\d{3}$/iu;
+    private static COUNTRY_CODE_MATCHER: RegExp = /^Z\d{3}$/iu;
 
     /**
      * Converts int to belfiore code
@@ -178,7 +181,7 @@ export default class BelfioreConnector {
         this.province = province;
         this.sources = sources;
 
-        return new Proxy<BelfioreConnector>(this, this.constructor);
+        return new Proxy<BelfioreConnector>(this, this.constructor as typeof BelfioreConnector);
     }
 
     /**
@@ -186,6 +189,15 @@ export default class BelfioreConnector {
      */
     public toArray(): BelfiorePlace[] {
         return [...this.scanData()] as BelfiorePlace[];
+    }
+
+    public get provinces(): string[] {
+        if (this.province) {
+            return [this.province];
+        } else if (this.codeMatcher !== BelfioreConnector.COUNTRY_CODE_MATCHER) {
+            return this.parseProvinces();
+        }
+        return [];
     }
 
     /**
@@ -225,9 +237,11 @@ export default class BelfioreConnector {
      * @returns Belfiore instance filtered by province code
      * @public
      */
-    public byProvince(code: string): BelfioreConnector {
+    public byProvince(code: string): BelfioreConnector | undefined {
         if (typeof code !== "string" || !(/^[A-Z]{2}$/u).test(code)) {
-            throw new Error("Province code must be a 2 char code");
+            // tslint:disable-next-line: no-console
+            console.warn(new Error("Province code must be a 2 char code"));
+            return;
         }
         return new BelfioreConnector({
             ...this.config,
@@ -242,7 +256,7 @@ export default class BelfioreConnector {
     public get cities(): BelfioreConnector {
         return new BelfioreConnector({
             ...this.config,
-            codeMatcher: /^[A-Y]/u,
+            codeMatcher: BelfioreConnector.CITY_CODE_MATCHER,
             province: undefined,
         });
     }
@@ -253,7 +267,7 @@ export default class BelfioreConnector {
     public get countries(): BelfioreConnector {
         return new BelfioreConnector({
             ...this.config,
-            codeMatcher: /^Z/u,
+            codeMatcher: BelfioreConnector.COUNTRY_CODE_MATCHER,
             province: undefined,
         });
     }
@@ -296,7 +310,7 @@ export default class BelfioreConnector {
     }
 
     private scanData(name?: string | RegExp): IGeneratorWrapper<BelfiorePlace, null, void> {
-      return generatorWrapper(this.scanDataGenerator(name));
+      return generatorWrapper(this.scanDataGenerator(name)) as IGeneratorWrapper<BelfiorePlace, null, void>;
     }
     private* scanDataGenerator(name?: string | RegExp): Generator {
         const nameMatcher = typeof name === "string" ? new RegExp(name, "i") : name;
@@ -329,7 +343,7 @@ export default class BelfioreConnector {
             return null;
         }
         const belFioreInt = parseInt(resourceData.belfioreCode.substr(belfioreIndex, 3), 32);
-        const belfioreCode = (this.constructor as typeof BelfioreConnector).belfioreFromInt(belFioreInt);
+        const belfioreCode = BelfioreConnector.belfioreFromInt(belFioreInt);
         const code = resourceData.provinceOrCountry.substr(index * 2, 2);
         if (
             this.province && this.province !== code ||
@@ -338,11 +352,10 @@ export default class BelfioreConnector {
             return null;
         }
 
-        const constructor = this.constructor as typeof BelfioreConnector;
         const dateIndex = index * 4;
-        const creationDate = constructor.decodeDate((resourceData.creationDate || "")
+        const creationDate = BelfioreConnector.decodeDate((resourceData.creationDate || "")
             .substr(dateIndex, 4) || "0").startOf("day");
-        const expirationDate = constructor.decodeDate((resourceData.expirationDate || "")
+        const expirationDate = BelfioreConnector.decodeDate((resourceData.expirationDate || "")
             .substr(dateIndex, 4) || "2qn13").endOf("day");
         if (
             this.activeDate &&
@@ -353,7 +366,7 @@ export default class BelfioreConnector {
         ) {
             return null;
         }
-        const name = constructor.nameByIndex(resourceData.name, index);
+        const name = BelfioreConnector.nameByIndex(resourceData.name, index);
         const licenseIndex = parseInt(resourceData.dataSource, 32)
             .toString(2).padStart(resourceData.belfioreCode.length * 2 / 3, "0")
             .substr(index * 2, 2);
@@ -377,5 +390,26 @@ export default class BelfioreConnector {
             ...location,
             province: code,
         } as IBelfioreCity;
+    }
+
+    private parseProvinces(): string[] {
+        const provinceList = new Set<string>();
+        for (const sourceData of this.data) {
+            const dataSourceScan = this.scanDataSourceIndex(sourceData);
+            for (let dss = dataSourceScan.next(); !dss.done; dss = dataSourceScan.next()) {
+                const index = dss.value as number;
+                const province = sourceData.provinceOrCountry.substr(index * 2, 2);
+                if (!provinceList.has(province)) {
+                    const belFioreInt = parseInt(sourceData.belfioreCode.substr(index * 3, 3), 32);
+                    const belfioreCode = BelfioreConnector.belfioreFromInt(belFioreInt);
+                    if (BelfioreConnector.CITY_CODE_MATCHER.test(belfioreCode)) {
+                        if (province.trim()) {
+                            provinceList.add(province);
+                        }
+                    }
+                }
+            }
+        }
+        return Array.from(provinceList);
     }
 }
