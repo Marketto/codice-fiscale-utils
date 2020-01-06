@@ -1,28 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Belfiore } from '@marketto/codice-fiscale-utils';
-import { FormControl, Validators, AbstractControl } from '@angular/forms';
+import { Belfiore, BelfioreConnector, Validator, BelfiorePlace, Genders } from '@marketto/codice-fiscale-utils';
+import { FormControl, Validators, AbstractControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { BelfioreConnector } from '../../../../src';
-
-interface IBelfiorePlace {
-    belfioreCode: string;
-    name: string;
-    creationDate: Date;
-    expirationDate: Date;
-    dataSource: {
-      name: string;
-      url: string;
-      license: string;
-      licenseUrl: string;
-      termsAndConditions: string;
-      authors: string;
-    };
-    iso3166?: string;
-    province?: string;
-}
-
-type IGender = 'M' | 'F';
+import CfValidators, { ValidationError } from './validators/cf-vaidators';
+import moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -30,106 +12,135 @@ type IGender = 'M' | 'F';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  public cfFormGroup = new FormGroup ({
+    codiceFiscale: new FormControl('', [
+      Validators.required,
+      Validators.minLength(16),
+      CfValidators.codiceFiscale.format
+    ]),
+    lastName: new FormControl('', [
+      Validators.required,
+      CfValidators.lastName.format,
 
-  public placeControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(2),
-    (control: AbstractControl): { [ key: string ]: any } | null => {
-      if (control.value) {
-        const scopedBelfiore = this.getScopedBelfiore();
-        const valueType = typeof control.value;
-        if (valueType === 'object' && scopedBelfiore[control.value.belfioreCode]) {
-          return null;
+    ]),
+    firstName: new FormControl('', [
+      Validators.required,
+      CfValidators.firstName.format,
+
+    ]),
+    birthDate: new FormControl('', [
+      Validators.required,
+      CfValidators.birthDate.placeMismatch(() => this.cfFormGroup.get('place').value),
+
+    ]),
+    gender: new FormControl('', [
+      Validators.required,
+
+    ]),
+    area: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      CfValidators.birthArea.format,
+      (): null => {
+        if (this.cfFormGroup) {
+          this.cfFormGroup.get('place').reset();
         }
-        if (valueType === 'string') {
-          const place = scopedBelfiore.findByName(control.value);
-          if (place) {
-            control.setValue(place);
-            return  null;
-          }
-        }
+        return null;
       }
-      return { invalidPlace: { value: control.value, area: this.areaControl && this.areaControl.value }};
-    }
-  ]);
+    ]),
+    place: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      CfValidators.birthPlace.exists(() => this.cfFormGroup.get('area').value),
+      CfValidators.birthPlace.dateMismatch(() => this.cfFormGroup.get('birthDate').value),
 
-  public areaControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(2),
-    (control: AbstractControl): { [ key: string ]: any } | null => {
-      return Array.isArray(this.areas) && this.areas.includes(control.value) ? null : { invalidArea: { value: control.value }};
-    },
-    (): null => {
-      this.placeControl.reset({ value: '', disabled: false });
-      return null;
-    }
-  ]);
+    ])
+  }, {
+    validators: [
+      CfValidators.group.cfLastNameMismatch('codiceFiscale', 'lastName'),
+      CfValidators.group.cfFirstNameMismatch('codiceFiscale', 'firstName'),
+      CfValidators.group.cfBirthDateMismatch('codiceFiscale', 'birthDate'),
+      CfValidators.group.cfGenderMismatch('codiceFiscale', 'gender'),
+      CfValidators.group.cfBirthPlaceMismatch('codiceFiscale', 'place'),
+    ]
+  });
 
-  public FOREGIN_COUNTRY = 'Stati Esteri';
-  public cf: string;
-  public firstName: string;
-  public lastName: string;
-  public birthDate: Date;
-  public gender: IGender;
-  public birthPlace: string;
-  private areas: string[];
+  public FOREGIN_COUNTRIES_LABEL = 'Stati esteri';
+  public minDate: Date = moment().subtract(130, 'y').toDate();
+  public maxDate: Date = moment().subtract(1, 'd').toDate();
+  private areas: Array<string | symbol> = [
+    ...Belfiore.provinces,
+    CfValidators.constant.COUNTRIES,
+  ];
   public filteredAreas: Observable<string[]>;
-  public filteredPlaces: Observable<IBelfiorePlace[]>;
-  public birthArea: string;
-
-  constructor() {
-  }
+  public filteredPlaces: Observable<BelfiorePlace[]>;
 
   private getScopedBelfiore(): BelfioreConnector {
-    if (this.areaControl && this.areaControl.value) {
-      const area = this.areaControl.value;
-      if (this.FOREGIN_COUNTRY === area) {
+    if (this.cfFormGroup.controls.area && this.cfFormGroup.controls.area.value) {
+      const area = this.cfFormGroup.controls.area.value;
+      if (area === CfValidators.constant.COUNTRIES) {
         return Belfiore.countries;
       }
-      const areaByProvince = Belfiore.cities.byProvince(area);
-      if (areaByProvince) {
-        return areaByProvince;
+      if (this.areas.includes(area.toUpperCase().trim())) {
+        const areaByProvince = Belfiore.cities.byProvince(area);
+        if (areaByProvince) {
+          return areaByProvince;
+        }
       }
     }
     return Belfiore;
   }
 
-  private loadAreas() {
-    const cities: IBelfiorePlace[] = Belfiore.cities.toArray();
-    const provinceList: string[] = cities.map(({ province }) => province);
-    this.areas = Array.from(new Set(provinceList))
-      .sort().concat(this.FOREGIN_COUNTRY);
+  public displayArea(area: string | symbol): string {
+    if (typeof area === 'string') {
+      return area;
+    } else if (area === CfValidators.constant.COUNTRIES) {
+      return this.FOREGIN_COUNTRIES_LABEL;
+    }
+    return;
   }
 
-  public displayPlace(place: IBelfiorePlace): string {
+  public displayPlace(place: BelfiorePlace): string {
     return place ? place.name.toLowerCase() : undefined;
   }
 
   ngOnInit() {
-    this.loadAreas();
-    this.filteredAreas = this.areaControl.valueChanges
+    this.filteredAreas = this.cfFormGroup.controls.area.valueChanges
       .pipe(
         startWith(''),
         map(value => {
-          if (!value || value !== this.areaControl.value) {
-            this.placeControl.reset({ value: '', disabled: false });
+          /*if (!value || value !== this.cfFormGroup.controls.area.value) {
+            this.cfFormGroup.get('place').reset();
+          }*/
+          if (value === CfValidators.constant.COUNTRIES) {
+            return [CfValidators.constant.COUNTRIES];
+          } else if (typeof value === 'string') {
+            const matcher = new RegExp(`^${value}`, 'i');
+            return this.areas.filter(area => matcher.test(this.displayArea(area)));
           }
-          const matcher = new RegExp(`^${value}`, 'i');
-          return this.areas.filter(area => matcher.test(area));
+          return [];
         })
       );
 
-    this.filteredPlaces = this.placeControl.valueChanges
+    this.filteredPlaces = this.cfFormGroup.controls.place.valueChanges
       .pipe(
         startWith(''),
-        map(value => {
-          if (!this.areaControl || this.areaControl.invalid) {
-            return [];
+        map((value: string | BelfiorePlace) => {
+          if (value) {
+            if (!this.cfFormGroup.controls.area || this.cfFormGroup.controls.area.invalid) {
+              return [];
+            }
+            if (typeof value === 'string') {
+              const matcher = new RegExp(`^${value}`, 'i');
+              return (this.getScopedBelfiore()
+                .searchByName(value) || [])
+                .sort((a, b) => ((matcher.test(a.name) ? 0 : 1) - (matcher.test(b.name) ? 0 : 1)) ||
+                  (a.name > b.name ? -1 : (a.name < b.name ? 1 : 0)));
+            } else if (typeof value === 'object' && value.belfioreCode) {
+              return [this.getScopedBelfiore()[value.belfioreCode]];
+            }
           }
-          const matcher = new RegExp(`^${value}`, 'i');
-          return (this.getScopedBelfiore()
-            .searchByName(value) || [])
-            .sort((a, b) => ((matcher.test(a.name) ? 0 : 1) - (matcher.test(b.name) ? 0 : 1)) || a.name - b.name);
+          return [];
         })
       );
   }
