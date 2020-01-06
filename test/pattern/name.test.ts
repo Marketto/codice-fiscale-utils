@@ -1,44 +1,44 @@
-import { Validator } from "../../src/";
+import { Pattern } from "../../src/";
 import { expect } from "../utils";
 
 export default async () => {
     describe("name", () => {
-        describe("Generic Validator", () => {
-            const nameValidator = Validator.firstname();
+        describe("Generic Pattern", () => {
+            const namePattern = Pattern.firstname();
             it ("Should validate name Kristersen", () => {
-                nameValidator.test("Kristersen").should.be.ok;
+                namePattern.test("Kristersen").should.be.ok;
             });
             it ("Should validate name Rossi", () => {
-                nameValidator.test("Rossi").should.be.ok;
+                namePattern.test("Rossi").should.be.ok;
             });
             it ("Should validate name Ao", () => {
-                nameValidator.test("Ao").should.be.ok;
+                namePattern.test("Ao").should.be.ok;
             });
             it ("Should validate name Tést", () => {
-                nameValidator.test("Tést").should.be.ok;
+                namePattern.test("Tést").should.be.ok;
             });
         });
         describe("Specific validator", () => {
             it ("Should validate name Marco for XYZMRC", () => {
-                Validator.firstname("XYZMRC").test("Marco").should.be.ok;
+                Pattern.firstname("XYZMRC").test("Marco").should.be.ok;
             });
             it ("Should validate name Alex for XYZLXA", () => {
-                Validator.firstname("XYZLXA").test("Alex").should.be.ok;
+                Pattern.firstname("XYZLXA").test("Alex").should.be.ok;
             });
             it ("Should validate name Aieie for XYZAIE", () => {
-                Validator.firstname("XYZAIE").test("Aieie").should.be.ok;
+                Pattern.firstname("XYZAIE").test("Aieie").should.be.ok;
             });
             it ("Should validate name Ai for XYZAIX", () => {
-                Validator.firstname("XYZAIX").test("Ai").should.be.ok;
+                Pattern.firstname("XYZAIX").test("Ai").should.be.ok;
             });
             it ("Should validate name U for XYZUXX", () => {
-                Validator.firstname("XYZUXX").test("U").should.be.ok;
+                Pattern.firstname("XYZUXX").test("U").should.be.ok;
             });
             it ("Should validate name Vàlidàtòr for XYZVLD", () => {
-                Validator.firstname("XYZVDT").test("Vàlidàtòr").should.be.ok;
+                Pattern.firstname("XYZVDT").test("Vàlidàtòr").should.be.ok;
             });
             it ("Should not validate name Air for XYZAIX", () => {
-                Validator.firstname("XYZAIX").test("Air").should.be.false;
+                Pattern.firstname("XYZAIX").test("Air").should.be.false;
             });
         });
     });

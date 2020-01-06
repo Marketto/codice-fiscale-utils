@@ -1,7 +1,8 @@
-import { Belfiore, BelfioreConnector } from "./belfiore-connector/belfiore";
+import { Belfiore, BelfioreConnector, BelfiorePlace } from "./belfiore-connector/belfiore";
 import CheckDigitizer from "./classes/check-digitizer.class";
 import Gender from "./classes/gender.class";
 import Parser from "./classes/parser.class";
+import Pattern from "./classes/pattern.class";
 import Validator from "./classes/validator.class";
 import * as DATE_VALIDATOR from "./const/date-matcher.const";
 import * as DateMatcher from "./const/date-matcher.const";
@@ -11,9 +12,11 @@ import BirthMonth from "./enums/birth-month.enum";
 import CRC from "./enums/crc.enum";
 import Omocodes from "./enums/omocodes.enum";
 import Genders from "./types/genders.type";
+import MultiFormatDate from "./types/multi-format-date.type";
 
 export {
     Belfiore,
+    BelfiorePlace,
     BelfioreConnector,
     BirthMonth,
     CheckDigitizer,
@@ -22,9 +25,11 @@ export {
     DateMatcher,
     Gender,
     Genders,
+    MultiFormatDate,
     Omocodes,
     Parser,
     VALIDATOR,
     Matcher,
+    Pattern,
     Validator,
 };

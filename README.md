@@ -17,11 +17,17 @@
 
 TS utilities to handle Italian Codice Fiscale
 
+## WARNING Upgrading from 1.1.x
+### Methods to generate RegExp were moved to Pattern class
+### name method was renamed into firstname due to typescript migration
+
 ## FAQs?
 1. **Why should I need a library? Can't I use just a RegExp?**
     *A RegExp would just check the form of a CodiceFiscale, not coherence between birth date and place, not validity of 16th check digit char*
+
 2. **What about the omocodes (Omocodia/Omocodice) problem, does it work?**
-   *Absolutely! There's a dedicated class to encode or decode such kind of CodiceFiscale and it's properly integrated in* [***Parser***](#parser) *and* [***Validator***](#validator) *methods*
+   *Absolutely! There's a dedicated class to encode or decode such kind of CodiceFiscale and it's properly integrated in* [***Parser***](#parser), [***Validator***](#validator) and [***Pattern***](#pattern) *methods*
+
 3. **Why it's ~250KB? Seems a lot**
    *It contains all you need in a FE or BE environment to properly check and validate a CodiceFiscale by its own or against spare personal informations, the full list of all Italian cities and foregin countries since [1861](https://en.wikipedia.org/wiki/Kingdom_of_Italy) including belfiore codes, province for cities,  begin and end date*
 
@@ -31,6 +37,7 @@ TS utilities to handle Italian Codice Fiscale
 5. **Can I use this library in a FE project with other frameworks?**
     *Sure, it's built to work both in node and browser environments! Give a look at the [Demo section](#demo)*
 
+## [CHANGELOG](CHANGELOG.MD)
 
 ## INSTALLATION
 ```{r, engine='bash', global_install}
@@ -250,95 +257,95 @@ Parser.encodeCf({
 ```
 
 
-### Validator
+### Pattern
 Class with static methods
 ```javascript
-const {Validator} = codiceFiscaleUtils;
+const {Pattern} = codiceFiscaleUtils;
 ```
 
-#### Validator.cfSurname
+#### Pattern.cfSurname
 ```javascript
-Validator.cfSurname().test('KST'); //true
-Validator.cfSurname().test('AST'); //false
-Validator.cfSurname('Alex').test('KST'); //false
-Validator.cfSurname('Alex').test('LXA'); //true
+Pattern.cfSurname().test('KST'); //true
+Pattern.cfSurname().test('AST'); //false
+Pattern.cfSurname('Alex').test('KST'); //false
+Pattern.cfSurname('Alex').test('LXA'); //true
 ```
 
-#### Validator.cfName
+#### Pattern.cfName
 ```javascript
-Validator.cfName().test('NIX'); //true
-Validator.cfName().test('UIK'); //false
-Validator.cfName('Dominique').test('DMN'); //false
-Validator.cfName('Dominique').test('DNQ'); //true
+Pattern.cfName().test('NIX'); //true
+Pattern.cfName().test('UIK'); //false
+Pattern.cfName('Dominique').test('DMN'); //false
+Pattern.cfName('Dominique').test('DNQ'); //true
 ```
 
-#### Validator.cfYear
+#### Pattern.cfYear
 ```javascript
-Validator.cfYear().test('07'); //true
-Validator.cfYear().test('3'); //false
-Validator.cfYear(1907).test('07'); //true
-Validator.cfYear(1986).test('U6'); //true - omocode
-Validator.cfYear(1986).test('87'); //false
+Pattern.cfYear().test('07'); //true
+Pattern.cfYear().test('3'); //false
+Pattern.cfYear(1907).test('07'); //true
+Pattern.cfYear(1986).test('U6'); //true - omocode
+Pattern.cfYear(1986).test('87'); //false
 ```
 
-#### Validator.cfMonth
+#### Pattern.cfMonth
 ```javascript
-Validator.cfMonth().test('C'); //true
-Validator.cfMonth().test('Z'); //false
-Validator.cfMonth(3).test('D'); //true
-Validator.cfMonth(3).test('A'); //false
+Pattern.cfMonth().test('C'); //true
+Pattern.cfMonth().test('Z'); //false
+Pattern.cfMonth(3).test('D'); //true
+Pattern.cfMonth(3).test('A'); //false
 ```
 
-#### Validator.cfDay
+#### Pattern.cfDay
 ```javascript
-Validator.cfDay().test('0M'); //true - omocode
-Validator.cfDay().test('33'); //false
-Validator.cfDay(12).test('12'); //true - male
-Validator.cfDay(12).test('52'); //true - female
-Validator.cfDay(12).test('MN'); //true - omocode
-Validator.cfDay(12).test('22'); //false
+Pattern.cfDay().test('0M'); //true - omocode
+Pattern.cfDay().test('33'); //false
+Pattern.cfDay(12).test('12'); //true - male
+Pattern.cfDay(12).test('52'); //true - female
+Pattern.cfDay(12).test('MN'); //true - omocode
+Pattern.cfDay(12).test('22'); //false
 ```
 
-#### Validator.cfDayGender
+#### Pattern.cfDayGender
 ```javascript
-Validator.cfDayGender().test('0M'); //true
-Validator.cfDayGender().test('73'); //false
-Validator.cfDayGender(9, 'F').test('RM'); //true
-Validator.cfDayGender(1, 'F').test('41'); //true
-Validator.cfDayGender(1, 'M').test('41'); //false
+Pattern.cfDayGender().test('0M'); //true
+Pattern.cfDayGender().test('73'); //false
+Pattern.cfDayGender(9, 'F').test('RM'); //true
+Pattern.cfDayGender(1, 'F').test('41'); //true
+Pattern.cfDayGender(1, 'M').test('41'); //false
 ```
 
-#### Validator.cfDateGender
+#### Pattern.cfDateGender
 ```javascript
-Validator.cfDateGender().test('83D22'); //true
-Validator.cfDateGender().test('83Z32'); //false
-Validator.cfDateGender([1983, 3, 22], 'M').test('U3D2N'); //true
-Validator.cfDateGender("1995-05-01", 'F').test('V5EQ1'); //true
-Validator.cfDateGender([1983, 3, 22], 'M').test('83D62'); //false
+Pattern.cfDateGender().test('83D22'); //true
+Pattern.cfDateGender().test('83Z32'); //false
+Pattern.cfDateGender([1983, 3, 22], 'M').test('U3D2N'); //true
+Pattern.cfDateGender("1995-05-01", 'F').test('V5EQ1'); //true
+Pattern.cfDateGender([1983, 3, 22], 'M').test('83D62'); //false
 ```
 
-#### Validator.cfPlace
+#### Pattern.cfPlace
 ```javascript
-Validator.cfPlace().test('A662'); //true
-Validator.cfPlace().test('Z974'); //false
-Validator.cfPlace('Bari').test('H501'); //true
-Validator.cfPlace([1933], 'Fiume').test('D620'); //true
-Validator.cfPlace([2000], 'Fiume').test('D620'); //false - Always invalid
+Pattern.cfPlace().test('A662'); //true
+Pattern.cfPlace().test('Z974'); //false
+Pattern.cfPlace('Bari').test('H501'); //true
+Pattern.cfPlace([1933], 'Fiume').test('D620'); //true
+Pattern.cfPlace([2000], 'Fiume').test('D620'); //false - Always invalid
 ```
 
-#### Validator.codiceFiscale
+#### Pattern.codiceFiscale
 ```javascript
-Validator.codiceFiscale().test('VRNGNY07D68C351V'); //true
-Validator.codiceFiscale().test('MRNMIA02E45L2193'); //false
+Pattern.codiceFiscale().test('VRNGNY07D68C351V'); //true
+Pattern.codiceFiscale().test('MRNMIA02E45L2193'); //false
 //Partial info
-Validator.codiceFiscale({
+Pattern.codiceFiscale({
     surname: 'Veronesi',
     name: 'Genny',
     gender: 'F',
     place: 'Catania'
 }).test('VRNGNY97A65C351V'); //true
 //Full info
-Validator.codiceFiscale({
+Pattern.codiceFiscale({
     surname: 'Veronesi',
     name: 'Genny',
     year: 1907,
@@ -349,51 +356,54 @@ Validator.codiceFiscale({
 }).test('VRNGNY07D68C351V'); //true
 ```
 
-#### Validator.surname
+#### Pattern.surname
 ```javascript
-Validator.surname().test('Kristersen'); //true
-Validator.surname('VLD').test('Vàlidàtòr'); //true
-Validator.surname('AIX').test('Air'); //false
+Pattern.surname().test('Kristersen'); //true
+Pattern.surname('VLD').test('Vàlidàtòr'); //true
+Pattern.surname('AIX').test('Air'); //false
 ```
 
-#### Validator.name
+#### Pattern.name
 ```javascript
-Validator.firstname().test('Rossi'); //true
-Validator.firstname('XYZAIE').test('Aieie'); //true
-Validator.firstname('XYZAIX').test('Air'); //false
+Pattern.firstname().test('Rossi'); //true
+Pattern.firstname('XYZAIE').test('Aieie'); //true
+Pattern.firstname('XYZAIX').test('Air'); //false
 ```
 
-#### Validator.date
+#### Pattern.date
 ```javascript
-Validator.date().test('1995'); //true
-Validator.date().test('1985-01'); //true
-Validator.date().test('1970-03-03'); //true
-Validator.date().test('1970-03-'); //false
-Validator.date('XYZXYZ88H61').test('1988-06-21'); //true
-Validator.date('XYZXYZ92C16').test('1992-03-26'); //false
+Pattern.date().test('1995'); //true
+Pattern.date().test('1985-01'); //true
+Pattern.date().test('1970-03-03'); //true
+Pattern.date().test('1970-03-'); //false
+Pattern.date('XYZXYZ88H61').test('1988-06-21'); //true
+Pattern.date('XYZXYZ92C16').test('1992-03-26'); //false
 ```
 
-#### Validator.gender
+#### Pattern.gender
 ```javascript
-Validator.gender().test('F'); //true
-Validator.gender().test('X'); //false
-Validator.gender('XYZXYZ88H61').test('F'); //true
-Validator.gender('XYZXYZ88H61').test('M'); //false
+Pattern.gender().test('F'); //true
+Pattern.gender().test('X'); //false
+Pattern.gender('XYZXYZ88H61').test('F'); //true
+Pattern.gender('XYZXYZ88H61').test('M'); //false
 ```
 
-#### Validator.place
+#### Pattern.place
 ```javascript
-Validator.place().test('Roma'); //true
-Validator.place('XYZXYZ92C16A662').test('Bari'); //true
-Validator.place('XYZXYZ12S30A662').test('Bologna'); //false
+Pattern.place().test('Roma'); //true
+Pattern.place('XYZXYZ92C16A662').test('Bari'); //true
+Pattern.place('XYZXYZ12S30A662').test('Bologna'); //false
 ```
 
+
+### Validator
 #### Validator.isValid
 ```javascript
 Validator.isValid('VRNGNY07D68C351V'); //true
 Validator.isValid('VRNGNY07D68C351K'); //false - invalid check digit
 Validator.isValid('GSTPPP99C06D620V'); //false - invalid birth date/place
 ```
+
 
 ## Compatibility (tested)
 * [X] NodeJs

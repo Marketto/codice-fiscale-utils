@@ -1,6 +1,7 @@
 import moment, { Moment } from "moment";
 import generatorWrapper from "../../functions/generator-wrapper.function";
 import IGeneratorWrapper from "../../interfaces/generator-wrapper.interface";
+import MultiFormatDate from "../../types/multi-format-date.type";
 import IBelfioreCity from "../interfaces/belfiore-city.interface";
 import IBelfioreCommonPlace from "../interfaces/belfiore-common-place.interface";
 import IBelfioreCountry from "../interfaces/belfiore-country.interface";
@@ -8,7 +9,6 @@ import IBelfioreDbData from "../interfaces/belfiore-db-data.interface";
 import IBelfioreDbLicense from "../interfaces/belfiore-db-license.interface";
 import BelfioreConnectorConfig from "../types/belfiore-connector-config.type";
 import BelfiorePlace from "../types/belfiore-place.type";
-import MultiFormatDate from "../types/multi-format-date.type";
 
 /**
  * Handler for cities and countries Dataset
@@ -239,8 +239,6 @@ export default class BelfioreConnector {
      */
     public byProvince(code: string): BelfioreConnector | undefined {
         if (typeof code !== "string" || !(/^[A-Z]{2}$/u).test(code)) {
-            // tslint:disable-next-line: no-console
-            console.warn(new Error("Province code must be a 2 char code"));
             return;
         }
         return new BelfioreConnector({
