@@ -11,30 +11,30 @@ server.param('cf', (req, res, next, codiceFiscale) => {
 });
 
 server.param(['surname', 'name'], (req, res, next, name) => {
-    if (!CodiceFiscaleUtils.Validator.firstname(name)) {
+    if (!CodiceFiscaleUtils.Pattern.firstname(name)) {
         res.status(400).send({error: `The provided ${name} is not a valid name or surname`});
     } else {
         next();
     }
 });
 server.param('birthDate', (req, res, next, birthDate) => {
-    if (!CodiceFiscaleUtils.Validator.date(birthDate)) {
+    if (!CodiceFiscaleUtils.Pattern.date(birthDate)) {
         res.status(400).send({error: `The provided ${birthDate} is not a valid iso8601 date`});
     } else {
         next();
     }
 });
 server.param('gender', (req, res, next, gender) => {
-    if (!CodiceFiscaleUtils.Validator.gender(gender)) {
+    if (!CodiceFiscaleUtils.Pattern.gender(gender)) {
         res.status(400).send({error: `The provided ${gender} is not a valid Gender`});
     } else {
         next();
     }
 });
 server.param('place', (req, res, next, place) => {
-    if (!CodiceFiscaleUtils.Validator.place(place)) {
+    if (!CodiceFiscaleUtils.Pattern.place(place)) {
         res.status(400).send({error: `The provided ${place} is not a valid place`});
-    } else if (req.param.birthDate && !CodiceFiscaleUtils.Validator.place(req.param.birthDate, place)) {
+    } else if (req.param.birthDate && !CodiceFiscaleUtils.Pattern.place(req.param.birthDate, place)) {
         res.status(400).send({error: `The provided birth place ${place} is not valid for the given birthDate: ${req.params.birthDate}`});
     } else {
         next();
