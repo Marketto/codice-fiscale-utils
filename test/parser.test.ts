@@ -7,11 +7,11 @@ import cfToSurname from "./parser/cfToSurname.test";
 import dateGenderToCf from "./parser/dateGenderToCf.test";
 import dayGenderToCf from "./parser/dayGenderToCf.test";
 import encodeCf from "./parser/encodeCf.test";
+import firstNameToCf from "./parser/firstNameToCf.test";
+import lastNameToCf from "./parser/lastNameToCf.test";
 import monthToCf from "./parser/monthToCf.test";
-import nameToCf from "./parser/nameToCf.test";
 import bitmap from "./parser/omocode-bitmap.test";
 import placeToCf from "./parser/placeToCf.test";
-import surnameToCf from "./parser/surnameToCf.test";
 import yearToCf from "./parser/yearToCf.test";
 
 describe("CodiceFiscaleUtils:Parser", () => {
@@ -27,8 +27,8 @@ describe("CodiceFiscaleUtils:Parser", () => {
     ]));
 
     describe("methods to CF", () => Promise.all([
-        surnameToCf(),
-        nameToCf(),
+        lastNameToCf(),
+        firstNameToCf(),
         yearToCf(),
         monthToCf(),
         dayGenderToCf(),

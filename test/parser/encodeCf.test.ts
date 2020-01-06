@@ -10,7 +10,7 @@ export default async () => {
                 month: 3,
                 name: "Genny",
                 place: "Catania",
-                surname: "Veronesi",
+                lastName: "Veronesi",
                 year: 1907,
             })).to.be.equal("VRNGNY07D68C351V");
         });
@@ -21,7 +21,7 @@ export default async () => {
                 month: 4,
                 name: "Mia",
                 place: "Torino",
-                surname: "Marin",
+                lastName: "Marin",
                 year: 1902,
             })).to.be.equal("MRNMIA02E45L219X");
         });

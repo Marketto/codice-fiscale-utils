@@ -24,7 +24,7 @@ export default class Parser {
     public static OMOCODE_BITMAP: number = 0b0111011011000000;
 
     /**
-     * Parse surname information
+     * Parse lastName information
      * @param codiceFiscale Partial or complete Omocode/Regular CF to parse
      * @returns Regular CF w/o omocodes chars
      */
@@ -37,23 +37,23 @@ export default class Parser {
     }
 
     /**
-     * Parse surname information
+     * Parse lastName information
      * @param codiceFiscale Partial or complete CF to parse
-     * @returns Partial/possible surname
+     * @returns Partial/possible lastName
      */
     public static cfToSurname(codiceFiscale: string): string | null {
         if (typeof codiceFiscale !== "string" || codiceFiscale.length < 3 || !(/^[A-Z]{3}/iu).test(codiceFiscale)) {
             return null;
         }
 
-        const surnameCf = codiceFiscale.substr(0, 3);
+        const lastNameCf = codiceFiscale.substr(0, 3);
 
-        const [cons = ""] = surnameCf.match(new RegExp(`^[${CONSONANT_LIST}]{1,3}`, "ig")) || [];
-        const [vow = ""] = surnameCf.match(new RegExp(`[${VOWEL_LIST}]{1,3}`, "ig")) || [];
+        const [cons = ""] = lastNameCf.match(new RegExp(`^[${CONSONANT_LIST}]{1,3}`, "ig")) || [];
+        const [vow = ""] = lastNameCf.match(new RegExp(`[${VOWEL_LIST}]{1,3}`, "ig")) || [];
 
         const matchingLength = cons.length + vow.length;
 
-        if (matchingLength < 2 || matchingLength < 3 && surnameCf[2].toUpperCase() !== "X") {
+        if (matchingLength < 2 || matchingLength < 3 && lastNameCf[2].toUpperCase() !== "X") {
             return null;
         }
 
@@ -230,7 +230,7 @@ export default class Parser {
         const place = this.cfToBirthPlace(fiscalCode);
         const personalInfo: IPersonalInfo = {
             name: this.cfToName(fiscalCode) || undefined,
-            surname: this.cfToSurname(fiscalCode) || undefined,
+            lastName: this.cfToSurname(fiscalCode) || undefined,
 
             day,
             month,
@@ -248,21 +248,21 @@ export default class Parser {
     }
 
     /**
-     * Parse surname to cf part
-     * @param surname Partial or complete CF to parse
+     * Parse lastName to cf part
+     * @param lastName Partial or complete CF to parse
      * @returns partial cf
      */
-    public static surnameToCf(surname?: string | null): string | null {
-        if (!surname || (surname || "").trim().length < 2) {
+    public static lastNameToCf(lastName?: string | null): string | null {
+        if (!lastName || (lastName || "").trim().length < 2) {
             return null;
         }
 
-        if (!(/^[A-Z "]+$/iu).test(diacriticRemover.replace(surname))) {
+        if (!(/^[A-Z "]+$/iu).test(diacriticRemover.replace(lastName))) {
             return null;
         }
 
-        const consonants = this.charExtractor(surname, CONSONANT_LIST);
-        const vowels = this.charExtractor(surname, VOWEL_LIST);
+        const consonants = this.charExtractor(lastName, CONSONANT_LIST);
+        const vowels = this.charExtractor(lastName, VOWEL_LIST);
 
         const partialCf = (consonants + vowels)
             .padEnd(3, "X").substr(0, 3);
@@ -286,7 +286,7 @@ export default class Parser {
         if (consonants.length >= 4) {
             return (consonants[0] + consonants.substr(2, 2)).toUpperCase();
         }
-        return this.surnameToCf(name);
+        return this.lastNameToCf(name);
     }
 
     /**
@@ -381,6 +381,16 @@ export default class Parser {
         return parsedDate.isValid() ? parsedDate.toDate() : null;
     }
 
+    public static parsePlace(place: BelfiorePlace | string): BelfiorePlace | null {
+        let verifiedBirthPlace: BelfiorePlace | null | undefined;
+        if (typeof place === "object" && place.belfioreCode) {
+            verifiedBirthPlace = place;
+        } else if (typeof place === "string") {
+            verifiedBirthPlace = Belfiore[place] || Belfiore.findByName(place);
+        }
+        return verifiedBirthPlace || null;
+    }
+
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
@@ -449,7 +459,7 @@ export default class Parser {
      * @returns Complete CF
      */
     public static encodeCf({
-        surname,
+        lastName,
         name,
 
         year,
@@ -461,11 +471,11 @@ export default class Parser {
         place,
     }: IPersonalInfo): string | null {
         const dtParams = this.parseDate(date) || this.yearMonthDayToDate(year, month, day);
-        if (!(dtParams && surname && name && gender && place)) {
+        if (!(dtParams && lastName && name && gender && place)) {
             return null;
         }
         const generator = [
-            () => this.surnameToCf(surname),
+            () => this.lastNameToCf(lastName),
             () => this.nameToCf(name),
             () => this.dateGenderToCf(dtParams, gender),
             () => this.placeToCf(dtParams, place),

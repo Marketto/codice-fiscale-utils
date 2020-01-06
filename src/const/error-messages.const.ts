@@ -1,4 +1,4 @@
-const INVALID_SURNAME: string = "Provided surname is not valid, only letters, diacritics and apostrophe allowed";
+const INVALID_SURNAME: string = "Provided lastName is not valid, only letters, diacritics and apostrophe allowed";
 const INVALID_NAME: string = "Provided name is not valid, only letters, diacritics and apostrophe allowed";
 const INVALID_DAY: string = "Provided day is not valid";
 const INVALID_GENDER: string = "Provided gender is not valid";
