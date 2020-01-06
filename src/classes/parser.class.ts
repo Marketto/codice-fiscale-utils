@@ -1,9 +1,7 @@
 import DiacriticRemover from "@marketto/diacritic-remover";
 import moment from "moment";
-import { Belfiore } from "../belfiore-connector/belfiore";
+import { Belfiore, BelfiorePlace } from "../belfiore-connector/belfiore";
 import BelfioreConnector from "../belfiore-connector/classes/belfiore-connector.class";
-import BelfiorePlace from "../belfiore-connector/types/belfiore-place.type";
-import MultiFormatDate from "../belfiore-connector/types/multi-format-date.type";
 import { ISO8601_SHORT_DATE } from "../const/date-matcher.const";
 import { CONSONANT_LIST, VOWEL_LIST } from "../const/matcher.const";
 import BirthMonth from "../enums/birth-month.enum";
@@ -13,6 +11,7 @@ import IPersonalInfo from "../interfaces/personal-info.interface";
 import DateDay from "../types/date-day.type";
 import DateMonth from "../types/date-month.type";
 import Genders from "../types/genders.type";
+import MultiFormatDate from "../types/multi-format-date.type";
 import CheckDigitizer from "./check-digitizer.class";
 import Gender from "./gender.class";
 
