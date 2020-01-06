@@ -9,92 +9,230 @@
       <mat-card-title>Codice Fiscale Utils</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <mat-form-field appearance="outline" class="field field-cf">
+      <form [formGroup]="cfFormGroup" class="form-content">
+        <mat-form-field appearance="outline" class="field field-cf" [ngClass]="{'mat-form-field-invalid': (cfFormGroup.errors | keyvalue)?.length}">
           <mat-label>Codice Fiscale</mat-label>
           <input
-            required
             matInput
-            name="cf"
-            [(ngModel)]="cf"
+            name="codiceFiscale"
+            formControlName="codiceFiscale"
+            maxlength=16
+            required
           >
+          <mat-error>
+            <span *ngFor= "let error of cfFormGroup.controls.codiceFiscale.errors | keyvalue; let first = first; let last = last" [ngSwitch]="error.key">
+              <span [ngSwitch]="first">
+                <span *ngSwitchCase="true">Il Codice Fiscale </span>
+                <span *ngSwitchDefault [ngSwitch]="last">
+                  <span *ngSwitchDefault>, </span>
+                  <span *ngSwitchCase="true"> e </span>
+                </span>
+              </span>
+              <span *ngSwitchCase = "'required'">è obbligatorio </span>
+              <span *ngSwitchCase = "'minlength'">deve essere di {{error.value.requiredLength}} caratteri </span>
+              <span *ngSwitchCase = "'invalidFormat'">non è formalmente valido </span>
+              <span *ngSwitchDefault>è {{ error.key }}</span>
+            </span>
+          </mat-error>
+          <mat-hint class="mat-error">
+            <span *ngFor= "let error of cfFormGroup.errors | keyvalue; let first = first; let last = last" [ngSwitch]="error.key">
+              <span [ngSwitch]="first">
+                <span *ngSwitchCase="true">Sono presenti discrepanze tra il codice fiscale e </span>
+                <span *ngSwitchDefault [ngSwitch]="last">
+                  <span *ngSwitchDefault>, </span>
+                  <span *ngSwitchCase="true"> e </span>
+                </span>
+              </span>
+              <span *ngSwitchCase = "'cfLastNameMismatch'">il cognome</span>
+              <span *ngSwitchCase = "'cfFirstNameMismatch'">il nome</span>
+              <span *ngSwitchCase = "'cfBirthDateMismatch'">la data di nascita</span>
+              <span *ngSwitchCase = "'cfGenderMismatch'">il sesso</span>
+              <span *ngSwitchCase = "'cfBirthPlaceMismatch'">il luogo di nascita</span>
+              <span *ngSwitchDefault>{{ error.key }}</span>
+            </span>
+          </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="field field-name">
+        <mat-form-field appearance="outline" class="field field-name" [ngClass]="{'mat-form-field-invalid': cfFormGroup.errors?.cfLastNameMismatch}">
           <mat-label>Cognome</mat-label>
           <input
             required
             matInput
             name="lastName"
-            [(ngModel)]="lastName"
+            formControlName="lastName"
           >
+          <mat-error>
+            <span *ngFor= "let error of cfFormGroup.controls.lastName.errors | keyvalue; let first = first; let last = last" [ngSwitch]="error.key">
+              <span [ngSwitch]="first">
+                <span *ngSwitchCase="true">Il Cognome </span>
+                <span *ngSwitchDefault [ngSwitch]="last">
+                  <span *ngSwitchDefault>, </span>
+                  <span *ngSwitchCase="true"> e </span>
+                </span>
+              </span>
+              <span *ngSwitchCase = "'required'">è obbligatorio </span>
+              <span *ngSwitchCase = "'minlength'">deve essere di {{error.value.requiredLength}} caratteri </span>
+              <span *ngSwitchCase = "'invalidFormat'">non è formalmente valido </span>
+              <span *ngSwitchDefault>è {{ error.key }}</span>
+            </span>
+          </mat-error>
+          <mat-hint class="mat-error" *ngIf="cfFormGroup.errors?.cfLastNameMismatch">
+            Il cognome presenta una discrepanza con il codice fiscale
+          </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="field field-name">
+        <mat-form-field appearance="outline" class="field field-name" [ngClass]="{'mat-form-field-invalid': cfFormGroup.errors?.cfFirstNameMismatch}">
           <mat-label>Nome</mat-label>
           <input
             required
             matInput
             name="firstName"
-            [(ngModel)]="firstName"
+            formControlName="firstName"
           >
+          <mat-error>
+            <span *ngFor= "let error of cfFormGroup.controls.firstName.errors | keyvalue; let first = first; let last = last" [ngSwitch]="error.key">
+              <span [ngSwitch]="first">
+                <span *ngSwitchCase="true">Il Nome </span>
+                <span *ngSwitchDefault [ngSwitch]="last">
+                  <span *ngSwitchDefault>, </span>
+                  <span *ngSwitchCase="true"> e </span>
+                </span>
+              </span>
+              <span *ngSwitchCase = "'required'">è obbligatorio </span>
+              <span *ngSwitchCase = "'minlength'">deve essere di {{error.value.requiredLength}} caratteri </span>
+              <span *ngSwitchCase = "'invalidFormat'">non è formalmente valido </span>
+              <span *ngSwitchDefault>è {{ error.key }}</span>
+            </span>
+          </mat-error>
+          <mat-hint class="mat-error" *ngIf="cfFormGroup.errors?.cfFirstNameMismatch">
+            Il nome presenta una discrepanza con il codice fiscale
+          </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="field field-date">
+        <mat-form-field appearance="outline" class="field field-date" [ngClass]="{'mat-form-field-invalid': cfFormGroup.errors?.cfBirthDateMismatch}">
           <mat-label>Data di nascita</mat-label>
           <input
             required
             matInput
             [matDatepicker]="birthDatePicker"
+            [min]="minDate"
+            [max]="maxDate"
             placeholder="Seleziona una data"
-            [(ngModel)]="birthDate"
+            name="birthDate"
+            formControlName="birthDate"
           >
+          <mat-error>
+            <span *ngFor= "let error of cfFormGroup.controls.birthDate.errors | keyvalue; let first = first; let last = last" [ngSwitch]="error.key">
+              <span [ngSwitch]="first">
+                <span *ngSwitchCase="true">La data di nascita </span>
+                <span *ngSwitchDefault [ngSwitch]="last">
+                  <span *ngSwitchDefault>, </span>
+                  <span *ngSwitchCase="true"> e </span>
+                </span>
+              </span>
+              <span *ngSwitchCase = "'required'">è obbligatoria </span>
+              <span *ngSwitchCase = "'matDatepickerParse'">non è formalmente valida </span>
+              <span *ngSwitchCase = "'matDatepickerMin'"> non può essere precedente al {{error.value.min | date}}</span>
+              <span *ngSwitchCase = "'matDatepickerMax'"> deve essere precedente ad oggi</span>
+              <span *ngSwitchDefault>è {{ error.key }}</span>
+            </span>
+          </mat-error>
+          <mat-hint class="mat-error" *ngIf="cfFormGroup.controls.place.errors?.dateMismatch">
+            <span>La data di nascita presenta una discrepanza con il luogo di nascita</span>
+          </mat-hint>
+          <mat-hint class="mat-error" *ngIf="cfFormGroup.errors?.cfBirthDateMismatch">
+            La data di nascita presenta una discrepanza con il codice fiscale
+          </mat-hint>
           <mat-datepicker-toggle matSuffix [for]="birthDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #birthDatePicker></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="field field-gender">
+        <mat-form-field appearance="outline" class="field field-gender" [ngClass]="{'mat-form-field-invalid': cfFormGroup.errors?.cfGenderMismatch}">
           <mat-label>Sesso</mat-label>
-          <mat-select [(value)]="gender" required name="gender">
+          <mat-select
+            required
+            name="gender"
+            formControlName="gender"
+          >
             <mat-option>(Seleziona)</mat-option>
             <mat-option value="M">Maschio</mat-option>
             <mat-option value="F">Femmina</mat-option>
           </mat-select>
+          <mat-error>
+            <span *ngFor= "let error of cfFormGroup.controls.gender.errors | keyvalue; let first = first; let last = last" [ngSwitch]="error.key">
+              <span [ngSwitch]="first">
+                <span *ngSwitchCase="true">Il sesso </span>
+                <span *ngSwitchDefault [ngSwitch]="last">
+                  <span *ngSwitchDefault>, </span>
+                  <span *ngSwitchCase="true"> e </span>
+                </span>
+              </span>
+              <span *ngSwitchCase = "'required'">è obbligatorio </span>
+              <span *ngSwitchDefault>è {{ error.key }}</span>
+            </span>
+          </mat-error>
+          <mat-hint class="mat-error" *ngIf="cfFormGroup.errors?.cfGenderMismatch">
+            Il sesso presenta una discrepanza con il codice fiscale
+          </mat-hint>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="field field-place">
           <mat-label>Area di nascita</mat-label>
           <input
             type="text"
-            name="province"
+            name="area"
+            formControlName="area"
             matInput
             required
             placeholder="Provincia o estero"
             [matAutocomplete]="autoArea"
-            [formControl]="areaControl"
           >
-          <mat-autocomplete #autoArea="matAutocomplete" autoActiveFirstOption>
+          <mat-autocomplete #autoArea="matAutocomplete" autoActiveFirstOption [displayWith]="displayArea">
             <mat-option *ngFor="let area of filteredAreas | async" [value]="area">
-              {{area}}
+              {{displayArea(area)}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="field field-place">
+        <mat-form-field appearance="outline" class="field field-place" [ngClass]="{'mat-form-field-invalid': cfFormGroup.errors?.cfBirthPlaceMismatch}">
           <mat-label>Luogo di nascita</mat-label>
           <input
             type="text"
-            name="birthCity"
+            name="place"
+            formControlName="place"
             matInput
             required
             [matAutocomplete]="autoPlace"
-            [formControl]="placeControl"
           >
           <mat-autocomplete #autoPlace="matAutocomplete" autoActiveFirstOption [displayWith]="displayPlace">
             <mat-option *ngFor="let place of filteredPlaces | async" [value]="place">
-              {{place.name}}
+              {{place?.name}}
             </mat-option>
           </mat-autocomplete>
+          <mat-error>
+            <span *ngFor= "let error of cfFormGroup.controls.place.errors | keyvalue; let first = first; let last = last" [ngSwitch]="error.key">
+              <span [ngSwitch]="first">
+                <span *ngSwitchCase="true">Il luogo di nascita </span>
+                <span *ngSwitchDefault [ngSwitch]="last">
+                  <span *ngSwitchDefault>, </span>
+                  <span *ngSwitchCase="true"> e </span>
+                </span>
+              </span>
+              <span *ngSwitchCase = "'required'">è obbligatorio </span>
+              <span *ngSwitchCase = "'nonexistent'">è inesistente</span>
+              <span *ngSwitchCase = "'scopeNonexistent'">non corrisponde ad una possibile scelta per l'area selezionata</span>
+              <span *ngSwitchCase = "'minlength'">deve essere di almeno due caratteri</span>
+              <span *ngSwitchDefault>è {{ error.key }}</span>
+            </span>
+          </mat-error>
+          <mat-hint class="mat-error" *ngIf="cfFormGroup.controls.place.errors?.placeMismatch">
+            <span>Il luogo di nascita presenta una discrepanza con la data di nascita</span>
+          </mat-hint>
+          <mat-hint class="mat-error" *ngIf="cfFormGroup.errors?.cfBirthPlaceMismatch">
+            Il luogo di nascita presenta una discrepanza con il codice fiscale
+          </mat-hint>
         </mat-form-field>
+      </form>
     </mat-card-content>
   </mat-card>
 </div>
