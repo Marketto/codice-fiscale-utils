@@ -74,6 +74,11 @@ var CITIES_COUNTRIES = {
 	]
 };
 
+function generatorWrapper(generator) {
+    generator[Symbol.iterator] = () => generator;
+    return generator;
+}
+
 /**
  * Handler for cities and countries Dataset
  */
@@ -205,13 +210,22 @@ class BelfioreConnector {
      * Return belfiore places list
      */
     toArray() {
-        return Array.from(this.scanData());
+        return [...this.scanData()];
+    }
+    get provinces() {
+        if (this.province) {
+            return [this.province];
+        }
+        else if (this.codeMatcher !== BelfioreConnector.COUNTRY_CODE_MATCHER) {
+            return this.parseProvinces();
+        }
+        return [];
     }
     /**
      * Search places matching given name
      */
     searchByName(name) {
-        return name ? Array.from(this.scanData(name)) : null;
+        return name ? [...this.scanData(name)] : null;
     }
     /**
      * Find place matching given name, retuns place object if provided name match only 1 result
@@ -243,7 +257,7 @@ class BelfioreConnector {
      */
     byProvince(code) {
         if (typeof code !== "string" || !(/^[A-Z]{2}$/u).test(code)) {
-            throw new Error("Province code must be a 2 char code");
+            return;
         }
         return new BelfioreConnector({
             ...this.config,
@@ -257,7 +271,7 @@ class BelfioreConnector {
     get cities() {
         return new BelfioreConnector({
             ...this.config,
-            codeMatcher: /^[A-Y]/u,
+            codeMatcher: BelfioreConnector.CITY_CODE_MATCHER,
             province: undefined,
         });
     }
@@ -267,7 +281,7 @@ class BelfioreConnector {
     get countries() {
         return new BelfioreConnector({
             ...this.config,
-            codeMatcher: /^Z/u,
+            codeMatcher: BelfioreConnector.COUNTRY_CODE_MATCHER,
             province: undefined,
         });
     }
@@ -301,11 +315,15 @@ class BelfioreConnector {
         }
         return -1;
     }
-    *scanData(name) {
+    scanData(name) {
+        return generatorWrapper(this.scanDataGenerator(name));
+    }
+    *scanDataGenerator(name) {
         const nameMatcher = typeof name === "string" ? new RegExp(name, "i") : name;
         for (const sourceData of this.data) {
             const dataSourceScan = this.scanDataSourceIndex(sourceData, nameMatcher);
-            for (const index of dataSourceScan) {
+            for (let dss = dataSourceScan.next(); !dss.done; dss = dataSourceScan.next()) {
+                const index = dss.value;
                 const parsedPlace = this.locationByIndex(sourceData, index);
                 if (parsedPlace) {
                     yield parsedPlace;
@@ -326,24 +344,23 @@ class BelfioreConnector {
             return null;
         }
         const belFioreInt = parseInt(resourceData.belfioreCode.substr(belfioreIndex, 3), 32);
-        const belfioreCode = this.constructor.belfioreFromInt(belFioreInt);
+        const belfioreCode = BelfioreConnector.belfioreFromInt(belFioreInt);
         const code = resourceData.provinceOrCountry.substr(index * 2, 2);
         if (this.province && this.province !== code ||
             this.codeMatcher && !this.codeMatcher.test(belfioreCode)) {
             return null;
         }
-        const constructor = this.constructor;
         const dateIndex = index * 4;
-        const creationDate = constructor.decodeDate((resourceData.creationDate || "")
+        const creationDate = BelfioreConnector.decodeDate((resourceData.creationDate || "")
             .substr(dateIndex, 4) || "0").startOf("day");
-        const expirationDate = constructor.decodeDate((resourceData.expirationDate || "")
+        const expirationDate = BelfioreConnector.decodeDate((resourceData.expirationDate || "")
             .substr(dateIndex, 4) || "2qn13").endOf("day");
         if (this.activeDate &&
             (resourceData.creationDate && this.activeDate.isBefore(creationDate, "day") ||
                 resourceData.expirationDate && this.activeDate.isAfter(expirationDate, "day"))) {
             return null;
         }
-        const name = constructor.nameByIndex(resourceData.name, index);
+        const name = BelfioreConnector.nameByIndex(resourceData.name, index);
         const licenseIndex = parseInt(resourceData.dataSource, 32)
             .toString(2).padStart(resourceData.belfioreCode.length * 2 / 3, "0")
             .substr(index * 2, 2);
@@ -367,9 +384,31 @@ class BelfioreConnector {
             province: code,
         };
     }
+    parseProvinces() {
+        const provinceList = new Set();
+        for (const sourceData of this.data) {
+            const dataSourceScan = this.scanDataSourceIndex(sourceData);
+            for (let dss = dataSourceScan.next(); !dss.done; dss = dataSourceScan.next()) {
+                const index = dss.value;
+                const province = sourceData.provinceOrCountry.substr(index * 2, 2);
+                if (!provinceList.has(province)) {
+                    const belFioreInt = parseInt(sourceData.belfioreCode.substr(index * 3, 3), 32);
+                    const belfioreCode = BelfioreConnector.belfioreFromInt(belFioreInt);
+                    if (BelfioreConnector.CITY_CODE_MATCHER.test(belfioreCode)) {
+                        if (province.trim()) {
+                            provinceList.add(province);
+                        }
+                    }
+                }
+            }
+        }
+        return Array.from(provinceList);
+    }
 }
 BelfioreConnector.ITALY_KINGDOM_BIRTHDATE = "1861-01-01";
 BelfioreConnector.BELFIORE_CODE_MATCHER = /^[A-Z]\d{3}$/iu;
+BelfioreConnector.CITY_CODE_MATCHER = /^[A-Y]\d{3}$/iu;
+BelfioreConnector.COUNTRY_CODE_MATCHER = /^Z\d{3}$/iu;
 
 const Belfiore = new BelfioreConnector(CITIES_COUNTRIES);
 
@@ -491,11 +530,30 @@ var CRC$1 = CRC;
 
 class CheckDigitizer {
     /**
+     * Evaluate given partial CF to produce last check digit character
+     * @param codiceFiscale Partial or complete Fiscal Code to evaluate to produce last character
+     * @returns 16th CF char
+     */
+    static checkDigit(codiceFiscale) {
+        if (typeof codiceFiscale === "string" && new RegExp(PARTIAL_CF).test(codiceFiscale)) {
+            const partialCF = codiceFiscale.substr(0, 15);
+            let partialCfValue = 0;
+            for (const charValue of this.evaluateChar(partialCF)) {
+                partialCfValue += charValue;
+            }
+            return String.fromCharCode(partialCfValue % 26 + 65);
+        }
+        return null;
+    }
+    static evaluateChar(partialCF = "") {
+        return generatorWrapper(this.evaluateCharGenerator(partialCF));
+    }
+    /**
      * Partial FiscalCode Evaluator
      * @param Partial Fiscal Code to evaluate
      * @yields character value odd/even
      */
-    static *evaluateChar(partialCF = "") {
+    static *evaluateCharGenerator(partialCF = "") {
         if (typeof partialCF === "string" && partialCF.length) {
             for (let index = 0; index < partialCF.length; index++) {
                 let char = partialCF[index].toUpperCase();
@@ -519,51 +577,8 @@ class CheckDigitizer {
         }
         return 0;
     }
-    /**
-     * Evaluate given partial CF to produce last check digit character
-     * @param codiceFiscale Partial or complete Fiscal Code to evaluate to produce last character
-     * @returns 16th CF char
-     */
-    static checkDigit(codiceFiscale) {
-        if (typeof codiceFiscale === "string" && new RegExp(PARTIAL_CF).test(codiceFiscale)) {
-            const partialCF = codiceFiscale.substr(0, 15);
-            let partialCfValue = 0;
-            for (const charValue of this.evaluateChar(partialCF)) {
-                partialCfValue += charValue;
-            }
-            return String.fromCharCode(partialCfValue % 26 + 65);
-        }
-        return null;
-    }
 }
 CheckDigitizer.CHAR_OFFSET = 65;
-
-var GenderWeight;
-(function (GenderWeight) {
-    GenderWeight[GenderWeight["M"] = 0] = "M";
-    GenderWeight[GenderWeight["F"] = 40] = "F";
-})(GenderWeight || (GenderWeight = {}));
-var GenderWeight$1 = GenderWeight;
-
-class Gender {
-    static getDay(genderDay) {
-        const plainDay = genderDay % GenderWeight$1.F;
-        return (plainDay > 0 && plainDay <= this.MAX_MONTH_DAY) ? plainDay : null;
-    }
-    static getGender(genderDay) {
-        return this.toArray()
-            .find((gender) => genderDay >= GenderWeight$1[gender] &&
-            genderDay <= GenderWeight$1[gender] + this.MAX_MONTH_DAY)
-            || null;
-    }
-    static genderizeDay(day, gender) {
-        return day + GenderWeight$1[gender];
-    }
-    static toArray() {
-        return ["M", "F"];
-    }
-}
-Gender.MAX_MONTH_DAY = 31;
 
 const YEAR = "[12][0-9]{3}";
 const MONTH = "0[1-9]|1[0-2]";
@@ -617,6 +632,13 @@ var BirthMonth;
 })(BirthMonth || (BirthMonth = {}));
 var BirthMonth$1 = BirthMonth;
 
+var GenderWeight;
+(function (GenderWeight) {
+    GenderWeight[GenderWeight["M"] = 0] = "M";
+    GenderWeight[GenderWeight["F"] = 40] = "F";
+})(GenderWeight || (GenderWeight = {}));
+var GenderWeight$1 = GenderWeight;
+
 var Omocodes;
 (function (Omocodes) {
     Omocodes[Omocodes["L"] = 0] = "L";
@@ -632,10 +654,30 @@ var Omocodes;
 })(Omocodes || (Omocodes = {}));
 var Omocodes$1 = Omocodes;
 
+class Gender {
+    static getDay(genderDay) {
+        const plainDay = genderDay % GenderWeight$1.F;
+        return (plainDay > 0 && plainDay <= this.MAX_MONTH_DAY) ? plainDay : null;
+    }
+    static getGender(genderDay) {
+        return this.toArray()
+            .find((gender) => genderDay >= GenderWeight$1[gender] &&
+            genderDay <= GenderWeight$1[gender] + this.MAX_MONTH_DAY)
+            || null;
+    }
+    static genderizeDay(day, gender) {
+        return day + GenderWeight$1[gender];
+    }
+    static toArray() {
+        return ["M", "F"];
+    }
+}
+Gender.MAX_MONTH_DAY = 31;
+
 const diacriticRemover = new DiacriticRemover();
 class Parser {
     /**
-     * Parse surname information
+     * Parse lastName information
      * @param codiceFiscale Partial or complete Omocode/Regular CF to parse
      * @returns Regular CF w/o omocodes chars
      */
@@ -647,19 +689,19 @@ class Parser {
         return codiceFiscale.replace(/[\dA-Z]/giu, charReplacer);
     }
     /**
-     * Parse surname information
+     * Parse lastName information
      * @param codiceFiscale Partial or complete CF to parse
-     * @returns Partial/possible surname
+     * @returns Partial/possible lastName
      */
     static cfToSurname(codiceFiscale) {
         if (typeof codiceFiscale !== "string" || codiceFiscale.length < 3 || !(/^[A-Z]{3}/iu).test(codiceFiscale)) {
             return null;
         }
-        const surnameCf = codiceFiscale.substr(0, 3);
-        const [cons = ""] = surnameCf.match(new RegExp(`^[${CONSONANT_LIST}]{1,3}`, "ig")) || [];
-        const [vow = ""] = surnameCf.match(new RegExp(`[${VOWEL_LIST}]{1,3}`, "ig")) || [];
+        const lastNameCf = codiceFiscale.substr(0, 3);
+        const [cons = ""] = lastNameCf.match(new RegExp(`^[${CONSONANT_LIST}]{1,3}`, "ig")) || [];
+        const [vow = ""] = lastNameCf.match(new RegExp(`[${VOWEL_LIST}]{1,3}`, "ig")) || [];
         const matchingLength = cons.length + vow.length;
-        if (matchingLength < 2 || matchingLength < 3 && surnameCf[2].toUpperCase() !== "X") {
+        if (matchingLength < 2 || matchingLength < 3 && lastNameCf[2].toUpperCase() !== "X") {
             return null;
         }
         switch (cons.length) {
@@ -813,14 +855,15 @@ class Parser {
         const year = this.cfToBirthYear(fiscalCode) || undefined;
         const month = this.cfToBirthMonth(fiscalCode) || undefined;
         const day = this.cfToBirthDay(fiscalCode) || undefined;
+        const place = this.cfToBirthPlace(fiscalCode);
         const personalInfo = {
             name: this.cfToName(fiscalCode) || undefined,
-            surname: this.cfToSurname(fiscalCode) || undefined,
+            lastName: this.cfToSurname(fiscalCode) || undefined,
             day,
             month,
             year,
             gender: this.cfToGender(fiscalCode) || undefined,
-            place: (this.cfToBirthPlace(fiscalCode) || {}).name,
+            place: place ? place.name : undefined,
         };
         if (year && month && day) {
             personalInfo.date = new Date(Date.UTC(year, month, day));
@@ -828,19 +871,19 @@ class Parser {
         return personalInfo;
     }
     /**
-     * Parse surname to cf part
-     * @param surname Partial or complete CF to parse
+     * Parse lastName to cf part
+     * @param lastName Partial or complete CF to parse
      * @returns partial cf
      */
-    static surnameToCf(surname) {
-        if (!surname || (surname || "").trim().length < 2) {
+    static lastNameToCf(lastName) {
+        if (!lastName || (lastName || "").trim().length < 2) {
             return null;
         }
-        if (!(/^[A-Z "]+$/iu).test(diacriticRemover.replace(surname))) {
+        if (!(/^[A-Z "]+$/iu).test(diacriticRemover.replace(lastName))) {
             return null;
         }
-        const consonants = this.charExtractor(surname, CONSONANT_LIST);
-        const vowels = this.charExtractor(surname, VOWEL_LIST);
+        const consonants = this.charExtractor(lastName, CONSONANT_LIST);
+        const vowels = this.charExtractor(lastName, VOWEL_LIST);
         const partialCf = (consonants + vowels)
             .padEnd(3, "X").substr(0, 3);
         if (partialCf.length < 3) {
@@ -861,7 +904,7 @@ class Parser {
         if (consonants.length >= 4) {
             return (consonants[0] + consonants.substr(2, 2)).toUpperCase();
         }
-        return this.surnameToCf(name);
+        return this.lastNameToCf(name);
     }
     /**
      * Parse year to cf part
@@ -940,6 +983,16 @@ class Parser {
         const parsedDate = moment(date);
         return parsedDate.isValid() ? parsedDate.toDate() : null;
     }
+    static parsePlace(place) {
+        let verifiedBirthPlace;
+        if (typeof place === "object" && place.belfioreCode) {
+            verifiedBirthPlace = place;
+        }
+        else if (typeof place === "string") {
+            verifiedBirthPlace = Belfiore[place] || Belfiore.findByName(place);
+        }
+        return verifiedBirthPlace || null;
+    }
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
      * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
@@ -990,13 +1043,13 @@ class Parser {
      * Generates full CF
      * @returns Complete CF
      */
-    static encodeCf({ surname, name, year, month, day, date, gender, place, }) {
+    static encodeCf({ lastName, name, year, month, day, date, gender, place, }) {
         const dtParams = this.parseDate(date) || this.yearMonthDayToDate(year, month, day);
-        if (!(dtParams && surname && name && gender && place)) {
+        if (!(dtParams && lastName && name && gender && place)) {
             return null;
         }
         const generator = [
-            () => this.surnameToCf(surname),
+            () => this.lastNameToCf(lastName),
             () => this.nameToCf(name),
             () => this.dateGenderToCf(dtParams, gender),
             () => this.placeToCf(dtParams, place),
@@ -1035,7 +1088,7 @@ class Parser {
 Parser.OMOCODE_BITMAP = 0b0111011011000000;
 Parser.JOLLY_CHAR = "*";
 
-const INVALID_SURNAME = "Provided surname is not valid, only letters, diacritics and apostrophe allowed";
+const INVALID_SURNAME = "Provided lastName is not valid, only letters, diacritics and apostrophe allowed";
 const INVALID_NAME = "Provided name is not valid, only letters, diacritics and apostrophe allowed";
 const INVALID_DAY = "Provided day is not valid";
 const INVALID_GENDER = "Provided gender is not valid";
@@ -1065,18 +1118,18 @@ class CfuError extends Error {
 const diacriticRemover$1 = new DiacriticRemover();
 class Validator {
     /**
-     * Validation regexp for the given surname or generic
-     * @param surname Optional surname to generate validation regexp
+     * Validation regexp for the given lastName or generic
+     * @param lastName Optional lastName to generate validation regexp
      * @return CF Surname matcher
      * @throw INVALID_SURNAME
      */
-    static cfSurname(surname) {
+    static cfSurname(lastName) {
         let matcher = CF_SURNAME_MATCHER;
-        if (surname) {
-            if (!this.surname().test(surname)) {
+        if (lastName) {
+            if (!this.lastName().test(lastName)) {
                 throw new CfuError(INVALID_SURNAME);
             }
-            matcher = Parser.surnameToCf(surname) || matcher;
+            matcher = Parser.lastNameToCf(lastName) || matcher;
         }
         return this.isolatedInsensitiveTailor(matcher);
     }
@@ -1089,7 +1142,7 @@ class Validator {
     static cfName(name) {
         let matcher = CF_NAME_MATCHER;
         if (name) {
-            if (!this.surname().test(name)) {
+            if (!this.lastName().test(name)) {
                 throw new CfuError(INVALID_NAME);
             }
             matcher = Parser.nameToCf(name) || matcher;
@@ -1250,8 +1303,8 @@ class Validator {
                 matcher = this.deomocode(parsedCf);
             }
             else {
-                const { surname, name, year, month, day, date, gender, place } = personalInfo;
-                if (surname || name || year || month || day || date || gender || place) {
+                const { lastName, name, year, month, day, date, gender, place } = personalInfo;
+                if (lastName || name || year || month || day || date || gender || place) {
                     let dtParams = null;
                     if (date) {
                         dtParams = Parser.parseDate(date);
@@ -1260,7 +1313,7 @@ class Validator {
                         dtParams = Parser.yearMonthDayToDate(year, month, day);
                     }
                     const generator = [
-                        () => this.cfSurname(surname),
+                        () => this.cfSurname(lastName),
                         () => this.cfName(name),
                         () => this.cfDateGender(dtParams, gender),
                         () => this.cfPlace(dtParams, place),
@@ -1268,7 +1321,8 @@ class Validator {
                     matcher = "";
                     for (const validator of generator) {
                         const cfMatcher = validator().toString();
-                        const [, cfValue] = cfMatcher.match(/\^(.+)\$/) || [];
+                        const match = cfMatcher.match(/\^(.+)\$/);
+                        const cfValue = match && match[1];
                         if (!cfValue) {
                             throw new Error(`Unable to handle [${cfMatcher}]`);
                         }
@@ -1282,23 +1336,23 @@ class Validator {
         return this.isolatedInsensitiveTailor(matcher);
     }
     /**
-     * Returns surname validator based on given cf or generic
+     * Returns lastName validator based on given cf or generic
      * @param codiceFiscale Partial or complete CF to parse
      * @return Generic or specific regular expression
      */
-    static surname(codiceFiscale) {
+    static lastName(codiceFiscale) {
         const LETTER_SET = `[A-Z${diacriticRemover$1.matcherBy(/^[A-Z]$/ui)}]`;
         const SEPARATOR_SET = "[' ]";
         const ANY_LETTER = `(?:${LETTER_SET}+${SEPARATOR_SET}?)`;
         let matcher = `${ANY_LETTER}+`;
         if (codiceFiscale && (/^[A-Z]{1,3}/iu).test(codiceFiscale)) {
-            const surnameCf = codiceFiscale.substr(0, 3);
+            const lastNameCf = codiceFiscale.substr(0, 3);
             const diacriticizer = (matchingChars) => matchingChars.split("")
                 .map((char) => `[${diacriticRemover$1.insensitiveMatcher[char]}]`);
             const [cons, vow] = [
                 `^[${CONSONANT_LIST}]{1,3}`,
                 `[${VOWEL_LIST}]{1,3}`,
-            ].map((charMatcher) => diacriticizer((surnameCf.match(new RegExp(charMatcher, "ig")) || [])[0] || ""));
+            ].map((charMatcher) => diacriticizer((lastNameCf.match(new RegExp(charMatcher, "ig")) || [])[0] || ""));
             const diacriticsVowelList = VOWEL_LIST + diacriticRemover$1.matcherBy(new RegExp(`^[${VOWEL_LIST}]$`, "ui"));
             const diacriticsVowelMatcher = `[${diacriticsVowelList}]`;
             const midDiacriticVowelMatcher = `(?:${diacriticsVowelMatcher}${SEPARATOR_SET}?)*`;
@@ -1339,7 +1393,7 @@ class Validator {
      * @param codiceFiscale Partial or complete CF to parse
      * @return Generic or specific regular expression
      */
-    static firstname(codiceFiscale) {
+    static firstName(codiceFiscale) {
         if (codiceFiscale && new RegExp(`^[A-Z]{3}[${CONSONANT_LIST}]{3}`, "iu").test(codiceFiscale)) {
             const ANY_LETTER = `[A-Z${diacriticRemover$1.matcherBy(/^[A-Z]$/ui)}]`;
             const nameCf = codiceFiscale.substr(3, 3);
@@ -1351,7 +1405,7 @@ class Validator {
                 + cons.slice(1, 3).join(`[${diacriticsVowelList}]*`) + `${ANY_LETTER}*`;
             return this.isolatedInsensitiveTailor(matcher);
         }
-        return this.surname((codiceFiscale || "").substr(3, 3));
+        return this.lastName((codiceFiscale || "").substr(3, 3));
     }
     /**
      * Returns iso8601 date validator based on given cf or generic
@@ -1403,24 +1457,6 @@ class Validator {
         }
         return this.isolatedInsensitiveTailor(matcher);
     }
-    /**
-     * Check the given cf validity by form, birth date/place and digit code
-     * @param codiceFiscale Complete CF to parse
-     * @return Generic or specific regular expression
-     */
-    static isValid(codiceFiscale) {
-        const matcher = this.isolatedInsensitiveTailor(CODICE_FISCALE);
-        if (
-        // Checking form validity
-        !matcher.test(codiceFiscale) ||
-            // Checking 16th char check digit validity
-            codiceFiscale.substr(15, 1).toUpperCase() !== CheckDigitizer.checkDigit(codiceFiscale) ||
-            // Checking Birth date/place validity
-            !Parser.cfToBirthPlace(codiceFiscale)) {
-            return false;
-        }
-        return true;
-    }
     static deomocode(omocode) {
         return omocode.replace(/\d/gu, (n) => `[${n}${Omocodes$1[n]}]`);
     }
@@ -1429,4 +1465,127 @@ class Validator {
     }
 }
 
-export { Belfiore, BelfioreConnector, BirthMonth$1 as BirthMonth, CRC$1 as CRC, CheckDigitizer, dateMatcher_const as DATE_VALIDATOR, dateMatcher_const as DateMatcher, Gender, matcher_const as Matcher, Omocodes$1 as Omocodes, Parser, matcher_const as VALIDATOR, Validator };
+class CFMismatchValidator {
+    constructor(codiceFiscale) {
+        this.codiceFiscale = codiceFiscale;
+    }
+    matchLastName(lastName) {
+        return Validator.lastName(this.codiceFiscale).test(lastName || "");
+    }
+    mismatchLastName(lastName) {
+        return !!(this.codiceFiscale && lastName && !this.matchLastName(lastName));
+    }
+    matchFirstName(firstName) {
+        return Validator.lastName(this.codiceFiscale).test(firstName || "");
+    }
+    mismatchFirstName(firstName) {
+        return !!(this.codiceFiscale && firstName && !this.matchFirstName(firstName));
+    }
+    matchBirthDate(birthDate) {
+        const parsedCfDate = Parser.cfToBirthDate(this.codiceFiscale);
+        const parsedDate = Parser.parseDate(birthDate);
+        if (parsedCfDate && parsedDate) {
+            return moment(parsedCfDate).isSame(parsedDate, "d");
+        }
+        return false;
+    }
+    mismatchBirthDate(birthDate) {
+        return !!(this.codiceFiscale && Parser.parseDate(birthDate) && !this.matchBirthDate(birthDate));
+    }
+    matchGender(gender) {
+        return Validator.gender(this.codiceFiscale).test(gender || "");
+    }
+    mismatchGender(gender) {
+        return !!(this.codiceFiscale && gender && !this.matchGender(gender));
+    }
+    /**
+     * @param birthPlace BirthPlace, place name or BelfioreCode
+     */
+    matchBirthPlace(birthPlace) {
+        const matcher = Validator.place(this.codiceFiscale);
+        const parsedBirthPlace = Parser.parsePlace(birthPlace);
+        return !!(parsedBirthPlace && matcher.test(parsedBirthPlace.belfioreCode));
+    }
+    /**
+     * @param birthPlace BirthPlace, place name or BelfioreCode
+     */
+    mismatchBirthPlace(birthPlace) {
+        return !!(this.codiceFiscale && birthPlace && !this.matchBirthPlace(birthPlace));
+    }
+    /**
+     * Check the given cf validity by form, birth date/place and digit code
+     * @param codiceFiscale Complete CF to parse
+     * @return Generic or specific regular expression
+     */
+    get valid() {
+        const matcher = Validator.codiceFiscale();
+        if (
+        // Checking form validity
+        !matcher.test(this.codiceFiscale) ||
+            // Checking 16th char check digit validity
+            this.codiceFiscale.substr(15, 1).toUpperCase() !== CheckDigitizer.checkDigit(this.codiceFiscale) ||
+            // Checking Birth date/place validity
+            !Parser.cfToBirthPlace(this.codiceFiscale)) {
+            return false;
+        }
+        return true;
+    }
+    get invalid() {
+        return !!this.codiceFiscale && !this.valid;
+    }
+}
+
+class Validator$1 {
+    static codiceFiscale(codiceFiscale) {
+        return new CFMismatchValidator(codiceFiscale);
+    }
+    static isLastNameValid(lastName) {
+        return Validator.lastName().test(lastName);
+    }
+    static isLastNameInvalid(lastName) {
+        return !!(lastName && !this.isLastNameValid(lastName));
+    }
+    static isFirstNameValid(firstName) {
+        return Validator.firstName().test(firstName);
+    }
+    static isFirstNameInvalid(firstName) {
+        return !!(firstName && !this.isFirstNameValid(firstName));
+    }
+    static isBirthDateValid(birthDate) {
+        return !!Parser.parseDate(birthDate);
+    }
+    static isBirthDateInvalid(birthDate) {
+        return !!(birthDate && !this.isBirthDateValid(birthDate));
+    }
+    static isGenderValid(gender) {
+        return Validator.gender().test(gender);
+    }
+    static isGenderInvalid(gender) {
+        return !!(gender && !this.isGenderValid(gender));
+    }
+    static isBirthPlaceValid(birthPlace, scopedBelfioreConnector = Belfiore) {
+        const parsedBirthPlace = Parser.parsePlace(birthPlace);
+        return !!parsedBirthPlace && !!scopedBelfioreConnector[parsedBirthPlace.belfioreCode];
+    }
+    static isBirthPlaceInvalid(birthPlace, scopedBelfioreConnector = Belfiore) {
+        return !!(birthPlace && !this.isBirthPlaceValid(birthPlace, scopedBelfioreConnector));
+    }
+    static birthDatePlaceMatch(birthDate, birthPlace) {
+        const parsedPlace = Parser.parsePlace(birthPlace);
+        return !!(this.isBirthDateValid(birthDate) && parsedPlace &&
+            Belfiore.active(birthDate)[parsedPlace.belfioreCode]);
+    }
+    static birthDatePlaceMismatch(birthDate, birthPlace) {
+        const parsedPlace = Parser.parsePlace(birthPlace);
+        return !!(this.isBirthDateValid(birthDate) && parsedPlace &&
+            !Belfiore.active(birthDate)[parsedPlace.belfioreCode]);
+    }
+    static birthPlaceDateMatch(birthPlace, birthDate) {
+        return this.birthDatePlaceMatch(birthDate, birthPlace);
+    }
+    static birthPlaceDateMismatch(birthPlace, birthDate) {
+        return this.birthDatePlaceMismatch(birthDate, birthPlace);
+    }
+}
+
+export { Belfiore, BelfioreConnector, BirthMonth$1 as BirthMonth, CFMismatchValidator, CRC$1 as CRC, CheckDigitizer, dateMatcher_const as DATE_VALIDATOR, dateMatcher_const as DateMatcher, Gender, matcher_const as Matcher, Omocodes$1 as Omocodes, Parser, Validator as Pattern, matcher_const as VALIDATOR, Validator$1 as Validator };

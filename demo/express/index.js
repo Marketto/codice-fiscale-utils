@@ -10,9 +10,9 @@ server.param('cf', (req, res, next, codiceFiscale) => {
     }
 });
 
-server.param(['surname', 'name'], (req, res, next, name) => {
-    if (!CodiceFiscaleUtils.Pattern.firstname(name)) {
-        res.status(400).send({error: `The provided ${name} is not a valid name or surname`});
+server.param(['lastName', 'name'], (req, res, next, name) => {
+    if (!CodiceFiscaleUtils.Pattern.firstName(name)) {
+        res.status(400).send({error: `The provided ${name} is not a valid name or lastName`});
     } else {
         next();
     }
@@ -49,10 +49,10 @@ server.get('/decode/:cf', (req, res) => {
     res.send(CodiceFiscaleUtils.Parser.cfDecode(req.params.cf));
 });
 
-server.get('/encode/:surname/:name/:birthDate/:gender/:place', (req, res) => {
-    const {surname, name, birthDate, gender, place} = req.params;
+server.get('/encode/:lastName/:name/:birthDate/:gender/:place', (req, res) => {
+    const {lastName, name, birthDate, gender, place} = req.params;
     const personalInfos = {
-        surname,
+        lastName,
         name,
         date: birthDate,
         gender,

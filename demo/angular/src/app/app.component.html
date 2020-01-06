@@ -10,7 +10,7 @@
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="cfFormGroup" class="form-content">
-        <mat-form-field appearance="outline" class="field field-cf" [ngClass]="{'mat-form-field-invalid': (cfFormGroup.errors | keyvalue)?.length}">
+        <mat-form-field appearance="outline" class="field field-cf" [ngClass]="{'mat-form-field-invalid': cfMismatchErrors.length}">
           <mat-label>Codice Fiscale</mat-label>
           <input
             matInput
@@ -35,13 +35,11 @@
             </span>
           </mat-error>
           <mat-hint class="mat-error">
-            <span *ngFor= "let error of cfFormGroup.errors | keyvalue; let first = first; let last = last" [ngSwitch]="error.key">
-              <span [ngSwitch]="first">
-                <span *ngSwitchCase="true">Sono presenti discrepanze tra il codice fiscale e </span>
-                <span *ngSwitchDefault [ngSwitch]="last">
-                  <span *ngSwitchDefault>, </span>
-                  <span *ngSwitchCase="true"> e </span>
-                </span>
+            <span *ngIf="cfMismatchErrors.length">Sono presenti discrepanze tra il codice fiscale</span>
+            <span *ngFor= "let error of cfMismatchErrors; let last = last;" [ngSwitch]="error.key">
+              <span [ngSwitch]="last">
+                <span *ngSwitchDefault>, </span>
+                <span *ngSwitchCase="true"> e </span>
               </span>
               <span *ngSwitchCase = "'cfLastNameMismatch'">il cognome</span>
               <span *ngSwitchCase = "'cfFirstNameMismatch'">il nome</span>
@@ -109,7 +107,7 @@
           </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="field field-date" [ngClass]="{'mat-form-field-invalid': cfFormGroup.errors?.cfBirthDateMismatch}">
+        <mat-form-field appearance="outline" class="field field-date" [ngClass]="{'mat-form-field-invalid': dateMismatchErrors.length}">
           <mat-label>Data di nascita</mat-label>
           <input
             required
@@ -137,11 +135,18 @@
               <span *ngSwitchDefault>è {{ error.key }}</span>
             </span>
           </mat-error>
-          <mat-hint class="mat-error" *ngIf="cfFormGroup.controls.place.errors?.dateMismatch">
-            <span>La data di nascita presenta una discrepanza con il luogo di nascita</span>
-          </mat-hint>
-          <mat-hint class="mat-error" *ngIf="cfFormGroup.errors?.cfBirthDateMismatch">
-            La data di nascita presenta una discrepanza con il codice fiscale
+          <mat-hint class="mat-error">
+            <span *ngFor= "let error of dateMismatchErrors; let first = first; let last = last" [ngSwitch]="error.key">
+              <span [ngSwitch]="first">
+                <span *ngSwitchCase="true">La data di nascita presenta discrepanze con </span>
+                <span *ngSwitchDefault [ngSwitch]="last">
+                  <span *ngSwitchDefault>, </span>
+                  <span *ngSwitchCase="true"> e </span>
+                </span>
+              </span>
+              <span *ngSwitchCase = "'cfBirthDateMismatch'">il codice fiscale</span>
+              <span *ngSwitchCase = "'birthDatePlaceMismatch'">il luogo di nascita</span>
+            </span>
           </mat-hint>
           <mat-datepicker-toggle matSuffix [for]="birthDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #birthDatePicker></mat-datepicker>
@@ -194,7 +199,7 @@
           </mat-autocomplete>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="field field-place" [ngClass]="{'mat-form-field-invalid': cfFormGroup.errors?.cfBirthPlaceMismatch}">
+        <mat-form-field appearance="outline" class="field field-place" [ngClass]="{'mat-form-field-invalid': placeMismatchErrors.length}">
           <mat-label>Luogo di nascita</mat-label>
           <input
             type="text"
@@ -225,11 +230,18 @@
               <span *ngSwitchDefault>è {{ error.key }}</span>
             </span>
           </mat-error>
-          <mat-hint class="mat-error" *ngIf="cfFormGroup.controls.place.errors?.placeMismatch">
-            <span>Il luogo di nascita presenta una discrepanza con la data di nascita</span>
-          </mat-hint>
-          <mat-hint class="mat-error" *ngIf="cfFormGroup.errors?.cfBirthPlaceMismatch">
-            Il luogo di nascita presenta una discrepanza con il codice fiscale
+          <mat-hint class="mat-error">
+            <span *ngFor= "let error of placeMismatchErrors; let first = first; let last = last" [ngSwitch]="error.key">
+              <span [ngSwitch]="first">
+                <span *ngSwitchCase="true">Il luogo di nascita presenta discrepanze con </span>
+                <span *ngSwitchDefault [ngSwitch]="last">
+                  <span *ngSwitchDefault>, </span>
+                  <span *ngSwitchCase="true"> e </span>
+                </span>
+              </span>
+              <span *ngSwitchCase = "'cfBirthPlaceMismatch'">il codice fiscale</span>
+              <span *ngSwitchCase = "'birthDatePlaceMismatch'">la data di nascita</span>
+            </span>
           </mat-hint>
         </mat-form-field>
       </form>
