@@ -18,11 +18,11 @@
         :state="stateSurname"
         description="Surname"
         label="Enter Surname"
-        label-for="surname"
+        label-for="lastName"
         :invalid-feedback="invalidSurname"
         class="col-6"
       >
-        <b-form-input :state="stateSurname" id="surname" v-model="surname" trim></b-form-input>
+        <b-form-input :state="stateSurname" id="lastName" v-model="lastName" trim></b-form-input>
       </b-form-group>
 
       <b-form-group
@@ -91,7 +91,7 @@ export default {
         return null;
       }
       const personalInfoCheck = CodiceFiscaleUtils.Pattern.codiceFiscale({
-          surname: this.surname,
+          lastName: this.lastName,
           name: this.name,
           date: this.date,
           gender: this.gender,
@@ -101,16 +101,16 @@ export default {
         personalInfoCheck.test(this.cf);
     },
     stateSurname() {
-      if(!(this.surname || '').length) {
+      if(!(this.lastName || '').length) {
         return null;
       }
-      return CodiceFiscaleUtils.Pattern.surname(this.cf).test(this.surname);
+      return CodiceFiscaleUtils.Pattern.lastName(this.cf).test(this.lastName);
     },
     stateName() {
       if(!(this.name || '').length) {
         return null;
       }
-      return CodiceFiscaleUtils.Pattern.firstname(this.cf).test(this.name);
+      return CodiceFiscaleUtils.Pattern.firstName(this.cf).test(this.name);
     },
     stateDate() {
       if(!this.date) {
@@ -143,7 +143,7 @@ export default {
         return 'Please enter a valid Codice Fiscale';
       }
       const fieldChecker = {
-        surname: this.stateSurname,
+        lastName: this.stateSurname,
         name: this.stateName,
         date: this.stateDate,
         gender: this.stateGender,
@@ -154,7 +154,7 @@ export default {
         .map(([key]) => key);
       return `The Codice Fiscale doesn't match ${fieldsToCheck.join(', ')}`;
     },
-    invalidSurname: () => 'The provided surname doesn\'t match the current Codice Fiscale',
+    invalidSurname: () => 'The provided lastName doesn\'t match the current Codice Fiscale',
     invalidName: () => 'The provided name doesn\'t match the current Codice Fiscale',
     invalidDate() {
       if (!moment(this.date).isValid()) {
@@ -176,7 +176,7 @@ export default {
   data() {
     return {
       cf: null,
-      surname: null,
+      lastName: null,
       name: null,
       date: null,
       gender: null,

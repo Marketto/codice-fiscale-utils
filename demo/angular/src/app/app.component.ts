@@ -52,11 +52,11 @@ export class AppComponent implements OnInit {
       Validators.required,
       Validators.minLength(2),
       CfValidators.birthPlace.exists(() => this.cfFormGroup.get('area').value),
-      CfValidators.birthPlace.dateMismatch(() => this.cfFormGroup.get('birthDate').value),
 
     ])
   }, {
     validators: [
+      CfValidators.group.birthDatePlaceMismatch('birthDate', 'place'),
       CfValidators.group.cfLastNameMismatch('codiceFiscale', 'lastName'),
       CfValidators.group.cfFirstNameMismatch('codiceFiscale', 'firstName'),
       CfValidators.group.cfBirthDateMismatch('codiceFiscale', 'birthDate'),
@@ -89,6 +89,29 @@ export class AppComponent implements OnInit {
       }
     }
     return Belfiore;
+  }
+
+  private getFilteredErrorList(
+    filter: (value: [string, unknown]) => boolean
+  ): { key: string, value: unknown }[] {
+    if (this.cfFormGroup && this.cfFormGroup.errors) {
+      return Object.entries(this.cfFormGroup.errors)
+        .filter(filter)
+        .map(([key, value]) => ({ key, value }));
+    }
+    return [];
+  }
+
+  public get cfMismatchErrors() {
+    return this.getFilteredErrorList(([errorId]) => (/cf[a-zA-Z]+Mismatch/).test(errorId));
+  }
+
+  public get dateMismatchErrors() {
+    return this.getFilteredErrorList(([errorId]) => (/[bB]irth[a-zA-Z]*Date[a-zA-Z]*Mismatch/).test(errorId));
+  }
+
+  public get placeMismatchErrors() {
+    return this.getFilteredErrorList(([errorId]) => (/[bB]irth[a-zA-Z]*Place[a-zA-Z]*Mismatch/).test(errorId));
   }
 
   public displayArea(area: string | symbol): string {

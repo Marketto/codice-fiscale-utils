@@ -1,8 +1,7 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 import ValidationError from './validation-error.type';
-import { Parser, Validator, BelfiorePlace } from '@marketto/codice-fiscale-utils';
-
-type MismatchValidationFn = (codiceFiscaleFormControlValue: string, secondFieldControlValue: unknown) => ValidationError;
+import { Validator, BelfiorePlace, CFMismatchValidator } from '@marketto/codice-fiscale-utils';
+import MismatchValidationFn from './mismatch-validation-fn.type';
 
 function mismatchValidatorGenerator(mismatchValidator: MismatchValidationFn) {
   return (
@@ -15,7 +14,11 @@ function mismatchValidatorGenerator(mismatchValidator: MismatchValidationFn) {
       const fieldsValid = ![codiceFiscaleControl, secondFieldControl]
         .some(fieldControl => !fieldControl.value || fieldControl.invalid);
       if (fieldsValid) {
-        return mismatchValidator(codiceFiscaleControl.value, secondFieldControl.value);
+        return mismatchValidator(
+          Validator.codiceFiscale(codiceFiscaleControl.value),
+          codiceFiscaleControl.value,
+          secondFieldControl.value
+        );
       }
       return null;
     };
@@ -23,76 +26,91 @@ function mismatchValidatorGenerator(mismatchValidator: MismatchValidationFn) {
 }
 
 export const cfLastNameMismatch = mismatchValidatorGenerator((
+  cfValidator: CFMismatchValidator,
   codiceFiscaleFormControlValue: string,
   lastNameFormControlValue: string
 ): ValidationError => {
-  if (!Validator.surname(codiceFiscaleFormControlValue).test(lastNameFormControlValue)) {
-    return {
+  return cfValidator.mismatchLastName(lastNameFormControlValue) ?
+    {
       cfLastNameMismatch: {
         lastName: lastNameFormControlValue,
         codiceFiscale: codiceFiscaleFormControlValue
       }
-    };
-  }
-  return null;
+    } : null;
 });
 
 export const cfFirstNameMismatch = mismatchValidatorGenerator((
+  cfValidator: CFMismatchValidator,
   codiceFiscaleFormControlValue: string,
   firstNameFormControlValue: string
 ): ValidationError => {
-  if (!Validator.firstname(codiceFiscaleFormControlValue).test(firstNameFormControlValue)) {
-    return {
+  return cfValidator.mismatchFirstName(firstNameFormControlValue) ?
+    {
       cfFirstNameMismatch: {
         firstName: firstNameFormControlValue,
         codiceFiscale: codiceFiscaleFormControlValue
       }
-    };
-  }
-  return null;
+    } : null;
 });
 
 export const cfGenderMismatch = mismatchValidatorGenerator((
+  cfValidator: CFMismatchValidator,
   codiceFiscaleFormControlValue: string,
   genderFormControlValue: string
 ): ValidationError => {
-  if (!Validator.gender(codiceFiscaleFormControlValue).test(genderFormControlValue)) {
-    return {
+  return cfValidator.matchGender(genderFormControlValue) ?
+    {
       cfGenderMismatch: {
         gender: genderFormControlValue,
         codiceFiscale: codiceFiscaleFormControlValue
       }
-    };
-  }
-  return null;
+    } : null;
 });
 
 export const cfBirthDateMismatch = mismatchValidatorGenerator((
+  cfValidator: CFMismatchValidator,
   codiceFiscaleFormControlValue: string,
   birthDateFormControlValue: Date
 ): ValidationError => {
-  if (!Validator.date(codiceFiscaleFormControlValue).test(birthDateFormControlValue.toJSON())) {
-    return {
+  return cfValidator.mismatchBirthDate(birthDateFormControlValue) ?
+    {
       cfBirthDateMismatch: {
         birthDate: birthDateFormControlValue,
         codiceFiscale: codiceFiscaleFormControlValue
       }
-    };
-  }
-  return null;
+    } : null;
 });
 
 export const cfBirthPlaceMismatch = mismatchValidatorGenerator((
+  cfValidator: CFMismatchValidator,
   codiceFiscaleFormControlValue: string,
   birthPlaceFormControlValue: BelfiorePlace
 ): ValidationError => {
-  if (!Validator.place(codiceFiscaleFormControlValue).test(birthPlaceFormControlValue.belfioreCode)) {
-    return {
+  return cfValidator.mismatchBirthPlace(birthPlaceFormControlValue) ?
+    {
       cfBirthPlaceMismatch: {
         birthPlace: birthPlaceFormControlValue,
         codiceFiscale: codiceFiscaleFormControlValue
       }
-    };
-  }
-  return null;
+    } : null;
 });
+
+export const birthDatePlaceMismatch = (
+  birthDateControlName: string,
+  birthPlaceFormControlName: string,
+): ValidatorFn => (formGroupControl: AbstractControl): ValidationError => {
+  const birthDateControl: AbstractControl = formGroupControl.get(birthDateControlName);
+  const birthPlaceFormControl: AbstractControl = formGroupControl.get(birthPlaceFormControlName);
+  const fieldsValid = ![birthDateControl, birthPlaceFormControl]
+    .some(fieldControl => !fieldControl.value || fieldControl.invalid);
+
+  return (fieldsValid && Validator.birthDatePlaceMismatch(
+    birthDateControl.value,
+    birthPlaceFormControl.value
+  )) ? {
+    birthDatePlaceMismatch: {
+      birthDate: birthDateControl.value,
+      birthPlace: birthPlaceFormControl.value
+    }
+  } : null;
+};
