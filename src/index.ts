@@ -1,4 +1,5 @@
 import { Belfiore, BelfioreConnector, BelfiorePlace } from "./belfiore-connector/belfiore";
+import CFMismatchValidator from "./classes/cf-mismatch-validator.class";
 import CheckDigitizer from "./classes/check-digitizer.class";
 import Gender from "./classes/gender.class";
 import Parser from "./classes/parser.class";
@@ -19,6 +20,7 @@ export {
     BelfiorePlace,
     BelfioreConnector,
     BirthMonth,
+    CFMismatchValidator,
     CheckDigitizer,
     CRC,
     DATE_VALIDATOR,

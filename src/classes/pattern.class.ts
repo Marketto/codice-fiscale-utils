@@ -48,18 +48,18 @@ const diacriticRemover = new DiacriticRemover();
 export default class Validator {
 
     /**
-     * Validation regexp for the given surname or generic
-     * @param surname Optional surname to generate validation regexp
+     * Validation regexp for the given lastName or generic
+     * @param lastName Optional lastName to generate validation regexp
      * @return CF Surname matcher
      * @throw INVALID_SURNAME
      */
-    public static cfSurname(surname?: string): RegExp {
+    public static cfSurname(lastName?: string): RegExp {
         let matcher: string = CF_SURNAME_MATCHER;
-        if (surname) {
-            if (!this.surname().test(surname)) {
+        if (lastName) {
+            if (!this.lastName().test(lastName)) {
                 throw new CfuError(INVALID_SURNAME);
             }
-            matcher = Parser.surnameToCf(surname) || matcher;
+            matcher = Parser.lastNameToCf(lastName) || matcher;
         }
         return this.isolatedInsensitiveTailor(matcher);
     }
@@ -73,7 +73,7 @@ export default class Validator {
     public static cfName(name?: string): RegExp {
         let matcher: string = CF_NAME_MATCHER;
         if (name) {
-            if (!this.surname().test(name)) {
+            if (!this.lastName().test(name)) {
                 throw new CfuError(INVALID_NAME);
             }
             matcher = Parser.nameToCf(name) || matcher;
@@ -244,8 +244,8 @@ export default class Validator {
             if (parsedCf) {
                 matcher = this.deomocode(parsedCf);
             } else {
-                const { surname, name, year, month, day, date, gender, place } = personalInfo;
-                if (surname || name || year || month || day || date || gender || place) {
+                const { lastName, name, year, month, day, date, gender, place } = personalInfo;
+                if (lastName || name || year || month || day || date || gender || place) {
                     let dtParams: Date | null = null;
                     if (date) {
                         dtParams = Parser.parseDate(date);
@@ -253,7 +253,7 @@ export default class Validator {
                         dtParams = Parser.yearMonthDayToDate(year, month, day);
                     }
                     const generator: Array<() => RegExp> = [
-                        () => this.cfSurname(surname),
+                        () => this.cfSurname(lastName),
                         () => this.cfName(name),
                         () => this.cfDateGender(dtParams, gender),
                         () => this.cfPlace(dtParams, place),
@@ -279,24 +279,24 @@ export default class Validator {
     }
 
     /**
-     * Returns surname validator based on given cf or generic
+     * Returns lastName validator based on given cf or generic
      * @param codiceFiscale Partial or complete CF to parse
      * @return Generic or specific regular expression
      */
-    public static surname(codiceFiscale?: string): RegExp {
+    public static lastName(codiceFiscale?: string): RegExp {
         const LETTER_SET: string = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/ui)}]`;
         const SEPARATOR_SET: string = "[' ]";
         const ANY_LETTER: string = `(?:${LETTER_SET}+${SEPARATOR_SET}?)`;
         let matcher: string = `${ANY_LETTER}+`;
         if (codiceFiscale && (/^[A-Z]{1,3}/iu).test(codiceFiscale)) {
-            const surnameCf: string = codiceFiscale.substr(0, 3);
+            const lastNameCf: string = codiceFiscale.substr(0, 3);
             const diacriticizer = (matchingChars: string) => matchingChars.split("")
                 .map((char) => `[${diacriticRemover.insensitiveMatcher[char]}]`);
 
             const [cons, vow] = [
                 `^[${CONSONANT_LIST}]{1,3}`,
                 `[${VOWEL_LIST}]{1,3}`,
-            ].map((charMatcher) => diacriticizer((surnameCf.match(new RegExp(charMatcher, "ig")) || [])[0] || ""));
+            ].map((charMatcher) => diacriticizer((lastNameCf.match(new RegExp(charMatcher, "ig")) || [])[0] || ""));
 
             const diacriticsVowelList: string = VOWEL_LIST + diacriticRemover.matcherBy(new RegExp(`^[${VOWEL_LIST}]$`, "ui"));
             const diacriticsVowelMatcher: string = `[${diacriticsVowelList}]`;
@@ -340,7 +340,7 @@ export default class Validator {
      * @param codiceFiscale Partial or complete CF to parse
      * @return Generic or specific regular expression
      */
-    public static firstname(codiceFiscale?: string): RegExp {
+    public static firstName(codiceFiscale?: string): RegExp {
         if (codiceFiscale && new RegExp(`^[A-Z]{3}[${CONSONANT_LIST}]{3}`, "iu").test(codiceFiscale)) {
             const ANY_LETTER: string = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/ui)}]`;
 
@@ -357,7 +357,7 @@ export default class Validator {
 
             return this.isolatedInsensitiveTailor(matcher);
         }
-        return this.surname((codiceFiscale || "").substr(3, 3));
+        return this.lastName((codiceFiscale || "").substr(3, 3));
     }
 
     /**

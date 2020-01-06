@@ -8,10 +8,10 @@ import cfSurname from "./pattern/cfSurname.test";
 import cfYear from "./pattern/cfYear.test";
 import codiceFiscale from "./pattern/codiceFiscale.test";
 import date from "./pattern/date.test";
+import firstName from "./pattern/firstName.test";
 import gender from "./pattern/gender.test";
-import name from "./pattern/name.test";
+import lastName from "./pattern/lastName.test";
 import place from "./pattern/place.test";
-import surname from "./pattern/surname.test";
 
 describe("CodiceFiscaleUtils:Pattern", () => {
     describe("codiceFiscale", () => Promise.all([
@@ -26,8 +26,8 @@ describe("CodiceFiscaleUtils:Pattern", () => {
         codiceFiscale(),
     ]));
     describe("personal infos", () => Promise.all([
-        surname(),
-        name(),
+        lastName(),
+        firstName(),
         date(),
         gender(),
         place(),

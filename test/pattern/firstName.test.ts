@@ -4,7 +4,7 @@ import { expect } from "../utils";
 export default async () => {
     describe("name", () => {
         describe("Generic Pattern", () => {
-            const namePattern = Pattern.firstname();
+            const namePattern = Pattern.firstName();
             it ("Should validate name Kristersen", () => {
                 namePattern.test("Kristersen").should.be.ok;
             });
@@ -20,25 +20,25 @@ export default async () => {
         });
         describe("Specific validator", () => {
             it ("Should validate name Marco for XYZMRC", () => {
-                Pattern.firstname("XYZMRC").test("Marco").should.be.ok;
+                Pattern.firstName("XYZMRC").test("Marco").should.be.ok;
             });
             it ("Should validate name Alex for XYZLXA", () => {
-                Pattern.firstname("XYZLXA").test("Alex").should.be.ok;
+                Pattern.firstName("XYZLXA").test("Alex").should.be.ok;
             });
             it ("Should validate name Aieie for XYZAIE", () => {
-                Pattern.firstname("XYZAIE").test("Aieie").should.be.ok;
+                Pattern.firstName("XYZAIE").test("Aieie").should.be.ok;
             });
             it ("Should validate name Ai for XYZAIX", () => {
-                Pattern.firstname("XYZAIX").test("Ai").should.be.ok;
+                Pattern.firstName("XYZAIX").test("Ai").should.be.ok;
             });
             it ("Should validate name U for XYZUXX", () => {
-                Pattern.firstname("XYZUXX").test("U").should.be.ok;
+                Pattern.firstName("XYZUXX").test("U").should.be.ok;
             });
             it ("Should validate name Vàlidàtòr for XYZVLD", () => {
-                Pattern.firstname("XYZVDT").test("Vàlidàtòr").should.be.ok;
+                Pattern.firstName("XYZVDT").test("Vàlidàtòr").should.be.ok;
             });
             it ("Should not validate name Air for XYZAIX", () => {
-                Pattern.firstname("XYZAIX").test("Air").should.be.false;
+                Pattern.firstName("XYZAIX").test("Air").should.be.false;
             });
         });
     });

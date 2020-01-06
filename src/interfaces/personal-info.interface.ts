@@ -4,7 +4,7 @@ import Genders from "../types/genders.type";
 
 export default interface IPersonalInfo {
     name?: string;
-    surname?: string;
+    lastName?: string;
 
     date?: Date;
     day?: DateDay;

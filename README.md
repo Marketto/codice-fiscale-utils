@@ -17,11 +17,13 @@
 
 TS utilities to handle Italian Codice Fiscale
 
-## WARNING Upgrading from 1.1.x
+## 🔶WARNING Upgrading from 1.1.x🔶
 ### Methods to generate RegExp were moved to Pattern class
-### name method was renamed into firstname due to typescript migration
+### Former Validator.isValid method was migrated to Validator.codiceFiscale(cf: string).valid (getter)
+### ***name*** method was renamed into ***firstName*** due to typescript migration
+### ***surname*** method was renamed into ***lastName*** according to firstName naming style
 
-## FAQs?
+## 📗FAQs?
 1. **Why should I need a library? Can't I use just a RegExp?**
     *A RegExp would just check the form of a CodiceFiscale, not coherence between birth date and place, not validity of 16th check digit char*
 
@@ -37,7 +39,7 @@ TS utilities to handle Italian Codice Fiscale
 5. **Can I use this library in a FE project with other frameworks?**
     *Sure, it's built to work both in node and browser environments! Give a look at the [Demo section](#demo)*
 
-## [CHANGELOG](CHANGELOG.MD)
+## 📙[CHANGELOG](CHANGELOG.MD)
 
 ## INSTALLATION
 ```{r, engine='bash', global_install}
@@ -150,7 +152,7 @@ const birthPlace = Parser.cfToBirthPlace('XXXYYY92B20H501');
 Parser.cfDecode('VRNGNY07D68C351V');
 /*
 {
-    surname: 'V*R*N*',
+    lastName: 'V*R*N*',
     name: 'G*N*Y*',
     day: 28,
     month: 3,
@@ -166,11 +168,11 @@ Parser.cfDecode('VRNGNY07D68C351V');
 Parser.removeDiacritics('Tést Tèxt'); //Test Text
 ```
 
-#### Parser.surnameToCf
+#### Parser.lastNameToCf
 ```javascript
-Parser.surnameToCf('Rossi'); //RSS
-Parser.surnameToCf('Réno'); //RNE
-Parser.surnameToCf('Aieie'); //AIE
+Parser.lastNameToCf('Rossi'); //RSS
+Parser.lastNameToCf('Réno'); //RNE
+Parser.lastNameToCf('Aieie'); //AIE
 ```
 
 #### Parser.nameToCf
@@ -246,7 +248,7 @@ Parser.placeToCf([2000],'Unione Sovietica'); //null
 #### Parser.encodeCf
 ```javascript
 Parser.encodeCf({
-    surname: 'Veronesi',
+    lastName: 'Veronesi',
     name: 'Genny',
     year: 1907,
     month: 3,
@@ -339,14 +341,14 @@ Pattern.codiceFiscale().test('VRNGNY07D68C351V'); //true
 Pattern.codiceFiscale().test('MRNMIA02E45L2193'); //false
 //Partial info
 Pattern.codiceFiscale({
-    surname: 'Veronesi',
+    lastName: 'Veronesi',
     name: 'Genny',
     gender: 'F',
     place: 'Catania'
 }).test('VRNGNY97A65C351V'); //true
 //Full info
 Pattern.codiceFiscale({
-    surname: 'Veronesi',
+    lastName: 'Veronesi',
     name: 'Genny',
     year: 1907,
     month: 3,
@@ -356,18 +358,18 @@ Pattern.codiceFiscale({
 }).test('VRNGNY07D68C351V'); //true
 ```
 
-#### Pattern.surname
+#### Pattern.lastName
 ```javascript
-Pattern.surname().test('Kristersen'); //true
-Pattern.surname('VLD').test('Vàlidàtòr'); //true
-Pattern.surname('AIX').test('Air'); //false
+Pattern.lastName().test('Kristersen'); //true
+Pattern.lastName('VLD').test('Vàlidàtòr'); //true
+Pattern.lastName('AIX').test('Air'); //false
 ```
 
 #### Pattern.name
 ```javascript
-Pattern.firstname().test('Rossi'); //true
-Pattern.firstname('XYZAIE').test('Aieie'); //true
-Pattern.firstname('XYZAIX').test('Air'); //false
+Pattern.firstName().test('Rossi'); //true
+Pattern.firstName('XYZAIE').test('Aieie'); //true
+Pattern.firstName('XYZAIX').test('Air'); //false
 ```
 
 #### Pattern.date
@@ -397,11 +399,12 @@ Pattern.place('XYZXYZ12S30A662').test('Bologna'); //false
 
 
 ### Validator
-#### Validator.isValid
+### CFMismatchValidator
+#### isValid
 ```javascript
-Validator.isValid('VRNGNY07D68C351V'); //true
-Validator.isValid('VRNGNY07D68C351K'); //false - invalid check digit
-Validator.isValid('GSTPPP99C06D620V'); //false - invalid birth date/place
+Validator.codiceFiscale('VRNGNY07D68C351V').valid; //true
+Validator.codiceFiscale('VRNGNY07D68C351K').valid; //false - invalid check digit
+Validator.codiceFiscale('GSTPPP99C06D620V').valid; //false - invalid birth date/place
 ```
 
 

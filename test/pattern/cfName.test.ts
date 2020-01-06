@@ -76,7 +76,7 @@ export default async () => {
             it ("Should validate cf name UXX for U", () => {
                 Pattern.cfName("U").test("UXX").should.not.be.ok;
             });
-            it ("Should throw error for cd surname with special chars", () => {
+            it ("Should throw error for cd lastName with special chars", () => {
                 expect(() => Pattern.cfName("@ieie")).to.throw("Provided name is not valid, only letters, diacritics and apostrophe allowed");
             });
         });
