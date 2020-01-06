@@ -90,7 +90,7 @@ export default {
       if(!(this.cf || '').length) {
         return null;
       }
-      const personalInfoCheck = CodiceFiscaleUtils.Validator.codiceFiscale({
+      const personalInfoCheck = CodiceFiscaleUtils.Pattern.codiceFiscale({
           surname: this.surname,
           name: this.name,
           date: this.date,
@@ -104,25 +104,25 @@ export default {
       if(!(this.surname || '').length) {
         return null;
       }
-      return CodiceFiscaleUtils.Validator.surname(this.cf).test(this.surname);
+      return CodiceFiscaleUtils.Pattern.surname(this.cf).test(this.surname);
     },
     stateName() {
       if(!(this.name || '').length) {
         return null;
       }
-      return CodiceFiscaleUtils.Validator.firstname(this.cf).test(this.name);
+      return CodiceFiscaleUtils.Pattern.firstname(this.cf).test(this.name);
     },
     stateDate() {
       if(!this.date) {
         return null;
       }
-      return moment(this.date).isValid() && CodiceFiscaleUtils.Validator.date(this.cf).test(this.date);
+      return moment(this.date).isValid() && CodiceFiscaleUtils.Pattern.date(this.cf).test(this.date);
     },
     stateGender() {
       if(!this.gender) {
         return null;
       }
-      return CodiceFiscaleUtils.Validator.gender(this.cf).test(this.gender);
+      return CodiceFiscaleUtils.Pattern.gender(this.cf).test(this.gender);
     },
     statePlace() {
       if(!this.place) {
@@ -130,7 +130,7 @@ export default {
       }
       const placeSubset = moment(this.date).isValid() ? CodiceFiscaleUtils.Belfiore.active(this.date) : CodiceFiscaleUtils.Belfiore;
       const placeData = placeSubset.findByName(this.place);
-      return !!placeData && !!CodiceFiscaleUtils.Validator.place(this.cf).test(this.place);
+      return !!placeData && !!CodiceFiscaleUtils.Pattern.place(this.cf).test(this.place);
     },
     invalidCf() {
       if ((this.cf || '').length <16) {
