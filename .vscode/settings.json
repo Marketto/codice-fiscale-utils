@@ -1,8 +1,14 @@
 {
     "jslint.enable": false,
-    "eslint.enable": true,
+    "eslint.enable": false,
+    "tslint.jsEnable": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "typescript.locale": "it",
+    "typescript.referencesCodeLens.enabled": true,
+    "mochaExplorer.exit": true,
+    "mochaExplorer.files": ["test/**/*.js","test/**/*.ts"],
+    "mochaExplorer.require": "ts-node/register",
     "jshint.enable": false,
-    "mochaExplorer.require": "@babel/register",
     "mochaExplorer.env": {
         "NODE_ENV": "test"
     }

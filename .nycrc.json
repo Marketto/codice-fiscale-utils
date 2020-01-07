@@ -1,6 +1,7 @@
 {
+    "extends": "@istanbuljs/nyc-config-typescript",
     "include": [
-        "src/**/*.js"
+        "src/**/*.ts"
     ],
     "exclude": [
         "dist",
@@ -8,7 +9,8 @@
         "coverage",
         "scripts",
         "test",
-        "demo"
+        "demo",
+        "**/*.js"
     ],
     "reporter": [
         "lcovonly",

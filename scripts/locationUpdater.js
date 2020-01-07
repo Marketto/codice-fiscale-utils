@@ -10,14 +10,14 @@ const locationResources = require('./location-resources.json');
 
 const LICENSE_KEYS = Object.keys(locationResources.licenses);
 
-const detinationPath = path.join(__dirname, '../src/asset');
+const detinationPath = path.join(__dirname, '../asset');
 const DEFAULT_CREATION_DATE = '1861-01-01';
 
 const downloadUnzip = (uri) => request({
+    encoding: null,
     method: 'GET',
-    uri,
     resolveWithFullResponse: true,
-    encoding: null
+    uri
 })
     .then(({body}) => body)
     .then(JSZip.loadAsync)
@@ -94,7 +94,7 @@ const compressDataMapper = data => data.map(({
     dataSource
 }) => ({
     belfioreCode: belfioreToInt(belfioreCode).toString(32).padStart(3, '0'),
-    name,
+    name: name === _.upperCase(name) ? _.startCase(_.lowerCase(name)) : name,
     creationDate: creationDate ? moment(creationDate).diff(DEFAULT_CREATION_DATE, 'days').toString(32) : undefined,
     expirationDate: expirationDate ? moment(expirationDate).diff(DEFAULT_CREATION_DATE, 'days').toString(32) : undefined,
     provinceOrCountry: province || iso3166alpha2,

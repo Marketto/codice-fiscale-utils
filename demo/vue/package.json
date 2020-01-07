@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "private": true,
   "scripts": {
-    "serve": "npx cross-env NODE_OPTIONS=--max_old_space_size=8192 npx vue-cli-service serve --mode development",
+    "start": "npx cross-env NODE_OPTIONS=--max_old_space_size=8192 npx vue-cli-service serve --mode development",
     "build": "npx vue-cli-service build",
     "lint": "npx vue-cli-service lint"
   },
