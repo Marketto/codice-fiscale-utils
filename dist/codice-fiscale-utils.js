@@ -1461,7 +1461,7 @@ class CFMismatchValidator {
         return !!(this.codiceFiscale && lastName && !this.matchLastName(lastName));
     }
     matchFirstName(firstName) {
-        return Validator.lastName(this.codiceFiscale).test(firstName || "");
+        return Validator.firstName(this.codiceFiscale).test(firstName || "");
     }
     mismatchFirstName(firstName) {
         return !!(this.codiceFiscale && firstName && !this.matchFirstName(firstName));
