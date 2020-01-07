@@ -308,7 +308,7 @@ export default class BelfioreConnector {
     }
 
     private scanData(name?: string | RegExp): IGeneratorWrapper<BelfiorePlace, null, void> {
-      return generatorWrapper(this.scanDataGenerator(name)) as IGeneratorWrapper<BelfiorePlace, null, void>;
+      return generatorWrapper(this.scanDataGenerator(name));
     }
     private* scanDataGenerator(name?: string | RegExp): Generator {
         const nameMatcher = typeof name === "string" ? new RegExp(name, "i") : name;
