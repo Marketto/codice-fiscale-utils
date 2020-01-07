@@ -2,9 +2,9 @@ import cfDateGender from "./pattern/cfDateGender.test";
 import cfDay from "./pattern/cfDay.test";
 import cfDayGender from "./pattern/cfDayGender.test";
 import cfMonth from "./pattern/cfMonth.test";
-import cfName from "./pattern/cfName.test";
+import cfFirstName from "./pattern/cfFirstName.test";
 import cfPlace from "./pattern/cfPlace.test";
-import cfSurname from "./pattern/cfSurname.test";
+import cfLastName from "./pattern/cfLastName.test";
 import cfYear from "./pattern/cfYear.test";
 import codiceFiscale from "./pattern/codiceFiscale.test";
 import date from "./pattern/date.test";
@@ -15,8 +15,8 @@ import place from "./pattern/place.test";
 
 describe("CodiceFiscaleUtils:Pattern", () => {
     describe("codiceFiscale", () => Promise.all([
-        cfSurname(),
-        cfName(),
+        cfLastName(),
+        cfFirstName(),
         cfYear(),
         cfMonth(),
         cfDay(),

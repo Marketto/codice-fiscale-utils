@@ -2,76 +2,76 @@ import { Pattern } from "../../src/";
 import { expect } from "../utils";
 
 export default async () => {
-    describe("cfSurname", () => {
+    describe("cfLastName", () => {
         describe("Generic Pattern", () => {
-            const cfSurnamePattern = Pattern.cfSurname();
+            const cfLastNamePattern = Pattern.cfLastName();
             it ("Should validate cf lastName KST", () => {
-                cfSurnamePattern.test("KST").should.be.ok;
+                cfLastNamePattern.test("KST").should.be.ok;
             });
             it ("Should validate cf lastName KSE", () => {
-                cfSurnamePattern.test("KSE").should.be.ok;
+                cfLastNamePattern.test("KSE").should.be.ok;
             });
             it ("Should validate cf lastName KAO", () => {
-                cfSurnamePattern.test("KAO").should.be.ok;
+                cfLastNamePattern.test("KAO").should.be.ok;
             });
             it ("Should validate cf lastName NIX", () => {
-                cfSurnamePattern.test("NIX").should.be.ok;
+                cfLastNamePattern.test("NIX").should.be.ok;
             });
             it ("Should validate cf lastName NIK", () => {
-                cfSurnamePattern.test("NIK").should.not.be.ok;
+                cfLastNamePattern.test("NIK").should.not.be.ok;
             });
             it ("Should validate cf lastName UAO", () => {
-                cfSurnamePattern.test("UAO").should.be.ok;
+                cfLastNamePattern.test("UAO").should.be.ok;
             });
             it ("Should validate cf lastName UIX", () => {
-                cfSurnamePattern.test("UIX").should.be.ok;
+                cfLastNamePattern.test("UIX").should.be.ok;
             });
             it ("Should validate cf lastName UXX", () => {
-                cfSurnamePattern.test("UXX").should.not.be.ok;
+                cfLastNamePattern.test("UXX").should.not.be.ok;
             });
             it ("Should validate cf lastName UIK", () => {
-                cfSurnamePattern.test("UIK").should.not.be.ok;
+                cfLastNamePattern.test("UIK").should.not.be.ok;
             });
             it ("Should validate cf lastName ASQ", () => {
-                cfSurnamePattern.test("ASQ").should.not.be.ok;
+                cfLastNamePattern.test("ASQ").should.not.be.ok;
             });
             it ("Should validate cf lastName ASX", () => {
-                cfSurnamePattern.test("ASX").should.not.be.ok;
+                cfLastNamePattern.test("ASX").should.not.be.ok;
             });
             it ("Should validate cf lastName UXI", () => {
-                cfSurnamePattern.test("UXI").should.not.be.ok;
+                cfLastNamePattern.test("UXI").should.not.be.ok;
             });
             it ("Should validate cf lastName UXK", () => {
-                cfSurnamePattern.test("UXK").should.not.be.ok;
+                cfLastNamePattern.test("UXK").should.not.be.ok;
             });
         });
         describe("Specific validator", () => {
             it ("Should validate cf lastName MRC for Marco", () => {
-                Pattern.cfSurname("Marco").test("MRC").should.be.ok;
+                Pattern.cfLastName("Marco").test("MRC").should.be.ok;
             });
             it ("Should validate cf lastName LXA for Alex", () => {
-                Pattern.cfSurname("Alex").test("LXA").should.be.ok;
+                Pattern.cfLastName("Alex").test("LXA").should.be.ok;
             });
             it ("Should validate cf lastName DLS for D'Annunzio", () => {
-                Pattern.cfSurname("D'Annunzio").test("DNN").should.be.ok;
+                Pattern.cfLastName("D'Annunzio").test("DNN").should.be.ok;
             });
             it ("Should validate cf lastName DVN for Da Vinci", () => {
-                Pattern.cfSurname("Da Vinci").test("DVN").should.be.ok;
+                Pattern.cfLastName("Da Vinci").test("DVN").should.be.ok;
             });
             it ("Should validate cf lastName AIE for Aieie", () => {
-                Pattern.cfSurname("Aieie").test("AIE").should.be.ok;
+                Pattern.cfLastName("Aieie").test("AIE").should.be.ok;
             });
             it ("Should validate cf lastName AIX for Ai", () => {
-                Pattern.cfSurname("Ai").test("AIX").should.be.ok;
+                Pattern.cfLastName("Ai").test("AIX").should.be.ok;
             });
             it ("Should validate LUX for cf partial lastName", () => {
-                Pattern.cfSurname("U").test("LUX").should.be.ok;
+                Pattern.cfLastName("U").test("LUX").should.be.ok;
             });
             it ("Should throw error for cf lastName with special chars", () => {
-                expect(() => Pattern.cfSurname("@ieie")).to.throw("Provided lastName is not valid, only letters, diacritics and apostrophe allowed");
+                expect(() => Pattern.cfLastName("@ieie")).to.throw("Provided lastName is not valid, only letters, diacritics and apostrophe allowed");
             });
             it ("Should throw error for cf lastName with double apostrophe", () => {
-                expect(() => Pattern.cfSurname("D''Aje")).to.throw("Provided lastName is not valid, only letters, diacritics and apostrophe allowed");
+                expect(() => Pattern.cfLastName("D''Aje")).to.throw("Provided lastName is not valid, only letters, diacritics and apostrophe allowed");
             });
         });
     });

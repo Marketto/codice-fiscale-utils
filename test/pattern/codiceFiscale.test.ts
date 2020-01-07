@@ -16,13 +16,13 @@ export default async () => {
         describe("Partial validator", () => {
             it("Should match VRNGNY97A65C351V providing name", () => {
                 Pattern.codiceFiscale({
-                    name: "Genny",
+                    firstName:"Genny",
                 }).test("VRNGNY97A65C351V").should.be.true;
             });
             it("Should match VRNGNY97A65C351V providing lastName, name, gender and place", () => {
                 Pattern.codiceFiscale({
                     gender: "F",
-                    name: "Genny",
+                    firstName:"Genny",
                     place: "Catania",
                     lastName: "Veronesi",
                 }).test("VRNGNY97A65C351V").should.be.true;
@@ -30,7 +30,7 @@ export default async () => {
             it("Should not match VRNGNY97A35C351V", () => {
                 Pattern.codiceFiscale({
                     gender: "F",
-                    name: "Genny",
+                    firstName:"Genny",
                     place: "Catania",
                     lastName: "Veronesi",
                 }).test("VRNGNY97A35C351V").should.be.false;
@@ -63,7 +63,7 @@ export default async () => {
                     day: 28,
                     gender: "F",
                     month: 3,
-                    name: "Genny",
+                    firstName:"Genny",
                     place: "Catania",
                     lastName: "Veronesi",
                     year: 1907,
@@ -74,7 +74,7 @@ export default async () => {
                     day: 5,
                     gender: "F",
                     month: 4,
-                    name: "Mia",
+                    firstName:"Mia",
                     place: "Torino",
                     lastName: "Marin",
                     year: 1902,

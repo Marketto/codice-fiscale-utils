@@ -1,5 +1,6 @@
 import moment from "moment";
 import { BelfiorePlace } from "../belfiore-connector/belfiore";
+import IPersonalInfo from "../interfaces/personal-info.interface";
 import Genders from "../types/genders.type";
 import MultiFormatDate from "../types/multi-format-date.type";
 import CheckDigitizer from "./check-digitizer.class";
@@ -8,6 +9,22 @@ import Pattern from "./pattern.class";
 
 export default class CFMismatchValidator {
     constructor(private codiceFiscale: string) {}
+
+    public matchPersonalInfo(personalInfo: IPersonalInfo): boolean {
+        return Pattern.codiceFiscale(personalInfo).test(this.codiceFiscale);
+    }
+    public mismatchPersonalInfo(personalInfo: IPersonalInfo): boolean {
+        return !!(
+            this.codiceFiscale &&
+            personalInfo &&
+            personalInfo.lastName &&
+            personalInfo.firstName &&
+            (personalInfo.date || (personalInfo.day && personalInfo.month && personalInfo.year)) &&
+            personalInfo.gender &&
+            personalInfo.place &&
+            !this.matchPersonalInfo(personalInfo)
+        );
+    }
 
     public matchLastName(lastName?: string): boolean {
         return Pattern.lastName(this.codiceFiscale).test(lastName || "");

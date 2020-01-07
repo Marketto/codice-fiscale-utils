@@ -53,7 +53,7 @@ export default class Validator {
      * @return CF Surname matcher
      * @throw INVALID_SURNAME
      */
-    public static cfSurname(lastName?: string): RegExp {
+    public static cfLastName(lastName?: string): RegExp {
         let matcher: string = CF_SURNAME_MATCHER;
         if (lastName) {
             if (!this.lastName().test(lastName)) {
@@ -70,13 +70,13 @@ export default class Validator {
      * @return CF name matcher
      * @throw INVALID_NAME
      */
-    public static cfName(name?: string): RegExp {
+    public static cfFirstName(name?: string): RegExp {
         let matcher: string = CF_NAME_MATCHER;
         if (name) {
             if (!this.lastName().test(name)) {
                 throw new CfuError(INVALID_NAME);
             }
-            matcher = Parser.nameToCf(name) || matcher;
+            matcher = Parser.firstNameToCf(name) || matcher;
         }
         return this.isolatedInsensitiveTailor(matcher);
     }
@@ -244,8 +244,8 @@ export default class Validator {
             if (parsedCf) {
                 matcher = this.deomocode(parsedCf);
             } else {
-                const { lastName, name, year, month, day, date, gender, place } = personalInfo;
-                if (lastName || name || year || month || day || date || gender || place) {
+                const { lastName, firstName, year, month, day, date, gender, place } = personalInfo;
+                if (lastName || firstName || year || month || day || date || gender || place) {
                     let dtParams: Date | null = null;
                     if (date) {
                         dtParams = Parser.parseDate(date);
@@ -253,8 +253,8 @@ export default class Validator {
                         dtParams = Parser.yearMonthDayToDate(year, month, day);
                     }
                     const generator: Array<() => RegExp> = [
-                        () => this.cfSurname(lastName),
-                        () => this.cfName(name),
+                        () => this.cfLastName(lastName),
+                        () => this.cfFirstName(firstName),
                         () => this.cfDateGender(dtParams, gender),
                         () => this.cfPlace(dtParams, place),
                     ];
