@@ -3,7 +3,9 @@
 * Typescript refactoring
 * RegExp validators moved into ***Pattern*** class
 * Naming convention for *name* and *surname* changed to ***firstName*** and ***lastName***
-* Implemented boolean validators in ***Validators*** class, match/mismatch compound validators & Angular demo
+* Implemented boolean validators in ***Validators*** class
+* Match and Mismatch compound validators (cf/lastName, cf/firsName, ... birthDate/birthPlace)
+* Angular demo
 
 ### ~~1.1.3~~ - External Diacritic remover [Broken build] (2019-12-01)
 * Implemented Rollup for packaging
