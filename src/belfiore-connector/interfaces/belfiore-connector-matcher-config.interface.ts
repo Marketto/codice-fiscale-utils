@@ -2,5 +2,5 @@ import IBelfioreConnectorCommonConfig from "./belfiore-connector-common-config.i
 
 export default interface IBelfioreConnectorMatcherConfig extends IBelfioreConnectorCommonConfig {
     codeMatcher: RegExp;
-    province?: undefined;
+    province: undefined;
 }
