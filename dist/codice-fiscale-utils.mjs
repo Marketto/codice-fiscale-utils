@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 1.1.3
+ * @marketto/codice-fiscale-utils 1.2.0
  * Copyright (c) 2019, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  * ============================================================
@@ -693,7 +693,7 @@ class Parser {
      * @param codiceFiscale Partial or complete CF to parse
      * @returns Partial/possible lastName
      */
-    static cfToSurname(codiceFiscale) {
+    static cfToLastName(codiceFiscale) {
         if (typeof codiceFiscale !== "string" || codiceFiscale.length < 3 || !(/^[A-Z]{3}/iu).test(codiceFiscale)) {
             return null;
         }
@@ -716,15 +716,15 @@ class Parser {
         }
     }
     /**
-     * Parse name information
+     * Parse firstName information
      * @param codiceFiscale Partial or complete CF to parse
-     * @returns Partial/possible name
+     * @returns Partial/possible firstName
      */
-    static cfToName(codiceFiscale) {
+    static cfToFirstName(codiceFiscale) {
         if (typeof codiceFiscale !== "string" || codiceFiscale.length < 3 || !(/^[A-Z]{6}/iu).test(codiceFiscale)) {
             return null;
         }
-        return this.cfToSurname(codiceFiscale.substr(3, 3));
+        return this.cfToLastName(codiceFiscale.substr(3, 3));
     }
     /**
      * Parse gender information
@@ -857,8 +857,8 @@ class Parser {
         const day = this.cfToBirthDay(fiscalCode) || undefined;
         const place = this.cfToBirthPlace(fiscalCode);
         const personalInfo = {
-            name: this.cfToName(fiscalCode) || undefined,
-            lastName: this.cfToSurname(fiscalCode) || undefined,
+            firstName: this.cfToFirstName(fiscalCode) || undefined,
+            lastName: this.cfToLastName(fiscalCode) || undefined,
             day,
             month,
             year,
@@ -892,19 +892,19 @@ class Parser {
         return partialCf.toUpperCase();
     }
     /**
-     * Parse name to cf part
-     * @param name Partial or complete CF to parse
+     * Parse firstName to cf part
+     * @param firstName Partial or complete CF to parse
      * @returns partial cf
      */
-    static nameToCf(name) {
-        if (!name || (name || "").trim().length < 2) {
+    static firstNameToCf(firstName) {
+        if (!firstName || (firstName || "").trim().length < 2) {
             return null;
         }
-        const consonants = this.charExtractor(name, CONSONANT_LIST);
+        const consonants = this.charExtractor(firstName, CONSONANT_LIST);
         if (consonants.length >= 4) {
             return (consonants[0] + consonants.substr(2, 2)).toUpperCase();
         }
-        return this.lastNameToCf(name);
+        return this.lastNameToCf(firstName);
     }
     /**
      * Parse year to cf part
@@ -983,13 +983,16 @@ class Parser {
         const parsedDate = moment(date);
         return parsedDate.isValid() ? parsedDate.toDate() : null;
     }
-    static parsePlace(place) {
+    static parsePlace(place, scopedBelfioreConnector = Belfiore) {
         let verifiedBirthPlace;
-        if (typeof place === "object" && place.belfioreCode) {
-            verifiedBirthPlace = place;
+        if (!place) {
+            return null;
+        }
+        else if (typeof place === "object" && place.belfioreCode) {
+            verifiedBirthPlace = scopedBelfioreConnector[place.belfioreCode];
         }
         else if (typeof place === "string") {
-            verifiedBirthPlace = Belfiore[place] || Belfiore.findByName(place);
+            verifiedBirthPlace = scopedBelfioreConnector[place] || scopedBelfioreConnector.findByName(place);
         }
         return verifiedBirthPlace || null;
     }
@@ -1032,7 +1035,7 @@ class Parser {
             placeFinder = placeFinder.active(birthDate);
         }
         if (placeFinder) {
-            const foundPlace = placeFinder.findByName(name);
+            const foundPlace = this.parsePlace(name, placeFinder);
             if (foundPlace) {
                 return foundPlace.belfioreCode;
             }
@@ -1043,14 +1046,14 @@ class Parser {
      * Generates full CF
      * @returns Complete CF
      */
-    static encodeCf({ lastName, name, year, month, day, date, gender, place, }) {
+    static encodeCf({ lastName, firstName, year, month, day, date, gender, place, }) {
         const dtParams = this.parseDate(date) || this.yearMonthDayToDate(year, month, day);
-        if (!(dtParams && lastName && name && gender && place)) {
+        if (!(dtParams && lastName && firstName && gender && place)) {
             return null;
         }
         const generator = [
             () => this.lastNameToCf(lastName),
-            () => this.nameToCf(name),
+            () => this.firstNameToCf(firstName),
             () => this.dateGenderToCf(dtParams, gender),
             () => this.placeToCf(dtParams, place),
             () => CheckDigitizer.checkDigit(cf),
@@ -1123,7 +1126,7 @@ class Validator {
      * @return CF Surname matcher
      * @throw INVALID_SURNAME
      */
-    static cfSurname(lastName) {
+    static cfLastName(lastName) {
         let matcher = CF_SURNAME_MATCHER;
         if (lastName) {
             if (!this.lastName().test(lastName)) {
@@ -1139,13 +1142,13 @@ class Validator {
      * @return CF name matcher
      * @throw INVALID_NAME
      */
-    static cfName(name) {
+    static cfFirstName(name) {
         let matcher = CF_NAME_MATCHER;
         if (name) {
             if (!this.lastName().test(name)) {
                 throw new CfuError(INVALID_NAME);
             }
-            matcher = Parser.nameToCf(name) || matcher;
+            matcher = Parser.firstNameToCf(name) || matcher;
         }
         return this.isolatedInsensitiveTailor(matcher);
     }
@@ -1303,8 +1306,8 @@ class Validator {
                 matcher = this.deomocode(parsedCf);
             }
             else {
-                const { lastName, name, year, month, day, date, gender, place } = personalInfo;
-                if (lastName || name || year || month || day || date || gender || place) {
+                const { lastName, firstName, year, month, day, date, gender, place } = personalInfo;
+                if (lastName || firstName || year || month || day || date || gender || place) {
                     let dtParams = null;
                     if (date) {
                         dtParams = Parser.parseDate(date);
@@ -1313,8 +1316,8 @@ class Validator {
                         dtParams = Parser.yearMonthDayToDate(year, month, day);
                     }
                     const generator = [
-                        () => this.cfSurname(lastName),
-                        () => this.cfName(name),
+                        () => this.cfLastName(lastName),
+                        () => this.cfFirstName(firstName),
                         () => this.cfDateGender(dtParams, gender),
                         () => this.cfPlace(dtParams, place),
                     ];
@@ -1468,6 +1471,19 @@ class Validator {
 class CFMismatchValidator {
     constructor(codiceFiscale) {
         this.codiceFiscale = codiceFiscale;
+    }
+    matchPersonalInfo(personalInfo) {
+        return Validator.codiceFiscale(personalInfo).test(this.codiceFiscale);
+    }
+    mismatchPersonalInfo(personalInfo) {
+        return !!(this.codiceFiscale &&
+            personalInfo &&
+            personalInfo.lastName &&
+            personalInfo.firstName &&
+            (personalInfo.date || (personalInfo.day && personalInfo.month && personalInfo.year)) &&
+            personalInfo.gender &&
+            personalInfo.place &&
+            !this.matchPersonalInfo(personalInfo));
     }
     matchLastName(lastName) {
         return Validator.lastName(this.codiceFiscale).test(lastName || "");
