@@ -20,8 +20,8 @@ TS utilities to handle Italian Codice Fiscale
 ## 🔶WARNING Upgrading from 1.1.x🔶
 ### Methods to generate RegExp were moved to Pattern class
 ### Former Validator.isValid method was migrated to Validator.codiceFiscale(cf: string).valid (getter)
-### ***name*** method was renamed into ***firstName*** due to typescript migration
-### ***surname*** method was renamed into ***lastName*** according to firstName naming style
+### ***name*** was renamed into ***firstName*** due to typescript migration (in method names and data models)
+### ***surname*** was renamed into ***lastName*** according to the new naming convention (even in method names and data models)
 
 ## 📗FAQs?
 1. **Why should I need a library? Can't I use just a RegExp?**
@@ -86,14 +86,14 @@ const {Parser} = codiceFiscaleUtils;
 Parser.cfDeomocode('KKALMNVMAPLB331Z'); //KKALMN91A30B331Z
 ```
 
-#### Parser.cfToSurname
+#### Parser.cfToLastName
 ```javascript
-Parser.cfToSurname('WYZ'); //W*Y*Z*
+Parser.cfToLastName('WYZ'); //W*Y*Z*
 ```
 
-#### Parser.cfToName
+#### Parser.cfToFirstName
 ```javascript
-Parser.cfToName('ZZZWAE'); //WAE*
+Parser.cfToFirstName('ZZZWAE'); //WAE*
 ```
 
 #### Parser.cfToGender
