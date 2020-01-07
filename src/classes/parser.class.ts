@@ -381,14 +381,17 @@ export default class Parser {
         return parsedDate.isValid() ? parsedDate.toDate() : null;
     }
 
-    public static parsePlace(place: BelfiorePlace | string): BelfiorePlace | null {
+    public static parsePlace(
+        place: BelfiorePlace | string,
+        scopedBelfioreConnector: BelfioreConnector = Belfiore,
+    ): BelfiorePlace | null {
         let verifiedBirthPlace: BelfiorePlace | null | undefined;
         if (!place) {
             return null;
         } else if (typeof place === "object" && place.belfioreCode) {
-            verifiedBirthPlace = place;
+            verifiedBirthPlace = scopedBelfioreConnector[place.belfioreCode];
         } else if (typeof place === "string") {
-            verifiedBirthPlace = Belfiore[place] || Belfiore.findByName(place);
+            verifiedBirthPlace = scopedBelfioreConnector[place] || scopedBelfioreConnector.findByName(place);
         }
         return verifiedBirthPlace || null;
     }
@@ -440,6 +443,7 @@ export default class Parser {
         } else {
             return null;
         }
+
         let placeFinder: BelfioreConnector | undefined = Belfiore;
         if (province) {
             placeFinder = placeFinder.byProvince(province);
@@ -448,7 +452,7 @@ export default class Parser {
             placeFinder = placeFinder.active(birthDate);
         }
         if (placeFinder) {
-            const foundPlace: BelfiorePlace | null = placeFinder.findByName(name);
+            const foundPlace: BelfiorePlace | null = this.parsePlace(name, placeFinder);
             if (foundPlace) {
                 return foundPlace.belfioreCode;
             }
