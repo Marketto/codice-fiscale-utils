@@ -58,7 +58,7 @@ export const cfGenderMismatch = mismatchValidatorGenerator((
   codiceFiscaleFormControlValue: string,
   genderFormControlValue: string
 ): ValidationError => {
-  return cfValidator.matchGender(genderFormControlValue) ?
+  return cfValidator.mismatchGender(genderFormControlValue) ?
     {
       cfGenderMismatch: {
         gender: genderFormControlValue,
