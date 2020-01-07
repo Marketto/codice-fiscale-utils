@@ -1,9 +1,9 @@
 import cfDecode from "./parser/cfDecode.test";
 import cfDeomocode from "./parser/cfDeomocode.test";
 import cfToBirthDate from "./parser/cfToBirthDate.test";
+import cfToFirstName from "./parser/cfToFirstName.test";
 import cfToGender from "./parser/cfToGender.test";
-import cfToName from "./parser/cfToName.test";
-import cfToSurname from "./parser/cfToSurname.test";
+import cfToLastName from "./parser/cfToLastName.test";
 import dateGenderToCf from "./parser/dateGenderToCf.test";
 import dayGenderToCf from "./parser/dayGenderToCf.test";
 import encodeCf from "./parser/encodeCf.test";
@@ -19,8 +19,8 @@ describe("CodiceFiscaleUtils:Parser", () => {
 
     describe("methods from CF", () => Promise.all([
         cfDeomocode(),
-        cfToSurname(),
-        cfToName(),
+        cfToLastName(),
+        cfToFirstName(),
         cfToGender(),
         cfToBirthDate(),
         cfDecode(),

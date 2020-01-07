@@ -41,7 +41,7 @@ export default class Parser {
      * @param codiceFiscale Partial or complete CF to parse
      * @returns Partial/possible lastName
      */
-    public static cfToSurname(codiceFiscale: string): string | null {
+    public static cfToLastName(codiceFiscale: string): string | null {
         if (typeof codiceFiscale !== "string" || codiceFiscale.length < 3 || !(/^[A-Z]{3}/iu).test(codiceFiscale)) {
             return null;
         }
@@ -70,15 +70,15 @@ export default class Parser {
     }
 
     /**
-     * Parse name information
+     * Parse firstName information
      * @param codiceFiscale Partial or complete CF to parse
-     * @returns Partial/possible name
+     * @returns Partial/possible firstName
      */
-    public static cfToName(codiceFiscale: string): string | null {
+    public static cfToFirstName(codiceFiscale: string): string | null {
         if (typeof codiceFiscale !== "string" || codiceFiscale.length < 3 || !(/^[A-Z]{6}/iu).test(codiceFiscale)) {
             return null;
         }
-        return this.cfToSurname(codiceFiscale.substr(3, 3));
+        return this.cfToLastName(codiceFiscale.substr(3, 3));
     }
 
     /**
@@ -229,8 +229,8 @@ export default class Parser {
         const day = this.cfToBirthDay(fiscalCode) || undefined;
         const place = this.cfToBirthPlace(fiscalCode);
         const personalInfo: IPersonalInfo = {
-            firstName: this.cfToName(fiscalCode) || undefined,
-            lastName: this.cfToSurname(fiscalCode) || undefined,
+            firstName: this.cfToFirstName(fiscalCode) || undefined,
+            lastName: this.cfToLastName(fiscalCode) || undefined,
 
             day,
             month,
@@ -274,19 +274,19 @@ export default class Parser {
     }
 
     /**
-     * Parse name to cf part
-     * @param name Partial or complete CF to parse
+     * Parse firstName to cf part
+     * @param firstName Partial or complete CF to parse
      * @returns partial cf
      */
-    public static firstNameToCf(name?: string | null): string | null {
-        if (!name || (name || "").trim().length < 2) {
+    public static firstNameToCf(firstName?: string | null): string | null {
+        if (!firstName || (firstName || "").trim().length < 2) {
             return null;
         }
-        const consonants = this.charExtractor(name, CONSONANT_LIST);
+        const consonants = this.charExtractor(firstName, CONSONANT_LIST);
         if (consonants.length >= 4) {
             return (consonants[0] + consonants.substr(2, 2)).toUpperCase();
         }
-        return this.lastNameToCf(name);
+        return this.lastNameToCf(firstName);
     }
 
     /**
@@ -473,7 +473,7 @@ export default class Parser {
         place,
     }: IPersonalInfo): string | null {
         const dtParams = this.parseDate(date) || this.yearMonthDayToDate(year, month, day);
-        if (!(dtParams && lastName && name && gender && place)) {
+        if (!(dtParams && lastName && firstName && gender && place)) {
             return null;
         }
         const generator = [
