@@ -4,7 +4,7 @@
       <b-form-group
         :state="stateCf"
         description="Codice fiscale"
-        label="Enter Codice Fiscale"
+        label="Codice Fiscale"
         label-for="cf"
         :invalid-feedback="invalidCf"
         class="col-12"
@@ -15,31 +15,31 @@
       <hr class="col-12"/>
 
       <b-form-group
-        :state="stateSurname"
-        description="Surname"
-        label="Enter Surname"
+        :state="stateLastName"
+        description="Last Name"
+        label="Last Name"
         label-for="lastName"
-        :invalid-feedback="invalidSurname"
+        :invalid-feedback="invalidLastName"
         class="col-6"
       >
-        <b-form-input :state="stateSurname" id="lastName" v-model="lastName" trim></b-form-input>
+        <b-form-input :state="stateLastName" id="lastName" v-model="lastName" trim></b-form-input>
       </b-form-group>
 
       <b-form-group
-        :state="stateName"
-        description="Name"
-        label="Enter Name"
+        :state="stateFirstName"
+        description="First Name"
+        label="First Name"
         label-for="name"
-        :invalid-feedback="invalidName"
+        :invalid-feedback="invalidFirstName"
         class="col-6"
       >
-        <b-form-input :state="stateName" id="name" v-model="name" trim></b-form-input>
+        <b-form-input :state="stateFirstName" id="firstName" v-model="firstName" trim></b-form-input>
       </b-form-group>
 
       <b-form-group
         :state="stateDate"
         description="Birth Date"
-        label="Enter Birth Date"
+        label="Birth Date"
         label-for="date"
         :invalid-feedback="invalidDate"
         class="col-4"
@@ -65,7 +65,7 @@
       <b-form-group
         :state="statePlace"
         description="Birth Place"
-        label="Enter Birth Place"
+        label="Birth Place"
         label-for="place"
         :invalid-feedback="invalidPlace"
         class="col-4"
@@ -87,50 +87,54 @@ export default {
   name: 'CodiceFiscale',
   computed: {
     stateCf() {
-      if(!(this.cf || '').length) {
+      if (!this.cf){
         return null;
       }
-      const personalInfoCheck = CodiceFiscaleUtils.Pattern.codiceFiscale({
+      return CodiceFiscaleUtils.Validator.codiceFiscale(this.cf).valid
+        && !CodiceFiscaleUtils.Validator.codiceFiscale(this.cf).mismatchPersonalInfo({
           lastName: this.lastName,
-          name: this.name,
+          firstName: this.firstName,
           date: this.date,
           gender: this.gender,
           place: this.place
         });
-      return CodiceFiscaleUtils.Validator.isValid(this.cf) &&
-        personalInfoCheck.test(this.cf);
     },
-    stateSurname() {
-      if(!(this.lastName || '').length) {
+    stateLastName() {
+      if (!this.lastName){
         return null;
       }
-      return CodiceFiscaleUtils.Pattern.lastName(this.cf).test(this.lastName);
+      return CodiceFiscaleUtils.Validator.isLastNameValid(this.lastName) &&
+        !CodiceFiscaleUtils.Validator.codiceFiscale(this.cf).mismatchLastName(this.lastName);
     },
-    stateName() {
-      if(!(this.name || '').length) {
+    stateFirstName() {
+      if (!this.firstName){
         return null;
       }
-      return CodiceFiscaleUtils.Pattern.firstName(this.cf).test(this.name);
+      return CodiceFiscaleUtils.Validator.isFirstNameValid(this.firstName) &&
+        !CodiceFiscaleUtils.Validator.codiceFiscale(this.cf).mismatchFirstName(this.firstName);
     },
     stateDate() {
-      if(!this.date) {
+      if (!this.date){
         return null;
       }
-      return moment(this.date).isValid() && CodiceFiscaleUtils.Pattern.date(this.cf).test(this.date);
+      return CodiceFiscaleUtils.Validator.isBirthDateValid(this.date) &&
+        !CodiceFiscaleUtils.Validator.birthDatePlaceMismatch(this.date, this.place) &&
+        !CodiceFiscaleUtils.Validator.codiceFiscale(this.cf).mismatchBirthDate(this.date);
     },
     stateGender() {
-      if(!this.gender) {
+      if (!this.gender){
         return null;
       }
-      return CodiceFiscaleUtils.Pattern.gender(this.cf).test(this.gender);
+      return CodiceFiscaleUtils.Validator.isGenderValid(this.gender) &&
+        !CodiceFiscaleUtils.Validator.codiceFiscale(this.cf).mismatchGender(this.gender);
     },
     statePlace() {
-      if(!this.place) {
+      if (!this.place){
         return null;
       }
-      const placeSubset = moment(this.date).isValid() ? CodiceFiscaleUtils.Belfiore.active(this.date) : CodiceFiscaleUtils.Belfiore;
-      const placeData = placeSubset.findByName(this.place);
-      return !!placeData && !!CodiceFiscaleUtils.Pattern.place(this.cf).test(this.place);
+      return CodiceFiscaleUtils.Validator.isBirthPlaceValid(this.place) &&
+        !CodiceFiscaleUtils.Validator.birthPlaceDateMismatch(this.place, this.date) &&
+        !CodiceFiscaleUtils.Validator.codiceFiscale(this.cf).mismatchBirthPlace(this.place);
     },
     invalidCf() {
       if ((this.cf || '').length <16) {
@@ -139,12 +143,12 @@ export default {
       if ((this.cf || '').length > 16) {
         return `You wrote ${this.cf.length} chars, a valid CF should be 16 chars only`;
       }
-      if (!CodiceFiscaleUtils.Validator.isValid(this.cf)) {
+      if (CodiceFiscaleUtils.Validator.codiceFiscale(this.cf).invalid) {
         return 'Please enter a valid Codice Fiscale';
       }
       const fieldChecker = {
-        lastName: this.stateSurname,
-        name: this.stateName,
+        lastName: this.stateLastName,
+        firstName: this.stateFirstName,
         date: this.stateDate,
         gender: this.stateGender,
         place: this.statePlace
@@ -154,30 +158,30 @@ export default {
         .map(([key]) => key);
       return `The Codice Fiscale doesn't match ${fieldsToCheck.join(', ')}`;
     },
-    invalidSurname: () => 'The provided lastName doesn\'t match the current Codice Fiscale',
-    invalidName: () => 'The provided name doesn\'t match the current Codice Fiscale',
+    invalidLastName: () => 'Provided Last name is not valid or doesn\'t match the current Codice Fiscale',
+    invalidFirstName: () => 'Provided First name is not valid or doesn\'t match the current Codice Fiscale',
     invalidDate() {
-      if (!moment(this.date).isValid()) {
+      if (CodiceFiscaleUtils.Validator.isBirthDateInvalid(this.date)) {
         return 'Please enter a valid date';
       }
-      return 'The provided date doesn\'t match the current Codice Fiscale';
+      return 'Provided date doesn\'t match the current Codice Fiscale';
     },
-    invalidGender: () => 'The provided gender doesn\'t match the current Codice Fiscale',
+    invalidGender: () => 'Provided gender doesn\'t match the current Codice Fiscale',
     invalidPlace() {
-      if (!CodiceFiscaleUtils.Belfiore.findByName(this.place)) {
+      if (CodiceFiscaleUtils.Validator.isBirthPlaceInvalid(this.place)) {
         return 'Please enter a valid city or country name';
       }
-      if (moment(this.date).isValid() && !CodiceFiscaleUtils.Belfiore.active(this.date).findByName(this.place)) {
-        return 'The provided place seems to be expired or not yet founded for the given birth date';
+      if (CodiceFiscaleUtils.Validator.birthPlaceDateMismatch(this.place, this.date)) {
+        return 'Provided place seems to be expired or not yet founded for the given birth date';
       }
-      return 'The provided place doesn\'t match the current Codice Fiscale';
+      return 'Provided place doesn\'t match the current Codice Fiscale';
     }
   },
   data() {
     return {
       cf: null,
       lastName: null,
-      name: null,
+      firstName: null,
       date: null,
       gender: null,
       place: null,
