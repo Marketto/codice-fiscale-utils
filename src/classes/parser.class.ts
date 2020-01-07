@@ -229,7 +229,7 @@ export default class Parser {
         const day = this.cfToBirthDay(fiscalCode) || undefined;
         const place = this.cfToBirthPlace(fiscalCode);
         const personalInfo: IPersonalInfo = {
-            name: this.cfToName(fiscalCode) || undefined,
+            firstName: this.cfToName(fiscalCode) || undefined,
             lastName: this.cfToSurname(fiscalCode) || undefined,
 
             day,
@@ -278,7 +278,7 @@ export default class Parser {
      * @param name Partial or complete CF to parse
      * @returns partial cf
      */
-    public static nameToCf(name?: string | null): string | null {
+    public static firstNameToCf(name?: string | null): string | null {
         if (!name || (name || "").trim().length < 2) {
             return null;
         }
@@ -383,7 +383,9 @@ export default class Parser {
 
     public static parsePlace(place: BelfiorePlace | string): BelfiorePlace | null {
         let verifiedBirthPlace: BelfiorePlace | null | undefined;
-        if (typeof place === "object" && place.belfioreCode) {
+        if (!place) {
+            return null;
+        } else if (typeof place === "object" && place.belfioreCode) {
             verifiedBirthPlace = place;
         } else if (typeof place === "string") {
             verifiedBirthPlace = Belfiore[place] || Belfiore.findByName(place);
@@ -460,7 +462,7 @@ export default class Parser {
      */
     public static encodeCf({
         lastName,
-        name,
+        firstName,
 
         year,
         month,
@@ -476,7 +478,7 @@ export default class Parser {
         }
         const generator = [
             () => this.lastNameToCf(lastName),
-            () => this.nameToCf(name),
+            () => this.firstNameToCf(firstName),
             () => this.dateGenderToCf(dtParams, gender),
             () => this.placeToCf(dtParams, place),
             () => CheckDigitizer.checkDigit(cf),

@@ -3,7 +3,7 @@ import DateMonth from "../types/date-month.type";
 import Genders from "../types/genders.type";
 
 export default interface IPersonalInfo {
-    name?: string;
+    firstName?: string;
     lastName?: string;
 
     date?: Date;

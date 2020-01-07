@@ -130,7 +130,7 @@ dt.toJSON(); //1981-01-23T...
 const birthPlace = Parser.cfToBirthPlace('XXXYYY92B20H501');
 /*
 {
-    name: "ROMA",
+    firstName: "ROMA",
     belfioreCode: "H501",
     creationDate: Date("1884-09-10T22:00:00.000Z"),
     expirationDate: Date("9999-12-31T22:59:59.999Z"),
@@ -153,7 +153,7 @@ Parser.cfDecode('VRNGNY07D68C351V');
 /*
 {
     lastName: 'V*R*N*',
-    name: 'G*N*Y*',
+    firstName: 'G*N*Y*',
     day: 28,
     month: 3,
     year: 2017,
@@ -175,12 +175,12 @@ Parser.lastNameToCf('Réno'); //RNE
 Parser.lastNameToCf('Aieie'); //AIE
 ```
 
-#### Parser.nameToCf
+#### Parser.firstNameToCf
 ```javascript
-Parser.nameToCf('Dòminique'); //DNQ
-Parser.nameToCf('Mark'); //MRK
-Parser.nameToCf('Tom'); //TMO
-Parser.nameToCf('Ania'); //NAI
+Parser.firstNameToCf('Dòminique'); //DNQ
+Parser.firstNameToCf('Mark'); //MRK
+Parser.firstNameToCf('Tom'); //TMO
+Parser.firstNameToCf('Ania'); //NAI
 ```
 
 #### Parser.yearToCf
@@ -224,7 +224,7 @@ Parser.placeToCf('Bologna');
 /*
 {
     belfioreCode: 'A944',
-    name: 'BOLOGNA',
+    firstName: 'BOLOGNA',
     creationDate: 1861-03-16T23:00:00.000Z,
     expirationDate: 9999-12-31T22:59:59.999Z,
     dataSource: {...},
@@ -235,7 +235,7 @@ Parser.placeToCf([1990],'Unione Sovietica');
 /*
 {
     belfioreCode: 'Z135',
-    name: 'Unione Sovietica',
+    firstName: 'Unione Sovietica',
     creationDate: 1860-12-31T23:00:00.000Z,
     expirationDate: 1991-12-31T22:59:59.999Z,
     dataSource: {...},
@@ -249,7 +249,7 @@ Parser.placeToCf([2000],'Unione Sovietica'); //null
 ```javascript
 Parser.encodeCf({
     lastName: 'Veronesi',
-    name: 'Genny',
+    firstName: 'Genny',
     year: 1907,
     month: 3,
     day: 28,
@@ -265,20 +265,20 @@ Class with static methods
 const {Pattern} = codiceFiscaleUtils;
 ```
 
-#### Pattern.cfSurname
+#### Pattern.cfLastName
 ```javascript
-Pattern.cfSurname().test('KST'); //true
-Pattern.cfSurname().test('AST'); //false
-Pattern.cfSurname('Alex').test('KST'); //false
-Pattern.cfSurname('Alex').test('LXA'); //true
+Pattern.cfLastName().test('KST'); //true
+Pattern.cfLastName().test('AST'); //false
+Pattern.cfLastName('Alex').test('KST'); //false
+Pattern.cfLastName('Alex').test('LXA'); //true
 ```
 
-#### Pattern.cfName
+#### Pattern.cfFirstName
 ```javascript
-Pattern.cfName().test('NIX'); //true
-Pattern.cfName().test('UIK'); //false
-Pattern.cfName('Dominique').test('DMN'); //false
-Pattern.cfName('Dominique').test('DNQ'); //true
+Pattern.cfFirstName().test('NIX'); //true
+Pattern.cfFirstName().test('UIK'); //false
+Pattern.cfFirstName('Dominique').test('DMN'); //false
+Pattern.cfFirstName('Dominique').test('DNQ'); //true
 ```
 
 #### Pattern.cfYear
@@ -342,14 +342,14 @@ Pattern.codiceFiscale().test('MRNMIA02E45L2193'); //false
 //Partial info
 Pattern.codiceFiscale({
     lastName: 'Veronesi',
-    name: 'Genny',
+    firstName: 'Genny',
     gender: 'F',
     place: 'Catania'
 }).test('VRNGNY97A65C351V'); //true
 //Full info
 Pattern.codiceFiscale({
     lastName: 'Veronesi',
-    name: 'Genny',
+    firstName: 'Genny',
     year: 1907,
     month: 3,
     day: 28,
@@ -365,7 +365,7 @@ Pattern.lastName('VLD').test('Vàlidàtòr'); //true
 Pattern.lastName('AIX').test('Air'); //false
 ```
 
-#### Pattern.name
+#### Pattern.firstName
 ```javascript
 Pattern.firstName().test('Rossi'); //true
 Pattern.firstName('XYZAIE').test('Aieie'); //true
