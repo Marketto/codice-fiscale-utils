@@ -17,7 +17,7 @@ export default class CFMismatchValidator {
     }
 
     public matchFirstName(firstName: string): boolean {
-        return Pattern.lastName(this.codiceFiscale).test(firstName || "");
+        return Pattern.firstName(this.codiceFiscale).test(firstName || "");
     }
     public mismatchFirstName(firstName: string): boolean {
         return !!(this.codiceFiscale && firstName && !this.matchFirstName(firstName));
