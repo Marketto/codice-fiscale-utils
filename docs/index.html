@@ -76,7 +76,12 @@
 <a href="http://blog.marketto.it"><img src="https://img.shields.io/badge/blog-marketto-blue.svg" alt="Blog"></a>
 <a href="https://ko-fi.com/marketto"><img src="https://img.shields.io/badge/Ko--fi-donate-blueviolet" alt="Buy me a coffee"></a></p>
 <p>TS utilities to handle Italian Codice Fiscale</p>
-<h2>FAQs?</h2>
+<h2>🔶WARNING Upgrading from 1.1.x🔶</h2>
+<h3>Methods to generate RegExp were moved to Pattern class</h3>
+<h3>Former Validator.isValid method was migrated to Validator.codiceFiscale(cf: string).valid (getter)</h3>
+<h3><em><strong>name</strong></em> was renamed into <em><strong>firstName</strong></em> due to typescript migration (in method names and data models)</h3>
+<h3><em><strong>surname</strong></em> was renamed into <em><strong>lastName</strong></em> according to the new naming convention (even in method names and data models)</h3>
+<h2>📗FAQs?</h2>
 <ol>
 <li>
 <p><strong>Why should I need a library? Can't I use just a RegExp?</strong>
@@ -84,7 +89,7 @@
 </li>
 <li>
 <p><strong>What about the omocodes (Omocodia/Omocodice) problem, does it work?</strong>
-<em>Absolutely! There's a dedicated class to encode or decode such kind of CodiceFiscale and it's properly integrated in</em> <a href="#parser"><em><strong>Parser</strong></em></a> <em>and</em> <a href="#validator"><em><strong>Validator</strong></em></a> <em>methods</em></p>
+<em>Absolutely! There's a dedicated class to encode or decode such kind of CodiceFiscale and it's properly integrated in</em> <a href="#parser"><em><strong>Parser</strong></em></a>, <a href="#validator"><em><strong>Validator</strong></em></a> and <a href="#pattern"><em><strong>Pattern</strong></em></a> <em>methods</em></p>
 </li>
 <li>
 <p><strong>Why it's ~250KB? Seems a lot</strong>
@@ -99,6 +104,8 @@
 <em>Sure, it's built to work both in node and browser environments! Give a look at the <a href="#demo">Demo section</a></em></p>
 </li>
 </ol>
+<h2>📙<a href="CHANGELOG.MD">CHANGELOG</a></h2>
+<h2>🚃<a href="ROADMAP.MD">ROADMAP</a></h2>
 <h2>INSTALLATION</h2>
 <pre class="prettyprint source lang-{r,"><code>npm i -s @marketto/codice-fiscale-utils
 </code></pre>
@@ -131,11 +138,11 @@
 <h4>Parser.deomocode</h4>
 <pre class="prettyprint source lang-javascript"><code>Parser.cfDeomocode('KKALMNVMAPLB331Z'); //KKALMN91A30B331Z
 </code></pre>
-<h4>Parser.cfToSurname</h4>
-<pre class="prettyprint source lang-javascript"><code>Parser.cfToSurname('WYZ'); //W*Y*Z*
+<h4>Parser.cfToLastName</h4>
+<pre class="prettyprint source lang-javascript"><code>Parser.cfToLastName('WYZ'); //W*Y*Z*
 </code></pre>
-<h4>Parser.cfToName</h4>
-<pre class="prettyprint source lang-javascript"><code>Parser.cfToName('ZZZWAE'); //WAE*
+<h4>Parser.cfToFirstName</h4>
+<pre class="prettyprint source lang-javascript"><code>Parser.cfToFirstName('ZZZWAE'); //WAE*
 </code></pre>
 <h4>Parser.cfToGender</h4>
 <pre class="prettyprint source lang-javascript"><code>Parser.cfToGender('XXXYYY90B20'); //M
@@ -160,7 +167,7 @@ dt.toJSON(); //1981-01-23T...
 <pre class="prettyprint source lang-javascript"><code>const birthPlace = Parser.cfToBirthPlace('XXXYYY92B20H501');
 /*
 {
-    name: &quot;ROMA&quot;,
+    firstName: &quot;ROMA&quot;,
     belfioreCode: &quot;H501&quot;,
     creationDate: Date(&quot;1884-09-10T22:00:00.000Z&quot;),
     expirationDate: Date(&quot;9999-12-31T22:59:59.999Z&quot;),
@@ -180,8 +187,8 @@ dt.toJSON(); //1981-01-23T...
 <pre class="prettyprint source lang-javascript"><code>Parser.cfDecode('VRNGNY07D68C351V');
 /*
 {
-    surname: 'V*R*N*',
-    name: 'G*N*Y*',
+    lastName: 'V*R*N*',
+    firstName: 'G*N*Y*',
     day: 28,
     month: 3,
     year: 2017,
@@ -193,16 +200,16 @@ dt.toJSON(); //1981-01-23T...
 <h4>Parser.removeDiacritics</h4>
 <pre class="prettyprint source lang-javascript"><code>Parser.removeDiacritics('Tést Tèxt'); //Test Text
 </code></pre>
-<h4>Parser.surnameToCf</h4>
-<pre class="prettyprint source lang-javascript"><code>Parser.surnameToCf('Rossi'); //RSS
-Parser.surnameToCf('Réno'); //RNE
-Parser.surnameToCf('Aieie'); //AIE
+<h4>Parser.lastNameToCf</h4>
+<pre class="prettyprint source lang-javascript"><code>Parser.lastNameToCf('Rossi'); //RSS
+Parser.lastNameToCf('Réno'); //RNE
+Parser.lastNameToCf('Aieie'); //AIE
 </code></pre>
-<h4>Parser.nameToCf</h4>
-<pre class="prettyprint source lang-javascript"><code>Parser.nameToCf('Dòminique'); //DNQ
-Parser.nameToCf('Mark'); //MRK
-Parser.nameToCf('Tom'); //TMO
-Parser.nameToCf('Ania'); //NAI
+<h4>Parser.firstNameToCf</h4>
+<pre class="prettyprint source lang-javascript"><code>Parser.firstNameToCf('Dòminique'); //DNQ
+Parser.firstNameToCf('Mark'); //MRK
+Parser.firstNameToCf('Tom'); //TMO
+Parser.firstNameToCf('Ania'); //NAI
 </code></pre>
 <h4>Parser.yearToCf</h4>
 <pre class="prettyprint source lang-javascript"><code>Parser.yearToCf('1990'); //90
@@ -234,7 +241,7 @@ Parser.dateGenderToCf(moment(1988, 7, 3, 12), 'F'); //88M43
 /*
 {
     belfioreCode: 'A944',
-    name: 'BOLOGNA',
+    firstName: 'BOLOGNA',
     creationDate: 1861-03-16T23:00:00.000Z,
     expirationDate: 9999-12-31T22:59:59.999Z,
     dataSource: {...},
@@ -245,7 +252,7 @@ Parser.placeToCf([1990],'Unione Sovietica');
 /*
 {
     belfioreCode: 'Z135',
-    name: 'Unione Sovietica',
+    firstName: 'Unione Sovietica',
     creationDate: 1860-12-31T23:00:00.000Z,
     expirationDate: 1991-12-31T22:59:59.999Z,
     dataSource: {...},
@@ -256,8 +263,8 @@ Parser.placeToCf([2000],'Unione Sovietica'); //null
 </code></pre>
 <h4>Parser.encodeCf</h4>
 <pre class="prettyprint source lang-javascript"><code>Parser.encodeCf({
-    surname: 'Veronesi',
-    name: 'Genny',
+    lastName: 'Veronesi',
+    firstName: 'Genny',
     year: 1907,
     month: 3,
     day: 28,
@@ -265,78 +272,78 @@ Parser.placeToCf([2000],'Unione Sovietica'); //null
     place: 'Catania'
 }); //VRNGNY07D68C351V
 </code></pre>
-<h3>Validator</h3>
+<h3>Pattern</h3>
 <p>Class with static methods</p>
-<pre class="prettyprint source lang-javascript"><code>const {Validator} = codiceFiscaleUtils;
+<pre class="prettyprint source lang-javascript"><code>const {Pattern} = codiceFiscaleUtils;
 </code></pre>
-<h4>Validator.cfSurname</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.cfSurname().test('KST'); //true
-Validator.cfSurname().test('AST'); //false
-Validator.cfSurname('Alex').test('KST'); //false
-Validator.cfSurname('Alex').test('LXA'); //true
+<h4>Pattern.cfLastName</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.cfLastName().test('KST'); //true
+Pattern.cfLastName().test('AST'); //false
+Pattern.cfLastName('Alex').test('KST'); //false
+Pattern.cfLastName('Alex').test('LXA'); //true
 </code></pre>
-<h4>Validator.cfName</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.cfName().test('NIX'); //true
-Validator.cfName().test('UIK'); //false
-Validator.cfName('Dominique').test('DMN'); //false
-Validator.cfName('Dominique').test('DNQ'); //true
+<h4>Pattern.cfFirstName</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.cfFirstName().test('NIX'); //true
+Pattern.cfFirstName().test('UIK'); //false
+Pattern.cfFirstName('Dominique').test('DMN'); //false
+Pattern.cfFirstName('Dominique').test('DNQ'); //true
 </code></pre>
-<h4>Validator.cfYear</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.cfYear().test('07'); //true
-Validator.cfYear().test('3'); //false
-Validator.cfYear(1907).test('07'); //true
-Validator.cfYear(1986).test('U6'); //true - omocode
-Validator.cfYear(1986).test('87'); //false
+<h4>Pattern.cfYear</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.cfYear().test('07'); //true
+Pattern.cfYear().test('3'); //false
+Pattern.cfYear(1907).test('07'); //true
+Pattern.cfYear(1986).test('U6'); //true - omocode
+Pattern.cfYear(1986).test('87'); //false
 </code></pre>
-<h4>Validator.cfMonth</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.cfMonth().test('C'); //true
-Validator.cfMonth().test('Z'); //false
-Validator.cfMonth(3).test('D'); //true
-Validator.cfMonth(3).test('A'); //false
+<h4>Pattern.cfMonth</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.cfMonth().test('C'); //true
+Pattern.cfMonth().test('Z'); //false
+Pattern.cfMonth(3).test('D'); //true
+Pattern.cfMonth(3).test('A'); //false
 </code></pre>
-<h4>Validator.cfDay</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.cfDay().test('0M'); //true - omocode
-Validator.cfDay().test('33'); //false
-Validator.cfDay(12).test('12'); //true - male
-Validator.cfDay(12).test('52'); //true - female
-Validator.cfDay(12).test('MN'); //true - omocode
-Validator.cfDay(12).test('22'); //false
+<h4>Pattern.cfDay</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.cfDay().test('0M'); //true - omocode
+Pattern.cfDay().test('33'); //false
+Pattern.cfDay(12).test('12'); //true - male
+Pattern.cfDay(12).test('52'); //true - female
+Pattern.cfDay(12).test('MN'); //true - omocode
+Pattern.cfDay(12).test('22'); //false
 </code></pre>
-<h4>Validator.cfDayGender</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.cfDayGender().test('0M'); //true
-Validator.cfDayGender().test('73'); //false
-Validator.cfDayGender(9, 'F').test('RM'); //true
-Validator.cfDayGender(1, 'F').test('41'); //true
-Validator.cfDayGender(1, 'M').test('41'); //false
+<h4>Pattern.cfDayGender</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.cfDayGender().test('0M'); //true
+Pattern.cfDayGender().test('73'); //false
+Pattern.cfDayGender(9, 'F').test('RM'); //true
+Pattern.cfDayGender(1, 'F').test('41'); //true
+Pattern.cfDayGender(1, 'M').test('41'); //false
 </code></pre>
-<h4>Validator.cfDateGender</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.cfDateGender().test('83D22'); //true
-Validator.cfDateGender().test('83Z32'); //false
-Validator.cfDateGender([1983, 3, 22], 'M').test('U3D2N'); //true
-Validator.cfDateGender(&quot;1995-05-01&quot;, 'F').test('V5EQ1'); //true
-Validator.cfDateGender([1983, 3, 22], 'M').test('83D62'); //false
+<h4>Pattern.cfDateGender</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.cfDateGender().test('83D22'); //true
+Pattern.cfDateGender().test('83Z32'); //false
+Pattern.cfDateGender([1983, 3, 22], 'M').test('U3D2N'); //true
+Pattern.cfDateGender(&quot;1995-05-01&quot;, 'F').test('V5EQ1'); //true
+Pattern.cfDateGender([1983, 3, 22], 'M').test('83D62'); //false
 </code></pre>
-<h4>Validator.cfPlace</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.cfPlace().test('A662'); //true
-Validator.cfPlace().test('Z974'); //false
-Validator.cfPlace('Bari').test('H501'); //true
-Validator.cfPlace([1933], 'Fiume').test('D620'); //true
-Validator.cfPlace([2000], 'Fiume').test('D620'); //false - Always invalid
+<h4>Pattern.cfPlace</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.cfPlace().test('A662'); //true
+Pattern.cfPlace().test('Z974'); //false
+Pattern.cfPlace('Bari').test('H501'); //true
+Pattern.cfPlace([1933], 'Fiume').test('D620'); //true
+Pattern.cfPlace([2000], 'Fiume').test('D620'); //false - Always invalid
 </code></pre>
-<h4>Validator.codiceFiscale</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale().test('VRNGNY07D68C351V'); //true
-Validator.codiceFiscale().test('MRNMIA02E45L2193'); //false
+<h4>Pattern.codiceFiscale</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.codiceFiscale().test('VRNGNY07D68C351V'); //true
+Pattern.codiceFiscale().test('MRNMIA02E45L2193'); //false
 //Partial info
-Validator.codiceFiscale({
-    surname: 'Veronesi',
-    name: 'Genny',
+Pattern.codiceFiscale({
+    lastName: 'Veronesi',
+    firstName: 'Genny',
     gender: 'F',
     place: 'Catania'
 }).test('VRNGNY97A65C351V'); //true
 //Full info
-Validator.codiceFiscale({
-    surname: 'Veronesi',
-    name: 'Genny',
+Pattern.codiceFiscale({
+    lastName: 'Veronesi',
+    firstName: 'Genny',
     year: 1907,
     month: 3,
     day: 28,
@@ -344,39 +351,41 @@ Validator.codiceFiscale({
     place: 'Catania'
 }).test('VRNGNY07D68C351V'); //true
 </code></pre>
-<h4>Validator.surname</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.surname().test('Kristersen'); //true
-Validator.surname('VLD').test('Vàlidàtòr'); //true
-Validator.surname('AIX').test('Air'); //false
+<h4>Pattern.lastName</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.lastName().test('Kristersen'); //true
+Pattern.lastName('VLD').test('Vàlidàtòr'); //true
+Pattern.lastName('AIX').test('Air'); //false
 </code></pre>
-<h4>Validator.name</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.firstname().test('Rossi'); //true
-Validator.firstname('XYZAIE').test('Aieie'); //true
-Validator.firstname('XYZAIX').test('Air'); //false
+<h4>Pattern.firstName</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.firstName().test('Rossi'); //true
+Pattern.firstName('XYZAIE').test('Aieie'); //true
+Pattern.firstName('XYZAIX').test('Air'); //false
 </code></pre>
-<h4>Validator.date</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.date().test('1995'); //true
-Validator.date().test('1985-01'); //true
-Validator.date().test('1970-03-03'); //true
-Validator.date().test('1970-03-'); //false
-Validator.date('XYZXYZ88H61').test('1988-06-21'); //true
-Validator.date('XYZXYZ92C16').test('1992-03-26'); //false
+<h4>Pattern.date</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.date().test('1995'); //true
+Pattern.date().test('1985-01'); //true
+Pattern.date().test('1970-03-03'); //true
+Pattern.date().test('1970-03-'); //false
+Pattern.date('XYZXYZ88H61').test('1988-06-21'); //true
+Pattern.date('XYZXYZ92C16').test('1992-03-26'); //false
 </code></pre>
-<h4>Validator.gender</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.gender().test('F'); //true
-Validator.gender().test('X'); //false
-Validator.gender('XYZXYZ88H61').test('F'); //true
-Validator.gender('XYZXYZ88H61').test('M'); //false
+<h4>Pattern.gender</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.gender().test('F'); //true
+Pattern.gender().test('X'); //false
+Pattern.gender('XYZXYZ88H61').test('F'); //true
+Pattern.gender('XYZXYZ88H61').test('M'); //false
 </code></pre>
-<h4>Validator.place</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.place().test('Roma'); //true
-Validator.place('XYZXYZ92C16A662').test('Bari'); //true
-Validator.place('XYZXYZ12S30A662').test('Bologna'); //false
+<h4>Pattern.place</h4>
+<pre class="prettyprint source lang-javascript"><code>Pattern.place().test('Roma'); //true
+Pattern.place('XYZXYZ92C16A662').test('Bari'); //true
+Pattern.place('XYZXYZ12S30A662').test('Bologna'); //false
 </code></pre>
-<h4>Validator.isValid</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.isValid('VRNGNY07D68C351V'); //true
-Validator.isValid('VRNGNY07D68C351K'); //false - invalid check digit
-Validator.isValid('GSTPPP99C06D620V'); //false - invalid birth date/place
+<h3>Validator</h3>
+<h3>CFMismatchValidator</h3>
+<h4>isValid</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale('VRNGNY07D68C351V').valid; //true
+Validator.codiceFiscale('VRNGNY07D68C351K').valid; //false - invalid check digit
+Validator.codiceFiscale('GSTPPP99C06D620V').valid; //false - invalid birth date/place
 </code></pre>
 <h2>Compatibility (tested)</h2>
 <ul>
@@ -405,7 +414,7 @@ Validator.isValid('GSTPPP99C06D620V'); //false - invalid birth date/place
 	</div>
 	<footer>
 				<div class="copyright">FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.</div>
-			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 2nd Jan 2020 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
+			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 8th Jan 2020 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
 	</footer>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
