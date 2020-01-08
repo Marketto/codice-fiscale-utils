@@ -6,6 +6,8 @@
 * Implemented boolean validators in ***Validators*** class
 * Match and Mismatch compound validators (cf/lastName, cf/firsName, ... birthDate/birthPlace)
 * Angular demo
+* Updated resource uris to generate Cities/Country Belfiore dataset
+* Implemented xlsx reading in locationUpdater script
 
 ### ~~1.1.3~~ - External Diacritic remover [Broken build] (2019-12-01)
 * Implemented Rollup for packaging
