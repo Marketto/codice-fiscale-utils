@@ -3,33 +3,18 @@ import { expect } from "../utils";
 
 export default async () => {
     describe("cfDay", () => {
-        describe("Generic Pattern", () => {
-            const cfDayPattern = Pattern.cfDay();
-            it ("Should validate cf day 0M", () => {
-                cfDayPattern.test("0M").should.be.ok;
-            });
-            it ("Should validate cf day MN for 12", () => {
-                Pattern.cfDay(12).test("MN").should.be.ok;
-            });
+        const cfDayPattern = Pattern.cfDay();
+        it ("Generic", () => {
+            cfDayPattern.test("0M").should.be.ok;
+            cfDayPattern.test("0m").should.be.ok;
         });
-        describe("Specific validator", () => {
-            describe("Days", () => {
-                it ("Should validate cf day 01 for 1", () => {
-                    Pattern.cfDay(1).test("01").should.be.ok;
-                });
-                it ("Should not validate cf day LM for 9", () => {
-                    Pattern.cfDay(9).test("LM").should.not.be.ok;
-                });
-
-                it ("Should validate cf day 41 for 1", () => {
-                    Pattern.cfDay(1).test("41").should.be.ok;
-                });
-
-                it ("Should not validate cf day QM for 9", () => {
-                    Pattern.cfDay(9).test("QM").should.not.be.ok;
-                });
-
-            });
+        it ("Specific", () => {
+            Pattern.cfDay(1).test("01").should.be.ok;
+            Pattern.cfDay(1).test("0M").should.be.ok;
+            Pattern.cfDay(1).test("q1").should.be.ok;
+            Pattern.cfDay(1).test("41").should.be.ok;
+            Pattern.cfDay(9).test("Lm").should.not.be.ok;
+            Pattern.cfDay(9).test("qM").should.not.be.ok;
         });
     });
 };

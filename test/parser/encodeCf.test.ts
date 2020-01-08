@@ -6,9 +6,9 @@ export default async () => {
         it("Should return VRNGNY07D68C351V", () => {
             expect(Parser.encodeCf({
                 day: 28,
-                firstName: "Genny",
+                firstName: "Génny",
                 gender: "F",
-                lastName: "Veronesi",
+                lastName: "Verònesi",
                 month: 3,
                 place: "Catania",
                 year: 1907,
@@ -17,9 +17,9 @@ export default async () => {
         it("Should return MRNMIA02E45L219X", () => {
             expect(Parser.encodeCf({
                 day: 5,
-                firstName: "Mia",
+                firstName: "Mìa",
                 gender: "F",
-                lastName: "Marin",
+                lastName: "Màrin",
                 month: 4,
                 place: "Torino",
                 year: 1902,

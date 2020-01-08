@@ -23,6 +23,10 @@ export default async () => {
                 Pattern.place("XYZXYZ88H61H501").test("ROMA").should.be.ok;
             });
 
+            it("Should validate Bari for omocode mixed-case XYZXYZ12S30aS6n", () => {
+                Pattern.place("XYZXYZ12S30aS6n").test("Bari").should.be.ok;
+            });
+
             it("Should not validate Bologna for XYZXYZ12S30A662", () => {
                 Pattern.place("XYZXYZ12S30A662").test("Bologna").should.be.false;
             });

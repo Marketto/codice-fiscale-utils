@@ -1,10 +1,11 @@
 import GenderWeight from "../enums/gender-weight.enum";
+import DateDay from "../types/date-day.type";
 import Genders from "../types/genders.type";
 
 class Gender {
-    public static getDay(genderDay: number): number | null {
+    public static getDay(genderDay: number): DateDay | null {
         const plainDay = genderDay % GenderWeight.F;
-        return (plainDay > 0 && plainDay <= this.MAX_MONTH_DAY) ? plainDay : null;
+        return (plainDay > 0 && plainDay <= this.MAX_MONTH_DAY) ? plainDay as DateDay : null;
     }
 
     public static getGender(genderDay: number): Genders | null {
