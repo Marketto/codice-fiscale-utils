@@ -2,7 +2,24 @@ import DiacriticRemover from "@marketto/diacritic-remover";
 import moment from "moment";
 import { Belfiore, BelfiorePlace } from "../belfiore-connector/belfiore";
 import BelfioreConnector from "../belfiore-connector/classes/belfiore-connector.class";
+import {
+    DAY_OFFSET,
+    DAY_SIZE,
+    FIRSTNAME_OFFSET,
+    FIRSTNAME_SIZE,
+    GENDER_OFFSET,
+    GENDER_SIZE,
+    LASTNAME_OFFSET,
+    LASTNAME_SIZE,
+    MONTH_OFFSET,
+    MONTH_SIZE,
+    PLACE_OFFSET,
+    PLACE_SIZE,
+    YEAR_OFFSET,
+    YEAR_SIZE,
+} from '../const/cf-offsets.const';
 import { ISO8601_SHORT_DATE } from "../const/date-matcher.const";
+import { CF_FULL_NAME_MATCHER, CF_SURNAME_MATCHER } from "../const/matcher.const";
 import { CONSONANT_LIST, VOWEL_LIST } from "../const/matcher.const";
 import BirthMonth from "../enums/birth-month.enum";
 import GenderWeight from "../enums/gender-weight.enum";
@@ -24,16 +41,15 @@ export default class Parser {
     public static OMOCODE_BITMAP: number = 0b0111011011000000;
 
     /**
-     * Parse lastName information
-     * @param codiceFiscale Partial or complete Omocode/Regular CF to parse
+     * Convert omocode CF into plain one
+     * @param codiceFiscale Partial or complete Omocode/Regular CF to parse, starting from LastName
      * @returns Regular CF w/o omocodes chars
      */
     public static cfDeomocode(codiceFiscale: string): string {
-        if (codiceFiscale && codiceFiscale.length < 7) {
+        if (codiceFiscale && codiceFiscale.length <= YEAR_OFFSET) {
             return codiceFiscale;
         }
-        const charReplacer = (char: string, position: number) => this.charOmocode(char, position);
-        return codiceFiscale.replace(/[\dA-Z]/giu, charReplacer);
+        return this.partialCfDeomocode(codiceFiscale);
     }
 
     /**
@@ -42,11 +58,15 @@ export default class Parser {
      * @returns Partial/possible lastName
      */
     public static cfToLastName(codiceFiscale: string): string | null {
-        if (typeof codiceFiscale !== "string" || codiceFiscale.length < 3 || !(/^[A-Z]{3}/iu).test(codiceFiscale)) {
+        if (
+            typeof codiceFiscale !== "string"
+            || codiceFiscale.length < (LASTNAME_OFFSET + LASTNAME_SIZE)
+            || !(new RegExp(`^(?:${CF_SURNAME_MATCHER})`, "iu")).test(codiceFiscale)
+        ) {
             return null;
         }
 
-        const lastNameCf = codiceFiscale.substr(0, 3);
+        const lastNameCf = codiceFiscale.substr(LASTNAME_OFFSET, LASTNAME_SIZE);
 
         const [cons = ""] = lastNameCf.match(new RegExp(`^[${CONSONANT_LIST}]{1,3}`, "ig")) || [];
         const [vow = ""] = lastNameCf.match(new RegExp(`[${VOWEL_LIST}]{1,3}`, "ig")) || [];
@@ -75,10 +95,14 @@ export default class Parser {
      * @returns Partial/possible firstName
      */
     public static cfToFirstName(codiceFiscale: string): string | null {
-        if (typeof codiceFiscale !== "string" || codiceFiscale.length < 3 || !(/^[A-Z]{6}/iu).test(codiceFiscale)) {
+        if (
+            typeof codiceFiscale !== "string"
+            || codiceFiscale.length < (FIRSTNAME_OFFSET + FIRSTNAME_SIZE)
+            || !(new RegExp(`^(${CF_FULL_NAME_MATCHER})`, "iu")).test(codiceFiscale)
+        ) {
             return null;
         }
-        return this.cfToLastName(codiceFiscale.substr(3, 3));
+        return this.cfToLastName(codiceFiscale.substr(FIRSTNAME_OFFSET, FIRSTNAME_SIZE));
     }
 
     /**
@@ -87,11 +111,12 @@ export default class Parser {
      * @returns Male or female
      */
     public static cfToGender(codiceFiscale: string): Genders | null {
-        if (typeof codiceFiscale !== "string" || codiceFiscale.length < 11) {
+        if (typeof codiceFiscale !== "string" || codiceFiscale.length < (GENDER_OFFSET + GENDER_SIZE)) {
             return null;
         }
-        const birthDay = parseInt(codiceFiscale.substr(9, 2), 10);
-        return Gender.getGender(birthDay);
+        const cfGenderPart = codiceFiscale.substr(GENDER_OFFSET, GENDER_SIZE);
+        const genderInt = parseInt(this.partialCfDeomocode(cfGenderPart, GENDER_OFFSET), 10) * 10;
+        return Gender.getGender(genderInt);
     }
 
     /**
@@ -100,10 +125,11 @@ export default class Parser {
      * @returns Birth Year (4 digits)
      */
     public static cfToBirthYear(codiceFiscale: string): number | null {
-        if (typeof codiceFiscale !== "string" || codiceFiscale.length < 8) {
+        if (typeof codiceFiscale !== "string" || codiceFiscale.length < (YEAR_OFFSET + YEAR_SIZE)) {
             return null;
         }
-        const birthYear: number = parseInt(codiceFiscale.substr(6, 2), 10);
+        const cfBirthYearPart = codiceFiscale.substr(YEAR_OFFSET, YEAR_SIZE);
+        const birthYear: number = parseInt(this.partialCfDeomocode(cfBirthYearPart, YEAR_OFFSET), 10);
 
         if (isNaN(birthYear)) {
             return null;
@@ -121,12 +147,12 @@ export default class Parser {
      * @returns Birth Month (0...11 - Date notation)
      */
     public static cfToBirthMonth(codiceFiscale: string): DateMonth | null {
-        if (typeof codiceFiscale !== "string" || codiceFiscale.length < 9) {
+        if (typeof codiceFiscale !== "string" || codiceFiscale.length < (MONTH_OFFSET + MONTH_SIZE)) {
             return null;
         }
 
-        const birthMonthCode: string = codiceFiscale.substr(8, 1).toUpperCase();
-        const birthMonth = BirthMonth[birthMonthCode as any];
+        const cfBirthMonthPart: any = codiceFiscale.substr(MONTH_OFFSET, MONTH_SIZE).toUpperCase();
+        const birthMonth = BirthMonth[cfBirthMonthPart as any];
         if (typeof birthMonth !== "number" || birthMonth < 0 || birthMonth > 11) {
             return null;
         }
@@ -139,21 +165,17 @@ export default class Parser {
      * @returns Birth day (1..31)
      */
     public static cfToBirthDay(codiceFiscale: string): DateDay | null {
-        if (typeof codiceFiscale !== "string" || codiceFiscale.length < 11) {
+        if (typeof codiceFiscale !== "string" || codiceFiscale.length < (DAY_OFFSET + DAY_SIZE)) {
             return null;
         }
-        let birthDay = parseInt(codiceFiscale.substr(9, 2), 10);
+
+        const cfBirthDayPart = codiceFiscale.substr(DAY_OFFSET, DAY_SIZE);
+        const birthDay: number = parseInt(this.partialCfDeomocode(cfBirthDayPart, DAY_OFFSET), 10);
 
         if (isNaN(birthDay)) {
             return null;
         }
-
-        birthDay -= birthDay >= 40 ? 40 : 0;
-
-        if (birthDay < 1 || birthDay > 31) {
-            return null;
-        }
-        return birthDay as DateDay;
+        return Gender.getDay(birthDay);
     }
 
     /**
@@ -168,20 +190,13 @@ export default class Parser {
         }
 
         const birthMonth = this.cfToBirthMonth(codiceFiscale);
-        if (!birthMonth && birthMonth !== 0) {
+        if (typeof birthMonth !== "number") {
             return null;
         }
 
         const birthYear = this.cfToBirthYear(codiceFiscale);
-        if (!birthYear) {
-            return null;
-        }
 
-        const dt = moment(Date.UTC(birthYear, birthMonth, birthDay));
-        if (!dt.isValid()) {
-            return null;
-        }
-        return dt.toDate();
+        return this.ymdToDate(birthYear, birthMonth, birthDay);
     }
 
     /**
@@ -190,16 +205,19 @@ export default class Parser {
      * @returns Birth place
      */
     public static cfToBirthPlace(codiceFiscale: string): BelfiorePlace | null {
-        if (typeof codiceFiscale !== "string" || codiceFiscale.length < 15) {
+        if (typeof codiceFiscale !== "string" || codiceFiscale.length < (PLACE_OFFSET + PLACE_SIZE)) {
             return null;
         }
-        const belfioreCode: string = codiceFiscale.substr(11, 4).toUpperCase();
+
+        const cfBirthPlacePart = codiceFiscale.substr(PLACE_OFFSET, PLACE_SIZE);
+        const belfioreCode: string = this.partialCfDeomocode(cfBirthPlacePart, PLACE_OFFSET);
+
         const birthPlace: BelfiorePlace | undefined = Belfiore[belfioreCode];
         if (!birthPlace) {
             return null;
         }
 
-        const {creationDate, expirationDate} = birthPlace;
+        const { creationDate, expirationDate } = birthPlace;
         if (creationDate || expirationDate) {
             const birthDate = this.cfToBirthDate(codiceFiscale);
             if (!birthDate) {
@@ -227,6 +245,7 @@ export default class Parser {
         const year = this.cfToBirthYear(fiscalCode) || undefined;
         const month = this.cfToBirthMonth(fiscalCode) || undefined;
         const day = this.cfToBirthDay(fiscalCode) || undefined;
+        const date = this.ymdToDate(year, month, day) || undefined;
         const place = this.cfToBirthPlace(fiscalCode);
         const personalInfo: IPersonalInfo = {
             firstName: this.cfToFirstName(fiscalCode) || undefined,
@@ -235,6 +254,8 @@ export default class Parser {
             day,
             month,
             year,
+
+            date,
 
             gender: this.cfToGender(fiscalCode) || undefined,
             place: place ? place.name : undefined,
@@ -475,6 +496,7 @@ export default class Parser {
 
         gender,
         place,
+        omocode = 0,
     }: IPersonalInfo): string | null {
         const dtParams = this.parseDate(date) || this.yearMonthDayToDate(year, month, day);
         if (!(dtParams && lastName && firstName && gender && place)) {
@@ -519,5 +541,26 @@ export default class Parser {
         const diacriticFreeText = diacriticRemover.replace(text).trim();
         const matchingChars = diacriticFreeText.match(charMatcher);
         return (matchingChars || []).join("");
+    }
+
+    /**
+     * Convert omocode full or chunk CF into plain one
+     * @param partialCodiceFiscale Partial or complete Omocode/Regular CF to parse
+     * @param offset starting point of the given chunk in the 16 char CF
+     * @returns Regular version w/o omocodes chars of the given chunk
+     */
+    private static partialCfDeomocode(partialCodiceFiscale: string, offset: number = 0): string {
+        const charReplacer = (char: string, position: number) => this.charOmocode(char, position + offset);
+        return partialCodiceFiscale.replace(/[\dA-Z]/giu, charReplacer);
+    }
+
+    private static ymdToDate(year?: number | null, month?: number | null, day?: number | null): Date | null {
+        if (year && typeof month === "number" && day) {
+            const dt = moment(Date.UTC(year, month, day));
+            if (dt.isValid()) {
+                return dt.toDate();
+            }
+        }
+        return null;
     }
 }
