@@ -1,5 +1,5 @@
 ## CHANGELOG
-### 1.2.0 - Typescript migration (2020-01-07)
+### 1.2.0 - Typescript migration (2020-01-08)
 * Typescript refactoring
 * RegExp validators moved into ***Pattern*** class
 * Naming convention for *name* and *surname* changed to ***firstName*** and ***lastName***
