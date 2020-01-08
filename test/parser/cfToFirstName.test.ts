@@ -3,47 +3,31 @@ import { expect } from "../utils";
 
 export default async () => {
     describe("cfToFirstName", () => {
-        describe("Uppercase", () => {
-            it ("Should return W*Y*Z*", () => {
-                expect(Parser.cfToFirstName("ZZZWYZ")).to.be.equal("W*Y*Z*");
-            });
-            it ("Should return WA*Y*", () => {
-                expect(Parser.cfToFirstName("ZZZWYA")).to.be.equal("WA*Y*");
-            });
-            it ("Should return WAE*", () => {
-                expect(Parser.cfToFirstName("ZZZWAE")).to.be.equal("WAE*");
-            });
-            it ("Should return AEI*", () => {
-                expect(Parser.cfToFirstName("ZZZAEI")).to.be.equal("AEI*");
-            });
-            it ("Should return AE", () => {
-                expect(Parser.cfToFirstName("ZZZAEX")).to.be.equal("AE");
-            });
+        it ("3 consonants", () => {
+            expect(Parser.cfToFirstName("ZZZWYZ")).to.be.equal("W*Y*Z*");
+            expect(Parser.cfToFirstName("qqqknt")).to.be.equal("k*n*t*");
         });
-        describe("Lowercase", () => {
-            it ("Should return K*N*T*", () => {
-                expect(Parser.cfToFirstName("qqqknt")).to.be.equal("k*n*t*");
-            });
-            it ("Should return KO*T*", () => {
-                expect(Parser.cfToFirstName("qqqkto")).to.be.equal("ko*t*");
-            });
-            it ("Should return RIO*", () => {
-                expect(Parser.cfToFirstName("qqqrio")).to.be.equal("rio*");
-            });
-            it ("Should return UAU*", () => {
-                expect(Parser.cfToFirstName("qqquau")).to.be.equal("uau*");
-            });
-            it ("Should return OO", () => {
-                expect(Parser.cfToFirstName("qqqoox")).to.be.equal("oo");
-            });
+        it ("2 consonants + 1 vowel", () => {
+            expect(Parser.cfToFirstName("ZZZWYA")).to.be.equal("WA*Y*");
+            expect(Parser.cfToFirstName("qqqkto")).to.be.equal("ko*t*");
         });
-        describe("Invalid", () => {
-            it("Should return null for irregular cf", () => {
-                expect(Parser.cfToFirstName("ZZZKAZ")).to.be.null;
-                expect(Parser.cfToFirstName("ZZZKA")).to.be.null;
-                expect(Parser.cfToFirstName("ZZZ")).to.be.null;
-                expect(Parser.cfToFirstName("")).to.be.null;
-            });
+        it ("1 consonants + 2 vowels", () => {
+            expect(Parser.cfToFirstName("ZZZWAE")).to.be.equal("WAE*");
+            expect(Parser.cfToFirstName("qqqrio")).to.be.equal("rio*");
+        });
+        it ("3 vowels", () => {
+            expect(Parser.cfToFirstName("ZZZAEI")).to.be.equal("AEI*");
+            expect(Parser.cfToFirstName("qqquau")).to.be.equal("uau*");
+        });
+        it ("2 vowels + X", () => {
+            expect(Parser.cfToFirstName("ZZZAEX")).to.be.equal("AE");
+            expect(Parser.cfToFirstName("qqqoox")).to.be.equal("oo");
+        });
+        it("Invalid", () => {
+            expect(Parser.cfToFirstName("zzzkaz")).to.be.null;
+            expect(Parser.cfToFirstName("ZZZKA")).to.be.null;
+            expect(Parser.cfToFirstName("zzz")).to.be.null;
+            expect(Parser.cfToFirstName("")).to.be.null;
         });
     });
 };

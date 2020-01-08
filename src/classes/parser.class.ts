@@ -17,7 +17,7 @@ import {
     PLACE_SIZE,
     YEAR_OFFSET,
     YEAR_SIZE,
-} from '../const/cf-offsets.const';
+} from "../const/cf-offsets.const";
 import { ISO8601_SHORT_DATE } from "../const/date-matcher.const";
 import { CF_FULL_NAME_MATCHER, CF_SURNAME_MATCHER } from "../const/matcher.const";
 import { CONSONANT_LIST, VOWEL_LIST } from "../const/matcher.const";
