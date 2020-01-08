@@ -6,11 +6,11 @@
   "module": "dist/codice-fiscale-utils.mjs",
   "typings": "src/index.ts",
   "scripts": {
-    "release": "npm i && npm audit fix && npm run lint-fix && npm run update-lovs && npm run coverage && npm run docs && npm run build",
+    "release": "npm audit fix && npm run lint-fix && npm run update-lovs && npm run coverage && npm run docs && npm run build",
     "build": "npx rimraf ./dist & npx rollup -c",
     "lint": "npx tslint -c tslint.json \"src/**/*.ts\"",
     "lint-fix": "npx tslint -c tslint.json \"src/**/*.ts\" --fix",
-    "test": "npx nyc npx mocha",
+    "test": "npx mocha",
     "coverage": "mkdir coverage \n npm run test && npx nyc report --reporter=text-lcov | npx relcov > coverage/lcov.info",
     "docs": "npx rimraf ./docs && npx jsdoc . -c jsdoc.json",
     "update-lovs": "node ./scripts/locationUpdater.js",
@@ -41,7 +41,8 @@
   "homepage": "https://github.com/Marketto/codice-fiscale-utils#readme",
   "dependencies": {
     "@marketto/diacritic-remover": "^1.0.6",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "read-excel-file": "^4.0.5"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
