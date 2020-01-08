@@ -18,10 +18,10 @@
 TS utilities to handle Italian Codice Fiscale
 
 ## 🚨 WARNING Upgrading from 1.1.x 🚨
-### Methods to generate RegExp were moved to Pattern class
-### Former Validator.isValid method was migrated to Validator.codiceFiscale(cf: string).valid (getter)
-### ***name*** was renamed into ***firstName*** due to typescript migration (in method names and data models)
-### ***surname*** was renamed into ***lastName*** according to the new naming convention (even in method names and data models)
+* #### Methods to generate RegExp were moved to Pattern class
+* #### Former Validator.isValid method was migrated to Validator.codiceFiscale(cf: string).valid (getter)
+* #### ***name*** was renamed into ***firstName*** due to typescript migration (in method names and data models)
+* #### ***surname*** was renamed into ***lastName*** according to the new naming convention (even in method names and data models)
 
 ## 📗FAQs?
 1. **Why should I need a library? Can't I use just a RegExp?**
@@ -73,8 +73,10 @@ import * as codiceFiscaleUtils from '@marketto/codice-fiscale-utils';
 Check out [CodiceFiscaleUtils](https://github.com/Marketto/codice-fiscale-utils) repo on Github
 ### NodeJS Express
 [Node/Express Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/express)
-### Browser VueJs
-[Node/Express Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/vue)
+### VueJs
+[Vue Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/vue)
+### Angular
+[Angular Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/angular)
 
 ### Parser
 *Class* with *static* methods
