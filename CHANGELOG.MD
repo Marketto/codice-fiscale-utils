@@ -1,4 +1,8 @@
 ## CHANGELOG
+### 1.2.1 - Deomocode proper implementation (2020-01-09)
+* Implemented CF deomocode in Parser methods
+* Optimized gender methods
+
 ### 1.2.0 - Typescript migration (2020-01-08)
 * Typescript refactoring
 * RegExp validators moved into ***Pattern*** class

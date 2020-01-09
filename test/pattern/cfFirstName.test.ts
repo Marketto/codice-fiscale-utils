@@ -3,47 +3,21 @@ import { expect } from "../utils";
 
 export default async () => {
     describe("cfFirstName", () => {
-        describe("Generic Pattern", () => {
+        it("Generic Pattern", () => {
             const cfFirstNamePattern = Pattern.cfFirstName();
-            it ("Should validate cf name KST", () => {
-                cfFirstNamePattern.test("KST").should.be.ok;
-            });
-            it ("Should validate cf name KSE", () => {
-                cfFirstNamePattern.test("KSE").should.be.ok;
-            });
-            it ("Should validate cf name KAO", () => {
-                cfFirstNamePattern.test("KAO").should.be.ok;
-            });
-            it ("Should validate cf name NIX", () => {
-                cfFirstNamePattern.test("NIX").should.be.ok;
-            });
-            it ("Should validate cf name NIK", () => {
-                cfFirstNamePattern.test("NIK").should.not.be.ok;
-            });
-            it ("Should validate cf name UAO", () => {
-                cfFirstNamePattern.test("UAO").should.be.ok;
-            });
-            it ("Should validate cf name UIX", () => {
-                cfFirstNamePattern.test("UIX").should.be.ok;
-            });
-            it ("Should validate cf name UXX", () => {
-                cfFirstNamePattern.test("UXX").should.not.be.ok;
-            });
-            it ("Should validate cf name UIK", () => {
-                cfFirstNamePattern.test("UIK").should.not.be.ok;
-            });
-            it ("Should validate cf name ASQ", () => {
-                cfFirstNamePattern.test("ASQ").should.not.be.ok;
-            });
-            it ("Should validate cf name ASX", () => {
-                cfFirstNamePattern.test("ASX").should.not.be.ok;
-            });
-            it ("Should validate cf name UXI", () => {
-                cfFirstNamePattern.test("UXI").should.not.be.ok;
-            });
-            it ("Should validate cf name UXK", () => {
-                cfFirstNamePattern.test("UXK").should.not.be.ok;
-            });
+            cfFirstNamePattern.test("UIK").should.not.be.ok;
+            cfFirstNamePattern.test("UXX").should.not.be.ok;
+            cfFirstNamePattern.test("UIX").should.be.ok;
+            cfFirstNamePattern.test("ASQ").should.not.be.ok;
+            cfFirstNamePattern.test("UAO").should.be.ok;
+            cfFirstNamePattern.test("NIK").should.not.be.ok;
+            cfFirstNamePattern.test("ASX").should.not.be.ok;
+            cfFirstNamePattern.test("NIX").should.be.ok;
+            cfFirstNamePattern.test("KAO").should.be.ok;
+            cfFirstNamePattern.test("UXI").should.not.be.ok;
+            cfFirstNamePattern.test("KSE").should.be.ok;
+            cfFirstNamePattern.test("KST").should.be.ok;
+            cfFirstNamePattern.test("UXK").should.not.be.ok;
         });
         describe("Specific validator", () => {
             it ("Should validate cf name DNQ for Dominique", () => {
