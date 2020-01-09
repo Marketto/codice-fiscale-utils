@@ -1,9 +1,12 @@
+import {
+    CRC_OFFSET,
+    LASTNAME_OFFSET,
+} from "../const/cf-offsets.const";
 import { PARTIAL_CF } from "../const/matcher.const";
 import CRC from "../enums/crc.enum";
 import generatorWrapper from "../functions/generator-wrapper.function";
 import IGeneratorWrapper from "../interfaces/generator-wrapper.interface";
 import CodiceFiscaleCRC from "../types/codice-fiscale-crc.type";
-
 class CheckDigitizer {
 
     /**
@@ -13,10 +16,10 @@ class CheckDigitizer {
      */
     public static checkDigit(codiceFiscale: string): CodiceFiscaleCRC | null {
         if (typeof codiceFiscale === "string" && new RegExp(PARTIAL_CF).test(codiceFiscale)) {
-            const partialCF = codiceFiscale.substr(0, 15);
+            const partialCF = codiceFiscale.substr(LASTNAME_OFFSET, CRC_OFFSET);
             let partialCfValue = 0;
             for (const charValue of this.evaluateChar(partialCF)) { partialCfValue += charValue as number; }
-            return String.fromCharCode(partialCfValue % 26 + 65) as CodiceFiscaleCRC;
+            return String.fromCharCode(partialCfValue % this.CRC_MOD + this.CHAR_OFFSET) as CodiceFiscaleCRC;
         }
         return null;
     }
@@ -26,6 +29,7 @@ class CheckDigitizer {
     }
 
     private static CHAR_OFFSET: number = 65;
+    private static CRC_MOD: number = 26;
 
     /**
      * Partial FiscalCode Evaluator
