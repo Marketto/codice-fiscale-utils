@@ -1,7 +1,7 @@
 import { Parser } from "../../src";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("cfToLastName", () => {
         it ("3 consonants", () => {
             expect(Parser.cfToLastName("WYZ")).to.be.equal("W*Y*Z*");

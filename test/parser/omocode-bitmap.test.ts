@@ -2,7 +2,7 @@
 import { Parser } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("OMOCODE_BITMAP", () => {
         const omocodeBitmap = Parser.OMOCODE_BITMAP;
         it("Off for Surname part", () => {

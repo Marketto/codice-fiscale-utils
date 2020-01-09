@@ -1,7 +1,7 @@
 import { Parser } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("encodeCf", () => {
         it("Should return VRNGNY07D68C351V", () => {
             expect(Parser.encodeCf({

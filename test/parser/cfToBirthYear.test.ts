@@ -1,7 +1,7 @@
 import { Parser } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("cfToBirthYear", () => {
         it("Simple", () => {
             expect(Parser.cfToBirthYear("XXXYYY92"))

@@ -1,5 +1,6 @@
 import cfDecode from "./parser/cfDecode.test";
 import cfDeomocode from "./parser/cfDeomocode.test";
+import cfOmocodeId from "./parser/cfOmocodeId.test";
 import cfToBirthDate from "./parser/cfToBirthDate.test";
 import cfToFirstName from "./parser/cfToFirstName.test";
 import cfToGender from "./parser/cfToGender.test";
@@ -17,23 +18,24 @@ import yearToCf from "./parser/yearToCf.test";
 describe("CodiceFiscaleUtils:Parser", () => {
     describe("constants", () => bitmap());
 
-    describe("methods from CF", async () => {
-        await cfDeomocode();
-        await cfToLastName();
-        await cfToFirstName();
-        await cfToGender();
-        await cfToBirthDate();
-        await cfDecode();
+    describe("methods from CF", () => {
+        cfDeomocode();
+        cfOmocodeId();
+        cfToLastName();
+        cfToFirstName();
+        cfToGender();
+        cfToBirthDate();
+        cfDecode();
     });
 
-    describe("methods to CF", async () => {
-        await lastNameToCf();
-        await firstNameToCf();
-        await yearToCf();
-        await monthToCf();
-        await dayGenderToCf();
-        await dateGenderToCf();
-        await placeToCf();
-        await encodeCf();
+    describe("methods to CF", () => {
+        lastNameToCf();
+        firstNameToCf();
+        yearToCf();
+        monthToCf();
+        dayGenderToCf();
+        dateGenderToCf();
+        placeToCf();
+        encodeCf();
     });
 });

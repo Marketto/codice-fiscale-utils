@@ -1,7 +1,7 @@
 import { Validator } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("isValid", () => {
         it("Should validate VRNGNY07D68C351V", () => {
             Validator.codiceFiscale("VRNGNY07D68C351V").valid.should.be.ok;

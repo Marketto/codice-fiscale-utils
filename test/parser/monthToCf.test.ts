@@ -1,7 +1,7 @@
 import { Parser } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("monthToCf", () => {
         it("All Months", () => {
             expect(Parser.monthToCf(0)).to.be.equal("A");

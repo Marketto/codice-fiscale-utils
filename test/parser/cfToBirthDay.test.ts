@@ -1,7 +1,7 @@
 import { Parser } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("cfToBirthDay", () => {
         it("Male", () => {
             expect(Parser.cfToBirthDay("XXXYYY90B12")).to.be.equal(12);

@@ -1,7 +1,7 @@
 import { Parser } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("dayGenderToCf", () => {
         it("Should return CF year part from 1 or 2 digit number and Male const", () => {
             expect(Parser.dayGenderToCf(3, "M")).to.be.equal("03");

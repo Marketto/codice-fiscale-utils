@@ -1,7 +1,7 @@
 import { Parser } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("placeToCf", () => {
         it("Currently active", () => {
             expect(Parser.placeToCf("Bologna")).to.be.equal("A944");

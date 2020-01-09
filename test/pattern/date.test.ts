@@ -1,7 +1,7 @@
 import { Pattern } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("date", () => {
         describe("Generic Pattern", () => {
             const datePattern = Pattern.date();

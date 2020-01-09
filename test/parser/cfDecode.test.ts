@@ -1,7 +1,7 @@
 import { Parser } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("cfDecode", () => {
         it("Uppercase VRNGNY07D68C351V", () => {
             const decoded = Parser.cfDecode("VRNGNY07D68C351V");
@@ -13,7 +13,7 @@ export default async () => {
             expect(decoded.day).to.be.equal(28);
             expect(decoded.gender).to.be.equal("F");
             expect(decoded.place).to.be.equalIgnoreCase("CATANIA");
-            //expect(decoded.omocode).to.be.equal(0);
+            expect(decoded.omocode).to.be.equal(0);
         });
         it("Lowercase mrnmia02e45l219x", () => {
             const decoded = Parser.cfDecode("mrnmia02e45l219x");
@@ -25,7 +25,7 @@ export default async () => {
             expect(decoded.day).to.be.equal(5);
             expect(decoded.gender).to.be.equal("F");
             expect(decoded.place).to.be.equalIgnoreCase("TORINO");
-            //expect(decoded.omocode).to.be.equal(0);
+            expect(decoded.omocode).to.be.equal(0);
         });
         it("Omocode VRNGNYLtdsucprmt", () => {
             const decoded = Parser.cfDecode("VRNGNYLtdsucprmt");
@@ -37,7 +37,7 @@ export default async () => {
             expect(decoded.day).to.be.equal(28);
             expect(decoded.gender).to.be.equal("F");
             expect(decoded.place).to.be.equalIgnoreCase("CATANIA");
-            //expect(decoded.omocode).to.be.equal(2);
+            expect(decoded.omocode).to.be.equal(127);
         });
     });
 };
