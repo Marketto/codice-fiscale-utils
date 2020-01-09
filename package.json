@@ -11,7 +11,7 @@
     "lint": "npx tslint -c tslint.json \"src/**/*.ts\"",
     "lint-fix": "npx tslint -c tslint.json \"src/**/*.ts\" --fix",
     "test": "npx mocha",
-    "coverage": "npx rimraf ./coverage && mkdir coverage && npm nyc mocha && npx nyc report --reporter=text-lcov | npx relcov > coverage/lcov.info",
+    "coverage": "npx rimraf ./coverage && mkdir coverage && npx nyc mocha && npx nyc report --reporter=text-lcov | npx relcov > coverage/lcov.info",
     "docs": "npx rimraf ./docs && npx jsdoc . -c jsdoc.json",
     "update-lovs": "node ./scripts/locationUpdater.js",
     "install": "node ./scripts/post-install.js"
