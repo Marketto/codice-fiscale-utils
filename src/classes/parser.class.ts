@@ -20,12 +20,12 @@ import {
     YEAR_OFFSET,
     YEAR_SIZE,
 } from "../const/cf-offsets.const";
-import { ISO8601_SHORT_DATE } from "../const/date-matcher.const";
-import { CF_FULL_NAME_MATCHER, CF_SURNAME_MATCHER, OMOCODE_NUMBER_LIST } from '../const/matcher.const';
+import { ISO8601_DATE_TIME } from "../const/date-matcher.const";
+import { CF_FULL_NAME_MATCHER, CF_SURNAME_MATCHER } from "../const/matcher.const";
 import { CONSONANT_LIST, VOWEL_LIST } from "../const/matcher.const";
 import BirthMonth from "../enums/birth-month.enum";
 import GenderWeight from "../enums/gender-weight.enum";
-import Omocodes from '../enums/omocodes.enum';
+import Omocodes from "../enums/omocodes.enum";
 import IPersonalInfo from "../interfaces/personal-info.interface";
 import DateDay from "../types/date-day.type";
 import DateMonth from "../types/date-month.type";
@@ -440,15 +440,18 @@ export default class Parser {
         if (!(
             date instanceof Date ||
             date instanceof moment ||
-            typeof date === "string" && new RegExp(ISO8601_SHORT_DATE).test(date) ||
-            Array.isArray(date) && !date.some((value) => typeof value !== "number")
+            typeof date === "string" && new RegExp(`^(?:${ISO8601_DATE_TIME})$`).test(date) ||
+            // typeof date === "string" && new RegExp(ISO8601_SHORT_DATE).test(date) ||
+            Array.isArray(date) && date.length && !date.some((value) => typeof value !== "number")
         )) {
             return null;
         }
-
-        const parsedDate = moment(date);
-
-        return parsedDate.isValid() ? parsedDate.toDate() : null;
+        try {
+            const parsedDate = moment(date);
+            return parsedDate.isValid() ? parsedDate.toDate() : null;
+        } catch (err) {
+            return null;
+        }
     }
 
     public static parsePlace(

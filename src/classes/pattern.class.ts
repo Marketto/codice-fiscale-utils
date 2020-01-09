@@ -1,5 +1,5 @@
 import DiacriticRemover from "@marketto/diacritic-remover";
-import moment, { Moment } from "moment";
+import moment from "moment";
 import {
     ISO8601_DATE_TIME,
     TIME,
@@ -11,7 +11,6 @@ import {
     INVALID_DAY_OR_GENDER,
     INVALID_GENDER,
     INVALID_NAME,
-    INVALID_PLACE_NAME,
     INVALID_SURNAME,
     INVALID_YEAR,
 } from "../const/error-messages.const";
@@ -39,7 +38,6 @@ import DateMonth from "../types/date-month.type";
 import Genders from "../types/genders.type";
 import MultiFormatDate from "../types/multi-format-date.type";
 import CfuError from "./cfu-error.class";
-import CheckDigitizer from "./check-digitizer.class";
 import Gender from "./gender.class";
 import Parser from "./parser.class";
 
@@ -216,13 +214,13 @@ export default class Validator {
     public static cfPlace(birthDateOrName?: MultiFormatDate | null, placeName?: string | null): RegExp {
         let matcher = BELFIORE_CODE_MATCHER;
         if (birthDateOrName) {
-            const birthDate: Moment = moment(birthDateOrName);
-            const validBD: boolean = birthDate.isValid();
-            if (validBD && placeName) {
+            const birthDate: Date | null = Parser.parseDate(birthDateOrName);
+
+            if (birthDate && placeName) {
                 const place: string = placeName;
                 const parsedPlace = Parser.placeToCf(birthDate, place);
                 matcher = this.deomocode(parsedPlace || "");
-            } else if (!validBD && typeof birthDateOrName === "string") {
+            } else if (!birthDate && typeof birthDateOrName === "string") {
                 const place: string = birthDateOrName;
                 const parsedPlace = Parser.placeToCf(place);
                 matcher = this.deomocode(parsedPlace || "");
