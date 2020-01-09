@@ -17,23 +17,23 @@ import yearToCf from "./parser/yearToCf.test";
 describe("CodiceFiscaleUtils:Parser", () => {
     describe("constants", () => bitmap());
 
-    describe("methods from CF", () => Promise.all([
-        cfDeomocode(),
-        cfToLastName(),
-        cfToFirstName(),
-        cfToGender(),
-        cfToBirthDate(),
-        cfDecode(),
-    ]));
+    describe("methods from CF", async () => {
+        await cfDeomocode();
+        await cfToLastName();
+        await cfToFirstName();
+        await cfToGender();
+        await cfToBirthDate();
+        await cfDecode();
+    });
 
-    describe("methods to CF", () => Promise.all([
-        lastNameToCf(),
-        firstNameToCf(),
-        yearToCf(),
-        monthToCf(),
-        dayGenderToCf(),
-        dateGenderToCf(),
-        placeToCf(),
-        encodeCf(),
-    ]));
+    describe("methods to CF", async () => {
+        await lastNameToCf();
+        await firstNameToCf();
+        await yearToCf();
+        await monthToCf();
+        await dayGenderToCf();
+        await dateGenderToCf();
+        await placeToCf();
+        await encodeCf();
+    });
 });
