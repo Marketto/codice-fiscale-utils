@@ -3,47 +3,30 @@ import { expect } from "../utils";
 
 export default async () => {
     describe("cfToLastName", () => {
-        describe("Uppercase", () => {
-            it ("Should return W*Y*Z*", () => {
-                expect(Parser.cfToLastName("WYZ")).to.be.equal("W*Y*Z*");
-            });
-            it ("Should return WA*Y*", () => {
-                expect(Parser.cfToLastName("WYA")).to.be.equal("WA*Y*");
-            });
-            it ("Should return WAE*", () => {
-                expect(Parser.cfToLastName("WAE")).to.be.equal("WAE*");
-            });
-            it ("Should return AEI*", () => {
-                expect(Parser.cfToLastName("AEI")).to.be.equal("AEI*");
-            });
-            it ("Should return AE", () => {
-                expect(Parser.cfToLastName("AEX")).to.be.equal("AE");
-            });
+        it ("3 consonants", () => {
+            expect(Parser.cfToLastName("WYZ")).to.be.equal("W*Y*Z*");
+            expect(Parser.cfToLastName("knt")).to.be.equal("k*n*t*");
         });
-        describe("Lowercase", () => {
-            it ("Should return K*N*T*", () => {
-                expect(Parser.cfToLastName("knt")).to.be.equal("k*n*t*");
-            });
-            it ("Should return KO*T*", () => {
-                expect(Parser.cfToLastName("kto")).to.be.equal("ko*t*");
-            });
-            it ("Should return RIO*", () => {
-                expect(Parser.cfToLastName("rio")).to.be.equal("rio*");
-            });
-            it ("Should return UAU*", () => {
-                expect(Parser.cfToLastName("uau")).to.be.equal("uau*");
-            });
-            it ("Should return OO", () => {
-                expect(Parser.cfToLastName("oox")).to.be.equal("oo");
-            });
+        it ("2 consonants + 1 vowel", () => {
+            expect(Parser.cfToLastName("WYA")).to.be.equal("WA*Y*");
+            expect(Parser.cfToLastName("kto")).to.be.equal("ko*t*");
         });
-        describe("Invalid", () => {
-            // Invalid
-            it("Should return null for cfToLastName strings different from 3 chars, vowel between consonants or undefined", () => {
-                expect(Parser.cfToLastName("KAZ")).to.be.null;
-                expect(Parser.cfToLastName("KA")).to.be.null;
-                expect(Parser.cfToLastName("")).to.be.null;
-            });
+        it ("1 consonants + 2 vowels", () => {
+            expect(Parser.cfToLastName("WAE")).to.be.equal("WAE*");
+            expect(Parser.cfToLastName("rio")).to.be.equal("rio*");
+        });
+        it ("3 vowels", () => {
+            expect(Parser.cfToLastName("AEI")).to.be.equal("AEI*");
+            expect(Parser.cfToLastName("uau")).to.be.equal("uau*");
+        });
+        it ("2 vowels + X", () => {
+            expect(Parser.cfToLastName("AEX")).to.be.equal("AE");
+            expect(Parser.cfToLastName("oox")).to.be.equal("oo");
+        });
+        it("Invalid", () => {
+            expect(Parser.cfToLastName("KAZ")).to.be.null;
+            expect(Parser.cfToLastName("ka")).to.be.null;
+            expect(Parser.cfToLastName("")).to.be.null;
         });
     });
 };

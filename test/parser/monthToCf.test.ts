@@ -3,7 +3,7 @@ import { expect } from "../utils";
 
 export default async () => {
     describe("monthToCf", () => {
-        it("Should return month code for the given month number", () => {
+        it("All Months", () => {
             expect(Parser.monthToCf(0)).to.be.equal("A");
             expect(Parser.monthToCf(1)).to.be.equal("B");
             expect(Parser.monthToCf(2)).to.be.equal("C");
@@ -17,7 +17,7 @@ export default async () => {
             expect(Parser.monthToCf(10)).to.be.equal("S");
             expect(Parser.monthToCf(11)).to.be.equal("T");
         });
-        it("Should return null", () => {
+        it("Invalid", () => {
             expect(Parser.monthToCf(12)).to.be.null;
             // expect(Parser.monthToCf("3")).to.be.null;
             // expect(Parser.monthToCf("$")).to.be.null;
