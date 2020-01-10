@@ -1,7 +1,10 @@
-import isValid from "./validator/isValid.test";
+import mismatch from "./validator/mismatch.test";
+import validity from "./validator/validity.test";
 
 describe("CodiceFiscaleUtils:Validator", () => {
-    describe("personal infos", () => {
-        isValid();
+    validity();
+    describe("CF Match / Mismatch", () => {
+
+        mismatch();
     });
 });
