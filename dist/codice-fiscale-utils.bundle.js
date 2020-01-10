@@ -395,6 +395,23 @@ var CodiceFiscaleUtils = (function (exports, moment, DiacriticRemover) {
 
     const Belfiore = new BelfioreConnector(CITIES_COUNTRIES);
 
+    const LASTNAME_OFFSET = 0;
+    const LASTNAME_SIZE = 3;
+    const FIRSTNAME_OFFSET = 3;
+    const FIRSTNAME_SIZE = 3;
+    const YEAR_OFFSET = 6;
+    const YEAR_SIZE = 2;
+    const MONTH_OFFSET = 8;
+    const MONTH_SIZE = 1;
+    const DAY_OFFSET = 9;
+    const DAY_SIZE = 2;
+    const GENDER_OFFSET = DAY_OFFSET;
+    const GENDER_SIZE = 1;
+    const PLACE_OFFSET = 11;
+    const PLACE_SIZE = 4;
+    const CRC_OFFSET = 15;
+    const CRC_SIZE = 1;
+
     const CONSONANT_LIST = "B-DF-HJ-NP-TV-Z";
     const VOWEL_LIST = "AEIOU";
     const OMOCODE_NUMBER_LIST = "\\dLMNP-V";
@@ -519,12 +536,12 @@ var CodiceFiscaleUtils = (function (exports, moment, DiacriticRemover) {
          */
         static checkDigit(codiceFiscale) {
             if (typeof codiceFiscale === "string" && new RegExp(PARTIAL_CF).test(codiceFiscale)) {
-                const partialCF = codiceFiscale.substr(0, 15);
+                const partialCF = codiceFiscale.substr(LASTNAME_OFFSET, CRC_OFFSET);
                 let partialCfValue = 0;
                 for (const charValue of this.evaluateChar(partialCF)) {
                     partialCfValue += charValue;
                 }
-                return String.fromCharCode(partialCfValue % 26 + 65);
+                return String.fromCharCode(partialCfValue % this.CRC_MOD + this.CHAR_OFFSET);
             }
             return null;
         }
@@ -562,21 +579,7 @@ var CodiceFiscaleUtils = (function (exports, moment, DiacriticRemover) {
         }
     }
     CheckDigitizer.CHAR_OFFSET = 65;
-
-    const LASTNAME_OFFSET = 0;
-    const LASTNAME_SIZE = 3;
-    const FIRSTNAME_OFFSET = 3;
-    const FIRSTNAME_SIZE = 3;
-    const YEAR_OFFSET = 6;
-    const YEAR_SIZE = 2;
-    const MONTH_OFFSET = 8;
-    const MONTH_SIZE = 1;
-    const DAY_OFFSET = 9;
-    const DAY_SIZE = 2;
-    const GENDER_OFFSET = DAY_OFFSET;
-    const GENDER_SIZE = 1;
-    const PLACE_OFFSET = 11;
-    const PLACE_SIZE = 4;
+    CheckDigitizer.CRC_MOD = 26;
 
     const YEAR = "[12][0-9]{3}";
     const MONTH = "0[1-9]|1[0-2]";
@@ -683,7 +686,44 @@ var CodiceFiscaleUtils = (function (exports, moment, DiacriticRemover) {
             if (codiceFiscale && codiceFiscale.length <= YEAR_OFFSET) {
                 return codiceFiscale;
             }
-            return this.partialCfDeomocode(codiceFiscale);
+            const deomocodedCf = this.partialCfDeomocode(codiceFiscale);
+            if (deomocodedCf.length < CRC_OFFSET) {
+                return deomocodedCf;
+            }
+            const partialDeomocodedCf = deomocodedCf.substr(LASTNAME_OFFSET, CRC_OFFSET);
+            return partialDeomocodedCf + this.appyCaseToChar(CheckDigitizer.checkDigit(deomocodedCf) || "", deomocodedCf.substr(CRC_OFFSET, CRC_SIZE));
+        }
+        static cfOmocode(codiceFiscale, omocodeId) {
+            const omocodedCf = codiceFiscale.split("");
+            if (omocodeId) {
+                // tslint:disable-next-line: prefer-for-of
+                for (let i = codiceFiscale.length - 1, o = 0; i >= 0; i--) {
+                    // tslint:disable-next-line: no-bitwise
+                    if (Math.pow(i, 2) & this.OMOCODE_BITMAP) {
+                        o++;
+                        // tslint:disable-next-line: no-bitwise
+                        const charToEncode = !!(omocodeId & Math.pow(o, 2));
+                        const isOmocode = isNaN(parseInt(omocodedCf[i], 10));
+                        if (charToEncode !== isOmocode) {
+                            omocodedCf[i] = Omocodes$1[omocodedCf[i]];
+                        }
+                    }
+                }
+            }
+            const crc = omocodedCf[CRC_OFFSET];
+            if (crc) {
+                const partialCf = omocodedCf.slice(LASTNAME_OFFSET, CRC_OFFSET).join("");
+                omocodedCf[CRC_OFFSET] = this.appyCaseToChar(CheckDigitizer.checkDigit(partialCf) || "", crc);
+            }
+            return omocodedCf.join("");
+        }
+        static cfOmocodeId(codiceFiscale) {
+            const cfOmocodeBitmap = codiceFiscale.split("")
+                // tslint:disable-next-line: no-bitwise
+                .filter((char, index) => Math.pow(2, index) & this.OMOCODE_BITMAP)
+                .map((char) => isNaN(parseInt(char, 10)) ? 1 : 0)
+                .join("");
+            return parseInt(cfOmocodeBitmap, 2);
         }
         /**
          * Parse lastName information
@@ -860,6 +900,7 @@ var CodiceFiscaleUtils = (function (exports, moment, DiacriticRemover) {
                 date,
                 gender: this.cfToGender(fiscalCode) || undefined,
                 place: place ? place.name : undefined,
+                omocode: this.cfOmocodeId(fiscalCode),
             };
             if (year && month && day) {
                 personalInfo.date = new Date(Date.UTC(year, month, day));
@@ -972,12 +1013,18 @@ var CodiceFiscaleUtils = (function (exports, moment, DiacriticRemover) {
         static parseDate(date) {
             if (!(date instanceof Date ||
                 date instanceof moment ||
-                typeof date === "string" && new RegExp(ISO8601_SHORT_DATE).test(date) ||
-                Array.isArray(date) && !date.some((value) => typeof value !== "number"))) {
+                typeof date === "string" && new RegExp(`^(?:${ISO8601_DATE_TIME})$`).test(date) ||
+                // typeof date === "string" && new RegExp(ISO8601_SHORT_DATE).test(date) ||
+                Array.isArray(date) && date.length && !date.some((value) => typeof value !== "number"))) {
                 return null;
             }
-            const parsedDate = moment(date);
-            return parsedDate.isValid() ? parsedDate.toDate() : null;
+            try {
+                const parsedDate = moment(date);
+                return parsedDate.isValid() ? parsedDate.toDate() : null;
+            }
+            catch (err) {
+                return null;
+            }
         }
         static parsePlace(place, scopedBelfioreConnector = Belfiore) {
             let verifiedBirthPlace;
@@ -1098,6 +1145,19 @@ var CodiceFiscaleUtils = (function (exports, moment, DiacriticRemover) {
                 }
             }
             return null;
+        }
+        static appyCaseToChar(targetChar, counterCaseChar) {
+            if (targetChar && counterCaseChar) {
+                const isUpperCase = counterCaseChar[0] === counterCaseChar[0].toUpperCase();
+                const isLowerCase = counterCaseChar[0] === counterCaseChar[0].toLowerCase();
+                if (isUpperCase && !isLowerCase) {
+                    return targetChar[0].toUpperCase();
+                }
+                else if (!isUpperCase && isLowerCase) {
+                    return targetChar[0].toLowerCase();
+                }
+            }
+            return targetChar[0];
         }
     }
     /**
@@ -1293,14 +1353,13 @@ var CodiceFiscaleUtils = (function (exports, moment, DiacriticRemover) {
         static cfPlace(birthDateOrName, placeName) {
             let matcher = BELFIORE_CODE_MATCHER;
             if (birthDateOrName) {
-                const birthDate = moment(birthDateOrName);
-                const validBD = birthDate.isValid();
-                if (validBD && placeName) {
+                const birthDate = Parser.parseDate(birthDateOrName);
+                if (birthDate && placeName) {
                     const place = placeName;
                     const parsedPlace = Parser.placeToCf(birthDate, place);
                     matcher = this.deomocode(parsedPlace || "");
                 }
-                else if (!validBD && typeof birthDateOrName === "string") {
+                else if (!birthDate && typeof birthDateOrName === "string") {
                     const place = birthDateOrName;
                     const parsedPlace = Parser.placeToCf(place);
                     matcher = this.deomocode(parsedPlace || "");
