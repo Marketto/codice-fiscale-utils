@@ -91,7 +91,7 @@
 <h4><em><strong>surname</strong></em> was renamed into <em><strong>lastName</strong></em> according to the new naming convention (even in method names and data models)</h4>
 </li>
 </ul>
-<h2>📗FAQs?</h2>
+<h2>📗 FAQs?</h2>
 <ol>
 <li>
 <p><strong>Why should I need a library? Can't I use just a RegExp?</strong>
@@ -114,12 +114,12 @@
 <em>Sure, it's built to work both in node and browser environments! Give a look at the <a href="#demo">Demo section</a></em></p>
 </li>
 </ol>
-<h2>📙<a href="CHANGELOG.MD">CHANGELOG</a></h2>
-<h2>🚃<a href="ROADMAP.MD">ROADMAP</a></h2>
-<h2>INSTALLATION</h2>
+<h2>📙 <a href="CHANGELOG.MD">CHANGELOG</a></h2>
+<h2>🚃 <a href="ROADMAP.MD">ROADMAP</a></h2>
+<h2>🔌 INSTALLATION</h2>
 <pre class="prettyprint source lang-{r,"><code>npm i -s @marketto/codice-fiscale-utils
 </code></pre>
-<h2>USAGE</h2>
+<h2>🔧 USAGE</h2>
 <h3>NodeJs</h3>
 <pre class="prettyprint source lang-javascript"><code>const codiceFiscaleUtils = require('@marketto/codice-fiscale-utils');
 </code></pre>
@@ -133,22 +133,50 @@
 <pre class="prettyprint source lang-html"><code>&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js&quot;>&lt;/script>
 &lt;script src=&quot;https://unpkg.com/browse/@marketto/codice-fiscale-utils/dist/codice-fiscale-utils.amd.min.js&quot;>&lt;/script>
 </code></pre>
-<h2>DOCUMENTATION</h2>
-<p><a href="https://marketto.github.io/codice-fiscale-utils/">JsDocs @ GitHub Pages</a></p>
-<h2>DEMO</h2>
+<h2>💻 DEMO</h2>
 <p>Check out <a href="https://github.com/Marketto/codice-fiscale-utils">CodiceFiscaleUtils</a> repo on Github</p>
 <h3>NodeJS Express</h3>
-<p><a href="https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/express">Node/Express Demo on Github</a></p>
+<ul>
+<li><a href="https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/express">Node/Express Demo on Github</a></li>
+</ul>
 <h3>VueJs</h3>
-<p><a href="https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/vue">Vue Demo on Github</a></p>
+<ul>
+<li><a href="https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/vue">Vue Demo on Github</a></li>
+</ul>
 <h3>Angular</h3>
-<p><a href="https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/angular">Angular Demo on Github</a></p>
+<ul>
+<li><a href="https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/angular">Angular Demo on Github</a></li>
+</ul>
+<h2>📖 DOCUMENTATION</h2>
+<p><a href="https://marketto.github.io/codice-fiscale-utils/">JsDocs @ GitHub Pages</a></p>
 <h3>Parser</h3>
 <p><em>Class</em> with <em>static</em> methods</p>
 <pre class="prettyprint source lang-javascript"><code>const {Parser} = codiceFiscaleUtils;
 </code></pre>
-<h4>Parser.deomocode</h4>
-<pre class="prettyprint source lang-javascript"><code>Parser.cfDeomocode('KKALMNVMAPLB331Z'); //KKALMN91A30B331Z
+<details>
+    <summary>Show code examples</summary>
+<h4>Parser.cfDeomocode</h4>
+<pre class="prettyprint source lang-javascript"><code>Parser.cfDeomocode(&quot;KKALMNVMAPLB331Z&quot;); //KKALMN91A30B331P
+Parser.cfDeomocode(&quot;kkalmnvmaplb331z&quot;); //kkalmn91a30b331p
+</code></pre>
+<h4>Parser.cfOmocodeId</h4>
+<pre class="prettyprint source lang-javascript"><code>Parser.cfOmocodeId(&quot;VRNGNYLtdsucprmt&quot;); //127
+Parser.cfOmocodeId(&quot;kkalmn91as0b331z&quot;); //16
+Parser.cfOmocodeId(&quot;kkalmn91a30b331z&quot;); //0
+</code></pre>
+<h4>Parser.cfOmocode</h4>
+<pre class="prettyprint source lang-javascript"><code>Parser.cfOmocode(&quot;VRNGNY07d68c351v&quot;, 0); //VRNGNY07d68c351v
+Parser.cfOmocode(&quot;VRNGNY07d68c351v&quot;, 1); //VRNGNY07d68c35Mn
+Parser.cfOmocode(&quot;VRNGNY07d68c351v&quot;, 2); //VRNGNY07d68c3R1h
+Parser.cfOmocode(&quot;VRNGNY07d68c351v&quot;, 3); //VRNGNY07d68c3RMz
+Parser.cfOmocode(&quot;VRNGNY07d68c351v&quot;, 8); //VRNGNY07d6Uc351s
+Parser.cfOmocode(&quot;VRNGNY07d68c351v&quot;, 32); //VRNGNY0Td68c351h
+Parser.cfOmocode(&quot;VRNGNY07d68c351v&quot;, 127); //VRNGNYLTdSUcPRMt
+//Re-omocode
+Parser.cfOmocode(&quot;kkalmnvmaplb331z&quot;, 0); //kkalmn91a30b331p
+Parser.cfOmocode(&quot;kkalmnvmaplb331z&quot;, 1); //kkalmn91a30b33Mh
+Parser.cfOmocode(&quot;kkalmnvmaplb331z&quot;, 74); //kkalmnv1a3lb3P1t
+Parser.cfOmocode(&quot;kkalmnvmaplb331z&quot;, 127); //kkalmnvmaplbPPMe
 </code></pre>
 <h4>Parser.cfToLastName</h4>
 <pre class="prettyprint source lang-javascript"><code>Parser.cfToLastName('WYZ'); //W*Y*Z*
@@ -208,9 +236,6 @@ dt.toJSON(); //1981-01-23T...
     place: 'CATANIA'
 }
 */
-</code></pre>
-<h4>Parser.removeDiacritics</h4>
-<pre class="prettyprint source lang-javascript"><code>Parser.removeDiacritics('Tést Tèxt'); //Test Text
 </code></pre>
 <h4>Parser.lastNameToCf</h4>
 <pre class="prettyprint source lang-javascript"><code>Parser.lastNameToCf('Rossi'); //RSS
@@ -284,10 +309,13 @@ Parser.placeToCf([2000],'Unione Sovietica'); //null
     place: 'Catania'
 }); //VRNGNY07D68C351V
 </code></pre>
+</details>
 <h3>Pattern</h3>
 <p>Class with static methods</p>
 <pre class="prettyprint source lang-javascript"><code>const {Pattern} = codiceFiscaleUtils;
 </code></pre>
+<details>
+    <summary>Show code examples</summary>
 <h4>Pattern.cfLastName</h4>
 <pre class="prettyprint source lang-javascript"><code>Pattern.cfLastName().test('KST'); //true
 Pattern.cfLastName().test('AST'); //false
@@ -392,30 +420,268 @@ Pattern.gender('XYZXYZ88H61').test('M'); //false
 Pattern.place('XYZXYZ92C16A662').test('Bari'); //true
 Pattern.place('XYZXYZ12S30A662').test('Bologna'); //false
 </code></pre>
+</details>
 <h3>Validator</h3>
-<h3>CFMismatchValidator</h3>
-<h4>isValid</h4>
-<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale('VRNGNY07D68C351V').valid; //true
-Validator.codiceFiscale('VRNGNY07D68C351K').valid; //false - invalid check digit
-Validator.codiceFiscale('GSTPPP99C06D620V').valid; //false - invalid birth date/place
+<p><em>Class</em> with <em>static</em> methods</p>
+<pre class="prettyprint source lang-javascript"><code>const {Validator} = codiceFiscaleUtils;
 </code></pre>
-<h2>Compatibility (tested)</h2>
+<details>
+    <summary>Show code examples</summary>
+<h4>isLastNameValid</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.isLastNameValid(&quot;Test&quot;); //true
+Validator.isLastNameValid(&quot;Tést N'àme&quot;); //true
+Validator.isLastNameValid(&quot;&quot;); //false
+Validator.isLastNameValid(&quot;@!#&quot;); //false
+</code></pre>
+<h4>isLastNameInvalid</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.isLastNameInvalid(&quot;Test&quot;); //false
+Validator.isLastNameInvalid(&quot;Tést N'àme&quot;); //false
+Validator.isLastNameInvalid(&quot;&quot;); //false
+Validator.isLastNameInvalid(&quot;@!#&quot;); //true
+</code></pre>
+<h4>isFirstNameValid</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.isFirstNameValid(&quot;Test&quot;); //true
+Validator.isFirstNameValid(&quot;Tést N'àme&quot;); //true
+Validator.isFirstNameValid(&quot;&quot;); //false
+Validator.isFirstNameValid(&quot;@!#&quot;); //false
+</code></pre>
+<h4>isFirstNameInvalid</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.isFirstNameInvalid(&quot;Test&quot;); //false
+Validator.isFirstNameInvalid(&quot;Tést N'àme&quot;); //false
+Validator.isFirstNameInvalid(&quot;&quot;); //false
+Validator.isFirstNameInvalid(&quot;@!#&quot;); //true
+</code></pre>
+<h4>isBirthDateValid</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.isBirthDateValid(&quot;1999-01-01&quot;); //true
+Validator.isBirthDateValid([1999, 0, 1]); //true
+Validator.isBirthDateValid(&quot;&quot;); //false
+Validator.isBirthDateValid(&quot;2000-02-30&quot;); //false
+Validator.isBirthDateValid(&quot;No date&quot;); //false
+Validator.isBirthDateValid(&quot;@!#&quot;); //false
+</code></pre>
+<h4>isBirthDateInvalid</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.isBirthDateInvalid(&quot;1999-01-01&quot;); //false
+Validator.isBirthDateInvalid([1999, 0, 1]); //false
+Validator.isBirthDateInvalid(&quot;&quot;); //false
+Validator.isBirthDateInvalid(&quot;2000-02-30&quot;); //true
+Validator.isBirthDateInvalid(&quot;No date&quot;); //true
+Validator.isBirthDateInvalid(&quot;@!#&quot;); //true
+</code></pre>
+<h4>isBirthPlaceValid</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.isBirthPlaceValid(&quot;Roma&quot;); //true
+Validator.isBirthPlaceValid(&quot;H501&quot;); //true
+Validator.isBirthPlaceValid(&quot;&quot;); //false
+Validator.isBirthPlaceValid(&quot;Moon&quot;); //false
+//With scoped BelfioreConnector
+//By active places
+Validator.isBirthPlaceValid(&quot;Unione sovietica&quot;, Belfiore.active()); //false
+Validator.isBirthPlaceValid(&quot;Unione sovietica&quot;, Belfiore.active([1980])); //true
+//By cities
+Validator.isBirthPlaceValid(&quot;Francia&quot;, Belfiore.cities); //false
+Validator.isBirthPlaceValid(&quot;A662&quot;, Belfiore.cities) //true
+//By countries
+Validator.isBirthPlaceValid(&quot;Belgio&quot;, Belfiore.countries); //true
+//By province
+Validator.isBirthPlaceValid(&quot;Vibo Valentia&quot;, Belfiore.byProvince(&quot;VV&quot;)); //true
+Validator.isBirthPlaceValid(&quot;H501&quot;, Belfiore.byProvince(&quot;VV&quot;)); //false
+</code></pre>
+<h4>isBirthPlaceInvalid</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.isBirthPlaceInvalid(&quot;Roma&quot;); //false
+Validator.isBirthPlaceInvalid(&quot;H501&quot;); //false
+Validator.isBirthPlaceInvalid(&quot;&quot;); //false
+Validator.isBirthPlaceInvalid(&quot;Moon&quot;); //true
+//With scoped BelfioreConnector
+//By active places
+Validator.isBirthPlaceInvalid(&quot;Unione sovietica&quot;, Belfiore.active()); //true
+Validator.isBirthPlaceInvalid(&quot;Unione sovietica&quot;, Belfiore.active([1980])); //false
+//By cities
+Validator.isBirthPlaceInvalid(&quot;Francia&quot;, Belfiore.cities); //true
+Validator.isBirthPlaceInvalid(&quot;A662&quot;, Belfiore.cities); //false
+//By countries
+Validator.isBirthPlaceInvalid(&quot;Belgio&quot;, Belfiore.countries); //false
+//By province
+Validator.isBirthPlaceInvalid(&quot;Vibo Valentia&quot;, Belfiore.byProvince(&quot;VV&quot;)); //false
+Validator.isBirthPlaceInvalid(&quot;H501&quot;, Belfiore.byProvince(&quot;VV&quot;)); //true
+</code></pre>
+<h4>birthDatePlaceMatch</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.birthDatePlaceMatch(&quot;1990-05-21&quot;, &quot;Repubblica Socialista Federale di Jugoslavia&quot;); //true
+Validator.birthDatePlaceMatch(new Date(), &quot;Repubblica Socialista Federale di Jugoslavia&quot;); //false
+Validator.birthDatePlaceMatch(&quot;1988-03-11&quot;, &quot;Roma&quot;); //true
+Validator.birthDatePlaceMatch(new Date(), &quot;Roma&quot;); //true
+Validator.birthDatePlaceMatch(new Date(), &quot;&quot;); //false
+Validator.birthDatePlaceMatch(&quot;&quot;, &quot;Palermo&quot;); //false
+Validator.birthDatePlaceMatch(&quot;&quot;, &quot;&quot;); //false
+</code></pre>
+<h4>birthDatePlaceMismatch</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.birthDatePlaceMismatch(&quot;1990-05-21&quot;, &quot;Repubblica Socialista Federale di Jugoslavia&quot;); //false
+Validator.birthDatePlaceMismatch(new Date(), &quot;Repubblica Socialista Federale di Jugoslavia&quot;); //true
+Validator.birthDatePlaceMismatch(&quot;1988-03-11&quot;, &quot;Roma&quot;); //false
+Validator.birthDatePlaceMismatch(new Date(), &quot;Roma&quot;); //false
+Validator.birthDatePlaceMismatch(new Date(), &quot;&quot;); //false
+Validator.birthDatePlaceMismatch(&quot;&quot;, &quot;Palermo&quot;); //false
+Validator.birthDatePlaceMismatch(&quot;&quot;, &quot;&quot;); //false
+</code></pre>
+<h4>matchPersonalInfo</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;)
+    .matchPersonalInfo({
+        day: 28,
+        firstName: &quot;Génny&quot;,
+        gender: &quot;F&quot;,
+        lastName: &quot;Verònesi&quot;,
+        month: 3,
+        place: &quot;Catania&quot;,
+        year: 1907,
+    }); //true
+
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;)
+    .mismatchPersonalInfo({
+        day: 28,
+        firstName: &quot;Génny&quot;,
+        gender: &quot;F&quot;,
+        lastName: &quot;Verònesi&quot;,
+        month: 3,
+        place: &quot;Firenze&quot;,
+        year: 1907,
+    }); //false
+</code></pre>
+<h4>mismatchPersonalInfo</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;)
+    .mismatchPersonalInfo({
+        day: 28,
+        firstName: &quot;Génny&quot;,
+        gender: &quot;F&quot;,
+        lastName: &quot;Verònesi&quot;,
+        month: 3,
+        place: &quot;Catania&quot;,
+        year: 1907,
+    }); //false
+
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;)
+    .mismatchPersonalInfo({
+        day: 28,
+        firstName: &quot;Génny&quot;,
+    }); //false
+</code></pre>
+</details>
+<h3>codiceFiscale (CFMismatchValidator)</h3>
+<p><em>Class</em> instance</p>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;); //CFMismatchValidator
+</code></pre>
+<details>
+    <summary>Show code examples</summary>
+<h4>valid</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).valid //true
+Validator.codiceFiscale(&quot;MRNMIA02E45L219X&quot;).valid //true
+Validator.codiceFiscale(&quot;GSTPPP31C06D620Z&quot;).valid //true
+Validator.codiceFiscale(&quot;VRNGNY07D68C351K&quot;).valid //false - invalid check digit
+Validator.codiceFiscale(&quot;GSTPPP99C06D620V&quot;).valid //false - invalid birth date/place
+Validator.codiceFiscale(&quot;&quot;).valid; //false - empty cf
+</code></pre>
+<h4>invalid</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).invalid //false - OK
+Validator.codiceFiscale(&quot;MRNMIA02E45L219X&quot;).invalid //false - OK
+Validator.codiceFiscale(&quot;GSTPPP31C06D620Z&quot;).invalid //false - OK
+Validator.codiceFiscale(&quot;VRNGNY07D68C351K&quot;).invalid //true - invalid check digit
+Validator.codiceFiscale(&quot;GSTPPP99C06D620V&quot;).invalid //true - invalid birth date/place
+Validator.codiceFiscale(&quot;&quot;).invalid //false - empty cf is not invalid!
+</code></pre>
+<h4>matchLastName</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchLastName(&quot;Vareni&quot;); //true
+Validator.codiceFiscale(&quot;VRN&quot;).matchLastName(&quot;Vareni&quot;); //true
+Validator.codiceFiscale(&quot;&quot;).matchLastName(&quot;Vareni&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchLastName(&quot;John&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchLastName(&quot;V&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchLastName(&quot;&quot;); //false
+</code></pre>
+<h4>mismatchLastName</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchLastName(&quot;Vareni&quot;); //false
+Validator.codiceFiscale(&quot;VRN&quot;).mismatchLastName(&quot;Vareni&quot;); //false
+Validator.codiceFiscale(&quot;&quot;).mismatchLastName(&quot;Vareni&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchLastName(&quot;John&quot;); //true
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchLastName(&quot;V&quot;); //true
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchLastName(&quot;&quot;); //false
+</code></pre>
+<h4>matchFirstName</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchFirstName(&quot;Genny&quot;); //true
+Validator.codiceFiscale(&quot;VRNGNY&quot;).matchFirstName(&quot;Genny&quot;); //true
+Validator.codiceFiscale(&quot;&quot;).matchFirstName(&quot;Genny&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchFirstName(&quot;John&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchFirstName(&quot;G&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchFirstName(&quot;&quot;); //false
+</code></pre>
+<h4>mismatchFirstName</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchFirstName(&quot;Genny&quot;); //false
+Validator.codiceFiscale(&quot;VRN&quot;).mismatchFirstName(&quot;Genny&quot;); //false
+Validator.codiceFiscale(&quot;&quot;).mismatchFirstName(&quot;Genny&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchFirstName(&quot;John&quot;); //true
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchFirstName(&quot;G&quot;); //true
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchFirstName(&quot;&quot;); //false
+</code></pre>
+<h4>matchBirthDate</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchBirthDate(&quot;2007-04-28&quot;); //true
+Validator.codiceFiscale(&quot;VRNGNY07D68&quot;).matchBirthDate(&quot;2007-04-28&quot;); //true
+Validator.codiceFiscale(&quot;&quot;).matchBirthDate(&quot;2007-04-28&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchBirthDate(&quot;2008-02-16&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchBirthDate(&quot;&quot;); //false
+</code></pre>
+<h4>mismatchBirthDate</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchBirthDate(&quot;2007-04-28&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68&quot;).mismatchBirthDate(&quot;2007-04-28&quot;); //false
+Validator.codiceFiscale(&quot;&quot;).mismatchBirthDate(&quot;2007-04-28&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchBirthDate(&quot;2008-02-16&quot;); //true
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchBirthDate(&quot;&quot;); //false
+</code></pre>
+<h4>matchGender</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchGender(&quot;F&quot;); //true
+Validator.codiceFiscale(&quot;VRNGNY07D68&quot;).matchGender(&quot;F&quot;); //true
+Validator.codiceFiscale(&quot;VRNGNY07D6&quot;).matchGender(&quot;F&quot;); //true
+Validator.codiceFiscale(&quot;&quot;).matchGender(&quot;F&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchGender(&quot;M&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchGender(&quot;&quot;); //false
+</code></pre>
+<h4>mismatchGender</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchGender(&quot;F&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68&quot;).mismatchGender(&quot;F&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D6&quot;).mismatchGender(&quot;F&quot;); //false
+Validator.codiceFiscale(&quot;&quot;).mismatchGender(&quot;F&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchGender(&quot;M&quot;); //true
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchGender(&quot;&quot;); //false
+</code></pre>
+<h4>matchBirthPlace</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchBirthPlace(&quot;CATANIA&quot;); //true
+Validator.codiceFiscale(&quot;VRNGNY07D68C351&quot;).matchBirthPlace(&quot;CATANIA&quot;); //true
+Validator.codiceFiscale(&quot;&quot;).matchBirthPlace(&quot;CATANIA&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchBirthPlace(&quot;ROMA&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).matchBirthPlace(&quot;&quot;); //false
+</code></pre>
+<h4>mismatchBirthPlace</h4>
+<pre class="prettyprint source lang-javascript"><code>Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchBirthPlace(&quot;CATANIA&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351&quot;).mismatchBirthPlace(&quot;CATANIA&quot;); //false
+Validator.codiceFiscale(&quot;&quot;).mismatchBirthPlace(&quot;CATANIA&quot;); //false
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchBirthPlace(&quot;ROMA&quot;); //true
+Validator.codiceFiscale(&quot;VRNGNY07D68C351V&quot;).mismatchBirthPlace(&quot;&quot;); //false
+</code></pre>
+</details>
+<h2>🔃 Compatibility</h2>
 <ul>
 <li>[X] NodeJs</li>
 <li>[X] Chrome</li>
 <li>[X] Firefox</li>
 <li>[X] Edge</li>
 </ul>
-<h2>LICENSE</h2>
+<h2>✋ DISCLAMER</h2>
+<p>All names, informations, and fiscal codes used in this README and all unit tests are fictitious.
+No identification with actual persons (living or deceased) is intended or should be inferred</p>
+<h2>📜 LICENSE</h2>
 <p><a href="LICENSE">MIT License</a></p>
 <p><a href="https://app.fossa.io/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils?ref=badge_large"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils.svg?type=large" alt="FOSSA Status"></a></p>
-<h2>ASSETS LICENSES AND AUTHORS</h2>
+<h2>📚 ASSETS LICENSES AND AUTHORS</h2>
 <ul>
 <li>Cities List of Values: <a href="asset/MINISTERO_DELL_INTERNO.LICENSE">CC BY 4.0</a> Ministero dell'interno</li>
 <li>Cities List of Values: <a href="asset/AGENZIA_DELLE_ENTRATE.LICENSE">CC BY 4.0</a> Agenzia delle Entrate</li>
 <li>Countries List of Values: <a href="asset/ISTITUTO_NAZIONALE_DI_STATISTICA.LICENSE">CC BY 3.0</a> Istituto nazionale di statistica</li>
 </ul>
-<h2>AUTHOR</h2>
+<h2>📝 AUTHOR</h2>
 <p><a href="mailto:marco.ricupero@gmail.com">Marco Ricupero</a></p></article>
 		</section>
 			</div>
@@ -426,7 +692,7 @@ Validator.codiceFiscale('GSTPPP99C06D620V').valid; //false - invalid birth date/
 	</div>
 	<footer>
 				<div class="copyright">FooDoc Copyright © 2016 The contributors to the JSDoc3 and FooDoc projects.</div>
-			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 10th Jan 2020 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
+			<div class="generated-by">Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on 11th Jan 2020 using the <a href="https://github.com/steveush/foodoc">FooDoc template</a>.</div>
 	</footer>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
