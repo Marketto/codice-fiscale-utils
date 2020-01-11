@@ -39,5 +39,17 @@ export default () => {
             expect(decoded.place).to.be.equalIgnoreCase("CATANIA");
             expect(decoded.omocodeId).to.be.equal(127);
         });
+        it("Partial", () => {
+            const decoded = Parser.cfDecode("VRNGNY@@@@@cprm");
+            expect(decoded).to.be.a("object");
+            expect(decoded.lastName).to.be.equal("V*R*N*");
+            expect(decoded.firstName).to.be.equal("G*N*Y*");
+            expect(decoded.year).to.be.undefined;
+            expect(decoded.month).to.be.undefined;
+            expect(decoded.day).to.be.undefined;
+            expect(decoded.gender).to.be.undefined;
+            expect(decoded.place).to.be.equalIgnoreCase("CATANIA");
+            expect(decoded.omocodeId).to.be.equal(7);
+        });
     });
 };

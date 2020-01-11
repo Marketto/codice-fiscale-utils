@@ -92,4 +92,48 @@ export default () => {
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").mismatchBirthPlace("")).to.be.false;
         });
     });
+
+    describe("personalInfo", () => {
+        it("match", () => {
+            expect(Validator.codiceFiscale("VRNGNY07D68C351V")
+                .matchPersonalInfo({
+                    day: 28,
+                    firstName: "Génny",
+                    gender: "F",
+                    lastName: "Verònesi",
+                    month: 3,
+                    place: "Catania",
+                    year: 1907,
+                })).to.be.true;
+
+            expect(Validator.codiceFiscale("VRNGNY07D68C351V")
+                .mismatchPersonalInfo({
+                    day: 28,
+                    firstName: "Génny",
+                    gender: "F",
+                    lastName: "Verònesi",
+                    month: 3,
+                    place: "Firenze",
+                    year: 1907,
+                })).to.be.false;
+        });
+        it("mismatch", () => {
+            expect(Validator.codiceFiscale("VRNGNY07D68C351V")
+                .mismatchPersonalInfo({
+                    day: 28,
+                    firstName: "Génny",
+                    gender: "F",
+                    lastName: "Verònesi",
+                    month: 3,
+                    place: "Catania",
+                    year: 1907,
+                })).to.be.false;
+
+            expect(Validator.codiceFiscale("VRNGNY07D68C351V")
+                .mismatchPersonalInfo({
+                    day: 28,
+                    firstName: "Génny",
+                })).to.be.false;
+        });
+    });
 };

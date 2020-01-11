@@ -25,6 +25,13 @@ export default () => {
             });
         });
 
+        it("Date validator", () => {
+            const testDate = "1988-04-22";
+            Pattern.cfDateGender(testDate).test("U8D22").should.be.true;
+            Pattern.cfDateGender(testDate).test("U8D62").should.be.true;
+            Pattern.cfDateGender(testDate).test("U9D62").should.be.false;
+        });
+
         describe("Specific validator", () => {
             it ("Male", () => {
                 const testArrayDate = [1983, 3, 22];
