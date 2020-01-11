@@ -96,7 +96,7 @@ export default class Parser {
         const cfOmocodeBitmap = codiceFiscale.split("")
             // tslint:disable-next-line: no-bitwise
             .filter((char, index) => 2 ** index & this.OMOCODE_BITMAP)
-            .map((char) => isNaN(parseInt(char, 10)) ? 1 : 0)
+            .map((char) => (/^[a-z]$/i).test(diacriticRemover[char]) ? 1 : 0)
             .join("");
         return parseInt(cfOmocodeBitmap , 2);
     }
@@ -269,18 +269,17 @@ export default class Parser {
         const { creationDate, expirationDate } = birthPlace;
         if (creationDate || expirationDate) {
             const birthDate = this.cfToBirthDate(codiceFiscale);
-            if (!birthDate) {
-                return null;
-            }
-            let validityCheck = true;
-            if (creationDate) {
-                validityCheck = moment(birthDate).isSameOrAfter(moment(creationDate));
-            }
-            if (validityCheck && expirationDate) {
-                validityCheck = moment(birthDate).isSameOrBefore(moment(expirationDate));
-            }
-            if (!validityCheck) {
-                return null;
+            if (birthDate) {
+                let validityCheck = true;
+                if (creationDate) {
+                    validityCheck = moment(birthDate).isSameOrAfter(moment(creationDate));
+                }
+                if (validityCheck && expirationDate) {
+                    validityCheck = moment(birthDate).isSameOrBefore(moment(expirationDate));
+                }
+                if (!validityCheck) {
+                    return null;
+                }
             }
         }
         return birthPlace;
