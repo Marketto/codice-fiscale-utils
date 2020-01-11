@@ -541,6 +541,51 @@ Validator.birthDatePlaceMismatch(new Date(), ""); //false
 Validator.birthDatePlaceMismatch("", "Palermo"); //false
 Validator.birthDatePlaceMismatch("", ""); //false
 ```
+
+#### matchPersonalInfo
+```javascript
+Validator.codiceFiscale("VRNGNY07D68C351V")
+    .matchPersonalInfo({
+        day: 28,
+        firstName: "Génny",
+        gender: "F",
+        lastName: "Verònesi",
+        month: 3,
+        place: "Catania",
+        year: 1907,
+    }); //true
+
+Validator.codiceFiscale("VRNGNY07D68C351V")
+    .mismatchPersonalInfo({
+        day: 28,
+        firstName: "Génny",
+        gender: "F",
+        lastName: "Verònesi",
+        month: 3,
+        place: "Firenze",
+        year: 1907,
+    }); //false
+```
+
+#### mismatchPersonalInfo
+```javascript
+Validator.codiceFiscale("VRNGNY07D68C351V")
+    .mismatchPersonalInfo({
+        day: 28,
+        firstName: "Génny",
+        gender: "F",
+        lastName: "Verònesi",
+        month: 3,
+        place: "Catania",
+        year: 1907,
+    }); //false
+
+Validator.codiceFiscale("VRNGNY07D68C351V")
+    .mismatchPersonalInfo({
+        day: 28,
+        firstName: "Génny",
+    }); //false
+```
 </details>
 
 ### codiceFiscale (CFMismatchValidator)
