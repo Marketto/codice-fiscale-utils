@@ -1,5 +1,21 @@
 import moment from "moment";
 import { BelfiorePlace } from "../belfiore-connector/belfiore";
+import {
+    CRC_OFFSET,
+    CRC_SIZE,
+    DATE_OFFSET,
+    DATE_SIZE,
+    FIRSTNAME_OFFSET,
+    FIRSTNAME_SIZE,
+    GENDER_OFFSET,
+    GENDER_SIZE,
+    LASTNAME_OFFSET,
+    LASTNAME_SIZE,
+    PLACE_OFFSET,
+    PLACE_SIZE,
+    YEAR_OFFSET,
+    YEAR_SIZE,
+} from "../const/cf-offsets.const";
 import IPersonalInfo from "../interfaces/personal-info.interface";
 import Genders from "../types/genders.type";
 import MultiFormatDate from "../types/multi-format-date.type";
@@ -9,6 +25,29 @@ import Pattern from "./pattern.class";
 
 export default class CFMismatchValidator {
     constructor(private codiceFiscale: string) {}
+
+    private get hasLastName() {
+        return this.codiceFiscale.length >= (LASTNAME_OFFSET + LASTNAME_SIZE);
+    }
+
+    private get hasFirstName() {
+        return this.codiceFiscale.length >= (FIRSTNAME_OFFSET + FIRSTNAME_SIZE);
+    }
+    private get hasBirthYear() {
+        return this.codiceFiscale.length >= (YEAR_OFFSET + YEAR_SIZE);
+    }
+    private get hasBirthDate() {
+        return this.codiceFiscale.length >= (DATE_OFFSET + DATE_SIZE);
+    }
+    private get hasGender() {
+        return this.codiceFiscale.length >= (GENDER_OFFSET + GENDER_SIZE);
+    }
+    private get hasBirthPlace() {
+        return this.codiceFiscale.length >= (PLACE_OFFSET + PLACE_SIZE);
+    }
+    private get hasCRC() {
+        return this.codiceFiscale.length >= (CRC_OFFSET + CRC_SIZE);
+    }
 
     public matchPersonalInfo(personalInfo: IPersonalInfo): boolean {
         return Pattern.codiceFiscale(personalInfo).test(this.codiceFiscale);
@@ -27,53 +66,60 @@ export default class CFMismatchValidator {
     }
 
     public matchLastName(lastName?: string): boolean {
-        return Pattern.lastName(this.codiceFiscale).test(lastName || "");
+        return this.hasLastName &&
+            Pattern.lastName(this.codiceFiscale).test(lastName || "");
     }
     public mismatchLastName(lastName?: string): boolean {
-        return !!(this.codiceFiscale && lastName && !this.matchLastName(lastName));
+        return this.hasLastName && !!lastName && !this.matchLastName(lastName);
     }
 
     public matchFirstName(firstName: string): boolean {
-        return Pattern.firstName(this.codiceFiscale).test(firstName || "");
+        return this.hasFirstName &&
+            Pattern.firstName(this.codiceFiscale).test(firstName || "");
     }
     public mismatchFirstName(firstName: string): boolean {
-        return !!(this.codiceFiscale && firstName && !this.matchFirstName(firstName));
+        return this.hasFirstName && !!firstName && !this.matchFirstName(firstName);
     }
 
     public matchBirthDate(birthDate: MultiFormatDate): boolean {
-        const parsedCfDate = Parser.cfToBirthDate(this.codiceFiscale);
-        const parsedDate = Parser.parseDate(birthDate);
-        if (parsedCfDate && parsedDate) {
-            return moment(parsedCfDate).isSame(parsedDate, "d");
+        if (this.hasBirthDate) {
+            const parsedCfDate = Parser.cfToBirthDate(this.codiceFiscale);
+            const parsedDate = Parser.parseDate(birthDate);
+            if (parsedCfDate && parsedDate) {
+                return moment(parsedCfDate).isSame(parsedDate, "d");
+            }
         }
         return false;
     }
     public mismatchBirthDate(birthDate: MultiFormatDate): boolean {
-        return !!(this.codiceFiscale && Parser.parseDate(birthDate) && !this.matchBirthDate(birthDate));
+        return this.hasBirthYear && !!Parser.parseDate(birthDate) && !this.matchBirthDate(birthDate);
     }
 
     public matchGender(gender: Genders | string): boolean {
-        return Pattern.gender(this.codiceFiscale).test(gender || "");
+        return this.hasGender && Pattern.gender(this.codiceFiscale).test(gender || "");
     }
 
     public mismatchGender(gender: Genders | string): boolean {
-        return !!(this.codiceFiscale && gender && !this.matchGender(gender));
+        return this.hasGender && !!gender && !this.matchGender(gender);
     }
 
     /**
      * @param birthPlace BirthPlace, place name or BelfioreCode
      */
     public matchBirthPlace(birthPlace: BelfiorePlace | string): boolean {
-        const matcher = Pattern.place(this.codiceFiscale);
-        const parsedBirthPlace = Parser.parsePlace(birthPlace);
+        if (this.hasBirthPlace && birthPlace) {
+            const matcher = Pattern.place(this.codiceFiscale);
+            const parsedBirthPlace = Parser.parsePlace(birthPlace);
 
-        return !!(parsedBirthPlace && matcher.test(parsedBirthPlace.belfioreCode));
+            return !!parsedBirthPlace && matcher.test(parsedBirthPlace.belfioreCode);
+        }
+        return false;
     }
     /**
      * @param birthPlace BirthPlace, place name or BelfioreCode
      */
     public mismatchBirthPlace(birthPlace: BelfiorePlace | string): boolean {
-        return !!(this.codiceFiscale && birthPlace && !this.matchBirthPlace(birthPlace));
+        return this.hasBirthPlace && !!birthPlace && !this.matchBirthPlace(birthPlace);
     }
 
     /**
@@ -82,12 +128,14 @@ export default class CFMismatchValidator {
      * @return Generic or specific regular expression
      */
     public get valid(): boolean {
-        const matcher = Pattern.codiceFiscale();
         if (
+            // Checking length
+            !this.hasCRC ||
             // Checking form validity
-            !matcher.test(this.codiceFiscale) ||
+            !Pattern.codiceFiscale().test(this.codiceFiscale) ||
             // Checking 16th char check digit validity
-            this.codiceFiscale.substr(15, 1).toUpperCase() !== CheckDigitizer.checkDigit(this.codiceFiscale) ||
+            this.codiceFiscale.substr(CRC_OFFSET, CRC_SIZE)
+                .toUpperCase() !== CheckDigitizer.checkDigit(this.codiceFiscale) ||
             // Checking Birth date/place validity
             !Parser.cfToBirthPlace(this.codiceFiscale)
         ) {

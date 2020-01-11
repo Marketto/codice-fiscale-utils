@@ -2,10 +2,9 @@ import Gender from "../src/classes/gender.class";
 import BirthMonth from "../src/enums/birth-month.enum";
 import GenderWeight from "../src/enums/gender-weight.enum";
 import Omocode from "../src/enums/omocodes.enum";
-import Genders from "../src/types/genders.type";
 import { expect } from "./utils";
 
-describe("CodiceFiscaleUtils:Enums", () => {
+describe("Enums", () => {
     describe("Gender", () => {
         describe("gender.toArray()", () => {
             it("Should return [M, F]", () => {
@@ -40,21 +39,19 @@ describe("CodiceFiscaleUtils:Enums", () => {
     });
 
     describe("BirthMonth", () => {
-        describe("Uppercase", () => {
-            it("Should return month numbers for proper codes", () => {
-                BirthMonth.A.should.be.equal(0);
-                BirthMonth.B.should.be.equal(1);
-                BirthMonth.C.should.be.equal(2);
-                BirthMonth.D.should.be.equal(3);
-                BirthMonth.E.should.be.equal(4);
-                BirthMonth.H.should.be.equal(5);
-                BirthMonth.L.should.be.equal(6);
-                BirthMonth.M.should.be.equal(7);
-                BirthMonth.P.should.be.equal(8);
-                BirthMonth.R.should.be.equal(9);
-                BirthMonth.S.should.be.equal(10);
-                BirthMonth.T.should.be.equal(11);
-            });
+        it("Should return month numbers for proper codes", () => {
+            BirthMonth.A.should.be.equal(0);
+            BirthMonth.B.should.be.equal(1);
+            BirthMonth.C.should.be.equal(2);
+            BirthMonth.D.should.be.equal(3);
+            BirthMonth.E.should.be.equal(4);
+            BirthMonth.H.should.be.equal(5);
+            BirthMonth.L.should.be.equal(6);
+            BirthMonth.M.should.be.equal(7);
+            BirthMonth.P.should.be.equal(8);
+            BirthMonth.R.should.be.equal(9);
+            BirthMonth.S.should.be.equal(10);
+            BirthMonth.T.should.be.equal(11);
         });
         it("Should return month code for the given month number", () => {
             BirthMonth[0].should.be.equal("A");
@@ -73,19 +70,17 @@ describe("CodiceFiscaleUtils:Enums", () => {
     });
 
     describe("Omocode", () => {
-        describe("Uppercase", () => {
-            it("Should return numeric representation for proper code", () => {
-                Omocode.L.should.be.equal(0);
-                Omocode.M.should.be.equal(1);
-                Omocode.N.should.be.equal(2);
-                Omocode.P.should.be.equal(3);
-                Omocode.Q.should.be.equal(4);
-                Omocode.R.should.be.equal(5);
-                Omocode.S.should.be.equal(6);
-                Omocode.T.should.be.equal(7);
-                Omocode.U.should.be.equal(8);
-                Omocode.V.should.be.equal(9);
-            });
+        it("Should return numeric representation for proper code", () => {
+            Omocode.L.should.be.equal(0);
+            Omocode.M.should.be.equal(1);
+            Omocode.N.should.be.equal(2);
+            Omocode.P.should.be.equal(3);
+            Omocode.Q.should.be.equal(4);
+            Omocode.R.should.be.equal(5);
+            Omocode.S.should.be.equal(6);
+            Omocode.T.should.be.equal(7);
+            Omocode.U.should.be.equal(8);
+            Omocode.V.should.be.equal(9);
         });
         it("Should return letter representation for the given number", () => {
             Omocode[0].should.be.equal("L");

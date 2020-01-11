@@ -1,7 +1,7 @@
 import { Pattern } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("codiceFiscale", () => {
         describe("Generic Pattern", () => {
             const cfDatePattern = Pattern.codiceFiscale();

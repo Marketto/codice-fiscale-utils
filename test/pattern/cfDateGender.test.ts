@@ -1,7 +1,7 @@
 import { Pattern } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("cfDateGender", () => {
         describe("Generic Pattern", () => {
             const cfDatePattern = Pattern.cfDateGender();
@@ -23,6 +23,13 @@ export default async () => {
                 Pattern.cfDateGender(null, "M").test("83DMR").should.true;
                 Pattern.cfDateGender(null, "F").test("v5eqm").should.true;
             });
+        });
+
+        it("Date validator", () => {
+            const testDate = "1988-04-22";
+            Pattern.cfDateGender(testDate).test("U8D22").should.be.true;
+            Pattern.cfDateGender(testDate).test("U8D62").should.be.true;
+            Pattern.cfDateGender(testDate).test("U9D62").should.be.false;
         });
 
         describe("Specific validator", () => {

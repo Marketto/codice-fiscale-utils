@@ -1,7 +1,7 @@
 import { Pattern } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("cfYear", () => {
         describe("Generic Pattern", () => {
             const cfYearPattern = Pattern.cfYear();

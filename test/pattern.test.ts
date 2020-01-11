@@ -13,23 +13,23 @@ import gender from "./pattern/gender.test";
 import lastName from "./pattern/lastName.test";
 import place from "./pattern/place.test";
 
-describe("CodiceFiscaleUtils:Pattern", () => {
-    describe("codiceFiscale", () => Promise.all([
-        cfLastName(),
-        cfFirstName(),
-        cfYear(),
-        cfMonth(),
-        cfDay(),
-        cfDayGender(),
-        cfDateGender(),
-        cfPlace(),
-        codiceFiscale(),
-    ]));
-    describe("personal infos", () => Promise.all([
-        lastName(),
-        firstName(),
-        date(),
-        gender(),
-        place(),
-    ]));
+describe("Pattern", () => {
+    describe("codiceFiscale", () => {
+        cfLastName();
+        cfFirstName();
+        cfYear();
+        cfMonth();
+        cfDay();
+        cfDayGender();
+        cfDateGender();
+        cfPlace();
+        codiceFiscale();
+    });
+    describe("personal infos", () => {
+        lastName();
+        firstName();
+        date();
+        gender();
+        place();
+    });
 });

@@ -1,7 +1,7 @@
 import { Pattern } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("name", () => {
         describe("Generic Pattern", () => {
             const namePattern = Pattern.firstName();

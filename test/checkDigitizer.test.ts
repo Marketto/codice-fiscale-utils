@@ -2,7 +2,7 @@ import { CheckDigitizer, CRC } from "../src/";
 import "./utils";
 import { expect } from "./utils";
 
-describe("CodiceFiscaleUtils:CheckDigitizer", () => {
+describe("CheckDigitizer", () => {
     it("Should return proper CRC Enum values", () => {
         expect(CRC.B).to.be.equal(0);
         expect(CRC.A).to.be.equal(1);

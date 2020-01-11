@@ -18,28 +18,28 @@ export default class Validator {
         return Pattern.lastName().test(lastName);
     }
     public static isLastNameInvalid(lastName: string): boolean {
-        return !!(lastName && !this.isLastNameValid(lastName));
+        return !!lastName && !this.isLastNameValid(lastName);
     }
 
     public static isFirstNameValid(firstName: string): boolean {
         return Pattern.firstName().test(firstName);
     }
     public static isFirstNameInvalid(firstName: string): boolean {
-        return !!(firstName && !this.isFirstNameValid(firstName));
+        return !!firstName && !this.isFirstNameValid(firstName);
     }
 
     public static isBirthDateValid(birthDate: MultiFormatDate): boolean {
         return !!Parser.parseDate(birthDate);
     }
     public static isBirthDateInvalid(birthDate: MultiFormatDate): boolean {
-        return !!(birthDate && !this.isBirthDateValid(birthDate));
+        return !!birthDate && !this.isBirthDateValid(birthDate);
     }
 
     public static isGenderValid(gender: Genders | string): boolean {
         return Pattern.gender().test(gender);
     }
     public static isGenderInvalid(gender: Genders | string): boolean {
-        return !!(gender && !this.isGenderValid(gender));
+        return !!gender && !this.isGenderValid(gender);
     }
 
     public static isBirthPlaceValid(
@@ -53,18 +53,18 @@ export default class Validator {
         birthPlace: BelfiorePlace | string,
         scopedBelfioreConnector: BelfioreConnector = Belfiore,
     ): boolean {
-        return !!(birthPlace && !this.isBirthPlaceValid(birthPlace, scopedBelfioreConnector));
+        return !!birthPlace && !this.isBirthPlaceValid(birthPlace, scopedBelfioreConnector);
     }
 
     public static birthDatePlaceMatch(birthDate: MultiFormatDate, birthPlace: BelfiorePlace | string): boolean {
         const parsedPlace = Parser.parsePlace(birthPlace);
-        return !!(this.isBirthDateValid(birthDate) && parsedPlace &&
-            Belfiore.active(birthDate)[parsedPlace.belfioreCode]);
+        return this.isBirthDateValid(birthDate) && !!parsedPlace &&
+            !!Belfiore.active(birthDate)[parsedPlace.belfioreCode];
     }
     public static birthDatePlaceMismatch(birthDate: MultiFormatDate, birthPlace: BelfiorePlace | string): boolean {
         const parsedPlace = Parser.parsePlace(birthPlace);
-        return !!(this.isBirthDateValid(birthDate) && parsedPlace &&
-            !Belfiore.active(birthDate)[parsedPlace.belfioreCode]);
+        return this.isBirthDateValid(birthDate) && !!parsedPlace &&
+            !this.birthDatePlaceMatch(birthDate, birthPlace);
     }
     public static birthPlaceDateMatch(birthPlace: BelfiorePlace | string, birthDate: MultiFormatDate): boolean {
         return this.birthDatePlaceMatch(birthDate, birthPlace);

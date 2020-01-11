@@ -1,7 +1,7 @@
 import { Parser } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("firstNameToCf", () => {
         it("Regular", () => {
             expect(Parser.firstNameToCf("Dominique")).to.be.equal("DNQ");

@@ -13,7 +13,7 @@ import {
 } from "../src/const/matcher.const";
 import { expect } from "./utils";
 
-describe("CodiceFiscaleUtils:Const", () => {
+describe("Const", () => {
     describe("validator", () => {
         describe("CONSONANT_LIST", () => {
             const consonantMatcher = new RegExp(`^[${CONSONANT_LIST}]$`, "i");

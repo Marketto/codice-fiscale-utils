@@ -1,11 +1,14 @@
 ## ROADMAP
 * [ ] Belfiore Externalization
 * [ ] Migration to async Belfiore methods
+* [ ] Date Parser, Validators, Pattern & Constants Externalization
 * [ ] jQuery Demo
 * [ ] React Demo
 * [ ] Svelte Demo
-* [ ] Increase Unit tests +10% coverage
-* [ ] Methods to retrieve CF Omocode Id and generate omocode
+* [X] Update README examples
+* [X] Increase Unit tests +10% coverage
+* [X] Replace "magic numbers" with constants
+* [X] Methods to retrieve CF Omocode Id and generate omocode CF by Id
 * [X] Personal info validator
 * [X] Boolean match/mismatch compound validators
 * [X] Boolean validators (Validator)

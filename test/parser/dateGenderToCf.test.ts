@@ -1,7 +1,7 @@
 import { Parser } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("dateGenderToCf", () => {
         it("Should return CF date part from year, month, day and gender", () => {
             expect(Parser.dateGenderToCf([2016, 3, 23], "M"))

@@ -1,39 +1,50 @@
-import cfDecode from "./parser/cfDecode.test";
-import cfDeomocode from "./parser/cfDeomocode.test";
-import cfToBirthDate from "./parser/cfToBirthDate.test";
-import cfToFirstName from "./parser/cfToFirstName.test";
-import cfToGender from "./parser/cfToGender.test";
-import cfToLastName from "./parser/cfToLastName.test";
-import dateGenderToCf from "./parser/dateGenderToCf.test";
-import dayGenderToCf from "./parser/dayGenderToCf.test";
-import encodeCf from "./parser/encodeCf.test";
-import firstNameToCf from "./parser/firstNameToCf.test";
-import lastNameToCf from "./parser/lastNameToCf.test";
-import monthToCf from "./parser/monthToCf.test";
-import bitmap from "./parser/omocode-bitmap.test";
-import placeToCf from "./parser/placeToCf.test";
-import yearToCf from "./parser/yearToCf.test";
+import cfDecodeTest from "./parser/cfDecode.test";
+import cfDeomocodeTest from "./parser/cfDeomocode.test";
+import cfOmocodeTest from "./parser/cfOmocode.test";
+import cfOmocodeIdTest from "./parser/cfOmocodeId.test";
+import cfToBirthDateTest from "./parser/cfToBirthDate.test";
+import cfToFirstNameTest from "./parser/cfToFirstName.test";
+import cfToGenderTest from "./parser/cfToGender.test";
+import cfToLastNameTest from "./parser/cfToLastName.test";
+import dateGenderToCfTest from "./parser/dateGenderToCf.test";
+import dayGenderToCfTest from "./parser/dayGenderToCf.test";
+import encodeCfTest from "./parser/encodeCf.test";
+import firstNameToCfTest from "./parser/firstNameToCf.test";
+import lastNameToCfTest from "./parser/lastNameToCf.test";
+import monthToCfTest from "./parser/monthToCf.test";
+import bitmapTest from "./parser/omocode-bitmap.test";
+import parseDateTest from "./parser/parseDate.test";
+import parsePlaceTest from "./parser/parsePlace.test";
+import placeToCfTest from "./parser/placeToCf.test";
+import yearToCfTest from "./parser/yearToCf.test";
 
-describe("CodiceFiscaleUtils:Parser", () => {
-    describe("constants", () => bitmap());
+describe("Parser", () => {
+    describe("constants", () => bitmapTest());
 
-    describe("methods from CF", () => Promise.all([
-        cfDeomocode(),
-        cfToLastName(),
-        cfToFirstName(),
-        cfToGender(),
-        cfToBirthDate(),
-        cfDecode(),
-    ]));
+    describe("methods from CF", () => {
+        cfDeomocodeTest();
+        cfOmocodeIdTest();
+        cfOmocodeTest();
+        cfToLastNameTest();
+        cfToFirstNameTest();
+        cfToGenderTest();
+        cfToBirthDateTest();
+        cfDecodeTest();
+    });
 
-    describe("methods to CF", () => Promise.all([
-        lastNameToCf(),
-        firstNameToCf(),
-        yearToCf(),
-        monthToCf(),
-        dayGenderToCf(),
-        dateGenderToCf(),
-        placeToCf(),
-        encodeCf(),
-    ]));
+    describe("methods to CF", () => {
+        lastNameToCfTest();
+        firstNameToCfTest();
+        yearToCfTest();
+        monthToCfTest();
+        dayGenderToCfTest();
+        dateGenderToCfTest();
+        placeToCfTest();
+        encodeCfTest();
+    });
+
+    describe("utils", () => {
+        parsePlaceTest();
+        parseDateTest();
+    });
 });

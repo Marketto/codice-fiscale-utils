@@ -1,7 +1,7 @@
 import { Parser } from "../../src/";
 import { expect } from "../utils";
 
-export default async () => {
+export default () => {
     describe("cfToBirthMonth", () => {
         it("Uppercase", () => {
             expect(Parser.cfToBirthMonth("XXXYYY92C")).should.be.equal(2);
