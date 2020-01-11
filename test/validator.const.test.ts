@@ -18,7 +18,7 @@ import "./utils";
 const belfioreCodes = Belfiore.toArray().map(({ belfioreCode }) => belfioreCode);
 const belfioreCodeMatcher = new RegExp(`^(?:${BELFIORE_CODE_MATCHER})$`, "giu");
 
-describe("CodiceFiscaleUtils:VALIDATOR", () => {
+describe("VALIDATOR", () => {
     describe("Belfiore Codes", () => {
         it ("Should validate all codes", () => {
             belfioreCodes

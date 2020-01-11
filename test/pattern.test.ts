@@ -13,7 +13,7 @@ import gender from "./pattern/gender.test";
 import lastName from "./pattern/lastName.test";
 import place from "./pattern/place.test";
 
-describe("CodiceFiscaleUtils:Pattern", () => {
+describe("Pattern", () => {
     describe("codiceFiscale", () => {
         cfLastName();
         cfFirstName();

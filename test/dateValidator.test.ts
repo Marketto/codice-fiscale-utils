@@ -14,7 +14,7 @@ import {
 } from "../src/const/date-matcher.const";
 import "./utils";
 
-describe("CodiceFiscaleUtils:DATE_VALIDATOR", () => {
+describe("DATE_VALIDATOR", () => {
     describe("YEAR", () => {
         const yearMatcher = new RegExp(`^(?:${YEAR})$`, "u");
         it("Should match year 2016", () => {

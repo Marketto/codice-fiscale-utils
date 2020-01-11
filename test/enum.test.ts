@@ -4,7 +4,7 @@ import GenderWeight from "../src/enums/gender-weight.enum";
 import Omocode from "../src/enums/omocodes.enum";
 import { expect } from "./utils";
 
-describe("CodiceFiscaleUtils:Enums", () => {
+describe("Enums", () => {
     describe("Gender", () => {
         describe("gender.toArray()", () => {
             it("Should return [M, F]", () => {
