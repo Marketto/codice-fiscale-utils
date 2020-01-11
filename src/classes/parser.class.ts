@@ -63,20 +63,22 @@ export default class Parser {
     }
 
     public static cfOmocode(codiceFiscale: string, omocodeId: number): string {
+        if (!omocodeId) {
+            return this.cfDeomocode(codiceFiscale);
+        }
         const omocodedCf = codiceFiscale.split("");
-        if (omocodeId) {
-            // tslint:disable-next-line: prefer-for-of
-            for (let i = codiceFiscale.length - 1, o = 0; i >= 0; i--) {
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = codiceFiscale.length - 1, o = 0; i >= 0; i--) {
+            // tslint:disable-next-line: no-bitwise
+            if (2 ** i & this.OMOCODE_BITMAP) {
                 // tslint:disable-next-line: no-bitwise
-                if (i ** 2 & this.OMOCODE_BITMAP) {
-                    o++;
-                    // tslint:disable-next-line: no-bitwise
-                    const charToEncode: boolean = !!(omocodeId & o ** 2);
-                    const isOmocode: boolean = isNaN(parseInt(omocodedCf[i], 10));
-                    if (charToEncode !== isOmocode) {
-                        omocodedCf[i] = Omocodes[omocodedCf[i] as any];
-                    }
+                const charToEncode: boolean = !!(omocodeId & 2 ** o);
+                const isOmocode: boolean = isNaN(parseInt(omocodedCf[i], 10));
+                if (charToEncode !== isOmocode) {
+                    const char: any = omocodedCf[i].toUpperCase();
+                    omocodedCf[i] = Omocodes[char];
                 }
+                o++;
             }
         }
         const crc = omocodedCf[CRC_OFFSET];

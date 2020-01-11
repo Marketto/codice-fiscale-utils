@@ -6,11 +6,11 @@
   "module": "dist/codice-fiscale-utils.mjs",
   "typings": "src/index.ts",
   "scripts": {
-    "release": "npm audit fix \n npm run lint-fix \n npm run update-lovs \n npm run coverage \n npm run docs \n npm run build",
+    "release": "npm audit fix \n npm run lint-fix && npm run update-lovs && npm run test && npm run coverage \n npm run docs \n npm run build",
     "build": "npx rimraf ./dist \n npx rollup -c",
     "lint": "npx tslint -c tslint.json \"src/**/*.ts\"",
     "lint-fix": "npx tslint -c tslint.json \"src/**/*.ts\" --fix",
-    "test": "npx nyc mocha",
+    "test": "npx mocha",
     "coverage": "npx rimraf ./coverage \n mkdir coverage \n npx nyc mocha \n npx nyc report --reporter=text-lcov | npx relcov > coverage/lcov.info",
     "docs": "npx rimraf ./docs \n npx jsdoc . -c jsdoc.json",
     "update-lovs": "node ./scripts/locationUpdater.js",

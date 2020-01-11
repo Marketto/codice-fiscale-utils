@@ -1,5 +1,6 @@
 import cfDecode from "./parser/cfDecode.test";
 import cfDeomocode from "./parser/cfDeomocode.test";
+import cfOmocode from "./parser/cfOmocode.test";
 import cfOmocodeId from "./parser/cfOmocodeId.test";
 import cfToBirthDate from "./parser/cfToBirthDate.test";
 import cfToFirstName from "./parser/cfToFirstName.test";
@@ -21,6 +22,7 @@ describe("CodiceFiscaleUtils:Parser", () => {
     describe("methods from CF", () => {
         cfDeomocode();
         cfOmocodeId();
+        cfOmocode();
         cfToLastName();
         cfToFirstName();
         cfToGender();
