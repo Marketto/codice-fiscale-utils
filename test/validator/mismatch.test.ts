@@ -107,7 +107,7 @@ export default () => {
                 })).to.be.true;
 
             expect(Validator.codiceFiscale("VRNGNY07D68C351V")
-                .mismatchPersonalInfo({
+                .matchPersonalInfo({
                     day: 28,
                     firstName: "Génny",
                     gender: "F",
