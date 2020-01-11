@@ -309,7 +309,7 @@ export default class Parser {
             gender: this.cfToGender(fiscalCode) || undefined,
             place: place ? place.name : undefined,
 
-            omocode: this.cfOmocodeId(fiscalCode),
+            omocodeId: this.cfOmocodeId(fiscalCode),
         };
 
         if (year && month && day) {
@@ -550,7 +550,8 @@ export default class Parser {
 
         gender,
         place,
-        omocode = 0,
+
+        omocodeId = 0,
     }: IPersonalInfo): string | null {
         const dtParams = this.parseDate(date) || this.yearMonthDayToDate(year, month, day);
         if (!(dtParams && lastName && firstName && gender && place)) {
@@ -561,7 +562,6 @@ export default class Parser {
             () => this.firstNameToCf(firstName),
             () => this.dateGenderToCf(dtParams, gender),
             () => this.placeToCf(dtParams, place),
-            () => CheckDigitizer.checkDigit(cf),
         ];
         let cf = "";
         for (const cfPartGenerator of generator) {
@@ -572,7 +572,7 @@ export default class Parser {
             cf += cfValue;
         }
 
-        return cf;
+        return this.cfOmocode(cf, omocodeId);
     }
 
     private static JOLLY_CHAR: string = "*";

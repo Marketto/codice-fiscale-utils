@@ -13,5 +13,5 @@ export default interface IPersonalInfo {
 
     gender?: Genders;
     place?: string;
-    omocode?: number;
+    omocodeId?: number;
 }
