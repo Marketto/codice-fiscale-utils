@@ -1,6 +1,15 @@
 ## CHANGELOG
+### 1.2.2 - Omocode encoder (2020-01-11)
+* Implemented cfOmocode in Parser class
+* Implemented cfOmocodeId in Parser class
+* Implemented omocodeId field in IPersonalInfo
+  * Parser.cfDecode output
+  * Parser.encodeCf input
+* Implemented constants for CF parts (offsets & lengths)
+* Improved date parse
+  
 ### 1.2.1 - Deomocode proper implementation (2020-01-09)
-* Implemented CF deomocode in Parser methods
+* Implemented CF deomocode in Parser class
 * Optimized gender methods
 
 ### 1.2.0 - Typescript migration (2020-01-08)

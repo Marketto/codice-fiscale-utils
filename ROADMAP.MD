@@ -4,8 +4,10 @@
 * [ ] jQuery Demo
 * [ ] React Demo
 * [ ] Svelte Demo
+* [ ] Update README examples
 * [X] Increase Unit tests +10% coverage
-* [X] Methods to retrieve CF Omocode Id and generate omocode
+* [X] Replace "magic numbers" with constants
+* [X] Methods to retrieve CF Omocode Id and generate omocode CF by Id
 * [X] Personal info validator
 * [X] Boolean match/mismatch compound validators
 * [X] Boolean validators (Validator)
