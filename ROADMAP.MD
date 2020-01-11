@@ -1,6 +1,7 @@
 ## ROADMAP
 * [ ] Belfiore Externalization
 * [ ] Migration to async Belfiore methods
+* [ ] Date Parser, Validators, Pattern & Constants Externalization
 * [ ] jQuery Demo
 * [ ] React Demo
 * [ ] Svelte Demo
