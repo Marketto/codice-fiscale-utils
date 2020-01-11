@@ -9,6 +9,7 @@ export default () => {
             Validator.codiceFiscale("GSTPPP31C06D620Z").valid.should.be.true;
             Validator.codiceFiscale("VRNGNY07D68C351K").valid.should.be.false;
             Validator.codiceFiscale("GSTPPP99C06D620V").valid.should.be.false;
+            Validator.codiceFiscale("").valid.should.be.false;
         });
         it("invalid", () => {
             Validator.codiceFiscale("VRNGNY07D68C351V").invalid.should.be.false;
@@ -16,6 +17,7 @@ export default () => {
             Validator.codiceFiscale("GSTPPP31C06D620Z").invalid.should.be.false;
             Validator.codiceFiscale("VRNGNY07D68C351K").invalid.should.be.true;
             Validator.codiceFiscale("GSTPPP99C06D620V").invalid.should.be.true;
+            Validator.codiceFiscale("").invalid.should.be.false;
         });
     });
     describe("Personal info", () => {

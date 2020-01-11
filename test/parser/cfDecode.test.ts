@@ -13,7 +13,7 @@ export default () => {
             expect(decoded.day).to.be.equal(28);
             expect(decoded.gender).to.be.equal("F");
             expect(decoded.place).to.be.equalIgnoreCase("CATANIA");
-            expect(decoded.omocode).to.be.equal(0);
+            expect(decoded.omocodeId).to.be.equal(0);
         });
         it("Lowercase mrnmia02e45l219x", () => {
             const decoded = Parser.cfDecode("mrnmia02e45l219x");
@@ -25,9 +25,9 @@ export default () => {
             expect(decoded.day).to.be.equal(5);
             expect(decoded.gender).to.be.equal("F");
             expect(decoded.place).to.be.equalIgnoreCase("TORINO");
-            expect(decoded.omocode).to.be.equal(0);
+            expect(decoded.omocodeId).to.be.equal(0);
         });
-        it("Omocode VRNGNYLtdsucprmt", () => {
+        it("Id VRNGNYLtdsucprmt", () => {
             const decoded = Parser.cfDecode("VRNGNYLtdsucprmt");
             expect(decoded).to.be.a("object");
             expect(decoded.lastName).to.be.equal("V*R*N*");
@@ -37,7 +37,7 @@ export default () => {
             expect(decoded.day).to.be.equal(28);
             expect(decoded.gender).to.be.equal("F");
             expect(decoded.place).to.be.equalIgnoreCase("CATANIA");
-            expect(decoded.omocode).to.be.equal(127);
+            expect(decoded.omocodeId).to.be.equal(127);
         });
     });
 };
