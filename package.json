@@ -1,6 +1,6 @@
 {
   "name": "@marketto/codice-fiscale-utils",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "TS & JS utilities to handle Italian Codice Fiscale",
   "main": "dist/codice-fiscale-utils.js",
   "module": "dist/codice-fiscale-utils.mjs",
@@ -13,7 +13,7 @@
     "test": "npx mocha",
     "coverage": "npx rimraf ./coverage \n mkdir coverage \n npx nyc mocha \n npx nyc report --reporter=text-lcov | npx relcov > coverage/lcov.info",
     "docs": "npx rimraf ./docs \n npx jsdoc . -c jsdoc.json",
-    "update-lovs": "node ./scripts/locationUpdater.js",
+    "update-lovs": "node ./tools/locationUpdater.js",
     "install": "node ./scripts/post-install.js"
   },
   "repository": {
