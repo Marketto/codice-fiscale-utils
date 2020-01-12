@@ -1,4 +1,4 @@
-import CITIES_COUNTRIES from "../../asset/cities-countries.json";
+import CITIES_COUNTRIES from "../../asset/cities-countries";
 import BelfioreConnector from "./classes/belfiore-connector.class";
 import BelfioreConnectorConfig from "./types/belfiore-connector-config.type";
 import BelfiorePlace from "./types/belfiore-place.type";

@@ -30,7 +30,7 @@ TS utilities to handle Italian Codice Fiscale
 2. **What about the omocodes (Omocodia/Omocodice) problem, does it work?**
    *Absolutely! There's a dedicated class to encode or decode such kind of CodiceFiscale and it's properly integrated in* [***Parser***](#parser), [***Validator***](#validator) and [***Pattern***](#pattern) *methods*
 
-3. **Why it's ~250KB? Seems a lot**
+3. **Why it's ~240KB? Seems a lot**
    *It contains all you need in a FE or BE environment to properly check and validate a CodiceFiscale by its own or against spare personal informations, the full list of all Italian cities and foregin countries since [1861](https://en.wikipedia.org/wiki/Kingdom_of_Italy) including belfiore codes, province for cities,  begin and end date*
 
 4. **Should I trust such city/country informations and do I need them?**
@@ -67,13 +67,14 @@ import * as codiceFiscaleUtils from '@marketto/codice-fiscale-utils';
 ```
 
 ## 💻 DEMO
-Check out [CodiceFiscaleUtils](https://github.com/Marketto/codice-fiscale-utils) repo on Github
 ### NodeJS Express
 * [Node/Express Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/express)
 ### VueJs
-* [Vue Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/vue)
+* [Code sandbox](https://codesandbox.io/s/codice-fiscale-utils-vue-demo-0yzzx)
+* [Github](https://github.com/Marketto/codice-fiscale-utils-vue-demo)
 ### Angular
-* [Angular Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/angular)
+* [Code sandbox](https://codesandbox.io/s/codice-fiscale-utils-angular-demo-txv79)
+* [Github](https://github.com/Marketto/codice-fiscale-utils-angular-demo)
 
 ## 📖 DOCUMENTATION
 [JsDocs @ GitHub Pages](https://marketto.github.io/codice-fiscale-utils/)
