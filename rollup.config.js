@@ -60,11 +60,10 @@ export default [
             ...baseConf.output,
             file: pkg.main,
             format: "cjs",
+            sourcemap: false,
         },
         plugins: [
-            builtins({
-                sourcemap: true
-            }),
+            builtins(),
             rollupCjsConf,
             ...baseConf.plugins,
         ],
@@ -84,21 +83,6 @@ export default [
             terser({
                 sourcemap: true
             }),
-            ...baseConf.plugins,
-        ],
-    },
-    {
-        ...baseConf,
-        output: {
-            ...baseConf.output,
-            file: "dist/codice-fiscale-utils.bundle.js",
-            format: "iife",
-        },
-        plugins: [
-            builtins({
-                sourcemap: true
-            }),
-            rollupBrowserConf,
             ...baseConf.plugins,
         ],
     },
