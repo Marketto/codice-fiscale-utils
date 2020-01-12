@@ -1728,4 +1728,3 @@ exports.Parser = Parser;
 exports.Pattern = Validator;
 exports.VALIDATOR = matcher_const;
 exports.Validator = Validator$1;
-//# sourceMappingURL=codice-fiscale-utils.js.map
