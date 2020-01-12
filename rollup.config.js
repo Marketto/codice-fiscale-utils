@@ -3,7 +3,6 @@ import pkg from "./package.json";
 import tsconfig from "./tsconfig.json";
 import { terser } from "rollup-plugin-terser";
 import builtins from "rollup-plugin-node-builtins";
-import jsonPlugin from "@rollup/plugin-json";
 import license from "rollup-plugin-license";
 import path from "path";
 
@@ -19,7 +18,7 @@ const baseConf = {
             "moment": "moment",
         },
         name: "CodiceFiscaleUtils",
-        sourceMap: true,
+        sourcemap: true,
     },
     plugins: [
         license({
@@ -29,7 +28,6 @@ const baseConf = {
                 },
             },
             cwd: __dirname,
-            sourcemap: true,
         }),
     ],
 };
@@ -64,12 +62,10 @@ export default [
             format: "cjs",
         },
         plugins: [
-            builtins(),
-            rollupCjsConf,
-            jsonPlugin({
-                namedExports: false,
-                preferConst: true,
+            builtins({
+                sourcemap: true
             }),
+            rollupCjsConf,
             ...baseConf.plugins,
         ],
     },
@@ -81,11 +77,12 @@ export default [
             format: "esm",
         },
         plugins: [
-            builtins(),
+            builtins({
+                sourcemap: true
+            }),
             rollupModuleConf,
-            jsonPlugin({
-                namedExports: false,
-                preferConst: true,
+            terser({
+                sourcemap: true
             }),
             ...baseConf.plugins,
         ],
@@ -98,12 +95,10 @@ export default [
             format: "iife",
         },
         plugins: [
-            builtins(),
-            rollupBrowserConf,
-            jsonPlugin({
-                namedExports: false,
-                preferConst: true,
+            builtins({
+                sourcemap: true
             }),
+            rollupBrowserConf,
             ...baseConf.plugins,
         ],
     },
@@ -115,13 +110,13 @@ export default [
             format: "iife",
         },
         plugins: [
-            builtins(),
-            rollupBrowserConf,
-            jsonPlugin({
-                namedExports: false,
-                preferConst: true,
+            builtins({
+                sourcemap: true
             }),
-            terser(),
+            rollupBrowserConf,
+            terser({
+                sourcemap: true
+            }),
             ...baseConf.plugins,
         ],
     },

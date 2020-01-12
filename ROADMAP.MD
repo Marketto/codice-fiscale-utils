@@ -5,6 +5,7 @@
 * [ ] jQuery Demo
 * [ ] React Demo
 * [ ] Svelte Demo
+* [X] Moved FE demos to dedicated repos
 * [X] Update README examples
 * [X] Increase Unit tests +10% coverage
 * [X] Replace "magic numbers" with constants

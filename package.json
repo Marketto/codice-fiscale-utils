@@ -46,7 +46,6 @@
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
-    "@rollup/plugin-json": "^4.0.0",
     "@types/chai": "^4.2.5",
     "@types/chai-string": "^1.4.2",
     "@types/mocha": "^5.2.7",
