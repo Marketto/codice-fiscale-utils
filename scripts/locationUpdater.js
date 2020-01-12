@@ -205,9 +205,10 @@ Promise.all(locationResources.resources.map(async ({uri, delimiter, defaultSourc
             .reduce((a, b) => a.concat(b)).filter(uri => !!uri)
     }))
     .then((data) => new Promise((resolve, reject) => {
-        const destFullPath = path.join(detinationPath, "cities-countries.json");
-        const jsonContent = JSON.stringify(data);
-        fs.writeFile(destFullPath, jsonContent, (err) => {
+        const destFullPath = path.join(detinationPath, "cities-countries.ts");
+        const jsonContent = JSON.stringify(data, null, 4);
+        const tsContent = `const CITIES_COUNTRIES = ${jsonContent};\nexport default CITIES_COUNTRIES;\n`;
+        fs.writeFile(destFullPath, tsContent, (err) => {
             err ? reject(err) : resolve();
         });
     }));
