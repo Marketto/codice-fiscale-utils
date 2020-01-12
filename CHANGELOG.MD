@@ -1,4 +1,9 @@
 ## CHANGELOG
+### 1.2.3 - Omocode encoder (2020-01-12)
+* CITIES_COUNTRIES generated as TS
+* Restored sourcemaps
+* Moved FE demos in dedicated repos
+
 ### 1.2.2 - Omocode encoder (2020-01-11)
 * Implemented cfOmocode in Parser class
 * Implemented cfOmocodeId in Parser class
