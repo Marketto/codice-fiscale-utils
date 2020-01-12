@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 1.2.3
+ * @marketto/codice-fiscale-utils 1.2.4
  * Copyright (c) 2019-2020, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  * ============================================================
