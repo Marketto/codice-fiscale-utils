@@ -1,6 +1,6 @@
 import DiacriticRemover from "@marketto/diacritic-remover";
 import moment from "moment";
-import { Belfiore, BelfiorePlace } from "../belfiore-connector/belfiore";
+import { Belfiore, BelfiorePlace } from "../belfiore-connector";
 import BelfioreConnector from "../belfiore-connector/classes/belfiore-connector.class";
 import {
     CRC_OFFSET,
@@ -20,17 +20,14 @@ import {
     YEAR_OFFSET,
     YEAR_SIZE,
 } from "../const/cf-offsets.const";
-import { ISO8601_DATE_TIME } from "../const/date-matcher.const";
 import { CF_FULL_NAME_MATCHER, CF_SURNAME_MATCHER } from "../const/matcher.const";
 import { CONSONANT_LIST, VOWEL_LIST } from "../const/matcher.const";
+import { DateDay, DateMonth, DateUtils, MultiFormatDate } from "../date-utils";
 import BirthMonth from "../enums/birth-month.enum";
 import GenderWeight from "../enums/gender-weight.enum";
 import Omocodes from "../enums/omocodes.enum";
 import IPersonalInfo from "../interfaces/personal-info.interface";
-import DateDay from "../types/date-day.type";
-import DateMonth from "../types/date-month.type";
 import Genders from "../types/genders.type";
-import MultiFormatDate from "../types/multi-format-date.type";
 import CheckDigitizer from "./check-digitizer.class";
 import Gender from "./gender.class";
 
@@ -245,7 +242,7 @@ export default class Parser {
 
         const birthYear = this.cfToBirthYear(codiceFiscale);
 
-        return this.ymdToDate(birthYear, birthMonth, birthDay);
+        return DateUtils.ymdToDate(birthYear, birthMonth, birthDay);
     }
 
     /**
@@ -293,7 +290,7 @@ export default class Parser {
         const year = this.cfToBirthYear(fiscalCode) || undefined;
         const month = this.cfToBirthMonth(fiscalCode) || undefined;
         const day = this.cfToBirthDay(fiscalCode) || undefined;
-        const date = this.ymdToDate(year, month, day) || undefined;
+        const date = DateUtils.ymdToDate(year, month, day) || undefined;
         const place = this.cfToBirthPlace(fiscalCode);
         const personalInfo: IPersonalInfo = {
             firstName: this.cfToFirstName(fiscalCode) || undefined,
@@ -432,29 +429,6 @@ export default class Parser {
         return date.toDate();
     }
 
-    /**
-     * Parse a Dated and Gender information to create Date/Gender CF part
-     * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
-     * @returns Parsed Date or null if not valid
-     */
-    public static parseDate(date?: MultiFormatDate | null): Date | null {
-        if (!(
-            date instanceof Date ||
-            date instanceof moment ||
-            typeof date === "string" && new RegExp(`^(?:${ISO8601_DATE_TIME})$`).test(date) ||
-            // typeof date === "string" && new RegExp(ISO8601_SHORT_DATE).test(date) ||
-            Array.isArray(date) && date.length && !date.some((value) => typeof value !== "number")
-        )) {
-            return null;
-        }
-        try {
-            const parsedDate = moment(date);
-            return parsedDate.isValid() ? parsedDate.toDate() : null;
-        } catch (err) {
-            return null;
-        }
-    }
-
     public static parsePlace(
         place: BelfiorePlace | string,
         scopedBelfioreConnector: BelfioreConnector = Belfiore,
@@ -477,7 +451,7 @@ export default class Parser {
      * @returns Birth date and Gender CF code
      */
     public static dateGenderToCf(date: MultiFormatDate, gender: Genders): string | null {
-        const parsedDate = this.parseDate(date);
+        const parsedDate = DateUtils.parseDate(date);
         if (!parsedDate) {
             return null;
         }
@@ -505,7 +479,7 @@ export default class Parser {
     public static placeToCf(cityOrCountryName: string, provinceId?: string): string | null;
     public static placeToCf(birthDate: MultiFormatDate, cityOrCountryName: string, provinceId?: string): string | null;
     public static placeToCf(dateOrName: MultiFormatDate, nameOrProvince?: string, provinceId?: string): string | null {
-        const birthDate: Date | null = this.parseDate(dateOrName);
+        const birthDate: Date | null = DateUtils.parseDate(dateOrName);
         let name: string;
         let province: string | undefined;
         if (!birthDate && typeof dateOrName === "string") {
@@ -552,7 +526,7 @@ export default class Parser {
 
         omocodeId = 0,
     }: IPersonalInfo): string | null {
-        const dtParams = this.parseDate(date) || this.yearMonthDayToDate(year, month, day);
+        const dtParams = DateUtils.parseDate(date) || this.yearMonthDayToDate(year, month, day);
         if (!(dtParams && lastName && firstName && gender && place)) {
             return null;
         }
@@ -605,16 +579,6 @@ export default class Parser {
     private static partialCfDeomocode(partialCodiceFiscale: string, offset: number = 0): string {
         const charReplacer = (char: string, position: number) => this.charOmocode(char, position + offset);
         return partialCodiceFiscale.replace(/[\dA-Z]/giu, charReplacer);
-    }
-
-    private static ymdToDate(year?: number | null, month?: number | null, day?: number | null): Date | null {
-        if (year && typeof month === "number" && day) {
-            const dt = moment(Date.UTC(year, month, day));
-            if (dt.isValid()) {
-                return dt.toDate();
-            }
-        }
-        return null;
     }
 
     private static appyCaseToChar(targetChar: string, counterCaseChar: string): string {

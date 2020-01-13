@@ -1,5 +1,5 @@
+import { DateDay } from "../date-utils/";
 import GenderWeight from "../enums/gender-weight.enum";
-import DateDay from "../types/date-day.type";
 import Genders from "../types/genders.type";
 
 class Gender {

@@ -1,7 +1,7 @@
 import moment, { Moment } from "moment";
+import { MultiFormatDate } from "../../date-utils";
 import generatorWrapper from "../../functions/generator-wrapper.function";
 import IGeneratorWrapper from "../../interfaces/generator-wrapper.interface";
-import MultiFormatDate from "../../types/multi-format-date.type";
 import IBelfioreCity from "../interfaces/belfiore-city.interface";
 import IBelfioreCommonPlace from "../interfaces/belfiore-common-place.interface";
 import IBelfioreCountry from "../interfaces/belfiore-country.interface";

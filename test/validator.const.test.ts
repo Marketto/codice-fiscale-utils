@@ -1,4 +1,4 @@
-import { Belfiore } from "../src/belfiore-connector/belfiore";
+import { Belfiore } from "../src/belfiore-connector/";
 import {
     BELFIORE_CODE_MATCHER,
     CONSONANT_LIST,
