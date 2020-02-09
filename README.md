@@ -17,7 +17,7 @@
 
 TS utilities to handle Italian Codice Fiscale
 
-## 🚨 WARNING Upgrading from 1.1.x 🚨
+## 🚨 WARNING Upgrading from 1.x 🚨
 * Methods to generate RegExp were moved to Pattern class
 * Former Validator.isValid method was migrated to Validator.codiceFiscale(cf: string).valid (getter)
 * ***name*** was renamed into ***firstName*** due to typescript migration (in method names and data models)
@@ -731,3 +731,6 @@ No identification with actual persons (living or deceased) is intended or should
 
 ## 📝 AUTHOR
 [Marco Ricupero](mailto:marco.ricupero@gmail.com)
+
+## CONTRIBUTORS
+* Giacomo Gregoletto

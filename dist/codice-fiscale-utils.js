@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 1.2.4
+ * @marketto/codice-fiscale-utils 2.0.0
  * Copyright (c) 2019-2020, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  * ============================================================
@@ -417,6 +417,79 @@ const PLACE_SIZE = 4;
 const CRC_OFFSET = 15;
 const CRC_SIZE = 1;
 
+const YEAR = "[12][0-9]{3}";
+const MONTH = "0[1-9]|1[0-2]";
+const DAY = "0[1-9]|[12][0-9]|3[01]";
+const LEAP_MONTH = "02";
+const DAYS_30_MONTHS = "0[469]|11";
+const DAYS_31_MONTHS = "0[13578]|1[02]";
+const MONTH_DAY = `(?:${MONTH})-(?:0[1-9]|[12]\\d)|(?:${DAYS_30_MONTHS})-30|(?:${DAYS_31_MONTHS})-3[01]`;
+const HOURS = "[01]\\d|2[0-3]";
+const MINUTES = "[0-5]\\d";
+const SECONDS = MINUTES;
+const MILLISECONDS = "\\d{3}";
+const TIMEZONE = `Z|[-+](?:${HOURS})(?::?${MINUTES})?`;
+const TIME = `(?:${HOURS})(?::${MINUTES}(?::${SECONDS}(\\.${MILLISECONDS})?)?(?:${TIMEZONE})?)?`;
+const ISO8601_SHORT_DATE = `${YEAR}-(?:${MONTH_DAY})(?:T${TIME})?`;
+const ISO8601_DATE_TIME = `${YEAR}(?:-(?:(?:${MONTH})|(?:${MONTH_DAY})(?:T${TIME})?))?`;
+
+var dateMatcher_const = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    DAY: DAY,
+    DAYS_30_MONTHS: DAYS_30_MONTHS,
+    DAYS_31_MONTHS: DAYS_31_MONTHS,
+    HOURS: HOURS,
+    ISO8601_DATE_TIME: ISO8601_DATE_TIME,
+    ISO8601_SHORT_DATE: ISO8601_SHORT_DATE,
+    LEAP_MONTH: LEAP_MONTH,
+    MILLISECONDS: MILLISECONDS,
+    MINUTES: MINUTES,
+    MONTH: MONTH,
+    MONTH_DAY: MONTH_DAY,
+    SECONDS: SECONDS,
+    TIME: TIME,
+    TIMEZONE: TIMEZONE,
+    YEAR: YEAR
+});
+
+class DateUtils {
+    /**
+     * Parse a Dated and Gender information to create Date/Gender CF part
+     * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
+     * @returns Parsed Date or null if not valid
+     */
+    static parseDate(date) {
+        if (!(date instanceof Date ||
+            date instanceof moment ||
+            typeof date === "string" && new RegExp(`^(?:${ISO8601_DATE_TIME})$`).test(date) ||
+            Array.isArray(date) && date.length && !date.some((value) => typeof value !== "number" || isNaN(value)))) {
+            return null;
+        }
+        try {
+            let parsedDate;
+            if (Array.isArray(date)) {
+                const [year, month = 0, day = 1] = date;
+                if (month >= 0 && month <= 11 && day > 0 && day <= 31) {
+                    parsedDate = moment(Date.UTC(year, month || 0, day || 1));
+                }
+                else {
+                    return null;
+                }
+            }
+            else {
+                parsedDate = moment(date);
+            }
+            return parsedDate.isValid() ? parsedDate.toDate() : null;
+        }
+        catch (err) {
+            return null;
+        }
+    }
+    static ymdToDate(year, month, day) {
+        return this.parseDate([year, month, day]);
+    }
+}
+
 const CONSONANT_LIST = "B-DF-HJ-NP-TV-Z";
 const VOWEL_LIST = "AEIOU";
 const OMOCODE_NUMBER_LIST = "\\dLMNP-V";
@@ -585,41 +658,6 @@ class CheckDigitizer {
 }
 CheckDigitizer.CHAR_OFFSET = 65;
 CheckDigitizer.CRC_MOD = 26;
-
-const YEAR = "[12][0-9]{3}";
-const MONTH = "0[1-9]|1[0-2]";
-const DAY = "0[1-9]|[12][0-9]|3[01]";
-const LEAP_MONTH = "02";
-const DAYS_30_MONTHS = "0[469]|11";
-const DAYS_31_MONTHS = "0[13578]|1[02]";
-const MONTH_DAY = `(?:${MONTH})-(?:0[1-9]|[12]\\d)|(?:${DAYS_30_MONTHS})-30|(?:${DAYS_31_MONTHS})-3[01]`;
-const HOURS = "[01]\\d|2[0-3]";
-const MINUTES = "[0-5]\\d";
-const SECONDS = MINUTES;
-const MILLISECONDS = "\\d{3}";
-const TIMEZONE = `Z|[-+](?:${HOURS})(?::?${MINUTES})?`;
-const TIME = `(?:${HOURS})(?::${MINUTES}(?::${SECONDS}(\\.${MILLISECONDS})?)?(?:${TIMEZONE})?)?`;
-const ISO8601_SHORT_DATE = `${YEAR}-(?:${MONTH_DAY})(?:T${TIME})?`;
-const ISO8601_DATE_TIME = `${YEAR}(?:-(?:(?:${MONTH})|(?:${MONTH_DAY})(?:T${TIME})?))?`;
-
-var dateMatcher_const = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    DAY: DAY,
-    DAYS_30_MONTHS: DAYS_30_MONTHS,
-    DAYS_31_MONTHS: DAYS_31_MONTHS,
-    HOURS: HOURS,
-    ISO8601_DATE_TIME: ISO8601_DATE_TIME,
-    ISO8601_SHORT_DATE: ISO8601_SHORT_DATE,
-    LEAP_MONTH: LEAP_MONTH,
-    MILLISECONDS: MILLISECONDS,
-    MINUTES: MINUTES,
-    MONTH: MONTH,
-    MONTH_DAY: MONTH_DAY,
-    SECONDS: SECONDS,
-    TIME: TIME,
-    TIMEZONE: TIMEZONE,
-    YEAR: YEAR
-});
 
 var BirthMonth;
 (function (BirthMonth) {
@@ -852,7 +890,7 @@ class Parser {
             return null;
         }
         const birthYear = this.cfToBirthYear(codiceFiscale);
-        return this.ymdToDate(birthYear, birthMonth, birthDay);
+        return DateUtils.ymdToDate(birthYear, birthMonth, birthDay);
     }
     /**
      * Parse birth place information
@@ -895,7 +933,7 @@ class Parser {
         const year = this.cfToBirthYear(fiscalCode) || undefined;
         const month = this.cfToBirthMonth(fiscalCode) || undefined;
         const day = this.cfToBirthDay(fiscalCode) || undefined;
-        const date = this.ymdToDate(year, month, day) || undefined;
+        const date = DateUtils.ymdToDate(year, month, day) || undefined;
         const place = this.cfToBirthPlace(fiscalCode);
         const personalInfo = {
             firstName: this.cfToFirstName(fiscalCode) || undefined,
@@ -1011,27 +1049,6 @@ class Parser {
         }
         return date.toDate();
     }
-    /**
-     * Parse a Dated and Gender information to create Date/Gender CF part
-     * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
-     * @returns Parsed Date or null if not valid
-     */
-    static parseDate(date) {
-        if (!(date instanceof Date ||
-            date instanceof moment ||
-            typeof date === "string" && new RegExp(`^(?:${ISO8601_DATE_TIME})$`).test(date) ||
-            // typeof date === "string" && new RegExp(ISO8601_SHORT_DATE).test(date) ||
-            Array.isArray(date) && date.length && !date.some((value) => typeof value !== "number"))) {
-            return null;
-        }
-        try {
-            const parsedDate = moment(date);
-            return parsedDate.isValid() ? parsedDate.toDate() : null;
-        }
-        catch (err) {
-            return null;
-        }
-    }
     static parsePlace(place, scopedBelfioreConnector = Belfiore) {
         let verifiedBirthPlace;
         if (!place) {
@@ -1052,7 +1069,7 @@ class Parser {
      * @returns Birth date and Gender CF code
      */
     static dateGenderToCf(date, gender) {
-        const parsedDate = this.parseDate(date);
+        const parsedDate = DateUtils.parseDate(date);
         if (!parsedDate) {
             return null;
         }
@@ -1062,7 +1079,7 @@ class Parser {
         return `${cfYear}${cfMonth}${cfDayGender}`;
     }
     static placeToCf(dateOrName, nameOrProvince, provinceId) {
-        const birthDate = this.parseDate(dateOrName);
+        const birthDate = DateUtils.parseDate(dateOrName);
         let name;
         let province;
         if (!birthDate && typeof dateOrName === "string") {
@@ -1096,7 +1113,7 @@ class Parser {
      * @returns Complete CF
      */
     static encodeCf({ lastName, firstName, year, month, day, date, gender, place, omocodeId = 0, }) {
-        const dtParams = this.parseDate(date) || this.yearMonthDayToDate(year, month, day);
+        const dtParams = DateUtils.parseDate(date) || this.yearMonthDayToDate(year, month, day);
         if (!(dtParams && lastName && firstName && gender && place)) {
             return null;
         }
@@ -1141,15 +1158,6 @@ class Parser {
     static partialCfDeomocode(partialCodiceFiscale, offset = 0) {
         const charReplacer = (char, position) => this.charOmocode(char, position + offset);
         return partialCodiceFiscale.replace(/[\dA-Z]/giu, charReplacer);
-    }
-    static ymdToDate(year, month, day) {
-        if (year && typeof month === "number" && day) {
-            const dt = moment(Date.UTC(year, month, day));
-            if (dt.isValid()) {
-                return dt.toDate();
-            }
-        }
-        return null;
     }
     static appyCaseToChar(targetChar, counterCaseChar) {
         if (targetChar && counterCaseChar) {
@@ -1324,7 +1332,7 @@ class Validator {
      * @return CF date and gender matcher
      */
     static cfDateGender(date, gender) {
-        if (date && !Parser.parseDate(date)) {
+        if (date && !DateUtils.parseDate(date)) {
             throw new CfuError(INVALID_DATE);
         }
         if (gender && !Gender.toArray().includes(gender)) {
@@ -1358,7 +1366,7 @@ class Validator {
     static cfPlace(birthDateOrName, placeName) {
         let matcher = BELFIORE_CODE_MATCHER;
         if (birthDateOrName) {
-            const birthDate = Parser.parseDate(birthDateOrName);
+            const birthDate = DateUtils.parseDate(birthDateOrName);
             if (birthDate && placeName) {
                 const place = placeName;
                 const parsedPlace = Parser.placeToCf(birthDate, place);
@@ -1389,7 +1397,7 @@ class Validator {
                 if (lastName || firstName || year || month || day || date || gender || place) {
                     let dtParams = null;
                     if (date) {
-                        dtParams = Parser.parseDate(date);
+                        dtParams = DateUtils.parseDate(date);
                     }
                     else if (year) {
                         dtParams = Parser.yearMonthDayToDate(year, month, day);
@@ -1602,7 +1610,7 @@ class CFMismatchValidator {
     matchBirthDate(birthDate) {
         if (this.hasBirthDate) {
             const parsedCfDate = Parser.cfToBirthDate(this.codiceFiscale);
-            const parsedDate = Parser.parseDate(birthDate);
+            const parsedDate = DateUtils.parseDate(birthDate);
             if (parsedCfDate && parsedDate) {
                 return moment(parsedCfDate).isSame(parsedDate, "d");
             }
@@ -1610,7 +1618,7 @@ class CFMismatchValidator {
         return false;
     }
     mismatchBirthDate(birthDate) {
-        return this.hasBirthYear && !!Parser.parseDate(birthDate) && !this.matchBirthDate(birthDate);
+        return this.hasBirthYear && !!DateUtils.parseDate(birthDate) && !this.matchBirthDate(birthDate);
     }
     matchGender(gender) {
         return this.hasGender && Validator.gender(this.codiceFiscale).test(gender || "");
@@ -1677,7 +1685,7 @@ class Validator$1 {
         return !!firstName && !this.isFirstNameValid(firstName);
     }
     static isBirthDateValid(birthDate) {
-        return !!Parser.parseDate(birthDate);
+        return !!DateUtils.parseDate(birthDate);
     }
     static isBirthDateInvalid(birthDate) {
         return !!birthDate && !this.isBirthDateValid(birthDate);
@@ -1719,8 +1727,8 @@ exports.BirthMonth = BirthMonth$1;
 exports.CFMismatchValidator = CFMismatchValidator;
 exports.CRC = CRC$1;
 exports.CheckDigitizer = CheckDigitizer;
-exports.DATE_VALIDATOR = dateMatcher_const;
-exports.DateMatcher = dateMatcher_const;
+exports.DATE_MATCHER = dateMatcher_const;
+exports.DateUtils = DateUtils;
 exports.Gender = Gender;
 exports.Matcher = matcher_const;
 exports.Omocodes = Omocodes$1;

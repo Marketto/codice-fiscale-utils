@@ -1,10 +1,14 @@
 ## CHANGELOG
-### 1.2.3 - Omocode encoder (2020-01-12)
+### 2.0.0 - (2020-02-10)
+* Semantic Versioning release (thx to Giacomo Gregoletto hint)
+* Moved packaging dependency to devDependencies (thx to Giacomo Gregoletto)
+* Removed install alert message
+### ~~1.2.3~~ - Omocode encoder (2020-01-12)
 * CITIES_COUNTRIES generated as TS
 * Restored sourcemaps
 * Moved FE demos in dedicated repos
 
-### 1.2.2 - Omocode encoder (2020-01-11)
+### ~~1.2.2~~ - Omocode encoder (2020-01-11)
 * Implemented cfOmocode in Parser class
 * Implemented cfOmocodeId in Parser class
 * Implemented omocodeId field in IPersonalInfo
@@ -13,11 +17,11 @@
 * Implemented constants for CF parts (offsets & lengths)
 * Improved date parse
   
-### 1.2.1 - Deomocode proper implementation (2020-01-09)
+### ~~1.2.1~~ - Deomocode proper implementation (2020-01-09)
 * Implemented CF deomocode in Parser class
 * Optimized gender methods
 
-### 1.2.0 - Typescript migration (2020-01-08)
+### ~~1.2.0~~ - Typescript migration (2020-01-08)
 * Typescript refactoring
 * RegExp validators moved into ***Pattern*** class
 * Naming convention for *name* and *surname* changed to ***firstName*** and ***lastName***

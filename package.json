@@ -1,6 +1,6 @@
 {
   "name": "@marketto/codice-fiscale-utils",
-  "version": "1.2.4-light",
+  "version": "2.0.0",
   "description": "TS & JS utilities to handle Italian Codice Fiscale",
   "main": "dist/codice-fiscale-utils.js",
   "module": "dist/codice-fiscale-utils.mjs",
@@ -13,8 +13,7 @@
     "test": "npx mocha",
     "coverage": "npx rimraf ./coverage \n mkdir coverage \n npx nyc mocha \n npx nyc report --reporter=text-lcov | npx relcov > coverage/lcov.info",
     "docs": "npx rimraf ./docs \n npx jsdoc . -c jsdoc.json",
-    "update-lovs": "node ./tools/locationUpdater.js",
-    "install": "node ./scripts/post-install.js"
+    "update-lovs": "node ./tools/locationUpdater.js"
   },
   "repository": {
     "type": "git",
@@ -52,7 +51,6 @@
     "@wessberg/rollup-plugin-ts": "^1.1.83",
     "chai": "^4.2.0",
     "chai-string": "^1.5.0",
-    "colors": "^1.4.0",
     "cross-env": "^6.0.3",
     "csvtojson": "^2.0.10",
     "foodoc": "0.0.9",
