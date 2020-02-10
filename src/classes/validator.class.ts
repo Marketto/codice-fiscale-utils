@@ -2,9 +2,9 @@ import {
     Belfiore,
     BelfioreConnector,
     BelfiorePlace,
-} from "../belfiore-connector/belfiore";
+} from "../belfiore-connector";
+import { DateUtils, MultiFormatDate } from "../date-utils/";
 import Genders from "../types/genders.type";
-import MultiFormatDate from "../types/multi-format-date.type";
 import CFMismatchValidator from "./cf-mismatch-validator.class";
 import Parser from "./parser.class";
 import Pattern from "./pattern.class";
@@ -29,7 +29,7 @@ export default class Validator {
     }
 
     public static isBirthDateValid(birthDate: MultiFormatDate): boolean {
-        return !!Parser.parseDate(birthDate);
+        return !!DateUtils.parseDate(birthDate);
     }
     public static isBirthDateInvalid(birthDate: MultiFormatDate): boolean {
         return !!birthDate && !this.isBirthDateValid(birthDate);

@@ -1,11 +1,6 @@
 import DiacriticRemover from "@marketto/diacritic-remover";
 import moment from "moment";
 import {
-    ISO8601_DATE_TIME,
-    TIME,
-    TIMEZONE,
-} from "../const/date-matcher.const";
-import {
     INVALID_DATE,
     INVALID_DAY,
     INVALID_DAY_OR_GENDER,
@@ -31,12 +26,10 @@ import {
     VOWEL_LIST,
     YEAR_MATCHER,
 } from "../const/matcher.const";
+import { DATE_MATCHER, DateDay, DateMonth, DateUtils, MultiFormatDate } from "../date-utils/";
 import Omocodes from "../enums/omocodes.enum";
 import IPersonalInfo from "../interfaces/personal-info.interface";
-import DateDay from "../types/date-day.type";
-import DateMonth from "../types/date-month.type";
 import Genders from "../types/genders.type";
-import MultiFormatDate from "../types/multi-format-date.type";
 import CfuError from "./cfu-error.class";
 import Gender from "./gender.class";
 import Parser from "./parser.class";
@@ -171,7 +164,7 @@ export default class Validator {
      * @return CF date and gender matcher
      */
     public static cfDateGender(date?: MultiFormatDate | null, gender?: Genders | null): RegExp {
-        if (date && !Parser.parseDate(date)) {
+        if (date && !DateUtils.parseDate(date)) {
             throw new CfuError(INVALID_DATE);
         }
         if (gender && !Gender.toArray().includes(gender)) {
@@ -214,7 +207,7 @@ export default class Validator {
     public static cfPlace(birthDateOrName?: MultiFormatDate | null, placeName?: string | null): RegExp {
         let matcher = BELFIORE_CODE_MATCHER;
         if (birthDateOrName) {
-            const birthDate: Date | null = Parser.parseDate(birthDateOrName);
+            const birthDate: Date | null = DateUtils.parseDate(birthDateOrName);
 
             if (birthDate && placeName) {
                 const place: string = placeName;
@@ -246,7 +239,7 @@ export default class Validator {
                 if (lastName || firstName || year || month || day || date || gender || place) {
                     let dtParams: Date | null = null;
                     if (date) {
-                        dtParams = Parser.parseDate(date);
+                        dtParams = DateUtils.parseDate(date);
                     } else if (year) {
                         dtParams = Parser.yearMonthDayToDate(year, month, day);
                     }
@@ -364,7 +357,7 @@ export default class Validator {
      * @return Generic or specific regular expression
      */
     public static date(codiceFiscale?: string): RegExp {
-        let matcher: string = ISO8601_DATE_TIME;
+        let matcher: string = DATE_MATCHER.ISO8601_DATE_TIME;
         if (codiceFiscale) {
             const parsedDate = Parser.cfToBirthDate(codiceFiscale);
             if (parsedDate) {
@@ -381,7 +374,7 @@ export default class Validator {
                 }
             }
         }
-        return this.isolatedInsensitiveTailor(`${matcher}(?:T${TIME}(?:${TIMEZONE})?)?`);
+        return this.isolatedInsensitiveTailor(`${matcher}(?:T${DATE_MATCHER.TIME}(?:${DATE_MATCHER.TIMEZONE})?)?`);
     }
 
     /**

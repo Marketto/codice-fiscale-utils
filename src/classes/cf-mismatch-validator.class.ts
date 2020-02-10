@@ -1,5 +1,5 @@
 import moment from "moment";
-import { BelfiorePlace } from "../belfiore-connector/belfiore";
+import { BelfiorePlace } from "../belfiore-connector";
 import {
     CRC_OFFSET,
     CRC_SIZE,
@@ -16,9 +16,9 @@ import {
     YEAR_OFFSET,
     YEAR_SIZE,
 } from "../const/cf-offsets.const";
+import { DateUtils, MultiFormatDate } from "../date-utils/";
 import IPersonalInfo from "../interfaces/personal-info.interface";
 import Genders from "../types/genders.type";
-import MultiFormatDate from "../types/multi-format-date.type";
 import CheckDigitizer from "./check-digitizer.class";
 import Parser from "./parser.class";
 import Pattern from "./pattern.class";
@@ -84,7 +84,7 @@ export default class CFMismatchValidator {
     public matchBirthDate(birthDate: MultiFormatDate): boolean {
         if (this.hasBirthDate) {
             const parsedCfDate = Parser.cfToBirthDate(this.codiceFiscale);
-            const parsedDate = Parser.parseDate(birthDate);
+            const parsedDate = DateUtils.parseDate(birthDate);
             if (parsedCfDate && parsedDate) {
                 return moment(parsedCfDate).isSame(parsedDate, "d");
             }
@@ -92,7 +92,7 @@ export default class CFMismatchValidator {
         return false;
     }
     public mismatchBirthDate(birthDate: MultiFormatDate): boolean {
-        return this.hasBirthYear && !!Parser.parseDate(birthDate) && !this.matchBirthDate(birthDate);
+        return this.hasBirthYear && !!DateUtils.parseDate(birthDate) && !this.matchBirthDate(birthDate);
     }
 
     public matchGender(gender: Genders | string): boolean {

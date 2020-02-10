@@ -1,22 +1,9 @@
-import {
-    DAY,
-    HOURS,
-    ISO8601_DATE_TIME,
-    ISO8601_SHORT_DATE,
-    MILLISECONDS,
-    MINUTES,
-    MONTH,
-    MONTH_DAY,
-    SECONDS,
-    TIME,
-    TIMEZONE,
-    YEAR,
-} from "../src/const/date-matcher.const";
+import { DATE_MATCHER } from "../src/";
 import "./utils";
 
 describe("DATE_VALIDATOR", () => {
     describe("YEAR", () => {
-        const yearMatcher = new RegExp(`^(?:${YEAR})$`, "u");
+        const yearMatcher = new RegExp(`^(?:${DATE_MATCHER.YEAR})$`, "u");
         it("Should match year 2016", () => {
             yearMatcher.test("2016").should.be.ok;
         });
@@ -87,7 +74,7 @@ describe("DATE_VALIDATOR", () => {
     });
 
     describe("MONTH", () => {
-        const monthMatcher = new RegExp(`^(?:${MONTH})$`, "u");
+        const monthMatcher = new RegExp(`^(?:${DATE_MATCHER.MONTH})$`, "u");
         it("Should match month 01", () => {
             monthMatcher.test("01").should.be.ok;
         });
@@ -143,7 +130,7 @@ describe("DATE_VALIDATOR", () => {
     });
 
     describe("DAY", () => {
-        const dayMatcher = new RegExp(`^(?:${DAY})$`, "u");
+        const dayMatcher = new RegExp(`^(?:${DATE_MATCHER.DAY})$`, "u");
 
         it("Should match day 01", () => {
             dayMatcher.test("01").should.be.ok;
@@ -246,7 +233,7 @@ describe("DATE_VALIDATOR", () => {
     });
 
     describe("MONTH_DAY", () => {
-        const monthDayMatcher = new RegExp(`^(?:${MONTH_DAY})$`, "u");
+        const monthDayMatcher = new RegExp(`^(?:${DATE_MATCHER.MONTH_DAY})$`, "u");
 
         it("Should match day 01-01", () => {
             monthDayMatcher.test("01-01").should.be.ok;
@@ -401,7 +388,7 @@ describe("DATE_VALIDATOR", () => {
     });
 
     describe("HOURS", () => {
-        const hoursMatcher = new RegExp(`^(?:${HOURS})$`, "u");
+        const hoursMatcher = new RegExp(`^(?:${DATE_MATCHER.HOURS})$`, "u");
         it("Should match 00", () => {
             hoursMatcher.test("00").should.be.ok;
         });
@@ -505,7 +492,7 @@ describe("DATE_VALIDATOR", () => {
     });
 
     describe("MINUTES", () => {
-        const minutesMatcher = new RegExp(`^(?:${MINUTES})$`, "u");
+        const minutesMatcher = new RegExp(`^(?:${DATE_MATCHER.MINUTES})$`, "u");
         it("Should match 00", () => {
             minutesMatcher.test("00").should.be.ok;
         });
@@ -702,7 +689,7 @@ describe("DATE_VALIDATOR", () => {
     });
 
     describe("SECONDS", () => {
-        const secondsMatcher = new RegExp(`^(?:${SECONDS})$`, "u");
+        const secondsMatcher = new RegExp(`^(?:${DATE_MATCHER.SECONDS})$`, "u");
         it("Should match 00", () => {
             secondsMatcher.test("00").should.be.ok;
         });
@@ -899,7 +886,7 @@ describe("DATE_VALIDATOR", () => {
     });
 
     describe("MILLISECONDS", () => {
-        const msMatcher = new RegExp(`^(?:${MILLISECONDS})$`, "u");
+        const msMatcher = new RegExp(`^(?:${DATE_MATCHER.MILLISECONDS})$`, "u");
         it("Should match 000", () => {
             msMatcher.test("000").should.be.ok;
         });
@@ -952,7 +939,7 @@ describe("DATE_VALIDATOR", () => {
     });
 
     describe("TIMEZONE", () => {
-        const tmzMatcher = new RegExp(`^(?:${TIMEZONE})$`, "u");
+        const tmzMatcher = new RegExp(`^(?:${DATE_MATCHER.TIMEZONE})$`, "u");
         it ("Should match Z", () => {
             tmzMatcher.test("Z").should.be.ok;
         });
@@ -1008,7 +995,7 @@ describe("DATE_VALIDATOR", () => {
     });
 
     describe("TIME", () => {
-        const timeMatcher = new RegExp(`^(?:${TIME})$`, "u");
+        const timeMatcher = new RegExp(`^(?:${DATE_MATCHER.TIME})$`, "u");
 
         it("Should match 23", () => {
             timeMatcher.test("23").should.be.ok;
@@ -1065,7 +1052,7 @@ describe("DATE_VALIDATOR", () => {
     });
 
     describe("ISO8601_SHORT_DATE", () => {
-        const dateMatcher = new RegExp(`^(?:${ISO8601_SHORT_DATE})$`, "u");
+        const dateMatcher = new RegExp(`^(?:${DATE_MATCHER.ISO8601_SHORT_DATE})$`, "u");
 
         it("Should match 2002-04-22", () => {
             dateMatcher.test("2002-04-22").should.be.ok;
@@ -1146,7 +1133,7 @@ describe("DATE_VALIDATOR", () => {
     });
 
     describe("ISO8601_DATE_TIME", () => {
-        const dateMatcher = new RegExp(`^(?:${ISO8601_DATE_TIME})$`, "u");
+        const dateMatcher = new RegExp(`^(?:${DATE_MATCHER.ISO8601_DATE_TIME})$`, "u");
         it("Should match 2017", () => {
             dateMatcher.test("2017").should.be.ok;
         });

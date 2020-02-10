@@ -1,5 +1,4 @@
-import DateDay from "../types/date-day.type";
-import DateMonth from "../types/date-month.type";
+import { DateDay, DateMonth } from "../date-utils/";
 import Genders from "../types/genders.type";
 
 export default interface IPersonalInfo {
