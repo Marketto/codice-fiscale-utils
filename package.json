@@ -13,8 +13,7 @@
     "test": "npx mocha",
     "coverage": "npx rimraf ./coverage \n mkdir coverage \n npx nyc mocha \n npx nyc report --reporter=text-lcov | npx relcov > coverage/lcov.info",
     "docs": "npx rimraf ./docs \n npx jsdoc . -c jsdoc.json",
-    "update-lovs": "node ./tools/locationUpdater.js",
-    "install": "node ./scripts/post-install.js"
+    "update-lovs": "node ./tools/locationUpdater.js"
   },
   "repository": {
     "type": "git",
