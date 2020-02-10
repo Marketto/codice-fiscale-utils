@@ -732,5 +732,5 @@ No identification with actual persons (living or deceased) is intended or should
 ## 📝 AUTHOR
 [Marco Ricupero](mailto:marco.ricupero@gmail.com)
 
-## CONTRIBUTORS
-* Giacomo Gregoletto
+## 📬 CONTRIBUTORS
+* [Giacomo Gregoletto](https://github.com/greguz)
