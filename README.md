@@ -63,7 +63,7 @@ import * as codiceFiscaleUtils from '@marketto/codice-fiscale-utils';
 ### Script
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="https://unpkg.com/browse/@marketto/codice-fiscale-utils/dist/codice-fiscale-utils.amd.min.js"></script>
+<script src="https://unpkg.com/@marketto/codice-fiscale-utils@2.0.0/dist/codice-fiscale-utils.bundle.min.js"></script>
 ```
 
 ## 💻 DEMO
