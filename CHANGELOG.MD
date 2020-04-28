@@ -1,8 +1,15 @@
 ## CHANGELOG
+### 2.0.1 - (2020-04-28)
+* README review
+* Dependencies update
+* Assets and source links update
+* Rollup config update
+
 ### 2.0.0 - (2020-02-10)
 * Semantic Versioning release (thx to Giacomo Gregoletto)
 * Moved packaging dependency to devDependencies (thx to Giacomo Gregoletto)
 * Removed install alert message
+
 ### ~~1.2.3~~ - Omocode encoder (2020-01-12)
 * CITIES_COUNTRIES generated as TS
 * Restored sourcemaps
