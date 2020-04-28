@@ -36,7 +36,7 @@ import Parser from "./parser.class";
 
 const diacriticRemover = new DiacriticRemover();
 
-export default class Validator {
+export default class Pattern {
 
     /**
      * Validation regexp for the given lastName or generic
