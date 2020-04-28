@@ -18,7 +18,7 @@ const downloadUnzip = (uri, delimiter) => request({
     encoding: null,
     method: "GET",
     resolveWithFullResponse: true,
-    uri
+    uri,
 })
     .then(({body}) => body)
     .catch(err => {
@@ -40,14 +40,14 @@ const downloadUnzip = (uri, delimiter) => request({
 
 const downloadText = (uri) => request({
     method: "GET",
+    resolveWithFullResponse: true,
     uri,
-    resolveWithFullResponse: true
 })
     .then(({body}) => body);
 
 const parseCsv = delimiter => file => csvtojson({
+    delimiter,
     trim: true,
-    delimiter
 }).fromString(file);
 
 const parseXlsx = parsedXlsx => {
@@ -94,25 +94,25 @@ const cleanObject = (obj) => {
     return out;
 };
 
-const belfioreToInt = code => (code.charCodeAt() - 65) * 10 ** 3 + parseInt(code.substr(1));
+const belfioreToInt = code => (code.charCodeAt() - 65) * 10 ** 3 + parseInt(code.substr(1), 10);
 const dataMapper1 = defaultSourceCode => data => data
     .map(obj => cleanObject({
-        belfioreCode: obj["Codice AT"] || obj["CODCATASTALE"],
-        name: obj["Denominazione IT"] || obj["Denominazione (b)"] || obj["DENOMINAZIONE_IT"],
-        // newIstatCode: obj["Codice Stato/Territorio_Figlio"],
-        iso3166alpha2: obj["Codice ISO 3166 alpha2"],
-        // iso3166alpha3: obj["Codice ISO 3166 alpha3"],
-        creationDate: obj["DATAISTITUZIONE"]
-            && moment(obj["DATAISTITUZIONE"], "YYYY-MM-DD").startOf("day").toISOString(),
-        expirationDate: obj["STATO"] === "C"
-            && obj["DATACESSAZIONE"] && moment(obj["DATACESSAZIONE"], "YYYY-MM-DD").endOf("day").toISOString()
+        belfioreCode: obj["Codice AT"] || obj.CODCATASTALE,
+        creationDate: obj.DATAISTITUZIONE && moment(obj.DATAISTITUZIONE, "YYYY-MM-DD").startOf("day").toISOString(),
+        dataSource: obj.FONTE || defaultSourceCode,
+        expirationDate: obj.STATO === "C"
+            && obj.DATACESSAZIONE && moment(obj.DATACESSAZIONE, "YYYY-MM-DD").endOf("day").toISOString()
             || obj["Anno evento"] && moment(obj["Anno evento"], "YYYY").endOf("year").toISOString(),
-        province: obj["SIGLAPROVINCIA"],
+        iso3166alpha2: obj["Codice ISO 3166 alpha2"],
+        name: obj["Denominazione IT"] || obj["Denominazione (b)"] || obj.DENOMINAZIONE_IT,
+        // newIstatCode: obj["Codice Stato/Territorio_Figlio"],
+        // iso3166alpha3: obj["Codice ISO 3166 alpha3"],
+        province: obj.SIGLAPROVINCIA,
         // region: parseInt(obj["IDREGIONE"]),
         // istatCode: parseInt(obj["CODISTAT"] || obj["Codice ISTAT"]),
-        dataSource: obj["FONTE"] || defaultSourceCode
     }))
-    .filter(({belfioreCode}) => belfioreCode).sort((a, b) => belfioreToInt(a.belfioreCode)-belfioreToInt(b.belfioreCode));
+    .filter(({belfioreCode}) => belfioreCode)
+        .sort((a, b) => belfioreToInt(a.belfioreCode) - belfioreToInt(b.belfioreCode));
 
 const compressDataMapper = data => data.map(({
     belfioreCode,
@@ -121,18 +121,18 @@ const compressDataMapper = data => data.map(({
     expirationDate,
     iso3166alpha2,
     province,
-    dataSource
+    dataSource,
 }) => ({
     belfioreCode: belfioreToInt(belfioreCode).toString(32).padStart(3, "0"),
-    name: name === name.toUpperCase() ? _.startCase(_.lowerCase(name)) : name,
     creationDate: creationDate
         ? moment(creationDate).diff(DEFAULT_CREATION_DATE, "days").toString(32)
         : undefined,
+    dataSource: { MI: 0, I: 1, AE: 2 }[dataSource],
     expirationDate: expirationDate
         ? moment(expirationDate).diff(DEFAULT_CREATION_DATE, "days").toString(32)
         : undefined,
+    name: name === name.toUpperCase() ? _.startCase(_.lowerCase(name)) : name,
     provinceOrCountry: province || iso3166alpha2,
-    dataSource: { MI: 0, I: 1, AE: 2 }[dataSource]
 }));
 
 const dataSquasher = data => {
