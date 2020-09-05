@@ -1,4 +1,8 @@
 ## CHANGELOG
+### 2.0.2 - (2020-09-14)
+* New ETL script for data assets in typescript, using streams (2x faster)
+* Assets and source links update
+
 ### 2.0.1 - (2020-04-28)
 * README review
 * Dependencies update
