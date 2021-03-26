@@ -325,7 +325,7 @@ export default class Parser {
             return null;
         }
 
-        if (!(/^[A-Z "]+$/iu).test(diacriticRemover.replace(lastName))) {
+        if (!(/^[A-Z ']+$/iu).test(diacriticRemover.replace(lastName))) {
             return null;
         }
 
