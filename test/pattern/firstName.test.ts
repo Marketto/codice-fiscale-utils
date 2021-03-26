@@ -17,6 +17,9 @@ export default () => {
             it ("Should validate name Tést", () => {
                 namePattern.test("Tést").should.be.ok;
             });
+            it ("Should validate composed name", () => {
+                namePattern.test("Val Audator").should.be.ok;
+            });
         });
         describe("Specific validator", () => {
             it ("Should validate name Marco for XYZMRC", () => {
@@ -36,6 +39,9 @@ export default () => {
             });
             it ("Should validate name Vàlidàtòr for XYZVLD", () => {
                 Pattern.firstName("XYZVDT").test("Vàlidàtòr").should.be.ok;
+            });
+            it ("Should validate composed name for CF", () => {
+                Pattern.firstName("XYZVDT").test("Val Audator").should.be.ok;
             });
             it ("Should not validate name Air for XYZAIX", () => {
                 Pattern.firstName("XYZAIX").test("Air").should.be.false;

@@ -334,6 +334,7 @@ export default class Pattern {
     public static firstName(codiceFiscale?: string): RegExp {
         if (codiceFiscale && new RegExp(`^[A-Z]{3}[${CONSONANT_LIST}]{3}`, "iu").test(codiceFiscale)) {
             const ANY_LETTER: string = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/ui)}]`;
+            const SEPARATOR_SET: string = "(?:'? ?)";
 
             const nameCf: string = codiceFiscale.substr(3, 3);
 
@@ -343,8 +344,8 @@ export default class Pattern {
             const [diacriticsVowelList, diacriticsConsonantList]: string[] = [VOWEL_LIST, CONSONANT_LIST]
                 .map((chars) => chars + diacriticRemover.matcherBy(new RegExp(`^[${chars}]$`, "ui")));
 
-            const matcher: string = `[${diacriticsVowelList}]*${cons[0]}[${diacriticsVowelList}]*(?:[${diacriticsConsonantList}][${diacriticsVowelList}]*)?`
-                + cons.slice(1, 3).join(`[${diacriticsVowelList}]*`) + `${ANY_LETTER}*`;
+            const matcher: string = `(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*${cons[0]}${SEPARATOR_SET}(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*(?:[${diacriticsConsonantList}]${SEPARATOR_SET}(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*)?`
+                + cons.slice(1, 3).join(`(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*`) + `${ANY_LETTER}*`;
 
             return this.isolatedInsensitiveTailor(matcher);
         }
