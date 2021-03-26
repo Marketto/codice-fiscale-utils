@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 2.0.2
+ * @marketto/codice-fiscale-utils 2.0.3
  * Copyright (c) 2019-2020, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  * ============================================================
@@ -960,7 +960,7 @@ class Parser {
         if (!lastName || (lastName || "").trim().length < 2) {
             return null;
         }
-        if (!(/^[A-Z "]+$/iu).test(diacriticRemover.replace(lastName))) {
+        if (!(/^[A-Z ']+$/iu).test(diacriticRemover.replace(lastName))) {
             return null;
         }
         const consonants = this.charExtractor(lastName, CONSONANT_LIST);
@@ -1486,13 +1486,14 @@ class Pattern {
     static firstName(codiceFiscale) {
         if (codiceFiscale && new RegExp(`^[A-Z]{3}[${CONSONANT_LIST}]{3}`, "iu").test(codiceFiscale)) {
             const ANY_LETTER = `[A-Z${diacriticRemover$1.matcherBy(/^[A-Z]$/ui)}]`;
+            const SEPARATOR_SET = "(?:'? ?)";
             const nameCf = codiceFiscale.substr(3, 3);
             const cons = ((nameCf.match(new RegExp(`^[${CONSONANT_LIST}]{1,3}`, "ig")) || [])[0] || "")
                 .split("").map((char) => `[${diacriticRemover$1.insensitiveMatcher[char]}]`);
             const [diacriticsVowelList, diacriticsConsonantList] = [VOWEL_LIST, CONSONANT_LIST]
                 .map((chars) => chars + diacriticRemover$1.matcherBy(new RegExp(`^[${chars}]$`, "ui")));
-            const matcher = `[${diacriticsVowelList}]*${cons[0]}[${diacriticsVowelList}]*(?:[${diacriticsConsonantList}][${diacriticsVowelList}]*)?`
-                + cons.slice(1, 3).join(`[${diacriticsVowelList}]*`) + `${ANY_LETTER}*`;
+            const matcher = `(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*${cons[0]}${SEPARATOR_SET}(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*(?:[${diacriticsConsonantList}]${SEPARATOR_SET}(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*)?`
+                + cons.slice(1, 3).join(`(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*`) + `${ANY_LETTER}*`;
             return this.isolatedInsensitiveTailor(matcher);
         }
         return this.lastName((codiceFiscale || "").substr(3, 3));
