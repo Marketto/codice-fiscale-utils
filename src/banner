@@ -1,6 +1,6 @@
 /**
  * <%= pkg.name %> <%= pkg.version %>
- * Copyright (c) 2019-2020, <%= pkg.author %>
+ * Copyright (c) 2019-2021, <%= pkg.author %>
  * License: <%= pkg.license %>
  * ============================================================
  * CITIES_COUNTRIES uses material from the following authors:

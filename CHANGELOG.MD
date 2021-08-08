@@ -1,7 +1,11 @@
 ## CHANGELOG
 
+### 2.0.4 - (2021-08-08)
+* Readme - review & Doc fixes
+
 ### 2.0.3 - (2021-03-26)
 * Minor fixes (Pattern.firstName)
+
 ### 2.0.2 - (2020-09-14)
 * New ETL script for data assets in typescript, using streams (2x faster)
 * Assets and source links update
