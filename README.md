@@ -50,20 +50,21 @@ npm i -s @marketto/codice-fiscale-utils
 ## 🔧 USAGE
 ### NodeJs
 ```javascript
-const codiceFiscaleUtils = require('@marketto/codice-fiscale-utils');
+const CodiceFiscaleUtils = require('@marketto/codice-fiscale-utils');
 ```
 ### ES6
 ```javascript
-import codiceFiscaleUtils from '@marketto/codice-fiscale-utils';
+import CodiceFiscaleUtils from '@marketto/codice-fiscale-utils';
 ```
 ### TypeScript
 ```typescript
-import * as codiceFiscaleUtils from '@marketto/codice-fiscale-utils';
+import * as CodiceFiscaleUtils from '@marketto/codice-fiscale-utils';
 ```
 ### Script
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="https://unpkg.com/@marketto/codice-fiscale-utils@2.0.0/dist/codice-fiscale-utils.bundle.min.js"></script>
+<script src="https://unpkg.com/@marketto/diacritic-remover/dist/diacritic-remover.bundle.min.js"></script>
+<script src="https://unpkg.com/@marketto/codice-fiscale-utils/dist/codice-fiscale-utils.bundle.min.js"></script>
 ```
 
 ## 💻 DEMO
@@ -83,7 +84,7 @@ import * as codiceFiscaleUtils from '@marketto/codice-fiscale-utils';
 ### Parser
 *Class* with *static* methods
 ```javascript
-const {Parser} = codiceFiscaleUtils;
+const { Parser } = CodiceFiscaleUtils;
 ```
 <details>
     <summary>Show code examples</summary>
@@ -287,7 +288,7 @@ Parser.encodeCf({
 ### Pattern
 Class with static methods
 ```javascript
-const {Pattern} = codiceFiscaleUtils;
+const { Pattern } = CodiceFiscaleUtils;
 ```
 <details>
     <summary>Show code examples</summary>
@@ -428,7 +429,7 @@ Pattern.place('XYZXYZ12S30A662').test('Bologna'); //false
 ### Validator
 *Class* with *static* methods
 ```javascript
-const {Validator} = codiceFiscaleUtils;
+const { Validator } = CodiceFiscaleUtils;
 ```
 <details>
     <summary>Show code examples</summary>
