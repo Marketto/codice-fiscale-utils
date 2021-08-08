@@ -1,6 +1,6 @@
 /**
- * @marketto/codice-fiscale-utils 2.0.3
- * Copyright (c) 2019-2020, Marco Ricupero <marco.ricupero@gmail.com>
+ * @marketto/codice-fiscale-utils 2.0.4
+ * Copyright (c) 2019-2021, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  * ============================================================
  * CITIES_COUNTRIES uses material from the following authors:
