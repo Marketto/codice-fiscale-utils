@@ -6,7 +6,6 @@ export interface IPlaceListUnZipOptions extends TransformOptions {
 }
 
 export class PlaceListUnZip extends Transform {
-    public writableObjectMode = true;
     private fileNameMatcher: RegExp;
     private buffer: Buffer = Buffer.alloc(0);
 
@@ -17,6 +16,10 @@ export class PlaceListUnZip extends Transform {
     public _transform(chunk: Buffer, encoding: string, callback: TransformCallback) {
         this.buffer = Buffer.concat([this.buffer, chunk], this.buffer.length + chunk.length);
         callback();
+    }
+
+    public get writeableObjectMode() {
+        return true;
     }
 
     public _flush(callback: TransformCallback) {

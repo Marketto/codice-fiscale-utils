@@ -6,9 +6,11 @@ import MultiFormatDate from "./multi-format-date.type";
 
 export default DateUtils;
 export {
-    DateDay,
     DATE_MATCHER,
-    DateMonth,
     DateUtils,
+};
+export type {
+    DateDay,
+    DateMonth,
     MultiFormatDate,
 };
