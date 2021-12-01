@@ -6,5 +6,7 @@ import BelfiorePlace from "./types/belfiore-place.type";
 export const Belfiore = new BelfioreConnector(CITIES_COUNTRIES as BelfioreConnectorConfig);
 export {
     BelfioreConnector,
+};
+export type {
     BelfiorePlace,
 };
