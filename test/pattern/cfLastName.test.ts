@@ -27,7 +27,7 @@ export default () => {
                 cfLastNamePattern.test("UIX").should.be.ok;
             });
             it ("Should validate cf lastName UXX", () => {
-                cfLastNamePattern.test("UXX").should.not.be.ok;
+                cfLastNamePattern.test("UXX").should.be.ok;
             });
             it ("Should validate cf lastName UIK", () => {
                 cfLastNamePattern.test("UIK").should.not.be.ok;

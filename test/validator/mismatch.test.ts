@@ -6,6 +6,8 @@ export default () => {
         it("match", () => {
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").matchLastName("Vareni")).to.be.true;
             expect(Validator.codiceFiscale("VRN").matchLastName("Vareni")).to.be.true;
+            expect(Validator.codiceFiscale("UXX").matchLastName("U")).to.be.true;
+            expect(Validator.codiceFiscale("XEX").matchLastName("XE")).to.be.true;
             expect(Validator.codiceFiscale("").matchLastName("Vareni")).to.be.false;
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").matchLastName("John")).to.be.false;
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").matchLastName("V")).to.be.false;
@@ -14,6 +16,7 @@ export default () => {
         it("mismatch", () => {
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").mismatchLastName("Vareni")).to.be.false;
             expect(Validator.codiceFiscale("VRN").mismatchLastName("Vareni")).to.be.false;
+            expect(Validator.codiceFiscale("UXX").mismatchLastName("U")).to.be.false;
             expect(Validator.codiceFiscale("").mismatchLastName("Vareni")).to.be.false;
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").mismatchLastName("John")).to.be.true;
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").mismatchLastName("V")).to.be.true;
@@ -26,6 +29,7 @@ export default () => {
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").matchFirstName("Genny")).to.be.true;
             expect(Validator.codiceFiscale("VRNGNY").matchFirstName("Genny")).to.be.true;
             expect(Validator.codiceFiscale("VRNGNY").matchFirstName("Gen Nyow")).to.be.true;
+            expect(Validator.codiceFiscale("VRNAXX").matchFirstName("A")).to.be.true;
             expect(Validator.codiceFiscale("").matchFirstName("Genny")).to.be.false;
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").matchFirstName("John")).to.be.false;
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").matchFirstName("G")).to.be.false;
@@ -34,6 +38,7 @@ export default () => {
         it("mismatch", () => {
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").mismatchFirstName("Genny")).to.be.false;
             expect(Validator.codiceFiscale("VRN").mismatchFirstName("Genny")).to.be.false;
+            expect(Validator.codiceFiscale("VRNAXX").mismatchFirstName("AX")).to.be.true;
             expect(Validator.codiceFiscale("").mismatchFirstName("Genny")).to.be.false;
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").mismatchFirstName("John")).to.be.true;
             expect(Validator.codiceFiscale("VRNGNY07D68C351V").mismatchFirstName("G")).to.be.true;
