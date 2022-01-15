@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### 2.0.5 - (2022-01-15)
+* Fixed isolated modules
+* CF rules for voewls reviewed
+* Dev dependencies update
+
 ### 2.0.4 - (2021-08-08)
 * Readme - review & Doc fixes
 

@@ -1,0 +1,6 @@
+bail: true
+full-trace: true
+require:
+  - 'ts-node/register'
+  - 'source-map-support/register'
+spec: 'test/**/*.ts'
