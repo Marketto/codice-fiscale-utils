@@ -1,10 +1,10 @@
-import rollupPluginTs from "@wessberg/rollup-plugin-ts";
+import path from "path";
 import pkg from "./package.json";
 import tsconfig from "./tsconfig.json";
+import rollupPluginTs from "rollup-plugin-ts";
 import { terser } from "rollup-plugin-terser";
 import builtins from "rollup-plugin-node-builtins";
 import license from "rollup-plugin-license";
-import path from "path";
 
 const baseConf = {
     external: [
@@ -36,6 +36,9 @@ const rollupCjsConf = rollupPluginTs({
     tsconfig: {
         ...tsconfig.compilerOptions,
     },
+    hook: {
+		declarationStats: declarationStats => console.log(declarationStats)
+	}
 });
 const rollupModuleConf = rollupPluginTs({
     tsconfig: {

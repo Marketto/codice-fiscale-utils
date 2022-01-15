@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 2.0.4
+ * @marketto/codice-fiscale-utils 2.0.5
  * Copyright (c) 2019-2021, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  * ============================================================
@@ -13,10 +13,13 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+var moment = require('moment');
+var DiacriticRemover = require('@marketto/diacritic-remover');
 
-var moment = _interopDefault(require('moment'));
-var DiacriticRemover = _interopDefault(require('@marketto/diacritic-remover'));
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var moment__default = /*#__PURE__*/_interopDefaultLegacy(moment);
+var DiacriticRemover__default = /*#__PURE__*/_interopDefaultLegacy(DiacriticRemover);
 
 const CITIES_COUNTRIES = {
     "data": [
@@ -182,7 +185,7 @@ class BelfioreConnector {
      */
     static decodeDate(base32daysFrom1861) {
         const italyBirthDatePastDays = parseInt(base32daysFrom1861, 32);
-        return moment(this.ITALY_KINGDOM_BIRTHDATE).add(italyBirthDatePastDays, "days");
+        return moment__default["default"](this.ITALY_KINGDOM_BIRTHDATE).add(italyBirthDatePastDays, "days");
     }
     /**
      * Retrieve string at index posizion
@@ -250,8 +253,8 @@ class BelfioreConnector {
      * @returns Belfiore instance filtered by active date
      * @public
      */
-    active(date = moment()) {
-        return new BelfioreConnector(Object.assign(Object.assign({}, this.config), { activeDate: moment(date) }));
+    active(date = moment__default["default"]()) {
+        return new BelfioreConnector(Object.assign(Object.assign({}, this.config), { activeDate: moment__default["default"](date) }));
     }
     /**
      * Returns a Belfiore instance filtered by the given province
@@ -460,7 +463,7 @@ class DateUtils {
      */
     static parseDate(date) {
         if (!(date instanceof Date ||
-            date instanceof moment ||
+            date instanceof moment__default["default"] ||
             typeof date === "string" && new RegExp(`^(?:${ISO8601_DATE_TIME})$`).test(date) ||
             Array.isArray(date) && date.length && !date.some((value) => typeof value !== "number" || isNaN(value)))) {
             return null;
@@ -470,14 +473,14 @@ class DateUtils {
             if (Array.isArray(date)) {
                 const [year, month = 0, day = 1] = date;
                 if (month >= 0 && month <= 11 && day > 0 && day <= 31) {
-                    parsedDate = moment(Date.UTC(year, month || 0, day || 1));
+                    parsedDate = moment__default["default"](Date.UTC(year, month || 0, day || 1));
                 }
                 else {
                     return null;
                 }
             }
             else {
-                parsedDate = moment(date);
+                parsedDate = moment__default["default"](date);
             }
             return parsedDate.isValid() ? parsedDate.toDate() : null;
         }
@@ -500,7 +503,7 @@ const MONTH_30DAYS_LIST = "DHPS";
 const MONTH_31DAYS_LIST = "ACELMRT";
 const CITY_CODE_LIST = "A-M";
 const COUNTRY_CODE_LIST = "Z";
-const CF_NAME_MATCHER = `[A-Z][${VOWEL_LIST}][${VOWEL_LIST}X]|[${CONSONANT_LIST}]{2}[A-Z]`;
+const CF_NAME_MATCHER = `[A-Z][${VOWEL_LIST}][${VOWEL_LIST}X]|[${VOWEL_LIST}]X{2}|[${CONSONANT_LIST}]{2}[A-Z]`;
 const CF_SURNAME_MATCHER = CF_NAME_MATCHER;
 const CF_FULL_NAME_MATCHER = `(?:${CF_NAME_MATCHER}){2}`;
 const YEAR_MATCHER = `[${OMOCODE_NUMBER_LIST}]{2}`;
@@ -718,7 +721,7 @@ class Gender {
 }
 Gender.MAX_MONTH_DAY = 31;
 
-const diacriticRemover = new DiacriticRemover();
+const diacriticRemover$1 = new DiacriticRemover__default["default"]();
 class Parser {
     /**
      * Convert omocode CF into plain one
@@ -766,7 +769,7 @@ class Parser {
         const cfOmocodeBitmap = codiceFiscale.split("")
             // tslint:disable-next-line: no-bitwise
             .filter((char, index) => Math.pow(2, index) & this.OMOCODE_BITMAP)
-            .map((char) => (/^[a-z]$/i).test(diacriticRemover[char]) ? 1 : 0)
+            .map((char) => (/^[a-z]$/i).test(diacriticRemover$1[char]) ? 1 : 0)
             .join("");
         return parseInt(cfOmocodeBitmap, 2);
     }
@@ -839,9 +842,9 @@ class Parser {
         if (isNaN(birthYear)) {
             return null;
         }
-        const current2DigitsYear = parseInt(moment().format("YY"), 10);
+        const current2DigitsYear = parseInt(moment__default["default"]().format("YY"), 10);
         const century = (birthYear > current2DigitsYear ? 1 : 0) * 100;
-        return moment().subtract(current2DigitsYear - birthYear + century, "years").year();
+        return moment__default["default"]().subtract(current2DigitsYear - birthYear + century, "years").year();
     }
     /**
      * Parse birth month information
@@ -913,10 +916,10 @@ class Parser {
             if (birthDate) {
                 let validityCheck = true;
                 if (creationDate) {
-                    validityCheck = moment(birthDate).isSameOrAfter(moment(creationDate));
+                    validityCheck = moment__default["default"](birthDate).isSameOrAfter(moment__default["default"](creationDate));
                 }
                 if (validityCheck && expirationDate) {
-                    validityCheck = moment(birthDate).isSameOrBefore(moment(expirationDate));
+                    validityCheck = moment__default["default"](birthDate).isSameOrBefore(moment__default["default"](expirationDate));
                 }
                 if (!validityCheck) {
                     return null;
@@ -960,7 +963,7 @@ class Parser {
         if (!lastName || (lastName || "").trim().length < 2) {
             return null;
         }
-        if (!(/^[A-Z ']+$/iu).test(diacriticRemover.replace(lastName))) {
+        if (!(/^[A-Z ']+$/iu).test(diacriticRemover$1.replace(lastName))) {
             return null;
         }
         const consonants = this.charExtractor(lastName, CONSONANT_LIST);
@@ -1043,7 +1046,7 @@ class Parser {
         if (!year || year < 1861 || [month, day].some((param) => typeof param !== "number")) {
             return null;
         }
-        const date = moment(Date.UTC(year, month || 0, day || 1));
+        const date = moment__default["default"](Date.UTC(year, month || 0, day || 1));
         if (!date.isValid() || date.year() !== year || date.month() !== month || date.date() !== day) {
             return null;
         }
@@ -1145,7 +1148,7 @@ class Parser {
     }
     static charExtractor(text, CHAR_LIST) {
         const charMatcher = new RegExp(`[${CHAR_LIST}]+`, "ig");
-        const diacriticFreeText = diacriticRemover.replace(text).trim();
+        const diacriticFreeText = diacriticRemover$1.replace(text).trim();
         const matchingChars = diacriticFreeText.match(charMatcher);
         return (matchingChars || []).join("");
     }
@@ -1206,7 +1209,7 @@ class CfuError extends Error {
     }
 }
 
-const diacriticRemover$1 = new DiacriticRemover();
+const diacriticRemover = new DiacriticRemover__default["default"]();
 class Pattern {
     /**
      * Validation regexp for the given lastName or generic
@@ -1431,19 +1434,19 @@ class Pattern {
      * @return Generic or specific regular expression
      */
     static lastName(codiceFiscale) {
-        const LETTER_SET = `[A-Z${diacriticRemover$1.matcherBy(/^[A-Z]$/ui)}]`;
+        const LETTER_SET = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/ui)}]`;
         const SEPARATOR_SET = "[' ]";
         const ANY_LETTER = `(?:${LETTER_SET}+${SEPARATOR_SET}?)`;
         let matcher = `${ANY_LETTER}+`;
         if (codiceFiscale && (/^[A-Z]{1,3}/iu).test(codiceFiscale)) {
             const lastNameCf = codiceFiscale.substr(0, 3);
             const diacriticizer = (matchingChars) => matchingChars.split("")
-                .map((char) => `[${diacriticRemover$1.insensitiveMatcher[char]}]`);
+                .map((char) => `[${diacriticRemover.insensitiveMatcher[char]}]`);
             const [cons, vow] = [
                 `^[${CONSONANT_LIST}]{1,3}`,
                 `[${VOWEL_LIST}]{1,3}`,
             ].map((charMatcher) => diacriticizer((lastNameCf.match(new RegExp(charMatcher, "ig")) || [])[0] || ""));
-            const diacriticsVowelList = VOWEL_LIST + diacriticRemover$1.matcherBy(new RegExp(`^[${VOWEL_LIST}]$`, "ui"));
+            const diacriticsVowelList = VOWEL_LIST + diacriticRemover.matcherBy(new RegExp(`^[${VOWEL_LIST}]$`, "ui"));
             const diacriticsVowelMatcher = `[${diacriticsVowelList}]`;
             const midDiacriticVowelMatcher = `(?:${diacriticsVowelMatcher}${SEPARATOR_SET}?)*`;
             const endingDiacritcVowelMatcher = `(?:${SEPARATOR_SET}?${midDiacriticVowelMatcher}${diacriticsVowelMatcher})?`;
@@ -1485,13 +1488,13 @@ class Pattern {
      */
     static firstName(codiceFiscale) {
         if (codiceFiscale && new RegExp(`^[A-Z]{3}[${CONSONANT_LIST}]{3}`, "iu").test(codiceFiscale)) {
-            const ANY_LETTER = `[A-Z${diacriticRemover$1.matcherBy(/^[A-Z]$/ui)}]`;
+            const ANY_LETTER = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/ui)}]`;
             const SEPARATOR_SET = "(?:'? ?)";
             const nameCf = codiceFiscale.substr(3, 3);
             const cons = ((nameCf.match(new RegExp(`^[${CONSONANT_LIST}]{1,3}`, "ig")) || [])[0] || "")
-                .split("").map((char) => `[${diacriticRemover$1.insensitiveMatcher[char]}]`);
+                .split("").map((char) => `[${diacriticRemover.insensitiveMatcher[char]}]`);
             const [diacriticsVowelList, diacriticsConsonantList] = [VOWEL_LIST, CONSONANT_LIST]
-                .map((chars) => chars + diacriticRemover$1.matcherBy(new RegExp(`^[${chars}]$`, "ui")));
+                .map((chars) => chars + diacriticRemover.matcherBy(new RegExp(`^[${chars}]$`, "ui")));
             const matcher = `(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*${cons[0]}${SEPARATOR_SET}(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*(?:[${diacriticsConsonantList}]${SEPARATOR_SET}(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*)?`
                 + cons.slice(1, 3).join(`(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*`) + `${ANY_LETTER}*`;
             return this.isolatedInsensitiveTailor(matcher);
@@ -1509,7 +1512,7 @@ class Pattern {
             const parsedDate = Parser.cfToBirthDate(codiceFiscale);
             if (parsedDate) {
                 const dateIso8601 = parsedDate.toJSON();
-                if (moment().diff(moment(parsedDate), "y") < 50) {
+                if (moment__default["default"]().diff(moment__default["default"](parsedDate), "y") < 50) {
                     const century = parseInt(dateIso8601.substr(0, 2), 10);
                     const centuries = [
                         century - 1,
@@ -1543,7 +1546,7 @@ class Pattern {
         let matcher = ".+";
         const parsedPlace = codiceFiscale && Parser.cfToBirthPlace(codiceFiscale);
         if (parsedPlace) {
-            const nameMatcher = parsedPlace.name.replace(/./gu, (c) => diacriticRemover$1[c] === c ? c : `[${c}${diacriticRemover$1[c]}]`);
+            const nameMatcher = parsedPlace.name.replace(/./gu, (c) => diacriticRemover[c] === c ? c : `[${c}${diacriticRemover[c]}]`);
             matcher = `(?:(?:${nameMatcher})|${parsedPlace.belfioreCode})`;
         }
         return this.isolatedInsensitiveTailor(matcher);
@@ -1613,7 +1616,7 @@ class CFMismatchValidator {
             const parsedCfDate = Parser.cfToBirthDate(this.codiceFiscale);
             const parsedDate = DateUtils.parseDate(birthDate);
             if (parsedCfDate && parsedDate) {
-                return moment(parsedCfDate).isSame(parsedDate, "d");
+                return moment__default["default"](parsedCfDate).isSame(parsedDate, "d");
             }
         }
         return false;

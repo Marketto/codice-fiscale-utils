@@ -13,21 +13,24 @@ import CRC from "./enums/crc.enum";
 import Omocodes from "./enums/omocodes.enum";
 import Genders from "./types/genders.type";
 
+export type {
+    BelfiorePlace,
+    DateDay,
+    DateMonth,
+    Genders,
+    MultiFormatDate,
+};
+
 export {
     Belfiore,
-    BelfiorePlace,
     BelfioreConnector,
     BirthMonth,
     CFMismatchValidator,
     CheckDigitizer,
     CRC,
     DATE_MATCHER,
-    DateDay,
-    DateMonth,
     DateUtils,
     Gender,
-    Genders,
-    MultiFormatDate,
     Omocodes,
     Parser,
     VALIDATOR,

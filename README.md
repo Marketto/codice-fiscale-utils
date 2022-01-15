@@ -17,12 +17,6 @@
 
 TS utilities to handle Italian Codice Fiscale
 
-## 🚨 WARNING Upgrading from 1.x 🚨
-* Methods to generate RegExp were moved to Pattern class
-* Former Validator.isValid method was migrated to Validator.codiceFiscale(cf: string).valid (getter)
-* ***name*** was renamed into ***firstName*** due to typescript migration (in method names and data models)
-* ***surname*** was renamed into ***lastName*** according to the new naming convention (even in method names and data models)
-
 ## 📗 FAQs?
 1. **Why should I need a library? Can't I use just a RegExp?**
     *A RegExp would just check the form of a CodiceFiscale, not coherence between birth date and place, not validity of 16th check digit char*
@@ -735,3 +729,4 @@ No identification with actual persons (living or deceased) is intended or should
 
 ## 📬 CONTRIBUTORS
 * [Giacomo Gregoletto](https://github.com/greguz)
+* [Julian Scheid](https://github.com/jscheid)
