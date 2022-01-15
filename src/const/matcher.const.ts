@@ -9,7 +9,7 @@ export const MONTH_31DAYS_LIST: string = "ACELMRT";
 export const CITY_CODE_LIST: string = "A-M";
 export const COUNTRY_CODE_LIST: string = "Z";
 
-export const CF_NAME_MATCHER: string = `[A-Z][${VOWEL_LIST}][${VOWEL_LIST}X]|[${CONSONANT_LIST}]{2}[A-Z]`;
+export const CF_NAME_MATCHER: string = `[A-Z][${VOWEL_LIST}][${VOWEL_LIST}X]|[${VOWEL_LIST}]X{2}|[${CONSONANT_LIST}]{2}[A-Z]`;
 export const CF_SURNAME_MATCHER: string = CF_NAME_MATCHER;
 export const CF_FULL_NAME_MATCHER: string = `(?:${CF_NAME_MATCHER}){2}`;
 
