@@ -6,7 +6,8 @@ export default () => {
         it("Generic Pattern", () => {
             const cfFirstNamePattern = Pattern.cfFirstName();
             cfFirstNamePattern.test("UIK").should.not.be.ok;
-            cfFirstNamePattern.test("UXX").should.not.be.ok;
+            cfFirstNamePattern.test("UXX").should.be.ok;
+            cfFirstNamePattern.test("XXX").should.be.ok;
             cfFirstNamePattern.test("UIX").should.be.ok;
             cfFirstNamePattern.test("ASQ").should.not.be.ok;
             cfFirstNamePattern.test("UAO").should.be.ok;
@@ -48,7 +49,7 @@ export default () => {
                 Pattern.cfFirstName("Ai").test("AIX").should.be.ok;
             });
             it ("Should validate cf name UXX for U", () => {
-                Pattern.cfFirstName("U").test("UXX").should.not.be.ok;
+                Pattern.cfFirstName("U").test("UXX").should.be.ok;
             });
             it ("Should throw error for cd lastName with special chars", () => {
                 expect(() => Pattern.cfFirstName("@ieie")).to.throw("Provided name is not valid, only letters, diacritics and apostrophe allowed");
