@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 2.0.5
+ * @marketto/codice-fiscale-utils 2.1.0
  * Copyright (c) 2019-2021, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  * ============================================================
@@ -93,11 +93,15 @@ function generatorWrapper(generator) {
  * Handler for cities and countries Dataset
  */
 class BelfioreConnector {
-    constructor({ activeDate, codeMatcher, data, licenses, province, sources, }) {
+    constructor({ fromDate, toDate, codeMatcher, data, licenses, province, sources, }) {
         if (codeMatcher && province) {
             throw new Error("Both codeMatcher and province were provided to Bolfiore, only one is allowed");
         }
-        this.activeDate = activeDate;
+        if (toDate && !fromDate) {
+            throw new Error("Parameter fromDate is mandatory passing toDate");
+        }
+        this.fromDate = fromDate;
+        this.toDate = toDate;
         this.codeMatcher = codeMatcher;
         this.data = data;
         this.licenses = licenses;
@@ -254,7 +258,16 @@ class BelfioreConnector {
      * @public
      */
     active(date = moment__default["default"]()) {
-        return new BelfioreConnector(Object.assign(Object.assign({}, this.config), { activeDate: moment__default["default"](date) }));
+        return new BelfioreConnector(Object.assign(Object.assign({}, this.config), { fromDate: moment__default["default"](date), toDate: moment__default["default"](date) }));
+    }
+    /**
+     * Returns a Proxied version of Belfiore which filters results by given date ahead
+     * @param date Target date to filter places active only for the given date
+     * @returns Belfiore instance filtered by active date
+     * @public
+     */
+    from(date = moment__default["default"]()) {
+        return new BelfioreConnector(Object.assign(Object.assign({}, this.config), { fromDate: moment__default["default"](date) }));
     }
     /**
      * Returns a Belfiore instance filtered by the given province
@@ -281,13 +294,14 @@ class BelfioreConnector {
         return new BelfioreConnector(Object.assign(Object.assign({}, this.config), { codeMatcher: BelfioreConnector.COUNTRY_CODE_MATCHER, province: undefined }));
     }
     get config() {
-        const { activeDate, codeMatcher, data, licenses, sources, } = this;
+        const { codeMatcher, data, fromDate, licenses, sources, toDate, } = this;
         return {
-            activeDate,
             codeMatcher,
             data,
+            fromDate,
             licenses,
             sources,
+            toDate,
         };
     }
     *scanDataSourceIndex(dataSource, matcher) {
@@ -350,9 +364,8 @@ class BelfioreConnector {
             .substr(dateIndex, 4) || "0").startOf("day");
         const expirationDate = BelfioreConnector.decodeDate((resourceData.expirationDate || "")
             .substr(dateIndex, 4) || "2qn13").endOf("day");
-        if (this.activeDate &&
-            (resourceData.creationDate && this.activeDate.isBefore(creationDate, "day") ||
-                resourceData.expirationDate && this.activeDate.isAfter(expirationDate, "day"))) {
+        if ((this.fromDate && resourceData.expirationDate && this.fromDate.isAfter(expirationDate, "day")) ||
+            (this.toDate && resourceData.creationDate && this.toDate.isBefore(creationDate, "day"))) {
             return null;
         }
         const name = BelfioreConnector.nameByIndex(resourceData.name, index);
@@ -915,11 +928,8 @@ class Parser {
             const birthDate = this.cfToBirthDate(codiceFiscale);
             if (birthDate) {
                 let validityCheck = true;
-                if (creationDate) {
-                    validityCheck = moment__default["default"](birthDate).isSameOrAfter(moment__default["default"](creationDate));
-                }
-                if (validityCheck && expirationDate) {
-                    validityCheck = moment__default["default"](birthDate).isSameOrBefore(moment__default["default"](expirationDate));
+                if (expirationDate) {
+                    validityCheck = moment__default["default"](expirationDate).isSameOrAfter(birthDate);
                 }
                 if (!validityCheck) {
                     return null;
@@ -1101,7 +1111,7 @@ class Parser {
             placeFinder = placeFinder.byProvince(province);
         }
         if (birthDate && placeFinder) {
-            placeFinder = placeFinder.active(birthDate);
+            placeFinder = placeFinder.from(birthDate);
         }
         if (placeFinder) {
             const foundPlace = this.parsePlace(name, placeFinder);
@@ -1710,7 +1720,7 @@ class Validator {
     static birthDatePlaceMatch(birthDate, birthPlace) {
         const parsedPlace = Parser.parsePlace(birthPlace);
         return this.isBirthDateValid(birthDate) && !!parsedPlace &&
-            !!Belfiore.active(birthDate)[parsedPlace.belfioreCode];
+            !!Belfiore.from(birthDate)[parsedPlace.belfioreCode];
     }
     static birthDatePlaceMismatch(birthDate, birthPlace) {
         const parsedPlace = Parser.parsePlace(birthPlace);
