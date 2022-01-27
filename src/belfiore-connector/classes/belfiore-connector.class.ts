@@ -158,12 +158,14 @@ export default class BelfioreConnector {
     private data: IBelfioreDbData[];
     private licenses: IBelfioreDbLicense[];
     private sources: string[];
-    private activeDate: Moment | undefined;
+    private toDate: Moment | undefined;
+    private fromDate: Moment | undefined;
     private codeMatcher: RegExp | undefined;
     private province: string | undefined;
 
     constructor({
-        activeDate,
+        fromDate,
+        toDate,
         codeMatcher,
         data,
         licenses,
@@ -174,7 +176,12 @@ export default class BelfioreConnector {
             throw new Error("Both codeMatcher and province were provided to Bolfiore, only one is allowed");
         }
 
-        this.activeDate = activeDate;
+        if (toDate && !fromDate) {
+            throw new Error("Parameter fromDate is mandatory passing toDate");
+        }
+
+        this.fromDate = fromDate;
+        this.toDate = toDate;
         this.codeMatcher = codeMatcher;
         this.data = data;
         this.licenses = licenses;
@@ -227,7 +234,21 @@ export default class BelfioreConnector {
     public active(date: MultiFormatDate = moment()): BelfioreConnector {
         return new BelfioreConnector({
             ...this.config,
-            activeDate: moment(date),
+            fromDate: moment(date),
+            toDate: moment(date),
+        });
+    }
+
+    /**
+     * Returns a Proxied version of Belfiore which filters results by given date ahead
+     * @param date Target date to filter places active only for the given date
+     * @returns Belfiore instance filtered by active date
+     * @public
+     */
+     public from(date: MultiFormatDate = moment()): BelfioreConnector {
+        return new BelfioreConnector({
+            ...this.config,
+            fromDate: moment(date),
         });
     }
 
@@ -272,18 +293,20 @@ export default class BelfioreConnector {
 
     private get config(): BelfioreConnectorConfig {
         const {
-            activeDate,
             codeMatcher,
             data,
+            fromDate,
             licenses,
             sources,
+            toDate,
         } = this;
         return {
-            activeDate,
             codeMatcher,
             data,
+            fromDate,
             licenses,
             sources,
+            toDate,
         } as BelfioreConnectorConfig;
     }
 
@@ -356,11 +379,8 @@ export default class BelfioreConnector {
         const expirationDate = BelfioreConnector.decodeDate((resourceData.expirationDate || "")
             .substr(dateIndex, 4) || "2qn13").endOf("day");
         if (
-            this.activeDate &&
-            (
-                resourceData.creationDate && this.activeDate.isBefore(creationDate, "day") ||
-                resourceData.expirationDate && this.activeDate.isAfter(expirationDate, "day")
-            )
+            (this.fromDate && resourceData.expirationDate && this.fromDate.isAfter(expirationDate, "day")) ||
+            (this.toDate && resourceData.creationDate && this.toDate.isBefore(creationDate, "day"))
         ) {
             return null;
         }

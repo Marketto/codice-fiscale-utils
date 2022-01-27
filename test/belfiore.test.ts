@@ -259,6 +259,17 @@ describe("Belfiore", () => {
         });
     });
 
+    describe("Belfiore.from", () => {
+        describe("Belfiore.from()[belfioreCode]", () => {
+            it("Should return FIUME for D620 from 1933", () => {
+                Belfiore.from([1933]).D620.name.should.be.equalIgnoreCase("FIUME");
+            });
+            it("Should find Federazione Russa from 1933", () => {
+                Belfiore.from([1933]).Z154.name.should.be.equalIgnoreCase("Federazione Russa");
+            });
+        });
+    });
+
     /*
     describe("Belfiore.nameByIndex", () => {
         it("Should return Bologna @ 0", () => {

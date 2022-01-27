@@ -1,3 +1,4 @@
+import moment from "moment";
 import {
     Belfiore,
     BelfioreConnector,
@@ -59,7 +60,7 @@ export default class Validator {
     public static birthDatePlaceMatch(birthDate: MultiFormatDate, birthPlace: BelfiorePlace | string): boolean {
         const parsedPlace = Parser.parsePlace(birthPlace);
         return this.isBirthDateValid(birthDate) && !!parsedPlace &&
-            !!Belfiore.active(birthDate)[parsedPlace.belfioreCode];
+        !!Belfiore.from(birthDate)[parsedPlace.belfioreCode];
     }
     public static birthDatePlaceMismatch(birthDate: MultiFormatDate, birthPlace: BelfiorePlace | string): boolean {
         const parsedPlace = Parser.parsePlace(birthPlace);

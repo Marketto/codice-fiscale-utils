@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 2.1.0 - (2022-01-26)
+* Added Belfiore.from
+* Changed CF place/date validation logics: CF might be generated after owner's birth date
+
 ### 2.0.5 - (2022-01-15)
 * Fixed isolated modules
 * CF rules for voewls reviewed

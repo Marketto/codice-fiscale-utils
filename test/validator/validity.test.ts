@@ -1,5 +1,4 @@
 import { Belfiore, Validator } from "../../src";
-import { expect } from "../utils";
 
 export default () => {
     describe("codiceFiscale", () => {

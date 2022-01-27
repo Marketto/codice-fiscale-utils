@@ -268,11 +268,8 @@ export default class Parser {
             const birthDate = this.cfToBirthDate(codiceFiscale);
             if (birthDate) {
                 let validityCheck = true;
-                if (creationDate) {
-                    validityCheck = moment(birthDate).isSameOrAfter(moment(creationDate));
-                }
-                if (validityCheck && expirationDate) {
-                    validityCheck = moment(birthDate).isSameOrBefore(moment(expirationDate));
+                if (expirationDate) {
+                    validityCheck = moment(expirationDate).isSameOrAfter(birthDate);
                 }
                 if (!validityCheck) {
                     return null;
@@ -497,7 +494,7 @@ export default class Parser {
             placeFinder = placeFinder.byProvince(province);
         }
         if (birthDate && placeFinder) {
-            placeFinder = placeFinder.active(birthDate);
+            placeFinder = placeFinder.from(birthDate);
         }
         if (placeFinder) {
             const foundPlace: BelfiorePlace | null = this.parsePlace(name, placeFinder);

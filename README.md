@@ -484,9 +484,16 @@ Validator.isBirthPlaceValid("H501"); //true
 Validator.isBirthPlaceValid(""); //false
 Validator.isBirthPlaceValid("Moon"); //false
 //With scoped BelfioreConnector
-//By active places
+//By places active at the given date
 Validator.isBirthPlaceValid("Unione sovietica", Belfiore.active()); //false
+Validator.isBirthPlaceValid("Federazione Russa", Belfiore.active()); //true
 Validator.isBirthPlaceValid("Unione sovietica", Belfiore.active([1980])); //true
+Validator.isBirthPlaceValid("Federazione Russa", Belfiore.active([1980])); //false
+//By places active from a given date
+Validator.isBirthPlaceValid("Unione sovietica", Belfiore.from()); //false
+Validator.isBirthPlaceValid("Federazione Russa", Belfiore.from()); //true
+Validator.isBirthPlaceValid("Unione sovietica", Belfiore.from([1980])); //true
+Validator.isBirthPlaceValid("Federazione Russa", Belfiore.from([1980])); //true
 //By cities
 Validator.isBirthPlaceValid("Francia", Belfiore.cities); //false
 Validator.isBirthPlaceValid("A662", Belfiore.cities) //true
@@ -504,9 +511,16 @@ Validator.isBirthPlaceInvalid("H501"); //false
 Validator.isBirthPlaceInvalid(""); //false
 Validator.isBirthPlaceInvalid("Moon"); //true
 //With scoped BelfioreConnector
-//By active places
+//By places active at the given date
 Validator.isBirthPlaceInvalid("Unione sovietica", Belfiore.active()); //true
+Validator.isBirthPlaceInvalid("Federazione Russa", Belfiore.active()); //false
 Validator.isBirthPlaceInvalid("Unione sovietica", Belfiore.active([1980])); //false
+Validator.isBirthPlaceInvalid("Federazione Russa", Belfiore.active([1980])); //true
+//By places active from a given date
+Validator.isBirthPlaceInvalid("Unione sovietica", Belfiore.from()); //true
+Validator.isBirthPlaceInvalid("Federazione Russa", Belfiore.from()); //false
+Validator.isBirthPlaceInvalid("Unione sovietica", Belfiore.from([1980])); //false
+Validator.isBirthPlaceInvalid("Federazione Russa", Belfiore.from([1980])); //false
 //By cities
 Validator.isBirthPlaceInvalid("Francia", Belfiore.cities); //true
 Validator.isBirthPlaceInvalid("A662", Belfiore.cities); //false
