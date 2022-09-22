@@ -1,12 +1,12 @@
 {
-  "name": "@marketto/codice-fiscale-utils",
-  "version": "2.1.0",
+  "name": "@holczhabyt/codice-fiscale-utils",
+  "version": "2.2.0",
   "description": "TS & JS utilities to handle Italian Codice Fiscale",
   "main": "dist/codice-fiscale-utils.js",
   "module": "dist/codice-fiscale-utils.mjs",
   "typings": "src/index.ts",
   "scripts": {
-    "release": "npm audit fix & npm run lint-fix && npm run update-lovs && npm run test && npm run coverage && npm run docs && npm run build",
+    "release": "npm audit fix & npm run lint-fix && npm run update-lovs && npm run test && npm run docs && npm run build",
     "build": "npx rimraf ./dist & npx rollup -c",
     "lint": "npx tslint -c tslint.json \"src/**/*.ts\"",
     "lint-fix": "npx tslint -c tslint.json \"src/**/*.ts\" --fix",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Marketto/codice-fiscale-utils.git"
+    "url": "git+https://github.com/habyt/codice-fiscale-utils.git"
   },
   "keywords": [
     "CF",
@@ -64,6 +64,7 @@
     "lodash": "^4.17.21",
     "merge-stream": "^2.0.0",
     "mocha": "^9.1.4",
+    "moment": "^2.24.0",
     "nyc": "^15.1.0",
     "read-excel-file": "^5.2.25",
     "relcov": "^1.0.6",
