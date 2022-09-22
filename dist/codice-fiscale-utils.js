@@ -13,12 +13,11 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var moment = require('moment');
+var dateFns = require('date-fns');
 var DiacriticRemover = require('@marketto/diacritic-remover');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
-var moment__default = /*#__PURE__*/_interopDefaultLegacy(moment);
 var DiacriticRemover__default = /*#__PURE__*/_interopDefaultLegacy(DiacriticRemover);
 
 const CITIES_COUNTRIES = {
@@ -82,6 +81,18 @@ const CITIES_COUNTRIES = {
         "https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.csv",
         "https://raw.githubusercontent.com/italia/anpr/master/src/archivi/ANPR_archivio_comuni.csv"
     ]
+};
+
+const multiFormatDateToDate = (multiFormatDate) => {
+    if (typeof multiFormatDate === "string") {
+        return dateFns.parseISO(multiFormatDate);
+    }
+    else if (multiFormatDate instanceof Date) {
+        return multiFormatDate;
+    }
+    else {
+        return new Date(Date.UTC(multiFormatDate[0], multiFormatDate[1] || 0, multiFormatDate[2] || 1));
+    }
 };
 
 function generatorWrapper(generator) {
@@ -183,13 +194,14 @@ class BelfioreConnector {
         return `${char}${numValue.padStart(3, "0")}`;
     }
     /**
-     * Converst Base 32 number of days since 01/01/1861 to Moment instance
+     * Converst Base 32 number of days since 01/01/1861 to Date instance
      * @param base32daysFrom1861 Base 32 number of days from 1861-01-01
-     * @returns Moment instance date
+     * @returns Date instance date
      */
     static decodeDate(base32daysFrom1861) {
         const italyBirthDatePastDays = parseInt(base32daysFrom1861, 32);
-        return moment__default["default"](this.ITALY_KINGDOM_BIRTHDATE).add(italyBirthDatePastDays, "days");
+        const italyBirthDate = dateFns.parseISO(this.ITALY_KINGDOM_BIRTHDATE);
+        return dateFns.add(italyBirthDate, { days: italyBirthDatePastDays });
     }
     /**
      * Retrieve string at index posizion
@@ -257,8 +269,9 @@ class BelfioreConnector {
      * @returns Belfiore instance filtered by active date
      * @public
      */
-    active(date = moment__default["default"]()) {
-        return new BelfioreConnector(Object.assign(Object.assign({}, this.config), { fromDate: moment__default["default"](date), toDate: moment__default["default"](date) }));
+    active(date) {
+        const dateOrNow = date ? multiFormatDateToDate(date) : new Date();
+        return new BelfioreConnector(Object.assign(Object.assign({}, this.config), { fromDate: dateOrNow, toDate: dateOrNow }));
     }
     /**
      * Returns a Proxied version of Belfiore which filters results by given date ahead
@@ -266,8 +279,9 @@ class BelfioreConnector {
      * @returns Belfiore instance filtered by active date
      * @public
      */
-    from(date = moment__default["default"]()) {
-        return new BelfioreConnector(Object.assign(Object.assign({}, this.config), { fromDate: moment__default["default"](date) }));
+    from(date) {
+        const dateOrNow = date ? multiFormatDateToDate(date) : new Date();
+        return new BelfioreConnector(Object.assign(Object.assign({}, this.config), { fromDate: dateOrNow }));
     }
     /**
      * Returns a Belfiore instance filtered by the given province
@@ -360,12 +374,14 @@ class BelfioreConnector {
             return null;
         }
         const dateIndex = index * 4;
-        const creationDate = BelfioreConnector.decodeDate((resourceData.creationDate || "")
-            .substr(dateIndex, 4) || "0").startOf("day");
-        const expirationDate = BelfioreConnector.decodeDate((resourceData.expirationDate || "")
-            .substr(dateIndex, 4) || "2qn13").endOf("day");
-        if ((this.fromDate && resourceData.expirationDate && this.fromDate.isAfter(expirationDate, "day")) ||
-            (this.toDate && resourceData.creationDate && this.toDate.isBefore(creationDate, "day"))) {
+        const creationDate = dateFns.startOfDay(BelfioreConnector.decodeDate((resourceData.creationDate || "")
+            .substr(dateIndex, 4) || "0"));
+        const expirationDate = dateFns.endOfDay(BelfioreConnector.decodeDate((resourceData.expirationDate || "")
+            .substr(dateIndex, 4) || "2qn13"));
+        if ((this.fromDate && resourceData.expirationDate &&
+            dateFns.isAfter(dateFns.startOfDay(this.fromDate), dateFns.startOfDay(expirationDate))) ||
+            (this.toDate && resourceData.creationDate &&
+                dateFns.isBefore(dateFns.startOfDay(this.toDate), dateFns.startOfDay(creationDate)))) {
             return null;
         }
         const name = BelfioreConnector.nameByIndex(resourceData.name, index);
@@ -375,9 +391,9 @@ class BelfioreConnector {
         const dataSource = this.licenses[parseInt(licenseIndex, 2)];
         const location = {
             belfioreCode,
-            creationDate: creationDate.toDate(),
+            creationDate,
             dataSource,
-            expirationDate: expirationDate.toDate(),
+            expirationDate,
             name,
         };
         const isCountry = belfioreCode[0] === "Z";
@@ -471,31 +487,33 @@ var dateMatcher_const = /*#__PURE__*/Object.freeze({
 class DateUtils {
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
-     * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
+     * @param date Date instance, ISO8601 date string or array of numbers [year, month, day]
      * @returns Parsed Date or null if not valid
      */
     static parseDate(date) {
         if (!(date instanceof Date ||
-            date instanceof moment__default["default"] ||
             typeof date === "string" && new RegExp(`^(?:${ISO8601_DATE_TIME})$`).test(date) ||
             Array.isArray(date) && date.length && !date.some((value) => typeof value !== "number" || isNaN(value)))) {
             return null;
         }
         try {
-            let parsedDate;
+            let parsedDate = null;
             if (Array.isArray(date)) {
                 const [year, month = 0, day = 1] = date;
                 if (month >= 0 && month <= 11 && day > 0 && day <= 31) {
-                    parsedDate = moment__default["default"](Date.UTC(year, month || 0, day || 1));
+                    parsedDate = new Date(Date.UTC(year, month, day));
                 }
                 else {
                     return null;
                 }
             }
-            else {
-                parsedDate = moment__default["default"](date);
+            else if (typeof date === "string") {
+                parsedDate = dateFns.parseISO(date);
             }
-            return parsedDate.isValid() ? parsedDate.toDate() : null;
+            else if (date instanceof Date) {
+                parsedDate = date;
+            }
+            return dateFns.isValid(parsedDate) ? parsedDate : null;
         }
         catch (err) {
             return null;
@@ -855,9 +873,10 @@ class Parser {
         if (isNaN(birthYear)) {
             return null;
         }
-        const current2DigitsYear = parseInt(moment__default["default"]().format("YY"), 10);
+        const now = new Date();
+        const current2DigitsYear = dateFns.getYear(now) % 100;
         const century = (birthYear > current2DigitsYear ? 1 : 0) * 100;
-        return moment__default["default"]().subtract(current2DigitsYear - birthYear + century, "years").year();
+        return dateFns.getYear(dateFns.subYears(now, current2DigitsYear - birthYear + century));
     }
     /**
      * Parse birth month information
@@ -929,7 +948,7 @@ class Parser {
             if (birthDate) {
                 let validityCheck = true;
                 if (expirationDate) {
-                    validityCheck = moment__default["default"](expirationDate).isSameOrAfter(birthDate);
+                    validityCheck = dateFns.isEqual(expirationDate, birthDate) || dateFns.isAfter(expirationDate, birthDate);
                 }
                 if (!validityCheck) {
                     return null;
@@ -1056,11 +1075,11 @@ class Parser {
         if (!year || year < 1861 || [month, day].some((param) => typeof param !== "number")) {
             return null;
         }
-        const date = moment__default["default"](Date.UTC(year, month || 0, day || 1));
-        if (!date.isValid() || date.year() !== year || date.month() !== month || date.date() !== day) {
+        const date = new Date(Date.UTC(year, month || 0, day || 1));
+        if (!dateFns.isValid(date) || dateFns.getYear(date) !== year || dateFns.getMonth(date) !== month || dateFns.getDate(date) !== day) {
             return null;
         }
-        return date.toDate();
+        return date;
     }
     static parsePlace(place, scopedBelfioreConnector = Belfiore) {
         let verifiedBirthPlace;
@@ -1077,7 +1096,7 @@ class Parser {
     }
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
-     * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
+     * @param date Date instance, ISO8601 date string or array of numbers [year, month, day]
      * @param gender Gender enum value
      * @returns Birth date and Gender CF code
      */
@@ -1522,7 +1541,8 @@ class Pattern {
             const parsedDate = Parser.cfToBirthDate(codiceFiscale);
             if (parsedDate) {
                 const dateIso8601 = parsedDate.toJSON();
-                if (moment__default["default"]().diff(moment__default["default"](parsedDate), "y") < 50) {
+                const now = new Date();
+                if ((dateFns.getYear(now) - dateFns.getYear(parsedDate)) < 50) {
                     const century = parseInt(dateIso8601.substr(0, 2), 10);
                     const centuries = [
                         century - 1,
@@ -1626,7 +1646,7 @@ class CFMismatchValidator {
             const parsedCfDate = Parser.cfToBirthDate(this.codiceFiscale);
             const parsedDate = DateUtils.parseDate(birthDate);
             if (parsedCfDate && parsedDate) {
-                return moment__default["default"](parsedCfDate).isSame(parsedDate, "d");
+                return dateFns.isSameDay(parsedCfDate, parsedDate);
             }
         }
         return false;
