@@ -1,4 +1,3 @@
-import moment, { Moment } from "moment";
 import { DateUtils } from "../../src/";
 import { expect } from "../utils";
 
@@ -15,9 +14,6 @@ export default () => {
         it("Date", () => {
             expect(DateUtils.parseDate(new Date())).to.be.instanceOf(Date);
         });
-        it("Moment", () => {
-            expect(DateUtils.parseDate(moment())).to.be.instanceOf(Date);
-        });
         it("Array of int", () => {
             expect(DateUtils.parseDate([2011, 9, 22])).to.be.instanceOf(Date);
             expect(DateUtils.parseDate([2011, 9])).to.be.instanceOf(Date);
@@ -27,7 +23,6 @@ export default () => {
             expect(DateUtils.parseDate("@åaf")).to.be.null;
             expect(DateUtils.parseDate("123")).to.be.null;
             expect(DateUtils.parseDate({} as Date)).to.be.null;
-            expect(DateUtils.parseDate({} as Moment)).to.be.null;
             expect(DateUtils.parseDate(null)).to.be.null;
             expect(DateUtils.parseDate([NaN, NaN, NaN])).to.be.null;
             expect(DateUtils.parseDate([])).to.be.null;

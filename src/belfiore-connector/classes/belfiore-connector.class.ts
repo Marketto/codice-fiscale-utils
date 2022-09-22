@@ -1,5 +1,6 @@
-import moment, { Moment } from "moment";
+import { add, endOfDay, isAfter, isBefore, parseISO, startOfDay} from "date-fns";
 import { MultiFormatDate } from "../../date-utils";
+import { multiFormatDateToDate } from "../../date-utils/multi-format-date.type";
 import generatorWrapper from "../../functions/generator-wrapper.function";
 import IGeneratorWrapper from "../../interfaces/generator-wrapper.interface";
 import IBelfioreCity from "../interfaces/belfiore-city.interface";
@@ -112,13 +113,14 @@ export default class BelfioreConnector {
     }
 
     /**
-     * Converst Base 32 number of days since 01/01/1861 to Moment instance
+     * Converst Base 32 number of days since 01/01/1861 to Date instance
      * @param base32daysFrom1861 Base 32 number of days from 1861-01-01
-     * @returns Moment instance date
+     * @returns Date instance date
      */
-    private static decodeDate(base32daysFrom1861: string): Moment {
+    private static decodeDate(base32daysFrom1861: string): Date {
         const italyBirthDatePastDays = parseInt(base32daysFrom1861, 32);
-        return moment(this.ITALY_KINGDOM_BIRTHDATE).add(italyBirthDatePastDays, "days");
+        const italyBirthDate = parseISO(this.ITALY_KINGDOM_BIRTHDATE);
+        return add(italyBirthDate, { days: italyBirthDatePastDays });
     }
 
     /**
@@ -158,8 +160,8 @@ export default class BelfioreConnector {
     private data: IBelfioreDbData[];
     private licenses: IBelfioreDbLicense[];
     private sources: string[];
-    private toDate: Moment | undefined;
-    private fromDate: Moment | undefined;
+    private toDate: Date | undefined;
+    private fromDate: Date | undefined;
     private codeMatcher: RegExp | undefined;
     private province: string | undefined;
 
@@ -231,11 +233,12 @@ export default class BelfioreConnector {
      * @returns Belfiore instance filtered by active date
      * @public
      */
-    public active(date: MultiFormatDate = moment()): BelfioreConnector {
+    public active(date?: MultiFormatDate): BelfioreConnector {
+        const dateOrNow = date ? multiFormatDateToDate(date) : new Date();
         return new BelfioreConnector({
             ...this.config,
-            fromDate: moment(date),
-            toDate: moment(date),
+            fromDate: dateOrNow,
+            toDate: dateOrNow,
         });
     }
 
@@ -245,10 +248,11 @@ export default class BelfioreConnector {
      * @returns Belfiore instance filtered by active date
      * @public
      */
-     public from(date: MultiFormatDate = moment()): BelfioreConnector {
+     public from(date?: MultiFormatDate): BelfioreConnector {
+        const dateOrNow = date ? multiFormatDateToDate(date) : new Date();
         return new BelfioreConnector({
             ...this.config,
-            fromDate: moment(date),
+            fromDate: dateOrNow,
         });
     }
 
@@ -374,13 +378,17 @@ export default class BelfioreConnector {
         }
 
         const dateIndex = index * 4;
-        const creationDate = BelfioreConnector.decodeDate((resourceData.creationDate || "")
-            .substr(dateIndex, 4) || "0").startOf("day");
-        const expirationDate = BelfioreConnector.decodeDate((resourceData.expirationDate || "")
-            .substr(dateIndex, 4) || "2qn13").endOf("day");
+        const creationDate = startOfDay(BelfioreConnector.decodeDate((resourceData.creationDate || "")
+        .substr(dateIndex, 4) || "0"));
+        const expirationDate = endOfDay(BelfioreConnector.decodeDate((resourceData.expirationDate || "")
+        .substr(dateIndex, 4) || "2qn13"));
         if (
-            (this.fromDate && resourceData.expirationDate && this.fromDate.isAfter(expirationDate, "day")) ||
-            (this.toDate && resourceData.creationDate && this.toDate.isBefore(creationDate, "day"))
+            (this.fromDate && resourceData.expirationDate &&
+                isAfter(startOfDay(this.fromDate), startOfDay(expirationDate))
+            ) ||
+            (this.toDate && resourceData.creationDate &&
+                isBefore(startOfDay(this.toDate), startOfDay(creationDate))
+            )
         ) {
             return null;
         }
@@ -392,9 +400,9 @@ export default class BelfioreConnector {
 
         const location: IBelfioreCommonPlace = {
             belfioreCode,
-            creationDate: creationDate.toDate(),
+            creationDate,
             dataSource,
-            expirationDate: expirationDate.toDate(),
+            expirationDate,
             name,
         };
         const isCountry = belfioreCode[0] === "Z";

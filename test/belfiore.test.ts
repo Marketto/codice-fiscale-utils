@@ -235,6 +235,7 @@ describe("Belfiore", () => {
     describe("Belfiore.active", () => {
         describe("Belfiore.active()[belfioreCode]", () => {
             it("Should return Bologna for A944", () => {
+                const t = Belfiore.active().A944;
                 Belfiore.active().A944.name.should.be.equalIgnoreCase("BOLOGNA");
             });
             it("Should return null for D620 today", () => {

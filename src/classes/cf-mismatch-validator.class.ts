@@ -1,4 +1,4 @@
-import moment from "moment";
+import { isSameDay } from "date-fns";
 import { BelfiorePlace } from "../belfiore-connector";
 import {
     CRC_OFFSET,
@@ -86,7 +86,7 @@ export default class CFMismatchValidator {
             const parsedCfDate = Parser.cfToBirthDate(this.codiceFiscale);
             const parsedDate = DateUtils.parseDate(birthDate);
             if (parsedCfDate && parsedDate) {
-                return moment(parsedCfDate).isSame(parsedDate, "d");
+                return isSameDay(parsedCfDate, parsedDate);
             }
         }
         return false;

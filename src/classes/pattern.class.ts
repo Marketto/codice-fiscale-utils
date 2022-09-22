@@ -1,5 +1,5 @@
 import DiacriticRemover from "@marketto/diacritic-remover";
-import moment from "moment";
+import { getYear } from "date-fns";
 import {
     INVALID_DATE,
     INVALID_DAY,
@@ -363,7 +363,8 @@ export default class Pattern {
             const parsedDate = Parser.cfToBirthDate(codiceFiscale);
             if (parsedDate) {
                 const dateIso8601: string = parsedDate.toJSON();
-                if (moment().diff(moment(parsedDate), "y") < 50) {
+                const now = new Date();
+                if ((getYear(now) - getYear(parsedDate)) < 50) {
                     const century: number = parseInt(dateIso8601.substr(0, 2), 10);
                     const centuries: string[] = [
                         century - 1,

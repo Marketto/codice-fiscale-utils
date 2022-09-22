@@ -1,5 +1,5 @@
 import DiacriticRemover from "@marketto/diacritic-remover";
-import moment from "moment";
+import { getDate, getDay, getMonth, getYear, isAfter, isDate, isEqual, isValid, sub, subYears } from "date-fns";
 import { Belfiore, BelfiorePlace } from "../belfiore-connector";
 import BelfioreConnector from "../belfiore-connector/classes/belfiore-connector.class";
 import {
@@ -180,11 +180,11 @@ export default class Parser {
         if (isNaN(birthYear)) {
             return null;
         }
+        const now = new Date();
 
-        const current2DigitsYear: number = parseInt(moment().format("YY"), 10);
-
+        const current2DigitsYear: number = getYear(now) % 100;
         const century: number = (birthYear > current2DigitsYear ? 1 : 0) * 100;
-        return moment().subtract(current2DigitsYear - birthYear + century, "years").year();
+        return getYear(subYears(now, current2DigitsYear - birthYear + century));
     }
 
     /**
@@ -269,7 +269,7 @@ export default class Parser {
             if (birthDate) {
                 let validityCheck = true;
                 if (expirationDate) {
-                    validityCheck = moment(expirationDate).isSameOrAfter(birthDate);
+                    validityCheck = isEqual(expirationDate, birthDate) || isAfter(expirationDate, birthDate);
                 }
                 if (!validityCheck) {
                     return null;
@@ -419,11 +419,11 @@ export default class Parser {
         if (!year || year < 1861 || [month, day].some((param) => typeof param !== "number") ) {
             return null;
         }
-        const date = moment(Date.UTC(year, month || 0, day || 1));
-        if (!date.isValid() || date.year() !== year || date.month() !== month || date.date() !== day) {
+        const date = new Date(Date.UTC(year, month || 0, day || 1));
+        if (!isValid(date) || getYear(date) !== year || getMonth(date) !== month || getDate(date) !== day) {
             return null;
         }
-        return date.toDate();
+        return date;
     }
 
     public static parsePlace(
@@ -443,7 +443,7 @@ export default class Parser {
 
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
-     * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
+     * @param date Date instance, ISO8601 date string or array of numbers [year, month, day]
      * @param gender Gender enum value
      * @returns Birth date and Gender CF code
      */
@@ -468,7 +468,7 @@ export default class Parser {
      */
     /**
      * Parse a Date and Gender information to create Date/Gender CF part
-     * @param birthDate Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
+     * @param birthDate Date instance, ISO8601 date string or array of numbers [year, month, day]
      * @param cityOrCountryName City or Country name
      * @param provinceId Province code for cities
      * @returns Matching place belfiore code, if only once is matching criteria
