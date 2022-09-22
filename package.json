@@ -40,7 +40,7 @@
   "homepage": "https://github.com/Marketto/codice-fiscale-utils#readme",
   "dependencies": {
     "@marketto/diacritic-remover": "^1.0.7",
-    "moment": "^2.24.0"
+    "date-fns": "^2.29.3"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
