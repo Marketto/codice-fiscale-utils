@@ -15,7 +15,7 @@ const baseConf = {
         exports: "named",
         globals: {
             "@marketto/diacritic-remover": "DiacriticRemover",
-            "moment": "moment",
+            "date-fns": "date-fns",
         },
         name: "CodiceFiscaleUtils",
         sourcemap: true,
