@@ -1,19 +1,15 @@
 # codice-fiscale-utils
+
 ***The Final and definitive solution to handle the Italian Tax Code***
 
-[![NPM Version](https://img.shields.io/npm/v/@marketto/codice-fiscale-utils.svg)](https://www.npmjs.com/package/@marketto/codice-fiscale-utils)
-[![NPM Downloads](https://img.shields.io/npm/dm/@marketto/codice-fiscale-utils.svg)](https://www.npmjs.com/package/@marketto/codice-fiscale-utils)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils?ref=badge_shield)
-[![Dependency status](https://david-dm.org/Marketto/codice-fiscale-utils.svg)](https://david-dm.org/Marketto/codice-fiscale-utils)
-[![Dev dependency status](https://david-dm.org/Marketto/codice-fiscale-utils/dev-status.svg)](https://david-dm.org/Marketto/codice-fiscale-utils?type=dev)
-[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=Marketto_codice-fiscale-utils&metric=alert_status)](https://sonarcloud.io/dashboard/index/Marketto_codice-fiscale-utils)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Marketto_codice-fiscale-utils&metric=coverage)](https://sonarcloud.io/dashboard/index/Marketto_codice-fiscale-utils)
-[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=Marketto_codice-fiscale-utils&metric=sqale_rating)](https://sonarcloud.io/dashboard/index/Marketto_codice-fiscale-utils)
-[![Reliability](https://sonarcloud.io/api/project_badges/measure?project=Marketto_codice-fiscale-utils&metric=reliability_rating)](https://sonarcloud.io/dashboard/index/Marketto_codice-fiscale-utils)
-![Build Status](http://ci.marketto.it/buildStatus/icon?job=codice-fiscale-utils)
-[![LICENSE](https://img.shields.io/badge/licese-MIT-gold.svg)](https://github.com/Marketto/codice-fiscale-utils/blob/master/LICENSE)
-[![Blog](https://img.shields.io/badge/blog-marketto-blue.svg)](http://blog.marketto.it)
-[![Buy me a coffee](https://img.shields.io/badge/Ko--fi-donate-blueviolet)](https://ko-fi.com/marketto)
+***This is a fork of the original package that is using `date-fn`s instead of the `moment.js` for handling dates***
+Eventually it is supposed to the migrated back to the original package (in-progress).
+
+[![NPM Version](https://img.shields.io/npm/v/@habyt/codice-fiscale-utils.svg)](https://www.npmjs.com/package/@habyt/codice-fiscale-utils)
+[![NPM Downloads](https://img.shields.io/npm/dm/@habyt/codice-fiscale-utils.svg)](https://www.npmjs.com/package/@habyt/codice-fiscale-utils)
+[![LICENSE](https://img.shields.io/badge/licese-MIT-gold.svg)](https://github.com/habyt/codice-fiscale-utils/blob/master/LICENSE)
+[![Read the Blog of the original author](https://img.shields.io/badge/blog-marketto-blue.svg)](http://blog.marketto.it)
+[![Buy a coffee to the original author](https://img.shields.io/badge/Ko--fi-donate-blueviolet)](https://ko-fi.com/marketto)
 
 TS utilities to handle Italian Codice Fiscale
 
@@ -38,30 +34,32 @@ TS utilities to handle Italian Codice Fiscale
 
 ## 🔌 INSTALLATION
 ```{r, engine='bash', global_install}
-npm i -s @marketto/codice-fiscale-utils
+npm i -s @habyt/codice-fiscale-utils
 ```
 
 ## 🔧 USAGE
 ### NodeJs
 ```javascript
-const CodiceFiscaleUtils = require('@marketto/codice-fiscale-utils');
+const CodiceFiscaleUtils = require('@habyt/codice-fiscale-utils');
 ```
 ### ES6
 ```javascript
-import CodiceFiscaleUtils from '@marketto/codice-fiscale-utils';
+import CodiceFiscaleUtils from '@habyt/codice-fiscale-utils';
 ```
 ### TypeScript
 ```typescript
-import * as CodiceFiscaleUtils from '@marketto/codice-fiscale-utils';
+import * as CodiceFiscaleUtils from '@habyt/codice-fiscale-utils';
 ```
-### Script
+### Client Side Script
+Note: date-fns is increadibly small, but as it supports treeshaking you can just load the neccessary modules (I will crate a list here soon.)
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="https://unpkg.com/@marketto/diacritic-remover/dist/diacritic-remover.bundle.min.js"></script>
-<script src="https://unpkg.com/@marketto/codice-fiscale-utils/dist/codice-fiscale-utils.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+<script src="https://unpkg.com/@habyt/diacritic-remover/dist/diacritic-remover.bundle.min.js"></script>
+<script src="https://unpkg.com/@habyt/codice-fiscale-utils/dist/codice-fiscale-utils.bundle.min.js"></script>
 ```
 
 ## 💻 DEMO
+As this fork does not change the functionality, you can use the original Demo (make sure to buy a coffee to Marketto)
 ### NodeJS Express
 * [Node/Express Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/express)
 ### VueJs
@@ -234,7 +232,7 @@ Parser.dayGenderToCf(7, 'F'); //47
 Parser.dateGenderToCf([2016, 3, 23], 'M'); //16D23
 Parser.dateGenderToCf('1987-09-22', 'F'); //87P62
 Parser.dateGenderToCf(new Date(2016, 2, 23, 12), 'M'); //16C23
-Parser.dateGenderToCf(moment(1988, 7, 3, 12), 'F'); //88M43
+Parser.dateGenderToCf(new Date(1988, 7, 3, 12), 'F'); //88M43
 ```
 
 #### Parser.placeToCf
