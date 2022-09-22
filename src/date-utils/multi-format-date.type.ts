@@ -9,6 +9,6 @@ export const multiFormatDateToDate = (multiFormatDate: MultiFormatDate): Date =>
     } else if (multiFormatDate instanceof Date) {
         return multiFormatDate;
     } else {
-        return (new Date(Date.UTC(multiFormatDate[0], multiFormatDate[1] || 0, multiFormatDate[2] || 1)));
+        return new Date(Date.UTC(multiFormatDate[0], multiFormatDate[1] || 0, multiFormatDate[2] || 1));
     }
 };
