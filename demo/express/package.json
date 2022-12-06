@@ -10,6 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "@marketto/codice-fiscale-utils": "latest",
-    "express": "^4.17.1"
+    "express": "^4.18.2"
   }
 }
