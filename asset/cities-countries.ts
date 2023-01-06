@@ -54,8 +54,8 @@ const CITIES_COUNTRIES = {
         }
     ],
     "sources": [
-        "https://www.istat.it/it/files//2011/01/Elenco-codici-e-denominazioni-unita-territoriali-estere.zip",
-        "https://www.istat.it/it/files//2011/01/Elenco-Paesi-esteri-cessati.zip",
+        "https://www.istat.it/it/files/2011/01/Elenco-codici-e-denominazioni-unita-territoriali-estere.zip",
+        "https://www.istat.it/it/files/2011/01/Elenco-Paesi-esteri-cessati.zip",
         "https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.csv",
         "https://raw.githubusercontent.com/italia/anpr/master/src/archivi/ANPR_archivio_comuni.csv"
     ]

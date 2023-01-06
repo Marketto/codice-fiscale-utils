@@ -49,7 +49,7 @@ export class PlaceListDeDupe extends Transform {
             try {
                 element = JSON.parse(chunk.toString("utf8"));
             } catch (err) {
-                return callback(err);
+                return callback(err as Error);
             }
         }
         if (element?.belfioreCode) {
@@ -64,7 +64,7 @@ export class PlaceListDeDupe extends Transform {
             ddl = deDupeList(this.storage);
         } catch (err) {
             this.storage.length = 0;
-            return callback(err);
+            return callback(err as Error);
         }
         this.push(ddl);
         this.storage.length = 0;

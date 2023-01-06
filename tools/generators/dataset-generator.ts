@@ -1,7 +1,7 @@
 import csvtojson from "csvtojson";
 import fs from "fs";
 import mergeStream from "merge-stream";
-import request from "request";
+import got from "got";
 import { Duplex, pipeline, Transform, TransformCallback } from "stream";
 import { promisify } from "util";
 import locationResources from "../location-resources.json";
@@ -23,7 +23,8 @@ const uriCfgList: IAssetGeneratorConfigResource[] = (locationResources.resources
     ], []);
 
 const streamList: NodeJS.ReadableStream[] = uriCfgList.map((cfg) => {
-    const cfgPipeline = [request.get(cfg.uri as string) as unknown as NodeJS.ReadableStream];
+    console.log(`Streaming data: ${cfg.uri}`);
+    const cfgPipeline: NodeJS.ReadableStream[] = [got.stream(cfg.uri as string) as unknown as NodeJS.ReadableStream];
     if ((/\.zip$/i).test(cfg.uri as string)) {
         cfgPipeline.push(new PlaceListUnZip({ fileNameMatcher: /\.(?:csv?)$/i}));
     }
@@ -45,6 +46,7 @@ const streamList: NodeJS.ReadableStream[] = uriCfgList.map((cfg) => {
 });
 
 export const exportDataset =  (destFile: string) => new Promise(async (resolve, reject) => {
+    console.log(`Exporting Datasets: ${destFile}`);
     const fileExists = await promisify(fs.exists)(destFile);
     if (fileExists) {
         await promisify(fs.unlink)(destFile);
