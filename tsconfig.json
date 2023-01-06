@@ -18,6 +18,6 @@
   "types": [
     "node",
     "mocha",
-    "chai"         
+    "chai"
   ]
 }

@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 2.1.0
+ * @marketto/codice-fiscale-utils 2.1.1
  * Copyright (c) 2019-2021, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  * ============================================================
@@ -77,8 +77,8 @@ const CITIES_COUNTRIES = {
         }
     ],
     "sources": [
-        "https://www.istat.it/it/files//2011/01/Elenco-codici-e-denominazioni-unita-territoriali-estere.zip",
-        "https://www.istat.it/it/files//2011/01/Elenco-Paesi-esteri-cessati.zip",
+        "https://www.istat.it/it/files/2011/01/Elenco-codici-e-denominazioni-unita-territoriali-estere.zip",
+        "https://www.istat.it/it/files/2011/01/Elenco-Paesi-esteri-cessati.zip",
         "https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.csv",
         "https://raw.githubusercontent.com/italia/anpr/master/src/archivi/ANPR_archivio_comuni.csv"
     ]
@@ -1468,7 +1468,7 @@ class Pattern {
                 }
                 case 2: {
                     const possibilities = [
-                        `${vow[0]}${SEPARATOR_SET}?${cons[0]}${midDiacriticVowelMatcher}${cons[1]}`,
+                        `${vow[0]}${midDiacriticVowelMatcher}${SEPARATOR_SET}?${cons[0]}${midDiacriticVowelMatcher}${cons[1]}`,
                         `${cons[0]}${SEPARATOR_SET}?` + vow.join(`${SEPARATOR_SET}?`) + `${SEPARATOR_SET}?${midDiacriticVowelMatcher}${cons[1]}`,
                         cons.join(`${SEPARATOR_SET}?`) + `${SEPARATOR_SET}?${vow[0]}`,
                     ];

@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 2.1.1 - (2023-01-06)
+* Minor fixes (Pattern.lastName) FirstName with 2 consonants and vowels
+* Cities Countries update
+
 ### 2.1.0 - (2022-01-26)
 * Added Belfiore.from
 * Changed CF place/date validation logics: CF might be generated after owner's birth date

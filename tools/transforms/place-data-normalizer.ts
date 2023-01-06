@@ -1,4 +1,4 @@
-import _, { values } from "lodash";
+import _ from "lodash";
 import moment from "moment";
 import {
     Transform,
@@ -54,7 +54,7 @@ export class PlaceDataNormalizer extends Transform {
             try {
                 element = JSON.parse(chunk.toString("utf8"));
             } catch (err) {
-                return callback(err);
+                return callback(err as Error);
             }
         }
 
