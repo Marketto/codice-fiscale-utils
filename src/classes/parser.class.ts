@@ -285,7 +285,7 @@ export default class Parser {
      */
     public static cfDecode(fiscalCode: string): IPersonalInfo {
         const year = this.cfToBirthYear(fiscalCode) || undefined;
-        const month = this.cfToBirthMonth(fiscalCode) || undefined;
+        const month = this.cfToBirthMonth(fiscalCode) ?? undefined;
         const day = this.cfToBirthDay(fiscalCode) || undefined;
         const date = DateUtils.ymdToDate(year, month, day) || undefined;
         const place = this.cfToBirthPlace(fiscalCode);
