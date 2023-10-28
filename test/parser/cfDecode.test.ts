@@ -15,6 +15,11 @@ export default () => {
             expect(decoded.place).to.be.equalIgnoreCase("CATANIA");
             expect(decoded.omocodeId).to.be.equal(0);
         });
+        it("Parse January as 0", () => {
+            const decoded = Parser.cfDecode("CSZVPM74A59L857A");
+            expect(decoded).to.be.a("object");
+            expect(decoded.month).to.be.equal(0);
+        });
         it("Lowercase mrnmia02e45l219x", () => {
             const decoded = Parser.cfDecode("mrnmia02e45l219x");
             expect(decoded).to.be.a("object");
