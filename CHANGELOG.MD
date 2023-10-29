@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 2.1.2 - (2023-10-29)
+* Minor fixes (cfDecode) month January returns 0 instead of undefined
+* Cities & Countries update
+
 ### 2.1.1 - (2023-01-06)
 * Minor fixes (Pattern.lastName) FirstName with 2 consonants and vowels
 * Cities Countries update
