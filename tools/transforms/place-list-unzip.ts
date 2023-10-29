@@ -26,7 +26,7 @@ export class PlaceListUnZip extends Transform {
         yauzl.fromBuffer(
             this.buffer,
             { lazyEntries: true },
-            (err?: Error | undefined, zipFile?: yauzl.ZipFile): void => {
+            (err?: Error | null, zipFile?: yauzl.ZipFile): void => {
                 if (err || !zipFile) {
                     callback(err);
                     throw err;
@@ -34,7 +34,7 @@ export class PlaceListUnZip extends Transform {
                 zipFile.readEntry();
                 zipFile.on("entry", (entry: Entry) => {
                     if (!/\/$/.test(entry.fileName) && this.fileNameMatcher.test(entry.fileName)) {
-                        zipFile.openReadStream(entry, (entryErr?: Error, readStream?: Readable) => {
+                        zipFile.openReadStream(entry, (entryErr?: Error | null, readStream?: Readable) => {
                             if (entryErr) {
                                 throw entryErr;
                             }
