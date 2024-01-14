@@ -1,8 +1,8 @@
-import moment, { Moment } from "moment";
-import DateDay from "./date-day.type";
+import moment, { type Moment } from "moment";
+import { type DateDay } from "./date-day.type";
 import { ISO8601_DATE_TIME } from "./date-matcher.const";
-import DateMonth from "./date-month.type";
-import MultiFormatDate from "./multi-format-date.type";
+import { type DateMonth } from "./date-month.type";
+import { type MultiFormatDate } from "./multi-format-date.type";
 export default class DateUtils {
 
     /**

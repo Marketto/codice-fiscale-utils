@@ -1,6 +1,6 @@
 import DiacriticRemover from "@marketto/diacritic-remover";
 import moment from "moment";
-import { Belfiore, BelfiorePlace } from "../belfiore-connector";
+import { Belfiore, type BelfiorePlace } from "../belfiore-connector";
 import BelfioreConnector from "../belfiore-connector/classes/belfiore-connector.class";
 import {
     CRC_OFFSET,
@@ -22,12 +22,12 @@ import {
 } from "../const/cf-offsets.const";
 import { CF_FULL_NAME_MATCHER, CF_SURNAME_MATCHER } from "../const/matcher.const";
 import { CONSONANT_LIST, VOWEL_LIST } from "../const/matcher.const";
-import { DateDay, DateMonth, DateUtils, MultiFormatDate } from "../date-utils";
+import { type DateDay, type DateMonth, DateUtils, type MultiFormatDate } from "../date-utils";
 import BirthMonth from "../enums/birth-month.enum";
 import GenderWeight from "../enums/gender-weight.enum";
 import Omocodes from "../enums/omocodes.enum";
-import IPersonalInfo from "../interfaces/personal-info.interface";
-import Genders from "../types/genders.type";
+import type IPersonalInfo from "../interfaces/personal-info.interface";
+import {type Genders} from "../types/genders.type";
 import CheckDigitizer from "./check-digitizer.class";
 import Gender from "./gender.class";
 

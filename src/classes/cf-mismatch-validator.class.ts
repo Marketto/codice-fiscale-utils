@@ -1,5 +1,5 @@
 import moment from "moment";
-import { BelfiorePlace } from "../belfiore-connector";
+import { type BelfiorePlace } from "../belfiore-connector";
 import {
     CRC_OFFSET,
     CRC_SIZE,
@@ -16,9 +16,9 @@ import {
     YEAR_OFFSET,
     YEAR_SIZE,
 } from "../const/cf-offsets.const";
-import { DateUtils, MultiFormatDate } from "../date-utils/";
-import IPersonalInfo from "../interfaces/personal-info.interface";
-import Genders from "../types/genders.type";
+import { DateUtils, type MultiFormatDate } from "../date-utils/";
+import type IPersonalInfo from "../interfaces/personal-info.interface";
+import { type Genders } from "../types/genders.type";
 import CheckDigitizer from "./check-digitizer.class";
 import Parser from "./parser.class";
 import Pattern from "./pattern.class";

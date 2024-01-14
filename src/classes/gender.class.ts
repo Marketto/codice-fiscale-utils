@@ -1,6 +1,6 @@
-import { DateDay } from "../date-utils/";
+import { type DateDay } from "../date-utils/";
 import GenderWeight from "../enums/gender-weight.enum";
-import Genders from "../types/genders.type";
+import {type Genders} from "../types/genders.type";
 
 class Gender {
     public static getDay(genderDay: number): DateDay | null {

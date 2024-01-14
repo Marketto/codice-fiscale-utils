@@ -26,10 +26,10 @@ import {
     VOWEL_LIST,
     YEAR_MATCHER,
 } from "../const/matcher.const";
-import { DATE_MATCHER, DateDay, DateMonth, DateUtils, MultiFormatDate } from "../date-utils/";
+import { DATE_MATCHER, type DateDay, type DateMonth, DateUtils, type MultiFormatDate } from "../date-utils/";
 import Omocodes from "../enums/omocodes.enum";
-import IPersonalInfo from "../interfaces/personal-info.interface";
-import Genders from "../types/genders.type";
+import type IPersonalInfo from "../interfaces/personal-info.interface";
+import {type Genders} from "../types/genders.type";
 import CfuError from "./cfu-error.class";
 import Gender from "./gender.class";
 import Parser from "./parser.class";

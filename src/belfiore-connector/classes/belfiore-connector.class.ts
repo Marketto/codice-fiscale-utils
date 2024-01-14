@@ -1,14 +1,14 @@
-import moment, { Moment } from "moment";
-import { MultiFormatDate } from "../../date-utils";
+import moment, { type Moment } from "moment";
+import { type MultiFormatDate } from "../../date-utils";
 import generatorWrapper from "../../functions/generator-wrapper.function";
-import IGeneratorWrapper from "../../interfaces/generator-wrapper.interface";
-import IBelfioreCity from "../interfaces/belfiore-city.interface";
-import IBelfioreCommonPlace from "../interfaces/belfiore-common-place.interface";
-import IBelfioreCountry from "../interfaces/belfiore-country.interface";
-import IBelfioreDbData from "../interfaces/belfiore-db-data.interface";
-import IBelfioreDbLicense from "../interfaces/belfiore-db-license.interface";
-import BelfioreConnectorConfig from "../types/belfiore-connector-config.type";
-import BelfiorePlace from "../types/belfiore-place.type";
+import type IGeneratorWrapper from "../../interfaces/generator-wrapper.interface";
+import type IBelfioreCity from "../interfaces/belfiore-city.interface";
+import type IBelfioreCommonPlace from "../interfaces/belfiore-common-place.interface";
+import type IBelfioreCountry from "../interfaces/belfiore-country.interface";
+import type IBelfioreDbData from "../interfaces/belfiore-db-data.interface";
+import type IBelfioreDbLicense from "../interfaces/belfiore-db-license.interface";
+import { type BelfioreConnectorConfig } from "../types/belfiore-connector-config.type";
+import { type BelfiorePlace } from "../types/belfiore-place.type";
 
 /**
  * Handler for cities and countries Dataset

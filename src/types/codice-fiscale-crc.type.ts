@@ -25,4 +25,4 @@ type CodiceFiscaleCRC = "A"
 | "Y"
 | "Z";
 
-export default CodiceFiscaleCRC;
+export type {CodiceFiscaleCRC};
