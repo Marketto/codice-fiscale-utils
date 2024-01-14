@@ -1,3 +1,3 @@
 type Genders = "M" | "F";
 
-export default Genders;
+export type {Genders};

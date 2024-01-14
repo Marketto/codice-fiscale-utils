@@ -1,11 +1,10 @@
-import moment from "moment";
 import {
     Belfiore,
     BelfioreConnector,
-    BelfiorePlace,
+    type BelfiorePlace,
 } from "../belfiore-connector";
-import { DateUtils, MultiFormatDate } from "../date-utils/";
-import Genders from "../types/genders.type";
+import { DateUtils, type MultiFormatDate } from "../date-utils/";
+import { type Genders } from "../types/genders.type";
 import CFMismatchValidator from "./cf-mismatch-validator.class";
 import Parser from "./parser.class";
 import Pattern from "./pattern.class";

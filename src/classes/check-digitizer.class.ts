@@ -5,8 +5,8 @@ import {
 import { PARTIAL_CF } from "../const/matcher.const";
 import CRC from "../enums/crc.enum";
 import generatorWrapper from "../functions/generator-wrapper.function";
-import IGeneratorWrapper from "../interfaces/generator-wrapper.interface";
-import CodiceFiscaleCRC from "../types/codice-fiscale-crc.type";
+import type IGeneratorWrapper from "../interfaces/generator-wrapper.interface";
+import { type CodiceFiscaleCRC } from "../types/codice-fiscale-crc.type";
 class CheckDigitizer {
 
     /**
