@@ -5,73 +5,85 @@ import got from "got";
 import { Duplex, pipeline, Transform, TransformCallback } from "stream";
 import { promisify } from "util";
 import locationResources from "../location-resources.json";
-import { IcovAutoDecode } from "../transforms/auto-decode";
-import { PlaceDataNormalizer } from "../transforms/place-data-normalizer";
+import { DataNormalizer } from "../transforms/data-normalizer";
 import { PlaceListCompressor } from "../transforms/place-list-compressor";
 import { PlaceListDeDupe } from "../transforms/place-list-de-dupe";
 import { PlaceListUnZip } from "../transforms/place-list-unzip";
-import { errorHandler, IAssetGeneratorConfigResource } from "../utils";
+import { errorHandler } from "../utils";
+import { XlsxToJson } from "../transforms/xlsx-to-json";
+import { IAssetGeneratorConfigResource } from "../models/asset-generator-config-resource.interface";
 
-const uriCfgList: IAssetGeneratorConfigResource[] = (locationResources.resources as IAssetGeneratorConfigResource[])
-    // unfolding uris
-    .reduce((accumulator: IAssetGeneratorConfigResource[], resConfig: IAssetGeneratorConfigResource) => [
-        ...accumulator,
-        ...([] as string[]).concat(resConfig.uri).map((uri: string) => ({
-            ...resConfig,
-            uri,
-        })),
-    ], []);
+const streamList: NodeJS.ReadableStream[] = locationResources.resources.map(
+	(cfg) => {
+		console.log(`Streaming data: ${cfg.uri}`);
+		const cfgPipeline: NodeJS.ReadableStream[] = [
+			got.stream(cfg.uri as string) as unknown as NodeJS.ReadableStream,
+		];
+		if (/\.zip$/i.test(cfg.uri as string)) {
+			cfgPipeline.push(new PlaceListUnZip({ target: cfg.target as string }));
+		}
 
-const streamList: NodeJS.ReadableStream[] = uriCfgList.map((cfg) => {
-    console.log(`Streaming data: ${cfg.uri}`);
-    const cfgPipeline: NodeJS.ReadableStream[] = [got.stream(cfg.uri as string) as unknown as NodeJS.ReadableStream];
-    if ((/\.zip$/i).test(cfg.uri as string)) {
-        cfgPipeline.push(new PlaceListUnZip({ fileNameMatcher: /\.(?:csv?)$/i}));
-    }
-    cfgPipeline.push(
-        new IcovAutoDecode(),
-        csvtojson({
-            delimiter: cfg.delimiter,
-            trim: true,
-        }, { objectMode: true }),
-        new PlaceDataNormalizer({
-            defaultValues: {
-                dataSource: cfg.defaultSourceCode,
-            },
-            objectMode: true,
-        }),
-    );
+		if (/\.xlsx?$/i.test(cfg.target || (cfg.uri as string))) {
+			cfgPipeline.push(new XlsxToJson());
+		} else if (/\.csv?$/i.test(cfg.target || (cfg.uri as string))) {
+			cfgPipeline.push(
+				csvtojson(
+					{
+						delimiter: cfg.delimiter,
+						trim: true,
+						flatKeys: true,
+					},
+					{ objectMode: true }
+				)
+			);
+		} else {
+			throw new Error(`Unhandled file type: ${cfg.target || cfg.uri}`);
+		}
 
-    return pipeline(cfgPipeline, errorHandler) as Duplex;
-});
+		cfgPipeline.push(
+			new DataNormalizer({
+				config: cfg as unknown as IAssetGeneratorConfigResource,
+				objectMode: true,
+			})
+		);
 
-export const exportDataset =  (destFile: string) => new Promise(async (resolve, reject) => {
-    console.log(`Exporting Datasets: ${destFile}`);
-    const fileExists = await promisify(fs.exists)(destFile);
-    if (fileExists) {
-        await promisify(fs.unlink)(destFile);
-    }
-    pipeline(
-        mergeStream(
-            ...streamList,
-        ),
-        new PlaceListDeDupe({ objectMode: true }),
-        new PlaceListCompressor(),
-        new Transform({
-            objectMode: true,
-            transform(data: any, encoding: string, callback: TransformCallback) {
-                if (data) {
-                    callback(null, `const CITIES_COUNTRIES = ${JSON.stringify({
-                        data,
-                        licenses: Object.values(locationResources.licenses),
-                        sources: uriCfgList.map(({ uri }) => uri),
-                    }, null, 4)};\nexport default CITIES_COUNTRIES;\n`);
-                }
-            },
-        }),
-        fs.createWriteStream(destFile),
-        errorHandler,
-    )
-    .on("finish", resolve)
-    .on("error", reject);
-});
+		return pipeline(cfgPipeline, errorHandler) as Duplex;
+	}
+);
+
+export const exportDataset = (destFile: string) =>
+	new Promise(async (resolve, reject) => {
+		console.log(`Exporting Datasets: ${destFile}`);
+		const fileExists = await promisify(fs.exists)(destFile);
+		if (fileExists) {
+			await promisify(fs.unlink)(destFile);
+		}
+		pipeline(
+			mergeStream(...streamList),
+			new PlaceListDeDupe({ objectMode: true }),
+			new PlaceListCompressor(),
+			new Transform({
+				objectMode: true,
+				transform(data: any, encoding: string, callback: TransformCallback) {
+					if (data) {
+						callback(
+							null,
+							`const CITIES_COUNTRIES = ${JSON.stringify(
+								{
+									data,
+									licenses: Object.values(locationResources.licenses),
+									sources: locationResources.resources.map(({ uri }) => uri),
+								},
+								null,
+								4
+							)};\nexport default CITIES_COUNTRIES;\n`
+						);
+					}
+				},
+			}),
+			fs.createWriteStream(destFile),
+			errorHandler
+		)
+			.on("finish", resolve)
+			.on("error", reject);
+	});

@@ -52,9 +52,9 @@
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.37",
     "@types/yauzl": "^2.9.1",
-    "autodetect-decoder-stream": "^1.0.3",
     "chai": "^4.2.0",
     "chai-string": "^1.5.0",
+    "chardet": "^2.0.0",
     "clean-jsdoc-theme": "^4.2.14",
     "cross-env": "^7.0.3",
     "csvtojson": "^2.0.10",
@@ -81,6 +81,7 @@
     "ts-node": "^10.9.1",
     "tslint": "^5.20.1",
     "typescript": "^3.8.3",
+    "xlsx": "^0.18.5",
     "yauzl": "^2.10.0"
   },
   "engines": {
