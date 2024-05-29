@@ -5,12 +5,5 @@ import DateUtils from "./date-utils.class";
 import MultiFormatDate from "./multi-format-date.type";
 
 export default DateUtils;
-export {
-    DATE_MATCHER,
-    DateUtils,
-};
-export type {
-    DateDay,
-    DateMonth,
-    MultiFormatDate,
-};
+export { DATE_MATCHER, DateUtils };
+export type { DateDay, DateMonth, MultiFormatDate };
