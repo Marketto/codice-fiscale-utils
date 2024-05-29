@@ -1,38 +1,39 @@
 ## ROADMAP
-* [ ] Belfiore Externalization
-* [ ] Migration to async Belfiore methods
-* [ ] Date Parser, Validators, Pattern & Constants Externalization
-* [ ] jQuery Demo
-* [ ] React Demo
-* [ ] Svelte Demo
-* [X] Semantic Versioning
-* [X] Moved FE demos to dedicated repos
-* [X] Update README examples
-* [X] Increase Unit tests +10% coverage
-* [X] Replace "magic numbers" with constants
-* [X] Methods to retrieve CF Omocode Id and generate omocode CF by Id
-* [X] Personal info validator
-* [X] Boolean match/mismatch compound validators
-* [X] Boolean validators (Validator)
-* [X] Validator => Pattern RegExp generators migration
-* [X] Angular Demo
-* [X] Typescript migration
-* [X] Implement Rollup
-* [X] Diacritic remover externalization
-* [X] LowerCase fields support
-* [X] Express Demo
-* [X] Vue Demo
-* [X] Unit tests
-* [X] RegExp generator utilities to validate fields
-* [X] Parsing utilities (CF => Personal infos)
-* [X] Diacritic remover utility
-* [X] Date Matcher constants
-* [X] Codice Fiscal Matcher constants
-* [X] Belfiore Connector
-* [X] Cities and Countries download and parsing script
-* [X] Omocodes bitmap
-* [X] Omocode iterator converter
-* [X] Gender codes converter
-* [X] Gender codes constant
-* [X] Month codes converter
-* [X] Month codes constant
+
+- [ ] Belfiore Externalization
+- [ ] Migration to async Belfiore methods
+- [ ] Date Parser, Validators, Pattern & Constants Externalization
+- [ ] jQuery Demo
+- [ ] React Demo
+- [ ] Svelte Demo
+- [x] Semantic Versioning
+- [x] Moved FE demos to dedicated repos
+- [x] Update README examples
+- [x] Increase Unit tests +10% coverage
+- [x] Replace "magic numbers" with constants
+- [x] Methods to retrieve CF Omocode Id and generate omocode CF by Id
+- [x] Personal info validator
+- [x] Boolean match/mismatch compound validators
+- [x] Boolean validators (Validator)
+- [x] Validator => Pattern RegExp generators migration
+- [x] Angular Demo
+- [x] Typescript migration
+- [x] Implement Rollup
+- [x] Diacritic remover externalization
+- [x] LowerCase fields support
+- [x] Express Demo
+- [x] Vue Demo
+- [x] Unit tests
+- [x] RegExp generator utilities to validate fields
+- [x] Parsing utilities (CF => Personal infos)
+- [x] Diacritic remover utility
+- [x] Date Matcher constants
+- [x] Codice Fiscal Matcher constants
+- [x] Belfiore Connector
+- [x] Cities and Countries download and parsing script
+- [x] Omocodes bitmap
+- [x] Omocode iterator converter
+- [x] Gender codes converter
+- [x] Gender codes constant
+- [x] Month codes converter
+- [x] Month codes constant

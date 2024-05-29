@@ -1,5 +1,6 @@
 # codice-fiscale-utils
-***The Final and definitive solution to handle the Italian Tax Code***
+
+**_The Final and definitive solution to handle the Italian Tax Code_**
 
 [![NPM Version](https://img.shields.io/npm/v/@marketto/codice-fiscale-utils.svg)](https://www.npmjs.com/package/@marketto/codice-fiscale-utils)
 [![NPM Downloads](https://img.shields.io/npm/dm/@marketto/codice-fiscale-utils.svg)](https://www.npmjs.com/package/@marketto/codice-fiscale-utils)
@@ -18,43 +19,62 @@
 TS utilities to handle Italian Codice Fiscale
 
 ## 📗 FAQs?
+
 1. **Why should I need a library? Can't I use just a RegExp?**
-    *A RegExp would just check the form of a CodiceFiscale, not coherence between birth date and place, not validity of 16th check digit char*
+   _A RegExp would just check the form of a CodiceFiscale, not coherence between birth date and place, not validity of 16th check digit char_
 
 2. **What about the omocodes (Omocodia/Omocodice) problem, does it work?**
-   *Absolutely! There's a dedicated class to encode or decode such kind of CodiceFiscale and it's properly integrated in* [***Parser***](#parser), [***Validator***](#validator) and [***Pattern***](#pattern) *methods*
+   _Absolutely! There's a dedicated class to encode or decode such kind of CodiceFiscale and it's properly integrated in_ [**_Parser_**](#parser), [**_Validator_**](#validator) and [**_Pattern_**](#pattern) _methods_
 
 3. **Why it's ~240KB? Seems a lot**
-   *It contains all you need in a FE or BE environment to properly check and validate a CodiceFiscale by its own or against spare personal informations, the full list of all Italian cities and foregin countries since [1861](https://en.wikipedia.org/wiki/Kingdom_of_Italy) including belfiore codes, province for cities,  begin and end date*
+   _It contains all you need in a FE or BE environment to properly check and validate a CodiceFiscale by its own or against spare personal informations, the full list of all Italian cities and foregin countries since [1861](https://en.wikipedia.org/wiki/Kingdom_of_Italy) including belfiore codes, province for cities, begin and end date_
 
 4. **Should I trust such city/country informations and do I need them?**
-   *Sure, every single information is provided with original source referrals like website, license and name. The script used to create the embedded dataset uses only official informations provided by Italian istitutional sources under* ***CC-BY*** *like 'Agenzia delle entrate', 'Ministero dell'interno' or 'ISTAT'; Give a look at the* [Assets Licenses and Authors](#assets-licenses-and-authors) *chapters*
+   _Sure, every single information is provided with original source referrals like website, license and name. The script used to create the embedded dataset uses only official informations provided by Italian istitutional sources under_ **_CC-BY_** _like 'Agenzia delle entrate', 'Ministero dell'interno' or 'ISTAT'; Give a look at the_ [Assets Licenses and Authors](#assets-licenses-and-authors) _chapters_
 
 5. **Can I use this library in a FE project with other frameworks?**
-    *Sure, it's built to work both in node and browser environments! Give a look at the [Demo section](#demo)*
+   _Sure, it's built to work both in node and browser environments! Give a look at the [Demo section](#demo)_
 
 ## 📙 [CHANGELOG](CHANGELOG.MD)
+
 ## 🚃 [ROADMAP](ROADMAP.MD)
 
 ## 🔌 INSTALLATION
+
 ```{r, engine='bash', global_install}
 npm i -s @marketto/codice-fiscale-utils
 ```
 
 ## 🔧 USAGE
+
 ### NodeJs
+
 ```javascript
-const CodiceFiscaleUtils = require('@marketto/codice-fiscale-utils');
+const CodiceFiscaleUtils = require("@marketto/codice-fiscale-utils");
 ```
+
 ### ES6
+
 ```javascript
-import CodiceFiscaleUtils from '@marketto/codice-fiscale-utils';
+import CodiceFiscaleUtils from "@marketto/codice-fiscale-utils";
 ```
+
 ### TypeScript
+
 ```typescript
-import * as CodiceFiscaleUtils from '@marketto/codice-fiscale-utils';
+import * as CodiceFiscaleUtils from "@marketto/codice-fiscale-utils";
+// Optional Types and Interfaces import
+import type {
+	BelfiorePlace,
+	DateDay,
+	DateMonth,
+	Genders,
+	MultiFormatDate,
+} from "@marketto/codice-fiscale-utils";
 ```
+
 ### Script
+
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://unpkg.com/@marketto/diacritic-remover/dist/diacritic-remover.bundle.min.js"></script>
@@ -62,39 +82,53 @@ import * as CodiceFiscaleUtils from '@marketto/codice-fiscale-utils';
 ```
 
 ## 💻 DEMO
+
 ### NodeJS Express
-* [Node/Express Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/express)
+
+- [Node/Express Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/express)
+
 ### VueJs
-* [Code sandbox](https://codesandbox.io/s/github/Marketto/codice-fiscale-utils-vue-demo)
-* [Github](https://github.com/Marketto/codice-fiscale-utils-vue-demo)
+
+- [Code sandbox](https://codesandbox.io/s/github/Marketto/codice-fiscale-utils-vue-demo)
+- [Github](https://github.com/Marketto/codice-fiscale-utils-vue-demo)
+
 ### Angular
-* [Code sandbox](https://codesandbox.io/s/github/Marketto/codice-fiscale-utils-angular-demo)
-* [Github](https://github.com/Marketto/codice-fiscale-utils-angular-demo)
+
+- [Code sandbox](https://codesandbox.io/s/github/Marketto/codice-fiscale-utils-angular-demo)
+- [Github](https://github.com/Marketto/codice-fiscale-utils-angular-demo)
 
 ## 📖 DOCUMENTATION
+
 [JsDocs @ GitHub Pages](https://marketto.github.io/codice-fiscale-utils/)
 
-
 ### Parser
-*Class* with *static* methods
+
+_Class_ with _static_ methods
+
 ```javascript
 const { Parser } = CodiceFiscaleUtils;
 ```
+
 <details>
     <summary>Show code examples</summary>
 
 #### Parser.cfDeomocode
+
 ```javascript
 Parser.cfDeomocode("KKALMNVMAPLB331Z"); //KKALMN91A30B331P
 Parser.cfDeomocode("kkalmnvmaplb331z"); //kkalmn91a30b331p
 ```
+
 #### Parser.cfOmocodeId
+
 ```javascript
 Parser.cfOmocodeId("VRNGNYLtdsucprmt"); //127
 Parser.cfOmocodeId("kkalmn91as0b331z"); //16
 Parser.cfOmocodeId("kkalmn91a30b331z"); //0
 ```
+
 #### Parser.cfOmocode
+
 ```javascript
 Parser.cfOmocode("VRNGNY07d68c351v", 0); //VRNGNY07d68c351v
 Parser.cfOmocode("VRNGNY07d68c351v", 1); //VRNGNY07d68c35Mn
@@ -111,47 +145,56 @@ Parser.cfOmocode("kkalmnvmaplb331z", 127); //kkalmnvmaplbPPMe
 ```
 
 #### Parser.cfToLastName
+
 ```javascript
-Parser.cfToLastName('WYZ'); //W*Y*Z*
+Parser.cfToLastName("WYZ"); //W*Y*Z*
 ```
 
 #### Parser.cfToFirstName
+
 ```javascript
-Parser.cfToFirstName('ZZZWAE'); //WAE*
+Parser.cfToFirstName("ZZZWAE"); //WAE*
 ```
 
 #### Parser.cfToGender
+
 ```javascript
-Parser.cfToGender('XXXYYY90B20'); //M
-Parser.cfToGender('XXXYYY90B63'); //F
+Parser.cfToGender("XXXYYY90B20"); //M
+Parser.cfToGender("XXXYYY90B63"); //F
 ```
 
 #### Parser.cfToBirthDay
+
 ```javascript
-Parser.cfToBirthDay('XXXYYY90B71'); //31
+Parser.cfToBirthDay("XXXYYY90B71"); //31
 ```
 
 #### Parser.cfToBirthMonth
+
 ```javascript
-Parser.cfToBirthMonth('XXXYYY92C'); //2
+Parser.cfToBirthMonth("XXXYYY92C"); //2
 ```
 
 #### Parser.cfToBirthYear
-Parser will consider dates that can be both *19xx* and *20xx* as ***20xx*** if they would be valid in the last 100 years range from now
+
+Parser will consider dates that can be both _19xx_ and _20xx_ as **_20xx_** if they would be valid in the last 100 years range from now
+
 ```javascript
-Parser.cfToBirthYear('XXXYYY92'); //1992
-Parser.cfToBirthYear('XXXYYY12'); //2012
+Parser.cfToBirthYear("XXXYYY92"); //1992
+Parser.cfToBirthYear("XXXYYY12"); //2012
 ```
 
 #### Parser.cfToBirthDate
+
 ```javascript
-const dt = Parser.cfToBirthDate('XXXYYY81A63'); //Date
+const dt = Parser.cfToBirthDate("XXXYYY81A63"); //Date
 dt.toJSON(); //1981-01-23T...
 ```
 
 #### Parser.cfToBirthPlace
+
 ```javascript
-const birthPlace = Parser.cfToBirthPlace('XXXYYY92B20H501');
+const birthPlace = Parser.cfToBirthPlace("XXXYYY92B20H501");
 /*
 {
     firstName: "ROMA",
@@ -172,8 +215,9 @@ const birthPlace = Parser.cfToBirthPlace('XXXYYY92B20H501');
 ```
 
 #### Parser.cfDecode
+
 ```javascript
-Parser.cfDecode('VRNGNY07D68C351V');
+Parser.cfDecode("VRNGNY07D68C351V");
 /*
 {
     lastName: 'V*R*N*',
@@ -188,28 +232,32 @@ Parser.cfDecode('VRNGNY07D68C351V');
 ```
 
 #### Parser.lastNameToCf
+
 ```javascript
-Parser.lastNameToCf('Rossi'); //RSS
-Parser.lastNameToCf('Réno'); //RNE
-Parser.lastNameToCf('Aieie'); //AIE
+Parser.lastNameToCf("Rossi"); //RSS
+Parser.lastNameToCf("Réno"); //RNE
+Parser.lastNameToCf("Aieie"); //AIE
 ```
 
 #### Parser.firstNameToCf
+
 ```javascript
-Parser.firstNameToCf('Dòminique'); //DNQ
-Parser.firstNameToCf('Mark'); //MRK
-Parser.firstNameToCf('Tom'); //TMO
-Parser.firstNameToCf('Ania'); //NAI
+Parser.firstNameToCf("Dòminique"); //DNQ
+Parser.firstNameToCf("Mark"); //MRK
+Parser.firstNameToCf("Tom"); //TMO
+Parser.firstNameToCf("Ania"); //NAI
 ```
 
 #### Parser.yearToCf
+
 ```javascript
-Parser.yearToCf('1990'); //90
+Parser.yearToCf("1990"); //90
 Parser.yearToCf(2010); //10
-Parser.yearToCf('02'); //02
+Parser.yearToCf("02"); //02
 ```
 
 #### Parser.monthToCf
+
 ```javascript
 Parser.monthToCf(0); //A
 Parser.monthToCf(4); //E
@@ -217,6 +265,7 @@ Parser.monthToCf(8); //P
 ```
 
 #### Parser.monthToCf
+
 ```javascript
 Parser.monthToCf(0); //A
 Parser.monthToCf(4); //E
@@ -224,22 +273,25 @@ Parser.monthToCf(8); //P
 ```
 
 #### Parser.dayGenderToCf
+
 ```javascript
-Parser.dayGenderToCf(3, 'M'); //03
-Parser.dayGenderToCf(7, 'F'); //47
+Parser.dayGenderToCf(3, "M"); //03
+Parser.dayGenderToCf(7, "F"); //47
 ```
 
 #### Parser.dateGenderToCf
+
 ```javascript
-Parser.dateGenderToCf([2016, 3, 23], 'M'); //16D23
-Parser.dateGenderToCf('1987-09-22', 'F'); //87P62
-Parser.dateGenderToCf(new Date(2016, 2, 23, 12), 'M'); //16C23
-Parser.dateGenderToCf(moment(1988, 7, 3, 12), 'F'); //88M43
+Parser.dateGenderToCf([2016, 3, 23], "M"); //16D23
+Parser.dateGenderToCf("1987-09-22", "F"); //87P62
+Parser.dateGenderToCf(new Date(2016, 2, 23, 12), "M"); //16C23
+Parser.dateGenderToCf(moment(1988, 7, 3, 12), "F"); //88M43
 ```
 
 #### Parser.placeToCf
+
 ```javascript
-Parser.placeToCf('Bologna');
+Parser.placeToCf("Bologna");
 /*
 {
     belfioreCode: 'A944',
@@ -250,7 +302,7 @@ Parser.placeToCf('Bologna');
     province: 'BO'
 }
 */
-Parser.placeToCf([1990],'Unione Sovietica');
+Parser.placeToCf([1990], "Unione Sovietica");
 /*
 {
     belfioreCode: 'Z135',
@@ -261,195 +313,224 @@ Parser.placeToCf([1990],'Unione Sovietica');
     iso3166: 'SU'
 }
 */
-Parser.placeToCf([2000],'Unione Sovietica'); //null
+Parser.placeToCf([2000], "Unione Sovietica"); //null
 ```
 
 #### Parser.encodeCf
+
 ```javascript
 Parser.encodeCf({
-    lastName: 'Veronesi',
-    firstName: 'Genny',
-    year: 1907,
-    month: 3,
-    day: 28,
-    gender: 'F',
-    place: 'Catania'
+	lastName: "Veronesi",
+	firstName: "Genny",
+	year: 1907,
+	month: 3,
+	day: 28,
+	gender: "F",
+	place: "Catania",
 }); //VRNGNY07D68C351V
 ```
+
 </details>
 
-
 ### Pattern
+
 Class with static methods
+
 ```javascript
 const { Pattern } = CodiceFiscaleUtils;
 ```
+
 <details>
     <summary>Show code examples</summary>
 
 #### Pattern.cfLastName
+
 ```javascript
-Pattern.cfLastName().test('KST'); //true
-Pattern.cfLastName().test('AST'); //false
-Pattern.cfLastName('Alex').test('KST'); //false
-Pattern.cfLastName('Alex').test('LXA'); //true
+Pattern.cfLastName().test("KST"); //true
+Pattern.cfLastName().test("AST"); //false
+Pattern.cfLastName("Alex").test("KST"); //false
+Pattern.cfLastName("Alex").test("LXA"); //true
 ```
 
 #### Pattern.cfFirstName
+
 ```javascript
-Pattern.cfFirstName().test('NIX'); //true
-Pattern.cfFirstName().test('UIK'); //false
-Pattern.cfFirstName('Dominique').test('DMN'); //false
-Pattern.cfFirstName('Dominique').test('DNQ'); //true
+Pattern.cfFirstName().test("NIX"); //true
+Pattern.cfFirstName().test("UIK"); //false
+Pattern.cfFirstName("Dominique").test("DMN"); //false
+Pattern.cfFirstName("Dominique").test("DNQ"); //true
 ```
 
 #### Pattern.cfYear
+
 ```javascript
-Pattern.cfYear().test('07'); //true
-Pattern.cfYear().test('3'); //false
-Pattern.cfYear(1907).test('07'); //true
-Pattern.cfYear(1986).test('U6'); //true - omocode
-Pattern.cfYear(1986).test('87'); //false
+Pattern.cfYear().test("07"); //true
+Pattern.cfYear().test("3"); //false
+Pattern.cfYear(1907).test("07"); //true
+Pattern.cfYear(1986).test("U6"); //true - omocode
+Pattern.cfYear(1986).test("87"); //false
 ```
 
 #### Pattern.cfMonth
+
 ```javascript
-Pattern.cfMonth().test('C'); //true
-Pattern.cfMonth().test('Z'); //false
-Pattern.cfMonth(3).test('D'); //true
-Pattern.cfMonth(3).test('A'); //false
+Pattern.cfMonth().test("C"); //true
+Pattern.cfMonth().test("Z"); //false
+Pattern.cfMonth(3).test("D"); //true
+Pattern.cfMonth(3).test("A"); //false
 ```
 
 #### Pattern.cfDay
+
 ```javascript
-Pattern.cfDay().test('0M'); //true - omocode
-Pattern.cfDay().test('33'); //false
-Pattern.cfDay(12).test('12'); //true - male
-Pattern.cfDay(12).test('52'); //true - female
-Pattern.cfDay(12).test('MN'); //true - omocode
-Pattern.cfDay(12).test('22'); //false
+Pattern.cfDay().test("0M"); //true - omocode
+Pattern.cfDay().test("33"); //false
+Pattern.cfDay(12).test("12"); //true - male
+Pattern.cfDay(12).test("52"); //true - female
+Pattern.cfDay(12).test("MN"); //true - omocode
+Pattern.cfDay(12).test("22"); //false
 ```
 
 #### Pattern.cfDayGender
+
 ```javascript
-Pattern.cfDayGender().test('0M'); //true
-Pattern.cfDayGender().test('73'); //false
-Pattern.cfDayGender(9, 'F').test('RM'); //true
-Pattern.cfDayGender(1, 'F').test('41'); //true
-Pattern.cfDayGender(1, 'M').test('41'); //false
+Pattern.cfDayGender().test("0M"); //true
+Pattern.cfDayGender().test("73"); //false
+Pattern.cfDayGender(9, "F").test("RM"); //true
+Pattern.cfDayGender(1, "F").test("41"); //true
+Pattern.cfDayGender(1, "M").test("41"); //false
 ```
 
 #### Pattern.cfDateGender
+
 ```javascript
-Pattern.cfDateGender().test('83D22'); //true
-Pattern.cfDateGender().test('83Z32'); //false
-Pattern.cfDateGender([1983, 3, 22], 'M').test('U3D2N'); //true
-Pattern.cfDateGender("1995-05-01", 'F').test('V5EQ1'); //true
-Pattern.cfDateGender([1983, 3, 22], 'M').test('83D62'); //false
+Pattern.cfDateGender().test("83D22"); //true
+Pattern.cfDateGender().test("83Z32"); //false
+Pattern.cfDateGender([1983, 3, 22], "M").test("U3D2N"); //true
+Pattern.cfDateGender("1995-05-01", "F").test("V5EQ1"); //true
+Pattern.cfDateGender([1983, 3, 22], "M").test("83D62"); //false
 ```
 
 #### Pattern.cfPlace
+
 ```javascript
-Pattern.cfPlace().test('A662'); //true
-Pattern.cfPlace().test('Z974'); //false
-Pattern.cfPlace('Bari').test('H501'); //true
-Pattern.cfPlace([1933], 'Fiume').test('D620'); //true
-Pattern.cfPlace([2000], 'Fiume').test('D620'); //false - Always invalid
+Pattern.cfPlace().test("A662"); //true
+Pattern.cfPlace().test("Z974"); //false
+Pattern.cfPlace("Bari").test("H501"); //true
+Pattern.cfPlace([1933], "Fiume").test("D620"); //true
+Pattern.cfPlace([2000], "Fiume").test("D620"); //false - Always invalid
 ```
 
 #### Pattern.codiceFiscale
+
 ```javascript
-Pattern.codiceFiscale().test('VRNGNY07D68C351V'); //true
-Pattern.codiceFiscale().test('MRNMIA02E45L2193'); //false
+Pattern.codiceFiscale().test("VRNGNY07D68C351V"); //true
+Pattern.codiceFiscale().test("MRNMIA02E45L2193"); //false
 //Partial info
 Pattern.codiceFiscale({
-    lastName: 'Veronesi',
-    firstName: 'Genny',
-    gender: 'F',
-    place: 'Catania'
-}).test('VRNGNY97A65C351V'); //true
+	lastName: "Veronesi",
+	firstName: "Genny",
+	gender: "F",
+	place: "Catania",
+}).test("VRNGNY97A65C351V"); //true
 //Full info
 Pattern.codiceFiscale({
-    lastName: 'Veronesi',
-    firstName: 'Genny',
-    year: 1907,
-    month: 3,
-    day: 28,
-    gender: 'F',
-    place: 'Catania'
-}).test('VRNGNY07D68C351V'); //true
+	lastName: "Veronesi",
+	firstName: "Genny",
+	year: 1907,
+	month: 3,
+	day: 28,
+	gender: "F",
+	place: "Catania",
+}).test("VRNGNY07D68C351V"); //true
 ```
 
 #### Pattern.lastName
+
 ```javascript
-Pattern.lastName().test('Kristersen'); //true
-Pattern.lastName('VLD').test('Vàlidàtòr'); //true
-Pattern.lastName('AIX').test('Air'); //false
+Pattern.lastName().test("Kristersen"); //true
+Pattern.lastName("VLD").test("Vàlidàtòr"); //true
+Pattern.lastName("AIX").test("Air"); //false
 ```
 
 #### Pattern.firstName
+
 ```javascript
-Pattern.firstName().test('Rossi'); //true
-Pattern.firstName('XYZAIE').test('Aieie'); //true
-Pattern.firstName('XYZAIX').test('Air'); //false
+Pattern.firstName().test("Rossi"); //true
+Pattern.firstName("XYZAIE").test("Aieie"); //true
+Pattern.firstName("XYZAIX").test("Air"); //false
 ```
 
 #### Pattern.date
+
 ```javascript
-Pattern.date().test('1995'); //true
-Pattern.date().test('1985-01'); //true
-Pattern.date().test('1970-03-03'); //true
-Pattern.date().test('1970-03-'); //false
-Pattern.date('XYZXYZ88H61').test('1988-06-21'); //true
-Pattern.date('XYZXYZ92C16').test('1992-03-26'); //false
+Pattern.date().test("1995"); //true
+Pattern.date().test("1985-01"); //true
+Pattern.date().test("1970-03-03"); //true
+Pattern.date().test("1970-03-"); //false
+Pattern.date("XYZXYZ88H61").test("1988-06-21"); //true
+Pattern.date("XYZXYZ92C16").test("1992-03-26"); //false
 ```
 
 #### Pattern.gender
+
 ```javascript
-Pattern.gender().test('F'); //true
-Pattern.gender().test('X'); //false
-Pattern.gender('XYZXYZ88H61').test('F'); //true
-Pattern.gender('XYZXYZ88H61').test('M'); //false
+Pattern.gender().test("F"); //true
+Pattern.gender().test("X"); //false
+Pattern.gender("XYZXYZ88H61").test("F"); //true
+Pattern.gender("XYZXYZ88H61").test("M"); //false
 ```
 
 #### Pattern.place
+
 ```javascript
-Pattern.place().test('Roma'); //true
-Pattern.place('XYZXYZ92C16A662').test('Bari'); //true
-Pattern.place('XYZXYZ12S30A662').test('Bologna'); //false
+Pattern.place().test("Roma"); //true
+Pattern.place("XYZXYZ92C16A662").test("Bari"); //true
+Pattern.place("XYZXYZ12S30A662").test("Bologna"); //false
 ```
+
 </details>
 
 ### Validator
-*Class* with *static* methods
+
+_Class_ with _static_ methods
+
 ```javascript
 const { Validator } = CodiceFiscaleUtils;
 ```
+
 <details>
     <summary>Show code examples</summary>
 
 #### isLastNameValid
+
 ```javascript
 Validator.isLastNameValid("Test"); //true
 Validator.isLastNameValid("Tést N'àme"); //true
 Validator.isLastNameValid(""); //false
 Validator.isLastNameValid("@!#"); //false
 ```
+
 #### isLastNameInvalid
+
 ```javascript
 Validator.isLastNameInvalid("Test"); //false
 Validator.isLastNameInvalid("Tést N'àme"); //false
 Validator.isLastNameInvalid(""); //false
 Validator.isLastNameInvalid("@!#"); //true
 ```
+
 #### isFirstNameValid
+
 ```javascript
 Validator.isFirstNameValid("Test"); //true
 Validator.isFirstNameValid("Tést N'àme"); //true
 Validator.isFirstNameValid(""); //false
 Validator.isFirstNameValid("@!#"); //false
 ```
+
 #### isFirstNameInvalid
+
 ```javascript
 Validator.isFirstNameInvalid("Test"); //false
 Validator.isFirstNameInvalid("Tést N'àme"); //false
@@ -458,6 +539,7 @@ Validator.isFirstNameInvalid("@!#"); //true
 ```
 
 #### isBirthDateValid
+
 ```javascript
 Validator.isBirthDateValid("1999-01-01"); //true
 Validator.isBirthDateValid([1999, 0, 1]); //true
@@ -468,6 +550,7 @@ Validator.isBirthDateValid("@!#"); //false
 ```
 
 #### isBirthDateInvalid
+
 ```javascript
 Validator.isBirthDateInvalid("1999-01-01"); //false
 Validator.isBirthDateInvalid([1999, 0, 1]); //false
@@ -478,6 +561,7 @@ Validator.isBirthDateInvalid("@!#"); //true
 ```
 
 #### isBirthPlaceValid
+
 ```javascript
 Validator.isBirthPlaceValid("Roma"); //true
 Validator.isBirthPlaceValid("H501"); //true
@@ -496,7 +580,7 @@ Validator.isBirthPlaceValid("Unione sovietica", Belfiore.from([1980])); //true
 Validator.isBirthPlaceValid("Federazione Russa", Belfiore.from([1980])); //true
 //By cities
 Validator.isBirthPlaceValid("Francia", Belfiore.cities); //false
-Validator.isBirthPlaceValid("A662", Belfiore.cities) //true
+Validator.isBirthPlaceValid("A662", Belfiore.cities); //true
 //By countries
 Validator.isBirthPlaceValid("Belgio", Belfiore.countries); //true
 //By province
@@ -505,6 +589,7 @@ Validator.isBirthPlaceValid("H501", Belfiore.byProvince("VV")); //false
 ```
 
 #### isBirthPlaceInvalid
+
 ```javascript
 Validator.isBirthPlaceInvalid("Roma"); //false
 Validator.isBirthPlaceInvalid("H501"); //false
@@ -532,19 +617,34 @@ Validator.isBirthPlaceInvalid("H501", Belfiore.byProvince("VV")); //true
 ```
 
 #### birthDatePlaceMatch
+
 ```javascript
-Validator.birthDatePlaceMatch("1990-05-21", "Repubblica Socialista Federale di Jugoslavia"); //true
-Validator.birthDatePlaceMatch(new Date(), "Repubblica Socialista Federale di Jugoslavia"); //false
+Validator.birthDatePlaceMatch(
+	"1990-05-21",
+	"Repubblica Socialista Federale di Jugoslavia"
+); //true
+Validator.birthDatePlaceMatch(
+	new Date(),
+	"Repubblica Socialista Federale di Jugoslavia"
+); //false
 Validator.birthDatePlaceMatch("1988-03-11", "Roma"); //true
 Validator.birthDatePlaceMatch(new Date(), "Roma"); //true
 Validator.birthDatePlaceMatch(new Date(), ""); //false
 Validator.birthDatePlaceMatch("", "Palermo"); //false
 Validator.birthDatePlaceMatch("", ""); //false
 ```
+
 #### birthDatePlaceMismatch
+
 ```javascript
-Validator.birthDatePlaceMismatch("1990-05-21", "Repubblica Socialista Federale di Jugoslavia"); //false
-Validator.birthDatePlaceMismatch(new Date(), "Repubblica Socialista Federale di Jugoslavia"); //true
+Validator.birthDatePlaceMismatch(
+	"1990-05-21",
+	"Repubblica Socialista Federale di Jugoslavia"
+); //false
+Validator.birthDatePlaceMismatch(
+	new Date(),
+	"Repubblica Socialista Federale di Jugoslavia"
+); //true
 Validator.birthDatePlaceMismatch("1988-03-11", "Roma"); //false
 Validator.birthDatePlaceMismatch(new Date(), "Roma"); //false
 Validator.birthDatePlaceMismatch(new Date(), ""); //false
@@ -553,79 +653,85 @@ Validator.birthDatePlaceMismatch("", ""); //false
 ```
 
 #### matchPersonalInfo
-```javascript
-Validator.codiceFiscale("VRNGNY07D68C351V")
-    .matchPersonalInfo({
-        day: 28,
-        firstName: "Génny",
-        gender: "F",
-        lastName: "Verònesi",
-        month: 3,
-        place: "Catania",
-        year: 1907,
-    }); //true
 
-Validator.codiceFiscale("VRNGNY07D68C351V")
-    .mismatchPersonalInfo({
-        day: 28,
-        firstName: "Génny",
-        gender: "F",
-        lastName: "Verònesi",
-        month: 3,
-        place: "Firenze",
-        year: 1907,
-    }); //false
+```javascript
+Validator.codiceFiscale("VRNGNY07D68C351V").matchPersonalInfo({
+	day: 28,
+	firstName: "Génny",
+	gender: "F",
+	lastName: "Verònesi",
+	month: 3,
+	place: "Catania",
+	year: 1907,
+}); //true
+
+Validator.codiceFiscale("VRNGNY07D68C351V").mismatchPersonalInfo({
+	day: 28,
+	firstName: "Génny",
+	gender: "F",
+	lastName: "Verònesi",
+	month: 3,
+	place: "Firenze",
+	year: 1907,
+}); //false
 ```
 
 #### mismatchPersonalInfo
-```javascript
-Validator.codiceFiscale("VRNGNY07D68C351V")
-    .mismatchPersonalInfo({
-        day: 28,
-        firstName: "Génny",
-        gender: "F",
-        lastName: "Verònesi",
-        month: 3,
-        place: "Catania",
-        year: 1907,
-    }); //false
 
-Validator.codiceFiscale("VRNGNY07D68C351V")
-    .mismatchPersonalInfo({
-        day: 28,
-        firstName: "Génny",
-    }); //false
+```javascript
+Validator.codiceFiscale("VRNGNY07D68C351V").mismatchPersonalInfo({
+	day: 28,
+	firstName: "Génny",
+	gender: "F",
+	lastName: "Verònesi",
+	month: 3,
+	place: "Catania",
+	year: 1907,
+}); //false
+
+Validator.codiceFiscale("VRNGNY07D68C351V").mismatchPersonalInfo({
+	day: 28,
+	firstName: "Génny",
+}); //false
 ```
+
 </details>
 
 ### codiceFiscale (CFMismatchValidator)
-*Class* instance
+
+_Class_ instance
+
 ```javascript
 Validator.codiceFiscale("VRNGNY07D68C351V"); //CFMismatchValidator
 ```
+
 <details>
     <summary>Show code examples</summary>
 
 #### valid
+
 ```javascript
-Validator.codiceFiscale("VRNGNY07D68C351V").valid //true
-Validator.codiceFiscale("MRNMIA02E45L219X").valid //true
-Validator.codiceFiscale("GSTPPP31C06D620Z").valid //true
-Validator.codiceFiscale("VRNGNY07D68C351K").valid //false - invalid check digit
-Validator.codiceFiscale("GSTPPP99C06D620V").valid //false - invalid birth date/place
+Validator.codiceFiscale("VRNGNY07D68C351V").valid; //true
+Validator.codiceFiscale("MRNMIA02E45L219X").valid; //true
+Validator.codiceFiscale("GSTPPP31C06D620Z").valid; //true
+Validator.codiceFiscale("VRNGNY07D68C351K").valid; //false - invalid check digit
+Validator.codiceFiscale("GSTPPP99C06D620V").valid; //false - invalid birth date/place
 Validator.codiceFiscale("").valid; //false - empty cf
 ```
+
 #### invalid
+
 ```javascript
-Validator.codiceFiscale("VRNGNY07D68C351V").invalid //false - OK
-Validator.codiceFiscale("MRNMIA02E45L219X").invalid //false - OK
-Validator.codiceFiscale("GSTPPP31C06D620Z").invalid //false - OK
-Validator.codiceFiscale("VRNGNY07D68C351K").invalid //true - invalid check digit
-Validator.codiceFiscale("GSTPPP99C06D620V").invalid //true - invalid birth date/place
-Validator.codiceFiscale("").invalid //false - empty cf is not invalid!
+Validator.codiceFiscale("VRNGNY07D68C351V").invalid; //false - OK
+Validator.codiceFiscale("MRNMIA02E45L219X").invalid; //false - OK
+Validator.codiceFiscale("GSTPPP31C06D620Z").invalid; //false - OK
+Validator.codiceFiscale("VRNGNY07D68C351K").invalid; //true - invalid check digit
+Validator.codiceFiscale("GSTPPP99C06D620V").invalid; //true - invalid birth date/place
+Validator.codiceFiscale("").invalid; //false - empty cf is not invalid!
 ```
 
 #### matchLastName
+
 ```javascript
 Validator.codiceFiscale("VRNGNY07D68C351V").matchLastName("Vareni"); //true
 Validator.codiceFiscale("VRN").matchLastName("Vareni"); //true
@@ -634,7 +740,9 @@ Validator.codiceFiscale("VRNGNY07D68C351V").matchLastName("John"); //false
 Validator.codiceFiscale("VRNGNY07D68C351V").matchLastName("V"); //false
 Validator.codiceFiscale("VRNGNY07D68C351V").matchLastName(""); //false
 ```
+
 #### mismatchLastName
+
 ```javascript
 Validator.codiceFiscale("VRNGNY07D68C351V").mismatchLastName("Vareni"); //false
 Validator.codiceFiscale("VRN").mismatchLastName("Vareni"); //false
@@ -645,6 +753,7 @@ Validator.codiceFiscale("VRNGNY07D68C351V").mismatchLastName(""); //false
 ```
 
 #### matchFirstName
+
 ```javascript
 Validator.codiceFiscale("VRNGNY07D68C351V").matchFirstName("Genny"); //true
 Validator.codiceFiscale("VRNGNY").matchFirstName("Genny"); //true
@@ -653,7 +762,9 @@ Validator.codiceFiscale("VRNGNY07D68C351V").matchFirstName("John"); //false
 Validator.codiceFiscale("VRNGNY07D68C351V").matchFirstName("G"); //false
 Validator.codiceFiscale("VRNGNY07D68C351V").matchFirstName(""); //false
 ```
+
 #### mismatchFirstName
+
 ```javascript
 Validator.codiceFiscale("VRNGNY07D68C351V").mismatchFirstName("Genny"); //false
 Validator.codiceFiscale("VRN").mismatchFirstName("Genny"); //false
@@ -664,6 +775,7 @@ Validator.codiceFiscale("VRNGNY07D68C351V").mismatchFirstName(""); //false
 ```
 
 #### matchBirthDate
+
 ```javascript
 Validator.codiceFiscale("VRNGNY07D68C351V").matchBirthDate("2007-04-28"); //true
 Validator.codiceFiscale("VRNGNY07D68").matchBirthDate("2007-04-28"); //true
@@ -671,7 +783,9 @@ Validator.codiceFiscale("").matchBirthDate("2007-04-28"); //false
 Validator.codiceFiscale("VRNGNY07D68C351V").matchBirthDate("2008-02-16"); //false
 Validator.codiceFiscale("VRNGNY07D68C351V").matchBirthDate(""); //false
 ```
+
 #### mismatchBirthDate
+
 ```javascript
 Validator.codiceFiscale("VRNGNY07D68C351V").mismatchBirthDate("2007-04-28"); //false
 Validator.codiceFiscale("VRNGNY07D68").mismatchBirthDate("2007-04-28"); //false
@@ -681,6 +795,7 @@ Validator.codiceFiscale("VRNGNY07D68C351V").mismatchBirthDate(""); //false
 ```
 
 #### matchGender
+
 ```javascript
 Validator.codiceFiscale("VRNGNY07D68C351V").matchGender("F"); //true
 Validator.codiceFiscale("VRNGNY07D68").matchGender("F"); //true
@@ -689,7 +804,9 @@ Validator.codiceFiscale("").matchGender("F"); //false
 Validator.codiceFiscale("VRNGNY07D68C351V").matchGender("M"); //false
 Validator.codiceFiscale("VRNGNY07D68C351V").matchGender(""); //false
 ```
+
 #### mismatchGender
+
 ```javascript
 Validator.codiceFiscale("VRNGNY07D68C351V").mismatchGender("F"); //false
 Validator.codiceFiscale("VRNGNY07D68").mismatchGender("F"); //false
@@ -700,6 +817,7 @@ Validator.codiceFiscale("VRNGNY07D68C351V").mismatchGender(""); //false
 ```
 
 #### matchBirthPlace
+
 ```javascript
 Validator.codiceFiscale("VRNGNY07D68C351V").matchBirthPlace("CATANIA"); //true
 Validator.codiceFiscale("VRNGNY07D68C351").matchBirthPlace("CATANIA"); //true
@@ -707,7 +825,9 @@ Validator.codiceFiscale("").matchBirthPlace("CATANIA"); //false
 Validator.codiceFiscale("VRNGNY07D68C351V").matchBirthPlace("ROMA"); //false
 Validator.codiceFiscale("VRNGNY07D68C351V").matchBirthPlace(""); //false
 ```
+
 #### mismatchBirthPlace
+
 ```javascript
 Validator.codiceFiscale("VRNGNY07D68C351V").mismatchBirthPlace("CATANIA"); //false
 Validator.codiceFiscale("VRNGNY07D68C351").mismatchBirthPlace("CATANIA"); //false
@@ -719,28 +839,34 @@ Validator.codiceFiscale("VRNGNY07D68C351V").mismatchBirthPlace(""); //false
 </details>
 
 ## 🔃 Compatibility
-* [X] NodeJs
-* [X] Chrome
-* [X] Firefox
-* [X] Edge
+
+- [x] NodeJs
+- [x] Chrome
+- [x] Firefox
+- [x] Edge
 
 ## ✋ DISCLAMER
+
 All names, informations, and fiscal codes used in this README and all unit tests are fictitious.
 No identification with actual persons (living or deceased) is intended or should be inferred
 
 ## 📜 LICENSE
+
 [MIT License](LICENSE)
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMarketto%2Fcodice-fiscale-utils?ref=badge_large)
 
 ## 📚 ASSETS LICENSES AND AUTHORS
-* Cities List of Values: [CC BY 4.0](asset/MINISTERO_DELL_INTERNO.LICENSE) Ministero dell'interno
-* Cities List of Values: [CC BY 4.0](asset/AGENZIA_DELLE_ENTRATE.LICENSE) Agenzia delle Entrate
-* Countries List of Values: [CC BY 3.0](asset/ISTITUTO_NAZIONALE_DI_STATISTICA.LICENSE) Istituto nazionale di statistica
+
+- Cities List of Values: [CC BY 4.0](asset/MINISTERO_DELL_INTERNO.LICENSE) Ministero dell'interno
+- Cities List of Values: [CC BY 4.0](asset/AGENZIA_DELLE_ENTRATE.LICENSE) Agenzia delle Entrate
+- Countries List of Values: [CC BY 3.0](asset/ISTITUTO_NAZIONALE_DI_STATISTICA.LICENSE) Istituto nazionale di statistica
 
 ## 📝 AUTHOR
+
 [Marco Ricupero](mailto:marco.ricupero@gmail.com)
 
 ## 📬 CONTRIBUTORS
-* [Giacomo Gregoletto](https://github.com/greguz)
-* [Julian Scheid](https://github.com/jscheid)
+
+- [Giacomo Gregoletto](https://github.com/greguz)
+- [Julian Scheid](https://github.com/jscheid)
