@@ -14,7 +14,8 @@ export const CF_SURNAME_MATCHER: string = CF_NAME_MATCHER;
 export const CF_FULL_NAME_MATCHER: string = `(?:${CF_NAME_MATCHER}){2}`;
 
 export const YEAR_MATCHER: string = `[${OMOCODE_NUMBER_LIST}]{2}`;
-export const LEAP_YEAR_MATCHER: string = "[02468LNQSU][048LQU]|[13579MPRTV][26NS]";
+export const LEAP_YEAR_MATCHER: string =
+	"[02468LNQSU][048LQU]|[13579MPRTV][26NS]";
 export const MONTH_MATCHER: string = `[${MONTH_LIST}]`;
 export const DAY_2X_MATCHER: string = "[26NS]";
 export const DAY_3X_MATCHER: string = "[37PT]";

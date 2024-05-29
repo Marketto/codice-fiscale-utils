@@ -16,4 +16,5 @@ export const PLACE_OFFSET = 11;
 export const PLACE_SIZE = 4;
 export const CRC_OFFSET = 15;
 export const CRC_SIZE = 1;
-export const CF_SIZE = LASTNAME_SIZE + FIRSTNAME_SIZE + DATE_SIZE + PLACE_SIZE + CRC_SIZE;
+export const CF_SIZE =
+	LASTNAME_SIZE + FIRSTNAME_SIZE + DATE_SIZE + PLACE_SIZE + CRC_SIZE;
