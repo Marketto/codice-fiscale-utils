@@ -62,15 +62,7 @@ import CodiceFiscaleUtils from "@marketto/codice-fiscale-utils";
 ### TypeScript
 
 ```typescript
-import * as CodiceFiscaleUtils from "@marketto/codice-fiscale-utils";
-// Optional Types and Interfaces import
-import type {
-	BelfiorePlace,
-	DateDay,
-	DateMonth,
-	Genders,
-	MultiFormatDate,
-} from "@marketto/codice-fiscale-utils";
+import CodiceFiscaleUtils from "@marketto/codice-fiscale-utils";
 ```
 
 ### Script
@@ -82,10 +74,6 @@ import type {
 ```
 
 ## 💻 DEMO
-
-### NodeJS Express
-
-- [Node/Express Demo on Github](https://github.com/Marketto/codice-fiscale-utils/tree/master/demo/express)
 
 ### VueJs
 

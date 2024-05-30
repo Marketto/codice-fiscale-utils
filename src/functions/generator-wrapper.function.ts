@@ -1,4 +1,4 @@
-import IGeneratorWrapper from "../interfaces/generator-wrapper.interface";
+import type IGeneratorWrapper from "../interfaces/generator-wrapper.interface";
 export default function generatorWrapper<
 	T = unknown,
 	TReturn = any,

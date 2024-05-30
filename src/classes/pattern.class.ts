@@ -34,8 +34,8 @@ import {
 	MultiFormatDate,
 } from "../date-utils/";
 import Omocodes from "../enums/omocodes.enum";
-import IPersonalInfo from "../interfaces/personal-info.interface";
-import Genders from "../types/genders.type";
+import type IPersonalInfo from "../interfaces/personal-info.interface";
+import type Genders from "../types/genders.type";
 import CfuError from "./cfu-error.class";
 import Gender from "./gender.class";
 import Parser from "./parser.class";

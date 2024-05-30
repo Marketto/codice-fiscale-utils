@@ -7,7 +7,7 @@ import {
 	DEFAULT_CREATION_DATE,
 	toUtf8,
 } from "../utils";
-import { IMappedLocationType } from "../models/mapped-location-type.interface";
+import type { IMappedLocationType } from "../models/mapped-location-type.interface";
 
 const MERGE_MAP: {
 	[key: string]: (valS: string | null, valD: string | null) => string | null;

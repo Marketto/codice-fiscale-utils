@@ -11,7 +11,7 @@ import { PlaceListDeDupe } from "../transforms/place-list-de-dupe";
 import { PlaceListUnZip } from "../transforms/place-list-unzip";
 import { errorHandler } from "../utils";
 import { XlsxToJson } from "../transforms/xlsx-to-json";
-import { IAssetGeneratorConfigResource } from "../models/asset-generator-config-resource.interface";
+import type { IAssetGeneratorConfigResource } from "../models/asset-generator-config-resource.interface";
 
 const streamList: NodeJS.ReadableStream[] = locationResources.resources.map(
 	(cfg) => {

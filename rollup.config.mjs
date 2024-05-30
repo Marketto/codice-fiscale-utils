@@ -1,10 +1,11 @@
 import path from "path";
-import pkg from "./package.json";
-import tsconfig from "./tsconfig.json";
+import pkg from "./package.json" with { type: "json" };;
+import tsconfig from "./tsconfig.json" with { type: "json" };
 import rollupPluginTs from "rollup-plugin-ts";
-import { terser } from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
 import builtins from "rollup-plugin-node-builtins";
 import license from "rollup-plugin-license";
+import dts from 'rollup-plugin-dts'
 
 const baseConf = {
     external: [
@@ -27,7 +28,7 @@ const baseConf = {
                     file: path.join(".", "src/banner"),
                 },
             },
-            cwd: __dirname,
+            //cwd: __dirname,
         }),
     ],
 };
@@ -37,8 +38,8 @@ const rollupCjsConf = rollupPluginTs({
         ...tsconfig.compilerOptions,
     },
     hook: {
-		declarationStats: declarationStats => console.log(declarationStats)
-	}
+        declarationStats: declarationStats => console.log(declarationStats)
+    }
 });
 const rollupModuleConf = rollupPluginTs({
     tsconfig: {
@@ -54,8 +55,18 @@ const rollupBrowserConf = rollupPluginTs({
         target: "ES2015",
     },
 });
+const rollupTypingConf = rollupPluginTs({
+    output: [{
+        file: pkg.typings,
+        format: 'es'
+    }],
+    plugins: [
+        dts()
+    ],
+})
 
 export default [
+    // JS
     {
         ...baseConf,
         output: {
@@ -70,6 +81,7 @@ export default [
             ...baseConf.plugins,
         ],
     },
+    // MJS
     {
         ...baseConf,
         output: {
@@ -83,11 +95,12 @@ export default [
             }),
             rollupModuleConf,
             terser({
-                sourcemap: true
+                sourceMap: true
             }),
             ...baseConf.plugins,
         ],
     },
+    // JS minified IIFE
     {
         ...baseConf,
         output: {
@@ -101,9 +114,27 @@ export default [
             }),
             rollupBrowserConf,
             terser({
-                sourcemap: true
+                sourceMap: true
             }),
             ...baseConf.plugins,
         ],
     },
+    // typings.d.ts
+    {
+        external: [
+            ...Object.keys(pkg.dependencies || {}),
+        ],
+        input: "src/index.ts",
+        output: [{
+            file: pkg.typings,
+            format: 'es',
+            globals: {
+                "@marketto/diacritic-remover": "DiacriticRemover",
+                "moment": "moment",
+            },
+        }],
+        plugins: [
+            dts(),
+        ],
+    }
 ];

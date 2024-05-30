@@ -1,4 +1,4 @@
-import { ColumnType } from "./column-type.type";
+import type { ColumnType } from "./column-type.type";
 
 export interface IAssetGeneratorConfigResource {
 	/**
