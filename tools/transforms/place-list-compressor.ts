@@ -8,7 +8,7 @@ import {
 	IPartialCompressedDataset,
 } from "../utils";
 import { DataSourceCodeEnum } from "../models/data-source-code.enum";
-import { IMappedLocationType } from "../models/mapped-location-type.interface";
+import type { IMappedLocationType } from "../models/mapped-location-type.interface";
 
 export const compressBelfioreCode = (belfioreCode: string): string =>
 	belfioreToInt(belfioreCode).toString(32).padStart(3, "0");

@@ -1,4 +1,4 @@
-import { IAssetGeneratorConfigResource } from "./asset-generator-config-resource.interface";
+import type { IAssetGeneratorConfigResource } from "./asset-generator-config-resource.interface";
 import { DataSourceCodeEnum } from "./data-source-code.enum";
 
 export interface IAssetGeneratorConfigLicense {

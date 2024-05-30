@@ -1,7 +1,7 @@
 import {
 	Belfiore,
 	BelfioreConnector,
-	BelfiorePlace,
+	type BelfiorePlace,
 } from "./belfiore-connector";
 import CFMismatchValidator from "./classes/cf-mismatch-validator.class";
 import CheckDigitizer from "./classes/check-digitizer.class";
@@ -13,19 +13,37 @@ import * as VALIDATOR from "./const/matcher.const";
 import * as Matcher from "./const/matcher.const";
 import {
 	DATE_MATCHER,
-	DateDay,
-	DateMonth,
+	type DateDay,
+	type DateMonth,
 	DateUtils,
-	MultiFormatDate,
+	type MultiFormatDate,
 } from "./date-utils/";
 import BirthMonth from "./enums/birth-month.enum";
 import CRC from "./enums/crc.enum";
 import Omocodes from "./enums/omocodes.enum";
-import Genders from "./types/genders.type";
+import type Genders from "./types/genders.type";
 
 export type { BelfiorePlace, DateDay, DateMonth, Genders, MultiFormatDate };
 
 export {
+	Belfiore,
+	BelfioreConnector,
+	BirthMonth,
+	CFMismatchValidator,
+	CheckDigitizer,
+	CRC,
+	DATE_MATCHER,
+	DateUtils,
+	Gender,
+	Omocodes,
+	Parser,
+	VALIDATOR,
+	Matcher,
+	Pattern,
+	Validator,
+};
+
+export default {
 	Belfiore,
 	BelfioreConnector,
 	BirthMonth,

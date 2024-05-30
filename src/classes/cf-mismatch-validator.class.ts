@@ -17,8 +17,8 @@ import {
 	YEAR_SIZE,
 } from "../const/cf-offsets.const";
 import { DateUtils, MultiFormatDate } from "../date-utils/";
-import IPersonalInfo from "../interfaces/personal-info.interface";
-import Genders from "../types/genders.type";
+import type IPersonalInfo from "../interfaces/personal-info.interface";
+import type Genders from "../types/genders.type";
 import CheckDigitizer from "./check-digitizer.class";
 import Parser from "./parser.class";
 import Pattern from "./pattern.class";

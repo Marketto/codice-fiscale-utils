@@ -1,10 +1,12 @@
 ## CHANGELOG
 
-### 2.2.0 - (2024-05-28)
+### 2.2.0 - (2024-05-31)
 
 - Added default export
 - Removed Express demo
-- Added Verbatim Module Syntax import to README.MD
+- Updated all rollup libs & plugins
+- All interface and type imports are properly defined as `import type`
+- Added dist/typings.d.ts to build script, no need to rely on source code anymore
 - Changed CF place/date validation logics: CF might be generated after owner's birth date except for birtdates prior CF introduction (29/09/1973)
 - Assets generator script refactored
 - Assets and source links update

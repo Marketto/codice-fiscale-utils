@@ -2,7 +2,7 @@ import _ from "lodash";
 import moment from "moment";
 import { Transform, TransformCallback, TransformOptions } from "stream";
 import { cleanObject, toUtf8 } from "../utils";
-import { IAssetGeneratorConfigResource } from "../models/asset-generator-config-resource.interface";
+import type { IAssetGeneratorConfigResource } from "../models/asset-generator-config-resource.interface";
 
 export const clearValue = (value?: string) => {
 	if (!!value && typeof value !== "string") {
