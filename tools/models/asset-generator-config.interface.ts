@@ -11,6 +11,7 @@ export interface IAssetGeneratorConfigLicense {
 }
 
 export interface IAssetGeneratorConfig {
+	resourceGroupKey: string;
 	resources: IAssetGeneratorConfigResource[];
 	licenses: {
 		[id in keyof typeof DataSourceCodeEnum]: IAssetGeneratorConfigLicense;

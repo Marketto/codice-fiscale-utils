@@ -1,13 +1,9 @@
 import _ from "lodash";
 import moment from "moment";
 import { Transform, TransformCallback } from "stream";
-import {
-	belfioreToInt,
-	cleanObject,
-	DEFAULT_CREATION_DATE,
-	toUtf8,
-} from "../utils";
+import { belfioreToInt, cleanObject, DEFAULT_CREATION_DATE } from "../utils";
 import type { IMappedLocationType } from "../models/mapped-location-type.interface";
+import fs from "fs";
 
 const MERGE_MAP: {
 	[key: string]: (valS: string | null, valD: string | null) => string | null;
@@ -48,14 +44,23 @@ export const merge = <T extends { [key: string]: any }>(...entries: T[]) => {
 	return cleanObject(merged);
 };
 
-export const deDupeList = (dataList: IMappedLocationType[]) =>
-	Object.entries(_.groupBy(dataList, "belfioreCode"))
-		.map(([belfioreCode, entries]) => ({ ...merge(...entries), belfioreCode }))
-		.sort(
-			(a, b) => belfioreToInt(a.belfioreCode) - belfioreToInt(b.belfioreCode)
-		);
+export const deDupeList = (dataList: IMappedLocationType[], groupKey: string) =>
+	Object.entries(_.groupBy(dataList, groupKey)).map(
+		([groupValue, entries]) => ({
+			...merge(...entries),
+			[groupKey]: groupValue,
+		})
+	);
 
 export class PlaceListDeDupe extends Transform {
+	private groupKey: string;
+
+	constructor(opts: { groupKey: string }) {
+		super({
+			objectMode: true,
+		});
+		this.groupKey = opts.groupKey;
+	}
 	protected storage: any[] = [];
 	public _transform(chunk: any, encoding: string, callback: TransformCallback) {
 		let element;
@@ -68,7 +73,7 @@ export class PlaceListDeDupe extends Transform {
 				return callback(err as Error);
 			}
 		}
-		if (element?.belfioreCode) {
+		if (element?.[this.groupKey]) {
 			this.storage.push(element);
 		}
 		callback();
@@ -77,7 +82,13 @@ export class PlaceListDeDupe extends Transform {
 	public _flush(callback: TransformCallback) {
 		let ddl;
 		try {
-			ddl = deDupeList(this.storage);
+			const firstDedupe = deDupeList(this.storage, this.groupKey).filter(
+				({ belfioreCode }) => !!belfioreCode
+			);
+			ddl = deDupeList(firstDedupe, "belfioreCode").sort(
+				(a, b) => belfioreToInt(a.belfioreCode) - belfioreToInt(b.belfioreCode)
+			);
+			fs.writeFileSync("./test.json", JSON.stringify(ddl, null, 4));
 		} catch (err) {
 			this.storage.length = 0;
 			return callback(err as Error);
