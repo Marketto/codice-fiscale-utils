@@ -3,7 +3,6 @@ import moment from "moment";
 import { Transform, TransformCallback } from "stream";
 import { belfioreToInt, cleanObject, DEFAULT_CREATION_DATE } from "../utils";
 import type { IMappedLocationType } from "../models/mapped-location-type.interface";
-import fs from "fs";
 
 const MERGE_MAP: {
 	[key: string]: (valS: string | null, valD: string | null) => string | null;
@@ -88,7 +87,6 @@ export class PlaceListDeDupe extends Transform {
 			ddl = deDupeList(firstDedupe, "belfioreCode").sort(
 				(a, b) => belfioreToInt(a.belfioreCode) - belfioreToInt(b.belfioreCode)
 			);
-			fs.writeFileSync("./test.json", JSON.stringify(ddl, null, 4));
 		} catch (err) {
 			this.storage.length = 0;
 			return callback(err as Error);
