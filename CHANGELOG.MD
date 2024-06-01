@@ -1,7 +1,9 @@
 ## CHANGELOG
 
-### 2.2.0 - (2024-05-31)
+### 2.2.0 - (2024-06-01)
 
+- Replaced jsdoc with typedoc
+- Added **Validator**.**codiceFiscale(** _string_ **)**.**errors** to get verbose errors for the given CF
 - Added default export
 - Removed Express demo
 - Updated all rollup libs & plugins
