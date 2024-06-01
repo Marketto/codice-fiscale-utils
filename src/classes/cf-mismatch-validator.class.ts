@@ -22,6 +22,7 @@ import type Genders from "../types/genders.type";
 import CheckDigitizer from "./check-digitizer.class";
 import Parser from "./parser.class";
 import Pattern from "./pattern.class";
+import type IMismatchVerboseErrors from "../interfaces/mismatch-verbose-errors.interface";
 
 export default class CFMismatchValidator {
 	constructor(private codiceFiscale: string) {}
@@ -45,6 +46,7 @@ export default class CFMismatchValidator {
 	private get hasBirthPlace() {
 		return this.codiceFiscale.length >= PLACE_OFFSET + PLACE_SIZE;
 	}
+
 	private get hasCRC() {
 		return this.codiceFiscale.length >= CRC_OFFSET + CRC_SIZE;
 	}
@@ -133,6 +135,64 @@ export default class CFMismatchValidator {
 		return (
 			this.hasBirthPlace && !!birthPlace && !this.matchBirthPlace(birthPlace)
 		);
+	}
+
+	/**
+	 * Check the given cf validity by form, birth date/place and digit code
+	 * @param codiceFiscale Complete CF to parse
+	 * @return Verbose errors
+	 */
+	public get errors(): IMismatchVerboseErrors {
+		return {
+			// Checking lastName validity
+			...(Parser.cfToLastName(this.codiceFiscale)
+				? {}
+				: { lastName: "MISSING_OR_INVALID_LAST_NAME" }),
+			// Checking firstName validity
+			...(Parser.cfToFirstName(this.codiceFiscale)
+				? {}
+				: { firstName: "MISSING_OR_INVALID_FIRST_NAME" }),
+			// Checking Date validity
+			...(Parser.cfToBirthDate(this.codiceFiscale)
+				? {}
+				: { date: "MISSING_OR_INVALID_DATE" }),
+			// Checking Day validity
+			...(Parser.cfToBirthDay(this.codiceFiscale)
+				? {}
+				: { date: "MISSING_OR_INVALID_DAY" }),
+			// Checking Month validity
+			...(Parser.cfToBirthMonth(this.codiceFiscale)
+				? {}
+				: { date: "MISSING_OR_INVALID_MONTH" }),
+			// Checking Year validity
+			...(Parser.cfToBirthYear(this.codiceFiscale)
+				? {}
+				: { date: "MISSING_OR_INVALID_YEAR" }),
+			// Checking Gender validity
+			...(Parser.cfToGender(this.codiceFiscale)
+				? {}
+				: { gender: "MISSING_DAY" }),
+			// Checking Place validity
+			...(Parser.cfToBirthPlace(this.codiceFiscale, false)
+				? {}
+				: { place: "MISSING_OR_INVALID_PLACE" }),
+			// Checking Place Creation/Expiration vs Birthdate validity
+			...(Parser.cfToBirthPlace(this.codiceFiscale, true)
+				? {}
+				: {
+						place: "PLACE_EXPIRED_ON_NOT_YET_CREATED_ON_BIRTDATE",
+						date: "BIRTHDATE_OUT_OF_BIRTH_PLACE_LIFE_RANGE",
+				  }),
+			// Checking 16th char check digit validity
+			...(this.codiceFiscale
+				.substring(CRC_OFFSET, CRC_OFFSET + CRC_SIZE)
+				.toUpperCase() === CheckDigitizer.checkDigit(this.codiceFiscale)
+				? {}
+				: { crc: "INVALID_CRC_CODE" }),
+
+			// Checking length
+			...(this.hasCRC ? {} : { crc: "MISSING_CRC_CODE" }),
+		};
 	}
 
 	/**
