@@ -1,10 +1,15 @@
 {
+	"resourceGroupKey": "istatCode",
 	"resources": [
 		{
 			"uri": "https://www.istat.it/it/files//2011/01/Elenco-codici-e-denominazioni-unita-territoriali-estere.zip",
 			"target": "Elenco-codici-e-denominazioni-al-31_12_2023.xlsx",
 			"defaultSourceCode": "I",
 			"columns": {
+				"Codice ISTAT": {
+					"field": "istatCode",
+					"type": "number"
+				},
 				"Codice AT": {
 					"field": "belfioreCode",
 					"type": "text"
@@ -24,6 +29,10 @@
 			"target": "Elenco-Paesi-esteri-cessati.xlsx",
 			"defaultSourceCode": "I",
 			"columns": {
+				"Codice ISTAT": {
+					"field": "istatCode",
+					"type": "number"
+				},
 				"Codice AT": {
 					"field": "belfioreCode",
 					"type": "text"
@@ -43,10 +52,29 @@
 			}
 		},
 		{
+			"uri": "https://www.istat.it/it/files/2011/01/Elenco-Paesi-esteri-cessati.zip",
+			"target": "Elenco-Paesi-esteri-cessati.xlsx",
+			"defaultSourceCode": "I",
+			"columns": {
+				"Codice Stato/\r\nTerritorio_Figlio": {
+					"field": "istatCode",
+					"type": "number"
+				},
+				"Anno evento": {
+					"field": "creationDate",
+					"type": "year_end"
+				}
+			}
+		},
+		{
 			"uri": "https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.csv",
 			"defaultSourceCode": "I",
 			"delimiter": ";",
 			"columns": {
+				"Codice Comune formato numerico": {
+					"field": "istatCode",
+					"type": "number"
+				},
 				"Codice Catastale del comune": {
 					"field": "belfioreCode",
 					"type": "text"
@@ -66,6 +94,10 @@
 			"defaultSourceCode": "MI",
 			"delimiter": ",",
 			"columns": {
+				"CODISTAT": {
+					"field": "istatCode",
+					"type": "number"
+				},
 				"CODCATASTALE": {
 					"field": "belfioreCode",
 					"type": "text"

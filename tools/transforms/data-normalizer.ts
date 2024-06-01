@@ -33,8 +33,12 @@ const TYPE_STRATEGY_MAP = {
 				? toFirstLetterUpperCase(value)
 				: value
 		),
-	number: (value: any) =>
-		typeof value === "number" && !isNaN(value) ? value : undefined,
+	number: (value: any) => {
+		const parsedValue =
+			typeof value === "number" ? value : parseFloat(`${value}`);
+
+		return isNaN(parsedValue) ? undefined : parsedValue;
+	},
 	date_start: (value: any) =>
 		value && moment(value, "YYYY-MM-DD").startOf("day").toDate(),
 	date_end: (value: any) =>
@@ -74,6 +78,7 @@ export class DataNormalizer extends Transform {
 		if (!element) {
 			return callback();
 		}
+
 		const mappedEntry = cleanObject(
 			Object.entries(this.config?.columns || {}).reduce(
 				(aggr, [colName, { field, type }]) => ({
