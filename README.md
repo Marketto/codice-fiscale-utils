@@ -640,6 +640,18 @@ Validator.birthDatePlaceMismatch("", "Palermo"); //false
 Validator.birthDatePlaceMismatch("", ""); //false
 ```
 
+#### errors
+
+```javascript
+Validator.codiceFiscale("GSTPPP99C06D620V").errors;
+/*
+{
+	place: "PLACE_EXPIRED_ON_NOT_YET_CREATED_ON_BIRTDATE",
+	date: "BIRTHDATE_OUT_OF_BIRTH_PLACE_LIFE_RANGE",
+}
+*/
+```
+
 #### matchPersonalInfo
 
 ```javascript
