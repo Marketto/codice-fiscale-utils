@@ -289,9 +289,13 @@ export default class Parser {
 	/**
 	 * Parse birth place information
 	 * @param codiceFiscale Partial or complete CF to parse
+	 * @param checkBirthDateConsistency Ensure birthday is between creation and expiran date of the cf city or country, default value: true
 	 * @returns Birth place
 	 */
-	public static cfToBirthPlace(codiceFiscale: string): BelfiorePlace | null {
+	public static cfToBirthPlace(
+		codiceFiscale: string,
+		checkBirthDateConsistency: boolean = true
+	): BelfiorePlace | null {
 		if (
 			typeof codiceFiscale !== "string" ||
 			codiceFiscale.length < PLACE_OFFSET + PLACE_SIZE
@@ -314,16 +318,24 @@ export default class Parser {
 		}
 
 		const { creationDate, expirationDate } = birthPlace;
-		if (creationDate || expirationDate) {
+		if ((creationDate || expirationDate) && checkBirthDateConsistency) {
 			const birthDate = this.cfToBirthDate(codiceFiscale);
-			if (birthDate) {
-				let validityCheck = true;
-				if (expirationDate) {
-					validityCheck =
-						moment(expirationDate).isSameOrAfter(birthDate, "day") ||
-						moment(CF_INTRODUCTION_DATE).isSameOrAfter(birthDate, "day");
-				}
-				if (!validityCheck) {
+			const isBirthDateAfterCfIntroduction = moment(
+				CF_INTRODUCTION_DATE
+			).isBefore(birthDate, "day");
+			const isBirthPlaceCountry = !birthPlace.province && !!birthPlace.iso3166;
+
+			if (
+				birthDate &&
+				(isBirthDateAfterCfIntroduction || isBirthPlaceCountry)
+			) {
+				const datePlaceConsistency =
+					// BirthDay is before expiration date
+					(!expirationDate ||
+						moment(birthDate).isBefore(expirationDate, "day")) &&
+					// BirthDay is after creation date
+					(!creationDate || moment(birthDate).isAfter(creationDate, "day"));
+				if (!datePlaceConsistency) {
 					return null;
 				}
 			}

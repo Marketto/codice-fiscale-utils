@@ -6,6 +6,7 @@ import cfToBirthDateTest from "./parser/cfToBirthDate.test";
 import cfToFirstNameTest from "./parser/cfToFirstName.test";
 import cfToGenderTest from "./parser/cfToGender.test";
 import cfToLastNameTest from "./parser/cfToLastName.test";
+import cfToBirthPlace from "./parser/cfToBirthPlace.test";
 import dateGenderToCfTest from "./parser/dateGenderToCf.test";
 import dayGenderToCfTest from "./parser/dayGenderToCf.test";
 import encodeCfTest from "./parser/encodeCf.test";
@@ -19,32 +20,33 @@ import placeToCfTest from "./parser/placeToCf.test";
 import yearToCfTest from "./parser/yearToCf.test";
 
 describe("Parser", () => {
-    describe("constants", () => bitmapTest());
+	describe("constants", () => bitmapTest());
 
-    describe("methods from CF", () => {
-        cfDeomocodeTest();
-        cfOmocodeIdTest();
-        cfOmocodeTest();
-        cfToLastNameTest();
-        cfToFirstNameTest();
-        cfToGenderTest();
-        cfToBirthDateTest();
-        cfDecodeTest();
-    });
+	describe("methods from CF", () => {
+		cfDeomocodeTest();
+		cfOmocodeIdTest();
+		cfOmocodeTest();
+		cfToLastNameTest();
+		cfToFirstNameTest();
+		cfToGenderTest();
+		cfToBirthDateTest();
+		cfToBirthPlace();
+		cfDecodeTest();
+	});
 
-    describe("methods to CF", () => {
-        lastNameToCfTest();
-        firstNameToCfTest();
-        yearToCfTest();
-        monthToCfTest();
-        dayGenderToCfTest();
-        dateGenderToCfTest();
-        placeToCfTest();
-        encodeCfTest();
-    });
+	describe("methods to CF", () => {
+		lastNameToCfTest();
+		firstNameToCfTest();
+		yearToCfTest();
+		monthToCfTest();
+		dayGenderToCfTest();
+		dateGenderToCfTest();
+		placeToCfTest();
+		encodeCfTest();
+	});
 
-    describe("utils", () => {
-        parsePlaceTest();
-        parseDateTest();
-    });
+	describe("utils", () => {
+		parsePlaceTest();
+		parseDateTest();
+	});
 });

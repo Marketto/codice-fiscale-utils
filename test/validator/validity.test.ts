@@ -19,6 +19,17 @@ export default () => {
 			Validator.codiceFiscale("GSTPPP99C06D620V").invalid.should.be.true;
 			Validator.codiceFiscale("").invalid.should.be.false;
 		});
+		it("errors", () => {
+			Validator.codiceFiscale("VRNGNY07D68C351V").errors.should.be.empty;
+			Validator.codiceFiscale("VRNGNY07D68C351K").errors.should.have.property(
+				"crc",
+				"INVALID_CRC_CODE"
+			);
+			Validator.codiceFiscale("GSTPPP99C06D620V").errors.should.contains({
+				place: "PLACE_EXPIRED_ON_NOT_YET_CREATED_ON_BIRTDATE",
+				date: "BIRTHDATE_OUT_OF_BIRTH_PLACE_LIFE_RANGE",
+			});
+		});
 	});
 	describe("Personal info", () => {
 		describe("lastName", () => {

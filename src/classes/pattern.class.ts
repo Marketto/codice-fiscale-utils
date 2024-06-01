@@ -267,7 +267,7 @@ export default class Pattern {
 					} else if (year) {
 						dtParams = Parser.yearMonthDayToDate(year, month, day);
 					}
-					const generator: Array<() => RegExp> = [
+					const generator: (() => RegExp)[] = [
 						() => this.cfLastName(lastName),
 						() => this.cfFirstName(firstName),
 						() => this.cfDateGender(dtParams, gender),
