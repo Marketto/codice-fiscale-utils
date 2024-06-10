@@ -11,15 +11,6 @@ describe("Belfiore", () => {
 				).should.be.equal(13);
 			});
 		});
-		/*
-        describe("constructor", () => {
-            it("Should throw error providing both codeMatcher and province", () => {
-                expect(() => new BelfioreConnector(
-                    { data: [], licenses: [], codeMatcher: new RegExp("test"), province: "XX" }
-                )).to.throw();
-            });
-        });
-        */
 	});
 
 	describe("Belfiore", () => {
@@ -62,6 +53,21 @@ describe("Belfiore", () => {
 				expect(place).to.be.ok;
 				if (place) {
 					place.name.should.be.equalIgnoreCase("ROMA");
+				}
+			});
+			it("Should return the first entry of a dataset (Cecoslovacchia)", () => {
+				const place = Belfiore.findByName("Cecoslovacchia");
+				expect(place).to.be.ok;
+				if (place) {
+					place.name.should.be.equalIgnoreCase("Cecoslovacchia");
+				}
+			});
+
+			it("Should return the last entry of a dataset (Sud Sudan)", () => {
+				const place = Belfiore.findByName("Sud Sudan");
+				expect(place).to.be.ok;
+				if (place) {
+					place.name.should.be.equalIgnoreCase("SUD SUDAN");
 				}
 			});
 		});
@@ -278,25 +284,4 @@ describe("Belfiore", () => {
 			});
 		});
 	});
-
-	/*
-    describe("Belfiore.nameByIndex", () => {
-        it("Should return Bologna @ 0", () => {
-            Belfiore.nameByIndex(targetData.name, 0).should.be.equal("Cecoslovacchia");
-        });
-        it("Should return Bologna @ 3", () => {
-            nameByIndex(targetData.name, 3).should.be.equal("Unione Sovietica");
-        });
-        it("Should return Bologna @ last position", () => {
-            nameByIndex(targetData.name, targetData.belfioreCode.length / 3 - 1).should.be.equal("Yemen del Sud");
-        });
-        it("Should return null @ last position +1", () => {
-            try {
-                nameByIndex(targetData.name, targetData.belfioreCode.length / 3);
-            } catch (err) {
-                expect(err).to.be.ok;
-            }
-        });
-    });
-    */
 });
