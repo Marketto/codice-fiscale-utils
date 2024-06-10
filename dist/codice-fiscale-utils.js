@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 2.1.2
+ * @marketto/codice-fiscale-utils 2.2.1
  * Copyright (c) 2019-2021, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  * ============================================================
@@ -308,7 +308,7 @@ class BelfioreConnector {
         if (matcher) {
             for (let startIndex = 0, entryIndex = 0; startIndex < dataSource.name.length; entryIndex++) {
                 const endIndex = dataSource.name.indexOf("|", startIndex + 1) + 1 ||
-                    dataSource.name.length;
+                    dataSource.name.length + 1;
                 const targetName = dataSource.name.substring(startIndex, endIndex - 1);
                 if (matcher.test(targetName)) {
                     yield entryIndex;
@@ -353,16 +353,18 @@ class BelfioreConnector {
         if (resourceData.belfioreCode.length - belfioreIndex < 3) {
             return null;
         }
-        const belFioreInt = parseInt(resourceData.belfioreCode.substr(belfioreIndex, 3), 32);
+        const belFioreInt = parseInt(resourceData.belfioreCode.substring(belfioreIndex, belfioreIndex + 3), 32);
         const belfioreCode = BelfioreConnector.belfioreFromInt(belFioreInt);
-        const code = resourceData.provinceOrCountry.substr(index * 2, 2);
+        const code = resourceData.provinceOrCountry.substring(index * 2, index * 2 + 2);
         if ((this.province && this.province !== code) ||
             (this.codeMatcher && !this.codeMatcher.test(belfioreCode))) {
             return null;
         }
         const dateIndex = index * 4;
-        const creationDate = BelfioreConnector.decodeDate((resourceData.creationDate || "").substr(dateIndex, 4) || "0").startOf("day");
-        const expirationDate = BelfioreConnector.decodeDate((resourceData.expirationDate || "").substr(dateIndex, 4) || "2qn13").endOf("day");
+        const creationDate = BelfioreConnector.decodeDate((resourceData.creationDate || "").substring(dateIndex, dateIndex + 4) ||
+            "0").startOf("day");
+        const expirationDate = BelfioreConnector.decodeDate((resourceData.expirationDate || "").substring(dateIndex, dateIndex + 4) ||
+            "2qn13").endOf("day");
         if ((this.fromDate &&
             resourceData.expirationDate &&
             this.fromDate.isAfter(expirationDate, "day")) ||
@@ -375,7 +377,7 @@ class BelfioreConnector {
         const licenseIndex = parseInt(resourceData.dataSource, 32)
             .toString(2)
             .padStart((resourceData.belfioreCode.length * 2) / 3, "0")
-            .substr(index * 2, 2);
+            .substring(index * 2, index * 2 + 2);
         const dataSource = this.licenses[parseInt(licenseIndex, 2)];
         const location = {
             belfioreCode,

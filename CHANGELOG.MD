@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 2.2.1 (2024-06-10)
+
+- #108 Fixed Belfiore findByName issue related to the last entry of each dataset
+
 ### 2.2.0 - (2024-06-01)
 
 - Replaced jsdoc with typedoc
