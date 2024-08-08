@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### 2.2.2 (2024-06-10)
+
+- #111 Fixed firstName and lastName validators to handle compund names
+- #113 Fixed Skipping place creation/expiration date vs birth place for birth dates prior cf introduction plus 5 years of tolerance
+
 ### 2.2.1 (2024-06-10)
 
 - #108 Fixed Belfiore findByName issue related to the last entry of each dataset
