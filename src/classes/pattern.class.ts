@@ -293,18 +293,18 @@ export default class Pattern {
 		return this.isolatedInsensitiveTailor(matcher);
 	}
 
+	private static LETTER_SET: string = `[A-Z${diacriticRemover.matcherBy(
+		/^[A-Z]$/iu
+	)}]`;
+	private static SEPARATOR_SET: string = "(?:'?\\s*)";
+
 	/**
 	 * Returns lastName validator based on given cf or generic
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @return Generic or specific regular expression
 	 */
 	public static lastName(codiceFiscale?: string): RegExp {
-		const LETTER_SET: string = `[A-Z${diacriticRemover.matcherBy(
-			/^[A-Z]$/iu
-		)}]`;
-		const SEPARATOR_SET: string = "[' ]";
-		const ANY_LETTER: string = `(?:${LETTER_SET}+${SEPARATOR_SET}?)`;
-		let matcher: string = `${ANY_LETTER}+`;
+		let matcher: string = `${this.LETTER_SET}+`;
 		if (codiceFiscale && /^[A-Z]{1,3}/iu.test(codiceFiscale)) {
 			const lastNameCf: string = codiceFiscale.substr(0, 3);
 			const diacriticizer = (matchingChars: string) =>
@@ -325,24 +325,25 @@ export default class Pattern {
 				VOWEL_LIST +
 				diacriticRemover.matcherBy(new RegExp(`^[${VOWEL_LIST}]$`, "ui"));
 			const diacriticsVowelMatcher: string = `[${diacriticsVowelList}]`;
-			const midDiacriticVowelMatcher: string = `(?:${diacriticsVowelMatcher}${SEPARATOR_SET}?)*`;
-			const endingDiacritcVowelMatcher: string = `(?:${SEPARATOR_SET}?${midDiacriticVowelMatcher}${diacriticsVowelMatcher})?`;
+			const midDiacriticVowelMatcher: string = `(?:${diacriticsVowelMatcher}${this.SEPARATOR_SET})*`;
+			const endingDiacritcVowelMatcher: string = `(?:${this.SEPARATOR_SET}${midDiacriticVowelMatcher}${diacriticsVowelMatcher})?`;
 			switch (cons.length) {
 				case 3: {
 					const divider = midDiacriticVowelMatcher;
 					matcher =
 						divider +
-						cons.join(`${SEPARATOR_SET}?${divider}`) +
-						`(?:${SEPARATOR_SET}?${LETTER_SET}*${LETTER_SET})?`;
+						cons.join(`${this.SEPARATOR_SET}${divider}`) +
+						`(?:${this.SEPARATOR_SET}${this.LETTER_SET}*${this.LETTER_SET})?`;
 					break;
 				}
 				case 2: {
 					const possibilities = [
-						`${vow[0]}${midDiacriticVowelMatcher}${SEPARATOR_SET}?${cons[0]}${midDiacriticVowelMatcher}${cons[1]}`,
-						`${cons[0]}${SEPARATOR_SET}?` +
-							vow.join(`${SEPARATOR_SET}?`) +
-							`${SEPARATOR_SET}?${midDiacriticVowelMatcher}${cons[1]}`,
-						cons.join(`${SEPARATOR_SET}?`) + `${SEPARATOR_SET}?${vow[0]}`,
+						`${vow[0]}${midDiacriticVowelMatcher}${this.SEPARATOR_SET}${cons[0]}${midDiacriticVowelMatcher}${cons[1]}`,
+						`${cons[0]}${this.SEPARATOR_SET}` +
+							vow.join(`${this.SEPARATOR_SET}`) +
+							`${this.SEPARATOR_SET}${midDiacriticVowelMatcher}${cons[1]}`,
+						cons.join(`${this.SEPARATOR_SET}`) +
+							`${this.SEPARATOR_SET}${vow[0]}`,
 					];
 					matcher = `(?:${possibilities.join(
 						"|"
@@ -351,13 +352,13 @@ export default class Pattern {
 				}
 				case 1: {
 					const possibilities = [
-						vow.slice(0, 2).join(`${SEPARATOR_SET}?`) +
+						vow.slice(0, 2).join(`${this.SEPARATOR_SET}`) +
 							midDiacriticVowelMatcher +
-							cons.join(`${SEPARATOR_SET}?`),
-						`${vow[0]}${SEPARATOR_SET}?` +
-							cons.join(`${SEPARATOR_SET}?`) +
+							cons.join(`${this.SEPARATOR_SET}`),
+						`${vow[0]}${this.SEPARATOR_SET}` +
+							cons.join(`${this.SEPARATOR_SET}`) +
 							vow[1],
-						[cons[0], ...vow.slice(0, 2)].join(`${SEPARATOR_SET}?`),
+						[cons[0], ...vow.slice(0, 2)].join(`${this.SEPARATOR_SET}`),
 					];
 					matcher = `(?:${possibilities.join(
 						"|"
@@ -366,12 +367,18 @@ export default class Pattern {
 				}
 				default:
 					matcher = `${vow.join(
-						`${SEPARATOR_SET}?`
+						`${this.SEPARATOR_SET}`
 					)}${endingDiacritcVowelMatcher}`;
+			}
+
+			if (vow?.length + cons?.length < 3) {
+				return this.isolatedInsensitiveTailor(`\\s*(${matcher})\\s*`);
 			}
 		}
 
-		return this.isolatedInsensitiveTailor(` *(${matcher}) *`);
+		return this.isolatedInsensitiveTailor(
+			`\\s*((?:${matcher})(?:${this.SEPARATOR_SET}${this.LETTER_SET}+)*)\\s*`
+		);
 	}
 
 	/**
@@ -384,11 +391,6 @@ export default class Pattern {
 			codiceFiscale &&
 			new RegExp(`^[A-Z]{3}[${CONSONANT_LIST}]{3}`, "iu").test(codiceFiscale)
 		) {
-			const ANY_LETTER: string = `[A-Z${diacriticRemover.matcherBy(
-				/^[A-Z]$/iu
-			)}]`;
-			const SEPARATOR_SET: string = "(?:'? ?)";
-
 			const nameCf: string = codiceFiscale.substr(3, 3);
 
 			const cons: string[] = (
@@ -407,11 +409,11 @@ export default class Pattern {
 			);
 
 			const matcher: string =
-				`(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*${cons[0]}${SEPARATOR_SET}(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*(?:[${diacriticsConsonantList}]${SEPARATOR_SET}(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*)?` +
+				`(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*${cons[0]}${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*(?:[${diacriticsConsonantList}]${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*)?` +
 				cons
 					.slice(1, 3)
-					.join(`(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*`) +
-				`${ANY_LETTER}*`;
+					.join(`(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*`) +
+				`(?:${this.SEPARATOR_SET}${this.LETTER_SET}+)*`;
 
 			return this.isolatedInsensitiveTailor(matcher);
 		}

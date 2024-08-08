@@ -91,7 +91,7 @@ describe("Belfiore", () => {
 			it("Should throw an error for province not matching 2 letters code", () => {
 				try {
 					Belfiore.cities.byProvince("@3");
-				} catch (err: any) {
+				} catch (err) {
 					err?.should?.be?.an("Error");
 				}
 			});
