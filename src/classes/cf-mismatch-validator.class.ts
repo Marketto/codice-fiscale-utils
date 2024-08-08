@@ -128,6 +128,7 @@ export default class CFMismatchValidator {
 		}
 		return false;
 	}
+
 	/**
 	 * @param birthPlace BirthPlace, place name or BelfioreCode
 	 */
@@ -180,7 +181,7 @@ export default class CFMismatchValidator {
 			...(Parser.cfToBirthPlace(this.codiceFiscale, true)
 				? {}
 				: {
-						place: "PLACE_EXPIRED_ON_NOT_YET_CREATED_ON_BIRTDATE",
+						place: "PLACE_EXPIRED_OR_NOT_YET_CREATED_ON_BIRTDATE",
 						date: "BIRTHDATE_OUT_OF_BIRTH_PLACE_LIFE_RANGE",
 				  }),
 			// Checking 16th char check digit validity

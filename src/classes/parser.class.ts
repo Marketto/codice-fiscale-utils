@@ -320,15 +320,13 @@ export default class Parser {
 		const { creationDate, expirationDate } = birthPlace;
 		if ((creationDate || expirationDate) && checkBirthDateConsistency) {
 			const birthDate = this.cfToBirthDate(codiceFiscale);
-			const isBirthDateAfterCfIntroduction = moment(
-				CF_INTRODUCTION_DATE
-			).isBefore(birthDate, "day");
-			const isBirthPlaceCountry = !birthPlace.province && !!birthPlace.iso3166;
+			const isBirthDateAfterCfIntroduction = moment(CF_INTRODUCTION_DATE)
+				// Adding some tolerance
+				.add(5, "years")
+				.isBefore(birthDate, "day");
 
-			if (
-				birthDate &&
-				(isBirthDateAfterCfIntroduction || isBirthPlaceCountry)
-			) {
+			// Skipping birthDate vs Creation/Expiration check for people born up to 5y after cf introduction
+			if (birthDate && isBirthDateAfterCfIntroduction) {
 				const datePlaceConsistency =
 					// BirthDay is before expiration date
 					(!expirationDate ||
@@ -508,6 +506,12 @@ export default class Parser {
 		return date.toDate();
 	}
 
+	/**
+	 * Parse Place information to return city or country details
+	 * @param place Belfiore place instance, belfiore code or city/country name
+	 * @param scopedBelfioreConnector BelfioreConnector
+	 * @returns BelfiorePlace instance with the target city or country details
+	 */
 	public static parsePlace(
 		place: BelfiorePlace | string,
 		scopedBelfioreConnector: BelfioreConnector = Belfiore
@@ -526,7 +530,7 @@ export default class Parser {
 	}
 
 	/**
-	 * Parse a Dated and Gender information to create Date/Gender CF part
+	 * Parse Date and Gender information to create Date/Gender CF part
 	 * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
 	 * @param gender Gender enum value
 	 * @returns Birth date and Gender CF code
