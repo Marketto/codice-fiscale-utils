@@ -5,7 +5,14 @@ export default () => {
 	describe("LastName", () => {
 		it("match", () => {
 			expect(
-				Validator.codiceFiscale("VRNGNY07D68C351V").matchLastName("Vareni")
+				Validator.codiceFiscale("VRNGNY07D68C351V").matchLastName(
+					"Vareni Loreni"
+				)
+			).to.be.true;
+			expect(
+				Validator.codiceFiscale("VRNGNY07D68C351V").matchLastName(
+					"Vareni Massimo Decimo Meridio"
+				)
 			).to.be.true;
 			expect(Validator.codiceFiscale("VRN").matchLastName("Vareni")).to.be.true;
 			expect(Validator.codiceFiscale("UXX").matchLastName("U")).to.be.true;
@@ -40,7 +47,12 @@ export default () => {
 	describe("FirstName", () => {
 		it("match", () => {
 			expect(
-				Validator.codiceFiscale("VRNGNY07D68C351V").matchFirstName("Genny")
+				Validator.codiceFiscale("VRNGNY07D68C351V").matchFirstName("Genny John")
+			).to.be.true;
+			expect(
+				Validator.codiceFiscale("VRNGNY07D68C351V").matchFirstName(
+					"Genny Bruce Wayne"
+				)
 			).to.be.true;
 			expect(Validator.codiceFiscale("VRNGNY").matchFirstName("Genny")).to.be
 				.true;
