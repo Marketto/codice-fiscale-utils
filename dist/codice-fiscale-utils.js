@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 2.2.1
+ * @marketto/codice-fiscale-utils 2.2.2
  * Copyright (c) 2019-2021, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  * ============================================================
@@ -72,7 +72,7 @@ const CITIES_COUNTRIES = {
         }
     ],
     "sources": [
-        "https://www.istat.it/it/files//2011/01/Elenco-codici-e-denominazioni-unita-territoriali-estere.zip",
+        "https://www.istat.it/wp-content/uploads/2024/03/Elenco-codici-e-denominazioni-unita-territoriali-estere.zip",
         "https://www.istat.it/it/files/2011/01/Elenco-Paesi-esteri-cessati.zip",
         "https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.csv",
         "https://www.anagrafenazionale.interno.it/wp-content/uploads/ANPR_archivio_comuni.csv"
@@ -951,10 +951,12 @@ class Parser {
         const { creationDate, expirationDate } = birthPlace;
         if ((creationDate || expirationDate) && checkBirthDateConsistency) {
             const birthDate = this.cfToBirthDate(codiceFiscale);
-            const isBirthDateAfterCfIntroduction = moment(CF_INTRODUCTION_DATE).isBefore(birthDate, "day");
-            const isBirthPlaceCountry = !birthPlace.province && !!birthPlace.iso3166;
-            if (birthDate &&
-                (isBirthDateAfterCfIntroduction || isBirthPlaceCountry)) {
+            const isBirthDateAfterCfIntroduction = moment(CF_INTRODUCTION_DATE)
+                // Adding some tolerance
+                .add(5, "years")
+                .isBefore(birthDate, "day");
+            // Skipping birthDate vs Creation/Expiration check for people born up to 5y after cf introduction
+            if (birthDate && isBirthDateAfterCfIntroduction) {
                 const datePlaceConsistency = 
                 // BirthDay is before expiration date
                 (!expirationDate ||
@@ -1100,6 +1102,12 @@ class Parser {
         }
         return date.toDate();
     }
+    /**
+     * Parse Place information to return city or country details
+     * @param place Belfiore place instance, belfiore code or city/country name
+     * @param scopedBelfioreConnector BelfioreConnector
+     * @returns BelfiorePlace instance with the target city or country details
+     */
     static parsePlace(place, scopedBelfioreConnector = Belfiore) {
         let verifiedBirthPlace;
         if (!place) {
@@ -1116,7 +1124,7 @@ class Parser {
         return verifiedBirthPlace || null;
     }
     /**
-     * Parse a Dated and Gender information to create Date/Gender CF part
+     * Parse Date and Gender information to create Date/Gender CF part
      * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
      * @param gender Gender enum value
      * @returns Birth date and Gender CF code
@@ -1491,10 +1499,7 @@ class Pattern {
      * @return Generic or specific regular expression
      */
     static lastName(codiceFiscale) {
-        const LETTER_SET = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/iu)}]`;
-        const SEPARATOR_SET = "[' ]";
-        const ANY_LETTER = `(?:${LETTER_SET}+${SEPARATOR_SET}?)`;
-        let matcher = `${ANY_LETTER}+`;
+        let matcher = `${this.LETTER_SET}+`;
         if (codiceFiscale && /^[A-Z]{1,3}/iu.test(codiceFiscale)) {
             const lastNameCf = codiceFiscale.substr(0, 3);
             const diacriticizer = (matchingChars) => matchingChars
@@ -1507,46 +1512,50 @@ class Pattern {
             const diacriticsVowelList = VOWEL_LIST +
                 diacriticRemover.matcherBy(new RegExp(`^[${VOWEL_LIST}]$`, "ui"));
             const diacriticsVowelMatcher = `[${diacriticsVowelList}]`;
-            const midDiacriticVowelMatcher = `(?:${diacriticsVowelMatcher}${SEPARATOR_SET}?)*`;
-            const endingDiacritcVowelMatcher = `(?:${SEPARATOR_SET}?${midDiacriticVowelMatcher}${diacriticsVowelMatcher})?`;
+            const midDiacriticVowelMatcher = `(?:${diacriticsVowelMatcher}${this.SEPARATOR_SET})*`;
+            const endingDiacritcVowelMatcher = `(?:${this.SEPARATOR_SET}${midDiacriticVowelMatcher}${diacriticsVowelMatcher})?`;
             switch (cons.length) {
                 case 3: {
                     const divider = midDiacriticVowelMatcher;
                     matcher =
                         divider +
-                            cons.join(`${SEPARATOR_SET}?${divider}`) +
-                            `(?:${SEPARATOR_SET}?${LETTER_SET}*${LETTER_SET})?`;
+                            cons.join(`${this.SEPARATOR_SET}${divider}`) +
+                            `(?:${this.SEPARATOR_SET}${this.LETTER_SET}*${this.LETTER_SET})?`;
                     break;
                 }
                 case 2: {
                     const possibilities = [
-                        `${vow[0]}${midDiacriticVowelMatcher}${SEPARATOR_SET}?${cons[0]}${midDiacriticVowelMatcher}${cons[1]}`,
-                        `${cons[0]}${SEPARATOR_SET}?` +
-                            vow.join(`${SEPARATOR_SET}?`) +
-                            `${SEPARATOR_SET}?${midDiacriticVowelMatcher}${cons[1]}`,
-                        cons.join(`${SEPARATOR_SET}?`) + `${SEPARATOR_SET}?${vow[0]}`,
+                        `${vow[0]}${midDiacriticVowelMatcher}${this.SEPARATOR_SET}${cons[0]}${midDiacriticVowelMatcher}${cons[1]}`,
+                        `${cons[0]}${this.SEPARATOR_SET}` +
+                            vow.join(`${this.SEPARATOR_SET}`) +
+                            `${this.SEPARATOR_SET}${midDiacriticVowelMatcher}${cons[1]}`,
+                        cons.join(`${this.SEPARATOR_SET}`) +
+                            `${this.SEPARATOR_SET}${vow[0]}`,
                     ];
                     matcher = `(?:${possibilities.join("|")})${endingDiacritcVowelMatcher}`;
                     break;
                 }
                 case 1: {
                     const possibilities = [
-                        vow.slice(0, 2).join(`${SEPARATOR_SET}?`) +
+                        vow.slice(0, 2).join(`${this.SEPARATOR_SET}`) +
                             midDiacriticVowelMatcher +
-                            cons.join(`${SEPARATOR_SET}?`),
-                        `${vow[0]}${SEPARATOR_SET}?` +
-                            cons.join(`${SEPARATOR_SET}?`) +
+                            cons.join(`${this.SEPARATOR_SET}`),
+                        `${vow[0]}${this.SEPARATOR_SET}` +
+                            cons.join(`${this.SEPARATOR_SET}`) +
                             vow[1],
-                        [cons[0], ...vow.slice(0, 2)].join(`${SEPARATOR_SET}?`),
+                        [cons[0], ...vow.slice(0, 2)].join(`${this.SEPARATOR_SET}`),
                     ];
                     matcher = `(?:${possibilities.join("|")})${endingDiacritcVowelMatcher}`;
                     break;
                 }
                 default:
-                    matcher = `${vow.join(`${SEPARATOR_SET}?`)}${endingDiacritcVowelMatcher}`;
+                    matcher = `${vow.join(`${this.SEPARATOR_SET}`)}${endingDiacritcVowelMatcher}`;
+            }
+            if ((vow === null || vow === void 0 ? void 0 : vow.length) + (cons === null || cons === void 0 ? void 0 : cons.length) < 3) {
+                return this.isolatedInsensitiveTailor(`\\s*(${matcher})\\s*`);
             }
         }
-        return this.isolatedInsensitiveTailor(` *(${matcher}) *`);
+        return this.isolatedInsensitiveTailor(`\\s*((?:${matcher})(?:${this.SEPARATOR_SET}${this.LETTER_SET}+)*)\\s*`);
     }
     /**
      * Returns name validator based on given cf or generic
@@ -1556,8 +1565,6 @@ class Pattern {
     static firstName(codiceFiscale) {
         if (codiceFiscale &&
             new RegExp(`^[A-Z]{3}[${CONSONANT_LIST}]{3}`, "iu").test(codiceFiscale)) {
-            const ANY_LETTER = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/iu)}]`;
-            const SEPARATOR_SET = "(?:'? ?)";
             const nameCf = codiceFiscale.substr(3, 3);
             const cons = ((nameCf.match(new RegExp(`^[${CONSONANT_LIST}]{1,3}`, "ig")) ||
                 [])[0] || "")
@@ -1567,11 +1574,11 @@ class Pattern {
                 VOWEL_LIST,
                 CONSONANT_LIST,
             ].map((chars) => chars + diacriticRemover.matcherBy(new RegExp(`^[${chars}]$`, "ui")));
-            const matcher = `(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*${cons[0]}${SEPARATOR_SET}(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*(?:[${diacriticsConsonantList}]${SEPARATOR_SET}(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*)?` +
+            const matcher = `(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*${cons[0]}${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*(?:[${diacriticsConsonantList}]${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*)?` +
                 cons
                     .slice(1, 3)
-                    .join(`(?:[${diacriticsVowelList}]+${SEPARATOR_SET})*`) +
-                `${ANY_LETTER}*`;
+                    .join(`(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*`) +
+                `(?:${this.SEPARATOR_SET}${this.LETTER_SET}+)*`;
             return this.isolatedInsensitiveTailor(matcher);
         }
         return this.lastName((codiceFiscale || "").substr(3, 3));
@@ -1630,6 +1637,8 @@ class Pattern {
         return new RegExp(`^(?:${matcher})$`, "iu");
     }
 }
+Pattern.LETTER_SET = `[A-Z${diacriticRemover.matcherBy(/^[A-Z]$/iu)}]`;
+Pattern.SEPARATOR_SET = "(?:'?\\s*)";
 
 class CFMismatchValidator {
     constructor(codiceFiscale) {
@@ -1747,7 +1756,7 @@ class CFMismatchValidator {
             : { place: "MISSING_OR_INVALID_PLACE" })), (Parser.cfToBirthPlace(this.codiceFiscale, true)
             ? {}
             : {
-                place: "PLACE_EXPIRED_ON_NOT_YET_CREATED_ON_BIRTDATE",
+                place: "PLACE_EXPIRED_OR_NOT_YET_CREATED_ON_BIRTDATE",
                 date: "BIRTHDATE_OUT_OF_BIRTH_PLACE_LIFE_RANGE",
             })), (this.codiceFiscale
             .substring(CRC_OFFSET, CRC_OFFSET + CRC_SIZE)

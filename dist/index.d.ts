@@ -445,9 +445,15 @@ declare class Parser {
      * @returns Date or null if provided year/month/day are not valid
      */
     static yearMonthDayToDate(year: number | null | undefined, month?: DateMonth | null | undefined, day?: DateDay | null | undefined): Date | null;
+    /**
+     * Parse Place information to return city or country details
+     * @param place Belfiore place instance, belfiore code or city/country name
+     * @param scopedBelfioreConnector BelfioreConnector
+     * @returns BelfiorePlace instance with the target city or country details
+     */
     static parsePlace(place: BelfiorePlace | string, scopedBelfioreConnector?: BelfioreConnector): BelfiorePlace | null;
     /**
-     * Parse a Dated and Gender information to create Date/Gender CF part
+     * Parse Date and Gender information to create Date/Gender CF part
      * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
      * @param gender Gender enum value
      * @returns Birth date and Gender CF code
@@ -551,6 +557,8 @@ declare class Pattern {
      * @return CodiceFiscale matcher
      */
     static codiceFiscale(personalInfo?: IPersonalInfo): RegExp;
+    private static LETTER_SET;
+    private static SEPARATOR_SET;
     /**
      * Returns lastName validator based on given cf or generic
      * @param codiceFiscale Partial or complete CF to parse
