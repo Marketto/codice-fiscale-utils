@@ -1,101 +1,2974 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Parser | @marketto/codice-fiscale-utils</title><meta name="description" content="Documentation for @marketto/codice-fiscale-utils"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search" data-base=".."><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="../assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">@marketto/codice-fiscale-utils</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><ul class="tsd-breadcrumb"><li><a href="../modules.html">@marketto/codice-fiscale-utils</a></li><li><a href="Parser.html">Parser</a></li></ul><h1>Class Parser</h1></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L39">src/classes/parser.class.ts:39</a></li></ul></aside><section class="tsd-panel-group tsd-index-group"><section class="tsd-panel tsd-index-panel"><details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><h5 class="tsd-index-heading uppercase" role="button" aria-expanded="false" tabIndex="0"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="../assets/icons.svg#icon-chevronSmall"></use></svg> Index</h5></summary><div class="tsd-accordion-details"><section class="tsd-index-section"><h3 class="tsd-index-heading">Constructors</h3><div class="tsd-index-list"><a href="Parser.html#constructor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-512"></use></svg><span>constructor</span></a>
-</div></section><section class="tsd-index-section"><h3 class="tsd-index-heading">Properties</h3><div class="tsd-index-list"><a href="Parser.html#JOLLY_CHAR" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-1024"></use></svg><span>JOLLY_<wbr/>CHAR</span></a>
-<a href="Parser.html#OMOCODE_BITMAP" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-1024"></use></svg><span>OMOCODE_<wbr/>BITMAP</span></a>
-<a href="Parser.html#belfioreConnector" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-1024"></use></svg><span>belfiore<wbr/>Connector</span></a>
-</div></section><section class="tsd-index-section"><h3 class="tsd-index-heading">Methods</h3><div class="tsd-index-list"><a href="Parser.html#appyCaseToChar" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>appy<wbr/>Case<wbr/>To<wbr/>Char</span></a>
-<a href="Parser.html#cfDecode" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>Decode</span></a>
-<a href="Parser.html#cfDeomocode" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>Deomocode</span></a>
-<a href="Parser.html#cfOmocode" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>Omocode</span></a>
-<a href="Parser.html#cfOmocodeId" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>Omocode<wbr/>Id</span></a>
-<a href="Parser.html#cfToBirthDate" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Birth<wbr/>Date</span></a>
-<a href="Parser.html#cfToBirthDay" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Birth<wbr/>Day</span></a>
-<a href="Parser.html#cfToBirthMonth" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Birth<wbr/>Month</span></a>
-<a href="Parser.html#cfToBirthPlace" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Birth<wbr/>Place</span></a>
-<a href="Parser.html#cfToBirthYear" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Birth<wbr/>Year</span></a>
-<a href="Parser.html#cfToFirstName" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>First<wbr/>Name</span></a>
-<a href="Parser.html#cfToGender" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Gender</span></a>
-<a href="Parser.html#cfToLastName" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Last<wbr/>Name</span></a>
-<a href="Parser.html#charExtractor" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>char<wbr/>Extractor</span></a>
-<a href="Parser.html#charOmocode" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>char<wbr/>Omocode</span></a>
-<a href="Parser.html#checkBitmap" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>check<wbr/>Bitmap</span></a>
-<a href="Parser.html#dateGenderToCf" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>date<wbr/>Gender<wbr/>To<wbr/>Cf</span></a>
-<a href="Parser.html#dayGenderToCf" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>day<wbr/>Gender<wbr/>To<wbr/>Cf</span></a>
-<a href="Parser.html#encodeCf" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>encode<wbr/>Cf</span></a>
-<a href="Parser.html#firstNameToCf" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>first<wbr/>Name<wbr/>To<wbr/>Cf</span></a>
-<a href="Parser.html#lastNameToCf" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>last<wbr/>Name<wbr/>To<wbr/>Cf</span></a>
-<a href="Parser.html#monthToCf" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>month<wbr/>To<wbr/>Cf</span></a>
-<a href="Parser.html#parsePlace" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>parse<wbr/>Place</span></a>
-<a href="Parser.html#partialCfDeomocode" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>partial<wbr/>Cf<wbr/>Deomocode</span></a>
-<a href="Parser.html#placeToCf" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>place<wbr/>To<wbr/>Cf</span></a>
-<a href="Parser.html#yearMonthDayToDate" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>year<wbr/>Month<wbr/>Day<wbr/>To<wbr/>Date</span></a>
-<a href="Parser.html#yearToCf" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>year<wbr/>To<wbr/>Cf</span></a>
-</div></section></div></details></section></section><section class="tsd-panel-group tsd-member-group"><h2>Constructors</h2><section class="tsd-panel tsd-member"><a id="constructor" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="constructor.new_Parser" class="tsd-anchor"></a><span class="tsd-kind-constructor-signature">new <wbr/>Parser</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">belfioreConnector</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Parser.html" class="tsd-signature-type tsd-kind-class">Parser</a><a href="#constructor.new_Parser" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">belfioreConnector</span>: <span class="tsd-signature-type">IBelfioreConnector</span></span></li></ul></div><h4 class="tsd-returns-title">Returns <a href="Parser.html" class="tsd-signature-type tsd-kind-class">Parser</a></h4><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L40">src/classes/parser.class.ts:40</a></li></ul></aside></li></ul></section></section><section class="tsd-panel-group tsd-member-group"><h2>Properties</h2><section class="tsd-panel tsd-member tsd-is-private"><a id="JOLLY_CHAR" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>JOLLY_<wbr/>CHAR</span><a href="#JOLLY_CHAR" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">JOLLY_<wbr/>CHAR</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;*&quot;</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L673">src/classes/parser.class.ts:673</a></li></ul></aside></section><section class="tsd-panel tsd-member"><a id="OMOCODE_BITMAP" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>OMOCODE_<wbr/>BITMAP</span><a href="#OMOCODE_BITMAP" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">OMOCODE_<wbr/>BITMAP</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0b0111011011000000</span></div><div class="tsd-comment tsd-typography"><p>Default omocode bitmap</p>
-</div><div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L45">src/classes/parser.class.ts:45</a></li></ul></aside></section><section class="tsd-panel tsd-member tsd-is-private"><a id="belfioreConnector" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>belfiore<wbr/>Connector</span><a href="#belfioreConnector" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">belfiore<wbr/>Connector</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IBelfioreConnector</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L40">src/classes/parser.class.ts:40</a></li></ul></aside></section></section><section class="tsd-panel-group tsd-member-group"><h2>Methods</h2><section class="tsd-panel tsd-member tsd-is-private"><a id="appyCaseToChar" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>appy<wbr/>Case<wbr/>To<wbr/>Char</span><a href="#appyCaseToChar" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures tsd-is-private"><li class="tsd-signature tsd-anchor-link"><a id="appyCaseToChar.appyCaseToChar-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">appy<wbr/>Case<wbr/>To<wbr/>Char</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">targetChar</span>, <span class="tsd-kind-parameter">counterCaseChar</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#appyCaseToChar.appyCaseToChar-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">targetChar</span>: <span class="tsd-signature-type">string</span></span></li><li><span><span class="tsd-kind-parameter">counterCaseChar</span>: <span class="tsd-signature-type">string</span></span></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L710">src/classes/parser.class.ts:710</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="cfDecode" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>cf<wbr/>Decode</span><a href="#cfDecode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="cfDecode.cfDecode-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">cf<wbr/>Decode</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">fiscalCode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">&gt;</span><a href="#cfDecode.cfDecode-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">fiscalCode</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>16 character Codice Fiscale to decode</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Decoded CF Info</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L368">src/classes/parser.class.ts:368</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="cfDeomocode" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>cf<wbr/>Deomocode</span><a href="#cfDeomocode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="cfDeomocode.cfDeomocode-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">cf<wbr/>Deomocode</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">codiceFiscale</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#cfDeomocode.cfDeomocode-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Convert omocode CF into plain one</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">codiceFiscale</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Partial or complete Omocode/Regular CF to parse, starting from LastName</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>Regular CF w/o omocodes chars</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L52">src/classes/parser.class.ts:52</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="cfOmocode" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>cf<wbr/>Omocode</span><a href="#cfOmocode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="cfOmocode.cfOmocode-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">cf<wbr/>Omocode</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">codiceFiscale</span>, <span class="tsd-kind-parameter">omocodeId</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#cfOmocode.cfOmocode-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">codiceFiscale</span>: <span class="tsd-signature-type">string</span></span></li><li><span><span class="tsd-kind-parameter">omocodeId</span>: <span class="tsd-signature-type">number</span></span></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L73">src/classes/parser.class.ts:73</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="cfOmocodeId" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>cf<wbr/>Omocode<wbr/>Id</span><a href="#cfOmocodeId" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="cfOmocodeId.cfOmocodeId-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">cf<wbr/>Omocode<wbr/>Id</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">codiceFiscale</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#cfOmocodeId.cfOmocodeId-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">codiceFiscale</span>: <span class="tsd-signature-type">string</span></span></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L103">src/classes/parser.class.ts:103</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="cfToBirthDate" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>cf<wbr/>To<wbr/>Birth<wbr/>Date</span><a href="#cfToBirthDate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="cfToBirthDate.cfToBirthDate-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">cf<wbr/>To<wbr/>Birth<wbr/>Date</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">codiceFiscale</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Date</span><a href="#cfToBirthDate.cfToBirthDate-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse birth date information</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">codiceFiscale</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Partial or complete CF to parse</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Date</span></h4><p>Birth Date</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L292">src/classes/parser.class.ts:292</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="cfToBirthDay" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>cf<wbr/>To<wbr/>Birth<wbr/>Day</span><a href="#cfToBirthDay" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="cfToBirthDay.cfToBirthDay-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">cf<wbr/>To<wbr/>Birth<wbr/>Day</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">codiceFiscale</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/DateDay.html" class="tsd-signature-type tsd-kind-type-alias">DateDay</a><a href="#cfToBirthDay.cfToBirthDay-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse birth day information</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">codiceFiscale</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Partial or complete CF to parse</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/DateDay.html" class="tsd-signature-type tsd-kind-type-alias">DateDay</a></h4><p>Birth day (1..31)</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L264">src/classes/parser.class.ts:264</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="cfToBirthMonth" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>cf<wbr/>To<wbr/>Birth<wbr/>Month</span><a href="#cfToBirthMonth" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="cfToBirthMonth.cfToBirthMonth-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">cf<wbr/>To<wbr/>Birth<wbr/>Month</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">codiceFiscale</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/DateMonth.html" class="tsd-signature-type tsd-kind-type-alias">DateMonth</a><a href="#cfToBirthMonth.cfToBirthMonth-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse birth month information</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">codiceFiscale</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Partial or complete CF to parse</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/DateMonth.html" class="tsd-signature-type tsd-kind-type-alias">DateMonth</a></h4><p>Birth Month (0...11 - Date notation)</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L241">src/classes/parser.class.ts:241</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="cfToBirthPlace" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>cf<wbr/>To<wbr/>Birth<wbr/>Place</span><a href="#cfToBirthPlace" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="cfToBirthPlace.cfToBirthPlace-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">cf<wbr/>To<wbr/>Birth<wbr/>Place</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">codiceFiscale</span>, <span class="tsd-kind-parameter">checkBirthDateConsistency</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/BelfiorePlace.html" class="tsd-signature-type tsd-kind-type-alias">BelfiorePlace</a><span class="tsd-signature-symbol">&gt;</span><a href="#cfToBirthPlace.cfToBirthPlace-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse birth place information</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">codiceFiscale</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Partial or complete CF to parse</p>
-</div><div class="tsd-comment tsd-typography"></div></li><li><span><span class="tsd-kind-parameter">checkBirthDateConsistency</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></span><div class="tsd-comment tsd-typography"><p>Ensure birthday is between creation and expiran date of the cf city or country, default value: true</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/BelfiorePlace.html" class="tsd-signature-type tsd-kind-type-alias">BelfiorePlace</a><span class="tsd-signature-symbol">&gt;</span></h4><p>Birth place</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L314">src/classes/parser.class.ts:314</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="cfToBirthYear" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>cf<wbr/>To<wbr/>Birth<wbr/>Year</span><a href="#cfToBirthYear" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="cfToBirthYear.cfToBirthYear-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">cf<wbr/>To<wbr/>Birth<wbr/>Year</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">codiceFiscale</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><a href="#cfToBirthYear.cfToBirthYear-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse birth year information</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">codiceFiscale</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Partial or complete CF to parse</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h4><p>Birth Year (4 digits)</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L208">src/classes/parser.class.ts:208</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="cfToFirstName" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>cf<wbr/>To<wbr/>First<wbr/>Name</span><a href="#cfToFirstName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="cfToFirstName.cfToFirstName-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">cf<wbr/>To<wbr/>First<wbr/>Name</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">codiceFiscale</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><a href="#cfToFirstName.cfToFirstName-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse firstName information</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">codiceFiscale</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Partial or complete CF to parse</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><p>Partial/possible firstName</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L167">src/classes/parser.class.ts:167</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="cfToGender" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>cf<wbr/>To<wbr/>Gender</span><a href="#cfToGender" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="cfToGender.cfToGender-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">cf<wbr/>To<wbr/>Gender</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">codiceFiscale</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/Genders.html" class="tsd-signature-type tsd-kind-type-alias">Genders</a><a href="#cfToGender.cfToGender-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse gender information</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">codiceFiscale</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Partial or complete CF to parse</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/Genders.html" class="tsd-signature-type tsd-kind-type-alias">Genders</a></h4><p>Male or female</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L187">src/classes/parser.class.ts:187</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="cfToLastName" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>cf<wbr/>To<wbr/>Last<wbr/>Name</span><a href="#cfToLastName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="cfToLastName.cfToLastName-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">cf<wbr/>To<wbr/>Last<wbr/>Name</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">codiceFiscale</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><a href="#cfToLastName.cfToLastName-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse lastName information</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">codiceFiscale</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Partial or complete CF to parse</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><p>Partial/possible lastName</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L118">src/classes/parser.class.ts:118</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member tsd-is-private"><a id="charExtractor" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>char<wbr/>Extractor</span><a href="#charExtractor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures tsd-is-private"><li class="tsd-signature tsd-anchor-link"><a id="charExtractor.charExtractor-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">char<wbr/>Extractor</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">text</span>, <span class="tsd-kind-parameter">CHAR_LIST</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#charExtractor.charExtractor-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">text</span>: <span class="tsd-signature-type">string</span></span></li><li><span><span class="tsd-kind-parameter">CHAR_LIST</span>: <span class="tsd-signature-type">string</span></span></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L688">src/classes/parser.class.ts:688</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member tsd-is-private"><a id="charOmocode" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>char<wbr/>Omocode</span><a href="#charOmocode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures tsd-is-private"><li class="tsd-signature tsd-anchor-link"><a id="charOmocode.charOmocode-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">char<wbr/>Omocode</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">char</span>, <span class="tsd-kind-parameter">offset</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#charOmocode.charOmocode-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">char</span>: <span class="tsd-signature-type">string</span></span></li><li><span><span class="tsd-kind-parameter">offset</span>: <span class="tsd-signature-type">number</span></span></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L680">src/classes/parser.class.ts:680</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member tsd-is-private"><a id="checkBitmap" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>check<wbr/>Bitmap</span><a href="#checkBitmap" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures tsd-is-private"><li class="tsd-signature tsd-anchor-link"><a id="checkBitmap.checkBitmap-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">check<wbr/>Bitmap</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">offset</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#checkBitmap.checkBitmap-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">offset</span>: <span class="tsd-signature-type">number</span></span></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L675">src/classes/parser.class.ts:675</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="dateGenderToCf" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>date<wbr/>Gender<wbr/>To<wbr/>Cf</span><a href="#dateGenderToCf" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="dateGenderToCf.dateGenderToCf-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">date<wbr/>Gender<wbr/>To<wbr/>Cf</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span>, <span class="tsd-kind-parameter">gender</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><a href="#dateGenderToCf.dateGenderToCf-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse Date and Gender information to create Date/Gender CF part</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">date</span>: <a href="../types/MultiFormatDate.html" class="tsd-signature-type tsd-kind-type-alias">MultiFormatDate</a></span><div class="tsd-comment tsd-typography"><p>Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]</p>
-</div><div class="tsd-comment tsd-typography"></div></li><li><span><span class="tsd-kind-parameter">gender</span>: <a href="../types/Genders.html" class="tsd-signature-type tsd-kind-type-alias">Genders</a></span><div class="tsd-comment tsd-typography"><p>Gender enum value</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><p>Birth date and Gender CF code</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L555">src/classes/parser.class.ts:555</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="dayGenderToCf" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>day<wbr/>Gender<wbr/>To<wbr/>Cf</span><a href="#dayGenderToCf" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="dayGenderToCf.dayGenderToCf-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">day<wbr/>Gender<wbr/>To<wbr/>Cf</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">day</span>, <span class="tsd-kind-parameter">gender</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><a href="#dayGenderToCf.dayGenderToCf-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse day information</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">day</span>: <span class="tsd-signature-type">number</span></span><div class="tsd-comment tsd-typography"><p>Day number 1..31</p>
-</div><div class="tsd-comment tsd-typography"></div></li><li><span><span class="tsd-kind-parameter">gender</span>: <a href="../types/Genders.html" class="tsd-signature-type tsd-kind-type-alias">Genders</a></span><div class="tsd-comment tsd-typography"><p>Gender enum value</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><p>Birth Day CF code</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L483">src/classes/parser.class.ts:483</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="encodeCf" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>encode<wbr/>Cf</span><a href="#encodeCf" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="encodeCf.encodeCf-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">encode<wbr/>Cf</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">__namedParameters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><a href="#encodeCf.encodeCf-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Generates full CF</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">__namedParameters</span>: <span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;place&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">place</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../types/BelfiorePlace.html" class="tsd-signature-type tsd-kind-type-alias">BelfiorePlace</a><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></span></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Complete CF</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L630">src/classes/parser.class.ts:630</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="firstNameToCf" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>first<wbr/>Name<wbr/>To<wbr/>Cf</span><a href="#firstNameToCf" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="firstNameToCf.firstNameToCf-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">first<wbr/>Name<wbr/>To<wbr/>Cf</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">firstName</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><a href="#firstNameToCf.firstNameToCf-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse firstName to cf part</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">firstName</span>: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Partial or complete CF to parse</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><p>partial cf</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L428">src/classes/parser.class.ts:428</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="lastNameToCf" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>last<wbr/>Name<wbr/>To<wbr/>Cf</span><a href="#lastNameToCf" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="lastNameToCf.lastNameToCf-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">last<wbr/>Name<wbr/>To<wbr/>Cf</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">lastName</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><a href="#lastNameToCf.lastNameToCf-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse lastName to cf part</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">lastName</span>: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Partial or complete CF to parse</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><p>partial cf</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L403">src/classes/parser.class.ts:403</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="monthToCf" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>month<wbr/>To<wbr/>Cf</span><a href="#monthToCf" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="monthToCf.monthToCf-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">month<wbr/>To<wbr/>Cf</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">month</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><a href="#monthToCf.monthToCf-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse month information</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">month</span>: <span class="tsd-signature-type">number</span></span><div class="tsd-comment tsd-typography"><p>Month number 0..11</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><p>Birth Month CF code</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L469">src/classes/parser.class.ts:469</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="parsePlace" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>parse<wbr/>Place</span><a href="#parsePlace" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="parsePlace.parsePlace-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">parse<wbr/>Place</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">place</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/BelfiorePlace.html" class="tsd-signature-type tsd-kind-type-alias">BelfiorePlace</a><span class="tsd-signature-symbol">&gt;</span><a href="#parsePlace.parsePlace-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse Place information to return city or country details</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">place</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../types/BelfiorePlace.html" class="tsd-signature-type tsd-kind-type-alias">BelfiorePlace</a></span><div class="tsd-comment tsd-typography"><p>Belfiore place instance, belfiore code or city/country name</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/BelfiorePlace.html" class="tsd-signature-type tsd-kind-type-alias">BelfiorePlace</a><span class="tsd-signature-symbol">&gt;</span></h4><p>BelfiorePlace instance with the target city or country details</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L531">src/classes/parser.class.ts:531</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member tsd-is-private"><a id="partialCfDeomocode" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>partial<wbr/>Cf<wbr/>Deomocode</span><a href="#partialCfDeomocode" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures tsd-is-private"><li class="tsd-signature tsd-anchor-link"><a id="partialCfDeomocode.partialCfDeomocode-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">partial<wbr/>Cf<wbr/>Deomocode</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">partialCodiceFiscale</span>, <span class="tsd-kind-parameter">offset</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#partialCfDeomocode.partialCfDeomocode-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Convert omocode full or chunk CF into plain one</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">partialCodiceFiscale</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Partial or complete Omocode/Regular CF to parse</p>
-</div><div class="tsd-comment tsd-typography"></div></li><li><span><span class="tsd-kind-parameter">offset</span>: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></span><div class="tsd-comment tsd-typography"><p>starting point of the given chunk in the 16 char CF</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>Regular version w/o omocodes chars of the given chunk</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L701">src/classes/parser.class.ts:701</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="placeToCf" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>place<wbr/>To<wbr/>Cf</span><a href="#placeToCf" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="placeToCf.placeToCf-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">place<wbr/>To<wbr/>Cf</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">cityOrCountryName</span>, <span class="tsd-kind-parameter">provinceId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><a href="#placeToCf.placeToCf-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse a Date and Gender information to create Date/Gender CF part</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">cityOrCountryName</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>City or Country name</p>
-</div><div class="tsd-comment tsd-typography"></div></li><li><span><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">provinceId</span>: <span class="tsd-signature-type">string</span></span><div class="tsd-comment tsd-typography"><p>Province code for cities</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Matching place belfiore code, if only once is matching criteria</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L581">src/classes/parser.class.ts:581</a></li></ul></aside></li><li class="tsd-signature tsd-anchor-link"><a id="placeToCf.placeToCf-2" class="tsd-anchor"></a><span class="tsd-kind-call-signature">place<wbr/>To<wbr/>Cf</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">birthDate</span>, <span class="tsd-kind-parameter">cityOrCountryName</span>, <span class="tsd-kind-parameter">provinceId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><a href="#placeToCf.placeToCf-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">birthDate</span>: <a href="../types/MultiFormatDate.html" class="tsd-signature-type tsd-kind-type-alias">MultiFormatDate</a></span></li><li><span><span class="tsd-kind-parameter">cityOrCountryName</span>: <span class="tsd-signature-type">string</span></span></li><li><span><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">provinceId</span>: <span class="tsd-signature-type">string</span></span></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L585">src/classes/parser.class.ts:585</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="yearMonthDayToDate" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>year<wbr/>Month<wbr/>Day<wbr/>To<wbr/>Date</span><a href="#yearMonthDayToDate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="yearMonthDayToDate.yearMonthDayToDate-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">year<wbr/>Month<wbr/>Day<wbr/>To<wbr/>Date</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">year</span>, <span class="tsd-kind-parameter">month</span><span class="tsd-signature-symbol">?</span>, <span class="tsd-kind-parameter">day</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Date</span><a href="#yearMonthDayToDate.yearMonthDayToDate-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse Year, Month, Day to Dated</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">year</span>: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></span><div class="tsd-comment tsd-typography"><p>4 digits Year</p>
-</div><div class="tsd-comment tsd-typography"></div></li><li><span><span class="tsd-kind-parameter">month</span>: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/DateMonth.html" class="tsd-signature-type tsd-kind-type-alias">DateMonth</a><span class="tsd-signature-symbol"> = 0</span></span><div class="tsd-comment tsd-typography"><p>1 or 2 digits Month 0..11</p>
-</div><div class="tsd-comment tsd-typography"></div></li><li><span><span class="tsd-kind-parameter">day</span>: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/DateDay.html" class="tsd-signature-type tsd-kind-type-alias">DateDay</a><span class="tsd-signature-symbol"> = 1</span></span><div class="tsd-comment tsd-typography"><p>1,2 digits Day 1..31</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Date</span></h4><p>Date or null if provided year/month/day are not valid</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L502">src/classes/parser.class.ts:502</a></li></ul></aside></li></ul></section><section class="tsd-panel tsd-member"><a id="yearToCf" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span>year<wbr/>To<wbr/>Cf</span><a href="#yearToCf" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><ul class="tsd-signatures"><li class="tsd-signature tsd-anchor-link"><a id="yearToCf.yearToCf-1" class="tsd-anchor"></a><span class="tsd-kind-call-signature">year<wbr/>To<wbr/>Cf</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">year</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><a href="#yearToCf.yearToCf-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></li><li class="tsd-description"><div class="tsd-comment tsd-typography"><p>Parse year to cf part</p>
-</div><div class="tsd-parameters"><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameter-list"><li><span><span class="tsd-kind-parameter">year</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></span><div class="tsd-comment tsd-typography"><p>Birth year 2 or 4 digit string, number above 19XX or below 100</p>
-</div><div class="tsd-comment tsd-typography"></div></li></ul></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><p>partial cf</p>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L444">src/classes/parser.class.ts:444</a></li></ul></aside></li></ul></section></section></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-index-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><h4 class="uppercase">Member Visibility</h4><form><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div><div class="tsd-theme-toggle"><h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#constructor" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-512"></use></svg><span>constructor</span></a><a href="#JOLLY_CHAR" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-1024"></use></svg><span>JOLLY_<wbr/>CHAR</span></a><a href="#OMOCODE_BITMAP" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-1024"></use></svg><span>OMOCODE_<wbr/>BITMAP</span></a><a href="#belfioreConnector" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-1024"></use></svg><span>belfiore<wbr/>Connector</span></a><a href="#appyCaseToChar" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>appy<wbr/>Case<wbr/>To<wbr/>Char</span></a><a href="#cfDecode" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>Decode</span></a><a href="#cfDeomocode" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>Deomocode</span></a><a href="#cfOmocode" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>Omocode</span></a><a href="#cfOmocodeId" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>Omocode<wbr/>Id</span></a><a href="#cfToBirthDate" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Birth<wbr/>Date</span></a><a href="#cfToBirthDay" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Birth<wbr/>Day</span></a><a href="#cfToBirthMonth" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Birth<wbr/>Month</span></a><a href="#cfToBirthPlace" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Birth<wbr/>Place</span></a><a href="#cfToBirthYear" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Birth<wbr/>Year</span></a><a href="#cfToFirstName" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>First<wbr/>Name</span></a><a href="#cfToGender" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Gender</span></a><a href="#cfToLastName" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>cf<wbr/>To<wbr/>Last<wbr/>Name</span></a><a href="#charExtractor" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>char<wbr/>Extractor</span></a><a href="#charOmocode" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>char<wbr/>Omocode</span></a><a href="#checkBitmap" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>check<wbr/>Bitmap</span></a><a href="#dateGenderToCf" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>date<wbr/>Gender<wbr/>To<wbr/>Cf</span></a><a href="#dayGenderToCf" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>day<wbr/>Gender<wbr/>To<wbr/>Cf</span></a><a href="#encodeCf" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>encode<wbr/>Cf</span></a><a href="#firstNameToCf" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>first<wbr/>Name<wbr/>To<wbr/>Cf</span></a><a href="#lastNameToCf" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>last<wbr/>Name<wbr/>To<wbr/>Cf</span></a><a href="#monthToCf" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>month<wbr/>To<wbr/>Cf</span></a><a href="#parsePlace" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>parse<wbr/>Place</span></a><a href="#partialCfDeomocode" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>partial<wbr/>Cf<wbr/>Deomocode</span></a><a href="#placeToCf" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>place<wbr/>To<wbr/>Cf</span></a><a href="#yearMonthDayToDate" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>year<wbr/>Month<wbr/>Day<wbr/>To<wbr/>Date</span></a><a href="#yearToCf" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-2048"></use></svg><span>year<wbr/>To<wbr/>Cf</span></a></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="../assets/icons.svg#icon-1"></use></svg><span>@marketto/codice-fiscale-utils</span></a><ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base=".."><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
+<!DOCTYPE html>
+<html class="default" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="IE=edge" />
+		<title>Parser | @marketto/codice-fiscale-utils</title>
+		<meta
+			name="description"
+			content="Documentation for @marketto/codice-fiscale-utils" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../assets/style.css" />
+		<link rel="stylesheet" href="../assets/highlight.css" />
+		<script defer src="../assets/main.js"></script>
+		<script async src="../assets/icons.js" id="tsd-icons-script"></script>
+		<script async src="../assets/search.js" id="tsd-search-script"></script>
+		<script async src="../assets/navigation.js" id="tsd-nav-script"></script>
+	</head>
+	<body>
+		<script>
+			document.documentElement.dataset.theme =
+				localStorage.getItem("tsd-theme") || "os";
+			document.body.style.display = "none";
+			setTimeout(
+				() =>
+					app ? app.showPage() : document.body.style.removeProperty("display"),
+				500
+			);
+		</script>
+		<header class="tsd-page-toolbar">
+			<div class="tsd-toolbar-contents container">
+				<div class="table-cell" id="tsd-search" data-base="..">
+					<div class="field">
+						<label
+							for="tsd-search-field"
+							class="tsd-widget tsd-toolbar-icon search no-caption"
+							><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+								<use href="../assets/icons.svg#icon-search"></use></svg></label
+						><input type="text" id="tsd-search-field" aria-label="Search" />
+					</div>
+					<div class="field"><div id="tsd-toolbar-links"></div></div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title"
+						>@marketto/codice-fiscale-utils</a
+					>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<a
+						href="#"
+						class="tsd-widget tsd-toolbar-icon menu no-caption"
+						data-toggle="menu"
+						aria-label="Menu"
+						><svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+							<use href="../assets/icons.svg#icon-menu"></use></svg
+					></a>
+				</div>
+			</div>
+		</header>
+		<div class="container container-main">
+			<div class="col-content">
+				<div class="tsd-page-title">
+					<ul class="tsd-breadcrumb">
+						<li>
+							<a href="../modules.html">@marketto/codice-fiscale-utils</a>
+						</li>
+						<li><a href="Parser.html">Parser</a></li>
+					</ul>
+					<h1>Class Parser</h1>
+				</div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>
+							Defined in
+							<a
+								href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L39"
+								>src/classes/parser.class.ts:39</a
+							>
+						</li>
+					</ul>
+				</aside>
+				<section class="tsd-panel-group tsd-index-group">
+					<section class="tsd-panel tsd-index-panel">
+						<details class="tsd-index-content tsd-index-accordion" open>
+							<summary class="tsd-accordion-summary tsd-index-summary">
+								<h5
+									class="tsd-index-heading uppercase"
+									role="button"
+									aria-expanded="false"
+									tabindex="0">
+									<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+										<use href="../assets/icons.svg#icon-chevronSmall"></use>
+									</svg>
+									Index
+								</h5>
+							</summary>
+							<div class="tsd-accordion-details">
+								<section class="tsd-index-section">
+									<h3 class="tsd-index-heading">Constructors</h3>
+									<div class="tsd-index-list">
+										<a href="Parser.html#constructor" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-512"></use></svg
+											><span>constructor</span></a
+										>
+									</div>
+								</section>
+								<section class="tsd-index-section">
+									<h3 class="tsd-index-heading">Properties</h3>
+									<div class="tsd-index-list">
+										<a
+											href="Parser.html#JOLLY_CHAR"
+											class="tsd-index-link tsd-is-private"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-1024"></use></svg
+											><span>JOLLY_<wbr />CHAR</span></a
+										>
+										<a href="Parser.html#OMOCODE_BITMAP" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-1024"></use></svg
+											><span>OMOCODE_<wbr />BITMAP</span></a
+										>
+										<a
+											href="Parser.html#belfioreConnector"
+											class="tsd-index-link tsd-is-private"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-1024"></use></svg
+											><span>belfiore<wbr />Connector</span></a
+										>
+									</div>
+								</section>
+								<section class="tsd-index-section">
+									<h3 class="tsd-index-heading">Methods</h3>
+									<div class="tsd-index-list">
+										<a
+											href="Parser.html#appyCaseToChar"
+											class="tsd-index-link tsd-is-private"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>appy<wbr />Case<wbr />To<wbr />Char</span></a
+										>
+										<a href="Parser.html#cfDecode" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>cf<wbr />Decode</span></a
+										>
+										<a href="Parser.html#cfDeomocode" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>cf<wbr />Deomocode</span></a
+										>
+										<a href="Parser.html#cfOmocode" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>cf<wbr />Omocode</span></a
+										>
+										<a href="Parser.html#cfOmocodeId" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>cf<wbr />Omocode<wbr />Id</span></a
+										>
+										<a href="Parser.html#cfToBirthDate" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>cf<wbr />To<wbr />Birth<wbr />Date</span></a
+										>
+										<a href="Parser.html#cfToBirthDay" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>cf<wbr />To<wbr />Birth<wbr />Day</span></a
+										>
+										<a href="Parser.html#cfToBirthMonth" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>cf<wbr />To<wbr />Birth<wbr />Month</span></a
+										>
+										<a href="Parser.html#cfToBirthPlace" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>cf<wbr />To<wbr />Birth<wbr />Place</span></a
+										>
+										<a href="Parser.html#cfToBirthYear" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>cf<wbr />To<wbr />Birth<wbr />Year</span></a
+										>
+										<a href="Parser.html#cfToFirstName" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>cf<wbr />To<wbr />First<wbr />Name</span></a
+										>
+										<a href="Parser.html#cfToGender" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>cf<wbr />To<wbr />Gender</span></a
+										>
+										<a href="Parser.html#cfToLastName" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>cf<wbr />To<wbr />Last<wbr />Name</span></a
+										>
+										<a
+											href="Parser.html#charExtractor"
+											class="tsd-index-link tsd-is-private"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>char<wbr />Extractor</span></a
+										>
+										<a
+											href="Parser.html#charOmocode"
+											class="tsd-index-link tsd-is-private"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>char<wbr />Omocode</span></a
+										>
+										<a
+											href="Parser.html#checkBitmap"
+											class="tsd-index-link tsd-is-private"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>check<wbr />Bitmap</span></a
+										>
+										<a href="Parser.html#dateGenderToCf" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>date<wbr />Gender<wbr />To<wbr />Cf</span></a
+										>
+										<a href="Parser.html#dayGenderToCf" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>day<wbr />Gender<wbr />To<wbr />Cf</span></a
+										>
+										<a href="Parser.html#encodeCf" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>encode<wbr />Cf</span></a
+										>
+										<a href="Parser.html#firstNameToCf" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>first<wbr />Name<wbr />To<wbr />Cf</span></a
+										>
+										<a href="Parser.html#lastNameToCf" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>last<wbr />Name<wbr />To<wbr />Cf</span></a
+										>
+										<a href="Parser.html#monthToCf" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>month<wbr />To<wbr />Cf</span></a
+										>
+										<a href="Parser.html#parsePlace" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>parse<wbr />Place</span></a
+										>
+										<a
+											href="Parser.html#partialCfDeomocode"
+											class="tsd-index-link tsd-is-private"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>partial<wbr />Cf<wbr />Deomocode</span></a
+										>
+										<a href="Parser.html#placeToCf" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>place<wbr />To<wbr />Cf</span></a
+										>
+										<a
+											href="Parser.html#yearMonthDayToDate"
+											class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span
+												>year<wbr />Month<wbr />Day<wbr />To<wbr />Date</span
+											></a
+										>
+										<a href="Parser.html#yearToCf" class="tsd-index-link"
+											><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+												<use href="../assets/icons.svg#icon-2048"></use></svg
+											><span>year<wbr />To<wbr />Cf</span></a
+										>
+									</div>
+								</section>
+							</div>
+						</details>
+					</section>
+				</section>
+				<section class="tsd-panel-group tsd-member-group">
+					<h2>Constructors</h2>
+					<section class="tsd-panel tsd-member">
+						<a id="constructor" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>constructor</span
+							><a
+								href="#constructor"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="constructor.new_Parser" class="tsd-anchor"></a
+								><span class="tsd-kind-constructor-signature"
+									>new <wbr />Parser</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">belfioreConnector</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><a href="Parser.html" class="tsd-signature-type tsd-kind-class"
+									>Parser</a
+								><a
+									href="#constructor.new_Parser"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter"
+													>belfioreConnector</span
+												>:
+												<span class="tsd-signature-type"
+													>IBelfioreConnector</span
+												></span
+											>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns
+									<a
+										href="Parser.html"
+										class="tsd-signature-type tsd-kind-class"
+										>Parser</a
+									>
+								</h4>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L40"
+												>src/classes/parser.class.ts:40</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+				</section>
+				<section class="tsd-panel-group tsd-member-group">
+					<h2>Properties</h2>
+					<section class="tsd-panel tsd-member tsd-is-private">
+						<a id="JOLLY_CHAR" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<code class="tsd-tag ts-flagPrivate">Private</code>
+							<span>JOLLY_<wbr />CHAR</span
+							><a
+								href="#JOLLY_CHAR"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<div class="tsd-signature">
+							<span class="tsd-kind-property">JOLLY_<wbr />CHAR</span
+							><span class="tsd-signature-symbol">:</span>
+							<span class="tsd-signature-type">string</span
+							><span class="tsd-signature-symbol"> = &quot;*&quot;</span>
+						</div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>
+									Defined in
+									<a
+										href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L673"
+										>src/classes/parser.class.ts:673</a
+									>
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="OMOCODE_BITMAP" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>OMOCODE_<wbr />BITMAP</span
+							><a
+								href="#OMOCODE_BITMAP"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<div class="tsd-signature">
+							<span class="tsd-kind-property">OMOCODE_<wbr />BITMAP</span
+							><span class="tsd-signature-symbol">:</span>
+							<span class="tsd-signature-type">number</span
+							><span class="tsd-signature-symbol"> = 0b0111011011000000</span>
+						</div>
+						<div class="tsd-comment tsd-typography">
+							<p>Default omocode bitmap</p>
+						</div>
+						<div class="tsd-comment tsd-typography"></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>
+									Defined in
+									<a
+										href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L45"
+										>src/classes/parser.class.ts:45</a
+									>
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-is-private">
+						<a id="belfioreConnector" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<code class="tsd-tag ts-flagPrivate">Private</code>
+							<code class="tsd-tag ts-flagReadonly">Readonly</code>
+							<span>belfiore<wbr />Connector</span
+							><a
+								href="#belfioreConnector"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<div class="tsd-signature">
+							<span class="tsd-kind-property">belfiore<wbr />Connector</span
+							><span class="tsd-signature-symbol">:</span>
+							<span class="tsd-signature-type">IBelfioreConnector</span>
+						</div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>
+									Defined in
+									<a
+										href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L40"
+										>src/classes/parser.class.ts:40</a
+									>
+								</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section class="tsd-panel-group tsd-member-group">
+					<h2>Methods</h2>
+					<section class="tsd-panel tsd-member tsd-is-private">
+						<a id="appyCaseToChar" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<code class="tsd-tag ts-flagPrivate">Private</code>
+							<span>appy<wbr />Case<wbr />To<wbr />Char</span
+							><a
+								href="#appyCaseToChar"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures tsd-is-private">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="appyCaseToChar.appyCaseToChar-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>appy<wbr />Case<wbr />To<wbr />Char</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">targetChar</span>,
+								<span class="tsd-kind-parameter">counterCaseChar</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#appyCaseToChar.appyCaseToChar-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">targetChar</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+										</li>
+										<li>
+											<span
+												><span class="tsd-kind-parameter">counterCaseChar</span
+												>: <span class="tsd-signature-type">string</span></span
+											>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">string</span>
+								</h4>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L710"
+												>src/classes/parser.class.ts:710</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="cfDecode" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>cf<wbr />Decode</span
+							><a
+								href="#cfDecode"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="cfDecode.cfDecode-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature">cf<wbr />Decode</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">fiscalCode</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">Promise</span
+								><span class="tsd-signature-symbol">&lt;</span
+								><span class="tsd-signature-type">default</span
+								><span class="tsd-signature-symbol">&gt;</span
+								><a
+									href="#cfDecode.cfDecode-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">fiscalCode</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>16 character Codice Fiscale to decode</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">Promise</span
+									><span class="tsd-signature-symbol">&lt;</span
+									><span class="tsd-signature-type">default</span
+									><span class="tsd-signature-symbol">&gt;</span>
+								</h4>
+								<p>Decoded CF Info</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L368"
+												>src/classes/parser.class.ts:368</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="cfDeomocode" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>cf<wbr />Deomocode</span
+							><a
+								href="#cfDeomocode"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="cfDeomocode.cfDeomocode-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature">cf<wbr />Deomocode</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">codiceFiscale</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#cfDeomocode.cfDeomocode-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Convert omocode CF into plain one</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">codiceFiscale</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>
+													Partial or complete Omocode/Regular CF to parse,
+													starting from LastName
+												</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">string</span>
+								</h4>
+								<p>Regular CF w/o omocodes chars</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L52"
+												>src/classes/parser.class.ts:52</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="cfOmocode" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>cf<wbr />Omocode</span
+							><a
+								href="#cfOmocode"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="cfOmocode.cfOmocode-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature">cf<wbr />Omocode</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">codiceFiscale</span>,
+								<span class="tsd-kind-parameter">omocodeId</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#cfOmocode.cfOmocode-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">codiceFiscale</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+										</li>
+										<li>
+											<span
+												><span class="tsd-kind-parameter">omocodeId</span>:
+												<span class="tsd-signature-type">number</span></span
+											>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">string</span>
+								</h4>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L73"
+												>src/classes/parser.class.ts:73</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="cfOmocodeId" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>cf<wbr />Omocode<wbr />Id</span
+							><a
+								href="#cfOmocodeId"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="cfOmocodeId.cfOmocodeId-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>cf<wbr />Omocode<wbr />Id</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">codiceFiscale</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">number</span
+								><a
+									href="#cfOmocodeId.cfOmocodeId-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">codiceFiscale</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">number</span>
+								</h4>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L103"
+												>src/classes/parser.class.ts:103</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="cfToBirthDate" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>cf<wbr />To<wbr />Birth<wbr />Date</span
+							><a
+								href="#cfToBirthDate"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="cfToBirthDate.cfToBirthDate-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>cf<wbr />To<wbr />Birth<wbr />Date</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">codiceFiscale</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">Date</span
+								><a
+									href="#cfToBirthDate.cfToBirthDate-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse birth date information</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">codiceFiscale</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Partial or complete CF to parse</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">Date</span>
+								</h4>
+								<p>Birth Date</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L292"
+												>src/classes/parser.class.ts:292</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="cfToBirthDay" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>cf<wbr />To<wbr />Birth<wbr />Day</span
+							><a
+								href="#cfToBirthDay"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="cfToBirthDay.cfToBirthDay-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>cf<wbr />To<wbr />Birth<wbr />Day</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">codiceFiscale</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><a
+									href="../types/DateDay.html"
+									class="tsd-signature-type tsd-kind-type-alias"
+									>DateDay</a
+								><a
+									href="#cfToBirthDay.cfToBirthDay-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse birth day information</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">codiceFiscale</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Partial or complete CF to parse</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><a
+										href="../types/DateDay.html"
+										class="tsd-signature-type tsd-kind-type-alias"
+										>DateDay</a
+									>
+								</h4>
+								<p>Birth day (1..31)</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L264"
+												>src/classes/parser.class.ts:264</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="cfToBirthMonth" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>cf<wbr />To<wbr />Birth<wbr />Month</span
+							><a
+								href="#cfToBirthMonth"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="cfToBirthMonth.cfToBirthMonth-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>cf<wbr />To<wbr />Birth<wbr />Month</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">codiceFiscale</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><a
+									href="../types/DateMonth.html"
+									class="tsd-signature-type tsd-kind-type-alias"
+									>DateMonth</a
+								><a
+									href="#cfToBirthMonth.cfToBirthMonth-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse birth month information</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">codiceFiscale</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Partial or complete CF to parse</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><a
+										href="../types/DateMonth.html"
+										class="tsd-signature-type tsd-kind-type-alias"
+										>DateMonth</a
+									>
+								</h4>
+								<p>Birth Month (0...11 - Date notation)</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L241"
+												>src/classes/parser.class.ts:241</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="cfToBirthPlace" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>cf<wbr />To<wbr />Birth<wbr />Place</span
+							><a
+								href="#cfToBirthPlace"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="cfToBirthPlace.cfToBirthPlace-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>cf<wbr />To<wbr />Birth<wbr />Place</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">codiceFiscale</span>,
+								<span class="tsd-kind-parameter">checkBirthDateConsistency</span
+								><span class="tsd-signature-symbol">?</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">Promise</span
+								><span class="tsd-signature-symbol">&lt;</span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><a
+									href="../types/BelfiorePlace.html"
+									class="tsd-signature-type tsd-kind-type-alias"
+									>BelfiorePlace</a
+								><span class="tsd-signature-symbol">&gt;</span
+								><a
+									href="#cfToBirthPlace.cfToBirthPlace-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse birth place information</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">codiceFiscale</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Partial or complete CF to parse</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+										<li>
+											<span
+												><span class="tsd-kind-parameter"
+													>checkBirthDateConsistency</span
+												>: <span class="tsd-signature-type">boolean</span
+												><span class="tsd-signature-symbol"> = true</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>
+													Ensure birthday is between creation and expiran date
+													of the cf city or country, default value: true
+												</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">Promise</span
+									><span class="tsd-signature-symbol">&lt;</span
+									><span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><a
+										href="../types/BelfiorePlace.html"
+										class="tsd-signature-type tsd-kind-type-alias"
+										>BelfiorePlace</a
+									><span class="tsd-signature-symbol">&gt;</span>
+								</h4>
+								<p>Birth place</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L314"
+												>src/classes/parser.class.ts:314</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="cfToBirthYear" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>cf<wbr />To<wbr />Birth<wbr />Year</span
+							><a
+								href="#cfToBirthYear"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="cfToBirthYear.cfToBirthYear-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>cf<wbr />To<wbr />Birth<wbr />Year</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">codiceFiscale</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">number</span
+								><a
+									href="#cfToBirthYear.cfToBirthYear-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse birth year information</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">codiceFiscale</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Partial or complete CF to parse</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">number</span>
+								</h4>
+								<p>Birth Year (4 digits)</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L208"
+												>src/classes/parser.class.ts:208</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="cfToFirstName" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>cf<wbr />To<wbr />First<wbr />Name</span
+							><a
+								href="#cfToFirstName"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="cfToFirstName.cfToFirstName-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>cf<wbr />To<wbr />First<wbr />Name</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">codiceFiscale</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#cfToFirstName.cfToFirstName-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse firstName information</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">codiceFiscale</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Partial or complete CF to parse</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">string</span>
+								</h4>
+								<p>Partial/possible firstName</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L167"
+												>src/classes/parser.class.ts:167</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="cfToGender" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>cf<wbr />To<wbr />Gender</span
+							><a
+								href="#cfToGender"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="cfToGender.cfToGender-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>cf<wbr />To<wbr />Gender</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">codiceFiscale</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><a
+									href="../types/Genders.html"
+									class="tsd-signature-type tsd-kind-type-alias"
+									>Genders</a
+								><a
+									href="#cfToGender.cfToGender-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse gender information</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">codiceFiscale</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Partial or complete CF to parse</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><a
+										href="../types/Genders.html"
+										class="tsd-signature-type tsd-kind-type-alias"
+										>Genders</a
+									>
+								</h4>
+								<p>Male or female</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L187"
+												>src/classes/parser.class.ts:187</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="cfToLastName" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>cf<wbr />To<wbr />Last<wbr />Name</span
+							><a
+								href="#cfToLastName"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="cfToLastName.cfToLastName-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>cf<wbr />To<wbr />Last<wbr />Name</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">codiceFiscale</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#cfToLastName.cfToLastName-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse lastName information</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">codiceFiscale</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Partial or complete CF to parse</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">string</span>
+								</h4>
+								<p>Partial/possible lastName</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L118"
+												>src/classes/parser.class.ts:118</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-is-private">
+						<a id="charExtractor" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<code class="tsd-tag ts-flagPrivate">Private</code>
+							<span>char<wbr />Extractor</span
+							><a
+								href="#charExtractor"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures tsd-is-private">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="charExtractor.charExtractor-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>char<wbr />Extractor</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">text</span>,
+								<span class="tsd-kind-parameter">CHAR_LIST</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#charExtractor.charExtractor-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">text</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+										</li>
+										<li>
+											<span
+												><span class="tsd-kind-parameter">CHAR_LIST</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">string</span>
+								</h4>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L688"
+												>src/classes/parser.class.ts:688</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-is-private">
+						<a id="charOmocode" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<code class="tsd-tag ts-flagPrivate">Private</code>
+							<span>char<wbr />Omocode</span
+							><a
+								href="#charOmocode"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures tsd-is-private">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="charOmocode.charOmocode-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature">char<wbr />Omocode</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">char</span>,
+								<span class="tsd-kind-parameter">offset</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#charOmocode.charOmocode-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">char</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+										</li>
+										<li>
+											<span
+												><span class="tsd-kind-parameter">offset</span>:
+												<span class="tsd-signature-type">number</span></span
+											>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">string</span>
+								</h4>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L680"
+												>src/classes/parser.class.ts:680</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-is-private">
+						<a id="checkBitmap" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<code class="tsd-tag ts-flagPrivate">Private</code>
+							<span>check<wbr />Bitmap</span
+							><a
+								href="#checkBitmap"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures tsd-is-private">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="checkBitmap.checkBitmap-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature">check<wbr />Bitmap</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">offset</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">boolean</span
+								><a
+									href="#checkBitmap.checkBitmap-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">offset</span>:
+												<span class="tsd-signature-type">number</span></span
+											>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">boolean</span>
+								</h4>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L675"
+												>src/classes/parser.class.ts:675</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="dateGenderToCf" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>date<wbr />Gender<wbr />To<wbr />Cf</span
+							><a
+								href="#dateGenderToCf"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="dateGenderToCf.dateGenderToCf-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>date<wbr />Gender<wbr />To<wbr />Cf</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">date</span>,
+								<span class="tsd-kind-parameter">gender</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#dateGenderToCf.dateGenderToCf-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>
+										Parse Date and Gender information to create Date/Gender CF
+										part
+									</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">date</span>:
+												<a
+													href="../types/MultiFormatDate.html"
+													class="tsd-signature-type tsd-kind-type-alias"
+													>MultiFormatDate</a
+												></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>
+													Date or Moment instance, ISO8601 date string or array
+													of numbers [year, month, day]
+												</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+										<li>
+											<span
+												><span class="tsd-kind-parameter">gender</span>:
+												<a
+													href="../types/Genders.html"
+													class="tsd-signature-type tsd-kind-type-alias"
+													>Genders</a
+												></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Gender enum value</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">string</span>
+								</h4>
+								<p>Birth date and Gender CF code</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L555"
+												>src/classes/parser.class.ts:555</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="dayGenderToCf" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>day<wbr />Gender<wbr />To<wbr />Cf</span
+							><a
+								href="#dayGenderToCf"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="dayGenderToCf.dayGenderToCf-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>day<wbr />Gender<wbr />To<wbr />Cf</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">day</span>,
+								<span class="tsd-kind-parameter">gender</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#dayGenderToCf.dayGenderToCf-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse day information</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">day</span>:
+												<span class="tsd-signature-type">number</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Day number 1..31</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+										<li>
+											<span
+												><span class="tsd-kind-parameter">gender</span>:
+												<a
+													href="../types/Genders.html"
+													class="tsd-signature-type tsd-kind-type-alias"
+													>Genders</a
+												></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Gender enum value</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">string</span>
+								</h4>
+								<p>Birth Day CF code</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L483"
+												>src/classes/parser.class.ts:483</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="encodeCf" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>encode<wbr />Cf</span
+							><a
+								href="#encodeCf"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="encodeCf.encodeCf-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature">encode<wbr />Cf</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">__namedParameters</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">Promise</span
+								><span class="tsd-signature-symbol">&lt;</span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">string</span
+								><span class="tsd-signature-symbol">&gt;</span
+								><a
+									href="#encodeCf.encodeCf-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Generates full CF</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter"
+													>__namedParameters</span
+												>: <span class="tsd-signature-type">Omit</span
+												><span class="tsd-signature-symbol">&lt;</span
+												><span class="tsd-signature-type">default</span
+												><span class="tsd-signature-symbol">, </span
+												><span class="tsd-signature-type"
+													>&quot;place&quot;</span
+												><span class="tsd-signature-symbol">&gt;</span
+												><span class="tsd-signature-symbol"> &amp; </span
+												><span class="tsd-signature-symbol">{ </span><br /><span
+													>    </span
+												><span class="tsd-kind-property">place</span
+												><span class="tsd-signature-symbol">?: </span
+												><span class="tsd-signature-type">string</span
+												><span class="tsd-signature-symbol"> | </span
+												><a
+													href="../types/BelfiorePlace.html"
+													class="tsd-signature-type tsd-kind-type-alias"
+													>BelfiorePlace</a
+												><span class="tsd-signature-symbol">; </span><br /><span
+													class="tsd-signature-symbol"
+													>}</span
+												></span
+											>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">Promise</span
+									><span class="tsd-signature-symbol">&lt;</span
+									><span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">string</span
+									><span class="tsd-signature-symbol">&gt;</span>
+								</h4>
+								<p>Complete CF</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L630"
+												>src/classes/parser.class.ts:630</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="firstNameToCf" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>first<wbr />Name<wbr />To<wbr />Cf</span
+							><a
+								href="#firstNameToCf"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="firstNameToCf.firstNameToCf-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>first<wbr />Name<wbr />To<wbr />Cf</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">firstName</span
+								><span class="tsd-signature-symbol">?</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#firstNameToCf.firstNameToCf-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse firstName to cf part</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><code class="tsd-tag ts-flagOptional">Optional</code>
+												<span class="tsd-kind-parameter">firstName</span>:
+												<span class="tsd-signature-type">null</span
+												><span class="tsd-signature-symbol"> | </span
+												><span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Partial or complete CF to parse</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">string</span>
+								</h4>
+								<p>partial cf</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L428"
+												>src/classes/parser.class.ts:428</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="lastNameToCf" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>last<wbr />Name<wbr />To<wbr />Cf</span
+							><a
+								href="#lastNameToCf"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="lastNameToCf.lastNameToCf-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>last<wbr />Name<wbr />To<wbr />Cf</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">lastName</span
+								><span class="tsd-signature-symbol">?</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#lastNameToCf.lastNameToCf-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse lastName to cf part</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><code class="tsd-tag ts-flagOptional">Optional</code>
+												<span class="tsd-kind-parameter">lastName</span>:
+												<span class="tsd-signature-type">null</span
+												><span class="tsd-signature-symbol"> | </span
+												><span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Partial or complete CF to parse</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">string</span>
+								</h4>
+								<p>partial cf</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L403"
+												>src/classes/parser.class.ts:403</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="monthToCf" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>month<wbr />To<wbr />Cf</span
+							><a
+								href="#monthToCf"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="monthToCf.monthToCf-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>month<wbr />To<wbr />Cf</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">month</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#monthToCf.monthToCf-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse month information</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">month</span>:
+												<span class="tsd-signature-type">number</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Month number 0..11</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">string</span>
+								</h4>
+								<p>Birth Month CF code</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L469"
+												>src/classes/parser.class.ts:469</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="parsePlace" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>parse<wbr />Place</span
+							><a
+								href="#parsePlace"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="parsePlace.parsePlace-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature">parse<wbr />Place</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">place</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">Promise</span
+								><span class="tsd-signature-symbol">&lt;</span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><a
+									href="../types/BelfiorePlace.html"
+									class="tsd-signature-type tsd-kind-type-alias"
+									>BelfiorePlace</a
+								><span class="tsd-signature-symbol">&gt;</span
+								><a
+									href="#parsePlace.parsePlace-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>
+										Parse Place information to return city or country details
+									</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">place</span>:
+												<span class="tsd-signature-type">string</span
+												><span class="tsd-signature-symbol"> | </span
+												><a
+													href="../types/BelfiorePlace.html"
+													class="tsd-signature-type tsd-kind-type-alias"
+													>BelfiorePlace</a
+												></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>
+													Belfiore place instance, belfiore code or city/country
+													name
+												</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">Promise</span
+									><span class="tsd-signature-symbol">&lt;</span
+									><span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><a
+										href="../types/BelfiorePlace.html"
+										class="tsd-signature-type tsd-kind-type-alias"
+										>BelfiorePlace</a
+									><span class="tsd-signature-symbol">&gt;</span>
+								</h4>
+								<p>
+									BelfiorePlace instance with the target city or country details
+								</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L531"
+												>src/classes/parser.class.ts:531</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member tsd-is-private">
+						<a id="partialCfDeomocode" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<code class="tsd-tag ts-flagPrivate">Private</code>
+							<span>partial<wbr />Cf<wbr />Deomocode</span
+							><a
+								href="#partialCfDeomocode"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures tsd-is-private">
+							<li class="tsd-signature tsd-anchor-link">
+								<a
+									id="partialCfDeomocode.partialCfDeomocode-1"
+									class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>partial<wbr />Cf<wbr />Deomocode</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">partialCodiceFiscale</span>,
+								<span class="tsd-kind-parameter">offset</span
+								><span class="tsd-signature-symbol">?</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#partialCfDeomocode.partialCfDeomocode-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Convert omocode full or chunk CF into plain one</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter"
+													>partialCodiceFiscale</span
+												>: <span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Partial or complete Omocode/Regular CF to parse</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+										<li>
+											<span
+												><span class="tsd-kind-parameter">offset</span>:
+												<span class="tsd-signature-type">number</span
+												><span class="tsd-signature-symbol"> = 0</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>
+													starting point of the given chunk in the 16 char CF
+												</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">string</span>
+								</h4>
+								<p>Regular version w/o omocodes chars of the given chunk</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L701"
+												>src/classes/parser.class.ts:701</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="placeToCf" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>place<wbr />To<wbr />Cf</span
+							><a
+								href="#placeToCf"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="placeToCf.placeToCf-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>place<wbr />To<wbr />Cf</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">cityOrCountryName</span>,
+								<span class="tsd-kind-parameter">provinceId</span
+								><span class="tsd-signature-symbol">?</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">Promise</span
+								><span class="tsd-signature-symbol">&lt;</span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">string</span
+								><span class="tsd-signature-symbol">&gt;</span
+								><a
+									href="#placeToCf.placeToCf-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>
+										Parse a Date and Gender information to create Date/Gender CF
+										part
+									</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter"
+													>cityOrCountryName</span
+												>: <span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>City or Country name</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+										<li>
+											<span
+												><code class="tsd-tag ts-flagOptional">Optional</code>
+												<span class="tsd-kind-parameter">provinceId</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>Province code for cities</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">Promise</span
+									><span class="tsd-signature-symbol">&lt;</span
+									><span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">string</span
+									><span class="tsd-signature-symbol">&gt;</span>
+								</h4>
+								<p>
+									Matching place belfiore code, if only once is matching
+									criteria
+								</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L581"
+												>src/classes/parser.class.ts:581</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="placeToCf.placeToCf-2" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>place<wbr />To<wbr />Cf</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">birthDate</span>,
+								<span class="tsd-kind-parameter">cityOrCountryName</span>,
+								<span class="tsd-kind-parameter">provinceId</span
+								><span class="tsd-signature-symbol">?</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">Promise</span
+								><span class="tsd-signature-symbol">&lt;</span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">string</span
+								><span class="tsd-signature-symbol">&gt;</span
+								><a
+									href="#placeToCf.placeToCf-2"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">birthDate</span>:
+												<a
+													href="../types/MultiFormatDate.html"
+													class="tsd-signature-type tsd-kind-type-alias"
+													>MultiFormatDate</a
+												></span
+											>
+										</li>
+										<li>
+											<span
+												><span class="tsd-kind-parameter"
+													>cityOrCountryName</span
+												>: <span class="tsd-signature-type">string</span></span
+											>
+										</li>
+										<li>
+											<span
+												><code class="tsd-tag ts-flagOptional">Optional</code>
+												<span class="tsd-kind-parameter">provinceId</span>:
+												<span class="tsd-signature-type">string</span></span
+											>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">Promise</span
+									><span class="tsd-signature-symbol">&lt;</span
+									><span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">string</span
+									><span class="tsd-signature-symbol">&gt;</span>
+								</h4>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L585"
+												>src/classes/parser.class.ts:585</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="yearMonthDayToDate" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>year<wbr />Month<wbr />Day<wbr />To<wbr />Date</span
+							><a
+								href="#yearMonthDayToDate"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a
+									id="yearMonthDayToDate.yearMonthDayToDate-1"
+									class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>year<wbr />Month<wbr />Day<wbr />To<wbr />Date</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">year</span>,
+								<span class="tsd-kind-parameter">month</span
+								><span class="tsd-signature-symbol">?</span>,
+								<span class="tsd-kind-parameter">day</span
+								><span class="tsd-signature-symbol">?</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">Date</span
+								><a
+									href="#yearMonthDayToDate.yearMonthDayToDate-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse Year, Month, Day to Dated</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">year</span>:
+												<span class="tsd-signature-type">undefined</span
+												><span class="tsd-signature-symbol"> | </span
+												><span class="tsd-signature-type">null</span
+												><span class="tsd-signature-symbol"> | </span
+												><span class="tsd-signature-type">number</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>4 digits Year</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+										<li>
+											<span
+												><span class="tsd-kind-parameter">month</span>:
+												<span class="tsd-signature-type">undefined</span
+												><span class="tsd-signature-symbol"> | </span
+												><span class="tsd-signature-type">null</span
+												><span class="tsd-signature-symbol"> | </span
+												><a
+													href="../types/DateMonth.html"
+													class="tsd-signature-type tsd-kind-type-alias"
+													>DateMonth</a
+												><span class="tsd-signature-symbol"> = 0</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>1 or 2 digits Month 0..11</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+										<li>
+											<span
+												><span class="tsd-kind-parameter">day</span>:
+												<span class="tsd-signature-type">undefined</span
+												><span class="tsd-signature-symbol"> | </span
+												><span class="tsd-signature-type">null</span
+												><span class="tsd-signature-symbol"> | </span
+												><a
+													href="../types/DateDay.html"
+													class="tsd-signature-type tsd-kind-type-alias"
+													>DateDay</a
+												><span class="tsd-signature-symbol"> = 1</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>1,2 digits Day 1..31</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">Date</span>
+								</h4>
+								<p>Date or null if provided year/month/day are not valid</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L502"
+												>src/classes/parser.class.ts:502</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+					<section class="tsd-panel tsd-member">
+						<a id="yearToCf" class="tsd-anchor"></a>
+						<h3 class="tsd-anchor-link">
+							<span>year<wbr />To<wbr />Cf</span
+							><a
+								href="#yearToCf"
+								aria-label="Permalink"
+								class="tsd-anchor-icon"
+								><svg viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-anchor"></use></svg
+							></a>
+						</h3>
+						<ul class="tsd-signatures">
+							<li class="tsd-signature tsd-anchor-link">
+								<a id="yearToCf.yearToCf-1" class="tsd-anchor"></a
+								><span class="tsd-kind-call-signature"
+									>year<wbr />To<wbr />Cf</span
+								><span class="tsd-signature-symbol">(</span
+								><span class="tsd-kind-parameter">year</span
+								><span class="tsd-signature-symbol">)</span
+								><span class="tsd-signature-symbol">: </span
+								><span class="tsd-signature-type">null</span
+								><span class="tsd-signature-symbol"> | </span
+								><span class="tsd-signature-type">string</span
+								><a
+									href="#yearToCf.yearToCf-1"
+									aria-label="Permalink"
+									class="tsd-anchor-icon"
+									><svg viewBox="0 0 24 24">
+										<use href="../assets/icons.svg#icon-anchor"></use></svg
+								></a>
+							</li>
+							<li class="tsd-description">
+								<div class="tsd-comment tsd-typography">
+									<p>Parse year to cf part</p>
+								</div>
+								<div class="tsd-parameters">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameter-list">
+										<li>
+											<span
+												><span class="tsd-kind-parameter">year</span>:
+												<span class="tsd-signature-type">string</span
+												><span class="tsd-signature-symbol"> | </span
+												><span class="tsd-signature-type">number</span></span
+											>
+											<div class="tsd-comment tsd-typography">
+												<p>
+													Birth year 2 or 4 digit string, number above 19XX or
+													below 100
+												</p>
+											</div>
+											<div class="tsd-comment tsd-typography"></div>
+										</li>
+									</ul>
+								</div>
+								<h4 class="tsd-returns-title">
+									Returns <span class="tsd-signature-type">null</span
+									><span class="tsd-signature-symbol"> | </span
+									><span class="tsd-signature-type">string</span>
+								</h4>
+								<p>partial cf</p>
+								<div class="tsd-comment tsd-typography"></div>
+								<aside class="tsd-sources">
+									<ul>
+										<li>
+											Defined in
+											<a
+												href="https://github.com/Marketto/codice-fiscale-utils/blob/705e56ff72b3fb807d5068d65224f0a8345bde18/src/classes/parser.class.ts#L444"
+												>src/classes/parser.class.ts:444</a
+											>
+										</li>
+									</ul>
+								</aside>
+							</li>
+						</ul>
+					</section>
+				</section>
+			</div>
+			<div class="col-sidebar">
+				<div class="page-menu">
+					<div class="tsd-navigation settings">
+						<details class="tsd-index-accordion">
+							<summary class="tsd-accordion-summary">
+								<h3>
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+										<use href="../assets/icons.svg#icon-chevronDown"></use></svg
+									>Settings
+								</h3>
+							</summary>
+							<div class="tsd-accordion-details">
+								<div class="tsd-filter-visibility">
+									<h4 class="uppercase">Member Visibility</h4>
+									<form>
+										<ul id="tsd-filter-options">
+											<li class="tsd-filter-item">
+												<label class="tsd-filter-input"
+													><input
+														type="checkbox"
+														id="tsd-filter-protected"
+														name="protected" /><svg
+														width="32"
+														height="32"
+														viewBox="0 0 32 32"
+														aria-hidden="true">
+														<rect
+															class="tsd-checkbox-background"
+															width="30"
+															height="30"
+															x="1"
+															y="1"
+															rx="6"
+															fill="none"></rect>
+														<path
+															class="tsd-checkbox-checkmark"
+															d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+															stroke="none"
+															stroke-width="3.5"
+															stroke-linejoin="round"
+															fill="none"></path></svg
+													><span>Protected</span></label
+												>
+											</li>
+											<li class="tsd-filter-item">
+												<label class="tsd-filter-input"
+													><input
+														type="checkbox"
+														id="tsd-filter-private"
+														name="private" /><svg
+														width="32"
+														height="32"
+														viewBox="0 0 32 32"
+														aria-hidden="true">
+														<rect
+															class="tsd-checkbox-background"
+															width="30"
+															height="30"
+															x="1"
+															y="1"
+															rx="6"
+															fill="none"></rect>
+														<path
+															class="tsd-checkbox-checkmark"
+															d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+															stroke="none"
+															stroke-width="3.5"
+															stroke-linejoin="round"
+															fill="none"></path></svg
+													><span>Private</span></label
+												>
+											</li>
+											<li class="tsd-filter-item">
+												<label class="tsd-filter-input"
+													><input
+														type="checkbox"
+														id="tsd-filter-inherited"
+														name="inherited"
+														checked /><svg
+														width="32"
+														height="32"
+														viewBox="0 0 32 32"
+														aria-hidden="true">
+														<rect
+															class="tsd-checkbox-background"
+															width="30"
+															height="30"
+															x="1"
+															y="1"
+															rx="6"
+															fill="none"></rect>
+														<path
+															class="tsd-checkbox-checkmark"
+															d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+															stroke="none"
+															stroke-width="3.5"
+															stroke-linejoin="round"
+															fill="none"></path></svg
+													><span>Inherited</span></label
+												>
+											</li>
+											<li class="tsd-filter-item">
+												<label class="tsd-filter-input"
+													><input
+														type="checkbox"
+														id="tsd-filter-external"
+														name="external" /><svg
+														width="32"
+														height="32"
+														viewBox="0 0 32 32"
+														aria-hidden="true">
+														<rect
+															class="tsd-checkbox-background"
+															width="30"
+															height="30"
+															x="1"
+															y="1"
+															rx="6"
+															fill="none"></rect>
+														<path
+															class="tsd-checkbox-checkmark"
+															d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+															stroke="none"
+															stroke-width="3.5"
+															stroke-linejoin="round"
+															fill="none"></path></svg
+													><span>External</span></label
+												>
+											</li>
+										</ul>
+									</form>
+								</div>
+								<div class="tsd-theme-toggle">
+									<h4 class="uppercase">Theme</h4>
+									<select id="tsd-theme">
+										<option value="os">OS</option>
+										<option value="light">Light</option>
+										<option value="dark">Dark</option>
+									</select>
+								</div>
+							</div>
+						</details>
+					</div>
+					<details open class="tsd-index-accordion tsd-page-navigation">
+						<summary class="tsd-accordion-summary">
+							<h3>
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+									<use href="../assets/icons.svg#icon-chevronDown"></use></svg
+								>On This Page
+							</h3>
+						</summary>
+						<div class="tsd-accordion-details">
+							<a href="#constructor" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-512"></use></svg
+								><span>constructor</span></a
+							><a href="#JOLLY_CHAR" class="tsd-is-private"
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-1024"></use></svg
+								><span>JOLLY_<wbr />CHAR</span></a
+							><a href="#OMOCODE_BITMAP" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-1024"></use></svg
+								><span>OMOCODE_<wbr />BITMAP</span></a
+							><a href="#belfioreConnector" class="tsd-is-private"
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-1024"></use></svg
+								><span>belfiore<wbr />Connector</span></a
+							><a href="#appyCaseToChar" class="tsd-is-private"
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>appy<wbr />Case<wbr />To<wbr />Char</span></a
+							><a href="#cfDecode" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>cf<wbr />Decode</span></a
+							><a href="#cfDeomocode" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>cf<wbr />Deomocode</span></a
+							><a href="#cfOmocode" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>cf<wbr />Omocode</span></a
+							><a href="#cfOmocodeId" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>cf<wbr />Omocode<wbr />Id</span></a
+							><a href="#cfToBirthDate" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>cf<wbr />To<wbr />Birth<wbr />Date</span></a
+							><a href="#cfToBirthDay" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>cf<wbr />To<wbr />Birth<wbr />Day</span></a
+							><a href="#cfToBirthMonth" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>cf<wbr />To<wbr />Birth<wbr />Month</span></a
+							><a href="#cfToBirthPlace" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>cf<wbr />To<wbr />Birth<wbr />Place</span></a
+							><a href="#cfToBirthYear" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>cf<wbr />To<wbr />Birth<wbr />Year</span></a
+							><a href="#cfToFirstName" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>cf<wbr />To<wbr />First<wbr />Name</span></a
+							><a href="#cfToGender" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>cf<wbr />To<wbr />Gender</span></a
+							><a href="#cfToLastName" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>cf<wbr />To<wbr />Last<wbr />Name</span></a
+							><a href="#charExtractor" class="tsd-is-private"
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>char<wbr />Extractor</span></a
+							><a href="#charOmocode" class="tsd-is-private"
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>char<wbr />Omocode</span></a
+							><a href="#checkBitmap" class="tsd-is-private"
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>check<wbr />Bitmap</span></a
+							><a href="#dateGenderToCf" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>date<wbr />Gender<wbr />To<wbr />Cf</span></a
+							><a href="#dayGenderToCf" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>day<wbr />Gender<wbr />To<wbr />Cf</span></a
+							><a href="#encodeCf" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>encode<wbr />Cf</span></a
+							><a href="#firstNameToCf" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>first<wbr />Name<wbr />To<wbr />Cf</span></a
+							><a href="#lastNameToCf" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>last<wbr />Name<wbr />To<wbr />Cf</span></a
+							><a href="#monthToCf" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>month<wbr />To<wbr />Cf</span></a
+							><a href="#parsePlace" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>parse<wbr />Place</span></a
+							><a href="#partialCfDeomocode" class="tsd-is-private"
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>partial<wbr />Cf<wbr />Deomocode</span></a
+							><a href="#placeToCf" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>place<wbr />To<wbr />Cf</span></a
+							><a href="#yearMonthDayToDate" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>year<wbr />Month<wbr />Day<wbr />To<wbr />Date</span></a
+							><a href="#yearToCf" class=""
+								><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+									<use href="../assets/icons.svg#icon-2048"></use></svg
+								><span>year<wbr />To<wbr />Cf</span></a
+							>
+						</div>
+					</details>
+				</div>
+				<div class="site-menu">
+					<nav class="tsd-navigation">
+						<a href="../modules.html"
+							><svg class="tsd-kind-icon" viewBox="0 0 24 24">
+								<use href="../assets/icons.svg#icon-1"></use></svg
+							><span>@marketto/codice-fiscale-utils</span></a
+						>
+						<ul
+							class="tsd-small-nested-navigation"
+							id="tsd-nav-container"
+							data-base="..">
+							<li>Loading...</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<p class="tsd-generator">
+				Generated using
+				<a href="https://typedoc.org/" target="_blank">TypeDoc</a>
+			</p>
+		</footer>
+		<div class="overlay"></div>
+	</body>
+</html>
