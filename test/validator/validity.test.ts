@@ -7,6 +7,10 @@ export default () => {
 			Validator.codiceFiscale("MRNMIA02E45L219X").valid.should.be.true;
 			Validator.codiceFiscale("GSTPPP31C06D620Z").valid.should.be.true;
 			Validator.codiceFiscale("RVNGNY63D27I560P").valid.should.be.true;
+			// Unexisting country but Birthdate before CF introduction
+			const t = Validator.codiceFiscale("RVNGNY77B08Z138H").errors;
+
+			Validator.codiceFiscale("RVNGNY77B08Z138H").valid.should.be.true;
 			Validator.codiceFiscale("VRNGNY07D68C351K").valid.should.be.false;
 			Validator.codiceFiscale("GSTPPP99C06D620V").valid.should.be.false;
 			Validator.codiceFiscale("").valid.should.be.false;
@@ -26,7 +30,7 @@ export default () => {
 				"INVALID_CRC_CODE"
 			);
 			Validator.codiceFiscale("GSTPPP99C06D620V").errors.should.contains({
-				place: "PLACE_EXPIRED_ON_NOT_YET_CREATED_ON_BIRTDATE",
+				place: "PLACE_EXPIRED_OR_NOT_YET_CREATED_ON_BIRTDATE",
 				date: "BIRTHDATE_OUT_OF_BIRTH_PLACE_LIFE_RANGE",
 			});
 		});
