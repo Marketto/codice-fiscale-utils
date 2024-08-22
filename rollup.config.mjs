@@ -18,7 +18,7 @@ const baseConf = {
             "@marketto/diacritic-remover": "DiacriticRemover",
             "moment": "moment",
         },
-        name: "CodiceFiscaleUtils",
+        name: pkg.config.name,
         sourcemap: true,
     },
     plugins: [
@@ -55,15 +55,6 @@ const rollupBrowserConf = rollupPluginTs({
         target: "ES2015",
     },
 });
-const rollupTypingConf = rollupPluginTs({
-    output: [{
-        file: pkg.typings,
-        format: 'es'
-    }],
-    plugins: [
-        dts()
-    ],
-})
 
 export default [
     // JS
@@ -105,7 +96,7 @@ export default [
         ...baseConf,
         output: {
             ...baseConf.output,
-            file: "dist/codice-fiscale-utils.bundle.min.js",
+            file: `dist/${pkg.config.iifeFileName}.bundle.min.js`,
             format: "iife",
         },
         plugins: [
@@ -128,10 +119,7 @@ export default [
         output: [{
             file: pkg.typings,
             format: 'es',
-            globals: {
-                "@marketto/diacritic-remover": "DiacriticRemover",
-                "moment": "moment",
-            },
+            globals: baseConf.output.globals,
         }],
         plugins: [
             dts(),

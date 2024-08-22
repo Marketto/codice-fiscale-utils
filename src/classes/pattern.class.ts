@@ -1,3 +1,7 @@
+import {
+	BelfiorePlace,
+	IBelfioreConnector,
+} from "@marketto/belfiore-connector";
 import DiacriticRemover from "@marketto/diacritic-remover";
 import moment from "moment";
 import {
@@ -43,19 +47,25 @@ import Parser from "./parser.class";
 const diacriticRemover = new DiacriticRemover();
 
 export default class Pattern {
+	private parser: Parser;
+
+	constructor(private readonly belfioreConnector: IBelfioreConnector) {
+		this.parser = new Parser(belfioreConnector);
+	}
+
 	/**
 	 * Validation regexp for the given lastName or generic
 	 * @param lastName Optional lastName to generate validation regexp
 	 * @return CF Surname matcher
 	 * @throw INVALID_SURNAME
 	 */
-	public static cfLastName(lastName?: string): RegExp {
+	public cfLastName(lastName?: string): RegExp {
 		let matcher: string = CF_SURNAME_MATCHER;
 		if (lastName) {
 			if (!this.lastName().test(lastName)) {
 				throw new CfuError(INVALID_SURNAME);
 			}
-			matcher = Parser.lastNameToCf(lastName) || matcher;
+			matcher = this.parser.lastNameToCf(lastName) || matcher;
 		}
 		return this.isolatedInsensitiveTailor(matcher);
 	}
@@ -66,13 +76,13 @@ export default class Pattern {
 	 * @return CF name matcher
 	 * @throw INVALID_NAME
 	 */
-	public static cfFirstName(name?: string): RegExp {
+	public cfFirstName(name?: string): RegExp {
 		let matcher: string = CF_NAME_MATCHER;
 		if (name) {
 			if (!this.lastName().test(name)) {
 				throw new CfuError(INVALID_NAME);
 			}
-			matcher = Parser.firstNameToCf(name) || matcher;
+			matcher = this.parser.firstNameToCf(name) || matcher;
 		}
 		return this.isolatedInsensitiveTailor(matcher);
 	}
@@ -82,10 +92,10 @@ export default class Pattern {
 	 * @param year Optional year to generate validation regexp
 	 * @return CF year matcher
 	 */
-	public static cfYear(year?: number): RegExp {
+	public cfYear(year?: number): RegExp {
 		let matcher: string = YEAR_MATCHER;
 		if (year) {
-			const parsedYear = Parser.yearToCf(year);
+			const parsedYear = this.parser.yearToCf(year);
 			if (parsedYear) {
 				matcher = this.deomocode(parsedYear);
 			} else {
@@ -100,10 +110,10 @@ export default class Pattern {
 	 * @param month Optional month to generate validation regexp
 	 * @return CF month matcher
 	 */
-	public static cfMonth(month?: DateMonth) {
+	public cfMonth(month?: DateMonth) {
 		let matcher: string = MONTH_MATCHER;
 		if (month) {
-			matcher = Parser.monthToCf(month) || matcher;
+			matcher = this.parser.monthToCf(month) || matcher;
 		}
 		return this.isolatedInsensitiveTailor(matcher);
 	}
@@ -113,11 +123,11 @@ export default class Pattern {
 	 * @param day Optional day to generate validation regexp
 	 * @return CF day matcher
 	 */
-	public static cfDay(day?: DateDay): RegExp {
+	public cfDay(day?: DateDay): RegExp {
 		let matcher = DAY_MATCHER;
 		if (day) {
-			const parsedDayM = Parser.dayGenderToCf(day, "M");
-			const parsedDayF = Parser.dayGenderToCf(day, "F");
+			const parsedDayM = this.parser.dayGenderToCf(day, "M");
+			const parsedDayF = this.parser.dayGenderToCf(day, "F");
 			if (parsedDayM && parsedDayF) {
 				const matcherM: string = this.deomocode(parsedDayM);
 				const matcherF: string = this.deomocode(parsedDayF);
@@ -135,13 +145,13 @@ export default class Pattern {
 	 * @param gender Gender @see Genders
 	 * @return CF day and gender matcher
 	 */
-	public static cfDayGender(day?: DateDay, gender?: Genders): RegExp {
+	public cfDayGender(day?: DateDay, gender?: Genders): RegExp {
 		if (!gender) {
 			return this.cfDay(day);
 		}
 		let matcher;
 		if (day) {
-			const parsedDayGender = Parser.dayGenderToCf(day, gender);
+			const parsedDayGender = this.parser.dayGenderToCf(day, gender);
 			if (parsedDayGender) {
 				matcher = this.deomocode(parsedDayGender);
 			} else {
@@ -168,7 +178,7 @@ export default class Pattern {
 	 * @param gender @see Genders
 	 * @return CF date and gender matcher
 	 */
-	public static cfDateGender(
+	public cfDateGender(
 		date?: MultiFormatDate | null,
 		gender?: Genders | null
 	): RegExp {
@@ -180,12 +190,13 @@ export default class Pattern {
 		}
 		let matcher = FULL_DATE_MATCHER;
 		if (date) {
-			const parsedDateGender = gender && Parser.dateGenderToCf(date, gender);
+			const parsedDateGender =
+				gender && this.parser.dateGenderToCf(date, gender);
 			if (parsedDateGender) {
 				matcher = this.deomocode(parsedDateGender);
 			} else {
 				const parseDeomocode = (g: Genders): string => {
-					const parsedGender = Parser.dateGenderToCf(date, g);
+					const parsedGender = this.parser.dateGenderToCf(date, g);
 					if (!parsedGender) {
 						throw new CfuError(INVALID_DATE);
 					}
@@ -210,26 +221,26 @@ export default class Pattern {
 	 * @param placeName Optional place name to generate validation regexp
 	 * @return CF place matcher
 	 */
-	public static cfPlace(placeName?: string | null): RegExp;
-	public static cfPlace(
+	public async cfPlace(placeName?: string | null): Promise<RegExp>;
+	public async cfPlace(
 		birthDate?: MultiFormatDate | null,
 		placeName?: string | null
-	): RegExp;
-	public static cfPlace(
+	): Promise<RegExp>;
+	public async cfPlace(
 		birthDateOrName?: MultiFormatDate | null,
 		placeName?: string | null
-	): RegExp {
+	): Promise<RegExp> {
 		let matcher = BELFIORE_CODE_MATCHER;
 		if (birthDateOrName) {
 			const birthDate: Date | null = DateUtils.parseDate(birthDateOrName);
 
 			if (birthDate && placeName) {
 				const place: string = placeName;
-				const parsedPlace = Parser.placeToCf(birthDate, place);
+				const parsedPlace = await this.parser.placeToCf(birthDate, place);
 				matcher = this.deomocode(parsedPlace || "");
 			} else if (!birthDate && typeof birthDateOrName === "string") {
 				const place: string = birthDateOrName;
-				const parsedPlace = Parser.placeToCf(place);
+				const parsedPlace = await this.parser.placeToCf(place);
 				matcher = this.deomocode(parsedPlace || "");
 			}
 		}
@@ -241,10 +252,14 @@ export default class Pattern {
 	 * @param personalInfo Input Object
 	 * @return CodiceFiscale matcher
 	 */
-	public static codiceFiscale(personalInfo?: IPersonalInfo): RegExp {
+	public async codiceFiscale(
+		personalInfo?: Omit<IPersonalInfo, "place"> & {
+			place?: BelfiorePlace | string | undefined;
+		}
+	): Promise<RegExp> {
 		let matcher = CODICE_FISCALE;
 		if (personalInfo) {
-			const parsedCf = Parser.encodeCf(personalInfo);
+			const parsedCf = await this.parser.encodeCf(personalInfo);
 
 			if (parsedCf) {
 				matcher = this.deomocode(parsedCf);
@@ -265,19 +280,23 @@ export default class Pattern {
 					if (date) {
 						dtParams = DateUtils.parseDate(date);
 					} else if (year) {
-						dtParams = Parser.yearMonthDayToDate(year, month, day);
+						dtParams = this.parser.yearMonthDayToDate(year, month, day);
 					}
-					const generator: (() => RegExp)[] = [
-						() => this.cfLastName(lastName),
-						() => this.cfFirstName(firstName),
-						() => this.cfDateGender(dtParams, gender),
-						() => this.cfPlace(dtParams, place),
+					const generator: (() => Promise<RegExp>)[] = [
+						async () => this.cfLastName(lastName),
+						async () => this.cfFirstName(firstName),
+						async () => this.cfDateGender(dtParams, gender),
+						async () =>
+							await this.cfPlace(
+								dtParams,
+								(place as BelfiorePlace)?.belfioreCode || (place as string)
+							),
 					];
 
 					matcher = "";
 					for (const validator of generator) {
-						const cfMatcher = validator().toString();
-						const match = cfMatcher.match(/\^(.+)\$/);
+						const cfMatcher = (await validator()).toString();
+						const match = cfMatcher.match(/\^(.{1,256})\$/);
 						const cfValue: string | null | undefined = match && match[1];
 
 						if (!cfValue) {
@@ -293,18 +312,18 @@ export default class Pattern {
 		return this.isolatedInsensitiveTailor(matcher);
 	}
 
-	private static LETTER_SET: string = `[A-Z${diacriticRemover.matcherBy(
+	private LETTER_SET: string = `[A-Z${diacriticRemover.matcherBy(
 		/^[A-Z]$/iu
 	)}]`;
-	private static SEPARATOR_SET: string = "(?:'?\\s*)";
+	private SEPARATOR_SET: string = "(?:'?\\s{0,4})";
 
 	/**
 	 * Returns lastName validator based on given cf or generic
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @return Generic or specific regular expression
 	 */
-	public static lastName(codiceFiscale?: string): RegExp {
-		let matcher: string = `${this.LETTER_SET}+`;
+	public lastName(codiceFiscale?: string): RegExp {
+		let matcher: string = `${this.LETTER_SET}{1,24}`;
 		if (codiceFiscale && /^[A-Z]{1,3}/iu.test(codiceFiscale)) {
 			const lastNameCf: string = codiceFiscale.substr(0, 3);
 			const diacriticizer = (matchingChars: string) =>
@@ -325,7 +344,7 @@ export default class Pattern {
 				VOWEL_LIST +
 				diacriticRemover.matcherBy(new RegExp(`^[${VOWEL_LIST}]$`, "ui"));
 			const diacriticsVowelMatcher: string = `[${diacriticsVowelList}]`;
-			const midDiacriticVowelMatcher: string = `(?:${diacriticsVowelMatcher}${this.SEPARATOR_SET})*`;
+			const midDiacriticVowelMatcher: string = `(?:${diacriticsVowelMatcher}${this.SEPARATOR_SET}){0,24}`;
 			const endingDiacritcVowelMatcher: string = `(?:${this.SEPARATOR_SET}${midDiacriticVowelMatcher}${diacriticsVowelMatcher})?`;
 			switch (cons.length) {
 				case 3: {
@@ -333,7 +352,7 @@ export default class Pattern {
 					matcher =
 						divider +
 						cons.join(`${this.SEPARATOR_SET}${divider}`) +
-						`(?:${this.SEPARATOR_SET}${this.LETTER_SET}*${this.LETTER_SET})?`;
+						`(?:${this.SEPARATOR_SET}${this.LETTER_SET}{0,24}${this.LETTER_SET})?`;
 					break;
 				}
 				case 2: {
@@ -372,12 +391,12 @@ export default class Pattern {
 			}
 
 			if (vow?.length + cons?.length < 3) {
-				return this.isolatedInsensitiveTailor(`\\s*(${matcher})\\s*`);
+				return this.isolatedInsensitiveTailor(`\\s{0,4}(${matcher})\\s{0,4}`);
 			}
 		}
 
 		return this.isolatedInsensitiveTailor(
-			`\\s*((?:${matcher})(?:${this.SEPARATOR_SET}${this.LETTER_SET}+)*)\\s*`
+			`\\s{0,4}((?:${matcher})(?:${this.SEPARATOR_SET}${this.LETTER_SET}{1,24}){0,24})\\s{0,4}`
 		);
 	}
 
@@ -386,7 +405,7 @@ export default class Pattern {
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @return Generic or specific regular expression
 	 */
-	public static firstName(codiceFiscale?: string): RegExp {
+	public firstName(codiceFiscale?: string): RegExp {
 		if (
 			codiceFiscale &&
 			new RegExp(`^[A-Z]{3}[${CONSONANT_LIST}]{3}`, "iu").test(codiceFiscale)
@@ -409,11 +428,13 @@ export default class Pattern {
 			);
 
 			const matcher: string =
-				`(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*${cons[0]}${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*(?:[${diacriticsConsonantList}]${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*)?` +
+				`(?:[${diacriticsVowelList}]{1,24}${this.SEPARATOR_SET}){0,24}${cons[0]}${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]{1,24}${this.SEPARATOR_SET}){0,24}(?:[${diacriticsConsonantList}]${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]{1,24}${this.SEPARATOR_SET}){0,24})?` +
 				cons
 					.slice(1, 3)
-					.join(`(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*`) +
-				`(?:${this.SEPARATOR_SET}${this.LETTER_SET}+)*`;
+					.join(
+						`(?:[${diacriticsVowelList}]{1,24}${this.SEPARATOR_SET}){0,24}`
+					) +
+				`(?:${this.SEPARATOR_SET}${this.LETTER_SET}{1,24}){0,24}`;
 
 			return this.isolatedInsensitiveTailor(matcher);
 		}
@@ -425,10 +446,10 @@ export default class Pattern {
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @return Generic or specific regular expression
 	 */
-	public static date(codiceFiscale?: string): RegExp {
+	public date(codiceFiscale?: string): RegExp {
 		let matcher: string = DATE_MATCHER.ISO8601_DATE_TIME;
 		if (codiceFiscale) {
-			const parsedDate = Parser.cfToBirthDate(codiceFiscale);
+			const parsedDate = this.parser.cfToBirthDate(codiceFiscale);
 			if (parsedDate) {
 				const dateIso8601: string = parsedDate.toJSON();
 				if (moment().diff(moment(parsedDate), "y") < 50) {
@@ -452,8 +473,8 @@ export default class Pattern {
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @return Generic or specific regular expression
 	 */
-	public static gender(codiceFiscale?: string): RegExp {
-		const parsedGender = codiceFiscale && Parser.cfToGender(codiceFiscale);
+	public gender(codiceFiscale?: string): RegExp {
+		const parsedGender = codiceFiscale && this.parser.cfToGender(codiceFiscale);
 		const matcher: string = parsedGender || `[${Gender.toArray().join("")}]`;
 		return this.isolatedInsensitiveTailor(matcher);
 	}
@@ -463,9 +484,10 @@ export default class Pattern {
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @return Generic or specific regular expression
 	 */
-	public static place(codiceFiscale?: string): RegExp {
-		let matcher: string = ".+";
-		const parsedPlace = codiceFiscale && Parser.cfToBirthPlace(codiceFiscale);
+	public async place(codiceFiscale?: string): Promise<RegExp> {
+		let matcher: string = ".{1,32}";
+		const parsedPlace =
+			codiceFiscale && (await this.parser.cfToBirthPlace(codiceFiscale));
 
 		if (parsedPlace) {
 			const nameMatcher: string = parsedPlace.name.replace(/./gu, (c) =>
@@ -477,11 +499,11 @@ export default class Pattern {
 		return this.isolatedInsensitiveTailor(matcher);
 	}
 
-	public static deomocode(omocode: string): string {
+	public deomocode(omocode: string): string {
 		return omocode.replace(/\d/gu, (n: any) => `[${n}${Omocodes[n]}]`);
 	}
 
-	private static isolatedInsensitiveTailor(matcher: string): RegExp {
+	private isolatedInsensitiveTailor(matcher: string): RegExp {
 		return new RegExp(`^(?:${matcher})$`, "iu");
 	}
 }

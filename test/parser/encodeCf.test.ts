@@ -1,11 +1,10 @@
-import { Parser } from "../../src/";
-import { expect } from "../utils";
+import { codiceFiscaleUtils, expect } from "../utils";
 
 export default () => {
 	describe("encodeCf", () => {
-		it("Should return VRNGNY07D68C351V", () => {
+		it("Should return VRNGNY07D68C351V", async () => {
 			expect(
-				Parser.encodeCf({
+				await codiceFiscaleUtils.parser.encodeCf({
 					day: 28,
 					firstName: "Génny",
 					gender: "F",
@@ -16,9 +15,9 @@ export default () => {
 				})
 			).to.be.equal("VRNGNY07D68C351V");
 		});
-		it("Should return MRNMIA02E45L219X", () => {
+		it("Should return MRNMIA02E45L219X", async () => {
 			expect(
-				Parser.encodeCf({
+				await codiceFiscaleUtils.parser.encodeCf({
 					day: 5,
 					firstName: "Mìa'",
 					gender: "F",

@@ -1,5 +1,11 @@
 ## CHANGELOG
 
+### 3.0.0 (2024-08-20)
+
+- Belfiore Connector separated from CodiceFiscaleUtils
+- All methods related to place (Belfiore Connector) are async
+- Parser, Validator and Pattern have to be used as instances provided by CodiceFiscaleUtils which have to be used as an instance aswell
+
 ### 2.2.2 (2024-06-10)
 
 - #111 Fixed firstName and lastName validators to handle compund names

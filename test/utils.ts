@@ -4,7 +4,8 @@ chai.use(chaiString);
 chai.should();
 const { expect } = chai;
 
-export {
-    expect,
-    chai,
-};
+import { CodiceFiscaleUtils } from "../src/";
+import { belfioreConnector } from "@marketto/belfiore-connector-embedded";
+const codiceFiscaleUtils = new CodiceFiscaleUtils(belfioreConnector);
+
+export { codiceFiscaleUtils, expect, chai };

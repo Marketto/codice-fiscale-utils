@@ -1,7 +1,9 @@
+import {
+	IBelfioreConnector,
+	BelfiorePlace,
+} from "@marketto/belfiore-connector";
 import DiacriticRemover from "@marketto/diacritic-remover";
 import moment from "moment";
-import { Belfiore, BelfiorePlace } from "../belfiore-connector";
-import BelfioreConnector from "../belfiore-connector/classes/belfiore-connector.class";
 import {
 	CRC_OFFSET,
 	CRC_SIZE,
@@ -20,10 +22,7 @@ import {
 	YEAR_OFFSET,
 	YEAR_SIZE,
 } from "../const/cf-offsets.const";
-import {
-	CF_FULL_NAME_MATCHER,
-	CF_SURNAME_MATCHER,
-} from "../const/matcher.const";
+import { CF_NAME_MATCHER, CF_SURNAME_MATCHER } from "../const/matcher.const";
 import { CONSONANT_LIST, VOWEL_LIST } from "../const/matcher.const";
 import { DateDay, DateMonth, DateUtils, MultiFormatDate } from "../date-utils";
 import BirthMonth from "../enums/birth-month.enum";
@@ -38,17 +37,19 @@ import { CF_INTRODUCTION_DATE } from "../const/logic.const";
 const diacriticRemover = new DiacriticRemover();
 
 export default class Parser {
+	constructor(private readonly belfioreConnector: IBelfioreConnector) {}
+
 	/**
 	 * Default omocode bitmap
 	 */
-	public static OMOCODE_BITMAP: number = 0b0111011011000000;
+	public OMOCODE_BITMAP: number = 0b0111011011000000;
 
 	/**
 	 * Convert omocode CF into plain one
 	 * @param codiceFiscale Partial or complete Omocode/Regular CF to parse, starting from LastName
 	 * @returns Regular CF w/o omocodes chars
 	 */
-	public static cfDeomocode(codiceFiscale: string): string {
+	public cfDeomocode(codiceFiscale: string): string {
 		if (codiceFiscale && codiceFiscale.length <= YEAR_OFFSET) {
 			return codiceFiscale;
 		}
@@ -56,7 +57,7 @@ export default class Parser {
 		if (deomocodedCf.length < CRC_OFFSET) {
 			return deomocodedCf;
 		}
-		const partialDeomocodedCf = deomocodedCf.substr(
+		const partialDeomocodedCf = deomocodedCf.substring(
 			LASTNAME_OFFSET,
 			CRC_OFFSET
 		);
@@ -64,12 +65,12 @@ export default class Parser {
 			partialDeomocodedCf +
 			this.appyCaseToChar(
 				CheckDigitizer.checkDigit(deomocodedCf) || "",
-				deomocodedCf.substr(CRC_OFFSET, CRC_SIZE)
+				deomocodedCf.substring(CRC_OFFSET, CRC_OFFSET + CRC_SIZE)
 			)
 		);
 	}
 
-	public static cfOmocode(codiceFiscale: string, omocodeId: number): string {
+	public cfOmocode(codiceFiscale: string, omocodeId: number): string {
 		if (!omocodeId) {
 			return this.cfDeomocode(codiceFiscale);
 		}
@@ -99,7 +100,7 @@ export default class Parser {
 		return omocodedCf.join("");
 	}
 
-	public static cfOmocodeId(codiceFiscale: string): number {
+	public cfOmocodeId(codiceFiscale: string): number {
 		const cfOmocodeBitmap = codiceFiscale
 			.split("")
 			// tslint:disable-next-line: no-bitwise
@@ -114,16 +115,23 @@ export default class Parser {
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @returns Partial/possible lastName
 	 */
-	public static cfToLastName(codiceFiscale: string): string | null {
+	public cfToLastName(codiceFiscale: string): string | null {
+		const cfLastNamePart = codiceFiscale?.substring(
+			LASTNAME_OFFSET,
+			LASTNAME_OFFSET + LASTNAME_SIZE
+		);
 		if (
 			typeof codiceFiscale !== "string" ||
-			codiceFiscale.length < LASTNAME_OFFSET + LASTNAME_SIZE ||
-			!new RegExp(`^(?:${CF_SURNAME_MATCHER})`, "iu").test(codiceFiscale)
+			cfLastNamePart.length !== LASTNAME_SIZE ||
+			!new RegExp(`^(?:${CF_SURNAME_MATCHER})`, "iu").test(cfLastNamePart)
 		) {
 			return null;
 		}
 
-		const lastNameCf = codiceFiscale.substr(LASTNAME_OFFSET, LASTNAME_SIZE);
+		const lastNameCf = codiceFiscale.substring(
+			LASTNAME_OFFSET,
+			LASTNAME_OFFSET + LASTNAME_SIZE
+		);
 
 		const [cons = ""] =
 			lastNameCf.match(new RegExp(`^[${CONSONANT_LIST}]{1,3}`, "ig")) || [];
@@ -156,17 +164,19 @@ export default class Parser {
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @returns Partial/possible firstName
 	 */
-	public static cfToFirstName(codiceFiscale: string): string | null {
+	public cfToFirstName(codiceFiscale: string): string | null {
+		const cfFirstNamePart = codiceFiscale?.substring(
+			FIRSTNAME_OFFSET,
+			FIRSTNAME_OFFSET + FIRSTNAME_SIZE
+		);
 		if (
 			typeof codiceFiscale !== "string" ||
-			codiceFiscale.length < FIRSTNAME_OFFSET + FIRSTNAME_SIZE ||
-			!new RegExp(`^(${CF_FULL_NAME_MATCHER})`, "iu").test(codiceFiscale)
+			cfFirstNamePart?.length !== FIRSTNAME_SIZE ||
+			!new RegExp(`^(${CF_NAME_MATCHER})$`, "iu").test(cfFirstNamePart)
 		) {
 			return null;
 		}
-		return this.cfToLastName(
-			codiceFiscale.substr(FIRSTNAME_OFFSET, FIRSTNAME_SIZE)
-		);
+		return this.cfToLastName(cfFirstNamePart);
 	}
 
 	/**
@@ -174,14 +184,17 @@ export default class Parser {
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @returns Male or female
 	 */
-	public static cfToGender(codiceFiscale: string): Genders | null {
+	public cfToGender(codiceFiscale: string): Genders | null {
 		if (
 			typeof codiceFiscale !== "string" ||
 			codiceFiscale.length < GENDER_OFFSET + GENDER_SIZE
 		) {
 			return null;
 		}
-		const cfGenderPart = codiceFiscale.substr(GENDER_OFFSET, GENDER_SIZE);
+		const cfGenderPart = codiceFiscale.substring(
+			GENDER_OFFSET,
+			GENDER_OFFSET + GENDER_SIZE
+		);
 		const genderInt =
 			parseInt(this.partialCfDeomocode(cfGenderPart, GENDER_OFFSET), 10) * 10;
 		return Gender.getGender(genderInt);
@@ -192,14 +205,17 @@ export default class Parser {
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @returns Birth Year (4 digits)
 	 */
-	public static cfToBirthYear(codiceFiscale: string): number | null {
+	public cfToBirthYear(codiceFiscale: string): number | null {
 		if (
 			typeof codiceFiscale !== "string" ||
 			codiceFiscale.length < YEAR_OFFSET + YEAR_SIZE
 		) {
 			return null;
 		}
-		const cfBirthYearPart = codiceFiscale.substr(YEAR_OFFSET, YEAR_SIZE);
+		const cfBirthYearPart = codiceFiscale.substring(
+			YEAR_OFFSET,
+			YEAR_OFFSET + YEAR_SIZE
+		);
 		const birthYear: number = parseInt(
 			this.partialCfDeomocode(cfBirthYearPart, YEAR_OFFSET),
 			10
@@ -222,7 +238,7 @@ export default class Parser {
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @returns Birth Month (0...11 - Date notation)
 	 */
-	public static cfToBirthMonth(codiceFiscale: string): DateMonth | null {
+	public cfToBirthMonth(codiceFiscale: string): DateMonth | null {
 		if (
 			typeof codiceFiscale !== "string" ||
 			codiceFiscale.length < MONTH_OFFSET + MONTH_SIZE
@@ -231,7 +247,7 @@ export default class Parser {
 		}
 
 		const cfBirthMonthPart: any = codiceFiscale
-			.substr(MONTH_OFFSET, MONTH_SIZE)
+			.substring(MONTH_OFFSET, MONTH_OFFSET + MONTH_SIZE)
 			.toUpperCase();
 		const birthMonth = BirthMonth[cfBirthMonthPart];
 		if (typeof birthMonth !== "number" || birthMonth < 0 || birthMonth > 11) {
@@ -245,7 +261,7 @@ export default class Parser {
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @returns Birth day (1..31)
 	 */
-	public static cfToBirthDay(codiceFiscale: string): DateDay | null {
+	public cfToBirthDay(codiceFiscale: string): DateDay | null {
 		if (
 			typeof codiceFiscale !== "string" ||
 			codiceFiscale.length < DAY_OFFSET + DAY_SIZE
@@ -253,7 +269,10 @@ export default class Parser {
 			return null;
 		}
 
-		const cfBirthDayPart = codiceFiscale.substr(DAY_OFFSET, DAY_SIZE);
+		const cfBirthDayPart = codiceFiscale.substring(
+			DAY_OFFSET,
+			DAY_OFFSET + DAY_SIZE
+		);
 		const birthDay: number = parseInt(
 			this.partialCfDeomocode(cfBirthDayPart, DAY_OFFSET),
 			10
@@ -270,7 +289,7 @@ export default class Parser {
 	 * @param codiceFiscale Partial or complete CF to parse
 	 * @returns Birth Date
 	 */
-	public static cfToBirthDate(codiceFiscale: string): Date | null {
+	public cfToBirthDate(codiceFiscale: string): Date | null {
 		const birthDay = this.cfToBirthDay(codiceFiscale);
 		if (!birthDay) {
 			return null;
@@ -292,10 +311,10 @@ export default class Parser {
 	 * @param checkBirthDateConsistency Ensure birthday is between creation and expiran date of the cf city or country, default value: true
 	 * @returns Birth place
 	 */
-	public static cfToBirthPlace(
+	public async cfToBirthPlace(
 		codiceFiscale: string,
 		checkBirthDateConsistency: boolean = true
-	): BelfiorePlace | null {
+	): Promise<BelfiorePlace | null> {
 		if (
 			typeof codiceFiscale !== "string" ||
 			codiceFiscale.length < PLACE_OFFSET + PLACE_SIZE
@@ -312,7 +331,8 @@ export default class Parser {
 			PLACE_OFFSET
 		);
 
-		const birthPlace: BelfiorePlace | undefined = Belfiore[belfioreCode];
+		const birthPlace: BelfiorePlace | undefined | null =
+			await this.belfioreConnector.findByCode(belfioreCode);
 		if (!birthPlace) {
 			return null;
 		}
@@ -345,13 +365,13 @@ export default class Parser {
 	 * @param fiscalCode 16 character Codice Fiscale to decode
 	 * @returns Decoded CF Info
 	 */
-	public static cfDecode(fiscalCode: string): IPersonalInfo {
+	public async cfDecode(fiscalCode: string): Promise<IPersonalInfo> {
 		const year = this.cfToBirthYear(fiscalCode) || undefined;
 		// 0 is a month
 		const month = this.cfToBirthMonth(fiscalCode) ?? undefined;
 		const day = this.cfToBirthDay(fiscalCode) || undefined;
 		const date = DateUtils.ymdToDate(year, month, day) || undefined;
-		const place = this.cfToBirthPlace(fiscalCode);
+		const place = await this.cfToBirthPlace(fiscalCode);
 		const personalInfo: IPersonalInfo = {
 			firstName: this.cfToFirstName(fiscalCode) || undefined,
 			lastName: this.cfToLastName(fiscalCode) || undefined,
@@ -363,7 +383,7 @@ export default class Parser {
 			date,
 
 			gender: this.cfToGender(fiscalCode) || undefined,
-			place: place ? place.name : undefined,
+			place: place || undefined,
 
 			omocodeId: this.cfOmocodeId(fiscalCode),
 		};
@@ -380,19 +400,19 @@ export default class Parser {
 	 * @param lastName Partial or complete CF to parse
 	 * @returns partial cf
 	 */
-	public static lastNameToCf(lastName?: string | null): string | null {
+	public lastNameToCf(lastName?: string | null): string | null {
 		if (!lastName || (lastName || "").trim().length < 2) {
 			return null;
 		}
 
-		if (!/^[A-Z ']+$/iu.test(diacriticRemover.replace(lastName))) {
+		if (!/^[A-Z ']{1,32}$/iu.test(diacriticRemover.replace(lastName))) {
 			return null;
 		}
 
 		const consonants = this.charExtractor(lastName, CONSONANT_LIST);
 		const vowels = this.charExtractor(lastName, VOWEL_LIST);
 
-		const partialCf = (consonants + vowels).padEnd(3, "X").substr(0, 3);
+		const partialCf = (consonants + vowels).padEnd(3, "X").substring(0, 3);
 
 		if (partialCf.length < 3) {
 			return null;
@@ -405,13 +425,13 @@ export default class Parser {
 	 * @param firstName Partial or complete CF to parse
 	 * @returns partial cf
 	 */
-	public static firstNameToCf(firstName?: string | null): string | null {
+	public firstNameToCf(firstName?: string | null): string | null {
 		if (!firstName || (firstName || "").trim().length < 2) {
 			return null;
 		}
 		const consonants = this.charExtractor(firstName, CONSONANT_LIST);
 		if (consonants.length >= 4) {
-			return (consonants[0] + consonants.substr(2, 2)).toUpperCase();
+			return (consonants[0] + consonants.substring(2, 4)).toUpperCase();
 		}
 		return this.lastNameToCf(firstName);
 	}
@@ -421,7 +441,7 @@ export default class Parser {
 	 * @param year Birth year 2 or 4 digit string, number above 19XX or below 100
 	 * @returns partial cf
 	 */
-	public static yearToCf(year: string | number): string | null {
+	public yearToCf(year: string | number): string | null {
 		let parsedYear: number;
 		if (typeof year === "string") {
 			parsedYear = parseInt(year, 10);
@@ -446,7 +466,7 @@ export default class Parser {
 	 * @param month Month number 0..11
 	 * @returns Birth Month CF code
 	 */
-	public static monthToCf(month: DateMonth | number): string | null {
+	public monthToCf(month: DateMonth | number): string | null {
 		if (month < 0 || month > 11) {
 			return null;
 		}
@@ -460,10 +480,7 @@ export default class Parser {
 	 * @param gender Gender enum value
 	 * @returns Birth Day CF code
 	 */
-	public static dayGenderToCf(
-		day: DateDay | number,
-		gender: Genders
-	): string | null {
+	public dayGenderToCf(day: DateDay | number, gender: Genders): string | null {
 		if (day < 1 || day > 31) {
 			return null;
 		}
@@ -482,7 +499,7 @@ export default class Parser {
 	 * @param day 1,2 digits Day 1..31
 	 * @returns Date or null if provided year/month/day are not valid
 	 */
-	public static yearMonthDayToDate(
+	public yearMonthDayToDate(
 		year: number | null | undefined,
 		month: DateMonth | null | undefined = 0,
 		day: DateDay | null | undefined = 1
@@ -509,22 +526,22 @@ export default class Parser {
 	/**
 	 * Parse Place information to return city or country details
 	 * @param place Belfiore place instance, belfiore code or city/country name
-	 * @param scopedBelfioreConnector BelfioreConnector
 	 * @returns BelfiorePlace instance with the target city or country details
 	 */
-	public static parsePlace(
-		place: BelfiorePlace | string,
-		scopedBelfioreConnector: BelfioreConnector = Belfiore
-	): BelfiorePlace | null {
+	public async parsePlace(
+		place: BelfiorePlace | string
+	): Promise<BelfiorePlace | null> {
 		let verifiedBirthPlace: BelfiorePlace | null | undefined;
 		if (!place) {
 			return null;
 		} else if (typeof place === "object" && place.belfioreCode) {
-			verifiedBirthPlace = scopedBelfioreConnector[place.belfioreCode];
+			verifiedBirthPlace = await this.belfioreConnector.findByCode(
+				place.belfioreCode
+			);
 		} else if (typeof place === "string") {
 			verifiedBirthPlace =
-				scopedBelfioreConnector[place] ||
-				scopedBelfioreConnector.findByName(place);
+				(await this.belfioreConnector.findByCode(place)) ||
+				(await this.belfioreConnector.findByName(place));
 		}
 		return verifiedBirthPlace || null;
 	}
@@ -535,10 +552,7 @@ export default class Parser {
 	 * @param gender Gender enum value
 	 * @returns Birth date and Gender CF code
 	 */
-	public static dateGenderToCf(
-		date: MultiFormatDate,
-		gender: Genders
-	): string | null {
+	public dateGenderToCf(date: MultiFormatDate, gender: Genders): string | null {
 		const parsedDate = DateUtils.parseDate(date);
 		if (!parsedDate) {
 			return null;
@@ -564,20 +578,20 @@ export default class Parser {
 	 * @param provinceId Province code for cities
 	 * @returns Matching place belfiore code, if only once is matching criteria
 	 */
-	public static placeToCf(
+	public async placeToCf(
 		cityOrCountryName: string,
 		provinceId?: string
-	): string | null;
-	public static placeToCf(
+	): Promise<string | null>;
+	public async placeToCf(
 		birthDate: MultiFormatDate,
 		cityOrCountryName: string,
 		provinceId?: string
-	): string | null;
-	public static placeToCf(
+	): Promise<string | null>;
+	public async placeToCf(
 		dateOrName: MultiFormatDate,
 		nameOrProvince?: string,
 		provinceId?: string
-	): string | null {
+	): Promise<string | null> {
 		const birthDate: Date | null = DateUtils.parseDate(dateOrName);
 		let name: string;
 		let province: string | undefined;
@@ -591,7 +605,7 @@ export default class Parser {
 			return null;
 		}
 
-		let placeFinder: BelfioreConnector | undefined = Belfiore;
+		let placeFinder: IBelfioreConnector | undefined = this.belfioreConnector;
 		if (province) {
 			placeFinder = placeFinder.byProvince(province);
 		}
@@ -599,10 +613,9 @@ export default class Parser {
 			placeFinder = placeFinder.from(birthDate);
 		}
 		if (placeFinder) {
-			const foundPlace: BelfiorePlace | null = this.parsePlace(
-				name,
+			const foundPlace: BelfiorePlace | null = await new Parser(
 				placeFinder
-			);
+			).parsePlace(name);
 			if (foundPlace) {
 				return foundPlace.belfioreCode;
 			}
@@ -614,7 +627,7 @@ export default class Parser {
 	 * Generates full CF
 	 * @returns Complete CF
 	 */
-	public static encodeCf({
+	public async encodeCf({
 		lastName,
 		firstName,
 
@@ -627,21 +640,27 @@ export default class Parser {
 		place,
 
 		omocodeId = 0,
-	}: IPersonalInfo): string | null {
+	}: Omit<IPersonalInfo, "place"> & {
+		place?: BelfiorePlace | string | undefined;
+	}): Promise<string | null> {
 		const dtParams =
 			DateUtils.parseDate(date) || this.yearMonthDayToDate(year, month, day);
 		if (!(dtParams && lastName && firstName && gender && place)) {
 			return null;
 		}
 		const generator = [
-			() => this.lastNameToCf(lastName),
-			() => this.firstNameToCf(firstName),
-			() => this.dateGenderToCf(dtParams, gender),
-			() => this.placeToCf(dtParams, place),
+			async () => this.lastNameToCf(lastName),
+			async () => this.firstNameToCf(firstName),
+			async () => this.dateGenderToCf(dtParams, gender),
+			async () =>
+				await this.placeToCf(
+					dtParams,
+					(place as BelfiorePlace)?.belfioreCode || (place as string)
+				),
 		];
 		let cf = "";
 		for (const cfPartGenerator of generator) {
-			const cfValue = cfPartGenerator();
+			const cfValue = await cfPartGenerator();
 			if (!cfValue) {
 				return null;
 			}
@@ -651,14 +670,14 @@ export default class Parser {
 		return this.cfOmocode(cf, omocodeId);
 	}
 
-	private static JOLLY_CHAR: string = "*";
+	private JOLLY_CHAR: string = "*";
 
-	private static checkBitmap(offset: number): boolean {
+	private checkBitmap(offset: number): boolean {
 		// tslint:disable-next-line: no-bitwise
 		return !!((2 ** offset) & this.OMOCODE_BITMAP);
 	}
 
-	private static charOmocode(char: string, offset: number): string {
+	private charOmocode(char: string, offset: number): string {
 		if (/^[A-Z]$/giu.test(char) && this.checkBitmap(offset)) {
 			return Omocodes[char.toUpperCase() as any];
 		}
@@ -666,8 +685,8 @@ export default class Parser {
 		return char;
 	}
 
-	private static charExtractor(text: string, CHAR_LIST: string): string {
-		const charMatcher = new RegExp(`[${CHAR_LIST}]+`, "ig");
+	private charExtractor(text: string, CHAR_LIST: string): string {
+		const charMatcher = new RegExp(`[${CHAR_LIST}]{1,24}`, "ig");
 		const diacriticFreeText = diacriticRemover.replace(text).trim();
 		const matchingChars = diacriticFreeText.match(charMatcher);
 		return (matchingChars || []).join("");
@@ -679,7 +698,7 @@ export default class Parser {
 	 * @param offset starting point of the given chunk in the 16 char CF
 	 * @returns Regular version w/o omocodes chars of the given chunk
 	 */
-	private static partialCfDeomocode(
+	private partialCfDeomocode(
 		partialCodiceFiscale: string,
 		offset: number = 0
 	): string {
@@ -688,10 +707,7 @@ export default class Parser {
 		return partialCodiceFiscale.replace(/[\dA-Z]/giu, charReplacer);
 	}
 
-	private static appyCaseToChar(
-		targetChar: string,
-		counterCaseChar: string
-	): string {
+	private appyCaseToChar(targetChar: string, counterCaseChar: string): string {
 		if (targetChar && counterCaseChar) {
 			const isUpperCase =
 				counterCaseChar[0] === counterCaseChar[0].toUpperCase();
