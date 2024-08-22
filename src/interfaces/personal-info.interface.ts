@@ -1,3 +1,4 @@
+import { BelfiorePlace } from "@marketto/belfiore-connector";
 import { DateDay, DateMonth } from "../date-utils/";
 import type Genders from "../types/genders.type";
 
@@ -11,6 +12,6 @@ export default interface IPersonalInfo {
 	year?: number;
 
 	gender?: Genders;
-	place?: string;
+	place?: BelfiorePlace;
 	omocodeId?: number;
 }

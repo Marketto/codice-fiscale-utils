@@ -1,10 +1,5 @@
 /**
  * <%= pkg.name %> <%= pkg.version %>
- * Copyright (c) 2019-2021, <%= pkg.author %>
+ * Copyright (c) 2019-2024, <%= pkg.author %>
  * License: <%= pkg.license %>
- * ============================================================
- * CITIES_COUNTRIES uses material from the following authors:
- * Agenzia delle Entrate             -   License: CC-BY 4.0
- * Istituto nazionale di Statistica  -   License: CC-BY 3.0
- * Ministero dell'Interno            -   License: CC-BY 4.0
  */

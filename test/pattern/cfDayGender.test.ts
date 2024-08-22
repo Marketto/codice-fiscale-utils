@@ -1,36 +1,42 @@
-import { Pattern } from "../../src/";
-import { expect } from "../utils";
+import { codiceFiscaleUtils } from "../utils";
 
 export default () => {
-    describe("cfDayGender", () => {
-        const cfDayPattern = Pattern.cfDayGender();
-        it ("Generic Pattern", () => {
-            cfDayPattern.test("0M").should.be.ok;
-            cfDayPattern.test("MN").should.be.ok;
-            cfDayPattern.test("0m").should.be.ok;
-        });
+	describe("cfDayGender", () => {
+		const cfDayPattern = codiceFiscaleUtils.pattern.cfDayGender();
+		it("Generic Pattern", () => {
+			cfDayPattern.test("0M").should.be.ok;
+			cfDayPattern.test("MN").should.be.ok;
+			cfDayPattern.test("0m").should.be.ok;
+		});
 
-        describe("Specific Gender validator", () => {
-            it ("Male", () => {
-                Pattern.cfDayGender(undefined, "M").test("41").should.be.false;
-                Pattern.cfDayGender(undefined, "M").test("MR").should.true;
-            });
+		describe("Specific Gender validator", () => {
+			it("Male", () => {
+				codiceFiscaleUtils.pattern.cfDayGender(undefined, "M").test("41").should
+					.be.false;
+				codiceFiscaleUtils.pattern.cfDayGender(undefined, "M").test("MR").should
+					.true;
+			});
 
-            it ("Female", () => {
-                Pattern.cfDayGender(undefined, "F").test("MR").should.be.false;
-                Pattern.cfDayGender(undefined, "F").test("QM").should.true;
-            });
-        });
+			it("Female", () => {
+				codiceFiscaleUtils.pattern.cfDayGender(undefined, "F").test("MR").should
+					.be.false;
+				codiceFiscaleUtils.pattern.cfDayGender(undefined, "F").test("QM").should
+					.true;
+			});
+		});
 
-        describe("Specific Date/Gender validator", () => {
-            it ("Male", () => {
-                Pattern.cfDayGender(1, "M").test("01").should.be.ok;
-                Pattern.cfDayGender(1, "M").test("41").should.be.not.ok;
-            });
-            it ("Female", () => {
-                Pattern.cfDayGender(9, "F").test("QM").should.not.be.ok;
-                Pattern.cfDayGender(9, "F").test("RM").should.not.be.ok;
-            });
-        });
-    });
+		describe("Specific Date/Gender validator", () => {
+			it("Male", () => {
+				codiceFiscaleUtils.pattern.cfDayGender(1, "M").test("01").should.be.ok;
+				codiceFiscaleUtils.pattern.cfDayGender(1, "M").test("41").should.be.not
+					.ok;
+			});
+			it("Female", () => {
+				codiceFiscaleUtils.pattern.cfDayGender(9, "F").test("QM").should.not.be
+					.ok;
+				codiceFiscaleUtils.pattern.cfDayGender(9, "F").test("RM").should.not.be
+					.ok;
+			});
+		});
+	});
 };
