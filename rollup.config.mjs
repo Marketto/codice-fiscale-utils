@@ -16,7 +16,7 @@ const baseConf = {
         exports: "named",
         globals: {
             "@marketto/diacritic-remover": "DiacriticRemover",
-            "moment": "moment",
+            "dayjs": "dayjs",
         },
         name: pkg.config.name,
         sourcemap: true,

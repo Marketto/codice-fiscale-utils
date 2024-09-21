@@ -43,12 +43,12 @@
 	"homepage": "https://github.com/Marketto/codice-fiscale-utils#readme",
 	"dependencies": {
 		"@marketto/diacritic-remover": "^1.0.7",
-		"moment": "^2.24.0"
+		"dayjs": "^1.11.13"
 	},
 	"devDependencies": {
-		"@marketto/belfiore-connector": "^2.0.0",
-		"@marketto/belfiore-connector-embedded": "^1.0.0",
 		"@istanbuljs/nyc-config-typescript": "^1.0.2",
+		"@marketto/belfiore-connector": "^3.0.0",
+		"@marketto/belfiore-connector-embedded": "^1.2.0",
 		"@rollup/plugin-node-resolve": "^15.2.3",
 		"@rollup/plugin-terser": "^0.4.4",
 		"@types/chai": "^4.3.16",

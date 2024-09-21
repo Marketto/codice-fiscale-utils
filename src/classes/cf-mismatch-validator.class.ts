@@ -1,4 +1,4 @@
-import moment from "moment";
+import dayjs from "dayjs";
 import {
 	IBelfioreConnector,
 	BelfiorePlace,
@@ -114,7 +114,7 @@ export default class CFMismatchValidator {
 			const parsedCfDate = this.parser.cfToBirthDate(this.codiceFiscale);
 			const parsedDate = DateUtils.parseDate(birthDate);
 			if (parsedCfDate && parsedDate) {
-				return moment(parsedCfDate).isSame(parsedDate, "d");
+				return dayjs(parsedCfDate).isSame(parsedDate, "d");
 			}
 		}
 		return false;
