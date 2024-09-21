@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 3.0.0
+ * @marketto/codice-fiscale-utils 3.1.0
  * Copyright (c) 2019-2024, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  */
@@ -8,7 +8,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var moment = require('moment');
+var dayjs = require('dayjs');
 var DiacriticRemover = require('@marketto/diacritic-remover');
 
 /******************************************************************************
@@ -100,12 +100,11 @@ var dateMatcher_const = /*#__PURE__*/Object.freeze({
 class DateUtils {
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
-     * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
+     * @param date Date instance, ISO8601 date string or array of numbers [year, month, day]
      * @returns Parsed Date or null if not valid
      */
     static parseDate(date) {
         if (!(date instanceof Date ||
-            date instanceof moment ||
             (typeof date === "string" &&
                 new RegExp(`^(?:${ISO8601_DATE_TIME})$`).test(date)) ||
             (Array.isArray(date) &&
@@ -118,14 +117,14 @@ class DateUtils {
             if (Array.isArray(date)) {
                 const [year, month = 0, day = 1] = date;
                 if (month >= 0 && month <= 11 && day > 0 && day <= 31) {
-                    parsedDate = moment(Date.UTC(year, month || 0, day || 1));
+                    parsedDate = dayjs(Date.UTC(year, month || 0, day || 1));
                 }
                 else {
                     return null;
                 }
             }
             else {
-                parsedDate = moment(date);
+                parsedDate = dayjs(date);
             }
             return parsedDate.isValid() ? parsedDate.toDate() : null;
         }
@@ -510,9 +509,9 @@ class Parser {
         if (isNaN(birthYear)) {
             return null;
         }
-        const current2DigitsYear = parseInt(moment().format("YY"), 10);
+        const current2DigitsYear = parseInt(dayjs().format("YY"), 10);
         const century = (birthYear > current2DigitsYear ? 1 : 0) * 100;
-        return moment()
+        return dayjs()
             .subtract(current2DigitsYear - birthYear + century, "years")
             .year();
     }
@@ -590,7 +589,7 @@ class Parser {
             const { creationDate, expirationDate } = birthPlace;
             if ((creationDate || expirationDate) && checkBirthDateConsistency) {
                 const birthDate = this.cfToBirthDate(codiceFiscale);
-                const isBirthDateAfterCfIntroduction = moment(CF_INTRODUCTION_DATE)
+                const isBirthDateAfterCfIntroduction = dayjs(CF_INTRODUCTION_DATE)
                     // Adding some tolerance
                     .add(5, "years")
                     .isBefore(birthDate, "day");
@@ -599,9 +598,9 @@ class Parser {
                     const datePlaceConsistency = 
                     // BirthDay is before expiration date
                     (!expirationDate ||
-                        moment(birthDate).isBefore(expirationDate, "day")) &&
+                        dayjs(birthDate).isBefore(expirationDate, "day")) &&
                         // BirthDay is after creation date
-                        (!creationDate || moment(birthDate).isAfter(creationDate, "day"));
+                        (!creationDate || dayjs(birthDate).isAfter(creationDate, "day"));
                     if (!datePlaceConsistency) {
                         return null;
                     }
@@ -735,7 +734,7 @@ class Parser {
             [month, day].some((param) => typeof param !== "number")) {
             return null;
         }
-        const date = moment(Date.UTC(year, month || 0, day || 1));
+        const date = dayjs(Date.UTC(year, month || 0, day || 1));
         if (!date.isValid() ||
             date.year() !== year ||
             date.month() !== month ||
@@ -768,7 +767,7 @@ class Parser {
     }
     /**
      * Parse Date and Gender information to create Date/Gender CF part
-     * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
+     * @param date Date instance, ISO8601 date string or array of numbers [year, month, day]
      * @param gender Gender enum value
      * @returns Birth date and Gender CF code
      */
@@ -1250,7 +1249,7 @@ class Pattern {
             const parsedDate = this.parser.cfToBirthDate(codiceFiscale);
             if (parsedDate) {
                 const dateIso8601 = parsedDate.toJSON();
-                if (moment().diff(moment(parsedDate), "y") < 50) {
+                if (dayjs().diff(dayjs(parsedDate), "y") < 50) {
                     const century = parseInt(dateIso8601.substr(0, 2), 10);
                     const centuries = [century - 1, century].map((year) => year.toString().padStart(2, "0"));
                     matcher = `(?:${centuries.join("|")})` + dateIso8601.substr(2, 8);
@@ -1367,7 +1366,7 @@ class CFMismatchValidator {
             const parsedCfDate = this.parser.cfToBirthDate(this.codiceFiscale);
             const parsedDate = DateUtils.parseDate(birthDate);
             if (parsedCfDate && parsedDate) {
-                return moment(parsedCfDate).isSame(parsedDate, "d");
+                return dayjs(parsedCfDate).isSame(parsedDate, "d");
             }
         }
         return false;
@@ -1525,7 +1524,7 @@ class Validator {
                     .from(birthDate)
                     .findByCode(parsedPlace.belfioreCode)) ||
                     // Ignoring control for people born before CF introduction
-                    moment(DateUtils.parseDate(birthDate)).isSameOrBefore(CF_INTRODUCTION_DATE, "day")));
+                    !dayjs(DateUtils.parseDate(birthDate)).isAfter(CF_INTRODUCTION_DATE, "day")));
         });
     }
     birthDatePlaceMismatch(birthDate, birthPlace) {

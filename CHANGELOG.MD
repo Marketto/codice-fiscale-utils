@@ -1,5 +1,12 @@
 ## CHANGELOG
 
+### 3.1.0 (2024-09-19)
+
+- Replaced moment with dayjs
+- Updated dependency to @marketto/belfiore-connector@3.0.0
+- Used semantic versioning to prevent compatibility issues
+- Updated Usage>Typestript example in README
+
 ### 3.0.0 (2024-08-20)
 
 - Belfiore Connector separated from CodiceFiscaleUtils
