@@ -65,7 +65,7 @@ const codiceFiscaleUtils = new CodiceFiscaleUtils(belfioreConnector);
 ### MJS & TypeScript
 
 ```typescript
-import CodiceFiscaleUtils from "@marketto/codice-fiscale-utils";
+import { CodiceFiscaleUtils } from "@marketto/codice-fiscale-utils";
 const codiceFiscaleUtils = new CodiceFiscaleUtils(belfioreConnector);
 ```
 

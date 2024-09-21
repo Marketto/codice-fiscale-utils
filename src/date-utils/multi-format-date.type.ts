@@ -1,5 +1,3 @@
-import { Moment } from "moment";
-
-type MultiFormatDate = string | Date | Moment | number[];
+type MultiFormatDate = string | Date | number[];
 
 export default MultiFormatDate;

@@ -3,7 +3,6 @@ import {
 	IBelfioreConnector,
 } from "@marketto/belfiore-connector";
 import DiacriticRemover from "@marketto/diacritic-remover";
-import moment from "moment";
 import {
 	INVALID_DATE,
 	INVALID_DAY,
@@ -43,6 +42,7 @@ import type Genders from "../types/genders.type";
 import CfuError from "./cfu-error.class";
 import Gender from "./gender.class";
 import Parser from "./parser.class";
+import dayjs from "dayjs";
 
 const diacriticRemover = new DiacriticRemover();
 
@@ -452,7 +452,7 @@ export default class Pattern {
 			const parsedDate = this.parser.cfToBirthDate(codiceFiscale);
 			if (parsedDate) {
 				const dateIso8601: string = parsedDate.toJSON();
-				if (moment().diff(moment(parsedDate), "y") < 50) {
+				if (dayjs().diff(dayjs(parsedDate), "y") < 50) {
 					const century: number = parseInt(dateIso8601.substr(0, 2), 10);
 					const centuries: string[] = [century - 1, century].map((year) =>
 						year.toString().padStart(2, "0")

@@ -1,9 +1,9 @@
+import dayjs from "dayjs";
 import {
 	IBelfioreConnector,
 	BelfiorePlace,
 } from "@marketto/belfiore-connector";
 import DiacriticRemover from "@marketto/diacritic-remover";
-import moment from "moment";
 import {
 	CRC_OFFSET,
 	CRC_SIZE,
@@ -225,10 +225,10 @@ export default class Parser {
 			return null;
 		}
 
-		const current2DigitsYear: number = parseInt(moment().format("YY"), 10);
+		const current2DigitsYear: number = parseInt(dayjs().format("YY"), 10);
 
 		const century: number = (birthYear > current2DigitsYear ? 1 : 0) * 100;
-		return moment()
+		return dayjs()
 			.subtract(current2DigitsYear - birthYear + century, "years")
 			.year();
 	}
@@ -340,7 +340,7 @@ export default class Parser {
 		const { creationDate, expirationDate } = birthPlace;
 		if ((creationDate || expirationDate) && checkBirthDateConsistency) {
 			const birthDate = this.cfToBirthDate(codiceFiscale);
-			const isBirthDateAfterCfIntroduction = moment(CF_INTRODUCTION_DATE)
+			const isBirthDateAfterCfIntroduction = dayjs(CF_INTRODUCTION_DATE)
 				// Adding some tolerance
 				.add(5, "years")
 				.isBefore(birthDate, "day");
@@ -350,9 +350,9 @@ export default class Parser {
 				const datePlaceConsistency =
 					// BirthDay is before expiration date
 					(!expirationDate ||
-						moment(birthDate).isBefore(expirationDate, "day")) &&
+						dayjs(birthDate).isBefore(expirationDate, "day")) &&
 					// BirthDay is after creation date
-					(!creationDate || moment(birthDate).isAfter(creationDate, "day"));
+					(!creationDate || dayjs(birthDate).isAfter(creationDate, "day"));
 				if (!datePlaceConsistency) {
 					return null;
 				}
@@ -511,7 +511,7 @@ export default class Parser {
 		) {
 			return null;
 		}
-		const date = moment(Date.UTC(year, month || 0, day || 1));
+		const date = dayjs(Date.UTC(year, month || 0, day || 1));
 		if (
 			!date.isValid() ||
 			date.year() !== year ||
@@ -548,7 +548,7 @@ export default class Parser {
 
 	/**
 	 * Parse Date and Gender information to create Date/Gender CF part
-	 * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
+	 * @param date Date instance, ISO8601 date string or array of numbers [year, month, day]
 	 * @param gender Gender enum value
 	 * @returns Birth date and Gender CF code
 	 */
@@ -573,7 +573,7 @@ export default class Parser {
 	 */
 	/**
 	 * Parse a Date and Gender information to create Date/Gender CF part
-	 * @param birthDate Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
+	 * @param birthDate Date instance, ISO8601 date string or array of numbers [year, month, day]
 	 * @param cityOrCountryName City or Country name
 	 * @param provinceId Province code for cities
 	 * @returns Matching place belfiore code, if only once is matching criteria

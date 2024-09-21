@@ -2,13 +2,13 @@ import {
 	IBelfioreConnector,
 	BelfiorePlace,
 } from "@marketto/belfiore-connector";
-import moment from "moment";
 import { DateUtils, MultiFormatDate } from "../date-utils/";
 import type Genders from "../types/genders.type";
 import CFMismatchValidator from "./cf-mismatch-validator.class";
 import Parser from "./parser.class";
 import Pattern from "./pattern.class";
 import { CF_INTRODUCTION_DATE } from "../const/logic.const";
+import dayjs from "dayjs";
 
 export default class Validator {
 	private parser: Parser;
@@ -78,7 +78,7 @@ export default class Validator {
 				.from(birthDate)
 				.findByCode(parsedPlace.belfioreCode)) ||
 				// Ignoring control for people born before CF introduction
-				moment(DateUtils.parseDate(birthDate)).isSameOrBefore(
+				!dayjs(DateUtils.parseDate(birthDate)).isAfter(
 					CF_INTRODUCTION_DATE,
 					"day"
 				))
