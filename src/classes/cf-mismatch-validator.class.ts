@@ -82,7 +82,9 @@ export default class CFMismatchValidator {
 			personalInfo.lastName &&
 			personalInfo.firstName &&
 			(personalInfo.date ||
-				(personalInfo.day && personalInfo.month && personalInfo.year)) &&
+				(personalInfo.day &&
+					typeof personalInfo.month === "number" &&
+					personalInfo.year)) &&
 			personalInfo.gender &&
 			personalInfo.place &&
 			!(await this.matchPersonalInfo(personalInfo))
@@ -195,7 +197,7 @@ export default class CFMismatchValidator {
 					? {}
 					: { date: "MISSING_OR_INVALID_DAY" }),
 				// Checking Month validity
-				...(this.parser.cfToBirthMonth(this.codiceFiscale)
+				...(typeof this.parser.cfToBirthMonth(this.codiceFiscale) === "number"
 					? {}
 					: { date: "MISSING_OR_INVALID_MONTH" }),
 				// Checking Year validity
