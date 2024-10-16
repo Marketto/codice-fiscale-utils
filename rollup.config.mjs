@@ -98,10 +98,10 @@ export default [
             ...baseConf.output,
             file: `dist/${pkg.config.iifeFileName}.bundle.min.js`,
             format: "iife",
+            sourcemap: false,
         },
         plugins: [
             builtins({
-                sourcemap: true
             }),
             rollupBrowserConf,
             terser({

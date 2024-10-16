@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 3.1.0
+ * @marketto/codice-fiscale-utils 3.1.1
  * Copyright (c) 2019-2024, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  */
@@ -1341,7 +1341,9 @@ class CFMismatchValidator {
                 personalInfo.lastName &&
                 personalInfo.firstName &&
                 (personalInfo.date ||
-                    (personalInfo.day && personalInfo.month && personalInfo.year)) &&
+                    (personalInfo.day &&
+                        typeof personalInfo.month === "number" &&
+                        personalInfo.year)) &&
                 personalInfo.gender &&
                 personalInfo.place &&
                 !(yield this.matchPersonalInfo(personalInfo)));
@@ -1426,7 +1428,7 @@ class CFMismatchValidator {
                 ? {}
                 : { date: "MISSING_OR_INVALID_DATE" })), (this.parser.cfToBirthDay(this.codiceFiscale)
                 ? {}
-                : { date: "MISSING_OR_INVALID_DAY" })), (this.parser.cfToBirthMonth(this.codiceFiscale)
+                : { date: "MISSING_OR_INVALID_DAY" })), (typeof this.parser.cfToBirthMonth(this.codiceFiscale) === "number"
                 ? {}
                 : { date: "MISSING_OR_INVALID_MONTH" })), (this.parser.cfToBirthYear(this.codiceFiscale)
                 ? {}

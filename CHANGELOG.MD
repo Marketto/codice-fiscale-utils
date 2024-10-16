@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 3.1.1 (2024-10-16)
+
+- Fixed Validator Bug For CF Validation of People born in January
+
 ### 3.1.0 (2024-09-19)
 
 - Replaced moment with dayjs
