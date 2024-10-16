@@ -8,6 +8,10 @@ export default () => {
 					.valid
 			).should.be.true;
 			(
+				await codiceFiscaleUtils.validator.codiceFiscale("VRNGNY07A68D843I")
+					.valid
+			).should.be.true;
+			(
 				await codiceFiscaleUtils.validator.codiceFiscale("MRNMIA02E45L219X")
 					.valid
 			).should.be.true;
@@ -60,9 +64,15 @@ export default () => {
 				.false;
 		});
 		describe("errors", () => {
-			it("No errors", async () => {
+			it("No errors VRNGNY07D68C351V", async () => {
 				const errors = await codiceFiscaleUtils.validator.codiceFiscale(
 					"VRNGNY07D68C351V"
+				).errors;
+				expect(errors).to.be.null;
+			});
+			it("No errors VRNGNY07A68D843I", async () => {
+				const errors = await codiceFiscaleUtils.validator.codiceFiscale(
+					"VRNGNY07A68D843I"
 				).errors;
 				expect(errors).to.be.null;
 			});
