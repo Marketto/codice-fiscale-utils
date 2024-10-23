@@ -62,7 +62,7 @@ import CodiceFiscaleUtils from "@marketto/codice-fiscale-utils";
 ### TypeScript
 
 ```typescript
-import CodiceFiscaleUtils from "@marketto/codice-fiscale-utils";
+import { CodiceFiscaleUtils } from "@marketto/codice-fiscale-utils";
 ```
 
 ### Script
