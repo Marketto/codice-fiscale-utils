@@ -19,6 +19,14 @@ jobs:
       - name: Installing dependencies
         run: |
           npm install
+      - run: |
+          npx mocha install
+      - run: |
+          npx rimraf install
+      - run: |
+          npx typedoc install
+      - run: |
+          npx rollup install
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: Running tests
         run: |
