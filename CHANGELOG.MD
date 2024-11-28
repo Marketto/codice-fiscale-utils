@@ -1,5 +1,32 @@
 ## CHANGELOG
 
+### 3.1.2 (2024-11-28)
+
+- Fixed Issue matching/Validation compund first names with more than 3 consonants
+- Updated import example in README.MD
+
+### 3.1.1 (2024-10-16)
+
+- Fixed Validator Bug For CF Validation of People born in January
+
+### 3.1.0 (2024-09-19)
+
+- Replaced moment with dayjs
+- Updated dependency to @marketto/belfiore-connector@3.0.0
+- Used semantic versioning to prevent compatibility issues
+- Updated Usage>Typestript example in README
+
+### 3.0.0 (2024-08-20)
+
+- Belfiore Connector separated from CodiceFiscaleUtils
+- All methods related to place (Belfiore Connector) are async
+- Parser, Validator and Pattern have to be used as instances provided by CodiceFiscaleUtils which have to be used as an instance aswell
+
+### 2.2.2 (2024-06-10)
+
+- #111 Fixed firstName and lastName validators to handle compund names
+- #113 Fixed Skipping place creation/expiration date vs birth place for birth dates prior cf introduction plus 5 years of tolerance
+
 ### 2.2.1 (2024-06-10)
 
 - #108 Fixed Belfiore findByName issue related to the last entry of each dataset

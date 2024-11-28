@@ -1,4 +1,4 @@
-import moment, { Moment } from "moment";
+import dayjs, { Dayjs } from "dayjs";
 import type DateDay from "./date-day.type";
 import { ISO8601_DATE_TIME } from "./date-matcher.const";
 import type DateMonth from "./date-month.type";
@@ -6,14 +6,13 @@ import type MultiFormatDate from "./multi-format-date.type";
 export default class DateUtils {
 	/**
 	 * Parse a Dated and Gender information to create Date/Gender CF part
-	 * @param date Date or Moment instance, ISO8601 date string or array of numbers [year, month, day]
+	 * @param date Date instance, ISO8601 date string or array of numbers [year, month, day]
 	 * @returns Parsed Date or null if not valid
 	 */
 	public static parseDate(date?: MultiFormatDate | null): Date | null {
 		if (
 			!(
 				date instanceof Date ||
-				date instanceof moment ||
 				(typeof date === "string" &&
 					new RegExp(`^(?:${ISO8601_DATE_TIME})$`).test(date)) ||
 				(Array.isArray(date) &&
@@ -24,16 +23,16 @@ export default class DateUtils {
 			return null;
 		}
 		try {
-			let parsedDate: Moment;
+			let parsedDate: Dayjs;
 			if (Array.isArray(date)) {
 				const [year, month = 0, day = 1] = date;
 				if (month >= 0 && month <= 11 && day > 0 && day <= 31) {
-					parsedDate = moment(Date.UTC(year, month || 0, day || 1));
+					parsedDate = dayjs(Date.UTC(year, month || 0, day || 1));
 				} else {
 					return null;
 				}
 			} else {
-				parsedDate = moment(date);
+				parsedDate = dayjs(date);
 			}
 			return parsedDate.isValid() ? parsedDate.toDate() : null;
 		} catch (err) {

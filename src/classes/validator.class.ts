@@ -1,106 +1,112 @@
-import moment from "moment";
 import {
-	Belfiore,
-	BelfioreConnector,
+	IBelfioreConnector,
 	BelfiorePlace,
-} from "../belfiore-connector";
+} from "@marketto/belfiore-connector";
 import { DateUtils, MultiFormatDate } from "../date-utils/";
 import type Genders from "../types/genders.type";
 import CFMismatchValidator from "./cf-mismatch-validator.class";
 import Parser from "./parser.class";
 import Pattern from "./pattern.class";
 import { CF_INTRODUCTION_DATE } from "../const/logic.const";
+import dayjs from "dayjs";
 
 export default class Validator {
-	public static codiceFiscale(codiceFiscale: string): CFMismatchValidator {
-		return new CFMismatchValidator(codiceFiscale);
+	private parser: Parser;
+	private pattern: Pattern;
+
+	constructor(private readonly belfioreConnector: IBelfioreConnector) {
+		this.parser = new Parser(belfioreConnector);
+		this.pattern = new Pattern(belfioreConnector);
 	}
 
-	public static isLastNameValid(lastName: string): boolean {
-		return Pattern.lastName().test(lastName);
+	public codiceFiscale(codiceFiscale: string): CFMismatchValidator {
+		return new CFMismatchValidator(this.belfioreConnector, codiceFiscale);
 	}
-	public static isLastNameInvalid(lastName: string): boolean {
+
+	public isLastNameValid(lastName: string): boolean {
+		return this.pattern.lastName().test(lastName);
+	}
+	public isLastNameInvalid(lastName: string): boolean {
 		return !!lastName && !this.isLastNameValid(lastName);
 	}
 
-	public static isFirstNameValid(firstName: string): boolean {
-		return Pattern.firstName().test(firstName);
+	public isFirstNameValid(firstName: string): boolean {
+		return this.pattern.firstName().test(firstName);
 	}
-	public static isFirstNameInvalid(firstName: string): boolean {
+	public isFirstNameInvalid(firstName: string): boolean {
 		return !!firstName && !this.isFirstNameValid(firstName);
 	}
 
-	public static isBirthDateValid(birthDate: MultiFormatDate): boolean {
+	public isBirthDateValid(birthDate: MultiFormatDate): boolean {
 		return !!DateUtils.parseDate(birthDate);
 	}
-	public static isBirthDateInvalid(birthDate: MultiFormatDate): boolean {
+	public isBirthDateInvalid(birthDate: MultiFormatDate): boolean {
 		return !!birthDate && !this.isBirthDateValid(birthDate);
 	}
 
-	public static isGenderValid(gender: Genders | string): boolean {
-		return Pattern.gender().test(gender);
+	public isGenderValid(gender: Genders | string): boolean {
+		return this.pattern.gender().test(gender);
 	}
-	public static isGenderInvalid(gender: Genders | string): boolean {
+	public isGenderInvalid(gender: Genders | string): boolean {
 		return !!gender && !this.isGenderValid(gender);
 	}
 
-	public static isBirthPlaceValid(
-		birthPlace: BelfiorePlace | string,
-		scopedBelfioreConnector: BelfioreConnector = Belfiore
-	): boolean {
-		const parsedBirthPlace = Parser.parsePlace(birthPlace);
+	public async isBirthPlaceValid(
+		birthPlace: BelfiorePlace | string
+	): Promise<boolean> {
+		const parsedBirthPlace = await this.parser.parsePlace(birthPlace);
 		return (
 			!!parsedBirthPlace &&
-			!!scopedBelfioreConnector[parsedBirthPlace.belfioreCode]
+			!!(await this.belfioreConnector.findByCode(parsedBirthPlace.belfioreCode))
 		);
 	}
-	public static isBirthPlaceInvalid(
-		birthPlace: BelfiorePlace | string,
-		scopedBelfioreConnector: BelfioreConnector = Belfiore
-	): boolean {
-		return (
-			!!birthPlace &&
-			!this.isBirthPlaceValid(birthPlace, scopedBelfioreConnector)
-		);
+	public async isBirthPlaceInvalid(
+		birthPlace: BelfiorePlace | string
+	): Promise<boolean> {
+		return !!birthPlace && !(await this.isBirthPlaceValid(birthPlace));
 	}
 
-	public static birthDatePlaceMatch(
+	public async birthDatePlaceMatch(
 		birthDate: MultiFormatDate,
 		birthPlace: BelfiorePlace | string
-	): boolean {
-		const parsedPlace = Parser.parsePlace(birthPlace);
+	): Promise<boolean> {
+		const parsedPlace = await this.parser.parsePlace(birthPlace);
 		return (
 			this.isBirthDateValid(birthDate) &&
 			!!parsedPlace &&
-			(!!Belfiore.from(birthDate)[parsedPlace.belfioreCode] ||
+			(!!(await this.belfioreConnector
+				.from(birthDate)
+				.findByCode(parsedPlace.belfioreCode)) ||
 				// Ignoring control for people born before CF introduction
-				moment(DateUtils.parseDate(birthDate)).isSameOrBefore(
+				!dayjs(DateUtils.parseDate(birthDate)).isAfter(
 					CF_INTRODUCTION_DATE,
 					"day"
 				))
 		);
 	}
-	public static birthDatePlaceMismatch(
+	public async birthDatePlaceMismatch(
 		birthDate: MultiFormatDate,
 		birthPlace: BelfiorePlace | string
-	): boolean {
-		const parsedPlace = Parser.parsePlace(birthPlace);
+	): Promise<boolean> {
+		const parsedPlace = await this.parser.parsePlace(birthPlace);
 		return (
 			this.isBirthDateValid(birthDate) &&
 			!!parsedPlace &&
-			!this.birthDatePlaceMatch(birthDate, birthPlace)
+			!(await this.birthDatePlaceMatch(birthDate, birthPlace))
 		);
 	}
-	public static birthPlaceDateMatch(
+
+	public async birthPlaceDateMatch(
 		birthPlace: BelfiorePlace | string,
 		birthDate: MultiFormatDate
-	): boolean {
-		return this.birthDatePlaceMatch(birthDate, birthPlace);
+	): Promise<boolean> {
+		return await this.birthDatePlaceMatch(birthDate, birthPlace);
 	}
-	public static birthPlaceDateMismatch(
+
+	public async birthPlaceDateMismatch(
 		birthPlace: BelfiorePlace | string,
 		birthDate: MultiFormatDate
-	): boolean {
-		return this.birthDatePlaceMismatch(birthDate, birthPlace);
+	): Promise<boolean> {
+		return await this.birthDatePlaceMismatch(birthDate, birthPlace);
 	}
 }
