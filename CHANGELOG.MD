@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### 2.2.4 (2024-11-28)
+
+- #119 Fixed script to generate cities and countries ignoring new countries start date due to misleading data
+- Fixed Issue matching/Validation compund first names with more than 3 consonants
+
 ### 2.2.2 (2024-06-10)
 
 - #111 Fixed firstName and lastName validators to handle compund names
