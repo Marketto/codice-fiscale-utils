@@ -1,0 +1,32 @@
+name: Test, Doc & Build Action
+run-name: ${{ github.actor }} is testing commit ${{ github.commit }} 🚀
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Check out node setup
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - name: Installing dependencies
+        run: |
+          npm install
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: Running tests
+        run: |
+          npm run test
+      - name: Generating Docs
+        run: |
+          npm run docs
+      - name: Building packages
+        run: |
+          npm run build
+      - run: echo "🍏 This job's status is ${{ job.status }}."
