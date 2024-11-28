@@ -18,7 +18,7 @@ jobs:
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - name: Installing dependencies
         run: |
-          npm install --only=prod && npm install --only=dev
+          npm install --include dev
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: Running tests
         run: |
