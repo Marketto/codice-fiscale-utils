@@ -432,7 +432,7 @@ export default class Pattern {
 				cons
 					.slice(1, 3)
 					.join(
-						`(?:[${diacriticsVowelList}]{1,24}${this.SEPARATOR_SET}){0,24}`
+						`${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]{1,24}${this.SEPARATOR_SET}){0,24}`
 					) +
 				`(?:${this.SEPARATOR_SET}${this.LETTER_SET}{1,24}){0,24}`;
 
@@ -490,7 +490,7 @@ export default class Pattern {
 			codiceFiscale && (await this.parser.cfToBirthPlace(codiceFiscale));
 
 		if (parsedPlace) {
-			const nameMatcher: string = parsedPlace.name.replace(/./gu, (c) =>
+			const nameMatcher: string = parsedPlace.name.replace(/./gu, (c: string) =>
 				diacriticRemover[c] === c ? c : `[${c}${diacriticRemover[c]}]`
 			);
 			matcher = `(?:(?:${nameMatcher})|${parsedPlace.belfioreCode})`;
