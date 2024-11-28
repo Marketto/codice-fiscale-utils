@@ -29,7 +29,7 @@ const TYPE_STRATEGY_MAP = {
 	text: (value: any) => toUtf8(value),
 	name: (value: any) =>
 		toUtf8(
-			[value.toUpperCase(), value.toLowerCase()].includes(value)
+			value && [value.toUpperCase(), value.toLowerCase()].includes(value)
 				? toFirstLetterUpperCase(value)
 				: value
 		),
@@ -44,9 +44,13 @@ const TYPE_STRATEGY_MAP = {
 	date_end: (value: any) =>
 		value && moment(value, "YYYY-MM-DD").endOf("day").toDate(),
 	year_start: (value: any) =>
-		value && moment(value, "YYYY").startOf("year").toDate(),
+		value &&
+		(!isNaN(value) || typeof value === "string") &&
+		moment(`${value}`, "YYYY").startOf("year").toDate(),
 	year_end: (value: any) =>
-		value && moment(value, "YYYY").endOf("year").toDate(),
+		value &&
+		(!isNaN(value) || typeof value === "string") &&
+		moment(`${value}`, "YYYY").endOf("year").toDate(),
 	bool: (value: any) =>
 		value === 1 || /^(?:1|y(?:es)?|s[iì]?)$/i.test(value) || undefined,
 	license: (value: any) => value,
@@ -66,7 +70,7 @@ export class DataNormalizer extends Transform {
 	public _transform(chunk: any, encoding: string, callback: TransformCallback) {
 		let element: { [key: string]: unknown };
 		if (this.readableObjectMode) {
-			element = JSON.parse(toUtf8(Buffer.from(JSON.stringify(chunk))));
+			element = chunk;
 		} else {
 			try {
 				element = JSON.parse(toUtf8(chunk));

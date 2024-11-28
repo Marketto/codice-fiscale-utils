@@ -101,9 +101,15 @@ describe("Belfiore", () => {
 	describe("Belfiore.countries", () => {
 		describe("Belfiore[belfioreCode]", () => {
 			it("Should return Federazione russa for Z154", () => {
+				let russia = Belfiore.countries.Z154;
 				Belfiore.countries.Z154.name.should.be.equalIgnoreCase(
 					"Federazione russa"
 				);
+				Belfiore.from(new Date(1991, 0, 1));
+			});
+			it("Should return Croazia for Z149", () => {
+				let croazia = Belfiore.countries.Z149;
+				Belfiore.countries.Z149.name.should.be.equalIgnoreCase("Croazia");
 			});
 		});
 	});
@@ -258,6 +264,15 @@ describe("Belfiore", () => {
 			});
 			it("Should throws Error for D620 in 2000", () => {
 				expect(Belfiore.active([2000]).D620).to.be.not.ok;
+			});
+
+			it("Should return Federazione Russa for Z154 in 1991", () => {
+				Belfiore.active([1991]).Z154.name.should.be.equalIgnoreCase(
+					"Federazione Russa"
+				);
+			});
+			it("Should return Croazia for Z149 in 1991", () => {
+				Belfiore.active([1991]).Z149.name.should.be.equalIgnoreCase("Croazia");
 			});
 		});
 		describe("Belfiore.cities.active()", () => {

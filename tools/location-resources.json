@@ -25,7 +25,7 @@
 			}
 		},
 		{
-			"uri": "https://www.istat.it/it/files/2011/01/Elenco-Paesi-esteri-cessati.zip",
+			"uri": "https://www.istat.it/wp-content/uploads/2011/01/Elenco-Paesi-esteri-cessati.zip",
 			"target": "Elenco-Paesi-esteri-cessati.xlsx",
 			"defaultSourceCode": "I",
 			"columns": {
@@ -52,26 +52,12 @@
 			}
 		},
 		{
-			"uri": "https://www.istat.it/it/files/2011/01/Elenco-Paesi-esteri-cessati.zip",
-			"target": "Elenco-Paesi-esteri-cessati.xlsx",
-			"defaultSourceCode": "I",
-			"columns": {
-				"Codice Stato/\r\nTerritorio_Figlio": {
-					"field": "istatCode",
-					"type": "number"
-				},
-				"Anno evento": {
-					"field": "creationDate",
-					"type": "year_end"
-				}
-			}
-		},
-		{
 			"uri": "https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.csv",
 			"defaultSourceCode": "I",
+			"encoding": "ISO-8859-1",
 			"delimiter": ";",
 			"columns": {
-				"Codice Comune formato numerico": {
+				"Codice Comune formato alfanumerico": {
 					"field": "istatCode",
 					"type": "number"
 				},

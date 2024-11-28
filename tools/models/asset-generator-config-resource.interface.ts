@@ -5,18 +5,26 @@ export interface IAssetGeneratorConfigResource {
 	 * @description Endpoint to download zip, xlsx or csv resource
 	 */
 	uri: string;
+
 	/**
 	 * @description Target file name inside zip file, used if uri point to a zip file
 	 */
 	target?: string;
+
 	/**
 	 * @description License source code from listed licenses
 	 */
 	defaultSourceCode: string;
+
 	/**
 	 * @description CSV value delimiter, default: ';'
 	 */
 	delimiter?: string;
+
+	/**
+	 * @description Force source encoding
+	 */
+	encoding?: string;
 
 	/**
 	 * @description Column definition mapping

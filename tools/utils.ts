@@ -60,9 +60,9 @@ export const errorHandler = (err: NodeJS.ErrnoException | null): void => {
 	}
 };
 
-export function toUtf8(text: Buffer): string;
-export function toUtf8(buffer: string): string;
-export function toUtf8(strBuffer: Buffer | string) {
+export function toUtf8(text: Buffer, encoding?: string): string;
+export function toUtf8(buffer: string, encoding?: string): string;
+export function toUtf8(strBuffer: Buffer | string, encoding?: string) {
 	if (strBuffer === null || typeof strBuffer === "undefined") {
 		return strBuffer;
 	}
@@ -71,16 +71,8 @@ export function toUtf8(strBuffer: Buffer | string) {
 		? strBuffer
 		: Buffer.from(strBuffer);
 
-	const srcEnc = chardet.detect(buffer);
+	const srcEnc = encoding || chardet.detect(buffer);
 	const decoded = new TextDecoder(srcEnc as string).decode(buffer);
-
-	if (
-		!["ascii", "utf8"].includes(
-			srcEnc?.toLowerCase()?.replace("-", "") as string
-		)
-	) {
-		return strBuffer.toString();
-	}
 
 	return decoded;
 }
