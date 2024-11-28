@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 3.1.1
+ * @marketto/codice-fiscale-utils 3.1.2
  * Copyright (c) 2019-2024, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  */
@@ -1232,7 +1232,7 @@ class Pattern {
             const matcher = `(?:[${diacriticsVowelList}]{1,24}${this.SEPARATOR_SET}){0,24}${cons[0]}${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]{1,24}${this.SEPARATOR_SET}){0,24}(?:[${diacriticsConsonantList}]${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]{1,24}${this.SEPARATOR_SET}){0,24})?` +
                 cons
                     .slice(1, 3)
-                    .join(`(?:[${diacriticsVowelList}]{1,24}${this.SEPARATOR_SET}){0,24}`) +
+                    .join(`${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]{1,24}${this.SEPARATOR_SET}){0,24}`) +
                 `(?:${this.SEPARATOR_SET}${this.LETTER_SET}{1,24}){0,24}`;
             return this.isolatedInsensitiveTailor(matcher);
         }

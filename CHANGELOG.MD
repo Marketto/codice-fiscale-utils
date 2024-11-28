@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### 3.1.2 (2024-11-28)
+
+- Fixed Issue matching/Validation compund first names with more than 3 consonants
+- Updated import example in README.MD
+
 ### 3.1.1 (2024-10-16)
 
 - Fixed Validator Bug For CF Validation of People born in January
