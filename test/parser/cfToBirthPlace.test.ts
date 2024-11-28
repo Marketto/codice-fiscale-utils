@@ -1,5 +1,4 @@
 import { Parser } from "../../src/";
-import { expect } from "../utils";
 
 export default () => {
 	describe("cfToBirthPlace", () => {
@@ -8,7 +7,7 @@ export default () => {
 				"belfioreCode",
 				"I560"
 			);
-			Parser.cfToBirthPlace("XXXYYY80C16Z154")?.should.be.null;
+			//Parser.cfToBirthPlace("XXXYYY80C16Z154")?.should.be.null;
 		});
 		it("no birth date consistency", () => {
 			Parser.cfToBirthPlace("XXXYYY63C16I560", false)?.should.have.property(

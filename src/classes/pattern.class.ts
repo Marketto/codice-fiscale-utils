@@ -412,7 +412,9 @@ export default class Pattern {
 				`(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*${cons[0]}${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*(?:[${diacriticsConsonantList}]${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*)?` +
 				cons
 					.slice(1, 3)
-					.join(`(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*`) +
+					.join(
+						`${this.SEPARATOR_SET}(?:[${diacriticsVowelList}]+${this.SEPARATOR_SET})*`
+					) +
 				`(?:${this.SEPARATOR_SET}${this.LETTER_SET}+)*`;
 
 			return this.isolatedInsensitiveTailor(matcher);
