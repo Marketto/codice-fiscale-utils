@@ -103,6 +103,11 @@ export default () => {
 					.matchFirstName("Gen Nyow")
 			).to.be.true;
 			expect(
+				codiceFiscaleUtils.validator
+					.codiceFiscale("VRNGNY")
+					.matchFirstName("Gehen Ayyero")
+			).to.be.true;
+			expect(
 				codiceFiscaleUtils.validator.codiceFiscale("VRNAXX").matchFirstName("A")
 			).to.be.true;
 			expect(
@@ -139,6 +144,16 @@ export default () => {
 				codiceFiscaleUtils.validator
 					.codiceFiscale("VRN")
 					.mismatchFirstName("Genny")
+			).to.be.false;
+			expect(
+				codiceFiscaleUtils.validator
+					.codiceFiscale("VRNGNY")
+					.mismatchFirstName("Gen Nyow")
+			).to.be.false;
+			expect(
+				codiceFiscaleUtils.validator
+					.codiceFiscale("VRNGNY")
+					.mismatchFirstName("Gehen Ayyero")
 			).to.be.false;
 			expect(
 				codiceFiscaleUtils.validator
@@ -364,6 +379,20 @@ export default () => {
 					.codiceFiscale("VRNGNY07D68C351V")
 					.matchPersonalInfo({
 						day: 28,
+						firstName: "Gehen Ayyero",
+						gender: "F",
+						lastName: "Verònesi",
+						month: 3,
+						place: "Catania",
+						year: 1907,
+					})
+			).to.be.true;
+
+			expect(
+				await codiceFiscaleUtils.validator
+					.codiceFiscale("VRNGNY07D68C351V")
+					.matchPersonalInfo({
+						day: 28,
 						firstName: "Génny",
 						gender: "F",
 						lastName: "Verònesi",
@@ -380,6 +409,20 @@ export default () => {
 					.mismatchPersonalInfo({
 						day: 28,
 						firstName: "Génny",
+						gender: "F",
+						lastName: "Verònesi",
+						month: 3,
+						place: "Catania",
+						year: 1907,
+					})
+			).to.be.false;
+
+			expect(
+				await codiceFiscaleUtils.validator
+					.codiceFiscale("VRNGNY07D68C351V")
+					.mismatchPersonalInfo({
+						day: 28,
+						firstName: "Gehen Ayyero",
 						gender: "F",
 						lastName: "Verònesi",
 						month: 3,
