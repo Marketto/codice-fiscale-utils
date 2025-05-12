@@ -197,6 +197,11 @@ export default () => {
 			).to.be.true;
 			expect(
 				codiceFiscaleUtils.validator
+					.codiceFiscale("VRNGNY07D68")
+					.matchBirthDate("1907-04-28")
+			).to.be.true;
+			expect(
+				codiceFiscaleUtils.validator
 					.codiceFiscale("")
 					.matchBirthDate("2007-04-28")
 			).to.be.false;

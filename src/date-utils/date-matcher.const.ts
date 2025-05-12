@@ -10,7 +10,7 @@ const MINUTES: string = "[0-5]\\d";
 const SECONDS: string = MINUTES;
 const MILLISECONDS: string = "\\d{3}";
 const TIMEZONE: string = `Z|[-+](?:${HOURS})(?::?${MINUTES})?`;
-const TIME: string = `(?:${HOURS})(?::${MINUTES}(?::${SECONDS}(\\.${MILLISECONDS})?)?(?:${TIMEZONE})?)?`;
+const TIME: string = `(?:${HOURS})(?::${MINUTES}(?::${SECONDS}(?:\\.${MILLISECONDS})?)?(?:${TIMEZONE})?)?`;
 const ISO8601_SHORT_DATE: string = `${YEAR}-(?:${MONTH_DAY})(?:T${TIME})?`;
 const ISO8601_DATE_TIME: string = `${YEAR}(?:-(?:(?:${MONTH})|(?:${MONTH_DAY})(?:T${TIME})?))?`;
 
