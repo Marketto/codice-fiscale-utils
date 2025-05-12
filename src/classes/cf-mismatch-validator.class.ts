@@ -113,11 +113,9 @@ export default class CFMismatchValidator {
 
 	public matchBirthDate(birthDate: MultiFormatDate): boolean {
 		if (this.hasBirthDate) {
-			const parsedCfDate = this.parser.cfToBirthDate(this.codiceFiscale);
 			const parsedDate = DateUtils.parseDate(birthDate);
-			if (parsedCfDate && parsedDate) {
-				return dayjs(parsedCfDate).isSame(parsedDate, "d");
-			}
+			const birthDateMatcher = this.pattern.date(this.codiceFiscale);
+			return !!parsedDate && birthDateMatcher.test(parsedDate.toJSON());
 		}
 		return false;
 	}

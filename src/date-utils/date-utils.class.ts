@@ -1,8 +1,12 @@
 import dayjs, { Dayjs } from "dayjs";
+import utc from "dayjs/plugin/utc";
 import type DateDay from "./date-day.type";
 import { ISO8601_DATE_TIME } from "./date-matcher.const";
 import type DateMonth from "./date-month.type";
 import type MultiFormatDate from "./multi-format-date.type";
+
+dayjs.extend(utc);
+
 export default class DateUtils {
 	/**
 	 * Parse a Dated and Gender information to create Date/Gender CF part
@@ -27,12 +31,12 @@ export default class DateUtils {
 			if (Array.isArray(date)) {
 				const [year, month = 0, day = 1] = date;
 				if (month >= 0 && month <= 11 && day > 0 && day <= 31) {
-					parsedDate = dayjs(Date.UTC(year, month || 0, day || 1));
+					parsedDate = dayjs.utc(Date.UTC(year, month || 0, day || 1));
 				} else {
 					return null;
 				}
 			} else {
-				parsedDate = dayjs(date);
+				parsedDate = dayjs.utc(date);
 			}
 			return parsedDate.isValid() ? parsedDate.toDate() : null;
 		} catch (err) {
