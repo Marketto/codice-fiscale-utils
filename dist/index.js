@@ -1,5 +1,5 @@
 /**
- * @marketto/codice-fiscale-utils 3.1.2
+ * @marketto/codice-fiscale-utils 3.1.3
  * Copyright (c) 2019-2024, Marco Ricupero <marco.ricupero@gmail.com>
  * License: MIT
  */
@@ -9,6 +9,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var dayjs = require('dayjs');
+var utc = require('dayjs/plugin/utc');
 var DiacriticRemover = require('@marketto/diacritic-remover');
 
 /******************************************************************************
@@ -74,7 +75,7 @@ const MINUTES = "[0-5]\\d";
 const SECONDS = MINUTES;
 const MILLISECONDS = "\\d{3}";
 const TIMEZONE = `Z|[-+](?:${HOURS})(?::?${MINUTES})?`;
-const TIME = `(?:${HOURS})(?::${MINUTES}(?::${SECONDS}(\\.${MILLISECONDS})?)?(?:${TIMEZONE})?)?`;
+const TIME = `(?:${HOURS})(?::${MINUTES}(?::${SECONDS}(?:\\.${MILLISECONDS})?)?(?:${TIMEZONE})?)?`;
 const ISO8601_SHORT_DATE = `${YEAR}-(?:${MONTH_DAY})(?:T${TIME})?`;
 const ISO8601_DATE_TIME = `${YEAR}(?:-(?:(?:${MONTH})|(?:${MONTH_DAY})(?:T${TIME})?))?`;
 
@@ -97,6 +98,7 @@ var dateMatcher_const = /*#__PURE__*/Object.freeze({
     YEAR: YEAR
 });
 
+dayjs.extend(utc);
 class DateUtils {
     /**
      * Parse a Dated and Gender information to create Date/Gender CF part
@@ -117,14 +119,14 @@ class DateUtils {
             if (Array.isArray(date)) {
                 const [year, month = 0, day = 1] = date;
                 if (month >= 0 && month <= 11 && day > 0 && day <= 31) {
-                    parsedDate = dayjs(Date.UTC(year, month || 0, day || 1));
+                    parsedDate = dayjs.utc(Date.UTC(year, month || 0, day || 1));
                 }
                 else {
                     return null;
                 }
             }
             else {
-                parsedDate = dayjs(date);
+                parsedDate = dayjs.utc(date);
             }
             return parsedDate.isValid() ? parsedDate.toDate() : null;
         }
@@ -1365,11 +1367,9 @@ class CFMismatchValidator {
     }
     matchBirthDate(birthDate) {
         if (this.hasBirthDate) {
-            const parsedCfDate = this.parser.cfToBirthDate(this.codiceFiscale);
             const parsedDate = DateUtils.parseDate(birthDate);
-            if (parsedCfDate && parsedDate) {
-                return dayjs(parsedCfDate).isSame(parsedDate, "d");
-            }
+            const birthDateMatcher = this.pattern.date(this.codiceFiscale);
+            return !!parsedDate && birthDateMatcher.test(parsedDate.toJSON());
         }
         return false;
     }
