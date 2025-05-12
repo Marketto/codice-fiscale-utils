@@ -1,5 +1,11 @@
 ## CHANGELOG
 
+### 3.1.3 (2025-05-12)
+
+- cfMismatchValidator.matchBirthDate: using pattern.date insted of parser.cfToBirthDate for people older than 100 years
+- Added Unit Test for cfMismatchValidator to verify someone older than 100 years CF
+- DateUtils.parseDate: using dayjs.utc to prevent date comparison issues and information loss
+
 ### 3.1.2 (2024-11-28)
 
 - Fixed Issue matching/Validation compund first names with more than 3 consonants
