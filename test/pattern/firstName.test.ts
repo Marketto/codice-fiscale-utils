@@ -1,5 +1,4 @@
-import { Pattern } from "../../src/";
-import { codiceFiscaleUtils, expect } from "../utils";
+import { codiceFiscaleUtils } from "../utils";
 
 export default () => {
 	describe("name", () => {

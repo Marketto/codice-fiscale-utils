@@ -48,7 +48,8 @@ npm i -s @marketto/codice-fiscale-utils
 ### Script
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://unpkg.com/dayjs/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/utc.js"></script>
 <script src="https://unpkg.com/@marketto/diacritic-remover/dist/diacritic-remover.bundle.min.js"></script>
 <script src="https://unpkg.com/@marketto/codice-fiscale-utils/dist/codice-fiscale-utils.bundle.min.js"></script>
 ```
