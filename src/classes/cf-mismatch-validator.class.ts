@@ -26,6 +26,7 @@ import CheckDigitizer from "./check-digitizer.class";
 import Parser from "./parser.class";
 import Pattern from "./pattern.class";
 import type IMismatchVerboseErrors from "../interfaces/mismatch-verbose-errors.interface";
+import birthPlaceDateMatch from "../functions/birth-place-date-match.function";
 
 export default class CFMismatchValidator {
 	private pattern: Pattern;
@@ -173,11 +174,18 @@ export default class CFMismatchValidator {
 	 * @return Verbose errors
 	 */
 	public get errors(): Promise<IMismatchVerboseErrors | null> {
-		return Promise.all([
-			this.parser.cfToBirthPlace(this.codiceFiscale, false),
-			this.parser.cfToBirthPlace(this.codiceFiscale, true),
-		])
-			.then(([placeCheck, placeCreationExpirationCheck]) => ({
+		return this.parser
+			.cfToBirthPlace(this.codiceFiscale, false)
+			.then((placeCheck) => ({
+				placeCheck,
+				placeCreationExpirationCheck:
+					!!placeCheck &&
+					birthPlaceDateMatch(
+						this.parser.cfToBirthDate(this.codiceFiscale),
+						placeCheck
+					),
+			}))
+			.then(({ placeCheck, placeCreationExpirationCheck }) => ({
 				// Checking lastName validity
 				...(this.parser.cfToLastName(this.codiceFiscale)
 					? {}
