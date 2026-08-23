@@ -490,9 +490,9 @@ export default class Pattern {
 			codiceFiscale && (await this.parser.cfToBirthPlace(codiceFiscale));
 
 		if (parsedPlace) {
-			const nameMatcher: string = parsedPlace.name.replace(/./gu, (c: string) =>
-				diacriticRemover[c] === c ? c : `[${c}${diacriticRemover[c]}]`
-			);
+			const nameMatcher = Array.from(parsedPlace.name)
+				.map((char) => this.diacriticInsensitiveLiteral(char))
+				.join("");
 			matcher = `(?:(?:${nameMatcher})|${parsedPlace.belfioreCode})`;
 		}
 
@@ -505,5 +505,15 @@ export default class Pattern {
 
 	private isolatedInsensitiveTailor(matcher: string): RegExp {
 		return new RegExp(`^(?:${matcher})$`, "iu");
+	}
+
+	private diacriticInsensitiveLiteral(char: string): string {
+		const normalizedChar = diacriticRemover[char];
+		if (normalizedChar !== char) {
+			return `[${[char, normalizedChar]
+				.map((value) => value.replace(/[\\\]^\-]/gu, "\\$&"))
+				.join("")}]`;
+		}
+		return char.replace(/[\\^$.*+?()[\]{}|]/gu, "\\$&");
 	}
 }
