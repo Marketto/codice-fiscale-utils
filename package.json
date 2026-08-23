@@ -5,18 +5,32 @@
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"typings": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"files": ["dist", "LICENSE", "README.md"],
+	"sideEffects": false,
 	"config": {
 		"name": "CodiceFiscaleUtils",
 		"iifeFileName": "codice-fiscale-utils"
 	},
 	"scripts": {
-		"release": "npm audit fix & npm run lint-fix && npm run test && npm run coverage && npm run docs && npm run build",
-		"build": "npx rimraf ./dist & npx rollup -c",
-		"lint": "npx tslint -c tslint.json \"src/**/*.ts\"",
-		"lint-fix": "npx tslint -c tslint.json \"src/**/*.ts\" --fix",
-		"test": "npx mocha",
-		"coverage": "npx rimraf ./coverage \n mkdir ./coverage \n npx nyc mocha && npx nyc report --reporter=text-lcov | npx relcov > ./coverage/lcov.info",
-		"docs": "npx rimraf ./docs & npx typedoc --options typedoc.json"
+		"release": "npm run verify && npm run docs",
+		"build": "rimraf ./dist && rollup -c",
+		"lint": "eslint \"{src,test}/**/*.ts\"",
+		"lint-fix": "npm run lint -- --fix",
+		"typecheck": "tsc --noEmit -p tsconfig.json",
+		"test": "mocha",
+		"test:package": "node -e \"const api = require('./dist/index.js'); if (!api.Parser || !api.Validator) process.exit(1)\" && node --input-type=module -e \"const api = await import('./dist/index.mjs'); if (!api.Parser || !api.Validator) process.exit(1)\"",
+		"coverage": "rimraf ./coverage ./.nyc_output && nyc mocha && nyc check-coverage --statements 95 --branches 85 --functions 95 --lines 95 && nyc report --reporter=text-lcov | relcov > ./coverage/lcov.info",
+		"docs": "rimraf ./docs && typedoc --options typedoc.json",
+		"verify": "npm run lint && npm run typecheck && npm run coverage && npm run build && npm run test:package",
+		"prepublishOnly": "npm run verify"
 	},
 	"repository": {
 		"type": "git",
@@ -45,37 +59,34 @@
 		"@marketto/diacritic-remover": "^1.0.7",
 		"dayjs": "^1.11.13"
 	},
+	"peerDependencies": {
+		"@marketto/belfiore-connector": "^3.0.0"
+	},
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "^1.0.2",
 		"@marketto/belfiore-connector": "^3.0.0",
 		"@marketto/belfiore-connector-embedded": "^1.2.1",
-		"@rollup/plugin-node-resolve": "^15.2.3",
 		"@rollup/plugin-terser": "^0.4.4",
+		"@rollup/plugin-typescript": "^12.1.4",
+		"@typescript-eslint/eslint-plugin": "^6.21.0",
+		"@typescript-eslint/parser": "^6.21.0",
 		"@types/chai": "^4.3.16",
 		"@types/chai-string": "^1.4.5",
-		"@types/got": "^9.6.12",
-		"@types/lodash": "^4.17.4",
-		"@types/merge-stream": "^1.1.5",
 		"@types/mocha": "^10.0.6",
 		"@types/node": "^20.12.13",
-		"@types/yauzl": "^2.10.3",
 		"chai": "^4.2.0",
 		"chai-string": "^1.5.0",
-		"dotenv": "^12.0.3",
-		"mocha": "^9.1.4",
+		"eslint": "^8.57.1",
+		"mocha": "^10.8.2",
 		"nyc": "^15.1.0",
 		"relcov": "^1.0.6",
 		"rimraf": "^5.0.7",
 		"rollup": "^4.18.0",
-		"rollup-plugin-commonjs": "^10.1.0",
 		"rollup-plugin-dts": "^6.1.1",
-		"rollup-plugin-license": "^3.4.0",
-		"rollup-plugin-node-builtins": "^2.1.2",
-		"rollup-plugin-ts": "^3.4.5",
 		"sonarqube-scanner": "^2.6.0",
 		"source-map-support": "^0.5.19",
 		"ts-node": "^10.9.2",
-		"tslint": "^6.1.3",
+		"tslib": "^2.6.2",
 		"typedoc": "^0.25.13",
 		"typescript": "^5.4.5"
 	},

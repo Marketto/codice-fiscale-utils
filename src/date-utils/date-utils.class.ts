@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from "dayjs";
-import utc from "dayjs/plugin/utc";
+import utc from "dayjs/plugin/utc.js";
 import type DateDay from "./date-day.type";
 import { ISO8601_DATE_TIME } from "./date-matcher.const";
 import type DateMonth from "./date-month.type";

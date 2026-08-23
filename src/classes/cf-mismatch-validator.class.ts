@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import {
 	IBelfioreConnector,
 	BelfiorePlace,
@@ -212,9 +211,9 @@ export default class CFMismatchValidator {
 				...(placeCreationExpirationCheck
 					? {}
 					: {
-							place: "PLACE_EXPIRED_OR_NOT_YET_CREATED_ON_BIRTDATE",
-							date: "BIRTHDATE_OUT_OF_BIRTH_PLACE_LIFE_RANGE",
-					  }),
+						place: "PLACE_EXPIRED_OR_NOT_YET_CREATED_ON_BIRTDATE",
+						date: "BIRTHDATE_OUT_OF_BIRTH_PLACE_LIFE_RANGE",
+					}),
 				// Checking 16th char check digit validity
 				...(this.codiceFiscale
 					?.substring(CRC_OFFSET, CRC_OFFSET + CRC_SIZE)

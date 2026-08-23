@@ -35,7 +35,23 @@ declare const dateMatcher_const_TIME: typeof TIME;
 declare const dateMatcher_const_TIMEZONE: typeof TIMEZONE;
 declare const dateMatcher_const_YEAR: typeof YEAR;
 declare namespace dateMatcher_const {
-  export { dateMatcher_const_DAY as DAY, dateMatcher_const_DAYS_30_MONTHS as DAYS_30_MONTHS, dateMatcher_const_DAYS_31_MONTHS as DAYS_31_MONTHS, dateMatcher_const_HOURS as HOURS, dateMatcher_const_ISO8601_DATE_TIME as ISO8601_DATE_TIME, dateMatcher_const_ISO8601_SHORT_DATE as ISO8601_SHORT_DATE, dateMatcher_const_LEAP_MONTH as LEAP_MONTH, dateMatcher_const_MILLISECONDS as MILLISECONDS, dateMatcher_const_MINUTES as MINUTES, dateMatcher_const_MONTH as MONTH, dateMatcher_const_MONTH_DAY as MONTH_DAY, dateMatcher_const_SECONDS as SECONDS, dateMatcher_const_TIME as TIME, dateMatcher_const_TIMEZONE as TIMEZONE, dateMatcher_const_YEAR as YEAR };
+  export {
+    dateMatcher_const_DAY as DAY,
+    dateMatcher_const_DAYS_30_MONTHS as DAYS_30_MONTHS,
+    dateMatcher_const_DAYS_31_MONTHS as DAYS_31_MONTHS,
+    dateMatcher_const_HOURS as HOURS,
+    dateMatcher_const_ISO8601_DATE_TIME as ISO8601_DATE_TIME,
+    dateMatcher_const_ISO8601_SHORT_DATE as ISO8601_SHORT_DATE,
+    dateMatcher_const_LEAP_MONTH as LEAP_MONTH,
+    dateMatcher_const_MILLISECONDS as MILLISECONDS,
+    dateMatcher_const_MINUTES as MINUTES,
+    dateMatcher_const_MONTH as MONTH,
+    dateMatcher_const_MONTH_DAY as MONTH_DAY,
+    dateMatcher_const_SECONDS as SECONDS,
+    dateMatcher_const_TIME as TIME,
+    dateMatcher_const_TIMEZONE as TIMEZONE,
+    dateMatcher_const_YEAR as YEAR,
+  };
 }
 
 type DateMonth = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
@@ -123,8 +139,8 @@ declare class CFMismatchValidator {
     get invalid(): Promise<boolean>;
 }
 
-interface IGeneratorWrapper<T = unknown, TReturn = any, TNext = unknown> extends Generator {
-    [Symbol.iterator]: () => Generator;
+interface IGeneratorWrapper<T = unknown, TReturn = any, TNext = unknown> extends Generator<T, TReturn, TNext> {
+    [Symbol.iterator]: () => Generator<T, TReturn, TNext>;
 }
 
 type CodiceFiscaleCRC = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z";
@@ -521,7 +537,48 @@ declare const matcher_const_PARTIAL_YEAR: typeof PARTIAL_YEAR;
 declare const matcher_const_VOWEL_LIST: typeof VOWEL_LIST;
 declare const matcher_const_YEAR_MATCHER: typeof YEAR_MATCHER;
 declare namespace matcher_const {
-  export { matcher_const_BELFIORE_CODE_MATCHER as BELFIORE_CODE_MATCHER, matcher_const_CF_FULL_NAME_MATCHER as CF_FULL_NAME_MATCHER, matcher_const_CF_NAME_MATCHER as CF_NAME_MATCHER, matcher_const_CF_SURNAME_MATCHER as CF_SURNAME_MATCHER, matcher_const_CHECK_DIGIT as CHECK_DIGIT, matcher_const_CITY_CODE_LIST as CITY_CODE_LIST, matcher_const_CITY_CODE_MATCHER as CITY_CODE_MATCHER, matcher_const_CODICE_FISCALE as CODICE_FISCALE, matcher_const_CONSONANT_LIST as CONSONANT_LIST, matcher_const_COUNTRY_CODE_LIST as COUNTRY_CODE_LIST, matcher_const_COUNTRY_CODE_MATCHER as COUNTRY_CODE_MATCHER, matcher_const_DAY_29_MATCHER as DAY_29_MATCHER, matcher_const_DAY_2X_MATCHER as DAY_2X_MATCHER, matcher_const_DAY_30_MATCHER as DAY_30_MATCHER, matcher_const_DAY_31_MATCHER as DAY_31_MATCHER, matcher_const_DAY_3X_MATCHER as DAY_3X_MATCHER, matcher_const_DAY_MATCHER as DAY_MATCHER, matcher_const_FEMALE_DAY_MATCHER as FEMALE_DAY_MATCHER, matcher_const_FEMALE_FULL_DATE_MATCHER as FEMALE_FULL_DATE_MATCHER, matcher_const_FULL_DATE_MATCHER as FULL_DATE_MATCHER, matcher_const_LEAP_YEAR_MATCHER as LEAP_YEAR_MATCHER, matcher_const_MALE_DAY_MATCHER as MALE_DAY_MATCHER, matcher_const_MALE_FULL_DATE_MATCHER as MALE_FULL_DATE_MATCHER, matcher_const_MONTH_30DAYS_LIST as MONTH_30DAYS_LIST, matcher_const_MONTH_31DAYS_LIST as MONTH_31DAYS_LIST, matcher_const_MONTH_DAY_MATCHER as MONTH_DAY_MATCHER, matcher_const_MONTH_LIST as MONTH_LIST, matcher_const_MONTH_MATCHER as MONTH_MATCHER, matcher_const_OMOCODE_NON_ZERO_NUMBER_LIST as OMOCODE_NON_ZERO_NUMBER_LIST, matcher_const_OMOCODE_NUMBER_LIST as OMOCODE_NUMBER_LIST, matcher_const_OMOCODE_ZERO_LIST as OMOCODE_ZERO_LIST, matcher_const_PARTIAL_BELFIORE_CODE_MATCHER as PARTIAL_BELFIORE_CODE_MATCHER, matcher_const_PARTIAL_CF as PARTIAL_CF, matcher_const_PARTIAL_CF_FULL_NAME as PARTIAL_CF_FULL_NAME, matcher_const_PARTIAL_CF_NAME_MATCHER as PARTIAL_CF_NAME_MATCHER, matcher_const_PARTIAL_FULL_DATE as PARTIAL_FULL_DATE, matcher_const_PARTIAL_MONTH_DAY as PARTIAL_MONTH_DAY, matcher_const_PARTIAL_YEAR as PARTIAL_YEAR, matcher_const_VOWEL_LIST as VOWEL_LIST, matcher_const_YEAR_MATCHER as YEAR_MATCHER };
+  export {
+    matcher_const_BELFIORE_CODE_MATCHER as BELFIORE_CODE_MATCHER,
+    matcher_const_CF_FULL_NAME_MATCHER as CF_FULL_NAME_MATCHER,
+    matcher_const_CF_NAME_MATCHER as CF_NAME_MATCHER,
+    matcher_const_CF_SURNAME_MATCHER as CF_SURNAME_MATCHER,
+    matcher_const_CHECK_DIGIT as CHECK_DIGIT,
+    matcher_const_CITY_CODE_LIST as CITY_CODE_LIST,
+    matcher_const_CITY_CODE_MATCHER as CITY_CODE_MATCHER,
+    matcher_const_CODICE_FISCALE as CODICE_FISCALE,
+    matcher_const_CONSONANT_LIST as CONSONANT_LIST,
+    matcher_const_COUNTRY_CODE_LIST as COUNTRY_CODE_LIST,
+    matcher_const_COUNTRY_CODE_MATCHER as COUNTRY_CODE_MATCHER,
+    matcher_const_DAY_29_MATCHER as DAY_29_MATCHER,
+    matcher_const_DAY_2X_MATCHER as DAY_2X_MATCHER,
+    matcher_const_DAY_30_MATCHER as DAY_30_MATCHER,
+    matcher_const_DAY_31_MATCHER as DAY_31_MATCHER,
+    matcher_const_DAY_3X_MATCHER as DAY_3X_MATCHER,
+    matcher_const_DAY_MATCHER as DAY_MATCHER,
+    matcher_const_FEMALE_DAY_MATCHER as FEMALE_DAY_MATCHER,
+    matcher_const_FEMALE_FULL_DATE_MATCHER as FEMALE_FULL_DATE_MATCHER,
+    matcher_const_FULL_DATE_MATCHER as FULL_DATE_MATCHER,
+    matcher_const_LEAP_YEAR_MATCHER as LEAP_YEAR_MATCHER,
+    matcher_const_MALE_DAY_MATCHER as MALE_DAY_MATCHER,
+    matcher_const_MALE_FULL_DATE_MATCHER as MALE_FULL_DATE_MATCHER,
+    matcher_const_MONTH_30DAYS_LIST as MONTH_30DAYS_LIST,
+    matcher_const_MONTH_31DAYS_LIST as MONTH_31DAYS_LIST,
+    matcher_const_MONTH_DAY_MATCHER as MONTH_DAY_MATCHER,
+    matcher_const_MONTH_LIST as MONTH_LIST,
+    matcher_const_MONTH_MATCHER as MONTH_MATCHER,
+    matcher_const_OMOCODE_NON_ZERO_NUMBER_LIST as OMOCODE_NON_ZERO_NUMBER_LIST,
+    matcher_const_OMOCODE_NUMBER_LIST as OMOCODE_NUMBER_LIST,
+    matcher_const_OMOCODE_ZERO_LIST as OMOCODE_ZERO_LIST,
+    matcher_const_PARTIAL_BELFIORE_CODE_MATCHER as PARTIAL_BELFIORE_CODE_MATCHER,
+    matcher_const_PARTIAL_CF as PARTIAL_CF,
+    matcher_const_PARTIAL_CF_FULL_NAME as PARTIAL_CF_FULL_NAME,
+    matcher_const_PARTIAL_CF_NAME_MATCHER as PARTIAL_CF_NAME_MATCHER,
+    matcher_const_PARTIAL_FULL_DATE as PARTIAL_FULL_DATE,
+    matcher_const_PARTIAL_MONTH_DAY as PARTIAL_MONTH_DAY,
+    matcher_const_PARTIAL_YEAR as PARTIAL_YEAR,
+    matcher_const_VOWEL_LIST as VOWEL_LIST,
+    matcher_const_YEAR_MATCHER as YEAR_MATCHER,
+  };
 }
 
 declare enum BirthMonth {
@@ -589,4 +646,5 @@ declare class CodiceFiscaleUtils {
     constructor(belfioreConnector: IBelfioreConnector);
 }
 
-export { BirthMonth, CFMismatchValidator, CRC, CheckDigitizer, CodiceFiscaleUtils, dateMatcher_const as DATE_MATCHER, type DateDay, type DateMonth, DateUtils, Gender, type Genders, type IMismatchVerboseErrors, matcher_const as Matcher, type MultiFormatDate, Omocodes, Parser, Pattern, matcher_const as VALIDATOR, Validator, CodiceFiscaleUtils as default };
+export { BirthMonth, CFMismatchValidator, CRC, CheckDigitizer, CodiceFiscaleUtils, dateMatcher_const as DATE_MATCHER, DateUtils, Gender, matcher_const as Matcher, Omocodes, Parser, Pattern, matcher_const as VALIDATOR, Validator, CodiceFiscaleUtils as default };
+export type { DateDay, DateMonth, Genders, IMismatchVerboseErrors, MultiFormatDate };

@@ -9,6 +9,7 @@
 		"moduleResolution": "node",
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
+		"newLine": "lf",
 		"inlineSourceMap": true,
 		"isolatedModules": true
 	},

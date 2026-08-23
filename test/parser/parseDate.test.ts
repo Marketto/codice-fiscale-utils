@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { DateUtils } from "../../src/";
 import { expect } from "../utils";
 

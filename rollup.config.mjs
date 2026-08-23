@@ -1,58 +1,84 @@
-import path from "path";
-import pkg from "./package.json" with { type: "json" };;
-import tsconfig from "./tsconfig.json" with { type: "json" };
-import rollupPluginTs from "rollup-plugin-ts";
+import { readFileSync } from "node:fs";
 import terser from "@rollup/plugin-terser";
-import builtins from "rollup-plugin-node-builtins";
-import license from "rollup-plugin-license";
-import dts from 'rollup-plugin-dts'
+import typescript from "@rollup/plugin-typescript";
+import dts from "rollup-plugin-dts";
+
+const pkg = JSON.parse(readFileSync(new URL("./package.json", import.meta.url)));
+const tsconfig = JSON.parse(
+    readFileSync(new URL("./tsconfig.json", import.meta.url))
+);
+const banner = readFileSync(new URL("./src/banner", import.meta.url), "utf8")
+    .replace(/<%= pkg\.name %>/g, pkg.name)
+    .replace(/<%= pkg\.version %>/g, pkg.version)
+    .replace(/<%= pkg\.author %>/g, pkg.author)
+    .replace(/<%= pkg\.license %>/g, pkg.license);
+const externalDependencies = [
+    ...Object.keys(pkg.dependencies || {}),
+    ...Object.keys(pkg.peerDependencies || {}),
+];
+const isExternal = id => externalDependencies.some(
+    dependency => id === dependency || id.startsWith(`${dependency}/`)
+);
+const normalizeLineEndings = {
+    name: "normalize-line-endings",
+    generateBundle: (_options, bundle) => {
+        Object.values(bundle).forEach(output => {
+            if (output.type === "chunk") {
+                output.code = output.code.replace(/\r\n/g, "\n");
+            }
+        });
+    },
+};
 
 const baseConf = {
-    external: [
-        ...Object.keys(pkg.dependencies || {}),
-    ],
+    external: isExternal,
     input: "src/index.ts",
     output: {
         exports: "named",
         globals: {
             "@marketto/diacritic-remover": "DiacriticRemover",
             "dayjs": "dayjs",
+            "dayjs/plugin/utc.js": "dayjs_plugin_utc",
         },
         name: pkg.config.name,
         sourcemap: true,
+        banner,
     },
-    plugins: [
-        license({
-            banner: {
-                content: {
-                    file: path.join(".", "src/banner"),
-                },
-            },
-            //cwd: __dirname,
-        }),
-    ],
 };
 
-const rollupCjsConf = rollupPluginTs({
-    tsconfig: {
+const rollupCjsConf = typescript({
+    tsconfig: "./tsconfig.json",
+    include: ["src/**/*.ts"],
+    compilerOptions: {
         ...tsconfig.compilerOptions,
+        module: "ESNext",
+        declaration: false,
+        inlineSourceMap: false,
+        sourceMap: false,
     },
-    hook: {
-        declarationStats: declarationStats => console.log(declarationStats)
-    }
 });
-const rollupModuleConf = rollupPluginTs({
-    tsconfig: {
+const rollupModuleConf = typescript({
+    tsconfig: "./tsconfig.json",
+    include: ["src/**/*.ts"],
+    compilerOptions: {
         ...tsconfig.compilerOptions,
         module: "ESNext",
         target: "ESNext",
+        declaration: false,
+        inlineSourceMap: false,
+        sourceMap: true,
     },
 });
-const rollupBrowserConf = rollupPluginTs({
-    tsconfig: {
+const rollupBrowserConf = typescript({
+    tsconfig: "./tsconfig.json",
+    include: ["src/**/*.ts"],
+    compilerOptions: {
         ...tsconfig.compilerOptions,
-        module: "es2015",
+        module: "ESNext",
         target: "ES2015",
+        declaration: false,
+        inlineSourceMap: false,
+        sourceMap: false,
     },
 });
 
@@ -67,9 +93,8 @@ export default [
             sourcemap: false,
         },
         plugins: [
-            builtins(),
             rollupCjsConf,
-            ...baseConf.plugins,
+            normalizeLineEndings,
         ],
     },
     // MJS
@@ -81,14 +106,10 @@ export default [
             format: "esm",
         },
         plugins: [
-            builtins({
-                sourcemap: true
-            }),
             rollupModuleConf,
             terser({
                 sourceMap: true
             }),
-            ...baseConf.plugins,
         ],
     },
     // JS minified IIFE
@@ -101,20 +122,15 @@ export default [
             sourcemap: false,
         },
         plugins: [
-            builtins({
-            }),
             rollupBrowserConf,
             terser({
                 sourceMap: true
             }),
-            ...baseConf.plugins,
         ],
     },
     // typings.d.ts
     {
-        external: [
-            ...Object.keys(pkg.dependencies || {}),
-        ],
+        external: isExternal,
         input: "src/index.ts",
         output: [{
             file: pkg.typings,
