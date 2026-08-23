@@ -20,7 +20,8 @@ export default class DateUtils {
 				(typeof date === "string" &&
 					new RegExp(`^(?:${ISO8601_DATE_TIME})$`).test(date)) ||
 				(Array.isArray(date) &&
-					date.length &&
+					date.length > 0 &&
+					date.length <= 3 &&
 					!date.some((value) => typeof value !== "number" || isNaN(value)))
 			)
 		) {
@@ -30,12 +31,15 @@ export default class DateUtils {
 			let parsedDate: Dayjs;
 			if (Array.isArray(date)) {
 				const [year, month = 0, day = 1] = date;
-				if (month >= 0 && month <= 11 && day > 0 && day <= 31) {
-					parsedDate = dayjs.utc(Date.UTC(year, month || 0, day || 1));
+				if (this.isValidDateParts(year, month, day)) {
+					parsedDate = dayjs.utc(this.dateFromParts(year, month, day));
 				} else {
 					return null;
 				}
 			} else {
+				if (typeof date === "string" && !this.hasValidCalendarDate(date)) {
+					return null;
+				}
 				parsedDate = dayjs.utc(date);
 			}
 			return parsedDate.isValid() ? parsedDate.toDate() : null;
@@ -50,5 +54,43 @@ export default class DateUtils {
 		day?: DateDay | null
 	): Date | null {
 		return this.parseDate([year, month, day] as number[]);
+	}
+
+	private static hasValidCalendarDate(date: string): boolean {
+		const [year, month = 1, day = 1] = date
+			.substring(0, 10)
+			.split("-")
+			.map((value) => Number(value));
+		return this.isValidDateParts(year, month - 1, day);
+	}
+
+	private static isValidDateParts(
+		year: number,
+		month: number,
+		day: number
+	): boolean {
+		if (
+			![year, month, day].every(Number.isInteger) ||
+			month < 0 ||
+			month > 11 ||
+			day < 1 ||
+			day > 31
+		) {
+			return false;
+		}
+
+		const parsedDate = this.dateFromParts(year, month, day);
+		return (
+			parsedDate.getUTCFullYear() === year &&
+			parsedDate.getUTCMonth() === month &&
+			parsedDate.getUTCDate() === day
+		);
+	}
+
+	private static dateFromParts(year: number, month: number, day: number): Date {
+		const parsedDate = new Date(0);
+		parsedDate.setUTCHours(0, 0, 0, 0);
+		parsedDate.setUTCFullYear(year, month, day);
+		return parsedDate;
 	}
 }

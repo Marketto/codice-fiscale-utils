@@ -36,5 +36,15 @@ export default () => {
 			expect(codiceFiscaleUtils.parser.cfToBirthDate("XXXYyy90")).to.be.null;
 			expect(codiceFiscaleUtils.parser.cfToBirthDate("")).to.be.null;
 		});
+		describe("Invalid calendar dates", () => {
+			it("Should reject February 29 on a non-leap year", () => {
+				expect(codiceFiscaleUtils.parser.cfToBirthDate("XXXYYY23B29")).to.be
+					.null;
+			});
+			it("Should reject day 31 in a 30-day month", () => {
+				expect(codiceFiscaleUtils.parser.cfToBirthDate("XXXYYY23D31")).to.be
+					.null;
+			});
+		});
 	});
 };
