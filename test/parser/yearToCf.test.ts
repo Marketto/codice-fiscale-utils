@@ -24,6 +24,15 @@ export default () => {
 			expect(codiceFiscaleUtils.parser.yearToCf("")).to.be.null;
 			expect(codiceFiscaleUtils.parser.yearToCf("105")).to.be.null;
 			expect(codiceFiscaleUtils.parser.yearToCf("@à")).to.be.null;
+			expect(codiceFiscaleUtils.parser.yearToCf("1990abc")).to.be.null;
+			expect(codiceFiscaleUtils.parser.yearToCf("0010")).to.be.null;
+			expect(codiceFiscaleUtils.parser.yearToCf("-1")).to.be.null;
+			expect(codiceFiscaleUtils.parser.yearToCf(-1)).to.be.null;
+			expect(codiceFiscaleUtils.parser.yearToCf(12.5)).to.be.null;
+			expect(codiceFiscaleUtils.parser.yearToCf(10000)).to.be.null;
+		});
+		it("Supports dates since the minimum supported birth year", () => {
+			expect(codiceFiscaleUtils.parser.yearToCf(1861)).to.be.equal("61");
 		});
 	});
 };

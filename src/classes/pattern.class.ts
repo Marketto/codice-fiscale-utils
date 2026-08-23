@@ -112,7 +112,7 @@ export default class Pattern {
 	 */
 	public cfMonth(month?: DateMonth) {
 		let matcher: string = MONTH_MATCHER;
-		if (month) {
+		if (typeof month === "number") {
 			matcher = this.parser.monthToCf(month) || matcher;
 		}
 		return this.isolatedInsensitiveTailor(matcher);

@@ -442,23 +442,21 @@ export default class Parser {
 	 * @returns partial cf
 	 */
 	public yearToCf(year: string | number): string | null {
-		let parsedYear: number;
-		if (typeof year === "string") {
-			parsedYear = parseInt(year, 10);
-		} else {
-			parsedYear = year;
+		if (typeof year === "string" && !/^(?:\d{2}|\d{4})$/u.test(year)) {
+			return null;
 		}
+		const parsedYear = typeof year === "string" ? Number(year) : year;
+		const isFourDigitYear = typeof year === "string" && year.length === 4;
 
 		if (
-			!(
-				typeof parsedYear === "number" &&
-				!isNaN(parsedYear) &&
-				(parsedYear >= 1900 || parsedYear < 100)
-			)
+			!Number.isInteger(parsedYear) ||
+			(isFourDigitYear && parsedYear < 1861) ||
+			!((parsedYear >= 0 && parsedYear < 100) ||
+				(parsedYear >= 1861 && parsedYear <= 9999))
 		) {
 			return null;
 		}
-		return `0${parsedYear}`.substr(-2);
+		return String(parsedYear % 100).padStart(2, "0");
 	}
 
 	/**
@@ -511,16 +509,7 @@ export default class Parser {
 		) {
 			return null;
 		}
-		const date = dayjs(Date.UTC(year, month || 0, day || 1));
-		if (
-			!date.isValid() ||
-			date.year() !== year ||
-			date.month() !== month ||
-			date.date() !== day
-		) {
-			return null;
-		}
-		return date.toDate();
+		return DateUtils.ymdToDate(year, month, day);
 	}
 
 	/**
@@ -558,9 +547,9 @@ export default class Parser {
 			return null;
 		}
 
-		const cfYear = this.yearToCf(parsedDate.getFullYear());
-		const cfMonth = this.monthToCf(parsedDate.getMonth());
-		const cfDayGender = this.dayGenderToCf(parsedDate.getDate(), gender);
+		const cfYear = this.yearToCf(parsedDate.getUTCFullYear());
+		const cfMonth = this.monthToCf(parsedDate.getUTCMonth());
+		const cfDayGender = this.dayGenderToCf(parsedDate.getUTCDate(), gender);
 
 		return `${cfYear}${cfMonth}${cfDayGender}`;
 	}

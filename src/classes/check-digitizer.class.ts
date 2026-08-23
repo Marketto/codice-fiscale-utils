@@ -13,7 +13,9 @@ class CheckDigitizer {
 	public static checkDigit(codiceFiscale: string): CodiceFiscaleCRC | null {
 		if (
 			typeof codiceFiscale === "string" &&
-			new RegExp(PARTIAL_CF).test(codiceFiscale)
+			codiceFiscale.length >= CRC_OFFSET &&
+			codiceFiscale.length <= CRC_OFFSET + 1 &&
+			new RegExp(`^(?:${PARTIAL_CF})$`, "iu").test(codiceFiscale)
 		) {
 			const partialCF = codiceFiscale.substr(LASTNAME_OFFSET, CRC_OFFSET);
 			let partialCfValue = 0;

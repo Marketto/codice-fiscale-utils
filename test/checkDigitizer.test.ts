@@ -57,6 +57,12 @@ describe("CheckDigitizer", () => {
 			it("Should return V for vrngny07d68c351", () => {
 				expect(CheckDigitizer.checkDigit("vrngny07d68c351")).to.be.equal("V");
 			});
+			it("Should reject incomplete or malformed fiscal codes", () => {
+				expect(CheckDigitizer.checkDigit("")).to.be.null;
+				expect(CheckDigitizer.checkDigit("VRNGNY")).to.be.null;
+				expect(CheckDigitizer.checkDigit("@@VRNGNY07D68C351@@")).to.be.null;
+				expect(CheckDigitizer.checkDigit("VRNGNY07D68C351VEXTRA")).to.be.null;
+			});
 		});
 	});
 });

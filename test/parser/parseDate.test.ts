@@ -27,6 +27,12 @@ export default () => {
 			expect(DateUtils.parseDate(null)).to.be.null;
 			expect(DateUtils.parseDate([NaN, NaN, NaN])).to.be.null;
 			expect(DateUtils.parseDate([])).to.be.null;
+			expect(DateUtils.parseDate("2023-02-29")).to.be.null;
+			expect(DateUtils.parseDate("2024-02-30")).to.be.null;
+			expect(DateUtils.parseDate("2024-04-31")).to.be.null;
+			expect(DateUtils.parseDate([2023, 1, 29])).to.be.null;
+			expect(DateUtils.parseDate([2024, 1, 30])).to.be.null;
+			expect(DateUtils.parseDate([2024, 3, 31])).to.be.null;
 		});
 	});
 };

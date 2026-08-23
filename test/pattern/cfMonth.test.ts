@@ -12,6 +12,9 @@ export default () => {
 			it("Should validate cf month A for 0", () => {
 				codiceFiscaleUtils.pattern.cfMonth(0).test("A").should.be.ok;
 			});
+			it("Should only validate cf month A for 0", () => {
+				codiceFiscaleUtils.pattern.cfMonth(0).test("B").should.not.be.ok;
+			});
 			it("Should validate cf month B for 1", () => {
 				codiceFiscaleUtils.pattern.cfMonth(1).test("B").should.be.ok;
 			});

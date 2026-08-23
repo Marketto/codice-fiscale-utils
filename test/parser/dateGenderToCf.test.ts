@@ -40,7 +40,20 @@ export default () => {
 				.be.null;
 			expect(codiceFiscaleUtils.parser.dateGenderToCf([1996, 11, 33], "M")).to
 				.be.null;
+			expect(codiceFiscaleUtils.parser.dateGenderToCf("2023-02-29", "M")).to
+				.be.null;
 			// expect(codiceFiscaleUtils.parser.dateGenderToCf([2016, 3, 23], "X")).to.be.null;
+		});
+		it("Should be timezone independent for date arrays", () => {
+			const currentTimezone = process.env.TZ;
+			try {
+				process.env.TZ = "America/New_York";
+				expect(
+					codiceFiscaleUtils.parser.dateGenderToCf([2016, 0, 1], "M")
+				).to.be.equal("16A01");
+			} finally {
+				process.env.TZ = currentTimezone;
+			}
 		});
 	});
 };
