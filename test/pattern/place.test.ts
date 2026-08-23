@@ -35,6 +35,14 @@ export default () => {
 					"Bologna"
 				).should.be.false;
 			});
+
+			it("Should treat regular-expression characters as literal place-name characters", async () => {
+				const pattern = await codiceFiscaleUtils.pattern.place(
+					"XYZXYZ88H61Z609"
+				);
+				pattern.test("Isole Falkland (Malvine)").should.be.true;
+				pattern.test("Isole Falkland Malvine").should.be.false;
+			});
 		});
 	});
 };
