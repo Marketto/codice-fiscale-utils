@@ -32,7 +32,7 @@ import type IPersonalInfo from "../interfaces/personal-info.interface";
 import type Genders from "../types/genders.type";
 import CheckDigitizer from "./check-digitizer.class";
 import Gender from "./gender.class";
-import { CF_INTRODUCTION_DATE } from "../const/logic.const";
+import birthPlaceDateMatch from "../functions/birth-place-date-match.function";
 
 const diacriticRemover = new DiacriticRemover();
 
@@ -337,26 +337,11 @@ export default class Parser {
 			return null;
 		}
 
-		const { creationDate, expirationDate } = birthPlace;
-		if ((creationDate || expirationDate) && checkBirthDateConsistency) {
-			const birthDate = this.cfToBirthDate(codiceFiscale);
-			const isBirthDateAfterCfIntroduction = dayjs(CF_INTRODUCTION_DATE)
-				// Adding some tolerance
-				.add(5, "years")
-				.isBefore(birthDate, "day");
-
-			// Skipping birthDate vs Creation/Expiration check for people born up to 5y after cf introduction
-			if (birthDate && isBirthDateAfterCfIntroduction) {
-				const datePlaceConsistency =
-					// BirthDay is before expiration date
-					(!expirationDate ||
-						dayjs(birthDate).isBefore(expirationDate, "day")) &&
-					// BirthDay is after creation date
-					(!creationDate || dayjs(birthDate).isAfter(creationDate, "day"));
-				if (!datePlaceConsistency) {
-					return null;
-				}
-			}
+		if (
+			checkBirthDateConsistency &&
+			!birthPlaceDateMatch(this.cfToBirthDate(codiceFiscale), birthPlace)
+		) {
+			return null;
 		}
 		return birthPlace;
 	}
@@ -648,26 +633,23 @@ export default class Parser {
 		if (!(dtParams && lastName && firstName && gender && place)) {
 			return null;
 		}
-		const generator = [
-			async () => this.lastNameToCf(lastName),
-			async () => this.firstNameToCf(firstName),
-			async () => this.dateGenderToCf(dtParams, gender),
-			async () =>
-				await this.placeToCf(
-					dtParams,
-					(place as BelfiorePlace)?.belfioreCode || (place as string)
-				),
+		const cfParts = [
+			this.lastNameToCf(lastName),
+			this.firstNameToCf(firstName),
+			this.dateGenderToCf(dtParams, gender),
 		];
-		let cf = "";
-		for (const cfPartGenerator of generator) {
-			const cfValue = await cfPartGenerator();
-			if (!cfValue) {
-				return null;
-			}
-			cf += cfValue;
+		if (cfParts.some((cfPart) => !cfPart)) {
+			return null;
+		}
+		const cfPlace = await this.placeToCf(
+			dtParams,
+			(place as BelfiorePlace)?.belfioreCode || (place as string)
+		);
+		if (!cfPlace) {
+			return null;
 		}
 
-		return this.cfOmocode(cf, omocodeId);
+		return this.cfOmocode(`${cfParts.join("")}${cfPlace}`, omocodeId);
 	}
 
 	private JOLLY_CHAR: string = "*";

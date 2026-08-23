@@ -282,20 +282,19 @@ export default class Pattern {
 					} else if (year) {
 						dtParams = this.parser.yearMonthDayToDate(year, month, day);
 					}
-					const generator: (() => Promise<RegExp>)[] = [
-						async () => this.cfLastName(lastName),
-						async () => this.cfFirstName(firstName),
-						async () => this.cfDateGender(dtParams, gender),
-						async () =>
+						const validators = [
+							this.cfLastName(lastName),
+							this.cfFirstName(firstName),
+							this.cfDateGender(dtParams, gender),
 							await this.cfPlace(
 								dtParams,
 								(place as BelfiorePlace)?.belfioreCode || (place as string)
 							),
-					];
+						];
 
-					matcher = "";
-					for (const validator of generator) {
-						const cfMatcher = (await validator()).toString();
+						matcher = "";
+						for (const validator of validators) {
+							const cfMatcher = validator.toString();
 						const match = cfMatcher.match(/\^(.{1,256})\$/);
 						const cfValue: string | null | undefined = match && match[1];
 

@@ -54,11 +54,7 @@ export default class Validator {
 	public async isBirthPlaceValid(
 		birthPlace: BelfiorePlace | string
 	): Promise<boolean> {
-		const parsedBirthPlace = await this.parser.parsePlace(birthPlace);
-		return (
-			!!parsedBirthPlace &&
-			!!(await this.belfioreConnector.findByCode(parsedBirthPlace.belfioreCode))
-		);
+		return !!(await this.parser.parsePlace(birthPlace));
 	}
 	public async isBirthPlaceInvalid(
 		birthPlace: BelfiorePlace | string
@@ -70,29 +66,28 @@ export default class Validator {
 		birthDate: MultiFormatDate,
 		birthPlace: BelfiorePlace | string
 	): Promise<boolean> {
+		const parsedBirthDate = DateUtils.parseDate(birthDate);
+		if (!parsedBirthDate) {
+			return false;
+		}
 		const parsedPlace = await this.parser.parsePlace(birthPlace);
 		return (
-			this.isBirthDateValid(birthDate) &&
 			!!parsedPlace &&
-			(!!(await this.belfioreConnector
-				.from(birthDate)
-				.findByCode(parsedPlace.belfioreCode)) ||
-				// Ignoring control for people born before CF introduction
-				!dayjs(DateUtils.parseDate(birthDate)).isAfter(
-					CF_INTRODUCTION_DATE,
-					"day"
-				))
+			this.birthDateMatchesParsedPlace(parsedBirthDate, parsedPlace)
 		);
 	}
 	public async birthDatePlaceMismatch(
 		birthDate: MultiFormatDate,
 		birthPlace: BelfiorePlace | string
 	): Promise<boolean> {
+		const parsedBirthDate = DateUtils.parseDate(birthDate);
+		if (!parsedBirthDate) {
+			return false;
+		}
 		const parsedPlace = await this.parser.parsePlace(birthPlace);
 		return (
-			this.isBirthDateValid(birthDate) &&
 			!!parsedPlace &&
-			!(await this.birthDatePlaceMatch(birthDate, birthPlace))
+			!(await this.birthDateMatchesParsedPlace(parsedBirthDate, parsedPlace))
 		);
 	}
 
@@ -100,13 +95,26 @@ export default class Validator {
 		birthPlace: BelfiorePlace | string,
 		birthDate: MultiFormatDate
 	): Promise<boolean> {
-		return await this.birthDatePlaceMatch(birthDate, birthPlace);
+		return this.birthDatePlaceMatch(birthDate, birthPlace);
 	}
 
 	public async birthPlaceDateMismatch(
 		birthPlace: BelfiorePlace | string,
 		birthDate: MultiFormatDate
 	): Promise<boolean> {
-		return await this.birthDatePlaceMismatch(birthDate, birthPlace);
+		return this.birthDatePlaceMismatch(birthDate, birthPlace);
+	}
+
+	private async birthDateMatchesParsedPlace(
+		birthDate: Date,
+		birthPlace: BelfiorePlace
+	): Promise<boolean> {
+		return (
+			!!(await this.belfioreConnector
+				.from(birthDate)
+				.findByCode(birthPlace.belfioreCode)) ||
+			// Ignoring control for people born before CF introduction
+			!dayjs(birthDate).isAfter(CF_INTRODUCTION_DATE, "day")
+		);
 	}
 }
